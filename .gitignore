@@ -1,0 +1,14 @@
+.venv/
+.uv-cache/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+_site/
+.sauvegardes/
+artifacts/
+.env
+.env.*
+!.env.example
+
+# Analyse initiale locale ; les décisions actuelles sont dans docs/.
+/PROPOSITION_WIKI.md

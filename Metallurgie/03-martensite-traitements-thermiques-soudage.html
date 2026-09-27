@@ -1,0 +1,1704 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Métallurgie — Cours 03 — Aciers : martensite, traitements thermiques et soudage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E7EBEF; --paper:#F8FAFB; --ink:#16202A; --ink2:#4A5968; --rule:#C2CCD6;
+  --grid:rgba(52,98,145,.08); --grid2:rgba(52,98,145,.15);
+  --cL:#E8820C; --cLs:#FCE0B8;
+  --cG:#C2303A; --cGs:#F5CDC9;
+  --cA:#4C6C8F; --cAs:#C4D3E2;
+  --cD:#7B61B8; --cDs:#DDD3F1;
+  --cC:#4B4F58; --cCs:#B9BEC6;
+  --cB:#1F8A70; --cBs:#BDE5D8;
+  --cM:#A33A8C; --cMs:#F0CFE6;
+  --good:#1E8657; --bad:#C23B3B;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10161C; --paper:#18212A; --ink:#E3EAF1; --ink2:#98A8B8; --rule:#2C3947;
+    --grid:rgba(150,190,230,.06); --grid2:rgba(150,190,230,.12);
+    --cL:#FF9A3C; --cLs:#5A3310;
+    --cG:#F0646C; --cGs:#5A2226;
+    --cA:#8DB1D6; --cAs:#243748;
+    --cD:#B3A0EE; --cDs:#352B52;
+    --cC:#C9CED6; --cCs:#4A505A;
+    --cB:#4FCEA7; --cBs:#16433A;
+    --cM:#E27CCB; --cMs:#4A2342;
+    --good:#46C08A; --bad:#EF6B6B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10161C; --paper:#18212A; --ink:#E3EAF1; --ink2:#98A8B8; --rule:#2C3947;
+  --grid:rgba(150,190,230,.06); --grid2:rgba(150,190,230,.12);
+  --cL:#FF9A3C; --cLs:#5A3310;
+  --cG:#F0646C; --cGs:#5A2226;
+  --cA:#8DB1D6; --cAs:#243748;
+  --cD:#B3A0EE; --cDs:#352B52;
+  --cC:#C9CED6; --cCs:#4A505A;
+  --cB:#4FCEA7; --cBs:#16433A;
+  --cM:#E27CCB; --cMs:#4A2342;
+  --good:#46C08A; --bad:#EF6B6B;
+  color-scheme:dark;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 100px);-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Archivo,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.58}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.hero{max-width:760px;margin:0 auto;padding:30px 18px 10px}
+.series{font-stretch:92%;font-weight:650;font-size:.9rem;color:var(--ink2);margin:0}
+h1{font-stretch:125%;font-weight:820;font-size:clamp(1.9rem,7.6vw,3.1rem);line-height:1.03;letter-spacing:-.015em;margin:.15em 0 .45em}
+.lead{font-size:1.07rem;color:var(--ink2);max-width:34em;margin:0}
+.ruler{margin:18px 0 4px}
+.ruler svg{display:block;width:100%;height:auto}
+.bar{position:sticky;top:0;padding-top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--rule)}
+@supports (backdrop-filter:blur(8px)){.bar{background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(8px)}}
+.bar-in{max-width:760px;margin:0 auto;padding:8px 18px;display:flex;gap:8px 10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;overflow:hidden}
+.seg button{font:inherit;font-size:.8rem;font-stretch:90%;font-weight:600;padding:.34rem .65rem;background:transparent;color:var(--ink);border:0;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.toc{display:flex;gap:4px;flex-wrap:wrap}
+.toc a{display:inline-grid;place-items:center;width:29px;height:29px;border-radius:50%;border:1.5px solid var(--rule);color:var(--ink);text-decoration:none;font-weight:750;font-size:.82rem}
+main{max-width:760px;margin:0 auto;padding:0 18px 90px}
+section{padding-top:38px}
+h2{font-stretch:116%;font-weight:780;font-size:clamp(1.4rem,5.4vw,2rem);line-height:1.12;margin:0 0 .5em;display:flex;gap:.45em;align-items:baseline}
+h2 .n{font-stretch:125%;font-weight:900;font-size:1.9em;line-height:.8;color:transparent;-webkit-text-stroke:1.6px var(--ink)}
+h3{font-stretch:106%;font-weight:720;font-size:1.13rem;margin:1.5em 0 .35em;line-height:1.25}
+p{margin:.6em 0}
+ul,ol{padding-left:1.25em;margin:.5em 0}
+li{margin:.3em 0}
+b,strong{font-weight:700}
+sub{font-size:.72em}
+.lv{margin:1.5rem 0;padding:.05rem 0 .05rem 14px;border-left:3px solid var(--ink)}
+.lv2{border-left:6px double var(--cA)}
+.tag{display:inline-block;font-size:.78rem;font-stretch:88%;font-weight:680;padding:.12rem .55rem;border-radius:4px;background:var(--ink);color:var(--bg);margin:0 0 .15rem}
+.lv2 .tag{background:var(--cA);color:var(--paper)}
+body[data-level="1"] .lv2, body[data-level="2"] .lv1{display:none}
+.fig{background-color:var(--paper);background-image:linear-gradient(var(--grid2) 1px,transparent 1px),linear-gradient(90deg,var(--grid2) 1px,transparent 1px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px;border:1px solid var(--rule);border-radius:10px;padding:12px;margin:1.2rem -6px}
+.fig svg{display:block;width:100%;height:auto;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.figt{font-stretch:104%;font-weight:720;font-size:.98rem;margin:0 0 .4rem}
+.cap{font-size:.86rem;color:var(--ink2);margin:.5rem 0 0}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:.6rem 0}
+.btn{font:inherit;font-size:.84rem;font-stretch:94%;font-weight:620;padding:.42rem .78rem;border-radius:999px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;line-height:1.2}
+.btn.on{background:var(--ink);color:var(--paper)}
+.btn:disabled{opacity:.35;cursor:default}
+.btn.ok{background:var(--good);border-color:var(--good);color:#fff}
+.btn.ko{background:var(--bad);border-color:var(--bad);color:#fff}
+.btns.sm .btn{font-size:.78rem;padding:.32rem .6rem}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--cL);outline-offset:2px}
+.eq{font-variant-numeric:tabular-nums;background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--cL);border-radius:6px;padding:.65rem .9rem;margin:.8rem 0;overflow-x:auto;line-height:2}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .22em;line-height:1.3}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em}
+.note{border:1.5px dashed var(--rule);border-radius:8px;padding:.7rem .9rem;margin:1rem 0;background:var(--paper)}
+.note.hot{border-color:var(--cL)}
+.note p:first-child{margin-top:0}.note p:last-child{margin-bottom:0}
+.tw{overflow-x:auto;margin:.8rem 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--rule);padding:.42rem .5rem;text-align:left;vertical-align:top}
+th{font-stretch:96%;font-weight:700;color:var(--ink2)}
+td.num,th.num{text-align:right;white-space:nowrap}
+.ph{display:inline-block;padding:0 .38em;border-radius:4px;font-weight:720;color:var(--ink);white-space:nowrap}
+.ph-L{background:var(--cLs)}.ph-g{background:var(--cGs)}.ph-a{background:var(--cAs)}.ph-d{background:var(--cDs)}.ph-c{background:var(--cCs)}
+.ph-p{background:repeating-linear-gradient(90deg,var(--cAs) 0 7px,var(--cCs) 7px 9px)}
+input[type=range]{width:100%;accent-color:var(--cL);margin:.3rem 0}
+.row{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.row>.grow{flex:1 1 200px;min-width:0}
+canvas.micro{display:block;width:100%;max-width:250px;aspect-ratio:1;height:auto;border-radius:50%;border:2px solid var(--ink);background:var(--paper)}
+canvas.cell{display:block;width:100%;max-width:300px;aspect-ratio:1;height:auto;margin:0 auto;touch-action:none;cursor:grab}
+.readT{font-stretch:120%;font-weight:820;font-size:1.9rem;line-height:1;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:.35em}
+.glow{display:inline-block;width:.62em;height:.62em;border-radius:50%;border:1.5px solid var(--ink)}
+.small{font-size:.86rem;color:var(--ink2)}
+.inp{display:grid;grid-template-columns:auto 1fr 78px;gap:6px 10px;align-items:center;margin:.4rem 0}
+.inp input[type=number]{font:inherit;font-size:.95rem;width:78px;padding:.3rem .4rem;border:1.5px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink)}
+.stack{display:flex;height:34px;border-radius:6px;overflow:hidden;border:1.5px solid var(--ink);margin:.5rem 0}
+.stack>div{display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;transition:width .25s}
+.stk-lab{font-size:.8rem;font-weight:680;color:var(--ink2);margin:.6rem 0 0}
+.sw{display:inline-block;width:.8em;height:.8em;border-radius:2px;vertical-align:-.05em;margin-right:.3em;border:1px solid var(--ink)}
+.msg{background:var(--bg);border-radius:6px;padding:.55rem .7rem;font-size:.92rem;margin:.5rem 0 0}
+.quizfb{min-height:1.6em;font-weight:650}
+.pill{display:inline-block;border:1.5px solid var(--ink);border-radius:999px;padding:.05rem .55rem;font-size:.8rem;font-weight:650;margin-right:.3rem}
+.reg{cursor:pointer}
+.reg.sel{stroke:var(--cL);stroke-width:2.5}
+.map{display:grid;grid-template-columns:auto 1fr;gap:.3rem .7rem;font-size:.95rem;margin:.6rem 0}
+.map b{white-space:nowrap}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:.8rem 0}
+.res>div{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:.5rem .7rem}
+.res .v{font-stretch:108%;font-weight:800;font-size:1.18rem;font-variant-numeric:tabular-nums;line-height:1.15;overflow-wrap:anywhere}
+.res .k{font-size:.8rem;color:var(--ink2)}
+footer{max-width:760px;margin:0 auto;padding:0 18px 40px;color:var(--ink2);font-size:.85rem}
+@media (prefers-reduced-motion: reduce){.stack>div{transition:none}}
+@media (min-width:640px){.fig{margin:1.2rem 0;padding:16px}}
+
+.ph-b{background:var(--cBs)}.ph-m{background:var(--cMs)}
+.thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 14px;margin:18px 0 6px}
+.thumbs figure{margin:0}
+.thumbs canvas{display:block;width:100%;aspect-ratio:1;height:auto;border-radius:50%;border:2px solid var(--ink)}
+.thumbs figcaption{font-size:.84rem;line-height:1.35;margin-top:.4rem;color:var(--ink2)}
+.thumbs figcaption b{display:block;color:var(--ink);font-size:.95rem}
+@media (min-width:640px){.thumbs{grid-template-columns:repeat(4,1fr)}}
+details.sol{border:1.5px solid var(--rule);border-radius:8px;background:var(--paper);margin:.6rem 0;padding:.1rem .9rem}
+details.sol summary{cursor:pointer;font-weight:700;padding:.5rem 0;list-style-position:outside}
+details.sol[open] summary{border-bottom:1px solid var(--rule);margin-bottom:.4rem}
+.ex{font-weight:720}
+.chk{display:flex;align-items:center;gap:.45rem;font-size:.9rem;font-weight:620;margin:.5rem 0}
+.chk input{width:1.1rem;height:1.1rem;accent-color:var(--cL)}
+.inp2{display:grid;grid-template-columns:5.2em 1fr 4.6em;gap:4px 10px;align-items:center;margin:.3rem 0;font-size:.9rem}
+.inp2 output{font-variant-numeric:tabular-nums;text-align:right;font-weight:650}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp>div{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:.5rem .7rem;min-width:0}
+.cmp h4{margin:0 0 .3rem;font-size:.95rem;font-stretch:108%}
+.zone{display:inline-block;width:.8em;height:.8em;border-radius:2px;border:1px solid var(--ink);vertical-align:-.05em;margin-right:.3em}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.2rem .8rem;font-size:.92rem}
+.kv b{font-variant-numeric:tabular-nums}
+.warn{color:var(--bad);font-weight:750}.okc{color:var(--good);font-weight:750}
+select{font:inherit;font-size:.9rem;padding:.3rem .4rem;border:1.5px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink);max-width:100%}
+</style>
+</head>
+<body data-level="both">
+
+<svg class="defs" aria-hidden="true" width="0" height="0">
+  <defs>
+    <pattern id="pLD" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cLs)"/><rect width="4" height="8" style="fill:var(--cDs)"/></pattern>
+    <pattern id="pDG" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cDs)"/><rect width="4" height="8" style="fill:var(--cGs)"/></pattern>
+    <pattern id="pLG" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cLs)"/><rect width="4" height="8" style="fill:var(--cGs)"/></pattern>
+    <pattern id="pLC" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cLs)"/><rect width="3" height="8" style="fill:var(--cCs)"/></pattern>
+    <pattern id="pGC" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="8" height="8" style="fill:var(--cGs)"/><rect width="3" height="8" style="fill:var(--cCs)"/></pattern>
+    <pattern id="pAG" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="8" height="8" style="fill:var(--cAs)"/><rect width="4" height="8" style="fill:var(--cGs)"/></pattern>
+    <pattern id="pAC" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cAs)"/><rect width="2.5" height="8" style="fill:var(--cCs)"/></pattern>
+    <pattern id="pHatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" style="fill:var(--cGs)"/><rect width="2.5" height="7" style="fill:var(--paper);opacity:.9"/></pattern>
+    <pattern id="pPc" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="9" height="9" style="fill:var(--cAs)"/><rect width="2" height="9" style="fill:var(--cC)"/></pattern>
+    <pattern id="pPf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="4" height="4" style="fill:var(--cAs)"/><rect width="1.4" height="4" style="fill:var(--cC)"/></pattern>
+  </defs>
+</svg>
+
+<header class="hero">
+  <p class="series">Métallurgie · Cours 03 · Série Aciers</p>
+  <h1>Aciers : martensite, traitements thermiques et soudage</h1>
+  <p class="lead">Dernier volet de la série. On ouvre la boîte noire de la martensite, on apprend à la rendre utile par le revenu, puis on applique tout le module à la zone affectée thermiquement d’une soudure.</p>
+  <div class="thumbs" aria-label="Quatre états d’un même acier">
+    <figure><canvas id="h1" width="300" height="300"></canvas><figcaption><b>Trempé</b>martensite, dure et fragile</figcaption></figure>
+    <figure><canvas id="h2" width="300" height="300"></canvas><figcaption><b>Trempé + revenu</b>martensite revenue, tenace</figcaption></figure>
+    <figure><canvas id="h3" width="300" height="300"></canvas><figcaption><b>Normalisé</b>ferrite + perlite fine</figcaption></figure>
+    <figure><canvas id="h4" width="300" height="300"></canvas><figcaption><b>Globulisé</b>cémentite en globules, facile à usiner</figcaption></figure>
+  </div>
+  <p class="small">Un acier de traitement à 0,4&nbsp;% C après quatre traitements thermiques différents (microstructures schématiques).</p>
+</header>
+
+<nav class="bar" aria-label="Navigation du cours">
+  <div class="bar-in">
+    <div class="seg" role="group" aria-label="Niveau affiché">
+      <button data-l="both" class="on">Les deux niveaux</button><button data-l="1">Niveau 1</button><button data-l="2">Niveau 2</button>
+    </div>
+    <div class="toc"><a href="#s0" title="Avant de commencer">0</a><a href="#s1" title="La martensite">1</a><a href="#s2" title="Dureté de la martensite">2</a><a href="#s3" title="Traitements thermiques">3</a><a href="#s4" title="Cycle thermique et ZAT">4</a><a href="#s5" title="t8/5 et TRC de soudage">5</a><a href="#s6" title="Fissuration à froid et préchauffage">6</a><a href="#s7" title="Synthèse de la série">7</a></div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ 0 ============ -->
+<section id="s0">
+  <h2><span class="n">0</span><span>Avant de commencer</span></h2>
+  <p>Ce cours couvre les deux derniers objectifs de ton polycopié :</p>
+  <ul>
+    <li><b>objectif 3</b> : les mécanismes des transformations <b>displacives</b> (la martensite) et leurs conséquences technologiques ;</li>
+    <li><b>objectif 5</b> : les objectifs des principaux traitements thermiques et leurs conséquences sur les microstructures et les propriétés.</li>
+  </ul>
+  <p>Il reprend sans cesse les deux cours précédents :</p>
+  <div class="map">
+    <b>Cours 1</b><span>le diagramme Fe–Fe<sub>3</sub>C (valeurs du poly : 727&nbsp;°C, 0,76&nbsp;%, 0,022&nbsp;%, 2,14&nbsp;%), les sites octaédriques du CFC, la perlite</span>
+    <b>Cours 2</b><span>les courbes TTT et TRC, les vitesses critiques, les formules de M<sub>s</sub>, Ac<sub>1</sub>, Ac<sub>3</sub> et les aciers C45, 42CrMo4 et S355</span>
+  </div>
+  <p>Les valeurs déjà calculées sont réutilisées telles quelles : M<sub>s</sub>&nbsp;=&nbsp;220&nbsp;°C pour l’acier eutectoïde, 327&nbsp;°C pour le C45, 324&nbsp;°C pour le 42CrMo4 et 420&nbsp;°C pour le S355.</p>
+
+  <div class="note hot">
+    <p><b>Pas de TD photographié pour ce chapitre non plus.</b> Trois exercices corrigés t’attendent : un sur la martensite (partie 2), un sur le choix des traitements thermiques (partie 3) et un exercice complet de soudage d’un S355 (partie 6).</p>
+  </div>
+  <div class="note">
+    <p><b>Comme au cours 2</b>, les courbes de transformation et les duretés de soudage viennent d’un modèle simplifié, calé sur l’allure des données publiées pour un acier C-Mn de type S355. Les formules normalisées (énergie de soudage, t<sub>8/5</sub>, carbone équivalent, préchauffage) sont, elles, celles de la norme EN 1011-2. En examen et en atelier, utilise toujours le diagramme ou la fiche fournie pour l’acier réel.</p>
+  </div>
+</section>
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+  <h2><span class="n">1</span><span>La martensite, une transformation sans diffusion</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>Au cours 2, on a vu que si l’on refroidit plus vite que la vitesse critique, la courbe passe à gauche du nez : ni perlite, ni bainite. L’austénite descend alors jusqu’à M<sub>s</sub> sans s’être transformée. Là, elle n’a plus le temps de trier son carbone, mais elle est devenue trop instable pour rester CFC. Elle change donc de maille <b>d’un seul bloc</b>, par un léger cisaillement coordonné de tous les atomes :</p>
+    <ul>
+      <li>chaque atome ne se déplace que d’une fraction de distance interatomique, et garde ses voisins ;</li>
+      <li>le carbone n’a pas le temps de bouger : il reste <b>piégé</b> dans la nouvelle maille, à 0,4&nbsp;% ou 0,76&nbsp;% alors que la ferrite n’en accepte que 0,022&nbsp;% ;</li>
+      <li>chaque plaquette se forme en une fraction de microseconde, à une vitesse de l’ordre du tiers de celle du son dans le métal.</li>
+    </ul>
+    <p>C’est une transformation <b>displacive</b> (on dit aussi « militaire », par opposition aux transformations diffusives, dites « civiles », où chaque atome va où il veut). Le produit, la <b>martensite</b>, est une ferrite sursaturée en carbone, déformée : sa maille est <b>quadratique centrée</b> (QC), un cube centré étiré le long d’un axe.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">La déformation de Bain : du CFC au quadratique centré</p>
+    <canvas class="cell" id="bain3" width="600" height="600" aria-label="Déformation de Bain en 3D, fais tourner au doigt"></canvas>
+    <div class="inp2"><label for="bainU">Déformation</label><input type="range" id="bainU" min="0" max="1" step="0.01" value="0"><output id="bainUv"></output></div>
+    <div class="inp2"><label for="bainC">% C</label><input type="range" id="bainC" min="0" max="1.2" step="0.02" value="0.76"><output id="bainCv"></output></div>
+    <div class="btns sm"><button class="btn" id="bainPlay">Animer la transformation</button><button class="btn" id="bainCtx">Masquer les deux mailles CFC</button></div>
+    <p id="bainTxt" class="msg"></p>
+    <p class="cap">Dans deux mailles CFC voisines (atomes pâles), on repère une maille quadratique centrée (atomes rouges, arêtes orange). La déformation de Bain la comprime selon la verticale et l’étire dans le plan horizontal. Sans carbone, on arrive à un cube centré : c’est de la ferrite. Avec du carbone, piégé dans les sites alignés sur l’axe vertical (en noir), la maille reste étirée : c’est la martensite.</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>Une transformation qui ne dépend que de la température</h3>
+    <p>La quantité de martensite ne dépend pas du temps passé, seulement de la <b>température atteinte</b> sous M<sub>s</sub>. Si l’on arrête la trempe à mi-chemin, la transformation s’arrête ; elle reprend dès qu’on refroidit à nouveau. On dit qu’elle est <b>athermique</b>. C’est pour cela que les lignes M<sub>s</sub>, M<sub>50</sub> et M<sub>90</sub> des diagrammes du cours 2 sont horizontales.</p>
+    <p>La loi de Koistinen-Marburger décrit cette progression : la fraction d’austénite transformée à la température T vaut f<sub>M</sub>&nbsp;=&nbsp;1&nbsp;−&nbsp;exp[−0,011&nbsp;(M<sub>s</sub>&nbsp;−&nbsp;T)]. On la calcule en partie 2.</p>
+
+    <h3>Lattes ou plaquettes</h3>
+    <p>Selon le carbone, la martensite prend deux formes :</p>
+    <ul>
+      <li><b>en lattes</b>, sous environ 0,6&nbsp;% C : de fines lattes parallèles groupées en paquets, riches en dislocations. C’est la martensite des aciers de construction et des soudures ;</li>
+      <li><b>en plaquettes</b>, au-delà d’environ 1&nbsp;% C : des lentilles qui se recoupent, avec une ligne médiane, au milieu d’austénite résiduelle. Plus dure mais plus fragile, elle peut même se fissurer toute seule.</li>
+    </ul>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Martensite en lattes et en plaquettes</p>
+    <div class="row">
+      <div style="flex:0 1 240px;min-width:170px;margin:0 auto"><canvas class="micro" id="mart" width="440" height="440" aria-label="Microstructure martensitique"></canvas></div>
+      <div class="grow">
+        <div class="btns sm" id="martBtns"><button class="btn on" data-k="M">En lattes (0,2&nbsp;% C)</button><button class="btn" data-k="Mp">En plaquettes (1,2&nbsp;% C)</button></div>
+        <div class="btns sm" id="martMode"><button class="btn on" data-m="schema">Couleurs des phases</button><button class="btn" data-m="nital">Aspect au nital</button></div>
+        <p id="martTxt" class="msg"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Ce que Bain n’explique pas</h3>
+    <p>La déformation de Bain donne la bonne correspondance entre les mailles, mais elle déformerait énormément le cristal : environ −20&nbsp;% selon un axe et +13&nbsp;% selon les deux autres. En réalité, la martensite croît en plaquettes le long d’un <b>plan d’habitat</b> qui reste non déformé et non tourné. Pour y parvenir, la déformation de Bain se combine à une rotation et à une déformation de cisaillement « invisible » à l’échelle du réseau, réalisée par glissement de dislocations (lattes) ou par maclage (plaquettes). Le résultat macroscopique est une déformation à plan invariant : c’est elle qui crée le <b>relief</b> visible à la surface d’un échantillon poli avant trempe.</p>
+    <p>Les deux mailles restent liées par des relations d’orientation précises, comme celles de Kurdjumov-Sachs : un plan dense {111} de l’austénite est parallèle à un plan dense {110} de la martensite. Il n’y a pas de diffusion : c’est une signature de la transformation displacive.</p>
+    <h3>La tétragonalité</h3>
+    <p>Dans le CFC, les sites octaédriques sont équivalents selon les trois axes. La correspondance de Bain envoie tous les sites octaédriques du CFC sur une seule des trois familles de sites octaédriques de la maille QC, celle alignée selon l’axe c. Tout le carbone piégé étire donc la maille dans la même direction. Les mesures donnent c/a&nbsp;≈&nbsp;1&nbsp;+&nbsp;0,045&nbsp;×&nbsp;%C : 1,034 à 0,76&nbsp;% C, 1,020 à 0,45&nbsp;% C. C’est le lien avec la remarque du cours 1 sur le carbone dans le site octaédrique aplati du CC.</p>
+    <h3>Pourquoi M<sub>s</sub> baisse avec le carbone</h3>
+    <p>Le carbone stabilise l’austénite (il est gammagène) et durcit la matrice qui doit se cisailler. Il faut donc une force motrice plus grande, c’est-à-dire un sous-refroidissement plus fort, pour déclencher la transformation. D’où le terme −423&nbsp;C de la formule d’Andrews du cours 2, qui domine tous les autres.</p>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+  <h2><span class="n">2</span><span>Pourquoi la martensite est dure, et fragile</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>Trois effets se cumulent pour bloquer les dislocations, donc la déformation plastique :</p>
+    <ol>
+      <li><b>le carbone piégé</b> déforme localement le réseau autour de chaque atome : c’est le durcissement principal, et il croît avec le % C ;</li>
+      <li><b>la densité de dislocations</b> (lattes) ou de macles (plaquettes) créées par le cisaillement est énorme ;</li>
+      <li><b>la finesse</b> des lattes, de l’ordre de 0,1 à 0,5&nbsp;µm, multiplie les obstacles.</li>
+    </ol>
+    <p>Conséquence directe : <b>c’est le carbone qui fait la dureté de la martensite</b>, pas les éléments d’alliage. Ceux-ci servent à l’obtenir plus facilement (cours 2). Revers de la médaille : sans revenu, la martensite est fragile, pleine de contraintes internes, et le passage γ&nbsp;→&nbsp;martensite augmente le volume de quelques pourcents, ce qui peut fissurer une pièce trempée trop brutalement (les <b>tapures de trempe</b>).</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Dureté, M<sub>s</sub> et austénite résiduelle en fonction du carbone</p>
+    <svg id="hvC" viewBox="0 0 360 250" role="img" aria-label="Dureté de la martensite et Ms en fonction du carbone"></svg>
+    <div class="inp2"><label for="hvCc">% C</label><input type="range" id="hvCc" min="0.1" max="1.2" step="0.01" value="0.45"><output id="hvCcv"></output></div>
+    <svg id="kmP" viewBox="0 0 360 200" role="img" aria-label="Fraction de martensite pendant la trempe"></svg>
+    <label class="chk"><input type="checkbox" id="kmCold"> Prolonger par un traitement par le froid (−196&nbsp;°C, azote liquide)</label>
+    <div class="res" id="hvRes"></div>
+    <p class="cap">En haut, la dureté de la martensite (formule empirique de Yurioka) et M<sub>s</sub> (formule d’Andrews jusqu’à 0,6&nbsp;% C, prolongée au-delà par une courbe approchée passant par 220&nbsp;°C à 0,76&nbsp;%). En bas, la fraction de martensite pendant la trempe (loi de Koistinen-Marburger), pour un acier au carbone seul.</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>Ce qu’il faut retenir du graphique</h3>
+    <ul>
+      <li>La dureté monte très vite jusqu’à 0,6&nbsp;% C environ, puis plafonne vers 850–900&nbsp;HV. On retrouve les valeurs du cours 2 : ≈&nbsp;850&nbsp;HV à 0,76&nbsp;% C, ≈&nbsp;650&nbsp;HV pour le C45 et le 42CrMo4, ≈&nbsp;450&nbsp;HV à 0,18&nbsp;% C pour la zone affectée d’un S355.</li>
+      <li>Plus il y a de carbone, plus M<sub>s</sub> est bas, et plus il reste d’<b>austénite résiduelle</b> à l’ambiante : environ 3&nbsp;% à 0,45&nbsp;% C, 11&nbsp;% à 0,76&nbsp;% C, beaucoup plus au-delà. Elle adoucit l’acier, et elle peut se transformer plus tard, en service, avec un gonflement : c’est pourquoi les aciers d’outils ou de roulements subissent un <b>traitement par le froid</b> puis un revenu.</li>
+    </ul>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3><span class="ex">Exercice 1.</span> La trempe du C45</h3>
+    <p>On trempe à l’eau une petite pièce en C45 (0,45&nbsp;% C ; 0,70&nbsp;% Mn), austénitisée à 830&nbsp;°C.</p>
+    <ol>
+      <li>Pourquoi 830&nbsp;°C ? (Utilise Ac<sub>3</sub> du cours 2.)</li>
+      <li>La trempe à l’eau est-elle assez rapide pour obtenir de la martensite ? (Utilise le TRC du cours 2.)</li>
+      <li>À quelle température commence la transformation martensitique ? Quelle fraction d’austénite reste à 20&nbsp;°C ?</li>
+      <li>Estime la dureté et le rapport c/a de la martensite obtenue.</li>
+      <li>Pourquoi ne peut-on pas utiliser la pièce telle quelle ?</li>
+    </ol>
+    <details class="sol"><summary>Voir la correction</summary>
+      <ol>
+        <li>Ac<sub>3</sub>&nbsp;≈&nbsp;785&nbsp;°C (formule d’Andrews, cours 2). On austénitise à Ac<sub>3</sub>&nbsp;+&nbsp;30 à 50&nbsp;°C pour être sûr d’avoir 100&nbsp;% d’austénite homogène, sans laisser grossir le grain.</li>
+        <li>Sur le TRC du cours 2, le C45 n’est entièrement martensitique qu’au-delà d’environ 240&nbsp;°C/s. Une trempe à l’eau d’une <b>petite</b> pièce y parvient ; au cœur d’une grosse pièce, non.</li>
+        <li>M<sub>s</sub>&nbsp;≈&nbsp;539&nbsp;−&nbsp;423&nbsp;×&nbsp;0,45&nbsp;−&nbsp;30,4&nbsp;×&nbsp;0,7&nbsp;≈&nbsp;<b>327&nbsp;°C</b>. À 20&nbsp;°C : f<sub>M</sub>&nbsp;=&nbsp;1&nbsp;−&nbsp;exp[−0,011&nbsp;×&nbsp;(327&nbsp;−&nbsp;20)]&nbsp;=&nbsp;1&nbsp;−&nbsp;exp(−3,38)&nbsp;≈&nbsp;0,966. Il reste environ <b>3&nbsp;% d’austénite résiduelle</b>.</li>
+        <li>Dureté (Yurioka) : 884&nbsp;×&nbsp;0,45&nbsp;×&nbsp;(1&nbsp;−&nbsp;0,3&nbsp;×&nbsp;0,45²)&nbsp;+&nbsp;294&nbsp;≈&nbsp;<b>670&nbsp;HV</b>, environ 59&nbsp;HRC. Rapport c/a&nbsp;≈&nbsp;1&nbsp;+&nbsp;0,045&nbsp;×&nbsp;0,45&nbsp;≈&nbsp;<b>1,020</b>.</li>
+        <li>La martensite brute est fragile et chargée de contraintes internes : un choc peut la casser, et la pièce peut même se fissurer quelques heures après la trempe. Il faut un <b>revenu</b>, idéalement tout de suite après (partie 3).</li>
+      </ol>
+    </details>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Les contraintes de trempe</h3>
+    <p>Deux phénomènes se superposent. Le premier est la <b>contraction thermique</b> : la surface refroidit et se contracte avant le cœur. Le second est la <b>dilatation de transformation</b> : la surface se transforme en martensite, plus volumineuse, avant le cœur. En fin de trempe, le cœur se transforme à son tour et gonfle alors que la surface, déjà dure, ne peut plus suivre : la surface peut se retrouver en traction. Plus la trempe est sévère et plus les sections varient, plus le risque de tapure est grand. Les trempes étagées (partie 3) répondent exactement à ce problème.</p>
+    <h3>Koistinen-Marburger et les lignes du cours 2</h3>
+    <p>Sur le diagramme TTT du cours 2, les lignes M<sub>50</sub> et M<sub>90</sub> reprennent l’allure du manuel de Callister (160 et 105&nbsp;°C pour M<sub>s</sub>&nbsp;=&nbsp;220&nbsp;°C). La loi de Koistinen-Marburger, établie sur d’autres aciers, les place à 157 et 11&nbsp;°C : même M<sub>50</sub>, mais une fin de transformation bien plus basse. L’avancement réel dépend de l’acier, de la taille de grain et de la vitesse de trempe. Retiens l’allure exponentielle et l’ordre de grandeur de l’austénite résiduelle, pas le chiffre exact de M<sub>90</sub>.</p>
+    <h3>L’austénite résiduelle</h3>
+    <p>Elle est riche en carbone, donc stable à l’ambiante, mais métastable. Sous contrainte ou au froid, elle peut se transformer en martensite fraîche, non revenue, avec un gonflement : instabilité dimensionnelle des calibres et des roulements. Le traitement par le froid, puis un revenu, la supprime en grande partie. Dans certains aciers modernes (TRIP), on la garde au contraire volontairement : sa transformation pendant une déformation augmente la ductilité.</p>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+  <h2><span class="n">3</span><span>Les traitements thermiques</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>Tout traitement thermique se résume à deux décisions :</p>
+    <ul>
+      <li><b>jusqu’où chauffer</b>, et combien de temps : cela fixe l’état de départ (tout austénitique, en partie, ou pas du tout). C’est le <b>diagramme d’équilibre</b> du cours 1 qui répond ;</li>
+      <li><b>à quelle vitesse refroidir</b> : cela fixe le produit (perlite, bainite, martensite). Ce sont les <b>TTT et TRC</b> du cours 2 qui répondent.</li>
+    </ul>
+    <p>Le schéma ci-dessous place chaque traitement sur le diagramme Fe–Fe<sub>3</sub>C du cours 1, en vue zoomée sur les aciers.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">La carte des traitements thermiques</p>
+    <svg id="dT" viewBox="0 0 360 300" role="img" aria-label="Domaines de chauffage des traitements sur le diagramme fer-carbone"></svg>
+    <div class="btns sm" id="trtBtns">
+      <button class="btn on" data-t="trempe">Trempe</button><button class="btn" data-t="norm">Normalisation</button><button class="btn" data-t="recuit">Recuit complet</button><button class="btn" data-t="glob">Globulisation</button><button class="btn" data-t="det">Détente</button><button class="btn" data-t="homo">Homogénéisation</button>
+    </div>
+    <div class="row">
+      <div class="grow"><svg id="cyc" viewBox="0 0 240 120" role="img" aria-label="Cycle thermique du traitement"></svg></div>
+      <div style="flex:0 1 150px;min-width:120px;margin:0 auto"><canvas class="micro" id="trtMc" width="320" height="320" aria-label="Microstructure après traitement"></canvas></div>
+    </div>
+    <div id="trtTxt" class="msg"></div>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <div class="tw"><table>
+      <thead><tr><th>Traitement</th><th>Chauffage</th><th>Refroidissement</th><th>But</th></tr></thead>
+      <tbody>
+        <tr><td><b>Trempe</b></td><td>A<sub>3</sub>&nbsp;+&nbsp;30–50&nbsp;°C (hypo) ; A<sub>1</sub>&nbsp;+&nbsp;30–50&nbsp;°C (hyper)</td><td>plus vite que la vitesse critique</td><td>martensite, dureté maximale</td></tr>
+        <tr><td><b>Revenu</b></td><td>sous A<sub>1</sub>, de 150 à 650&nbsp;°C</td><td>air</td><td>rendre la martensite tenace</td></tr>
+        <tr><td><b>Normalisation</b></td><td>A<sub>3</sub> ou A<sub>cm</sub>&nbsp;+&nbsp;30–50&nbsp;°C</td><td>air calme</td><td>grain fin, perlite fine, structure homogène</td></tr>
+        <tr><td><b>Recuit complet</b></td><td>comme la trempe</td><td>four, très lent</td><td>acier le plus doux</td></tr>
+        <tr><td><b>Globulisation</b></td><td>autour de A<sub>1</sub>, longtemps</td><td>lent</td><td>cémentite en globules : usinage, frappe à froid</td></tr>
+        <tr><td><b>Détente</b></td><td>500–650&nbsp;°C, sous A<sub>1</sub></td><td>lent</td><td>relâcher les contraintes résiduelles (soudures)</td></tr>
+        <tr><td><b>Homogénéisation</b></td><td>1050–1200&nbsp;°C, des heures</td><td>lent, puis normalisation</td><td>effacer les ségrégations de solidification</td></tr>
+      </tbody>
+    </table></div>
+    <p><b>Pourquoi seulement A<sub>1</sub>&nbsp;+&nbsp;50&nbsp;°C pour tremper un acier hypereutectoïde ?</b> Au-dessus de A<sub>cm</sub>, tout le carbone passerait en solution : M<sub>s</sub> chuterait, il resterait beaucoup d’austénite résiduelle, et le grain grossirait. En restant entre A<sub>1</sub> et A<sub>cm</sub>, on garde quelques globules de cémentite, très durs et utiles contre l’usure, et une austénite à environ 0,8&nbsp;% C seulement.</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>Le revenu : rendre la martensite utilisable</h3>
+    <p>On réchauffe l’acier trempé sous A<sub>1</sub>. Le carbone piégé retrouve un peu de mobilité et sort de la maille sous forme de carbures fins. La martensite perd sa tétragonalité et ses contraintes, et devient progressivement de la ferrite parsemée de carbures : la <b>martensite revenue</b>. On échange de la dureté contre de la ténacité, et c’est la <b>température de revenu</b> qui règle cet échange.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Dureté après un revenu d’une heure</p>
+    <svg id="rev" viewBox="0 0 360 250" role="img" aria-label="Courbes de revenu"></svg>
+    <div class="inp2"><label for="revT">Revenu à</label><input type="range" id="revT" min="20" max="700" step="10" value="550"><output id="revTv"></output></div>
+    <div class="row">
+      <div class="grow"><p id="revTxt" class="msg"></p></div>
+      <div style="flex:0 1 170px;min-width:130px;margin:0 auto"><canvas class="micro" id="revMc" width="320" height="320" aria-label="Martensite revenue"></canvas></div>
+    </div>
+    <p class="cap">Allures typiques pour trois aciers trempés. L’acier à outils au Cr-Mo-V (type X40CrMoV5-1) regagne de la dureté vers 500–550&nbsp;°C : c’est le <b>durcissement secondaire</b>, dû à la précipitation de carbures alliés (cours 2 : éléments carburigènes).</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <div class="tw"><table>
+      <thead><tr><th>Stade</th><th>Températures</th><th>Ce qui se passe</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>100–200&nbsp;°C</td><td>précipitation de carbures de transition très fins (carbure ε) ; la tétragonalité diminue, la dureté baisse à peine. C’est le revenu bas des outils (150–200&nbsp;°C).</td></tr>
+        <tr><td>2</td><td>200–300&nbsp;°C</td><td>l’austénite résiduelle se décompose (en ferrite et carbures, comme une bainite).</td></tr>
+        <tr><td>3</td><td>250–400&nbsp;°C</td><td>la cémentite remplace les carbures ε ; la martensite devient ferrite + Fe<sub>3</sub>C en bâtonnets.</td></tr>
+        <tr><td>4</td><td>au-delà de 400&nbsp;°C</td><td>la cémentite coalesce en globules, la ferrite se restaure puis recristallise. Avec Mo, V, W, Cr : carbures alliés et durcissement secondaire vers 500–600&nbsp;°C.</td></tr>
+      </tbody>
+    </table></div>
+    <p><b>Trempe + revenu à 500–650&nbsp;°C</b>, c’est le traitement dit d’<b>amélioration</b> (en anglais « quench and temper ») des aciers de construction comme le 42CrMo4 : le meilleur compromis entre résistance et ténacité.</p>
+
+    <h3>Les trempes étagées</h3>
+    <p>Pour limiter déformations et tapures, on évite que la surface et le cœur se transforment à des moments très différents. On trempe dans un bain de sel chaud, puis on attend que toute la pièce soit à la même température :</p>
+    <ul>
+      <li><b>trempe étagée martensitique</b> (« martempering ») : palier juste <b>au-dessus de M<sub>s</sub></b>, sans atteindre le début de la bainite, puis refroidissement à l’air. Toute la pièce se transforme en martensite en même temps. C’est l’idée de la question e) de l’exercice 1 du cours 2 ;</li>
+      <li><b>trempe étagée bainitique</b> (« austempering ») : palier dans le domaine de la bainite jusqu’à transformation complète. On obtient une bainite, souvent inférieure, sans revenu nécessaire. C’est le « bain de sel à 400&nbsp;°C » du cours 2.</li>
+    </ul>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Surface et cœur sur le TTT de l’acier eutectoïde (cours 2)</p>
+    <svg id="etag" viewBox="0 0 360 300" role="img" aria-label="Trempes étagées sur le diagramme TTT"></svg>
+    <div class="btns sm" id="etagBtns"><button class="btn on" data-e="eau">Trempe à l’eau</button><button class="btn" data-e="mart">Étagée martensitique</button><button class="btn" data-e="aus">Étagée bainitique</button></div>
+    <p id="etagTxt" class="msg"></p>
+    <p class="cap">Trait plein orange : surface de la pièce. Tirets : cœur. Revenu éventuel non représenté.</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3><span class="ex">Exercice 2.</span> Quel traitement choisir ?</h3>
+    <ol type="a">
+      <li>Une barre d’acier à 1&nbsp;% C doit être usinée avant d’être transformée en outil.</li>
+      <li>Une pièce forgée en C45 présente un gros grain irrégulier.</li>
+      <li>Un arbre de transmission en 42CrMo4 doit être à la fois résistant et tenace.</li>
+      <li>Une charpente soudée épaisse en acier faiblement allié doit être débarrassée de ses contraintes résiduelles.</li>
+      <li>Un poinçon en acier à 0,9&nbsp;% C doit être le plus dur possible, sans casser au premier choc.</li>
+      <li>Une pièce en 42CrMo4 de forme complexe se déforme trop à la trempe à l’huile.</li>
+    </ol>
+    <details class="sol"><summary>Voir la correction</summary>
+      <ol type="a">
+        <li><b>Globulisation</b> : longue tenue vers A<sub>1</sub>. La cémentite (et son réseau aux joints, cours 1) se met en globules dans une ferrite continue : l’acier devient doux et se coupe bien.</li>
+        <li><b>Normalisation</b> : austénitisation vers Ac<sub>3</sub>&nbsp;+&nbsp;30–50&nbsp;°C (≈&nbsp;820–830&nbsp;°C), puis refroidissement à l’air. Le passage par l’austénite recrée des grains neufs, fins et homogènes.</li>
+        <li><b>Trempe à l’huile puis revenu vers 550–650&nbsp;°C</b> (amélioration). La trempabilité du 42CrMo4 (cours 2) donne de la martensite même au cœur ; le revenu haut la rend tenace.</li>
+        <li><b>Recuit de détente</b> vers 550–650&nbsp;°C, sous Ac<sub>1</sub>, avec montée et descente lentes : c’est le traitement thermique après soudage (partie 6).</li>
+        <li><b>Trempe depuis A<sub>1</sub>&nbsp;+&nbsp;30–50&nbsp;°C (≈&nbsp;760–780&nbsp;°C), puis revenu bas à 150–200&nbsp;°C</b>. On garde presque toute la dureté (stade 1 du revenu) tout en détendant la martensite. Un traitement par le froid avant le revenu limite l’austénite résiduelle.</li>
+        <li><b>Trempe étagée martensitique</b> : bain de sel juste au-dessus de M<sub>s</sub> (≈&nbsp;324&nbsp;°C, cours 2), puis air, puis revenu. La surface et le cœur se transforment ensemble.</li>
+      </ol>
+    </details>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Temps et température de revenu sont équivalents</h3>
+    <p>Le revenu est gouverné par la diffusion : un revenu plus long à plus basse température peut donner le même résultat. Le paramètre de Hollomon-Jaffe le formalise : P&nbsp;=&nbsp;T(K)&nbsp;×&nbsp;(20&nbsp;+&nbsp;log&nbsp;t), avec t en heures. Même P, même dureté. Exemple : 1&nbsp;h à 600&nbsp;°C donne P&nbsp;=&nbsp;873&nbsp;×&nbsp;20&nbsp;=&nbsp;17&nbsp;460 ; pour 10&nbsp;h, il suffit de T&nbsp;=&nbsp;17&nbsp;460/21&nbsp;=&nbsp;831&nbsp;K, soit environ 558&nbsp;°C. C’est ce paramètre qu’on utilise pour vérifier qu’un traitement après soudage ne dégrade pas trop le métal de base.</p>
+    <h3>Les fragilités de revenu</h3>
+    <ul>
+      <li><b>Vers 250–400&nbsp;°C</b> : la cémentite précipite en films le long des lattes de martensite, et la ténacité chute. On évite simplement ce domaine.</li>
+      <li><b>Vers 350–575&nbsp;°C</b>, ou en refroidissant lentement à travers ce domaine : des impuretés (P, Sn, Sb, As) ségrègent aux anciens joints de grains d’austénite. C’est la fragilité de revenu « réversible ». Le molybdène la limite : c’est une des raisons de sa présence dans le 42CrMo4.</li>
+    </ul>
+    <h3>Trempabilité et effet de masse</h3>
+    <p>Une pièce épaisse refroidit moins vite à cœur qu’en surface : pour une même trempe, le cœur peut rester bainitique ou ferrito-perlitique. Les fiches des aciers donnent des diamètres limites pour chaque milieu de trempe, à partir de l’essai Jominy (cours 2). C’est l’origine des classes d’aciers : non alliés pour les petites sections trempées à l’eau, faiblement alliés au Cr, Mo ou Ni pour les grosses sections trempées à l’huile.</p>
+    <h3>Et les traitements de surface ?</h3>
+    <p>La même logique s’applique localement : la <b>trempe superficielle</b> (par induction ou à la flamme) n’austénitise qu’une couche ; la <b>cémentation</b> enrichit la surface en carbone avant trempe ; la <b>nitruration</b> durcit par des nitrures, sans trempe, vers 500–570&nbsp;°C. Ils sortent du cadre de ce cours.</p>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+  <h2><span class="n">4</span><span>Le soudage, un traitement thermique local et brutal</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>Pendant le soudage, chaque point du métal de base subit un <b>cycle thermique</b> : chauffage très rapide (quelques secondes), passage bref à une température maximale, puis refroidissement imposé par la conduction de la chaleur dans la tôle. La température maximale, la <b>température de pic</b>, diminue à mesure qu’on s’éloigne du cordon.</p>
+    <p>Reprends la verticale du cours 1 à 0,18&nbsp;% C (un S355) : chaque bande de la ZAT correspond à une portion de cette verticale. Selon la hauteur atteinte, l’acier est entièrement, partiellement ou pas du tout austénitisé, et la zone se comporte comme après un traitement différent.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Zone</th><th>Température de pic (S355)</th><th>Ce qu’elle subit</th></tr></thead>
+      <tbody>
+        <tr><td><span class="zone" style="background:var(--cLs)"></span>Zone fondue</td><td>au-dessus d’environ 1500&nbsp;°C</td><td>métal fondu mélangé au métal d’apport, structure de solidification</td></tr>
+        <tr><td><span class="zone" style="background:var(--cM)"></span>ZAT à gros grains</td><td>de 1150&nbsp;°C à la fusion</td><td>austénitisation complète et grossissement du grain : trempabilité maximale, zone la plus dure et la moins tenace</td></tr>
+        <tr><td><span class="zone" style="background:var(--cGs)"></span>ZAT à grains fins</td><td>de Ac<sub>3</sub> à 1150&nbsp;°C</td><td>austénitisation sans grossissement : c’est une <b>normalisation</b>, zone souvent excellente</td></tr>
+        <tr><td><span class="zone" style="background:repeating-linear-gradient(45deg,var(--cAs) 0 3px,var(--cGs) 3px 6px)"></span>ZAT intercritique</td><td>de Ac<sub>1</sub> à Ac<sub>3</sub></td><td>austénitisation partielle : la perlite devient une austénite riche en carbone, qui peut former des îlots durs</td></tr>
+        <tr><td><span class="zone" style="background:var(--cBs)"></span>ZAT subcritique</td><td>de 500&nbsp;°C environ à Ac<sub>1</sub></td><td>pas d’austénite : un <b>revenu</b> ou une globulisation partielle</td></tr>
+        <tr><td><span class="zone" style="background:var(--cAs)"></span>Métal de base</td><td>moins de 500&nbsp;°C</td><td>rien de visible</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Simulateur de zone affectée thermiquement (S355)</p>
+    <div class="inp2"><label for="zQ">Énergie Q</label><input type="range" id="zQ" min="0.3" max="3.5" step="0.05" value="1.1"><output id="zQv"></output></div>
+    <div class="inp2"><label for="zD">Épaisseur</label><input type="range" id="zD" min="4" max="40" step="1" value="12"><output id="zDv"></output></div>
+    <div class="inp2"><label for="zT0">Préchauffage</label><input type="range" id="zT0" min="20" max="250" step="5" value="20"><output id="zT0v"></output></div>
+    <svg id="zSec" viewBox="0 0 360 170" role="img" aria-label="Coupe de la soudure avec les zones de la ZAT"></svg>
+    <svg id="zProf" viewBox="0 0 360 230" role="img" aria-label="Température de pic en fonction de la distance"></svg>
+    <div class="btns sm" id="zBtns"></div>
+    <div class="row">
+      <div class="grow"><div id="zTxt" class="msg"></div></div>
+      <div style="flex:0 1 170px;min-width:130px;margin:0 auto"><canvas class="micro" id="zMc" width="320" height="320" aria-label="Microstructure de la zone choisie"></canvas></div>
+    </div>
+    <p class="cap">Largeurs calculées par la formule d’Adams (tôle soudée en pleine pénétration, chaleur qui s’écoule dans le plan) ; t<sub>8/5</sub> calculé par la norme EN 1011-2 pour un cordon sur tôle. Microstructures et duretés : modèle simplifié d’un acier C-Mn de type S355. Touche une zone pour afficher son cycle.</p>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>La formule d’Adams</h3>
+    <p>Pour une tôle d’épaisseur d soudée en pleine pénétration, la température de pic à la distance Y de la ligne de fusion vérifie :</p>
+    <div class="eq">1/(T<sub>p</sub> − T<sub>0</sub>) = 4,13 ρc d Y / Q<sub>net</sub> + 1/(T<sub>f</sub> − T<sub>0</sub>)</div>
+    <p>avec ρc&nbsp;≈&nbsp;0,0044&nbsp;J/(mm³·°C) pour l’acier, Q<sub>net</sub> l’énergie de soudage en J/mm et T<sub>f</sub> la température de fusion. Lis-la comme une règle de proportion : la ZAT s’élargit avec l’énergie, rétrécit quand la tôle s’épaissit, et s’élargit avec le préchauffage.</p>
+    <h3>Pourquoi la zone à gros grains est la plus critique</h3>
+    <p>Au-delà de 1100 à 1200&nbsp;°C, les précipités qui ancraient les joints de grains (nitrures d’aluminium, carbonitrures de niobium ou de vanadium) se dissolvent, et le grain d’austénite grossit en quelques secondes. Moins de joints, c’est moins de sites de germination pour la ferrite : les courbes TRC se décalent vers la droite (cours 2, grain et trempabilité). La même vitesse de refroidissement donne alors bainite supérieure ou martensite au lieu de ferrite. Les aciers modernes « TMCP » limitent ce grossissement par de fins nitrures de titane, stables jusqu’à très haute température.</p>
+    <h3>La zone intercritique et les îlots M-A</h3>
+    <p>Entre Ac<sub>1</sub> et Ac<sub>3</sub>, seule la perlite et un peu de ferrite voisine deviennent austénite. Cette austénite hérite du carbone de la perlite, elle est donc très trempante : au refroidissement, elle donne de petits îlots de martensite et d’austénite résiduelle, les <b>constituants M-A</b>. En soudage multipasse, une zone à gros grains réchauffée dans l’intercritique par la passe suivante combine gros grain et îlots M-A : ce sont les zones fragiles locales, surveillées dans les aciers offshore.</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+  <h2><span class="n">5</span><span>Le t<sub>8/5</sub> et les diagrammes TRC de soudage</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>Pour un acier C-Mn ou faiblement allié, toutes les transformations de l’austénite se produisent entre 800 et 500&nbsp;°C. Le temps passé dans cet intervalle, le <b>t<sub>8/5</sub></b>, résume donc à lui seul l’effet du refroidissement sur la microstructure. Les TRC de soudage sont tracés en fonction de ce t<sub>8/5</sub>.</p>
+    <h3>1. L’énergie de soudage</h3>
+    <div class="eq">Q = k × U × I / v &nbsp;&nbsp;(en kJ/mm si U en V, I en A, v en mm/s, divisé par 1000)</div>
+    <p>Le rendement thermique k tient compte de la chaleur perdue : 1,0 en arc submergé, 0,8 en électrode enrobée et en MIG/MAG, 0,6 en TIG et plasma.</p>
+    <h3>2. Tôle épaisse ou tôle mince ?</h3>
+    <p>Dans une tôle épaisse, la chaleur s’échappe dans les trois directions (écoulement <b>3D</b>). Dans une tôle mince, elle ne s’échappe que dans le plan (<b>2D</b>), donc plus lentement. La norme EN 1011-2 donne les deux formules, avec T<sub>0</sub> la température initiale (préchauffage) et d l’épaisseur en mm :</p>
+    <div class="eq">
+      3D : t<sub>8/5</sub> = (6700 − 5 T<sub>0</sub>) · Q · [1/(500 − T<sub>0</sub>) − 1/(800 − T<sub>0</sub>)] · F<sub>3</sub><br>
+      2D : t<sub>8/5</sub> = (4300 − 4,3 T<sub>0</sub>) · 10<sup>5</sup> · (Q²/d²) · [1/(500 − T<sub>0</sub>)² − 1/(800 − T<sub>0</sub>)²] · F<sub>2</sub>
+    </div>
+    <p>On applique la formule 3D si l’épaisseur dépasse l’<b>épaisseur de transition</b> d<sub>t</sub>, où les deux formules donnent le même résultat :</p>
+    <div class="eq">d<sub>t</sub> = √{ [(4300 − 4,3 T<sub>0</sub>)/(6700 − 5 T<sub>0</sub>)] · 10<sup>5</sup> · Q · [1/(500 − T<sub>0</sub>) + 1/(800 − T<sub>0</sub>)] }</div>
+    <p>Les facteurs de forme F tiennent compte de la géométrie du joint : 1 pour un cordon sur tôle, 0,9 pour les passes d’un joint bout à bout, 0,67 en 3D pour une soudure d’angle (0,67 à 0,9 en 2D pour un angle extérieur, 0,45 à 0,67 pour un joint en T). Un angle évacue la chaleur dans plus de directions : il refroidit plus vite.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Calcule le t<sub>8/5</sub> et lis le TRC de soudage</p>
+    <div class="inp2"><label for="wP">Procédé</label><select id="wP"><option value="0.8">MAG (k = 0,8)</option><option value="0.8">Électrode enrobée (k = 0,8)</option><option value="1">Arc submergé (k = 1)</option><option value="0.6">TIG (k = 0,6)</option></select><span></span></div>
+    <div class="inp2"><label for="wU">Tension</label><input type="range" id="wU" min="10" max="40" step="0.5" value="28"><output id="wUv"></output></div>
+    <div class="inp2"><label for="wI">Intensité</label><input type="range" id="wI" min="60" max="700" step="5" value="250"><output id="wIv"></output></div>
+    <div class="inp2"><label for="wV">Vitesse</label><input type="range" id="wV" min="1" max="15" step="0.1" value="5"><output id="wVv"></output></div>
+    <div class="inp2"><label for="wD">Épaisseur</label><input type="range" id="wD" min="4" max="60" step="1" value="20"><output id="wDv"></output></div>
+    <div class="inp2"><label for="wT0">Préchauffage</label><input type="range" id="wT0" min="20" max="250" step="5" value="20"><output id="wT0v"></output></div>
+    <div class="inp2"><label for="wF">Joint</label><select id="wF"><option value="1,1">Cordon sur tôle</option><option value="0.9,0.9" selected>Bout à bout (passes)</option><option value="0.67,0.8">Angle extérieur</option><option value="0.67,0.55">Joint en T</option></select><span></span></div>
+    <div class="res" id="wRes"></div>
+    <svg id="wTrc" viewBox="0 0 360 250" role="img" aria-label="Constituants et dureté de la ZAT en fonction du t8/5"></svg>
+    <div class="btns sm" id="wZone"><button class="btn on" data-z="CG">ZAT à gros grains</button><button class="btn" data-z="FG">ZAT à grains fins</button></div>
+    <p id="wTxt" class="msg"></p>
+    <p class="cap">Diagramme de soudage sous sa forme « compacte » : pour chaque t<sub>8/5</sub>, la proportion de chaque constituant (aires empilées) et la dureté (courbe noire, échelle de droite). Modèle simplifié d’un S355, pic à 1350&nbsp;°C pour la zone à gros grains.</p>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>D’où viennent ces formules</h3>
+    <p>Elles dérivent des solutions de Rosenthal pour une source de chaleur mobile. Loin derrière l’arc, la température d’une tôle épaisse décroît comme 1/t (3D), celle d’une tôle mince comme 1/√t (2D). C’est pourquoi t<sub>8/5</sub> est proportionnel à Q en 3D et à (Q/d)² en 2D : en tôle mince, doubler l’énergie quadruple le t<sub>8/5</sub>, et doubler l’épaisseur le divise par quatre. Le préchauffage agit dans les deux cas en réduisant l’écart entre la tôle et l’intervalle 800–500&nbsp;°C.</p>
+    <h3>Le vrai diagramme TRC de soudage</h3>
+    <p>Sur un TRC de soudage « complet », l’axe horizontal est le temps compté depuis le passage à 800&nbsp;°C (ou depuis le pic), et chaque courbe de refroidissement est étiquetée par son t<sub>8/5</sub>. On y retrouve les domaines F, P, B, M du cours 2, les pourcentages le long des courbes et la dureté au bout. La forme compacte ci-dessus en est la lecture systématique, courbe par courbe.</p>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+  <h2><span class="n">6</span><span>Fissuration à froid, carbone équivalent et préchauffage</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>La <b>fissuration à froid</b> (ou fissuration par l’hydrogène) apparaît dans la ZAT, parfois des heures après le soudage, quand trois conditions sont réunies :</p>
+    <ol>
+      <li><b>une microstructure sensible</b> : de la martensite dure dans la zone à gros grains. On limite souvent la dureté vers 350&nbsp;HV ; la norme de qualification des modes opératoires EN ISO 15614-1 tolère par exemple 380&nbsp;HV10 pour les aciers courants non traités après soudage ;</li>
+      <li><b>de l’hydrogène diffusible</b>, apporté par l’humidité de l’enrobage ou du flux, le gaz, la graisse ou la rouille ;</li>
+      <li><b>des contraintes</b> : retrait, bridage, épaisseur.</li>
+    </ol>
+    <p>Elle ne se produit que près de l’ambiante, en dessous de 150 à 200&nbsp;°C environ. Chaque remède agit sur un des facteurs.</p>
+    <ul>
+      <li>Le <b>préchauffage</b> et le maintien d’une <b>température entre passes</b> allongent le t<sub>8/5</sub> (moins de martensite) et laissent à l’hydrogène le temps de s’échapper.</li>
+      <li>Les <b>consommables bas hydrogène</b> (électrodes basiques étuvées, fils pleins) réduisent la source.</li>
+      <li>Le <b>post-chauffage</b> (dégazage à 200–300&nbsp;°C pendant quelques heures) chasse l’hydrogène avant refroidissement.</li>
+      <li>Le <b>traitement thermique après soudage</b> (détente à 550–650&nbsp;°C) revient la martensite de la ZAT et relâche les contraintes.</li>
+    </ul>
+    <h3>Le carbone équivalent</h3>
+    <p>Pour juger la trempabilité d’un acier en un seul nombre, on pondère chaque élément par son effet relatif à celui du carbone. La formule de l’Institut international de la soudure (IIW) :</p>
+    <div class="eq">CEV = C + Mn/6 + (Cr + Mo + V)/5 + (Ni + Cu)/15</div>
+    <p>Ordres de grandeur : moins de 0,40, soudabilité généralement bonne sans précaution particulière en épaisseur modérée ; de 0,40 à 0,50, préchauffage souvent nécessaire ; au-delà, soudage délicat, avec préchauffage, bas hydrogène et souvent traitement après soudage. La norme EN 1011-2 propose aussi le CET, qui sert à calculer directement un préchauffage :</p>
+    <div class="eq">
+      CET = C + (Mn + Mo)/10 + (Cr + Cu)/20 + Ni/40<br>
+      T<sub>p</sub> = 697·CET + 160·tanh(d/35) + 62·HD<sup>0,35</sup> + (53·CET − 32)·Q − 328 &nbsp;(°C)
+    </div>
+    <p>avec d l’épaisseur en mm, HD la teneur en hydrogène diffusible du métal fondu en ml/100&nbsp;g et Q l’énergie en kJ/mm. Domaine de validité : CET de 0,2 à 0,5 ; d de 10 à 90&nbsp;mm ; HD de 1 à 20 ; Q de 0,5 à 4&nbsp;kJ/mm.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Carbone équivalent et préchauffage (EN 1011-2, méthode B)</p>
+    <div class="btns sm" id="pPre"><button class="btn on" data-k="S355">S355</button><button class="btn" data-k="C45">C45</button><button class="btn" data-k="42CrMo4">42CrMo4</button></div>
+    <div id="pIn"></div>
+    <div class="inp2"><label for="pD">Épaisseur</label><input type="range" id="pD" min="10" max="90" step="1" value="20"><output id="pDv"></output></div>
+    <div class="inp2"><label for="pQ">Énergie Q</label><input type="range" id="pQ" min="0.5" max="4" step="0.05" value="1.1"><output id="pQv"></output></div>
+    <div class="inp2"><label for="pH">Hydrogène</label><select id="pH"><option value="3">HD ≤ 3 (classe E)</option><option value="5" selected>HD 3 à 5 (classe D)</option><option value="10">HD 5 à 10 (classe C)</option><option value="15">HD 10 à 15 (classe B)</option><option value="20">HD &gt; 15 (classe A)</option></select><span></span></div>
+    <div class="res" id="pRes"></div>
+    <p id="pTxt" class="msg"></p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3><span class="ex">Exercice 3.</span> Souder un S355 de 20&nbsp;mm</h3>
+    <p>On soude en MAG, bout à bout, deux tôles de S355 (C 0,18 ; Mn 1,40 ; Si 0,30) de 20&nbsp;mm d’épaisseur. Passes de remplissage : U&nbsp;=&nbsp;28&nbsp;V, I&nbsp;=&nbsp;250&nbsp;A, v&nbsp;=&nbsp;300&nbsp;mm/min. Passe de racine : Q&nbsp;=&nbsp;0,6&nbsp;kJ/mm. On prend F<sub>3</sub>&nbsp;=&nbsp;0,9 pour toutes les passes.</p>
+    <ol>
+      <li>Calcule l’énergie de soudage des passes de remplissage.</li>
+      <li>Le régime est-il 2D ou 3D ? Calcule le t<sub>8/5</sub> sans préchauffage.</li>
+      <li>Avec le diagramme de soudage de la partie 5 (ZAT à gros grains), estime la dureté maximale. Est-elle acceptable ?</li>
+      <li>Même question pour la passe de racine. Quel préchauffage ramène la dureté vers 350&nbsp;HV ?</li>
+      <li>Calcule CEV et CET. Quel préchauffage donne la méthode de la norme EN 1011-2 avec un fil plein (HD&nbsp;≤&nbsp;5), puis avec des électrodes rutiles (HD&nbsp;≈&nbsp;15) ? Commente l’écart avec la question 4.</li>
+    </ol>
+    <details class="sol"><summary>Voir la correction</summary>
+      <ol>
+        <li>v&nbsp;=&nbsp;300&nbsp;mm/min&nbsp;=&nbsp;5&nbsp;mm/s. Q&nbsp;=&nbsp;0,8&nbsp;×&nbsp;28&nbsp;×&nbsp;250&nbsp;/&nbsp;5&nbsp;=&nbsp;1120&nbsp;J/mm&nbsp;=&nbsp;<b>1,12&nbsp;kJ/mm</b>.</li>
+        <li>d<sub>t</sub>&nbsp;=&nbsp;√[(4214/6600)&nbsp;×&nbsp;10<sup>5</sup>&nbsp;×&nbsp;1,12&nbsp;×&nbsp;(1/480&nbsp;+&nbsp;1/780)]&nbsp;≈&nbsp;15,5&nbsp;mm. Comme 20&nbsp;mm&nbsp;&gt;&nbsp;15,5&nbsp;mm : <b>régime 3D</b>. t<sub>8/5</sub>&nbsp;=&nbsp;6600&nbsp;×&nbsp;1,12&nbsp;×&nbsp;(1/480&nbsp;−&nbsp;1/780)&nbsp;×&nbsp;0,9&nbsp;≈&nbsp;<b>5,3&nbsp;s</b>.</li>
+        <li>À 5,3&nbsp;s, la zone à gros grains est surtout bainitique avec un peu de martensite : environ <b>320&nbsp;HV</b>. C’est sous 350&nbsp;HV : acceptable.</li>
+        <li>Racine : d<sub>t</sub>&nbsp;≈&nbsp;11,4&nbsp;mm, toujours 3D ; t<sub>8/5</sub>&nbsp;=&nbsp;6600&nbsp;×&nbsp;0,6&nbsp;×&nbsp;0,000801&nbsp;×&nbsp;0,9&nbsp;≈&nbsp;<b>2,9&nbsp;s</b>, soit environ <b>390&nbsp;HV</b> : trop dur. Avec 100&nbsp;°C : t<sub>8/5</sub>&nbsp;≈&nbsp;3,6&nbsp;s et ≈&nbsp;365&nbsp;HV. Avec 150&nbsp;°C : t<sub>8/5</sub>&nbsp;≈&nbsp;4,2&nbsp;s et ≈&nbsp;340&nbsp;HV. Il faut donc un préchauffage d’environ <b>130 à 150&nbsp;°C</b> pour passer sous 350&nbsp;HV. La racine, peu énergétique et très bridée, est toujours la passe la plus exposée.</li>
+        <li>CEV&nbsp;=&nbsp;0,18&nbsp;+&nbsp;1,40/6&nbsp;≈&nbsp;<b>0,41</b> ; CET&nbsp;=&nbsp;0,18&nbsp;+&nbsp;1,40/10&nbsp;=&nbsp;<b>0,32</b>. Remplissage, HD&nbsp;=&nbsp;5 : T<sub>p</sub>&nbsp;=&nbsp;223&nbsp;+&nbsp;82,6&nbsp;+&nbsp;108,9&nbsp;−&nbsp;16,8&nbsp;−&nbsp;328&nbsp;≈&nbsp;<b>70&nbsp;°C</b>. Racine (Q&nbsp;=&nbsp;0,6) : ≈&nbsp;<b>78&nbsp;°C</b>. Avec HD&nbsp;=&nbsp;15, le terme hydrogène passe de 109 à 160 : ≈&nbsp;<b>121&nbsp;°C</b> et <b>129&nbsp;°C</b>.<br><b>Commentaire.</b> Les deux approches ne répondent pas à la même question. Le critère de dureté ne voit que la microstructure : il ignore l’hydrogène, et 350&nbsp;HV est une limite prudente. La méthode de la norme vient d’essais de fissuration : elle tient compte de l’hydrogène et de l’épaisseur, et montre qu’un consommable humide coûte à lui seul 50&nbsp;°C de préchauffage. En pratique, on prendrait environ 100&nbsp;°C avec un fil plein, et on soignerait particulièrement la racine.</li>
+      </ol>
+      <p class="small">Duretés lues sur le modèle simplifié de ce cours. Sur une vraie fiche d’acier, les valeurs changent ; le raisonnement reste le même.</p>
+    </details>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Pourquoi l’hydrogène fissure la martensite</h3>
+    <p>L’hydrogène atomique, minuscule, diffuse vite dans l’acier, même à l’ambiante. Il se concentre là où le réseau est dilaté : pointes de fissures, zones en traction, interfaces. Il y facilite la décohésion et la plasticité locale. Une martensite dure, chargée de contraintes, est le pire terrain. La fissuration est différée : il faut le temps que l’hydrogène rejoigne les zones critiques. C’est pourquoi beaucoup de codes imposent d’attendre, souvent de 16 à 48&nbsp;h, avant le contrôle final des soudures sensibles.</p>
+    <h3>Le diagramme de Graville</h3>
+    <p>Il classe les aciers selon leur carbone et leur carbone équivalent. Zone I, peu de carbone : facile à souder. Zone II, carbone plus élevé mais trempabilité faible : on agit sur la vitesse de refroidissement (énergie, préchauffage). Zone III, carbone et trempabilité élevés : la martensite est inévitable, il faut bas hydrogène, préchauffage et traitement après soudage. Le S355 (0,18&nbsp;% C, CEV&nbsp;≈&nbsp;0,41) est en zone II, le 42CrMo4 (CEV&nbsp;≈&nbsp;0,80) en zone III : c’est la réponse de l’exercice 3 du cours 2.</p>
+    <h3>Le traitement thermique après soudage</h3>
+    <p>C’est un revenu (partie 3) appliqué à toute la soudure : la martensite et la bainite de la ZAT sont revenues, les contraintes résiduelles tombent à la limite d’élasticité à chaud du métal, et l’hydrogène s’échappe. Il faut rester sous Ac<sub>1</sub>, et vérifier par le paramètre de Hollomon-Jaffe que le métal de base ne s’adoucit pas trop.</p>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+  <h2><span class="n">7</span><span>Synthèse de la série</span></h2>
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p><b>Le fil rouge des trois cours.</b> Chauffé dans le domaine γ, l’acier dissout son carbone. En refroidissant, le fer redevient α et doit s’en débarrasser. Tout dépend du temps qu’on lui laisse :</p>
+    <div class="tw"><table>
+      <thead><tr><th>Temps laissé au carbone</th><th>Résultat</th><th>Outil de lecture</th></tr></thead>
+      <tbody>
+        <tr><td>infini (refroidissement très lent)</td><td>ferrite + perlite grossière, proportions du levier</td><td>diagramme Fe–Fe<sub>3</sub>C, cours 1</td></tr>
+        <tr><td>quelques secondes à quelques minutes, haut</td><td>perlite fine</td><td>TTT / TRC, cours 2</td></tr>
+        <tr><td>quelques secondes, plus bas</td><td>bainite (supérieure puis inférieure)</td><td>TTT / TRC, cours 2</td></tr>
+        <tr><td>aucun</td><td>martensite, carbone piégé</td><td>M<sub>s</sub>, Koistinen-Marburger, cours 3</td></tr>
+        <tr><td>on lui en rend ensuite</td><td>martensite revenue</td><td>courbes de revenu, cours 3</td></tr>
+      </tbody>
+    </table></div>
+    <p><b>La composition règle l’horloge</b> (cours 2) : les éléments d’alliage retardent perlite et bainite, et rendent la martensite plus facile à obtenir. <b>Le carbone règle la dureté</b> de cette martensite (cours 3). En soudage, les deux se retrouvent dans le carbone équivalent, et le t<sub>8/5</sub> joue le rôle de la vitesse de refroidissement.</p>
+    <h3>Les questions à se poser devant n’importe quel exercice</h3>
+    <ol>
+      <li>Quelle est la composition ? Hypo, eutectoïde ou hyper ? Allié ou non ?</li>
+      <li>Jusqu’où chauffe-t-on ? Austénitisation complète, partielle ou aucune ? (cours 1)</li>
+      <li>Comment refroidit-on ? Paliers : TTT. Continu : TRC. Soudage : t<sub>8/5</sub>. (cours 2 et 3)</li>
+      <li>Qu’obtient-on, en quelles proportions, avec quelle dureté ?</li>
+      <li>Faut-il un traitement complémentaire : revenu, détente, préchauffage ? (cours 3)</li>
+    </ol>
+    <h3>Les pièges propres à ce cours</h3>
+    <ul>
+      <li>Croire que le temps de maintien sous M<sub>s</sub> fait avancer la martensite : seule la température compte.</li>
+      <li>Attribuer la dureté de la martensite aux éléments d’alliage : c’est le carbone.</li>
+      <li>Oublier le revenu après une trempe : la martensite brute n’est presque jamais utilisable.</li>
+      <li>Oublier le rendement k dans l’énergie de soudage, ou mélanger les unités (mm/min et mm/s, J/mm et kJ/mm).</li>
+      <li>Appliquer la formule 3D à une tôle plus mince que d<sub>t</sub>.</li>
+      <li>Croire qu’une ZAT est homogène : de la ligne de fusion au métal de base, on traverse en quelques millimètres toutes les zones du diagramme.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Cours 3 sur 3, métallurgie des aciers. Formules normalisées : EN 1011-2 (t<sub>8/5</sub>, CET, préchauffage). Formules empiriques : Andrews (M<sub>s</sub>), Yurioka (dureté de la martensite), Koistinen-Marburger, Adams. Transformations et duretés en soudage : modèle simplifié d’un acier de type S355.</p>
+</footer>
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent) { const e = document.createElementNS(NS, tag); if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+function tx(parent, x, y, s, style, attrs) { const t = el('text', Object.assign({ x: x, y: y, style: style || '' }, attrs || {}), parent); t.textContent = s; return t; }
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const fmt = (v, d = 1) => (Math.round(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d).replace('.', ',');
+const NB = '\u00a0';
+const RM = (() => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } })();
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function cssv(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function hex2rgb(h) { h = (h || '#888888').replace('#', ''); if (h.length === 3) h = h.split('').map(x => x + x).join(''); const n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+function onVisible(node, cb) { try { new IntersectionObserver(es => es.forEach(e => cb(e.isIntersecting)), { threshold: 0.05 }).observe(node); } catch (e) { cb(true); } }
+const easeIO = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const GLOW = [[20, '#5b636d'], [480, '#5b636d'], [540, '#4a1812'], [620, '#6e1a12'], [700, '#951f14'], [780, '#b82817'], [860, '#d6361a'], [950, '#ec5a1c'], [1050, '#f5801f'], [1150, '#faa532'], [1250, '#fcc653'], [1350, '#fde08a'], [1450, '#fff0c2'], [1700, '#fffbea']];
+function glow(T) {
+  if (T <= GLOW[0][0]) return GLOW[0][1];
+  for (let i = 1; i < GLOW.length; i++) if (T <= GLOW[i][0]) { const [t0, c0] = GLOW[i - 1], [t1, c1] = GLOW[i], u = (T - t0) / (t1 - t0), a = hex2rgb(c0), b = hex2rgb(c1); return 'rgb(' + a.map((v, k) => Math.round(lerp(v, b[k], u))).join(',') + ')'; }
+  return GLOW[GLOW.length - 1][1];
+}
+const isDark = () => (cssv('--bg') || '').toLowerCase() === '#10161c';
+const sup = n => String(n).split('').map(ch => '⁰¹²³⁴⁵⁶⁷⁸⁹'['0123456789'.indexOf(ch)] || '⁻').join('');
+const fmtT = t => t < 1 ? fmt(t, 1) + NB + 's' : t < 100 ? fmt(t, t < 10 ? 1 : 0) + NB + 's' : t < 3600 ? Math.round(t) + NB + 's' : t < 86400 ? fmt(t / 3600, 1) + NB + 'h' : fmt(t / 86400, 1) + NB + 'j';
+const redraws = [];
+function radio(box, attr, cb) { $$('button', box).forEach(b => b.addEventListener('click', () => { $$('button', box).forEach(x => x.classList.toggle('on', x === b)); cb(b.dataset[attr], b); })); }
+
+const seq = (a, b, n) => Array.from({ length: n + 1 }, (_, i) => a + (b - a) * i / n);
+
+// ===== modèle TTT (cours 2) =====
+function mono(pts) {
+  const n = pts.length, x = pts.map(p => p[0]), y = pts.map(p => p[1]), d = [], m = new Array(n);
+  for (let i = 0; i < n - 1; i++) d.push((y[i + 1] - y[i]) / (x[i + 1] - x[i]));
+  m[0] = d[0]; m[n - 1] = d[n - 2];
+  for (let i = 1; i < n - 1; i++) m[i] = d[i - 1] * d[i] <= 0 ? 0 : (d[i - 1] + d[i]) / 2;
+  for (let i = 0; i < n - 1; i++) {
+    if (d[i] === 0) { m[i] = m[i + 1] = 0; continue; }
+    const a = m[i] / d[i], b = m[i + 1] / d[i], s = a * a + b * b;
+    if (s > 9) { const t = 3 / Math.sqrt(s); m[i] = t * a * d[i]; m[i + 1] = t * b * d[i]; }
+  }
+  return X => {
+    if (X <= x[0]) return y[0] + m[0] * (X - x[0]);
+    if (X >= x[n - 1]) return y[n - 1] + m[n - 1] * (X - x[n - 1]);
+    let i = 0; while (X > x[i + 1]) i++;
+    const h = x[i + 1] - x[i], t = (X - x[i]) / h, t2 = t * t, t3 = t2 * t;
+    return (2 * t3 - 3 * t2 + 1) * y[i] + (t3 - 2 * t2 + t) * h * m[i] + (-2 * t3 + 3 * t2) * y[i + 1] + (t3 - t2) * h * m[i + 1];
+  };
+}
+const MS = 220, A1 = 727;
+const ttS = mono([[220, 3.1], [250, 2.6], [300, 1.95], [350, 1.35], [400, 0.85], [450, 0.45], [500, 0.05], [520, -0.1], [540, -0.15], [560, -0.1], [600, 0.1], [650, 0.5], [680, 1.0], [700, 1.5], [720, 2.8]]);
+const ttF = mono([[220, 4.6], [250, 4.1], [300, 3.45], [350, 2.85], [400, 2.3], [450, 1.75], [500, 1.2], [520, 0.95], [540, 0.85], [560, 0.9], [600, 1.1], [650, 1.6], [680, 2.2], [700, 2.8], [720, 4.3]]);
+const LN = Math.log(Math.log(100) / -Math.log(0.99));
+function jm(T, S, F) { const ts = Math.pow(10, S(T)), tf = Math.pow(10, F(T)), n = LN / Math.log(tf / ts); return { n: n, b: -Math.log(0.99) / Math.pow(ts, n), ts: ts, tf: tf }; }
+const fAt = (T, t) => { const k = jm(T, ttS, ttF); return 1 - Math.exp(-k.b * Math.pow(t, k.n)); };
+const t50 = T => { const k = jm(T, ttS, ttF); return Math.pow(Math.LN2 / k.b, 1 / k.n); };
+const prodOf = T => T >= 650 ? 'Pc' : T >= 540 ? 'Pf' : T >= 350 ? 'Bu' : 'Bl';
+
+// ===== modèle Fe–C et diagramme (cours 1) =====
+// MODEL START
+const CK = 6.67, CS = 0.76, CP = 0.022, TBOT = 300, TTOP = 1700;
+const TAB = c => 1538 - 45 * c / 0.53, cAB = T => (1538 - T) * 0.53 / 45;
+const TBC = c => 1493 - (c - 0.53) * 346 / 3.77, cBC = T => 0.53 + (1493 - T) * 3.77 / 346;
+const TCD = c => 1147 + (c - 4.3) * 105 / 2.37, cCD = T => 4.3 + (T - 1147) * 2.37 / 105;
+const cAH = T => (1538 - T) * 0.09 / 45;
+const cHN = T => 0.09 * (T - 1394) / 99, cJN = T => 0.16 * (T - 1394) / 99;
+const TJE = c => 1493 - (c - 0.16) * 346 / 1.98, cJE = T => 0.16 + (1493 - T) * 1.98 / 346;
+const TA3 = c => 912 - 347.9 * c + 137.5 * c * c;
+const cA3 = T => (347.9 - Math.sqrt(Math.max(0, 347.9 * 347.9 - 550 * (912 - T)))) / 275;
+const TAcm = c => 727 + (c - 0.76) * 420 / 1.38, cAcm = T => 0.76 + (T - 727) * 1.38 / 420;
+const cGP = T => 0.022 * (912 - T) / 185;
+const cPQ = T => 0.022 * Math.pow(clamp((T - 20) / 707, 0, 1), 3);
+const Tliq = c => (c <= 0.53 ? TAB(c) : c <= 4.3 ? TBC(c) : TCD(c));
+
+function two(r, p1, c1, p2, c2, c) { const f2 = (c - c1) / (c2 - c1); return { r: r, ph: [{ p: p1, c: c1, f: 1 - f2 }, { p: p2, c: c2, f: f2 }] }; }
+const one = (r, c) => ({ r: r, ph: [{ p: r, c: c, f: 1 }] });
+function state(c, T) {
+  if (c >= CK - 1e-9) return one('Fe3C', CK);
+  if (T >= Tliq(c)) return one('L', c);
+  if (T > 1493) { const cs = cAH(T); if (c <= cs) return one('δ', c); return two('L+δ', 'δ', cs, 'L', cAB(T), c); }
+  if (T > 1147) {
+    if (c > 4.3) return two('L+Fe3C', 'L', cCD(T), 'Fe3C', CK, c);
+    if (T > 1394) {
+      const ch = cHN(T), cj = cJN(T);
+      if (c <= ch) return one('δ', c);
+      if (c < cj) return two('δ+γ', 'δ', ch, 'γ', cj, c);
+    }
+    const cs = cJE(T);
+    if (c <= cs) return one('γ', c);
+    return two('L+γ', 'γ', cs, 'L', cBC(T), c);
+  }
+  if (T > 727) {
+    const cm = cAcm(T);
+    if (c > cm) return two('γ+Fe3C', 'γ', cm, 'Fe3C', CK, c);
+    if (T >= 912 || c >= cA3(T)) return one('γ', c);
+    const ca = cGP(T);
+    if (c <= ca) return one('α', c);
+    return two('α+γ', 'α', ca, 'γ', cA3(T), c);
+  }
+  const ca = cPQ(T);
+  if (c <= ca) return one('α', c);
+  return two('α+Fe3C', 'α', ca, 'Fe3C', CK, c);
+}
+const fOf = (s, p) => { const x = s.ph.find(q => q.p === p); return x ? x.f : 0; };
+function constitAt(c, T) {
+  const s = state(c, T), o = { L: 0, d: 0, g: 0, aPro: 0, cPro: 0, perl: 0 };
+  switch (s.r) {
+    case 'L': o.L = 1; break;
+    case 'δ': o.d = 1; break;
+    case 'L+δ': o.L = fOf(s, 'L'); o.d = fOf(s, 'δ'); break;
+    case 'δ+γ': o.d = fOf(s, 'δ'); o.g = fOf(s, 'γ'); break;
+    case 'L+γ': o.L = fOf(s, 'L'); o.g = fOf(s, 'γ'); break;
+    case 'γ': o.g = 1; break;
+    case 'α+γ': o.aPro = fOf(s, 'α'); o.g = fOf(s, 'γ'); break;
+    case 'γ+Fe3C': o.cPro = fOf(s, 'Fe3C'); o.g = fOf(s, 'γ'); break;
+    case 'α': o.aPro = 1; break;
+    case 'α+Fe3C':
+      if (c <= CP) o.aPro = 1;
+      else if (c < CS - 1e-9) { o.aPro = (CS - c) / (CS - CP); o.perl = 1 - o.aPro; }
+      else if (c <= CS + 1e-9) o.perl = 1;
+      else { o.cPro = (c - CS) / (CK - CS); o.perl = 1 - o.cPro; }
+      break;
+  }
+  return o;
+}
+function blendObj(a, b, u) { const o = {}; for (const k in a) o[k] = lerp(a[k], b[k] || 0, u); for (const k in b) if (!(k in o)) o[k] = b[k] * u; return o; }
+function phaseMap(s) { const o = {}; s.ph.forEach(p => { o[p.p] = { f: p.f, c: p.c }; }); return o; }
+
+function transitions(c) {
+  if (c <= 1e-6) return [{ T: 1538, lab: 'fusion' }, { T: 1394, lab: 'A4 δ→γ' }, { T: 912, lab: 'A3 γ→α' }];
+  const out = [{ T: Tliq(c), lab: 'liquidus' }];
+  if (c < 0.09) { out.push({ T: 1538 - 45 * c / 0.09, lab: 'solidus' }); out.push({ T: 1394 + 99 * c / 0.09, lab: 'début δ→γ' }); out.push({ T: 1394 + 99 * c / 0.16, lab: 'fin δ→γ' }); }
+  else if (c < 0.53) { out.push({ T: 1493, lab: 'péritectique' }); out.push(c < 0.16 ? { T: 1394 + 99 * c / 0.16, lab: 'fin δ→γ' } : { T: TJE(c), lab: 'solidus' }); }
+  else out.push({ T: TJE(c), lab: 'solidus' });
+  if (c < CP) { out.push({ T: TA3(c), lab: 'A3' }); out.push({ T: 912 - 185 * c / 0.022, lab: 'fin γ→α' }); }
+  else if (c < CS - 1e-6) { out.push({ T: TA3(c), lab: 'A3' }); out.push({ T: 727, lab: 'A1' }); }
+  else if (c <= CS + 1e-6) out.push({ T: 727, lab: 'A1' });
+  else { out.push({ T: TAcm(c), lab: 'Acm' }); out.push({ T: 727, lab: 'A1' }); }
+  return out;
+}
+
+const LS = 250, LD = 20, LT = 60;
+function Hof(c, T) {
+  const s = state(c, T);
+  const fL = fOf(s, 'L'), fd = fOf(s, 'δ');
+  let X = 0;
+  if (s.r === 'α+γ') X = fOf(s, 'α');
+  else if (s.r === 'γ+Fe3C') X = fOf(s, 'Fe3C');
+  else if (s.r === 'α' || s.r === 'α+Fe3C' || s.r === 'Fe3C') X = 1;
+  return T + LS * fL + LD * (fL + fd) + LT * (1 - X);
+}
+function simulate(c) {
+  const T0 = 400, dT = 0.1, n = 12001;
+  const Ht = new Float64Array(n);
+  for (let i = 0; i < n; i++) Ht[i] = Hof(c, T0 + i * dT);
+  for (let i = 1; i < n; i++) if (Ht[i] < Ht[i - 1]) Ht[i] = Ht[i - 1];
+  const plats = [];
+  for (let i = 0; i < n - 1; i++) if (Ht[i + 1] - Ht[i] > 1.5) plats.push({ T: T0 + (i + 0.5) * dT, lo: Ht[i], hi: Ht[i + 1] });
+  const Tof = H => {
+    let lo = 0, hi = n - 1;
+    if (H <= Ht[0]) return T0;
+    if (H >= Ht[n - 1]) return T0 + (n - 1) * dT;
+    while (hi - lo > 1) { const m = (lo + hi) >> 1; if (Ht[m] <= H) lo = m; else hi = m; }
+    const d = Ht[hi] - Ht[lo];
+    return T0 + (lo + (d > 0 ? (H - Ht[lo]) / d : 0)) * dT;
+  };
+  let H = Ht[n - 1], t = 0;
+  const dt = 0.0006, pts = [{ t: 0, T: Tof(H), H: H }];
+  let guard = 0;
+  while (guard++ < 20000) {
+    const T = Tof(H);
+    if (T <= 412) break;
+    H -= (T - 20) * dt; t += dt;
+    pts.push({ t: t, T: Tof(H), H: H });
+  }
+  return { c: c, pts: pts, plats: plats, tEnd: t };
+}
+function platOf(sim, H) {
+  for (const p of sim.plats) if (H >= p.lo - 1e-9 && H <= p.hi + 1e-9) return p;
+  return null;
+}
+function snapshot(sim, i) {
+  const pt = sim.pts[clamp(i, 0, sim.pts.length - 1)], c = sim.c;
+  const pl = platOf(sim, pt.H);
+  if (pl) {
+    const u = (pl.hi - pt.H) / (pl.hi - pl.lo);
+    const sa = state(c, pl.T + 0.05), sb = state(c, pl.T - 0.05);
+    const pa = phaseMap(sa), pb = phaseMap(sb), ph = {};
+    new Set(Object.keys(pa).concat(Object.keys(pb))).forEach(k => {
+      const fa = pa[k] ? pa[k].f : 0, fb = pb[k] ? pb[k].f : 0;
+      ph[k] = { f: lerp(fa, fb, u), c: (pa[k] || pb[k]).c };
+    });
+    return { T: pl.T, plateau: true, prog: u, reg: sa.r + ' → ' + sb.r, ph: ph, co: blendObj(constitAt(c, pl.T + 0.05), constitAt(c, pl.T - 0.05), u) };
+  }
+  const s = state(c, pt.T);
+  return { T: pt.T, plateau: false, prog: null, reg: s.r, ph: phaseMap(s), co: constitAt(c, pt.T) };
+}
+// MODEL END
+
+/* ================= DIAGRAMME ================= */
+const VIEWS = {
+  full: { c0: 0, c1: 6.9, T0: 400, T1: 1600 },
+  steel: { c0: 0, c1: 2.3, T0: 550, T1: 1250 },
+  eut: { c0: 0, c1: 1.0, T0: 640, T1: 960 },
+  delta: { c0: 0, c1: 0.62, T0: 1360, T1: 1560 }
+};
+const A3pts = seq(0, 0.76, 40).map(c => [c, TA3(c)]);
+const GPpts = seq(912, 727, 20).map(T => [cGP(T), T]);
+const PQpts = seq(727, TBOT, 40).map(T => [cPQ(T), T]);
+const rev = a => a.slice().reverse();
+const DOMS = [
+  { k: 'L', lab: 'L', mono: 1, st: 6, fill: 'var(--cLs)', pts: [[0, 1538], [0.53, 1493], [4.3, 1147], [6.67, 1252], [6.67, TTOP], [0, TTOP]] },
+  { k: 'δ', lab: 'δ', mono: 1, st: 6, fill: 'var(--cDs)', pts: [[0, 1538], [0.09, 1493], [0, 1394]], ptr: [34, 4] },
+  { k: 'L+δ', lab: 'L + δ', st: 7, fill: 'url(#pLD)', pts: [[0, 1538], [0.53, 1493], [0.09, 1493]] },
+  { k: 'δ+γ', lab: 'δ + γ', st: 7, fill: 'url(#pDG)', pts: [[0.09, 1493], [0.16, 1493], [0, 1394]] },
+  { k: 'L+γ', lab: 'L + γ', st: 7, fill: 'url(#pLG)', pts: [[0.53, 1493], [4.3, 1147], [2.14, 1147], [0.16, 1493]] },
+  { k: 'γ', lab: 'γ', mono: 1, st: 6, fill: 'var(--cGs)', pts: [[0, 1394], [0.16, 1493], [2.14, 1147], [0.76, 727]].concat(rev(A3pts)) },
+  { k: 'L+Fe3C', lab: 'L + Fe₃C', st: 7, fill: 'url(#pLC)', pts: [[4.3, 1147], [6.67, 1252], [6.67, 1147]] },
+  { k: 'γ+Fe3C', lab: 'γ + Fe₃C', st: 7, fill: 'url(#pGC)', pts: [[2.14, 1147], [6.67, 1147], [6.67, 727], [0.76, 727]] },
+  { k: 'α+γ', lab: 'α + γ', st: 7, fill: 'url(#pAG)', pts: A3pts.concat([[0.022, 727]], rev(GPpts)) },
+  { k: 'α', lab: 'α', mono: 1, st: 6, fill: 'var(--cAs)', pts: GPpts.concat(PQpts, [[0, TBOT]]), ptr: [30, 34] },
+  { k: 'α+Fe3C', lab: 'α + Fe₃C', st: 7, fill: 'url(#pAC)', pts: [[0.022, 727], [6.67, 727], [6.67, TBOT]].concat(rev(PQpts)) }
+];
+const DINFO = {
+  'L': 'Monophasé : liquide. Au-dessus du liquidus, tout est fondu.',
+  'δ': 'Monophasé : ferrite δ, cubique centrée, jusqu’à 0,09 % C. Elle n’existe qu’au-dessus de 1394 °C.',
+  'L+δ': 'Biphasé : liquide + ferrite δ. Début de solidification des aciers à moins de 0,53 % C.',
+  'δ+γ': 'Biphasé : ferrite δ + austénite. Petit triangle où δ se transforme en γ.',
+  'L+γ': 'Biphasé : liquide + austénite. Solidification de la plupart des aciers et des fontes hypoeutectiques.',
+  'γ': 'Monophasé : austénite, cubique à faces centrées, jusqu’à 2,14 % C. C’est le domaine où l’on « austénitise » avant un traitement.',
+  'L+Fe3C': 'Biphasé : liquide + cémentite primaire. Fontes hypereutectiques (plus de 4,3 % C).',
+  'γ+Fe3C': 'Biphasé : austénite + cémentite. Aciers hypereutectoïdes entre Acm et 727 °C, et fontes.',
+  'α+γ': 'Biphasé : ferrite + austénite, entre A3 et 727 °C. C’est là que naît la ferrite proeutectoïde.',
+  'α': 'Monophasé : ferrite α, cubique centrée, au plus 0,022 % C. Domaine très étroit : zoome pour le voir.',
+  'α+Fe3C': 'Biphasé : ferrite + cémentite. Tous les aciers et fontes blanches à l’ambiante, après refroidissement lent.'
+};
+const LINES = [
+  { st: 2, w: 2.2, pts: [[0, 1538], [0.53, 1493], [4.3, 1147], [6.67, 1252]] },
+  { st: 3, pts: [[0, 1538], [0.09, 1493]] }, { st: 3, pts: [[0.16, 1493], [2.14, 1147]] },
+  { st: 3, pts: [[0.09, 1493], [0, 1394]] }, { st: 3, pts: [[0.16, 1493], [0, 1394]] },
+  { st: 4, w: 2, pts: [[0.09, 1493], [0.53, 1493]] }, { st: 4, w: 2, pts: [[2.14, 1147], [6.67, 1147]] },
+  { st: 5, w: 2, pts: [[0.022, 727], [6.67, 727]] },
+  { st: 5, pts: A3pts }, { st: 5, pts: [[2.14, 1147], [0.76, 727]] }, { st: 5, pts: GPpts }, { st: 5, pts: PQpts },
+  { st: 1, w: 3.4, col: 'var(--cC)', pts: [[6.67, TBOT], [6.67, 1252]] }
+];
+const KP = [
+  { c: 0, T: 1538, lab: '1538 °C', st: 1, dx: 5, dy: -4 },
+  { c: 0, T: 1394, lab: '1394 °C', st: 1, dx: 5, dy: 13 },
+  { c: 0, T: 912, lab: '912 °C', st: 1, dx: 6, dy: -5 },
+  { c: 0.09, T: 1493, lab: '0,09', st: 4, dx: -2, dy: -6, a: 'end', v: ['delta'] },
+  { c: 0.16, T: 1493, lab: '0,16', st: 4, dx: 3, dy: 13, v: ['delta'] },
+  { c: 0.53, T: 1493, lab: '0,53', st: 4, dx: 4, dy: -6, v: ['delta'] },
+  { c: 0.36, T: 1493, lab: '1493 °C', st: 4, dx: 0, dy: 13, a: 'middle', v: ['delta'], nodot: 1 },
+  { c: 2.14, T: 1147, lab: '2,14', st: 4, dx: -5, dy: -6, a: 'end', v: ['full', 'steel'] },
+  { c: 4.3, T: 1147, lab: '4,3', st: 4, dx: 0, dy: 14, a: 'middle', v: ['full'] },
+  { c: 6.67, T: 1147, lab: '1147 °C', st: 4, dx: -6, dy: 13, a: 'end', v: ['full'], nodot: 1 },
+  { c: 0.76, T: 727, lab: '0,76', st: 5, dx: 0, dy: 14, a: 'middle', v: ['full', 'steel', 'eut'] },
+  { c: 0.022, T: 727, lab: '0,022', st: 5, dx: 5, dy: -6, v: ['eut'] },
+  { c: 6.67, T: 727, lab: '727 °C', st: 5, dx: -6, dy: -5, a: 'end', v: ['full'], nodot: 1 },
+  { c: 1.0, T: 727, lab: '727 °C', st: 5, dx: -5, dy: 13, a: 'end', v: ['eut'], nodot: 1 },
+  { c: 2.3, T: 727, lab: '727 °C', st: 5, dx: -5, dy: 13, a: 'end', v: ['steel'], nodot: 1 },
+  { c: 6.67, T: 420, lab: 'Fe₃C', st: 1, dx: -5, dy: 0, a: 'end', v: ['full'] }
+];
+const A3s = seq(0, 0.65, 30).map(c => [c, 912 - 330.3 * c + 101.1 * c * c]);
+const STAB = [[[2.1, 1153], [7.5, 1153]], [[0.021, 740], [7.5, 740]], [[2.1, 1153], [0.65, 740]], A3s, [[0.53, 1493], [4.2, 1153], [5.5, 1600]]];
+
+function clipPoly(pts, x0, y0, x1, y1) {
+  const E = [
+    [p => p[0] >= x0, (a, b) => [x0, a[1] + (b[1] - a[1]) * (x0 - a[0]) / (b[0] - a[0])]],
+    [p => p[0] <= x1, (a, b) => [x1, a[1] + (b[1] - a[1]) * (x1 - a[0]) / (b[0] - a[0])]],
+    [p => p[1] >= y0, (a, b) => [a[0] + (b[0] - a[0]) * (y0 - a[1]) / (b[1] - a[1]), y0]],
+    [p => p[1] <= y1, (a, b) => [a[0] + (b[0] - a[0]) * (y1 - a[1]) / (b[1] - a[1]), y1]]
+  ];
+  let out = pts;
+  for (const [inside, inter] of E) {
+    const inp = out; out = [];
+    for (let i = 0; i < inp.length; i++) {
+      const cur = inp[i], prev = inp[(i + inp.length - 1) % inp.length];
+      if (inside(cur)) { if (!inside(prev)) out.push(inter(prev, cur)); out.push(cur); }
+      else if (inside(prev)) out.push(inter(prev, cur));
+    }
+    if (!out.length) break;
+  }
+  return out;
+}
+function polyStats(p) {
+  let A = 0, cx = 0, cy = 0, x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  for (let i = 0; i < p.length; i++) {
+    const [xa, ya] = p[i], [xb, yb] = p[(i + 1) % p.length], cr = xa * yb - xb * ya;
+    A += cr; cx += (xa + xb) * cr; cy += (ya + yb) * cr;
+    x0 = Math.min(x0, xa); x1 = Math.max(x1, xa); y0 = Math.min(y0, ya); y1 = Math.max(y1, ya);
+  }
+  A /= 2;
+  return Math.abs(A) < 1e-6 ? null : { A: Math.abs(A), cx: cx / (6 * A), cy: cy / (6 * A), w: x1 - x0, h: y1 - y0 };
+}
+function niceStep(range, maxN, cands) { for (const s of cands) if (range / s <= maxN) return s; return cands[cands.length - 1]; }
+
+class Dia {
+  constructor(svg, o) {
+    o = o || {};
+    this.svg = svg; this.W = 360; this.H = o.H || 300;
+    this.m = { l: 50, r: 10, t: 12, b: 34 };
+    this.vname = o.view || 'full';
+    this.v = Object.assign({}, VIEWS[this.vname]);
+    this.step = o.step == null ? 99 : o.step;
+    this.stable = false; this.onPick = o.onPick || null; this.overlay = null; this.sel = null;
+    this.id = 'dia' + (Dia.n = (Dia.n || 0) + 1);
+    svg.innerHTML = '';
+    const defs = el('defs', null, svg);
+    const cp = el('clipPath', { id: this.id + 'c' }, defs);
+    this.clipR = el('rect', {}, cp);
+    this.grad = el('linearGradient', { id: this.id + 'g', gradientUnits: 'userSpaceOnUse', x1: 0, x2: 0 }, defs);
+    this.gGrid = el('g', null, svg);
+    this.gClip = el('g', { 'clip-path': 'url(#' + this.id + 'c)' }, svg);
+    this.gDom = el('g', null, this.gClip);
+    this.gLines = el('g', null, this.gClip);
+    this.gStab = el('g', null, this.gClip);
+    this.gLab = el('g', { style: 'pointer-events:none' }, this.gClip);
+    this.gOver = el('g', { style: 'pointer-events:none' }, this.gClip);
+    this.gAx = el('g', null, svg);
+    this.render();
+  }
+  X(c) { const m = this.m; return m.l + (c - this.v.c0) / (this.v.c1 - this.v.c0) * (this.W - m.l - m.r); }
+  Y(T) { const m = this.m; return this.H - m.b - (T - this.v.T0) / (this.v.T1 - this.v.T0) * (this.H - m.t - m.b); }
+  C(x) { const m = this.m; return this.v.c0 + (x - m.l) / (this.W - m.l - m.r) * (this.v.c1 - this.v.c0); }
+  T(y) { const m = this.m; return this.v.T0 + (this.H - m.b - y) / (this.H - m.t - m.b) * (this.v.T1 - this.v.T0); }
+  path(pts, close) { return pts.map((p, i) => (i ? 'L' : 'M') + this.X(p[0]).toFixed(1) + ' ' + this.Y(p[1]).toFixed(1)).join('') + (close ? 'Z' : ''); }
+  setView(name, anim) {
+    const to = VIEWS[name], from = Object.assign({}, this.v);
+    this.vname = name;
+    if (RM || anim === false) { this.v = Object.assign({}, to); this.render(); return; }
+    const t0 = performance.now(), D = 600;
+    cancelAnimationFrame(this.raf);
+    const tick = now => {
+      const u = easeIO(clamp((now - t0) / D, 0, 1));
+      for (const k in to) this.v[k] = lerp(from[k], to[k], u);
+      this.render();
+      if (u < 1) this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  render() {
+    const m = this.m, W = this.W, H = this.H, x0 = m.l, x1 = W - m.r, y0 = m.t, y1 = H - m.b;
+    Object.entries({ x: x0, y: y0, width: x1 - x0, height: y1 - y0 }).forEach(([k, v]) => this.clipR.setAttribute(k, v));
+    // grille et axes
+    this.gGrid.innerHTML = ''; this.gAx.innerHTML = '';
+    el('rect', { x: x0, y: y0, width: x1 - x0, height: y1 - y0, style: 'fill:var(--paper)' }, this.gGrid);
+    const v = this.v;
+    const sc = niceStep(v.c1 - v.c0, 7, [0.05, 0.1, 0.2, 0.25, 0.5, 1, 2]);
+    const sT = niceStep(v.T1 - v.T0, 8, [20, 25, 50, 100, 200]);
+    for (let c = Math.ceil(v.c0 / sc - 1e-9) * sc; c <= v.c1 + 1e-9; c += sc) {
+      const x = this.X(c);
+      el('line', { x1: x, x2: x, y1: y1, y2: y1 + 4, style: 'stroke:var(--ink);stroke-width:1' }, this.gAx);
+      tx(this.gAx, x, y1 + 14, fmt(c, sc < 0.1 ? 2 : sc < 1 ? 1 : 0), 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+    }
+    for (let T = Math.ceil(v.T0 / sT - 1e-9) * sT; T <= v.T1 + 1e-9; T += sT) {
+      const y = this.Y(T);
+      el('line', { x1: x0, x2: x1, y1: y, y2: y, style: 'stroke:var(--grid2);stroke-width:1' }, this.gAx);
+      tx(this.gAx, x0 - 11, y + 3.5, String(Math.round(T)), 'font-size:9.5px;fill:var(--ink2);text-anchor:end');
+    }
+    tx(this.gAx, (x0 + x1) / 2, H - 4, '% massique de carbone', 'font-size:10px;fill:var(--ink2);text-anchor:middle');
+    tx(this.gAx, 4, y0 + 2, '°C', 'font-size:10px;fill:var(--ink2);dominant-baseline:hanging');
+    el('rect', { x: x0, y: y0, width: x1 - x0, height: y1 - y0, style: 'fill:none;stroke:var(--ink);stroke-width:1.2' }, this.gAx);
+    // bande d’incandescence
+    this.grad.setAttribute('y1', this.Y(v.T0)); this.grad.setAttribute('y2', this.Y(v.T1));
+    this.grad.innerHTML = '';
+    for (let i = 0; i <= 10; i++) { const T = lerp(v.T0, v.T1, i / 10); el('stop', { offset: i / 10, 'stop-color': glow(T) }, this.grad); }
+    el('rect', { x: x0 - 8, y: y0, width: 5, height: y1 - y0, rx: 1.5, fill: 'url(#' + this.id + 'g)' }, this.gAx);
+    // domaines
+    this.gDom.innerHTML = '';
+    const st = this.step;
+    DOMS.forEach(d => {
+      const show = st >= d.st;
+      const p = el('path', { d: this.path(d.pts, true), class: 'reg' + (this.sel === d.k ? ' sel' : ''), style: 'fill:' + (show ? d.fill : 'transparent') + ';stroke:none', 'data-k': d.k }, this.gDom);
+      if (this.onPick) p.addEventListener('click', e => { e.stopPropagation(); this.onPick(d.k); });
+    });
+    el('path', { d: this.path([[6.67, TBOT], [8, TBOT], [8, TTOP], [6.67, TTOP]], true), style: 'fill:var(--bg);opacity:.7' }, this.gDom);
+    // lignes
+    this.gLines.innerHTML = '';
+    LINES.forEach(L => { if (st >= L.st) el('path', { d: this.path(L.pts), style: 'fill:none;stroke:' + (L.col || 'var(--ink)') + ';stroke-width:' + (L.w || 1.5) + ';stroke-linejoin:round' }, this.gLines); });
+    // stable
+    this.gStab.innerHTML = '';
+    if (this.stable) {
+      STAB.forEach(p => el('path', { d: this.path(p), style: 'fill:none;stroke:var(--ink2);stroke-width:1.4;stroke-dasharray:5 3' }, this.gStab));
+      const lab = (c, T, s, a) => { if (c > v.c0 && c < v.c1 && T > v.T0 && T < v.T1) tx(this.gStab, this.X(c), this.Y(T), s, 'font-size:9px;font-style:italic;fill:var(--ink2);text-anchor:' + (a || 'end')); };
+      const cm = v.c0 + (v.c1 - v.c0) * 0.58;
+      lab(cm, 1153 + (v.T1 - v.T0) * 0.025, 'stable 1153 °C', 'middle');
+      lab(cm, 740 + (v.T1 - v.T0) * 0.025, 'stable 740 °C', 'middle');
+      lab(0.65, 740 - (v.T1 - v.T0) * 0.05, '0,65', 'middle');
+      if (this.vname === 'full') lab(6.55, 1480, 'L + graphite');
+    }
+    // étiquettes
+    this.gLab.innerHTML = '';
+    if (this.sel) {
+      const d = DOMS.find(q => q.k === this.sel);
+      if (d) el('path', { d: this.path(d.pts, true), style: 'fill:none;stroke:var(--cL);stroke-width:3;stroke-linejoin:round' }, this.gLab);
+    }
+    if (st >= 6) DOMS.forEach(d => {
+      if (!d.mono && st < 7) return;
+      const cp = clipPoly(d.pts.map(p => [this.X(p[0]), this.Y(p[1])]), x0, y0, x1, y1);
+      if (cp.length < 3) return;
+      const s = polyStats(cp); if (!s) return;
+      const fs = d.mono ? 13 : 10.5, tw = d.lab.length * fs * 0.52;
+      if (s.w > tw + 6 && s.h > fs + 4 && s.A > (d.mono ? 500 : 1100)) {
+        tx(this.gLab, s.cx, s.cy + fs * 0.35, d.lab, 'font-size:' + fs + 'px;font-weight:' + (d.mono ? 800 : 650) + ';fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:var(--paper);stroke-width:3px;stroke-opacity:.6');
+      } else if (d.ptr && s.A > 0.2) {
+        const lx = s.cx + d.ptr[0], ly = s.cy + d.ptr[1];
+        el('line', { x1: s.cx, y1: s.cy, x2: lx - 6, y2: ly - 4, style: 'stroke:var(--ink);stroke-width:1' }, this.gLab);
+        el('circle', { cx: s.cx, cy: s.cy, r: 1.8, style: 'fill:var(--ink)' }, this.gLab);
+        tx(this.gLab, lx, ly, d.lab, 'font-size:12px;font-weight:800;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+      }
+    });
+    KP.forEach(k => {
+      if (st < k.st) return;
+      if (k.v && k.v.indexOf(this.vname) < 0) return;
+      if (k.c < v.c0 - 1e-9 || k.c > v.c1 + 1e-9 || k.T < v.T0 || k.T > v.T1) return;
+      const x = this.X(k.c), y = this.Y(k.T);
+      if (!k.nodot && k.c > 0.001 && k.c < 6.6) el('circle', { cx: x, cy: y, r: 2.4, style: 'fill:var(--ink)' }, this.gLab);
+      tx(this.gLab, x + k.dx, y + k.dy, k.lab, 'font-size:9.5px;font-weight:650;fill:var(--ink);text-anchor:' + (k.a || 'start') + ';paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+    });
+    this.drawOverlay();
+  }
+  drawOverlay() { this.gOver.innerHTML = ''; if (this.overlay) this.overlay(this.gOver, this); }
+}
+
+// ===== textures (cours 2) =====
+class Tex {
+  constructor(cv, seed, N, g, k) {
+    this.cv = cv; this.N = N || 200; this.mode = 'schema';
+    this.off = document.createElement('canvas'); this.off.width = this.off.height = this.N;
+    this.octx = this.off.getContext('2d'); this.img = this.octx.createImageData(this.N, this.N);
+    const n = this.N, P = n * n, rnd = mulberry32(seed || 5);
+    const jit = (m, j) => { const s = []; for (let i = 0; i < m; i++) for (let q = 0; q < m; q++) s.push([(i + 0.5 + (rnd() - 0.5) * j) * n / m, (q + 0.5 + (rnd() - 0.5) * j) * n / m]); return s; };
+    const gs = jit(g || 4, 0.85), cs = jit(k || 12, 0.9), cs2 = jit(Math.max(3, Math.round((k || 12) / 2)), 0.9);
+    const ang = () => { const a = rnd() * Math.PI; return [Math.cos(a), Math.sin(a), rnd(), rnd(), rnd()]; };
+    this.cc = cs.map(ang); this.cc2 = cs2.map(ang);
+    const near2 = (S, x, y) => {
+      let a = 0, b = 0, da = 1e18, db = 1e18;
+      for (let i = 0; i < S.length; i++) { const dx = x - S[i][0], dy = y - S[i][1], d = dx * dx + dy * dy; if (d < da) { db = da; b = a; da = d; a = i; } else if (d < db) { db = d; b = i; } }
+      return [a, (db - da) / (2 * Math.hypot(S[a][0] - S[b][0], S[a][1] - S[b][1]))];
+    };
+    this.bd = new Float32Array(P); this.cbd = new Float32Array(P); this.cid = new Int16Array(P); this.cid2 = new Int16Array(P); this.cbd2 = new Float32Array(P);
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+      const i = y * n + x, g1 = near2(gs, x + 0.5, y + 0.5), c1 = near2(cs, x + 0.5, y + 0.5), c2 = near2(cs2, x + 0.5, y + 0.5);
+      this.bd[i] = g1[1]; this.cid[i] = c1[0]; this.cbd[i] = c1[1]; this.cid2[i] = c2[0]; this.cbd2[i] = c2[1];
+    }
+    const idx = Array.from({ length: P }, (_, i) => i); idx.sort((a, b) => this.bd[a] - this.bd[b]);
+    this.qB = new Float32Array(P); idx.forEach((p, r) => { this.qB[p] = (r + 0.5) / P; });
+  }
+  pal() {
+    const g = n => hex2rgb(cssv(n)), dk = isDark();
+    const mix = (a, b, u) => a.map((v, i) => Math.round(v + (b[i] - v) * u));
+    if (this.mode === 'nital') return { A2: [228, 222, 212], A: [214, 208, 200], F: [238, 236, 230], Fb: [170, 168, 162], Pca: [124, 120, 114], Pcc: [40, 38, 36], Pfa: [84, 80, 76], Pfc: [36, 34, 32], Bu: [150, 142, 132], Buc: [46, 42, 38], Bl: [126, 118, 110], Blc: [42, 38, 34], M1: [206, 198, 186], M2: [176, 166, 154], Mn: [104, 96, 88], Cp: [252, 252, 248], gb: [70, 66, 62] };
+    const a = g('--cAs'), c = dk ? [205, 210, 218] : g('--cC'), bs = g('--cBs'), b = g('--cB'), ms = g('--cMs'), m = g('--cM');
+    return { A2: g('--cGs'), A: g('--cGs'), F: a, Fb: mix(a, g('--cA'), 0.45), Pca: a, Pcc: c, Pfa: a, Pfc: c, Bu: bs, Buc: c, Bl: mix(bs, b, 0.3), Blc: c, M1: ms, M2: mix(ms, m, 0.3), Mn: mix(ms, m, 0.75), Cp: c, gb: dk ? [150, 170, 190] : [60, 70, 82] };
+  }
+  draw(mix) {
+    const n = this.N, P = n * n, d = this.img.data, C = this.pal(), cum = [];
+    let s = 0; mix.forEach(m => { s += m.f; cum.push([s, m.k]); });
+    const frac = x => x - Math.floor(x);
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+      const i = y * n + x, q = this.qB[i];
+      let k = 'A'; for (const [cu, kk] of cum) if (q < cu) { k = kk; break; }
+      const big = k === 'Pc' || k === 'Pf' || k === 'Bu' || k === 'Bl' || k === 'Mp', cc = big ? this.cc2[this.cid2[i]] : this.cc[this.cid[i]], u = x * cc[0] + y * cc[1], v = -x * cc[1] + y * cc[0];
+      let col, gb = false;
+      if (k === 'A') { col = C.A; gb = this.bd[i] < 0.8; }
+      else if (k === 'F') { col = (this.cbd[i] < 0.5 || this.bd[i] < 0.5) ? C.Fb : C.F; }
+      else if (k === 'Cp') { col = C.Cp; }
+      else if (k === 'Pc' || k === 'Pf') {
+        const lam = k === 'Pc' ? 7.5 : 3.2, w = 0.13, h = 0.6 / lam, sv = frac(v / lam + cc[2]);
+        let cov = 0; for (const o of [-1, 0, 1]) { const lo = Math.max(sv - h, o), hi = Math.min(sv + h, o + w); if (hi > lo) cov += hi - lo; }
+        cov = clamp(cov / (2 * h), 0, 1);
+        const A = k === 'Pc' ? C.Pca : C.Pfa, B = k === 'Pc' ? C.Pcc : C.Pfc;
+        col = [A[0] + (B[0] - A[0]) * cov, A[1] + (B[1] - A[1]) * cov, A[2] + (B[2] - A[2]) * cov];
+      } else if (k === 'Bu') {
+        const sv = frac(v / 6 + cc[2]);
+        col = (sv < 0.2 && frac(u / 3.5 + cc[3]) < 0.62) ? C.Buc : C.Bu;
+        gb = this.bd[i] < 0.6;
+      } else if (k === 'Bl') {
+        const L = 7, sv = frac(v / L + cc[2]), row = Math.floor(v / L + cc[2]);
+        const w2 = u * 0.5 + v * 0.866;
+        col = sv < 0.07 ? C.Blc : (frac(w2 / 2.8 + cc[3]) < 0.22 && frac(u / 6 + cc[4] + row * 0.37) < 0.55) ? C.Blc : C.Bl;
+        gb = this.bd[i] < 0.6;
+      } else if (k === 'Mp') {
+        const sv = frac(v / 16 + cc[2]), la = 2 * frac(u / 46 + cc[3]) - 1, w = 0.3 * (1 - la * la), dd = Math.abs(sv - 0.5);
+        col = dd < 0.035 && w > 0.05 ? C.Mn : dd < w ? C.M2 : C.A2;
+        gb = this.bd[i] < 0.6;
+      } else if (k === 'Mt') {
+        const tl = this.tl || 0, sv = frac(v / 3 + cc[2]), gs = 1 + Math.round(tl * 2), hx = Math.floor(x / gs), hy = Math.floor(y / gs);
+        const h = frac(Math.sin(hx * 12.9898 + hy * 78.233) * 43758.5453);
+        const base = sv < 0.5 ? C.M1 : C.M2, fer = C.F, mixb = base.map((q, j) => q + (fer[j] - q) * tl * 0.8);
+        col = h < 0.05 + 0.1 * tl ? C.Pcc : mixb;
+        gb = this.bd[i] < 0.6 || (tl < 0.6 && this.cbd[i] < 0.35);
+      } else if (k === 'Cg') {
+        const cell = 7, cx = Math.floor(x / cell), cy = Math.floor(y / cell), h1 = frac(Math.sin(cx * 127.1 + cy * 311.7) * 43758.5453), h2 = frac(Math.sin(cx * 269.5 + cy * 183.3) * 43758.5453);
+        const px = (cx + 0.25 + h1 * 0.5) * cell, py = (cy + 0.25 + h2 * 0.5) * cell;
+        col = Math.hypot(x - px, y - py) < 1.4 + h1 * 0.9 ? C.Pcc : ((this.cbd[i] < 0.5) ? C.Fb : C.F);
+      } else if (k === 'AF') {
+        const sv = frac(v / 4.5 + cc[2]), su = frac(u / 10 + cc[3] + Math.floor(v / 4.5 + cc[2]) * 0.41);
+        col = (sv < 0.42 && su < 0.72) ? C.F : C.Bu;
+        gb = this.bd[i] < 0.5;
+      } else {
+        const sv = frac(v / 3 + cc[2]);
+        col = (frac(v / 11 + cc[3]) < 0.08 || this.cbd[i] < 0.4) ? C.Mn : sv < 0.5 ? C.M1 : C.M2;
+        gb = this.bd[i] < 0.6;
+      }
+      const j = i * 4;
+      if (gb) { d[j] = C.gb[0]; d[j + 1] = C.gb[1]; d[j + 2] = C.gb[2]; } else { d[j] = col[0]; d[j + 1] = col[1]; d[j + 2] = col[2]; }
+      d[j + 3] = 255;
+    }
+    this.octx.putImageData(this.img, 0, 0);
+    const ctx = this.cv.getContext('2d'); ctx.imageSmoothingEnabled = true;
+    ctx.clearRect(0, 0, this.cv.width, this.cv.height); ctx.drawImage(this.off, 0, 0, this.cv.width, this.cv.height);
+  }
+}
+
+
+// ===== TTT (cours 2) =====
+const TX = l => 44 + (l + 1) / 6 * 306, TY = T => 12 + (800 - T) / 800 * 254;
+function drawTTT(g, opts) {
+  opts = opts || {};
+  const X = opts.X || TX, Y = opts.Y || TY, x1 = opts.x1 || 350, lmin = opts.lmin == null ? -1 : opts.lmin, lmax = opts.lmax || 5;
+  const Ts = []; for (let T = 222; T <= 724; T += 2) Ts.push(T);
+  const cl = l => clamp(l, lmin, lmax);
+  const S = Ts.map(T => [X(cl(T > 720 ? 2.8 + (T - 720) * 0.9 : ttS(T))), Y(T)]), F = Ts.map(T => [X(cl(T > 720 ? 4.3 + (T - 720) * 0.9 : ttF(T))), Y(T)]);
+  const pth = (pts, close) => pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('') + (close ? 'Z' : '');
+  if (!opts.ghost) {
+    el('rect', { x: X(lmin), y: Y(800), width: x1 - X(lmin), height: Y(MS) - Y(800), style: 'fill:var(--cGs)' }, g);
+    const bands = [[650, 724, 'url(#pPc)'], [540, 650, 'url(#pPf)'], [350, 540, 'var(--cBs)'], [222, 350, 'var(--cBs)']];
+    bands.forEach(([a, b, f]) => { const seg = F.filter((p, i) => Ts[i] >= a && Ts[i] <= b); if (seg.length < 2) return; el('path', { d: pth(seg.concat([[x1, seg[seg.length - 1][1]], [x1, seg[0][1]]]), true), style: 'fill:' + f + (a < 350 ? ';opacity:.75' : '') }, g); });
+    el('path', { d: pth(S.concat(F.slice().reverse()), true), style: 'fill:url(#pHatch)' }, g);
+    el('rect', { x: X(lmin), y: Y(MS), width: x1 - X(lmin), height: Y(0) - Y(MS), style: 'fill:var(--cMs)' }, g);
+  }
+  const st = opts.ghost ? 'fill:none;stroke:var(--ink2);stroke-width:1.2;stroke-dasharray:4 3' : 'fill:none;stroke:var(--ink);stroke-width:2';
+  el('path', { d: pth(S), style: st }, g); el('path', { d: pth(F), style: st }, g);
+  if (!opts.ghost) {
+    const H = Ts.map(T => [X(cl(T > 720 ? 3.5 : Math.log10(t50(T)))), Y(T)]);
+    el('path', { d: pth(H), style: 'fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:2 3' }, g);
+    [[MS, 'Ms'], [160, 'M50'], [105, 'M90']].forEach(([T, l]) => { el('line', { x1: X(lmin), x2: x1, y1: Y(T), y2: Y(T), style: 'stroke:var(--cM);stroke-width:' + (T === MS ? 1.6 : 1) + (T === MS ? '' : ';stroke-dasharray:4 3') }, g); tx(g, x1 - 3, Y(T) - 3, l, 'font-size:9px;font-weight:700;fill:var(--cM);text-anchor:end'); });
+    const lb = (l, T, s, w) => tx(g, X(l), Y(T), s, 'font-size:' + (w || 9.5) + 'px;font-weight:750;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+    lb(-0.8, 760, 'austénite stable'); lb(-0.85, 692, 'austénite'); lb(-0.85, 668, 'instable', 9);
+    lb(3.0, 690, 'perlite grossière'); lb(2.4, 590, 'perlite fine'); lb(2.9, 450, 'bainite sup.'); lb(3.6, 300, 'bainite inf.');
+    lb(-0.8, 70, 'martensite (+ austénite)');
+    tx(g, X(0.2), Y(470) + 3, 'début', 'font-size:9px;font-weight:700;fill:var(--ink);text-anchor:end;paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+    tx(g, X(1.62), Y(470) + 3, 'fin', 'font-size:9px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+  }
+}
+function axesLog(g, X, Y, lmin, lmax, x1, yb, Tmax) {
+  for (let T = 0; T <= Tmax; T += 100) { el('line', { x1: X(lmin), x2: x1, y1: Y(T), y2: Y(T), style: 'stroke:var(--grid2)' }, g); tx(g, X(lmin) - 4, Y(T) + 3.5, String(T), 'font-size:9px;fill:var(--ink2);text-anchor:end'); }
+  for (let l = lmin; l <= lmax; l++) { el('line', { x1: X(l), x2: X(l), y1: yb, y2: yb + 4, style: 'stroke:var(--ink)' }, g); tx(g, X(l), yb + 14, l === 0 ? '1' : l === 1 ? '10' : l === -1 ? '0,1' : '10' + sup(l), 'font-size:8.5px;fill:var(--ink2);text-anchor:middle'); }
+  tx(g, (X(lmin) + x1) / 2, yb + 28, 'temps (s), échelle logarithmique', 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+  tx(g, 4, 10, '°C', 'font-size:9.5px;fill:var(--ink2)');
+}
+
+/* ---------- niveaux ---------- */
+$$('.seg button').forEach(b => b.addEventListener('click', () => { document.body.dataset.level = b.dataset.l; $$('.seg button').forEach(x => x.classList.toggle('on', x === b)); }));
+
+/* ================= HÉROS ================= */
+(function hero() {
+  const T = [['h1', [{ k: 'M', f: 1 }]], ['h2', [{ k: 'Mt', f: 1 }], 0.75], ['h3', [{ k: 'F', f: 0.45 }, { k: 'Pf', f: 0.55 }]], ['h4', [{ k: 'Cg', f: 1 }]]].map(([id, mix, tl], i) => { const t = new Tex($('#' + id), 13 + i * 5, 150, 3, 9); t.tl = tl || 0; return () => t.draw(mix); });
+  const all = () => T.forEach(f => f()); all(); redraws.push(all);
+})();
+
+/* ================= PARTIE 1 : Bain ================= */
+(function bain() {
+  const cv = $('#bain3'), ctx = cv.getContext('2d');
+  let u = 0, C = 0.76, ry = 0.7, rx = -0.3, ctxOn = true, drag = null, raf = null;
+  const a0 = 3.57, aA = 2.87;
+  // atomes : coordonnées CFC (unité a0), repère centré sur (0, 1/2, 1/2)
+  const ctxAtoms = [];
+  for (const cx of [-1, 0]) { [[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1], [.5, .5, 0], [.5, .5, 1], [.5, 0, .5], [.5, 1, .5], [0, .5, .5], [1, .5, .5]].forEach(p => { const q = [p[0] + cx, p[1], p[2]]; if (!ctxAtoms.some(r => Math.hypot(r[0] - q[0], r[1] - q[1], r[2] - q[2]) < 1e-6)) ctxAtoms.push(q); }); }
+  const bct = [[0, 0, 0], [.5, .5, 0], [0, 1, 0], [-.5, .5, 0], [0, 0, 1], [.5, .5, 1], [0, 1, 1], [-.5, .5, 1], [0, .5, .5]];
+  const isB = p => bct.some(r => Math.hypot(r[0] - p[0], r[1] - p[1], r[2] - p[2]) < 1e-6);
+  const others = ctxAtoms.filter(p => !isB(p));
+  const carb = [[0, .5, 0], [0, .5, 1]];
+  const bEdges = [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]];
+  const fccEdges = []; for (const cx of [-1, 0]) { const c = [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0], [0, 0, 1], [1, 0, 1], [1, 1, 1], [0, 1, 1]].map(p => [p[0] + cx, p[1], p[2]]); [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]].forEach(([i, j]) => fccEdges.push([c[i], c[j]])); }
+  const kb = () => lerp(1, aA / (a0 / Math.SQRT2), u), kc = () => lerp(1, aA * (1 + 0.045 * C) / a0, u);
+  const def = p => [p[0] * kb(), (p[1] - 0.5) * kb(), (p[2] - 0.5) * kc()];
+  function draw() {
+    const W = cv.width; ctx.clearRect(0, 0, W, W);
+    const sc = W * 0.36, cx0 = W / 2, cy0 = W / 2;
+    const cy_ = Math.cos(ry), sy = Math.sin(ry), cxr = Math.cos(rx), sxr = Math.sin(rx);
+    const P = p => { const x = p[0], y = p[2], z = p[1]; const x1 = x * cy_ + z * sy, z1 = -x * sy + z * cy_; const y1 = y * cxr - z1 * sxr, z2 = y * sxr + z1 * cxr; const f = 1 / (1 + z2 * 0.22); return [cx0 + x1 * sc * f, cy0 - y1 * sc * f, z2, f]; };
+    const ink = cssv('--ink'), fade = ctxOn ? (1 - u) : 0;
+    const line = (a, b, col, w, al) => { const A = P(a), B = P(b); ctx.globalAlpha = al; ctx.strokeStyle = col; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0], B[1]); ctx.stroke(); };
+    if (fade > 0.02) fccEdges.forEach(([a, b]) => line(def(a), def(b), ink, W / 400, 0.3 * fade));
+    bEdges.forEach(([i, j]) => line(def(bct[i]), def(bct[j]), cssv('--cL'), W / 150, 0.95));
+    const items = [];
+    const R = 0.12;
+    const cG = hex2rgb(cssv('--cG')), cEnd = hex2rgb(cssv(C > 0.02 ? '--cM' : '--cA')), mix = cG.map((v, i) => Math.round(v + (cEnd[i] - v) * u)), colB = 'rgb(' + mix.join(',') + ')';
+    bct.forEach(p => items.push({ p: def(p), r: R, c: colB, a: 1 }));
+    if (fade > 0.02) others.forEach(p => items.push({ p: def(p), r: R * 0.85, c: colB, a: 0.28 * fade }));
+    if (C > 0.02) carb.forEach(p => items.push({ p: def(p), r: 0.07, c: '#111', a: 1 }));
+    items.forEach(it => { const q = P(it.p); it.x = q[0]; it.y = q[1]; it.z = q[2]; it.R = it.r * sc * q[3]; });
+    items.sort((a, b) => a.z - b.z);
+    items.forEach(it => {
+      const g = ctx.createRadialGradient(it.x - it.R * 0.35, it.y - it.R * 0.35, it.R * 0.1, it.x, it.y, it.R);
+      g.addColorStop(0, '#ffffff'); g.addColorStop(1, it.c);
+      ctx.globalAlpha = it.a; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(it.x, it.y, Math.max(1, it.R), 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = it.a * 0.6; ctx.strokeStyle = ink; ctx.lineWidth = W / 500; ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+    const base = a0 / Math.SQRT2 * kb(), h = a0 * kc();
+    $('#bainUv').textContent = fmt(u * 100, 0) + NB + '%'; $('#bainCv').textContent = fmt(C, 2) + NB + '%';
+    $('#bainTxt').textContent = 'Base de la maille : ' + fmt(base, 2) + ' Å (' + (u ? '+' + fmt((kb() - 1) * 100, 1) + ' %' : 'départ') + '), hauteur : ' + fmt(h, 2) + ' Å (' + (u ? fmt((kc() - 1) * 100, 1) + ' %' : 'départ') + '). Rapport c/a = ' + fmt(h / base, 3) + (u >= 0.99 ? (C > 0.02 ? ' : martensite quadratique, étirée par le carbone (c/a ≈ 1 + 0,045 × %C).' : ' : sans carbone, un cube centré parfait, c’est de la ferrite.') : u < 0.01 ? ' : c’est la maille CFC vue autrement (√2 ≈ 1,414).' : '.');
+  }
+  cv.addEventListener('pointerdown', e => { drag = [e.clientX, e.clientY, ry, rx]; cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener('pointermove', e => { if (!drag) return; ry = drag[2] + (e.clientX - drag[0]) * 0.012; rx = clamp(drag[3] + (e.clientY - drag[1]) * 0.012, -1.4, 1.4); draw(); });
+  cv.addEventListener('pointerup', () => { drag = null; }); cv.addEventListener('pointercancel', () => { drag = null; });
+  $('#bainU').addEventListener('input', e => { cancelAnimationFrame(raf); u = +e.target.value; draw(); });
+  $('#bainC').addEventListener('input', e => { C = +e.target.value; draw(); });
+  $('#bainCtx').addEventListener('click', e => { ctxOn = !ctxOn; e.currentTarget.textContent = ctxOn ? 'Masquer les deux mailles CFC' : 'Montrer les deux mailles CFC'; draw(); });
+  $('#bainPlay').addEventListener('click', () => {
+    cancelAnimationFrame(raf); if (RM) { u = 1; $('#bainU').value = 1; draw(); return; }
+    const t0 = performance.now();
+    const f = now => { const k = clamp((now - t0) / 3500, 0, 1); u = k < 0.2 ? 0 : easeIO((k - 0.2) / 0.8); $('#bainU').value = u; ry += 0.004; draw(); if (k < 1) raf = requestAnimationFrame(f); };
+    raf = requestAnimationFrame(f);
+  });
+  draw(); redraws.push(draw);
+})();
+
+/* ---------- martensite en lattes / plaquettes ---------- */
+(function mart() {
+  const t = new Tex($('#mart'), 29, 220, 4, 12); let k = 'M';
+  const TXT = { M: 'Martensite en lattes : dans chaque ancien grain d’austénite, des paquets de lattes parallèles très fines. C’est la martensite des aciers à moins de 0,6 % C, celle qu’on rencontre dans la ZAT d’une soudure.', Mp: 'Martensite en plaquettes : des lentilles qui se recoupent, avec une ligne médiane, dans une austénite résiduelle abondante. Typique des aciers à plus de 1 % C : très dure, fragile, parfois microfissurée.' };
+  const draw = () => { t.draw([{ k: k, f: 1 }]); $('#martTxt').textContent = TXT[k]; };
+  radio($('#martBtns'), 'k', v => { k = v; draw(); });
+  radio($('#martMode'), 'm', m => { t.mode = m; draw(); });
+  draw(); redraws.push(draw);
+})();
+
+/* ================= PARTIE 2 : dureté, Ms, austénite résiduelle ================= */
+const hvM = C => 884 * C * (1 - 0.3 * C * C) + 294;
+const msC = C => C <= 0.6 ? 539 - 423 * C : C <= 0.76 ? 285 - (C - 0.6) * 406.25 : 220 - (C - 0.76) * 250;
+const kmF = (Ms, T) => T >= Ms ? 0 : 1 - Math.exp(-0.011 * (Ms - T));
+(function part2() {
+  const s = $('#hvC'), k = $('#kmP'), sl = $('#hvCc');
+  const X = c => 44 + (c - 0.1) / 1.1 * 270, Yh = h => 214 - (h - 300) / 650 * 196, Ym = m => 214 - m / 600 * 196;
+  const gB = el('g', null, s), gM = el('g', null, s);
+  el('rect', { x: 44, y: 18, width: 270, height: 196, style: 'fill:var(--paper);stroke:var(--ink)' }, gB);
+  for (let h = 300; h <= 900; h += 100) { el('line', { x1: 44, x2: 314, y1: Yh(h), y2: Yh(h), style: 'stroke:var(--grid2)' }, gB); tx(gB, 40, Yh(h) + 3, String(h), 'font-size:9px;fill:var(--ink2);text-anchor:end'); }
+  for (let m = 0; m <= 600; m += 100) tx(gB, 318, Ym(m) + 3, String(m), 'font-size:9px;fill:var(--cM)');
+  for (let c = 0.2; c <= 1.21; c += 0.2) tx(gB, X(c), 228, fmt(c, 1), 'font-size:9px;fill:var(--ink2);text-anchor:middle');
+  tx(gB, 179, 244, '% massique de carbone', 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+  tx(gB, 44, 12, 'dureté HV', 'font-size:9.5px;font-weight:700;fill:var(--ink)');
+  tx(gB, 356, 12, 'Ms (°C)', 'font-size:9.5px;font-weight:700;fill:var(--cM);text-anchor:end');
+  let d1 = '', d2 = ''; for (let c = 0.1; c <= 1.2001; c += 0.01) { d1 += (d1 ? 'L' : 'M') + X(c).toFixed(1) + ' ' + Yh(hvM(c)).toFixed(1); d2 += (d2 ? 'L' : 'M') + X(c).toFixed(1) + ' ' + Ym(msC(c)).toFixed(1); }
+  el('path', { d: d1, style: 'fill:none;stroke:var(--ink);stroke-width:2.6' }, gB);
+  el('path', { d: d2, style: 'fill:none;stroke:var(--cM);stroke-width:2;stroke-dasharray:6 3' }, gB);
+  [[0.18, 'S355'], [0.45, 'C45'], [0.76, 'eutectoïde']].forEach(([c, l]) => { el('circle', { cx: X(c), cy: Yh(hvM(c)), r: 3, style: 'fill:var(--ink)' }, gB); tx(gB, X(c) + 4, Yh(hvM(c)) + 12, l, 'font-size:8.5px;font-weight:650;fill:var(--ink2)'); });
+  function upd() {
+    const C = +sl.value, Ms = msC(C), cold = $('#kmCold').checked, Tend = cold ? -196 : 20;
+    $('#hvCcv').textContent = fmt(C, 2) + NB + '%';
+    gM.innerHTML = '';
+    el('line', { x1: X(C), x2: X(C), y1: 18, y2: 214, style: 'stroke:var(--cL);stroke-width:2' }, gM);
+    el('circle', { cx: X(C), cy: Yh(hvM(C)), r: 5, style: 'fill:var(--cL);stroke:var(--ink);stroke-width:1.2' }, gM);
+    el('circle', { cx: X(C), cy: Ym(Ms), r: 5, style: 'fill:var(--paper);stroke:var(--cM);stroke-width:2' }, gM);
+    // Koistinen-Marburger
+    k.innerHTML = '';
+    const XT = T => 44 + (600 - T) / 820 * 300, YF = f => 170 - f * 150;
+    el('rect', { x: 44, y: 20, width: 300, height: 150, style: 'fill:var(--paper);stroke:var(--ink)' }, k);
+    el('rect', { x: XT(Ms), y: 20, width: 344 - XT(Ms), height: 150, style: 'fill:var(--cMs);opacity:.35' }, k);
+    for (let T = 600; T >= -200; T -= 100) { el('line', { x1: XT(T), x2: XT(T), y1: 170, y2: 174, style: 'stroke:var(--ink)' }, k); tx(k, XT(T), 184, String(T), 'font-size:8.5px;fill:var(--ink2);text-anchor:middle'); }
+    [0, 0.5, 1].forEach(f => tx(k, 40, YF(f) + 3, fmt(f * 100, 0) + ' %', 'font-size:8.5px;fill:var(--ink2);text-anchor:end'));
+    tx(k, 194, 197, 'température pendant la trempe (°C) →', 'font-size:9px;fill:var(--ink2);text-anchor:middle');
+    tx(k, 48, 14, 'fraction de martensite', 'font-size:9.5px;font-weight:700;fill:var(--ink)');
+    let d = ''; for (let T = 600; T >= Tend; T -= 2) d += (d ? 'L' : 'M') + XT(T).toFixed(1) + ' ' + YF(kmF(Ms, T)).toFixed(1);
+    el('path', { d: d, style: 'fill:none;stroke:var(--cM);stroke-width:2.6' }, k);
+    el('line', { x1: XT(Ms), x2: XT(Ms), y1: 20, y2: 170, style: 'stroke:var(--cM);stroke-dasharray:4 3' }, k);
+    tx(k, XT(Ms) + 3, 32, 'Ms ' + Math.round(Ms) + ' °C', 'font-size:9px;font-weight:700;fill:var(--cM)');
+    [[20, 'ambiante'], [-196, 'azote liquide']].forEach(([T, l]) => { if (T < Tend) return; const f = kmF(Ms, T); el('line', { x1: XT(T), x2: XT(T), y1: 20, y2: 170, style: 'stroke:var(--ink2);stroke-dasharray:2 3' }, k); el('circle', { cx: XT(T), cy: YF(f), r: 4.5, style: 'fill:var(--cL);stroke:var(--ink)' }, k); tx(k, XT(T) - 3, YF(f) + 16, l, 'font-size:8.5px;fill:var(--ink2);text-anchor:end'); });
+    const fa = 1 - kmF(Ms, 20), fc = 1 - kmF(Ms, -196);
+    $('#hvRes').innerHTML = [['Dureté de la martensite', '≈' + NB + Math.round(hvM(C) / 10) * 10 + NB + 'HV'], ['Ms (carbone seul)', '≈' + NB + Math.round(Ms) + NB + '°C'], ['c/a', fmt(1 + 0.045 * C, 3)], ['Austénite résiduelle à 20 °C', fmt(fa * 100, fa < 0.1 ? 1 : 0) + NB + '%'], cold ? ['Après −196 °C', fmt(fc * 100, 1) + NB + '%'] : ['Type', C < 0.6 ? 'lattes' : C < 1 ? 'mixte' : 'plaquettes']].map(([a, b]) => '<div><div class="k">' + a + '</div><div class="v">' + b + '</div></div>').join('');
+  }
+  sl.addEventListener('input', upd); $('#kmCold').addEventListener('change', upd); upd();
+})();
+
+/* ================= PARTIE 3 : carte des traitements ================= */
+VIEWS.trt = { c0: 0, c1: 2.2, T0: 450, T1: 1250 };
+(function part3a() {
+  const d = new Dia($('#dT'), { view: 'trt' });
+  const tex = new Tex($('#trtMc'), 37, 180, 4, 11), texBig = new Tex($('#trtMc'), 41, 180, 2, 7);
+  const cs = seq(0, 2.1, 84);
+  const bandAbove = (f, lo, hi, c0, c1) => { const up = cs.filter(c => c >= c0 && c <= c1).map(c => [c, f(c) + hi]), dn = cs.filter(c => c >= c0 && c <= c1).map(c => [c, f(c) + lo]).reverse(); return up.concat(dn); };
+  const A3h = c => c <= 0.76 ? TA3(c) : 727, Acmh = c => c <= 0.76 ? TA3(c) : TAcm(c);
+  const TRT = {
+    trempe: { bands: [bandAbove(A3h, 30, 50, 0, 2.1)], cyc: 'trempe', mix: [{ k: 'M', f: 1 }], t: '<b>Trempe.</b> On austénitise juste au-dessus de A<sub>3</sub> (hypo) ou de A<sub>1</sub> (hyper), puis on refroidit plus vite que la vitesse critique (eau, huile, polymère ou gaz selon la trempabilité, cours 2). Résultat : martensite, dure et fragile. Elle est <b>toujours suivie d’un revenu</b>.' },
+    norm: { bands: [bandAbove(Acmh, 30, 50, 0, 1.6)], cyc: 'norm', mix: [{ k: 'F', f: 0.45 }, { k: 'Pf', f: 0.55 }], t: '<b>Normalisation.</b> Austénitisation au-dessus de A<sub>3</sub> ou A<sub>cm</sub>, puis refroidissement à l’air calme. Le grain est régénéré, fin et homogène ; la perlite est fine. C’est l’état de livraison courant des aciers de construction (le « N » de S355N) et un traitement de régénération après forgeage ou soudage.' },
+    recuit: { bands: [bandAbove(A3h, 30, 50, 0, 2.1)], cyc: 'recuit', big: 1, mix: [{ k: 'F', f: 0.48 }, { k: 'Pc', f: 0.52 }], t: '<b>Recuit complet.</b> Même chauffage que la trempe, puis refroidissement dans le four, très lent. On s’approche de l’équilibre du cours 1 : ferrite + perlite grossière, acier le plus doux. Sert avant un usinage ou une mise en forme difficile.' },
+    glob: { bands: [bandAbove(() => 700, 0, 45, 0.3, 2.1)], cyc: 'glob', mix: [{ k: 'Cg', f: 1 }], t: '<b>Globulisation (ou sphéroïdisation).</b> Longue tenue juste sous ou autour de A<sub>1</sub>, parfois en oscillant de part et d’autre. La cémentite, lamellaire ou en réseau, se roule en globules pour réduire son interface. Acier doux et très ductile : idéal pour l’usinage et la frappe à froid, et indispensable avant de tremper un acier hypereutectoïde (cours 1).' },
+    det: { bands: [bandAbove(() => 500, 0, 150, 0, 2.1)], cyc: 'det', mix: [{ k: 'F', f: 0.45 }, { k: 'Pf', f: 0.55 }], t: '<b>Recuit de détente.</b> Chauffage sous A<sub>1</sub>, vers 500–650&nbsp;°C, maintien, refroidissement lent. La microstructure ne change pas visiblement ; les contraintes résiduelles (usinage, soudage) se relâchent. En soudage, c’est le <b>traitement thermique après soudage</b> (partie 6).' },
+    homo: { bands: [bandAbove(() => 1050, 0, 150, 0, 1.3)], cyc: 'homo', big: 1, mix: [{ k: 'F', f: 0.48 }, { k: 'Pc', f: 0.52 }], t: '<b>Homogénéisation.</b> Des heures vers 1050–1200&nbsp;°C, pour que les éléments ségrégés à la solidification (Mn, P…) rediffusent. Le grain grossit beaucoup : on fait toujours suivre d’une normalisation.' }
+  };
+  let cur = 'trempe';
+  d.overlay = (g, D) => {
+    TRT[cur].bands.forEach(b => el('path', { d: b.map((p, i) => (i ? 'L' : 'M') + D.X(p[0]).toFixed(1) + ' ' + D.Y(p[1]).toFixed(1)).join('') + 'Z', style: 'fill:var(--cL);fill-opacity:.55;stroke:var(--cL);stroke-width:1.5' }, g));
+    el('line', { x1: D.X(0.4), x2: D.X(0.4), y1: D.m.t, y2: D.H - D.m.b, style: 'stroke:var(--ink);stroke-width:1.2;stroke-dasharray:4 3' }, g);
+    tx(g, D.X(0.4) + 3, D.H - D.m.b - 5, '0,4 % C', 'font-size:9px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+  };
+  const cyc = $('#cyc');
+  const CYC = {
+    trempe: [[0, 20], [20, 820], [40, 820], [42, 60], [50, 40], [60, 560], [80, 560], [95, 40]],
+    norm: [[0, 20], [20, 830], [40, 830], [60, 450], [80, 150], [100, 50]],
+    recuit: [[0, 20], [20, 820], [40, 820], [100, 350]],
+    glob: [[0, 20], [15, 700], [25, 740], [35, 700], [45, 740], [55, 700], [65, 740], [75, 700], [100, 400]],
+    det: [[0, 20], [30, 600], [60, 600], [100, 150]],
+    homo: [[0, 20], [15, 1150], [70, 1150], [100, 500]]
+  };
+  function drawCyc() {
+    cyc.innerHTML = '';
+    const X = t => 30 + t * 2.0, Y = T => 104 - T / 1200 * 94;
+    el('rect', { x: 30, y: 10, width: 200, height: 94, style: 'fill:var(--paper);stroke:var(--ink)' }, cyc);
+    [[727, 'A1', 1], [Math.round(TA3(0.4)), 'A3 (0,4 % C)', 0]].forEach(([T, l, right]) => { el('line', { x1: 30, x2: 230, y1: Y(T), y2: Y(T), style: 'stroke:var(--ink2);stroke-dasharray:3 3' }, cyc); tx(cyc, right ? 228 : 33, right ? Y(T) + 9 : Y(T) - 2, l, 'font-size:7.5px;fill:var(--ink2);text-anchor:' + (right ? 'end' : 'start')); });
+    [0, 400, 800, 1200].forEach(T => tx(cyc, 26, Y(T) + 3, String(T), 'font-size:8px;fill:var(--ink2);text-anchor:end'));
+    tx(cyc, 130, 116, 'temps (schématique) →', 'font-size:8.5px;fill:var(--ink2);text-anchor:middle');
+    const p = CYC[cur];
+    el('path', { d: p.map((q, i) => (i ? 'L' : 'M') + X(q[0]) + ' ' + Y(q[1])).join(''), style: 'fill:none;stroke:var(--cL);stroke-width:2.6;stroke-linejoin:round' }, cyc);
+    if (cur === 'trempe') tx(cyc, X(70), Y(560) - 5, 'revenu', 'font-size:8.5px;font-weight:700;fill:var(--ink);text-anchor:middle');
+  }
+  function show() {
+    d.drawOverlay(); drawCyc();
+    const T = TRT[cur], tt = T.big ? texBig : tex; tt.draw(T.mix);
+    $('#trtTxt').innerHTML = T.t;
+  }
+  radio($('#trtBtns'), 't', v => { cur = v; show(); });
+  show(); redraws.push(show);
+})();
+
+/* ---------- revenu ---------- */
+(function part3b() {
+  const s = $('#rev'), X = T => 44 + (T - 20) / 680 * 296, Y = h => 214 - (h - 150) / 550 * 196;
+  const CUR = [
+    { n: 'C45', col: 'var(--ink)', f: mono([[20, 668], [100, 660], [200, 600], [300, 520], [400, 440], [500, 350], [600, 270], [700, 210]]) },
+    { n: '42CrMo4', col: 'var(--cA)', f: mono([[20, 646], [100, 640], [200, 590], [300, 535], [400, 480], [500, 410], [600, 330], [700, 245]]) },
+    { n: 'outil Cr-Mo-V', col: 'var(--cB)', f: mono([[20, 620], [100, 615], [200, 575], [300, 550], [400, 545], [450, 555], [500, 585], [550, 575], [600, 485], [650, 360], [700, 270]]) }
+  ];
+  const tex = new Tex($('#revMc'), 53, 180, 4, 11);
+  const gB = el('g', null, s), gM = el('g', null, s);
+  el('rect', { x: 44, y: 18, width: 296, height: 196, style: 'fill:var(--paper);stroke:var(--ink)' }, gB);
+  [[100, 200, '1'], [200, 300, '2'], [300, 400, '3'], [400, 700, '4']].forEach(([a, b, l], i) => { el('rect', { x: X(a), y: 18, width: X(b) - X(a), height: 196, style: 'fill:var(--cL);opacity:' + (i % 2 ? 0.06 : 0.12) }, gB); tx(gB, (X(a) + X(b)) / 2, 30, 'stade ' + l, 'font-size:8.5px;font-weight:700;fill:var(--ink2);text-anchor:middle'); });
+  for (let h = 200; h <= 700; h += 100) { el('line', { x1: 44, x2: 340, y1: Y(h), y2: Y(h), style: 'stroke:var(--grid2)' }, gB); tx(gB, 40, Y(h) + 3, String(h), 'font-size:9px;fill:var(--ink2);text-anchor:end'); }
+  for (let T = 100; T <= 700; T += 100) tx(gB, X(T), 228, String(T), 'font-size:9px;fill:var(--ink2);text-anchor:middle');
+  tx(gB, 192, 244, 'température de revenu (°C), 1 h', 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+  tx(gB, 44, 12, 'dureté HV', 'font-size:9.5px;font-weight:700;fill:var(--ink)');
+  CUR.forEach((c, i) => { let d = ''; for (let T = 20; T <= 700; T += 5) d += (d ? 'L' : 'M') + X(T).toFixed(1) + ' ' + Y(c.f(T)).toFixed(1); el('path', { d: d, style: 'fill:none;stroke:' + c.col + ';stroke-width:2.4' }, gB); const yl = Y(380 - i * 30); el('line', { x1: X(35), x2: X(75), y1: yl - 3, y2: yl - 3, style: 'stroke:' + c.col + ';stroke-width:2.4' }, gB); tx(gB, X(82), yl, c.n, 'font-size:9px;font-weight:700;fill:' + c.col + ';paint-order:stroke;stroke:var(--paper);stroke-width:3px'); });
+  function upd() {
+    const T = +$('#revT').value; $('#revTv').textContent = T + NB + '°C';
+    gM.innerHTML = '';
+    el('line', { x1: X(T), x2: X(T), y1: 18, y2: 214, style: 'stroke:var(--cL);stroke-width:2' }, gM);
+    CUR.forEach(c => el('circle', { cx: X(T), cy: Y(c.f(T)), r: 4.5, style: 'fill:var(--paper);stroke:' + c.col + ';stroke-width:2.2' }, gM));
+    const st = T < 100 ? 'Pas de revenu : martensite brute.' : T < 200 ? 'Stade 1 : carbures ε très fins, détente de la martensite. Revenu des outils (dureté conservée).' : T < 300 ? 'Stade 2 : l’austénite résiduelle se décompose.' : T < 400 ? 'Stade 3 : cémentite en bâtonnets, perte de la tétragonalité. Attention, fragilité de revenu vers 250–400 °C.' : T < 500 ? 'Stade 4 : la cémentite coalesce, la ferrite se restaure.' : 'Stade 4 avancé : globules de cémentite, ferrite restaurée ; carbures alliés dans l’acier Cr-Mo-V (durcissement secondaire). C’est le domaine de l’amélioration et des traitements après soudage.';
+    $('#revTxt').textContent = CUR.map(c => c.n + ' ≈ ' + Math.round(c.f(T) / 10) * 10 + ' HV').join(' ; ') + '. ' + st;
+    tex.tl = clamp((T - 20) / 680, 0, 1); tex.draw([{ k: T < 60 ? 'M' : 'Mt', f: 1 }]);
+  }
+  $('#revT').addEventListener('input', upd); upd(); redraws.push(upd);
+})();
+
+/* ---------- trempes étagées sur TTT ---------- */
+(function part3c() {
+  const s = $('#etag'), gB = el('g', null, s), gA = el('g', null, s), gP = el('g', null, s);
+  axesLog(gA, TX, TY, -1, 5, 350, TY(0), 800);
+  drawTTT(gB);
+  el('line', { x1: TX(-1), x2: 350, y1: TY(A1), y2: TY(A1), style: 'stroke:var(--ink);stroke-width:1.3;stroke-dasharray:6 3' }, gA);
+  el('rect', { x: TX(-1), y: TY(800), width: 306, height: TY(0) - TY(800), style: 'fill:none;stroke:var(--ink);stroke-width:1.2' }, gA);
+  const F = {
+    eau: [t => 20 + 780 * Math.exp(-t / 0.3), t => 20 + 780 * Math.exp(-t / 1.2)],
+    mart: [t => 240 + 560 * Math.exp(-t / 0.3), t => 240 + 560 * Math.exp(-t / 1.4)],
+    aus: [t => 350 + 450 * Math.exp(-t / 0.3), t => 350 + 450 * Math.exp(-t / 1.4)]
+  };
+  const HOLD = { mart: [240, 60, 150], aus: [350, 2000, 150] };
+  const TXT = {
+    eau: 'Trempe directe : la surface (trait plein) passe Ms bien avant le cœur (tirets). Elle se transforme et gonfle la première, puis le cœur gonfle à son tour sous une surface déjà dure : contraintes, déformations, risque de tapure.',
+    mart: 'Trempe étagée martensitique : bain vers 240 °C, juste au-dessus de Ms (220 °C). On attend que le cœur rejoigne la surface, sans atteindre le début de la bainite, puis on refroidit à l’air : toute la pièce traverse Ms ensemble. Revenu ensuite, comme après une trempe classique.',
+    aus: 'Trempe étagée bainitique : bain vers 350 °C, maintenu jusqu’à la fin de la transformation (au-delà de la courbe de fin). Toute la pièce devient bainite inférieure, tenace, sans passer par la martensite ni par le revenu.'
+  };
+  function draw(k) {
+    gP.innerHTML = '';
+    F[k].forEach((f, i) => {
+      let d = '';
+      for (let l = -1; l <= 5.001; l += 0.02) {
+        const t = Math.pow(10, l); let T = f(t);
+        if (HOLD[k]) { const [Th, th, tau] = HOLD[k]; if (t > th) T = 20 + (Th - 20) * Math.exp(-(t - th) / tau); }
+        d += (d ? 'L' : 'M') + TX(l).toFixed(1) + ' ' + TY(T).toFixed(1);
+        if (T < 22) break;
+      }
+      el('path', { d: d, style: 'fill:none;stroke:var(--cL);stroke-width:3' + (i ? ';stroke-dasharray:6 4' : '') }, gP);
+    });
+    tx(gP, TX(2.7), TY(70), 'surface : trait plein', 'font-size:9px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+    tx(gP, TX(2.7), TY(35), 'cœur : tirets', 'font-size:9px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+    $('#etagTxt').textContent = TXT[k];
+  }
+  radio($('#etagBtns'), 'e', draw); draw('eau');
+})();
+
+/* ================= SOUDAGE : modèle S355 ================= */
+function cA3x(T, Ae3, C0) { const T0 = T - (Ae3 - TA3(C0)); if (T0 >= 727) return cA3(T0); return 0.76 + (727 - T0) / 138.9; }
+const shW = (p, d) => p.map(([T, l]) => [T, l + d]);
+const S355 = { C: 0.18, Ae3: 837, Ae1: 717, Bs: 655, Ms: 420, hvF: 160, hvP: 220, hvM: Math.round(hvM(0.18)), Fmin: 550, Pmin: 500,
+  F: [[550, 1.2], [600, 0.8], [650, 0.5], [700, 0.6], [750, 1.0], [800, 1.8], [837, 3.5]], dF: 1.0,
+  P: [[500, 1.5], [550, 1.2], [600, 1.0], [650, 1.1], [700, 1.8], [717, 3.2]], dP: 1.0,
+  B: [[430, 0.8], [480, 0.3], [530, 0.2], [580, 0.4], [630, 1.0], [655, 2.5]], dB: 1.3 };
+function mkW(dF, dB) { const o = Object.assign({}, S355); o.FS = mono(shW(o.F, dF)); o.FF = mono(shW(o.F, dF + o.dF)); o.PS = mono(shW(o.P, dF)); o.PF = mono(shW(o.P, dF + o.dP)); o.BS = mono(shW(o.B, dB)); o.BF = mono(shW(o.B, dB + o.dB)); return o; }
+const WZ = { CG: mkW(-0.55, -0.75), FG: mkW(-1.3, -0.95) };
+function coolW(st, t85, T0) {
+  T0 = T0 || 20;
+  const A = t85 / (1 / (500 - T0) - 1 / (800 - T0)), tp = A / (1350 - T0), Tf = t => T0 + A / (t + tp);
+  let F = 0, P = 0, B = 0, tprev = 0, gMs = null;
+  const step = (X, S, Fi, T, dt) => { const k = jm(T, S, Fi); const te = Math.pow(-Math.log(1 - Math.min(X, 0.9999)) / k.b, 1 / k.n) + dt; return 1 - Math.exp(-k.b * Math.pow(te, k.n)); };
+  for (let i = 0; i <= 8 * 80; i++) {
+    const t = Math.pow(10, -2 + i / 80), dt = t - tprev, T = Tf((t + tprev) / 2); tprev = t;
+    let g = 1 - F - P - B;
+    if (g > 1e-4 && T > st.Ms) {
+      if (T < st.Ae3 && T > st.Fmin) { const ca = cA3x(T, st.Ae3, st.C), feq = Math.min(clamp((ca - st.C) / (ca - 0.02), 0, 0.95), (0.76 - st.C) / 0.74); if (feq > F + 1e-6) { const y = step(F / feq, st.FS, st.FF, T, dt); F = Math.max(F, Math.min(y * feq, F + g)); } }
+      g = 1 - F - P - B;
+      if (T < st.Ae1 && T > st.Pmin && g > 1e-4) { const base = P + g; P = step(P / base, st.PS, st.PF, T, dt) * base; }
+      g = 1 - F - P - B;
+      if (T < st.Bs && g > 1e-4) { const base = B + g; B = step(B / base, st.BS, st.BF, T, dt) * base; }
+    }
+    if (T <= st.Ms && gMs === null) gMs = 1 - F - P - B;
+    if (T < T0 + 5 || T < 60) break;
+  }
+  if (gMs === null) gMs = 1 - F - P - B;
+  const M = Math.max(0, gMs), hvB = 350 - 45 * Math.log10(t85);
+  return { F: F, P: P, B: B, M: M, hv: F * st.hvF + P * st.hvP + B * hvB + M * st.hvM };
+}
+function t85(Q, d, T0, F3, F2) {
+  const a = 1 / (500 - T0), b = 1 / (800 - T0);
+  const t3 = (6700 - 5 * T0) * Q * (a - b) * F3;
+  const t2 = (4300 - 4.3 * T0) * 1e5 * Q * Q / (d * d) * (a * a - b * b) * F2;
+  const dt = Math.sqrt((4300 - 4.3 * T0) / (6700 - 5 * T0) * 1e5 * Q * (a + b));
+  return { t3: t3, t2: t2, dt: dt, D3: d >= dt, t: d >= dt ? t3 : t2 };
+}
+const mixW = r => [{ k: 'F', f: r.F }, { k: 'Pf', f: r.P }, { k: 'Bu', f: r.B }, { k: 'M', f: r.M }].filter(m => m.f > 0.003);
+const fmtMix = r => [['ferrite', r.F], ['perlite', r.P], ['bainite', r.B], ['martensite', r.M]].filter(q => q[1] > 0.02).map(q => fmt(q[1] * 100, 0) + NB + '% ' + q[0]).join(', ');
+const hvCls = hv => hv > 350 ? '<span class="warn">' + Math.round(hv / 10) * 10 + NB + 'HV</span>' : '<span class="okc">' + Math.round(hv / 10) * 10 + NB + 'HV</span>';
+
+/* ================= PARTIE 4 : simulateur de ZAT ================= */
+(function part4() {
+  const Z = [
+    { k: 'ZF', n: 'Zone fondue', col: 'var(--cLs)', lo: 1500, hi: 1600 },
+    { k: 'CG', n: 'ZAT à gros grains', col: 'var(--cM)', lo: 1150, hi: 1500 },
+    { k: 'FG', n: 'ZAT à grains fins', col: 'var(--cGs)', lo: 837, hi: 1150 },
+    { k: 'IC', n: 'ZAT intercritique', col: 'url(#pAG)', lo: 717, hi: 837 },
+    { k: 'SC', n: 'ZAT subcritique', col: 'var(--cBs)', lo: 500, hi: 717 },
+    { k: 'MB', n: 'Métal de base', col: 'var(--cAs)', lo: 20, hi: 500 }
+  ];
+  const texCG = new Tex($('#zMc'), 61, 180, 2, 7), texFG = new Tex($('#zMc'), 67, 180, 7, 16), texBM = new Tex($('#zMc'), 71, 180, 5, 12);
+  let sel = 'CG';
+  const bx = $('#zBtns');
+  Z.forEach(z => { const b = document.createElement('button'); b.className = 'btn' + (z.k === sel ? ' on' : ''); b.dataset.z = z.k; b.textContent = z.n; bx.appendChild(b); });
+  radio(bx, 'z', k => { sel = k; upd(); });
+  const Yof = (Tp, Q, d, T0) => Math.max(0, (1 / (Tp - T0) - 1 / (1500 - T0)) * Q * 1000 / (4.13 * 0.0044 * d));
+  const Tof = (Y, Q, d, T0) => T0 + 1 / (4.13 * 0.0044 * d * Y / (Q * 1000) + 1 / (1500 - T0));
+  function upd() {
+    const Q = +$('#zQ').value, d = +$('#zD').value, T0 = +$('#zT0').value;
+    $('#zQv').textContent = fmt(Q, 2) + NB + 'kJ/mm'; $('#zDv').textContent = d + NB + 'mm'; $('#zT0v').textContent = T0 + NB + '°C';
+    const w = t85(Q, d, T0, 1, 1), tt = w.t;
+    const Ys = Z.slice(1, 5).map(z => Yof(z.lo, Q, d, T0));   // limites extérieures CG, FG, IC, SC
+    // ---- coupe ----
+    const s = $('#zSec'); s.innerHTML = '';
+    const Ymax = Ys[3], sc = Math.min(14, 120 / Math.max(Ymax, 0.1)), cx = 180, top = 26, bot = 136, wt = 34, wb = 12;
+    el('rect', { x: 8, y: top, width: 344, height: bot - top, style: 'fill:var(--cAs);stroke:var(--ink)' }, s);
+    const trap = off => 'M' + (cx - wt - off) + ' ' + top + 'L' + (cx + wt + off) + ' ' + top + 'L' + (cx + wb + off) + ' ' + bot + 'L' + (cx - wb - off) + ' ' + bot + 'Z';
+    [[3, 'var(--cBs)'], [2, 'url(#pAG)'], [1, 'var(--cGs)'], [0, 'var(--cM)']].forEach(([i, c]) => el('path', { d: trap(Ys[i] * sc), style: 'fill:' + c + ';stroke:var(--ink);stroke-width:.6' }, s));
+    el('path', { d: trap(0), style: 'fill:var(--cLs);stroke:var(--ink);stroke-width:1.2' }, s);
+    el('path', { d: 'M' + (cx - wt - 4) + ' ' + top + 'Q' + cx + ' ' + (top - 14) + ' ' + (cx + wt + 4) + ' ' + top, style: 'fill:var(--cLs);stroke:var(--ink);stroke-width:1.2' }, s);
+    const zi = Z.findIndex(z => z.k === sel);
+    const selOff = zi === 0 ? 0 : zi === 5 ? Ys[3] * sc + 12 : ((zi === 1 ? 0 : Ys[zi - 2]) + Ys[zi - 1]) / 2 * sc;
+    el('circle', { cx: cx + wt + selOff - (bot - top) * 0.2 * (zi === 0 ? 1 : 0) - (zi === 0 ? 20 : 0), cy: top + 22, r: 5, style: 'fill:var(--cL);stroke:var(--ink);stroke-width:1.3' }, s);
+    tx(s, cx, top + (bot - top) / 2 + 4, 'ZF', 'font-size:10px;font-weight:800;fill:var(--ink);text-anchor:middle');
+    // échelle
+    const mm = Math.max(1, Math.round(4 / sc * 10) ? Math.max(1, Math.round(40 / sc)) : 1);
+    el('line', { x1: 14, x2: 14 + mm * sc, y1: 152, y2: 152, style: 'stroke:var(--ink);stroke-width:2' }, s);
+    tx(s, 14, 165, mm + ' mm', 'font-size:9px;fill:var(--ink2)');
+    tx(s, 346, 165, 'ZAT : ' + fmt(Ys[3], 1) + ' mm de chaque côté (jusqu’à 500 °C)', 'font-size:9px;font-weight:650;fill:var(--ink2);text-anchor:end');
+    tx(s, 12, 18, d + ' mm', 'font-size:9px;fill:var(--ink2)');
+    // ---- profil ----
+    const p = $('#zProf'); p.innerHTML = '';
+    const Ym = Ys[3] * 1.25, X = y => 50 + y / Ym * 296, Y = T => 200 - (T - 20) / 1580 * 185;
+    const defs = el('defs', null, p), gr = el('linearGradient', { id: 'zg', gradientUnits: 'userSpaceOnUse', x1: 0, x2: 0, y1: Y(20), y2: Y(1600) }, defs);
+    for (let i = 0; i <= 10; i++) el('stop', { offset: i / 10, 'stop-color': glow(20 + 158 * i) }, gr);
+    el('rect', { x: 38, y: Y(1600), width: 5, height: Y(20) - Y(1600), rx: 1.5, fill: 'url(#zg)' }, p);
+    el('rect', { x: 50, y: Y(1600), width: 296, height: Y(20) - Y(1600), style: 'fill:var(--paper);stroke:var(--ink)' }, p);
+    Z.slice(1).forEach((z, i) => {
+      const y0 = i === 0 ? 0 : Ys[i - 1], y1 = i < 4 ? Ys[i] : Ym;
+      el('rect', { x: X(y0), y: Y(1600), width: Math.max(0, X(Math.min(y1, Ym)) - X(y0)), height: Y(20) - Y(1600), style: 'fill:' + z.col + ';opacity:' + (z.k === sel ? 0.75 : 0.35) }, p);
+      if (i < 4) el('line', { x1: X(y1), x2: X(y1), y1: Y(1600), y2: Y(20), style: 'stroke:var(--ink2);stroke-dasharray:3 3' }, p);
+    });
+    [[1500, 'fusion'], [1150, 'grossissement du grain'], [837, 'Ac3'], [717, 'Ac1'], [500, '500 °C']].forEach(([T, l]) => { el('line', { x1: 50, x2: 346, y1: Y(T), y2: Y(T), style: 'stroke:var(--ink);stroke-width:.8;stroke-dasharray:5 3' }, p); tx(p, 344, Y(T) - 3, l + (T !== 500 ? ' ' + T + ' °C' : ''), 'font-size:8.5px;font-weight:650;fill:var(--ink);text-anchor:end;paint-order:stroke;stroke:var(--paper);stroke-width:2.5px'); });
+    let dd = ''; for (let k = 0; k <= 120; k++) { const y = Ym * k / 120; dd += (k ? 'L' : 'M') + X(y).toFixed(1) + ' ' + Y(Tof(y, Q, d, T0)).toFixed(1); }
+    el('path', { d: dd, style: 'fill:none;stroke:var(--cL);stroke-width:3' }, p);
+    [0, 400, 800, 1200, 1600].forEach(T => tx(p, 34, Y(T) + 3, String(T), 'font-size:8.5px;fill:var(--ink2);text-anchor:end'));
+    const stp = Ym > 6 ? 2 : Ym > 3 ? 1 : 0.5;
+    for (let y = 0; y <= Ym + 1e-9; y += stp) tx(p, X(y), 214, fmt(y, stp < 1 ? 1 : 0), 'font-size:8.5px;fill:var(--ink2);text-anchor:middle');
+    tx(p, 198, 227, 'distance à la ligne de fusion (mm)', 'font-size:9px;fill:var(--ink2);text-anchor:middle');
+    tx(p, 54, 12, 'température de pic (°C)', 'font-size:9.5px;font-weight:700;fill:var(--ink)');
+    // ---- zone choisie ----
+    const z = Z[zi], width = zi === 0 ? null : zi === 5 ? null : (Ys[zi - 1] - (zi === 1 ? 0 : Ys[zi - 2]));
+    let mix, hv = null, txt = '', tex = texBM;
+    const rCG = coolW(WZ.CG, tt, T0), rFG = coolW(WZ.FG, tt, T0);
+    if (z.k === 'ZF') { mix = [{ k: 'AF', f: 1 }]; tex = texFG; txt = 'Métal fondu : structure de solidification (grains colonnaires). Avec un métal d’apport adapté, on vise la ferrite aciculaire, fine et tenace (cours 2). Sa dureté dépend surtout du métal d’apport.'; }
+    else if (z.k === 'CG') { mix = mixW(rCG); tex = texCG; hv = rCG.hv; txt = 'Pic entre 1150 °C et la fusion : austénite à gros grains, très trempante. Après refroidissement : ' + fmtMix(rCG) + '.'; }
+    else if (z.k === 'FG') { mix = mixW(rFG); tex = texFG; hv = rFG.hv; txt = 'Pic entre Ac3 et 1150 °C : austénitisation complète sans grossissement, comme une normalisation. Après refroidissement : ' + fmtMix(rFG) + '.'; }
+    else if (z.k === 'IC') { const mart = tt < 8; mix = [{ k: 'F', f: 0.78 }, { k: mart ? 'M' : 'Pf', f: 0.22 }]; hv = 0.78 * 160 + 0.22 * (mart ? Math.round(hvM(0.6)) : 280); txt = 'Pic entre Ac1 et Ac3 : seules la perlite et la ferrite voisine deviennent austénite, riche en carbone (≈ 0,6 à 0,8 %). ' + (mart ? 'Refroidie vite, elle donne des îlots de martensite très durs (constituants M-A) au milieu de la ferrite : dureté moyenne modérée, mais îlots fragiles.' : 'Refroidie assez lentement, elle redonne une perlite fine.'); }
+    else if (z.k === 'SC') { mix = [{ k: 'F', f: 0.78 }, { k: 'Cg', f: 0.22 }]; hv = 165; txt = 'Pic sous Ac1 : pas d’austénite. La perlite commence à se globuliser et le métal subit un léger revenu. Peu de changement pour un acier normalisé ; adoucissement possible pour un acier trempé et revenu.'; }
+    else { mix = [{ k: 'F', f: 0.78 }, { k: 'Pf', f: 0.22 }]; hv = 170; txt = 'Métal de base S355 : ferrite + perlite (environ 22 % de perlite à 0,18 % C, levier du cours 1).'; }
+    tex.draw(mix);
+    $('#zTxt').innerHTML = '<b>' + z.n + '</b>' + (width != null ? ', largeur ≈ ' + fmt(width, 2) + ' mm' : '') + '. ' + txt + (hv != null ? ' Dureté estimée ' + hvCls(hv) + '.' : '') + '<br><span class="small">t<sub>8/5</sub> ≈ ' + fmt(tt, 1) + ' s (' + (w.D3 ? '3D' : '2D') + ', cordon sur tôle, EN 1011-2).</span>';
+  }
+  ['zQ', 'zD', 'zT0'].forEach(id => $('#' + id).addEventListener('input', upd));
+  upd(); redraws.push(upd);
+})();
+
+/* ================= PARTIE 5 : t8/5 et TRC de soudage ================= */
+(function part5() {
+  const grid = [], L0 = 0, L1 = Math.log10(300);
+  for (let i = 0; i <= 60; i++) { const t = Math.pow(10, L0 + (L1 - L0) * i / 60); grid.push({ t: t, CG: coolW(WZ.CG, t), FG: coolW(WZ.FG, t) }); }
+  let zone = 'CG';
+  const s = $('#wTrc'), X = t => 40 + (Math.log10(t) - L0) / (L1 - L0) * 280, Y = f => 206 - f * 186, YH = h => 206 - (h - 150) / 350 * 186;
+  const gB = el('g', null, s), gM = el('g', null, s);
+  function drawBase() {
+    gB.innerHTML = '';
+    el('rect', { x: 40, y: 20, width: 280, height: 186, style: 'fill:var(--paper);stroke:var(--ink)' }, gB);
+    const keys = [['F', 'var(--cAs)', 'ferrite'], ['P', 'var(--cCs)', 'perlite'], ['B', 'var(--cBs)', 'bainite'], ['M', 'var(--cMs)', 'martensite']];
+    let lower = grid.map(() => 0);
+    keys.forEach(([k, col, lab]) => {
+      const upper = grid.map((g, i) => lower[i] + g[zone][k]);
+      const d = grid.map((g, i) => (i ? 'L' : 'M') + X(g.t).toFixed(1) + ' ' + Y(upper[i]).toFixed(1)).join('') + grid.slice().reverse().map((g, j) => 'L' + X(g.t).toFixed(1) + ' ' + Y(lower[grid.length - 1 - j]).toFixed(1)).join('') + 'Z';
+      el('path', { d: d, style: 'fill:' + col + ';stroke:var(--ink);stroke-width:.5' }, gB);
+      let bi = 0, bw = 0; grid.forEach((g, i) => { if (g[zone][k] > bw) { bw = g[zone][k]; bi = i; } });
+      const isM = lab === 'martensite';
+      if (bw > 0.2) tx(gB, isM ? 46 : clamp(X(grid[bi].t), 80, 280), Y(isM ? lower[bi] + 0.85 * (upper[bi] - lower[bi]) : (lower[bi] + upper[bi]) / 2) + 3, lab, 'font-size:9.5px;font-weight:750;fill:var(--ink);text-anchor:' + (isM ? 'start' : 'middle') + ';paint-order:stroke;stroke:var(--paper);stroke-width:2.5px');
+      lower = upper;
+    });
+    el('path', { d: grid.map((g, i) => (i ? 'L' : 'M') + X(g.t).toFixed(1) + ' ' + YH(g[zone].hv).toFixed(1)).join(''), style: 'fill:none;stroke:var(--ink);stroke-width:2.6' }, gB);
+    el('line', { x1: 40, x2: 320, y1: YH(350), y2: YH(350), style: 'stroke:var(--bad);stroke-width:1.3;stroke-dasharray:5 3' }, gB);
+    tx(gB, 316, YH(350) - 3, '350 HV', 'font-size:8.5px;font-weight:700;fill:var(--bad);text-anchor:end');
+    [1, 2, 5, 10, 20, 50, 100, 300].forEach(t => { el('line', { x1: X(t), x2: X(t), y1: 206, y2: 210, style: 'stroke:var(--ink)' }, gB); tx(gB, X(t), 220, String(t), 'font-size:8.5px;fill:var(--ink2);text-anchor:middle'); });
+    [0, 0.5, 1].forEach(f => tx(gB, 36, Y(f) + 3, fmt(f * 100, 0) + ' %', 'font-size:8.5px;fill:var(--ink2);text-anchor:end'));
+    [200, 300, 400, 500].forEach(h => tx(gB, 324, YH(h) + 3, String(h), 'font-size:8.5px;fill:var(--ink)'));
+    tx(gB, 180, 236, 't8/5 (s), échelle logarithmique', 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+    tx(gB, 356, 14, 'HV', 'font-size:9.5px;font-weight:700;fill:var(--ink);text-anchor:end');
+    tx(gB, 40, 14, 'constituants', 'font-size:9.5px;font-weight:700;fill:var(--ink)');
+  }
+  const ids = ['wU', 'wI', 'wV', 'wD', 'wT0'];
+  function upd() {
+    const k = +$('#wP').value, U = +$('#wU').value, I = +$('#wI').value, v = +$('#wV').value, d = +$('#wD').value, T0 = +$('#wT0').value;
+    const [F3, F2] = $('#wF').value.split(',').map(Number);
+    $('#wUv').textContent = fmt(U, 1) + NB + 'V'; $('#wIv').textContent = I + NB + 'A'; $('#wVv').textContent = fmt(v, 1) + NB + 'mm/s'; $('#wDv').textContent = d + NB + 'mm'; $('#wT0v').textContent = T0 + NB + '°C';
+    const Q = k * U * I / v / 1000, w = t85(Q, d, T0, F3, F2), tt = clamp(w.t, 1, 300), r = coolW(WZ[zone], tt, T0);
+    $('#wRes').innerHTML = [['Énergie Q', fmt(Q, 2) + NB + 'kJ/mm'], ['Épaisseur de transition', fmt(w.dt, 1) + NB + 'mm'], ['Régime', w.D3 ? '3D (tôle épaisse)' : '2D (tôle mince)'], ['t8/5', fmt(w.t, 1) + NB + 's'], ['Dureté ZAT ' + (zone === 'CG' ? 'gros grains' : 'grains fins'), hvCls(r.hv)]].map(([a, b]) => '<div><div class="k">' + a + '</div><div class="v">' + b + '</div></div>').join('');
+    gM.innerHTML = '';
+    el('line', { x1: X(tt), x2: X(tt), y1: 20, y2: 206, style: 'stroke:var(--cL);stroke-width:2.4' }, gM);
+    el('circle', { cx: X(tt), cy: YH(r.hv), r: 5, style: 'fill:var(--cL);stroke:var(--ink);stroke-width:1.3' }, gM);
+    $('#wTxt').innerHTML = 'Vitesse ' + fmt(v * 60, 0) + ' mm/min. Formule ' + (w.D3 ? '3D' : '2D') + ' retenue car d ' + (w.D3 ? '≥' : '<') + ' d<sub>t</sub> (3D : ' + fmt(w.t3, 1) + ' s ; 2D : ' + fmt(w.t2, 1) + ' s). ' + (w.t < 1 || w.t > 300 ? 'Hors de l’échelle du diagramme. ' : '') + 'ZAT : ' + fmtMix(r) + '. ' + (r.hv > 350 ? 'Au-dessus de 350 HV : augmente l’énergie ou préchauffe (partie 6).' : 'Sous 350 HV.');
+  }
+  ids.forEach(id => $('#' + id).addEventListener('input', upd)); ['wP', 'wF'].forEach(id => $('#' + id).addEventListener('change', upd));
+  radio($('#wZone'), 'z', z => { zone = z; drawBase(); upd(); });
+  drawBase(); upd(); redraws.push(() => { drawBase(); upd(); });
+})();
+
+/* ================= PARTIE 6 : préchauffage ================= */
+(function part6() {
+  const EL = [['C', 0, 0.6, 0.01], ['Mn', 0, 2, 0.05], ['Cr', 0, 2, 0.05], ['Mo', 0, 1, 0.01], ['V', 0, 0.2, 0.01], ['Ni', 0, 3, 0.05], ['Cu', 0, 0.5, 0.01]];
+  const PRE = { S355: { C: 0.18, Mn: 1.4, Cr: 0, Mo: 0, V: 0, Ni: 0, Cu: 0 }, C45: { C: 0.45, Mn: 0.7, Cr: 0, Mo: 0, V: 0, Ni: 0, Cu: 0 }, '42CrMo4': { C: 0.42, Mn: 0.75, Cr: 1.05, Mo: 0.22, V: 0, Ni: 0, Cu: 0 } };
+  $('#pIn').innerHTML = EL.map(([k, a, b, st]) => '<div class="inp2"><label for="pe' + k + '">' + k + ' (%)</label><input type="range" id="pe' + k + '" min="' + a + '" max="' + b + '" step="' + st + '"><output id="pe' + k + 'v"></output></div>').join('');
+  let isS355 = true;
+  function upd() {
+    const c = {}; EL.forEach(([k]) => { c[k] = +$('#pe' + k).value; $('#pe' + k + 'v').textContent = fmt(c[k], 2); });
+    const d = +$('#pD').value, Q = +$('#pQ').value, HD = +$('#pH').value;
+    $('#pDv').textContent = d + NB + 'mm'; $('#pQv').textContent = fmt(Q, 2) + NB + 'kJ/mm';
+    const CEV = c.C + c.Mn / 6 + (c.Cr + c.Mo + c.V) / 5 + (c.Ni + c.Cu) / 15;
+    const CET = c.C + (c.Mn + c.Mo) / 10 + (c.Cr + c.Cu) / 20 + c.Ni / 40;
+    const Tp = 697 * CET + 160 * Math.tanh(d / 35) + 62 * Math.pow(HD, 0.35) + (53 * CET - 32) * Q - 328;
+    const valid = CET >= 0.2 && CET <= 0.5;
+    const T0 = Math.max(20, Math.round(Tp / 5) * 5);
+    const w0 = t85(Q, d, 20, 0.9, 0.9), w1 = t85(Q, d, T0, 0.9, 0.9);
+    const cells = [['CEV (IIW)', fmt(CEV, 2)], ['CET', fmt(CET, 2)], ['Préchauffage EN 1011-2', valid ? (Tp <= 20 ? 'aucun' : '≈' + NB + Math.round(Tp / 5) * 5 + NB + '°C') : '<span class="warn">hors domaine</span>'], ['t8/5 sans / avec', fmt(w0.t, 1) + ' / ' + fmt(w1.t, 1) + NB + 's']];
+    if (isS355) { const a = coolW(WZ.CG, clamp(w0.t, 1, 300), 20), b = coolW(WZ.CG, clamp(w1.t, 1, 300), T0); cells.push(['Dureté ZAT gros grains', hvCls(a.hv) + ' → ' + hvCls(b.hv)]); }
+    $('#pRes').innerHTML = cells.map(([a, b]) => '<div><div class="k">' + a + '</div><div class="v">' + b + '</div></div>').join('');
+    let t = CEV < 0.4 ? 'CEV < 0,40 : acier réputé facilement soudable.' : CEV < 0.5 ? 'CEV entre 0,40 et 0,50 : préchauffage souvent nécessaire selon l’épaisseur et l’hydrogène.' : 'CEV > 0,50 : soudage délicat, martensite probable en ZAT ; bas hydrogène, préchauffage et souvent traitement après soudage.';
+    if (!valid) t += ' CET hors de 0,2–0,5 : la méthode B de la norme ne s’applique pas. Pour ces aciers trempants, on retient en pratique des préchauffages de l’ordre de 200 à 350 °C et un traitement après soudage, fixés par des essais.';
+    else t += ' Le terme hydrogène vaut à lui seul ' + Math.round(62 * Math.pow(HD, 0.35)) + ' °C : passer à un consommable plus sec est souvent plus efficace que de chauffer davantage.';
+    if (d < 10 || d > 90 || Q < 0.5 || Q > 4) t += ' Attention : épaisseur ou énergie hors domaine de la formule.';
+    if (!isS355) t += ' (La dureté n’est estimée que pour le S355, seul acier du modèle de soudage.)';
+    $('#pTxt').textContent = t;
+  }
+  function preset(k) { isS355 = k === 'S355'; const o = PRE[k]; EL.forEach(([e]) => { $('#pe' + e).value = o[e]; }); upd(); }
+  radio($('#pPre'), 'k', preset);
+  EL.forEach(([k]) => $('#pe' + k).addEventListener('input', () => { isS355 = false; $$('#pPre button').forEach(b => b.classList.remove('on')); upd(); }));
+  ['pD', 'pQ'].forEach(id => $('#' + id).addEventListener('input', upd)); $('#pH').addEventListener('change', upd);
+  preset('S355');
+})();
+
+try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => redraws.forEach(f => { try { f(); } catch (e) {} })); } catch (e) {}
+})();
+</script>
+</body>
+</html>

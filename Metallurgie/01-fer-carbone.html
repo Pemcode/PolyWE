@@ -1,0 +1,1844 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Métallurgie — Cours 01 — Fer–carbone : du fer pur à la perlite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E7EBEF; --paper:#F8FAFB; --ink:#16202A; --ink2:#4A5968; --rule:#C2CCD6;
+  --grid:rgba(52,98,145,.08); --grid2:rgba(52,98,145,.15);
+  --cL:#E8820C; --cLs:#FCE0B8;
+  --cG:#C2303A; --cGs:#F5CDC9;
+  --cA:#4C6C8F; --cAs:#C4D3E2;
+  --cD:#7B61B8; --cDs:#DDD3F1;
+  --cC:#4B4F58; --cCs:#B9BEC6;
+  --good:#1E8657; --bad:#C23B3B;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10161C; --paper:#18212A; --ink:#E3EAF1; --ink2:#98A8B8; --rule:#2C3947;
+    --grid:rgba(150,190,230,.06); --grid2:rgba(150,190,230,.12);
+    --cL:#FF9A3C; --cLs:#5A3310;
+    --cG:#F0646C; --cGs:#5A2226;
+    --cA:#8DB1D6; --cAs:#243748;
+    --cD:#B3A0EE; --cDs:#352B52;
+    --cC:#C9CED6; --cCs:#4A505A;
+    --good:#46C08A; --bad:#EF6B6B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10161C; --paper:#18212A; --ink:#E3EAF1; --ink2:#98A8B8; --rule:#2C3947;
+  --grid:rgba(150,190,230,.06); --grid2:rgba(150,190,230,.12);
+  --cL:#FF9A3C; --cLs:#5A3310;
+  --cG:#F0646C; --cGs:#5A2226;
+  --cA:#8DB1D6; --cAs:#243748;
+  --cD:#B3A0EE; --cDs:#352B52;
+  --cC:#C9CED6; --cCs:#4A505A;
+  --good:#46C08A; --bad:#EF6B6B;
+  color-scheme:dark;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 100px);-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Archivo,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.58}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.hero{max-width:760px;margin:0 auto;padding:30px 18px 10px}
+.series{font-stretch:92%;font-weight:650;font-size:.9rem;color:var(--ink2);margin:0}
+h1{font-stretch:125%;font-weight:820;font-size:clamp(1.9rem,7.6vw,3.1rem);line-height:1.03;letter-spacing:-.015em;margin:.15em 0 .45em}
+.lead{font-size:1.07rem;color:var(--ink2);max-width:34em;margin:0}
+.ruler{margin:18px 0 4px}
+.ruler svg{display:block;width:100%;height:auto}
+.bar{position:sticky;top:0;padding-top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--rule)}
+@supports (backdrop-filter:blur(8px)){.bar{background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(8px)}}
+.bar-in{max-width:760px;margin:0 auto;padding:8px 18px;display:flex;gap:8px 10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;overflow:hidden}
+.seg button{font:inherit;font-size:.8rem;font-stretch:90%;font-weight:600;padding:.34rem .65rem;background:transparent;color:var(--ink);border:0;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.toc{display:flex;gap:4px;flex-wrap:wrap}
+.toc a{display:inline-grid;place-items:center;width:29px;height:29px;border-radius:50%;border:1.5px solid var(--rule);color:var(--ink);text-decoration:none;font-weight:750;font-size:.82rem}
+main{max-width:760px;margin:0 auto;padding:0 18px 90px}
+section{padding-top:38px}
+h2{font-stretch:116%;font-weight:780;font-size:clamp(1.4rem,5.4vw,2rem);line-height:1.12;margin:0 0 .5em;display:flex;gap:.45em;align-items:baseline}
+h2 .n{font-stretch:125%;font-weight:900;font-size:1.9em;line-height:.8;color:transparent;-webkit-text-stroke:1.6px var(--ink)}
+h3{font-stretch:106%;font-weight:720;font-size:1.13rem;margin:1.5em 0 .35em;line-height:1.25}
+p{margin:.6em 0}
+ul,ol{padding-left:1.25em;margin:.5em 0}
+li{margin:.3em 0}
+b,strong{font-weight:700}
+sub{font-size:.72em}
+.lv{margin:1.5rem 0;padding:.05rem 0 .05rem 14px;border-left:3px solid var(--ink)}
+.lv2{border-left:6px double var(--cA)}
+.tag{display:inline-block;font-size:.78rem;font-stretch:88%;font-weight:680;padding:.12rem .55rem;border-radius:4px;background:var(--ink);color:var(--bg);margin:0 0 .15rem}
+.lv2 .tag{background:var(--cA);color:var(--paper)}
+body[data-level="1"] .lv2, body[data-level="2"] .lv1{display:none}
+.fig{background-color:var(--paper);background-image:linear-gradient(var(--grid2) 1px,transparent 1px),linear-gradient(90deg,var(--grid2) 1px,transparent 1px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:40px 40px,40px 40px,8px 8px,8px 8px;border:1px solid var(--rule);border-radius:10px;padding:12px;margin:1.2rem -6px}
+.fig svg{display:block;width:100%;height:auto;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.figt{font-stretch:104%;font-weight:720;font-size:.98rem;margin:0 0 .4rem}
+.cap{font-size:.86rem;color:var(--ink2);margin:.5rem 0 0}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:.6rem 0}
+.btn{font:inherit;font-size:.84rem;font-stretch:94%;font-weight:620;padding:.42rem .78rem;border-radius:999px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;line-height:1.2}
+.btn.on{background:var(--ink);color:var(--paper)}
+.btn:disabled{opacity:.35;cursor:default}
+.btn.ok{background:var(--good);border-color:var(--good);color:#fff}
+.btn.ko{background:var(--bad);border-color:var(--bad);color:#fff}
+.btns.sm .btn{font-size:.78rem;padding:.32rem .6rem}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--cL);outline-offset:2px}
+.eq{font-variant-numeric:tabular-nums;background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--cL);border-radius:6px;padding:.65rem .9rem;margin:.8rem 0;overflow-x:auto;line-height:2}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .22em;line-height:1.3}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em}
+.note{border:1.5px dashed var(--rule);border-radius:8px;padding:.7rem .9rem;margin:1rem 0;background:var(--paper)}
+.note.hot{border-color:var(--cL)}
+.note p:first-child{margin-top:0}.note p:last-child{margin-bottom:0}
+.tw{overflow-x:auto;margin:.8rem 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--rule);padding:.42rem .5rem;text-align:left;vertical-align:top}
+th{font-stretch:96%;font-weight:700;color:var(--ink2)}
+td.num,th.num{text-align:right;white-space:nowrap}
+.ph{display:inline-block;padding:0 .38em;border-radius:4px;font-weight:720;color:var(--ink);white-space:nowrap}
+.ph-L{background:var(--cLs)}.ph-g{background:var(--cGs)}.ph-a{background:var(--cAs)}.ph-d{background:var(--cDs)}.ph-c{background:var(--cCs)}
+.ph-p{background:repeating-linear-gradient(90deg,var(--cAs) 0 7px,var(--cCs) 7px 9px)}
+input[type=range]{width:100%;accent-color:var(--cL);margin:.3rem 0}
+.row{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.row>.grow{flex:1 1 200px;min-width:0}
+canvas.micro{display:block;width:100%;max-width:250px;aspect-ratio:1;height:auto;border-radius:50%;border:2px solid var(--ink);background:var(--paper)}
+canvas.cell{display:block;width:100%;max-width:300px;aspect-ratio:1;height:auto;margin:0 auto;touch-action:none;cursor:grab}
+.readT{font-stretch:120%;font-weight:820;font-size:1.9rem;line-height:1;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:.35em}
+.glow{display:inline-block;width:.62em;height:.62em;border-radius:50%;border:1.5px solid var(--ink)}
+.small{font-size:.86rem;color:var(--ink2)}
+.inp{display:grid;grid-template-columns:auto 1fr 78px;gap:6px 10px;align-items:center;margin:.4rem 0}
+.inp input[type=number]{font:inherit;font-size:.95rem;width:78px;padding:.3rem .4rem;border:1.5px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink)}
+.stack{display:flex;height:34px;border-radius:6px;overflow:hidden;border:1.5px solid var(--ink);margin:.5rem 0}
+.stack>div{display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;transition:width .25s}
+.stk-lab{font-size:.8rem;font-weight:680;color:var(--ink2);margin:.6rem 0 0}
+.sw{display:inline-block;width:.8em;height:.8em;border-radius:2px;vertical-align:-.05em;margin-right:.3em;border:1px solid var(--ink)}
+.msg{background:var(--bg);border-radius:6px;padding:.55rem .7rem;font-size:.92rem;margin:.5rem 0 0}
+.quizfb{min-height:1.6em;font-weight:650}
+.pill{display:inline-block;border:1.5px solid var(--ink);border-radius:999px;padding:.05rem .55rem;font-size:.8rem;font-weight:650;margin-right:.3rem}
+.reg{cursor:pointer}
+.reg.sel{stroke:var(--cL);stroke-width:2.5}
+.map{display:grid;grid-template-columns:auto 1fr;gap:.3rem .7rem;font-size:.95rem;margin:.6rem 0}
+.map b{white-space:nowrap}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:.8rem 0}
+.res>div{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:.5rem .7rem}
+.res .v{font-stretch:108%;font-weight:800;font-size:1.18rem;font-variant-numeric:tabular-nums;line-height:1.15;overflow-wrap:anywhere}
+.res .k{font-size:.8rem;color:var(--ink2)}
+footer{max-width:760px;margin:0 auto;padding:0 18px 40px;color:var(--ink2);font-size:.85rem}
+@media (prefers-reduced-motion: reduce){.stack>div{transition:none}}
+@media (min-width:640px){.fig{margin:1.2rem 0;padding:16px}}
+</style>
+</head>
+<body data-level="both">
+
+<svg class="defs" aria-hidden="true" width="0" height="0">
+  <defs>
+    <pattern id="pLD" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cLs)"/><rect width="4" height="8" style="fill:var(--cDs)"/></pattern>
+    <pattern id="pDG" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cDs)"/><rect width="4" height="8" style="fill:var(--cGs)"/></pattern>
+    <pattern id="pLG" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cLs)"/><rect width="4" height="8" style="fill:var(--cGs)"/></pattern>
+    <pattern id="pLC" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cLs)"/><rect width="3" height="8" style="fill:var(--cCs)"/></pattern>
+    <pattern id="pGC" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="8" height="8" style="fill:var(--cGs)"/><rect width="3" height="8" style="fill:var(--cCs)"/></pattern>
+    <pattern id="pAG" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="8" height="8" style="fill:var(--cAs)"/><rect width="4" height="8" style="fill:var(--cGs)"/></pattern>
+    <pattern id="pAC" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--cAs)"/><rect width="2.5" height="8" style="fill:var(--cCs)"/></pattern>
+  </defs>
+</svg>
+
+<header class="hero">
+  <p class="series">Métallurgie · Cours 01 · Série Aciers</p>
+  <h1>Fer–carbone : du fer pur à la perlite</h1>
+  <p class="lead">Cours interactif en deux niveaux, construit autour de ton TD « Diagramme fer-carbone ». On part du fer pur, on construit le diagramme Fe–Fe<sub>3</sub>C, puis on suit un acier à 0,3&nbsp;% de carbone du liquide jusqu’à la perlite.</p>
+  <div class="ruler" aria-hidden="true"><svg id="ruler" viewBox="0 0 360 70"></svg></div>
+  <p class="small">La bande colore chaque température comme l’acier qui rougeoie à la forge ou sous la torche (échelle approximative). Elle suit l’axe des températures de tous les diagrammes du cours.</p>
+</header>
+
+<nav class="bar" aria-label="Navigation du cours">
+  <div class="bar-in">
+    <div class="seg" role="group" aria-label="Niveau affiché">
+      <button data-l="both" class="on">Les deux niveaux</button><button data-l="1">Niveau 1</button><button data-l="2">Niveau 2</button>
+    </div>
+    <div class="toc"><a href="#s0" title="Avant de commencer">0</a><a href="#s1" title="Le fer pur">1</a><a href="#s2" title="Le diagramme (Q1)">2</a><a href="#s3" title="La perlite (Q2)">3</a><a href="#s4" title="Acier à 0,3 % C (Q3)">4</a><a href="#s5" title="Perlite et carbone (Q4)">5</a><a href="#s6" title="Austénite à 1000 °C (Q5)">6</a><a href="#s7" title="Fiche méthode">7</a></div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ 0 ============ -->
+<section id="s0">
+  <h2><span class="n">0</span><span>Avant de commencer</span></h2>
+
+  <p><b>La série en trois cours.</b></p>
+  <ol>
+    <li><b>Ce cours :</b> le fer pur, le diagramme Fe–Fe<sub>3</sub>C et les microstructures obtenues par refroidissement lent (ferrite, perlite, cémentite). C’est le socle de tes objectifs n°1 et n°4.</li>
+    <li><b>Cours 2 :</b> les transformations diffusives quand on refroidit plus vite (courbes TTT et TRC, perlite fine, bainite) et le rôle des éléments d’addition.</li>
+    <li><b>Cours 3 :</b> la martensite (transformation displacive), les traitements thermiques, et leur traduction en soudage (zone affectée thermiquement, carbone équivalent, préchauffage).</li>
+  </ol>
+
+  <p><b>Où trouver les réponses de ton TD.</b></p>
+  <div class="map">
+    <b>Q1</b><span>phases de chaque domaine → partie 2 (la partie 1 donne les bases sur le fer pur)</span>
+    <b>Q2</b><span>fractions de ferrite et de cémentite dans la perlite → partie 3</span>
+    <b>Q3</b><span>acier à 0,3&nbsp;% C, fractions massiques et volumiques → partie 4</span>
+    <b>Q4</b><span>courbe « % de perlite en fonction du % de carbone » → partie 5</span>
+    <b>Q5</b><span>l’acier à 0,3&nbsp;% C à 1000&nbsp;°C : structure, carbone, atomes par cm³ → partie 6</span>
+  </div>
+
+  <div class="note hot">
+    <p><b>Trois vérifications sur ton énoncé.</b></p>
+    <p><b>1. La masse volumique de la cémentite donnée (4,3&nbsp;g/cm³) est fausse.</b> On peut la recalculer depuis sa maille : Fe<sub>3</sub>C est orthorhombique (a&nbsp;=&nbsp;5,09&nbsp;Å, b&nbsp;=&nbsp;6,74&nbsp;Å, c&nbsp;=&nbsp;4,53&nbsp;Å) avec 4 motifs Fe<sub>3</sub>C par maille, ce qui donne ≈&nbsp;7,7&nbsp;g/cm³. Les manuels donnent 7,6 à 7,7&nbsp;g/cm³. Le « 4,3 » ressemble à une confusion avec les 4,3&nbsp;% C de l’eutectique. Je fais les calculs avec la valeur de l’énoncé, car c’est ce que ton correcteur attend, et je donne à côté le résultat réaliste. L’écart change la conclusion physique, tu verras pourquoi en partie 3.</p>
+    <p><b>2. La question 3 commence directement au d).</b> Les sous-questions a) à c) ont disparu de ta photo. J’ai ajouté ce qu’elles demandent en général : le chemin de refroidissement et les températures de transformation.</p>
+    <p><b>3. Pour la Q5 c), la masse molaire du fer n’est pas donnée.</b> Je te montre deux méthodes : une qui n’utilise que les données de l’énoncé, et une plus rigoureuse avec M(Fe)&nbsp;=&nbsp;55,85&nbsp;g/mol.</p>
+  </div>
+
+  <div class="note">
+    <p><b>Les valeurs du diagramme.</b> J’utilise exactement celles de ton polycopié : eutectoïde à 727&nbsp;°C et 0,76&nbsp;% C, ferrite à 0,022&nbsp;% C au maximum, austénite jusqu’à 2,14&nbsp;% C, eutectique à 1147&nbsp;°C et 4,3&nbsp;% C, cémentite à 6,67&nbsp;% C, péritectique à 1493&nbsp;°C. Toutes les teneurs sont en <b>% massique de carbone</b>.</p>
+    <p><b>Attention au code des traits.</b> Dans ton poly, le diagramme stable (fer–graphite) est en trait plein et le métastable (fer–cémentite) en pointillés. Ici c’est l’inverse : le métastable, celui qu’on utilise pour les aciers, est dessiné en trait plein et en couleurs. Le stable n’apparaît qu’en tirets gris, quand tu l’actives.</p>
+  </div>
+
+  <p><b>Comment lire le cours.</b> Chaque partie a deux étages. Le <span class="pill">Niveau 1</span> donne l’intuition et la méthode d’examen, pas à pas. Le <span class="pill">Niveau 2</span> explique le pourquoi physique et fait le lien avec le soudage. Le sélecteur en haut permet de n’afficher qu’un seul niveau.</p>
+</section>
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+  <h2><span class="n">1</span><span>Le fer pur change de structure en chauffant</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>Le fer est <b>allotropique</b> : à l’état solide, il change d’empilement atomique selon la température. C’est rare parmi les métaux usuels, et c’est toute la richesse des aciers. En chauffant depuis l’ambiante :</p>
+    <ul>
+      <li>jusqu’à <b>912&nbsp;°C</b> : fer <span class="ph ph-a">α</span>, la <b>ferrite</b>, de structure <b>cubique centrée (CC)</b> ;</li>
+      <li>de 912 à <b>1394&nbsp;°C</b> : fer <span class="ph ph-g">γ</span>, l’<b>austénite</b>, <b>cubique à faces centrées (CFC)</b> ;</li>
+      <li>de 1394 à <b>1538&nbsp;°C</b> : fer <span class="ph ph-d">δ</span>, la <b>ferrite δ</b>, de nouveau <b>CC</b> ;</li>
+      <li>au-dessus de 1538&nbsp;°C : <span class="ph ph-L">liquide</span>.</li>
+    </ul>
+    <p>Comme le fer est pur, chaque changement se fait à <b>température fixe</b>, avec un palier sur la courbe de refroidissement. C’est la même règle que pour la fusion d’un métal pur, vue avec Pb–Sn.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Chauffe le fer pur et regarde sa maille</p>
+    <svg id="fe1" viewBox="0 0 360 250" role="img" aria-label="Échelle des phases du fer pur et courbe de dilatation"></svg>
+    <input type="range" id="fe1T" min="20" max="1600" step="1" value="20" aria-label="Température du fer pur">
+    <div class="btns sm"><button class="btn" id="fe1play">Chauffer puis refroidir</button><button class="btn" data-t="700">700&nbsp;°C</button><button class="btn" data-t="1100">1100&nbsp;°C</button><button class="btn" data-t="1450">1450&nbsp;°C</button></div>
+    <div class="row">
+      <div class="grow">
+        <div class="readT"><span class="glow" id="fe1glow"></span><span id="fe1Tv">20&nbsp;°C</span></div>
+        <p id="fe1txt" class="msg"></p>
+      </div>
+    </div>
+    <canvas class="cell" id="cell1" width="600" height="600" aria-label="Maille cristalline en 3D, fais-la tourner au doigt"></canvas>
+    <div class="btns sm" id="cell1opt">
+      <button class="btn on" data-size="small">Petites sphères</button><button class="btn" data-size="real">Sphères jointives</button>
+    </div>
+    <div class="btns sm" id="cell1site">
+      <button class="btn on" data-site="none">Sans sites</button><button class="btn" data-site="oct">Sites octaédriques</button><button class="btn" data-site="tet">Sites tétraédriques</button><button class="btn" data-site="C">Un atome de carbone</button>
+    </div>
+    <p id="cell1txt" class="msg"></p>
+    <p class="cap">À gauche, l’échelle du fer pur (le bord gauche du futur diagramme). À droite, la longueur d’un barreau de fer qu’on chauffe (dilatométrie, schématique). Fais tourner la maille avec le doigt.</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>CC et CFC, les deux empilements à connaître</h3>
+    <div class="tw"><table>
+      <thead><tr><th></th><th>CC (α et δ)</th><th>CFC (γ)</th></tr></thead>
+      <tbody>
+        <tr><td>Atomes par maille</td><td>8 × ⅛ + 1 = <b>2</b></td><td>8 × ⅛ + 6 × ½ = <b>4</b></td></tr>
+        <tr><td>Voisins de chaque atome</td><td>8</td><td>12</td></tr>
+        <tr><td>Compacité</td><td>0,68</td><td><b>0,74</b> (le maximum possible)</td></tr>
+        <tr><td>Paramètre de maille</td><td>2,87&nbsp;Å (α, à 20&nbsp;°C)</td><td>3,57&nbsp;Å (ton énoncé)</td></tr>
+        <tr><td>Plus gros « trou » entre atomes</td><td>0,36&nbsp;Å (site tétraédrique)</td><td><b>0,52&nbsp;Å</b> (site octaédrique)</td></tr>
+        <tr><td>Carbone dissous au maximum</td><td>0,022&nbsp;% (α, à 727&nbsp;°C)</td><td><b>2,14&nbsp;%</b> (à 1147&nbsp;°C)</td></tr>
+      </tbody>
+    </table></div>
+    <p><b>Le paradoxe qui explique tout l’acier.</b> Le CFC est plus compact que le CC, et pourtant il loge beaucoup mieux le carbone. Le CC a beaucoup de petits trous ; le CFC en a moins, mais plus gros. Or l’atome de carbone (rayon ≈&nbsp;0,77&nbsp;Å) est trop gros pour tous ces trous : il force toujours un peu. Il force beaucoup moins dans le gros trou octaédrique de l’austénite.</p>
+    <p>Retiens cette mécanique, elle revient dans les trois cours : <b>en chauffant dans le domaine γ, on dissout le carbone ; en refroidissant, le fer redevient α et doit expulser ce carbone.</b> La perlite (ici), la bainite (cours&nbsp;2) et la martensite (cours&nbsp;3) sont trois façons de gérer cette expulsion.</p>
+    <p>Le barreau <b>raccourcit</b> quand il passe de α à γ à 912&nbsp;°C, alors qu’il chauffe : environ −1&nbsp;% en volume, car le CFC est plus compact. C’est en mesurant ces accidents de longueur (dilatométrie) qu’on repère les transformations des aciers. On s’en servira pour les courbes TRC du cours&nbsp;2.</p>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Taille des sites : le calcul</h3>
+    <p>En sphères dures, les atomes se touchent le long de la <b>grande diagonale</b> en CC (4R&nbsp;=&nbsp;a√3) et le long de la <b>diagonale d’une face</b> en CFC (4R&nbsp;=&nbsp;a√2).</p>
+    <ul>
+      <li>CFC, a&nbsp;=&nbsp;3,57&nbsp;Å : R&nbsp;=&nbsp;1,262&nbsp;Å. Le site octaédrique (centre du cube) est à a/2 d’un atome de face, donc r<sub>oct</sub>&nbsp;=&nbsp;a/2&nbsp;−&nbsp;R&nbsp;=&nbsp;<b>0,523&nbsp;Å</b>, soit 0,414&nbsp;R. Le site tétraédrique (¼,&nbsp;¼,&nbsp;¼) donne r<sub>tét</sub>&nbsp;=&nbsp;a√3/4&nbsp;−&nbsp;R&nbsp;=&nbsp;0,284&nbsp;Å, soit 0,225&nbsp;R.</li>
+      <li>CC, a&nbsp;=&nbsp;2,87&nbsp;Å : R&nbsp;=&nbsp;1,243&nbsp;Å. Le site octaédrique (centre d’une face) est aplati : r<sub>oct</sub>&nbsp;=&nbsp;a/2&nbsp;−&nbsp;R&nbsp;=&nbsp;<b>0,192&nbsp;Å</b>. Le site tétraédrique (½,&nbsp;¼,&nbsp;0) donne r<sub>tét</sub>&nbsp;=&nbsp;a√5/4&nbsp;−&nbsp;R&nbsp;=&nbsp;0,362&nbsp;Å.</li>
+    </ul>
+    <p>Le nombre de sites confirme le paradoxe : le CC offre 3 sites octaédriques et 6 tétraédriques <b>par atome de fer</b>, le CFC seulement 1 et 2. Dans le CC, le carbone se met pourtant en site octaédrique : ce site est aplati, et le carbone n’a que 2 atomes de fer très proches à repousser, selon un seul axe. Cette déformation selon un axe deviendra, en grand nombre, la <b>tétragonalité de la martensite</b> (cours&nbsp;3).</p>
+
+    <h3>Pourquoi le CC revient à haute température</h3>
+    <p>La phase stable est celle d’enthalpie libre G&nbsp;=&nbsp;H&nbsp;−&nbsp;TS minimale. Pour le fer, c’est le <b>ferromagnétisme</b> qui abaisse H du CC à basse température (α stable). En chauffant, le CFC l’emporte grâce à son terme entropique, puis le CC, plus « lâche », vibre davantage et reprend l’avantage par l’entropie vibrationnelle : c’est δ. Le fer est un cas d’école où magnétisme et vibrations se disputent la structure.</p>
+
+    <h3>Le point de Curie (770&nbsp;°C) n’est pas une phase</h3>
+    <p>À 770&nbsp;°C (point A<sub>2</sub>), la ferrite perd son aimantation, mais sa maille reste CC. Les anciens manuels parlent de « fer β » : ce n’est pas une phase, car la structure ne change pas. Tu ne le verras pas sur le diagramme, seulement comme une petite anomalie de pente sur la courbe de dilatation.</p>
+
+    <h3>Le vocabulaire des points de transformation</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Nom</th><th>Définition</th><th>Fer pur</th></tr></thead>
+      <tbody>
+        <tr><td>A<sub>1</sub></td><td>eutectoïde, apparition de l’austénite au chauffage</td><td>n’existe pas</td></tr>
+        <tr><td>A<sub>2</sub></td><td>point de Curie de la ferrite</td><td>770&nbsp;°C</td></tr>
+        <tr><td>A<sub>3</sub></td><td>fin de la transformation α&nbsp;→&nbsp;γ au chauffage (acier hypoeutectoïde)</td><td>912&nbsp;°C</td></tr>
+        <tr><td>A<sub>cm</sub></td><td>fin de la dissolution de la cémentite (acier hypereutectoïde)</td><td>n’existe pas</td></tr>
+        <tr><td>A<sub>4</sub></td><td>γ&nbsp;→&nbsp;δ</td><td>1394&nbsp;°C</td></tr>
+      </tbody>
+    </table></div>
+    <p>On ajoute <b>c</b> (chauffage) ou <b>r</b> (refroidissement) : Ac<sub>3</sub>, Ar<sub>3</sub>… Les valeurs réelles s’écartent de l’équilibre : Ac<sub>3</sub>&nbsp;&gt;&nbsp;A<sub>3</sub>&nbsp;&gt;&nbsp;Ar<sub>3</sub>, d’autant plus que la vitesse est grande. C’est le point de départ du cours&nbsp;2.</p>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+  <h2><span class="n">2</span><span>Le diagramme fer–carbone (Q1)</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>Pourquoi deux diagrammes superposés ?</h3>
+    <p>Le carbone peut sortir du fer sous deux formes : le <b>graphite</b> (carbone pur, forme la plus stable) ou la <b>cémentite</b> Fe<sub>3</sub>C (un carbure de fer). Le graphite est la vraie forme d’équilibre, mais il met très longtemps à se former. La cémentite, elle, se forme vite. Dans un acier, c’est donc toujours la cémentite qu’on obtient : on travaille sur le diagramme <b>métastable Fe–Fe<sub>3</sub>C</b>. Le diagramme stable Fe–graphite sert surtout pour les fontes grises, riches en silicium et refroidies lentement.</p>
+    <p>Le diagramme s’arrête à <b>6,67&nbsp;% C</b> : c’est la composition de Fe<sub>3</sub>C (3 atomes de fer pour 1 de carbone). La cémentite joue le rôle de « deuxième constituant pur », comme l’étain dans Pb–Sn. Deux familles d’alliages :</p>
+    <ul>
+      <li><b>aciers</b> : moins de 2,14&nbsp;% C (ils peuvent être entièrement austénitiques) ;</li>
+      <li><b>fontes</b> : de 2,14 à 6,67&nbsp;% C (elles passent par l’eutectique).</li>
+    </ul>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Construis le diagramme, puis explore-le</p>
+    <svg id="d2" viewBox="0 0 360 300" role="img" aria-label="Diagramme fer-cémentite interactif"></svg>
+    <div class="btns sm" id="d2zoom">
+      <button class="btn on" data-v="full">Vue complète</button><button class="btn" data-v="steel">Zoom aciers</button><button class="btn" data-v="eut">Zoom eutectoïde</button><button class="btn" data-v="delta">Zoom péritectique</button>
+    </div>
+    <div class="btns sm">
+      <button class="btn" id="d2prev">Étape précédente</button><button class="btn" id="d2next">Étape suivante</button><button class="btn" id="d2stable">Afficher le stable</button>
+    </div>
+    <p id="d2txt" class="msg"></p>
+    <p id="d2info" class="msg">Touche une zone du diagramme pour afficher son nom et ses phases.</p>
+    <p class="cap">Les zones rayées sont biphasées : les deux couleurs rappellent les deux phases présentes. Le zoom est indispensable pour voir les domaines α et δ, trop étroits en vue complète.</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>Les phases à connaître</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Phase</th><th>Nature</th><th>Structure</th><th>Carbone</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ph ph-L">L</span></td><td>liquide</td><td>aucune</td><td>de 0 à 6,67&nbsp;%</td></tr>
+        <tr><td><span class="ph ph-d">δ</span> ferrite δ</td><td>solution solide d’insertion</td><td>CC</td><td>0,09&nbsp;% max (1493&nbsp;°C)</td></tr>
+        <tr><td><span class="ph ph-g">γ</span> austénite</td><td>solution solide d’insertion</td><td>CFC</td><td>2,14&nbsp;% max (1147&nbsp;°C)</td></tr>
+        <tr><td><span class="ph ph-a">α</span> ferrite</td><td>solution solide d’insertion</td><td>CC</td><td>0,022&nbsp;% max (727&nbsp;°C)</td></tr>
+        <tr><td><span class="ph ph-c">Fe<sub>3</sub>C</span> cémentite</td><td>composé défini, dur et fragile</td><td>orthorhombique</td><td>6,67&nbsp;% exactement</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Réponse à la Q1</h3>
+    <p>On applique la méthode vue avec Pb–Sn. Un domaine <b>coloré uni</b> ne contient qu’une phase. Dans un domaine <b>biphasé</b>, trace une horizontale : les deux phases sont celles des domaines que tu touches à gauche et à droite.</p>
+    <ul>
+      <li><b>Domaines monophasés (4 surfaces + 1 ligne) :</b> <span class="ph ph-L">L</span>, <span class="ph ph-d">δ</span>, <span class="ph ph-g">γ</span>, <span class="ph ph-a">α</span>, et la verticale à 6,67&nbsp;% qui est la cémentite <span class="ph ph-c">Fe<sub>3</sub>C</span>.</li>
+      <li><b>Domaines biphasés (7) :</b> L&nbsp;+&nbsp;δ, δ&nbsp;+&nbsp;γ, L&nbsp;+&nbsp;γ, L&nbsp;+&nbsp;Fe<sub>3</sub>C, γ&nbsp;+&nbsp;Fe<sub>3</sub>C, α&nbsp;+&nbsp;γ, α&nbsp;+&nbsp;Fe<sub>3</sub>C.</li>
+      <li><b>Trois horizontales</b> où trois phases coexistent : 1493&nbsp;°C (L, δ, γ), 1147&nbsp;°C (L, γ, Fe<sub>3</sub>C) et 727&nbsp;°C (γ, α, Fe<sub>3</sub>C).</li>
+    </ul>
+    <p>Sur le diagramme de ton poly, ajoute aussi les domaines du <b>stable</b>, puisque la Q1 dit « du diagramme » : L&nbsp;+&nbsp;graphite (déjà écrit), γ&nbsp;+&nbsp;graphite et α&nbsp;+&nbsp;graphite, sous les horizontales en trait plein.</p>
+
+    <h3>Entraîne-toi</h3>
+    <div class="fig">
+      <p class="figt">Quel domaine contient le point rouge ?</p>
+      <svg id="dq" viewBox="0 0 360 300" role="img" aria-label="Quiz : identifier le domaine"></svg>
+      <div class="btns sm" id="qbtns"></div>
+      <p class="quizfb" id="qfb" aria-live="polite"></p>
+      <div class="btns"><button class="btn" id="qnext">Point suivant</button><span class="small" id="qscore" style="align-self:center"></span></div>
+    </div>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Les trois réactions invariantes</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Réaction</th><th>Température</th><th>Équation (au refroidissement)</th></tr></thead>
+      <tbody>
+        <tr><td>Péritectique</td><td>1493&nbsp;°C</td><td>δ (0,09&nbsp;%) + L (0,53&nbsp;%) → γ (0,16&nbsp;%)</td></tr>
+        <tr><td>Eutectique</td><td>1147&nbsp;°C</td><td>L (4,3&nbsp;%) → γ (2,14&nbsp;%) + Fe<sub>3</sub>C (6,67&nbsp;%) : la <b>lédéburite</b></td></tr>
+        <tr><td>Eutectoïde</td><td>727&nbsp;°C</td><td>γ (0,76&nbsp;%) → α (0,022&nbsp;%) + Fe<sub>3</sub>C (6,67&nbsp;%) : la <b>perlite</b></td></tr>
+      </tbody>
+    </table></div>
+    <p>Pour ne pas les confondre : <b>eutectique</b>, un liquide donne deux solides ; <b>eutectoïde</b> (« qui ressemble à un eutectique »), un <i>solide</i> donne deux solides ; <b>péritectique</b>, un liquide et un solide donnent un autre solide qui les « entoure » (péri-).</p>
+    <p>Sur chaque horizontale, trois phases coexistent. La règle de Gibbs à pression fixée donne v&nbsp;=&nbsp;C&nbsp;+&nbsp;1&nbsp;−&nbsp;φ&nbsp;=&nbsp;2&nbsp;+&nbsp;1&nbsp;−&nbsp;3&nbsp;=&nbsp;0 : température et compositions sont imposées. D’où les paliers sur les courbes de refroidissement.</p>
+
+    <h3>Le piège du poly : deux jeux de valeurs</h3>
+    <p>Stable et métastable sont presque superposés. Le stable donne 1153&nbsp;°C, 4,2&nbsp;% et 2,1&nbsp;% pour l’eutectique, et <b>740&nbsp;°C et 0,65&nbsp;%</b> pour l’eutectoïde. Si tu lis 0,65 au lieu de 0,76, tous tes calculs de perlite seront faux. Pour un acier, lis <b>toujours les pointillés</b> de ton poly. Autre piège : l’axe du haut de ton poly est en % <b>atomique</b> (Fe<sub>3</sub>C y est à 25&nbsp;%). Tous tes calculs se font sur l’axe du bas, massique.</p>
+
+    <h3>Le coin péritectique, un point sensible en soudage</h3>
+    <p>Les aciers entre 0,09 et 0,53&nbsp;% C (ton 0,3&nbsp;% C compris) se solidifient d’abord en δ, puis passent en γ par la réaction péritectique. Le passage δ&nbsp;→&nbsp;γ s’accompagne d’une contraction, alors que le métal est encore partiellement liquide. Les nuances proches de 0,1&nbsp;% C y sont connues pour être délicates en coulée continue. En soudage, la solidification du bain en δ ou en γ influe aussi sur la sensibilité à la fissuration à chaud.</p>
+
+    <h3>Ce qui fait du graphite ou de la cémentite</h3>
+    <p>Le graphite demande de rassembler beaucoup d’atomes de carbone et de repousser le fer : c’est lent. La cémentite n’a besoin que de réarrangements courts. Le silicium favorise le graphite, le manganèse et le chrome stabilisent la cémentite. Même dans un acier, un très long maintien vers 500 à 700&nbsp;°C peut faire apparaître du graphite : c’est la <b>graphitisation</b>, un mode de vieillissement redouté des tuyauteries au carbone en service à chaud.</p>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+  <h2><span class="n">3</span><span>La perlite, un tri du carbone (Q2)</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>À 727&nbsp;°C, une austénite à 0,76&nbsp;% C devient instable. Elle se transforme en deux phases de teneurs très différentes : de la ferrite presque vide de carbone (0,022&nbsp;%) et de la cémentite très riche (6,67&nbsp;%). Le carbone doit donc <b>se trier</b>. Il n’a le temps que de parcourir de courtes distances, alors les deux phases poussent côte à côte en fines <b>lamelles alternées</b> : c’est la perlite.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Une colonie de perlite qui avance dans l’austénite</p>
+    <svg id="pg" viewBox="0 0 360 250" role="img" aria-label="Animation de croissance de la perlite avec diffusion du carbone"></svg>
+    <div class="btns sm"><button class="btn" id="pgplay">Pause</button><button class="btn" id="pgreset">Recommencer</button></div>
+    <p class="cap">Les points noirs sont les atomes de carbone. Devant une lamelle de ferrite, le carbone est rejeté et file latéralement vers les lamelles de cémentite voisines. Les flèches montrent ce trajet de diffusion.</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>Q2, fractions massiques : la règle du levier</h3>
+    <p>On se place <b>juste sous 727&nbsp;°C</b>, sur l’horizontale eutectoïde. La perlite a la composition globale 0,76&nbsp;% C. Les deux extrémités de l’horizontale sont la ferrite (0,022&nbsp;%) et la cémentite (6,67&nbsp;%). La fraction d’une phase est le segment <b>opposé</b> divisé par la longueur totale :</p>
+    <div class="eq">
+      w<sub>Fe3C</sub> = <span class="frac"><span>0,76 − 0,022</span><span>6,67 − 0,022</span></span> = <span class="frac"><span>0,738</span><span>6,648</span></span> ≈ <b>0,111 soit 11,1&nbsp;%</b><br>
+      w<sub>α</sub> = <span class="frac"><span>6,67 − 0,76</span><span>6,67 − 0,022</span></span> = 1 − 0,111 ≈ <b>0,889 soit 88,9&nbsp;%</b>
+    </div>
+    <p>Si ton prof néglige les 0,022&nbsp;% de la ferrite, il trouvera 0,76/6,67&nbsp;≈&nbsp;11,4&nbsp;%. Les deux sont acceptables : précise simplement ton hypothèse.</p>
+
+    <h3>Q2, fractions volumiques : on passe par les volumes</h3>
+    <p>Pour 100&nbsp;g de perlite, chaque phase occupe un volume V&nbsp;=&nbsp;m/ρ. La fraction volumique est ce volume divisé par le volume total :</p>
+    <div class="eq">
+      f<sub>v,Fe3C</sub> = <span class="frac"><span>w<sub>Fe3C</sub> / ρ<sub>Fe3C</sub></span><span>w<sub>α</sub> / ρ<sub>α</sub> + w<sub>Fe3C</sub> / ρ<sub>Fe3C</sub></span></span>
+    </div>
+    <div class="fig">
+      <p class="figt">Masse ou volume : compare les deux valeurs de densité</p>
+      <div class="btns sm" id="rhoBtns"><button class="btn on" data-r="4.3">ρ<sub>Fe3C</sub> = 4,3 (énoncé)</button><button class="btn" data-r="7.66">ρ<sub>Fe3C</sub> = 7,66 (réelle)</button></div>
+      <p class="stk-lab">En masse</p>
+      <div class="stack" id="q2m"></div>
+      <p class="stk-lab">En volume</p>
+      <div class="stack" id="q2v"></div>
+      <div class="eq" id="q2eq"></div>
+      <svg id="q2lam" viewBox="0 0 360 70" role="img" aria-label="Épaisseurs relatives des lamelles"></svg>
+      <p class="cap">En bas, une période de perlite dessinée à l’échelle des fractions volumiques : c’est le rapport d’épaisseur entre lamelles de ferrite et de cémentite.</p>
+    </div>
+    <div class="res">
+      <div><div class="k">Masse, ferrite / cémentite</div><div class="v">88,9 / 11,1&nbsp;%</div></div>
+      <div><div class="k">Volume, données de l’énoncé</div><div class="v">81,5 / 18,5&nbsp;%</div></div>
+      <div><div class="k">Volume, ρ réelle 7,66</div><div class="v">88,7 / 11,3&nbsp;%</div></div>
+    </div>
+    <p><b>Ce que ça veut dire.</b> Avec la vraie masse volumique, ferrite (7,8) et cémentite (7,66) ont presque la même densité : fractions massiques et volumiques sont quasi égales. Les lamelles de cémentite sont environ 8 fois plus fines que celles de ferrite. Avec 4,3, on trouverait une cémentite bien trop volumineuse. Sur ta copie, donne le résultat avec la donnée de l’énoncé, et tu peux ajouter une ligne pour signaler la valeur réaliste.</p>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Pourquoi des lamelles, et de quelle finesse ?</h3>
+    <p>Une lamelle de ferrite qui avance rejette du carbone : il faut l’évacuer vers la cémentite voisine, à une demi-période de distance. Plus les lamelles sont fines, plus ce trajet est court et plus la croissance est rapide. Mais chaque interface α/Fe<sub>3</sub>C coûte de l’énergie. L’espacement interlamellaire λ résulte de ce compromis, et il est à peu près <b>inversement proportionnel au sous-refroidissement</b> sous 727&nbsp;°C : refroidir plus vite donne une perlite plus fine, plus dure. C’est la porte d’entrée du cours&nbsp;2.</p>
+    <h3>Et à température ambiante ?</h3>
+    <p>Sous 727&nbsp;°C, la solubilité du carbone dans la ferrite tend vers zéro. La fraction de cémentite passe de 11,1&nbsp;% à 0,76/6,67&nbsp;=&nbsp;11,4&nbsp;% : le petit excès précipite sous forme de <b>cémentite tertiaire</b>, invisible au microscope optique. En pratique, les fractions calculées à 727&nbsp;°C restent valables à l’ambiante.</p>
+    <h3>D’où vient le nom</h3>
+    <p>Au microscope, les lamelles très régulières diffractent la lumière et donnent des reflets irisés, comme la nacre. D’où « perlite », de <i>pearl</i>. Au microscope optique courant, elle apparaît surtout sombre : la plupart des lamelles sont trop fines pour être résolues.</p>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+  <h2><span class="n">4</span><span>Un acier à 0,3&nbsp;% C refroidi lentement (Q3)</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>0,3&nbsp;% C est entre 0,022 et 0,76&nbsp;% : c’est un acier <b>hypoeutectoïde</b> (moins de carbone que la perlite). On trace la verticale à 0,3&nbsp;% et on la descend. Voici ce qu’on rencontre (ce que demandaient sûrement les questions a à c) :</p>
+    <div class="tw"><table>
+      <thead><tr><th>Température</th><th>Ligne franchie</th><th>Ce qui se passe</th></tr></thead>
+      <tbody>
+        <tr><td class="num">≈ 1512&nbsp;°C</td><td>liquidus</td><td>premiers cristaux de ferrite δ</td></tr>
+        <tr><td class="num">1493&nbsp;°C</td><td>péritectique</td><td>palier : δ + L → γ, il reste du liquide</td></tr>
+        <tr><td class="num">≈ 1468&nbsp;°C</td><td>solidus</td><td>fin de solidification, 100&nbsp;% austénite</td></tr>
+        <tr><td class="num">≈ 820&nbsp;°C</td><td>A<sub>3</sub></td><td>la ferrite apparaît aux joints de grains de l’austénite</td></tr>
+        <tr><td class="num">727&nbsp;°C</td><td>A<sub>1</sub>, eutectoïde</td><td>palier : l’austénite restante (0,76&nbsp;%) devient perlite</td></tr>
+        <tr><td class="num">sous 727&nbsp;°C</td><td>–</td><td>plus d’évolution visible : ferrite + perlite</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">1512, 1468 et 820&nbsp;°C sont lus sur mon modèle du diagramme : sur ton poly, tes lectures peuvent différer de quelques degrés.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Refroidis l’acier et suis tout en même temps</p>
+    <div class="btns sm" id="s4pre">
+      <button class="btn on" data-c="0.3">0,3&nbsp;% (ton TD)</button><button class="btn" data-c="0.76">0,76&nbsp;% eutectoïde</button><button class="btn" data-c="1.2">1,2&nbsp;% hyper</button><button class="btn" data-c="0.1">0,1&nbsp;%</button><button class="btn" data-c="0">Fer pur</button>
+    </div>
+    <div class="inp"><label for="s4c">% C</label><input type="range" id="s4c" min="0" max="2.1" step="0.01" value="0.3"><input type="number" id="s4cn" min="0" max="2.1" step="0.01" value="0.3" aria-label="Teneur en carbone"></div>
+    <svg id="d4" viewBox="0 0 360 300" role="img" aria-label="Diagramme avec la verticale de l’alliage"></svg>
+    <div class="btns sm" id="d4zoom">
+      <button class="btn" data-v="full">Vue complète</button><button class="btn on" data-v="steel">Zoom aciers</button><button class="btn" data-v="eut">Zoom eutectoïde</button><button class="btn" data-v="delta">Zoom péritectique</button>
+    </div>
+    <svg id="cc4" viewBox="0 0 360 190" role="img" aria-label="Courbe de refroidissement"></svg>
+    <input type="range" id="s4t" min="0" max="1000" step="1" value="0" aria-label="Avancement du refroidissement">
+    <div class="btns sm"><button class="btn" id="s4play">Lecture</button><button class="btn" data-sp="1">×1</button><button class="btn on" data-sp="2">×2</button><button class="btn" data-sp="4">×4</button><button class="btn" id="s4j1000">Aller à 1000&nbsp;°C</button><button class="btn" id="s4j726">Aller à 726&nbsp;°C</button></div>
+    <div class="row">
+      <div class="grow">
+        <div class="readT"><span class="glow" id="s4glow"></span><span id="s4T"></span></div>
+        <p id="s4reg" class="msg"></p>
+        <div class="tw"><table id="s4tab"></table></div>
+      </div>
+      <div style="flex:0 1 250px;min-width:180px;margin:0 auto">
+        <canvas class="micro" id="mc4" width="440" height="440" aria-label="Microstructure simulée"></canvas>
+        <div class="btns sm" id="mc4mode" style="justify-content:center"><button class="btn on" data-m="schema">Couleurs des phases</button><button class="btn" data-m="nital">Aspect au nital</button></div>
+      </div>
+    </div>
+    <p class="stk-lab">Phases (ce que dit le diagramme)</p>
+    <div class="stack" id="s4ph"></div>
+    <p class="stk-lab">Constituants (ce qu’on voit au microscope)</p>
+    <div class="stack" id="s4co"></div>
+    <p class="cap">Microstructure schématique : grains d’austénite, ferrite qui germe aux joints, puis perlite dans les îlots restants. En mode « nital », l’aspect d’une micrographie attaquée : ferrite claire, perlite sombre, cémentite proeutectoïde blanche. Aux températures où l’austénite existe, la vue nital est fictive (on observe toujours à l’ambiante).</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>Phases ou constituants : la distinction qui fait les points</h3>
+    <p>Une <b>phase</b> est un domaine homogène de composition et de structure : ici, sous 727&nbsp;°C, il n’y en a que deux, <span class="ph ph-a">α</span> et <span class="ph ph-c">Fe<sub>3</sub>C</span>. Un <b>constituant</b> est ce que tu vois au microscope, avec sa propre histoire : la <b>ferrite proeutectoïde</b> (formée avant 727&nbsp;°C, en gros grains clairs) et la <span class="ph ph-p">perlite</span> (formée à 727&nbsp;°C, elle-même faite de α et Fe<sub>3</sub>C). La ferrite existe donc à deux endroits : en grains, et en lamelles dans la perlite.</p>
+
+    <h3>Q3 d), fractions massiques : trois leviers</h3>
+    <p><b>Levier 1, juste au-dessus de 727&nbsp;°C</b> (domaine α + γ). La ferrite déjà présente est la ferrite proeutectoïde ; l’austénite, qui a atteint 0,76&nbsp;%, deviendra exactement la perlite.</p>
+    <div class="eq">
+      w<sub>α pro</sub> = <span class="frac"><span>0,76 − 0,3</span><span>0,76 − 0,022</span></span> = <span class="frac"><span>0,46</span><span>0,738</span></span> ≈ <b>62,3&nbsp;%</b>
+      &nbsp;&nbsp; w<sub>perlite</sub> = w<sub>γ</sub> = <span class="frac"><span>0,3 − 0,022</span><span>0,738</span></span> ≈ <b>37,7&nbsp;%</b>
+    </div>
+    <p><b>Levier 2, juste en dessous de 727&nbsp;°C</b> (domaine α + Fe<sub>3</sub>C). On obtient les <i>phases</i> :</p>
+    <div class="eq">
+      w<sub>α totale</sub> = <span class="frac"><span>6,67 − 0,3</span><span>6,67 − 0,022</span></span> = <span class="frac"><span>6,37</span><span>6,648</span></span> ≈ <b>95,8&nbsp;%</b>
+      &nbsp;&nbsp; w<sub>Fe3C</sub> = <span class="frac"><span>0,3 − 0,022</span><span>6,648</span></span> ≈ <b>4,2&nbsp;%</b>
+    </div>
+    <p><b>Étape 3, par différence.</b> La ferrite des lamelles est la ferrite totale moins la proeutectoïde :</p>
+    <div class="eq">
+      w<sub>α lamelles</sub> = 95,8 − 62,3 ≈ <b>33,5&nbsp;%</b>
+      &nbsp;&nbsp; <span class="small">vérification : 37,7&nbsp;% de perlite × 88,9&nbsp;% de ferrite dans la perlite = 33,5&nbsp;% ✓</span>
+    </div>
+
+    <h3>Q3 e), fractions volumiques</h3>
+    <p>Même méthode que pour la perlite. Pour 100&nbsp;g d’acier : V<sub>α</sub>&nbsp;=&nbsp;95,8/7,8&nbsp;=&nbsp;12,28&nbsp;cm³ et V<sub>Fe3C</sub>&nbsp;=&nbsp;4,18/4,3&nbsp;=&nbsp;0,97&nbsp;cm³, total 13,26&nbsp;cm³. On divise chaque volume par ce total.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Constituant ou phase</th><th class="num">Masse</th><th class="num">Volume (ρ énoncé)</th><th class="num">Volume (ρ réelle)</th></tr></thead>
+      <tbody>
+        <tr><td>Ferrite totale</td><td class="num">95,8&nbsp;%</td><td class="num"><b>92,7&nbsp;%</b></td><td class="num">95,7&nbsp;%</td></tr>
+        <tr><td>Ferrite proeutectoïde</td><td class="num">62,3&nbsp;%</td><td class="num"><b>60,3&nbsp;%</b></td><td class="num">62,3&nbsp;%</td></tr>
+        <tr><td>Ferrite en lamelles</td><td class="num">33,5&nbsp;%</td><td class="num"><b>32,4&nbsp;%</b></td><td class="num">33,5&nbsp;%</td></tr>
+        <tr><td>Cémentite</td><td class="num">4,2&nbsp;%</td><td class="num"><b>7,3&nbsp;%</b></td><td class="num">4,3&nbsp;%</td></tr>
+        <tr><td>Perlite</td><td class="num">37,7&nbsp;%</td><td class="num"><b>39,7&nbsp;%</b></td><td class="num">37,7&nbsp;%</td></tr>
+      </tbody>
+    </table></div>
+    <p><b>Astuce de TP.</b> Le raisonnement marche à l’envers : sur une micrographie d’acier hypoeutectoïde refroidi lentement, mesure la surface de perlite et tu estimes le carbone, avec C&nbsp;≈&nbsp;0,022&nbsp;+&nbsp;0,738&nbsp;×&nbsp;f<sub>perlite</sub>. Environ 38&nbsp;% de perlite, c’est un acier à 0,3&nbsp;% C.</p>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>L’austénite s’enrichit pendant que la ferrite pousse</h3>
+    <p>Entre A<sub>3</sub> et A<sub>1</sub>, la ferrite qui se forme ne garde presque pas de carbone. Elle le rejette dans l’austénite voisine, dont la teneur suit la ligne A<sub>3</sub> : 0,3&nbsp;% à 820&nbsp;°C, 0,5&nbsp;% vers 770&nbsp;°C, 0,76&nbsp;% à 727&nbsp;°C. Le tableau du simulateur le montre. C’est pour cela que l’austénite restante a pile la composition eutectoïde au moment de se transformer en perlite.</p>
+    <h3>Pendant le palier, trois phases coexistent</h3>
+    <p>Arrête l’animation au milieu du palier à 727&nbsp;°C : α, γ et Fe<sub>3</sub>C sont présentes ensemble, en proportions qui évoluent à température fixe. C’est le seul moment où l’on quitte la règle « deux phases au plus hors des horizontales ».</p>
+    <h3>Où germe la ferrite</h3>
+    <p>La ferrite proeutectoïde naît de préférence aux <b>joints de grains</b> de l’austénite, où l’énergie de germination est plus faible. À refroidissement lent, elle forme un liseré puis des grains équiaxes. Plus vite, elle pousse en aiguilles depuis les joints : la <b>ferrite de Widmanstätten</b>, fréquente dans le métal fondu et la zone à gros grains d’une soudure (cours&nbsp;2).</p>
+    <h3>Le cas hypereutectoïde</h3>
+    <p>Essaie 1,2&nbsp;% dans le simulateur. Entre A<sub>cm</sub> et 727&nbsp;°C, c’est de la <b>cémentite proeutectoïde</b> qui se dépose aux joints de grains, en réseau continu. Ce réseau dur et fragile est une autoroute pour les fissures. On le supprime par un recuit de globulisation (cours&nbsp;3).</p>
+    <h3>Et hors équilibre ?</h3>
+    <p>En refroidissement réel, les transformations commencent sous les températures d’équilibre (Ar<sub>3</sub>&nbsp;&lt;&nbsp;A<sub>3</sub>, Ar<sub>1</sub>&nbsp;&lt;&nbsp;A<sub>1</sub>). Si l’on refroidit assez vite, la ferrite n’a pas le temps de se former en entier, et l’acier contient alors plus de perlite que ne le prédit le levier. Le diagramme d’équilibre donne la limite des refroidissements très lents, comme un recuit au four.</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+  <h2><span class="n">5</span><span>La perlite en fonction du carbone (Q4)</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <p>On généralise le levier 1 de la partie 4 à une teneur C quelconque. Deux cas, selon le côté de l’eutectoïde :</p>
+    <div class="eq">
+      <b>Hypoeutectoïde</b> (0,022 ≤ C ≤ 0,76) : &nbsp;w<sub>perlite</sub> = <span class="frac"><span>C − 0,022</span><span>0,76 − 0,022</span></span><br>
+      <b>Hypereutectoïde</b> (0,76 ≤ C ≤ 2,14) : &nbsp;w<sub>perlite</sub> = <span class="frac"><span>6,67 − C</span><span>6,67 − 0,76</span></span>
+    </div>
+    <p>Dans les deux cas, c’est une <b>droite</b>. Pour la tracer à la main, trois points suffisent : 0&nbsp;% de perlite à 0,022&nbsp;% C, <b>100&nbsp;%</b> à 0,76&nbsp;% C, et (6,67&nbsp;−&nbsp;2,14)/(6,67&nbsp;−&nbsp;0,76)&nbsp;=&nbsp;<b>76,7&nbsp;%</b> à 2,14&nbsp;% C.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Déplace le curseur de carbone</p>
+    <svg id="q4" viewBox="0 0 360 250" role="img" aria-label="Fraction de perlite en fonction du pourcentage de carbone"></svg>
+    <input type="range" id="q4c" min="0" max="2.14" step="0.01" value="0.3" aria-label="Teneur en carbone">
+    <div class="btns sm" id="q4mode"><button class="btn on" data-m="co">Constituants</button><button class="btn" data-m="ph">Phases</button></div>
+    <div class="row">
+      <div class="grow"><p id="q4txt" class="msg"></p></div>
+      <div style="flex:0 1 190px;min-width:150px;margin:0 auto"><canvas class="micro" id="mc5" width="360" height="360" aria-label="Microstructure à l’ambiante"></canvas></div>
+    </div>
+    <p class="cap">Le mode « Phases » montre la cémentite totale : une seule droite, sans cassure à 0,76&nbsp;%. La cassure n’existe que pour les constituants.</p>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Pourquoi la courbe est si dissymétrique</h3>
+    <p>Côté hypo, l’autre extrémité du levier est la ferrite à 0,022&nbsp;% : le bras total ne mesure que 0,738. Côté hyper, c’est la cémentite à 6,67&nbsp;% : le bras mesure 5,91. La pente est donc 8 fois plus forte à gauche. Ajouter 0,1&nbsp;% de carbone à un acier doux ajoute environ 14&nbsp;% de perlite ; à un acier hyper, cela n’ajoute qu’environ 1,7&nbsp;% de cémentite proeutectoïde.</p>
+    <h3>Du côté des propriétés</h3>
+    <p>Jusqu’à 0,76&nbsp;%, chaque point de perlite en plus durcit l’acier et réduit sa ductilité. Au-delà, le réseau de cémentite aux joints rend l’acier fragile, bien que plus dur. C’est une des raisons pour lesquelles les aciers de construction soudables restent à bas carbone, souvent sous 0,2&nbsp;% : moins de carbone, c’est aussi moins de risque de trempe sous le cordon (cours&nbsp;3).</p>
+    <h3>Au-delà de 2,14&nbsp;%</h3>
+    <p>La formule ne s’applique plus : l’alliage traverse l’eutectique à 1147&nbsp;°C et contient de la lédéburite. On change de famille, ce sont les fontes.</p>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+  <h2><span class="n">6</span><span>L’acier à 0,3&nbsp;% C à 1000&nbsp;°C (Q5)</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>a) Structure cristalline</h3>
+    <p>Sur la verticale 0,3&nbsp;%, le point à 1000&nbsp;°C est au-dessus de A<sub>3</sub> (≈&nbsp;820&nbsp;°C) et sous le solidus : on est dans le domaine <span class="ph ph-g">γ</span> monophasé. L’alliage est entièrement <b>austénitique</b>, donc <b>cubique à faces centrées</b>, avec a&nbsp;=&nbsp;3,57&nbsp;Å.</p>
+    <h3>b) Forme du carbone</h3>
+    <p>Tout le carbone est <b>dissous dans l’austénite</b>, en <b>solution solide d’insertion</b> : les atomes de carbone, petits, se glissent entre les atomes de fer, dans les <b>sites octaédriques</b> (centre du cube et milieux des arêtes). Il n’y a ni cémentite ni graphite à cette température : un seul domaine, une seule phase.</p>
+  </div>
+
+  <div class="fig">
+    <p class="figt">Un atome de carbone dans l’austénite</p>
+    <canvas class="cell" id="cell6" width="600" height="600" aria-label="Maille CFC avec un atome de carbone en site octaédrique"></canvas>
+    <div class="btns sm" id="cell6opt"><button class="btn on" data-size="small">Petites sphères</button><button class="btn" data-size="real">Sphères jointives</button></div>
+    <p class="cap">Le carbone (noir) au centre de la maille est entouré de 6 atomes de fer qui forment un octaèdre. En sphères jointives, on voit qu’il est un peu trop gros pour son trou (0,77&nbsp;Å contre 0,52&nbsp;Å) : il écarte ses voisins.</p>
+  </div>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>c) Nombre d’atomes de carbone par unité de volume</h3>
+    <p><b>Méthode 1, avec les seules données de l’énoncé.</b> 1&nbsp;cm³ d’acier pèse environ 7,8&nbsp;g. Le carbone en représente 0,3&nbsp;% en masse. On passe en moles, puis en atomes :</p>
+    <div class="eq">
+      m<sub>C</sub> = 0,003 × 7,8 = 0,0234&nbsp;g par cm³<br>
+      n<sub>C</sub> = <span class="frac"><span>0,0234</span><span>12</span></span> × 6,02·10<sup>23</sup> ≈ <b>1,17·10<sup>21</sup> atomes/cm³</b> soit 1,17·10<sup>27</sup> atomes/m³
+    </div>
+    <p><b>Méthode 2, par la maille</b> (elle utilise le paramètre 3,57&nbsp;Å, mais aussi M(Fe)&nbsp;=&nbsp;55,85&nbsp;g/mol, absente de l’énoncé).</p>
+    <ol>
+      <li>Rapport atomique : pour 100&nbsp;g, 0,3/12&nbsp;=&nbsp;0,025&nbsp;mol de C et 99,7/55,85&nbsp;=&nbsp;1,785&nbsp;mol de Fe, soit <b>0,0140 atome de C par atome de Fe</b> (1 pour 71).</li>
+      <li>Une maille CFC contient 4 atomes de fer, donc 4&nbsp;×&nbsp;0,0140&nbsp;=&nbsp;<b>0,056 atome de C par maille</b>.</li>
+      <li>Volume d’une maille : a³ = (3,57·10<sup>−8</sup>&nbsp;cm)³ = 4,55·10<sup>−23</sup>&nbsp;cm³.</li>
+      <li>n<sub>C</sub> = 0,056 / 4,55·10<sup>−23</sup> ≈ <b>1,23·10<sup>21</sup> atomes/cm³</b>.</li>
+    </ol>
+    <div class="fig">
+      <p class="figt">Refais le calcul pour une autre teneur</p>
+      <div class="inp"><label for="q5c">% C</label><input type="range" id="q5c" min="0.05" max="2.1" step="0.01" value="0.3"><input type="number" id="q5cn" min="0.05" max="2.1" step="0.01" value="0.3" aria-label="Teneur en carbone"></div>
+      <div class="res" id="q5res"></div>
+      <svg id="q5grid" viewBox="0 0 360 150" role="img" aria-label="Un atome de carbone pour N mailles"></svg>
+      <p class="cap">Chaque petit cube est une maille d’austénite. En moyenne, un seul contient un atome de carbone, et cet atome saute sans cesse de site en site : c’est la diffusion (cours&nbsp;2).</p>
+    </div>
+    <p><b>Laquelle rendre ?</b> Les deux méthodes s’écartent de 5&nbsp;%. La méthode 1 prend la masse volumique du fer α à l’ambiante (7,8), alors que l’austénite de paramètre 3,57&nbsp;Å a une masse volumique de 8,16&nbsp;g/cm³. Si ton prof n’a pas donné M(Fe), il attend probablement la méthode 1. Mentionne l’hypothèse « ρ<sub>acier</sub>&nbsp;≈&nbsp;ρ<sub>fer</sub> ».</p>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Taux d’occupation des sites</h3>
+    <p>Le CFC a un site octaédrique par atome de fer. Avec 0,014 atome de C par atome de Fe, seulement <b>1,4&nbsp;% des sites octaédriques sont occupés</b>, un site sur 71. Même à 2,14&nbsp;% C, le maximum, on ne remplit qu’environ un site sur dix. La raison est la déformation : chaque carbone écarte ses voisins, et deux carbones voisins se gêneraient.</p>
+    <h3>Le paramètre de maille à 1000&nbsp;°C</h3>
+    <p>3,57&nbsp;Å est un paramètre proche de celui de l’ambiante. À 1000&nbsp;°C, la dilatation thermique porte a vers 3,65&nbsp;Å environ, et le carbone dissous l’augmente encore légèrement. Le volume de la maille augmente d’environ 7&nbsp;%, et le nombre d’atomes de carbone par cm³ diminue d’autant. L’énoncé simplifie, ce qui est légitime.</p>
+    <h3>Pourquoi c’est le point de départ des traitements</h3>
+    <p>Cet état, austénite homogène avec tout le carbone dissous, s’appelle l’<b>austénitisation</b>. C’est le point de départ de la trempe, de la normalisation et du recuit (cours&nbsp;3). En soudage, la zone chauffée au-dessus de A<sub>3</sub> à côté du cordon passe elle aussi par cet état. La vitesse à laquelle elle refroidit ensuite décide de sa microstructure : c’est tout l’objet des cours 2 et 3.</p>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+  <h2><span class="n">7</span><span>Fiche méthode et pièges</span></h2>
+
+  <div class="lv lv1">
+    <span class="tag">Niveau 1</span>
+    <h3>La méthode en 6 réflexes</h3>
+    <ol>
+      <li><b>Situer l’acier</b> : hypoeutectoïde (C&nbsp;&lt;&nbsp;0,76), eutectoïde (0,76) ou hypereutectoïde (0,76 à 2,14).</li>
+      <li><b>Tracer la verticale</b> et noter les lignes franchies : A<sub>3</sub> ou A<sub>cm</sub>, puis A<sub>1</sub> à 727&nbsp;°C.</li>
+      <li><b>Pour les phases</b>, un seul levier juste sous 727&nbsp;°C, entre 0,022 et 6,67.</li>
+      <li><b>Pour les constituants</b>, un levier juste au-dessus de 727&nbsp;°C, entre 0,022 et 0,76 (hypo) ou entre 0,76 et 6,67 (hyper). L’austénite de ce levier devient la perlite.</li>
+      <li><b>Pour les volumes</b>, diviser chaque masse par sa masse volumique, puis renormaliser.</li>
+      <li><b>Vérifier</b> par un bilan : ferrite lamellaire = perlite × 88,9&nbsp;%, cémentite = perlite × 11,1&nbsp;% (hypo).</li>
+    </ol>
+    <h3>Les pièges classiques</h3>
+    <ul>
+      <li>Confondre <b>phases</b> (α, Fe<sub>3</sub>C) et <b>constituants</b> (ferrite proeutectoïde, perlite).</li>
+      <li>Lire le diagramme <b>stable</b> (740&nbsp;°C, 0,65&nbsp;%) au lieu du métastable (727&nbsp;°C, 0,76&nbsp;%).</li>
+      <li>Lire les compositions sur l’axe <b>atomique</b> du haut de ton poly.</li>
+      <li>Prendre les fractions volumiques égales aux fractions massiques sans conversion. Avec les densités de l’énoncé, l’écart est net.</li>
+      <li>Appeler la cémentite « du carbone » : c’est un carbure, Fe<sub>3</sub>C, à 6,67&nbsp;% C.</li>
+      <li>Confondre ferrite α (basse température) et ferrite δ (haute température) : même structure CC, domaines différents.</li>
+    </ul>
+    <h3>Ce qu’il faut savoir redessiner de mémoire</h3>
+    <p>Le coin des aciers : A<sub>3</sub> qui descend de 912&nbsp;°C à 727&nbsp;°C / 0,76&nbsp;%, A<sub>cm</sub> qui descend de 1147&nbsp;°C / 2,14&nbsp;% au même point, l’horizontale 727&nbsp;°C, et le liseré de ferrite jusqu’à 0,022&nbsp;%. Avec ces quatre traits, tu résous 90&nbsp;% des exercices sur les aciers.</p>
+  </div>
+
+  <div class="lv lv2">
+    <span class="tag">Niveau 2</span>
+    <h3>Ce que le diagramme ne dit pas</h3>
+    <p>Le diagramme d’équilibre suppose un refroidissement infiniment lent. Il ne prévoit ni la bainite, ni la martensite, ni la finesse de la perlite. Dès qu’on refroidit vite, comme dans une soudure, il faut des diagrammes qui ajoutent le temps : les courbes TTT et TRC. C’est l’objet du cours&nbsp;2, avec le rôle des éléments d’addition (alphagènes, gammagènes, carburigènes) qui déplacent les lignes A<sub>1</sub> et A<sub>3</sub> et le point eutectoïde.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Cours 1 sur 3, métallurgie des aciers. Diagramme modélisé à partir des valeurs de ton polycopié ; les courbes entre les points remarquables sont approchées.</p>
+</footer>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function tx(parent, x, y, s, style, attrs) {
+  const t = el('text', Object.assign({ x: x, y: y, style: style || '' }, attrs || {}), parent);
+  t.textContent = s;
+  return t;
+}
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const fmt = (v, d = 1) => (Math.round(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d).replace('.', ',');
+const NB = '\u00a0';
+const RM = (() => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } })();
+const seq = (a, b, n) => Array.from({ length: n + 1 }, (_, i) => a + (b - a) * i / n);
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function cssv(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function hex2rgb(h) { h = h.replace('#', ''); if (h.length === 3) h = h.split('').map(x => x + x).join(''); const n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+function onVisible(node, cb) {
+  try { new IntersectionObserver(es => es.forEach(e => cb(e.isIntersecting)), { threshold: 0.05 }).observe(node); } catch (e) { cb(true); }
+}
+
+/* ---------- incandescence ---------- */
+const GLOW = [[20, '#5b636d'], [480, '#5b636d'], [540, '#4a1812'], [620, '#6e1a12'], [700, '#951f14'], [780, '#b82817'], [860, '#d6361a'], [950, '#ec5a1c'], [1050, '#f5801f'], [1150, '#faa532'], [1250, '#fcc653'], [1350, '#fde08a'], [1450, '#fff0c2'], [1700, '#fffbea']];
+function glow(T) {
+  if (T <= GLOW[0][0]) return GLOW[0][1];
+  for (let i = 1; i < GLOW.length; i++) if (T <= GLOW[i][0]) {
+    const [t0, c0] = GLOW[i - 1], [t1, c1] = GLOW[i], u = (T - t0) / (t1 - t0);
+    const a = hex2rgb(c0), b = hex2rgb(c1);
+    return 'rgb(' + a.map((v, k) => Math.round(lerp(v, b[k], u))).join(',') + ')';
+  }
+  return GLOW[GLOW.length - 1][1];
+}
+
+// MODEL START
+const CK = 6.67, CS = 0.76, CP = 0.022, TBOT = 300, TTOP = 1700;
+const TAB = c => 1538 - 45 * c / 0.53, cAB = T => (1538 - T) * 0.53 / 45;
+const TBC = c => 1493 - (c - 0.53) * 346 / 3.77, cBC = T => 0.53 + (1493 - T) * 3.77 / 346;
+const TCD = c => 1147 + (c - 4.3) * 105 / 2.37, cCD = T => 4.3 + (T - 1147) * 2.37 / 105;
+const cAH = T => (1538 - T) * 0.09 / 45;
+const cHN = T => 0.09 * (T - 1394) / 99, cJN = T => 0.16 * (T - 1394) / 99;
+const TJE = c => 1493 - (c - 0.16) * 346 / 1.98, cJE = T => 0.16 + (1493 - T) * 1.98 / 346;
+const TA3 = c => 912 - 347.9 * c + 137.5 * c * c;
+const cA3 = T => (347.9 - Math.sqrt(Math.max(0, 347.9 * 347.9 - 550 * (912 - T)))) / 275;
+const TAcm = c => 727 + (c - 0.76) * 420 / 1.38, cAcm = T => 0.76 + (T - 727) * 1.38 / 420;
+const cGP = T => 0.022 * (912 - T) / 185;
+const cPQ = T => 0.022 * Math.pow(clamp((T - 20) / 707, 0, 1), 3);
+const Tliq = c => (c <= 0.53 ? TAB(c) : c <= 4.3 ? TBC(c) : TCD(c));
+
+function two(r, p1, c1, p2, c2, c) { const f2 = (c - c1) / (c2 - c1); return { r: r, ph: [{ p: p1, c: c1, f: 1 - f2 }, { p: p2, c: c2, f: f2 }] }; }
+const one = (r, c) => ({ r: r, ph: [{ p: r, c: c, f: 1 }] });
+function state(c, T) {
+  if (c >= CK - 1e-9) return one('Fe3C', CK);
+  if (T >= Tliq(c)) return one('L', c);
+  if (T > 1493) { const cs = cAH(T); if (c <= cs) return one('δ', c); return two('L+δ', 'δ', cs, 'L', cAB(T), c); }
+  if (T > 1147) {
+    if (c > 4.3) return two('L+Fe3C', 'L', cCD(T), 'Fe3C', CK, c);
+    if (T > 1394) {
+      const ch = cHN(T), cj = cJN(T);
+      if (c <= ch) return one('δ', c);
+      if (c < cj) return two('δ+γ', 'δ', ch, 'γ', cj, c);
+    }
+    const cs = cJE(T);
+    if (c <= cs) return one('γ', c);
+    return two('L+γ', 'γ', cs, 'L', cBC(T), c);
+  }
+  if (T > 727) {
+    const cm = cAcm(T);
+    if (c > cm) return two('γ+Fe3C', 'γ', cm, 'Fe3C', CK, c);
+    if (T >= 912 || c >= cA3(T)) return one('γ', c);
+    const ca = cGP(T);
+    if (c <= ca) return one('α', c);
+    return two('α+γ', 'α', ca, 'γ', cA3(T), c);
+  }
+  const ca = cPQ(T);
+  if (c <= ca) return one('α', c);
+  return two('α+Fe3C', 'α', ca, 'Fe3C', CK, c);
+}
+const fOf = (s, p) => { const x = s.ph.find(q => q.p === p); return x ? x.f : 0; };
+function constitAt(c, T) {
+  const s = state(c, T), o = { L: 0, d: 0, g: 0, aPro: 0, cPro: 0, perl: 0 };
+  switch (s.r) {
+    case 'L': o.L = 1; break;
+    case 'δ': o.d = 1; break;
+    case 'L+δ': o.L = fOf(s, 'L'); o.d = fOf(s, 'δ'); break;
+    case 'δ+γ': o.d = fOf(s, 'δ'); o.g = fOf(s, 'γ'); break;
+    case 'L+γ': o.L = fOf(s, 'L'); o.g = fOf(s, 'γ'); break;
+    case 'γ': o.g = 1; break;
+    case 'α+γ': o.aPro = fOf(s, 'α'); o.g = fOf(s, 'γ'); break;
+    case 'γ+Fe3C': o.cPro = fOf(s, 'Fe3C'); o.g = fOf(s, 'γ'); break;
+    case 'α': o.aPro = 1; break;
+    case 'α+Fe3C':
+      if (c <= CP) o.aPro = 1;
+      else if (c < CS - 1e-9) { o.aPro = (CS - c) / (CS - CP); o.perl = 1 - o.aPro; }
+      else if (c <= CS + 1e-9) o.perl = 1;
+      else { o.cPro = (c - CS) / (CK - CS); o.perl = 1 - o.cPro; }
+      break;
+  }
+  return o;
+}
+function blendObj(a, b, u) { const o = {}; for (const k in a) o[k] = lerp(a[k], b[k] || 0, u); for (const k in b) if (!(k in o)) o[k] = b[k] * u; return o; }
+function phaseMap(s) { const o = {}; s.ph.forEach(p => { o[p.p] = { f: p.f, c: p.c }; }); return o; }
+
+function transitions(c) {
+  if (c <= 1e-6) return [{ T: 1538, lab: 'fusion' }, { T: 1394, lab: 'A4 δ→γ' }, { T: 912, lab: 'A3 γ→α' }];
+  const out = [{ T: Tliq(c), lab: 'liquidus' }];
+  if (c < 0.09) { out.push({ T: 1538 - 45 * c / 0.09, lab: 'solidus' }); out.push({ T: 1394 + 99 * c / 0.09, lab: 'début δ→γ' }); out.push({ T: 1394 + 99 * c / 0.16, lab: 'fin δ→γ' }); }
+  else if (c < 0.53) { out.push({ T: 1493, lab: 'péritectique' }); out.push(c < 0.16 ? { T: 1394 + 99 * c / 0.16, lab: 'fin δ→γ' } : { T: TJE(c), lab: 'solidus' }); }
+  else out.push({ T: TJE(c), lab: 'solidus' });
+  if (c < CP) { out.push({ T: TA3(c), lab: 'A3' }); out.push({ T: 912 - 185 * c / 0.022, lab: 'fin γ→α' }); }
+  else if (c < CS - 1e-6) { out.push({ T: TA3(c), lab: 'A3' }); out.push({ T: 727, lab: 'A1' }); }
+  else if (c <= CS + 1e-6) out.push({ T: 727, lab: 'A1' });
+  else { out.push({ T: TAcm(c), lab: 'Acm' }); out.push({ T: 727, lab: 'A1' }); }
+  return out;
+}
+
+const LS = 250, LD = 20, LT = 60;
+function Hof(c, T) {
+  const s = state(c, T);
+  const fL = fOf(s, 'L'), fd = fOf(s, 'δ');
+  let X = 0;
+  if (s.r === 'α+γ') X = fOf(s, 'α');
+  else if (s.r === 'γ+Fe3C') X = fOf(s, 'Fe3C');
+  else if (s.r === 'α' || s.r === 'α+Fe3C' || s.r === 'Fe3C') X = 1;
+  return T + LS * fL + LD * (fL + fd) + LT * (1 - X);
+}
+function simulate(c) {
+  const T0 = 400, dT = 0.1, n = 12001;
+  const Ht = new Float64Array(n);
+  for (let i = 0; i < n; i++) Ht[i] = Hof(c, T0 + i * dT);
+  for (let i = 1; i < n; i++) if (Ht[i] < Ht[i - 1]) Ht[i] = Ht[i - 1];
+  const plats = [];
+  for (let i = 0; i < n - 1; i++) if (Ht[i + 1] - Ht[i] > 1.5) plats.push({ T: T0 + (i + 0.5) * dT, lo: Ht[i], hi: Ht[i + 1] });
+  const Tof = H => {
+    let lo = 0, hi = n - 1;
+    if (H <= Ht[0]) return T0;
+    if (H >= Ht[n - 1]) return T0 + (n - 1) * dT;
+    while (hi - lo > 1) { const m = (lo + hi) >> 1; if (Ht[m] <= H) lo = m; else hi = m; }
+    const d = Ht[hi] - Ht[lo];
+    return T0 + (lo + (d > 0 ? (H - Ht[lo]) / d : 0)) * dT;
+  };
+  let H = Ht[n - 1], t = 0;
+  const dt = 0.0006, pts = [{ t: 0, T: Tof(H), H: H }];
+  let guard = 0;
+  while (guard++ < 20000) {
+    const T = Tof(H);
+    if (T <= 412) break;
+    H -= (T - 20) * dt; t += dt;
+    pts.push({ t: t, T: Tof(H), H: H });
+  }
+  return { c: c, pts: pts, plats: plats, tEnd: t };
+}
+function platOf(sim, H) {
+  for (const p of sim.plats) if (H >= p.lo - 1e-9 && H <= p.hi + 1e-9) return p;
+  return null;
+}
+function snapshot(sim, i) {
+  const pt = sim.pts[clamp(i, 0, sim.pts.length - 1)], c = sim.c;
+  const pl = platOf(sim, pt.H);
+  if (pl) {
+    const u = (pl.hi - pt.H) / (pl.hi - pl.lo);
+    const sa = state(c, pl.T + 0.05), sb = state(c, pl.T - 0.05);
+    const pa = phaseMap(sa), pb = phaseMap(sb), ph = {};
+    new Set(Object.keys(pa).concat(Object.keys(pb))).forEach(k => {
+      const fa = pa[k] ? pa[k].f : 0, fb = pb[k] ? pb[k].f : 0;
+      ph[k] = { f: lerp(fa, fb, u), c: (pa[k] || pb[k]).c };
+    });
+    return { T: pl.T, plateau: true, prog: u, reg: sa.r + ' → ' + sb.r, ph: ph, co: blendObj(constitAt(c, pl.T + 0.05), constitAt(c, pl.T - 0.05), u) };
+  }
+  const s = state(c, pt.T);
+  return { T: pt.T, plateau: false, prog: null, reg: s.r, ph: phaseMap(s), co: constitAt(c, pt.T) };
+}
+// MODEL END
+
+/* ================= DIAGRAMME ================= */
+const VIEWS = {
+  full: { c0: 0, c1: 6.9, T0: 400, T1: 1600 },
+  steel: { c0: 0, c1: 2.3, T0: 550, T1: 1250 },
+  eut: { c0: 0, c1: 1.0, T0: 640, T1: 960 },
+  delta: { c0: 0, c1: 0.62, T0: 1360, T1: 1560 }
+};
+const A3pts = seq(0, 0.76, 40).map(c => [c, TA3(c)]);
+const GPpts = seq(912, 727, 20).map(T => [cGP(T), T]);
+const PQpts = seq(727, TBOT, 40).map(T => [cPQ(T), T]);
+const rev = a => a.slice().reverse();
+const DOMS = [
+  { k: 'L', lab: 'L', mono: 1, st: 6, fill: 'var(--cLs)', pts: [[0, 1538], [0.53, 1493], [4.3, 1147], [6.67, 1252], [6.67, TTOP], [0, TTOP]] },
+  { k: 'δ', lab: 'δ', mono: 1, st: 6, fill: 'var(--cDs)', pts: [[0, 1538], [0.09, 1493], [0, 1394]], ptr: [34, 4] },
+  { k: 'L+δ', lab: 'L + δ', st: 7, fill: 'url(#pLD)', pts: [[0, 1538], [0.53, 1493], [0.09, 1493]] },
+  { k: 'δ+γ', lab: 'δ + γ', st: 7, fill: 'url(#pDG)', pts: [[0.09, 1493], [0.16, 1493], [0, 1394]] },
+  { k: 'L+γ', lab: 'L + γ', st: 7, fill: 'url(#pLG)', pts: [[0.53, 1493], [4.3, 1147], [2.14, 1147], [0.16, 1493]] },
+  { k: 'γ', lab: 'γ', mono: 1, st: 6, fill: 'var(--cGs)', pts: [[0, 1394], [0.16, 1493], [2.14, 1147], [0.76, 727]].concat(rev(A3pts)) },
+  { k: 'L+Fe3C', lab: 'L + Fe₃C', st: 7, fill: 'url(#pLC)', pts: [[4.3, 1147], [6.67, 1252], [6.67, 1147]] },
+  { k: 'γ+Fe3C', lab: 'γ + Fe₃C', st: 7, fill: 'url(#pGC)', pts: [[2.14, 1147], [6.67, 1147], [6.67, 727], [0.76, 727]] },
+  { k: 'α+γ', lab: 'α + γ', st: 7, fill: 'url(#pAG)', pts: A3pts.concat([[0.022, 727]], rev(GPpts)) },
+  { k: 'α', lab: 'α', mono: 1, st: 6, fill: 'var(--cAs)', pts: GPpts.concat(PQpts, [[0, TBOT]]), ptr: [30, 34] },
+  { k: 'α+Fe3C', lab: 'α + Fe₃C', st: 7, fill: 'url(#pAC)', pts: [[0.022, 727], [6.67, 727], [6.67, TBOT]].concat(rev(PQpts)) }
+];
+const DINFO = {
+  'L': 'Monophasé : liquide. Au-dessus du liquidus, tout est fondu.',
+  'δ': 'Monophasé : ferrite δ, cubique centrée, jusqu’à 0,09 % C. Elle n’existe qu’au-dessus de 1394 °C.',
+  'L+δ': 'Biphasé : liquide + ferrite δ. Début de solidification des aciers à moins de 0,53 % C.',
+  'δ+γ': 'Biphasé : ferrite δ + austénite. Petit triangle où δ se transforme en γ.',
+  'L+γ': 'Biphasé : liquide + austénite. Solidification de la plupart des aciers et des fontes hypoeutectiques.',
+  'γ': 'Monophasé : austénite, cubique à faces centrées, jusqu’à 2,14 % C. C’est le domaine où l’on « austénitise » avant un traitement.',
+  'L+Fe3C': 'Biphasé : liquide + cémentite primaire. Fontes hypereutectiques (plus de 4,3 % C).',
+  'γ+Fe3C': 'Biphasé : austénite + cémentite. Aciers hypereutectoïdes entre Acm et 727 °C, et fontes.',
+  'α+γ': 'Biphasé : ferrite + austénite, entre A3 et 727 °C. C’est là que naît la ferrite proeutectoïde.',
+  'α': 'Monophasé : ferrite α, cubique centrée, au plus 0,022 % C. Domaine très étroit : zoome pour le voir.',
+  'α+Fe3C': 'Biphasé : ferrite + cémentite. Tous les aciers et fontes blanches à l’ambiante, après refroidissement lent.'
+};
+const LINES = [
+  { st: 2, w: 2.2, pts: [[0, 1538], [0.53, 1493], [4.3, 1147], [6.67, 1252]] },
+  { st: 3, pts: [[0, 1538], [0.09, 1493]] }, { st: 3, pts: [[0.16, 1493], [2.14, 1147]] },
+  { st: 3, pts: [[0.09, 1493], [0, 1394]] }, { st: 3, pts: [[0.16, 1493], [0, 1394]] },
+  { st: 4, w: 2, pts: [[0.09, 1493], [0.53, 1493]] }, { st: 4, w: 2, pts: [[2.14, 1147], [6.67, 1147]] },
+  { st: 5, w: 2, pts: [[0.022, 727], [6.67, 727]] },
+  { st: 5, pts: A3pts }, { st: 5, pts: [[2.14, 1147], [0.76, 727]] }, { st: 5, pts: GPpts }, { st: 5, pts: PQpts },
+  { st: 1, w: 3.4, col: 'var(--cC)', pts: [[6.67, TBOT], [6.67, 1252]] }
+];
+const KP = [
+  { c: 0, T: 1538, lab: '1538 °C', st: 1, dx: 5, dy: -4 },
+  { c: 0, T: 1394, lab: '1394 °C', st: 1, dx: 5, dy: 13 },
+  { c: 0, T: 912, lab: '912 °C', st: 1, dx: 6, dy: -5 },
+  { c: 0.09, T: 1493, lab: '0,09', st: 4, dx: -2, dy: -6, a: 'end', v: ['delta'] },
+  { c: 0.16, T: 1493, lab: '0,16', st: 4, dx: 3, dy: 13, v: ['delta'] },
+  { c: 0.53, T: 1493, lab: '0,53', st: 4, dx: 4, dy: -6, v: ['delta'] },
+  { c: 0.36, T: 1493, lab: '1493 °C', st: 4, dx: 0, dy: 13, a: 'middle', v: ['delta'], nodot: 1 },
+  { c: 2.14, T: 1147, lab: '2,14', st: 4, dx: -5, dy: -6, a: 'end', v: ['full', 'steel'] },
+  { c: 4.3, T: 1147, lab: '4,3', st: 4, dx: 0, dy: 14, a: 'middle', v: ['full'] },
+  { c: 6.67, T: 1147, lab: '1147 °C', st: 4, dx: -6, dy: 13, a: 'end', v: ['full'], nodot: 1 },
+  { c: 0.76, T: 727, lab: '0,76', st: 5, dx: 0, dy: 14, a: 'middle', v: ['full', 'steel', 'eut'] },
+  { c: 0.022, T: 727, lab: '0,022', st: 5, dx: 5, dy: -6, v: ['eut'] },
+  { c: 6.67, T: 727, lab: '727 °C', st: 5, dx: -6, dy: -5, a: 'end', v: ['full'], nodot: 1 },
+  { c: 1.0, T: 727, lab: '727 °C', st: 5, dx: -5, dy: 13, a: 'end', v: ['eut'], nodot: 1 },
+  { c: 2.3, T: 727, lab: '727 °C', st: 5, dx: -5, dy: 13, a: 'end', v: ['steel'], nodot: 1 },
+  { c: 6.67, T: 420, lab: 'Fe₃C', st: 1, dx: -5, dy: 0, a: 'end', v: ['full'] }
+];
+const A3s = seq(0, 0.65, 30).map(c => [c, 912 - 330.3 * c + 101.1 * c * c]);
+const STAB = [[[2.1, 1153], [7.5, 1153]], [[0.021, 740], [7.5, 740]], [[2.1, 1153], [0.65, 740]], A3s, [[0.53, 1493], [4.2, 1153], [5.5, 1600]]];
+
+function clipPoly(pts, x0, y0, x1, y1) {
+  const E = [
+    [p => p[0] >= x0, (a, b) => [x0, a[1] + (b[1] - a[1]) * (x0 - a[0]) / (b[0] - a[0])]],
+    [p => p[0] <= x1, (a, b) => [x1, a[1] + (b[1] - a[1]) * (x1 - a[0]) / (b[0] - a[0])]],
+    [p => p[1] >= y0, (a, b) => [a[0] + (b[0] - a[0]) * (y0 - a[1]) / (b[1] - a[1]), y0]],
+    [p => p[1] <= y1, (a, b) => [a[0] + (b[0] - a[0]) * (y1 - a[1]) / (b[1] - a[1]), y1]]
+  ];
+  let out = pts;
+  for (const [inside, inter] of E) {
+    const inp = out; out = [];
+    for (let i = 0; i < inp.length; i++) {
+      const cur = inp[i], prev = inp[(i + inp.length - 1) % inp.length];
+      if (inside(cur)) { if (!inside(prev)) out.push(inter(prev, cur)); out.push(cur); }
+      else if (inside(prev)) out.push(inter(prev, cur));
+    }
+    if (!out.length) break;
+  }
+  return out;
+}
+function polyStats(p) {
+  let A = 0, cx = 0, cy = 0, x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  for (let i = 0; i < p.length; i++) {
+    const [xa, ya] = p[i], [xb, yb] = p[(i + 1) % p.length], cr = xa * yb - xb * ya;
+    A += cr; cx += (xa + xb) * cr; cy += (ya + yb) * cr;
+    x0 = Math.min(x0, xa); x1 = Math.max(x1, xa); y0 = Math.min(y0, ya); y1 = Math.max(y1, ya);
+  }
+  A /= 2;
+  return Math.abs(A) < 1e-6 ? null : { A: Math.abs(A), cx: cx / (6 * A), cy: cy / (6 * A), w: x1 - x0, h: y1 - y0 };
+}
+function niceStep(range, maxN, cands) { for (const s of cands) if (range / s <= maxN) return s; return cands[cands.length - 1]; }
+const easeIO = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+class Dia {
+  constructor(svg, o) {
+    o = o || {};
+    this.svg = svg; this.W = 360; this.H = o.H || 300;
+    this.m = { l: 50, r: 10, t: 12, b: 34 };
+    this.vname = o.view || 'full';
+    this.v = Object.assign({}, VIEWS[this.vname]);
+    this.step = o.step == null ? 99 : o.step;
+    this.stable = false; this.onPick = o.onPick || null; this.overlay = null; this.sel = null;
+    this.id = 'dia' + (Dia.n = (Dia.n || 0) + 1);
+    svg.innerHTML = '';
+    const defs = el('defs', null, svg);
+    const cp = el('clipPath', { id: this.id + 'c' }, defs);
+    this.clipR = el('rect', {}, cp);
+    this.grad = el('linearGradient', { id: this.id + 'g', gradientUnits: 'userSpaceOnUse', x1: 0, x2: 0 }, defs);
+    this.gGrid = el('g', null, svg);
+    this.gClip = el('g', { 'clip-path': 'url(#' + this.id + 'c)' }, svg);
+    this.gDom = el('g', null, this.gClip);
+    this.gLines = el('g', null, this.gClip);
+    this.gStab = el('g', null, this.gClip);
+    this.gLab = el('g', { style: 'pointer-events:none' }, this.gClip);
+    this.gOver = el('g', { style: 'pointer-events:none' }, this.gClip);
+    this.gAx = el('g', null, svg);
+    this.render();
+  }
+  X(c) { const m = this.m; return m.l + (c - this.v.c0) / (this.v.c1 - this.v.c0) * (this.W - m.l - m.r); }
+  Y(T) { const m = this.m; return this.H - m.b - (T - this.v.T0) / (this.v.T1 - this.v.T0) * (this.H - m.t - m.b); }
+  C(x) { const m = this.m; return this.v.c0 + (x - m.l) / (this.W - m.l - m.r) * (this.v.c1 - this.v.c0); }
+  T(y) { const m = this.m; return this.v.T0 + (this.H - m.b - y) / (this.H - m.t - m.b) * (this.v.T1 - this.v.T0); }
+  path(pts, close) { return pts.map((p, i) => (i ? 'L' : 'M') + this.X(p[0]).toFixed(1) + ' ' + this.Y(p[1]).toFixed(1)).join('') + (close ? 'Z' : ''); }
+  setView(name, anim) {
+    const to = VIEWS[name], from = Object.assign({}, this.v);
+    this.vname = name;
+    if (RM || anim === false) { this.v = Object.assign({}, to); this.render(); return; }
+    const t0 = performance.now(), D = 600;
+    cancelAnimationFrame(this.raf);
+    const tick = now => {
+      const u = easeIO(clamp((now - t0) / D, 0, 1));
+      for (const k in to) this.v[k] = lerp(from[k], to[k], u);
+      this.render();
+      if (u < 1) this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  render() {
+    const m = this.m, W = this.W, H = this.H, x0 = m.l, x1 = W - m.r, y0 = m.t, y1 = H - m.b;
+    Object.entries({ x: x0, y: y0, width: x1 - x0, height: y1 - y0 }).forEach(([k, v]) => this.clipR.setAttribute(k, v));
+    // grille et axes
+    this.gGrid.innerHTML = ''; this.gAx.innerHTML = '';
+    el('rect', { x: x0, y: y0, width: x1 - x0, height: y1 - y0, style: 'fill:var(--paper)' }, this.gGrid);
+    const v = this.v;
+    const sc = niceStep(v.c1 - v.c0, 7, [0.05, 0.1, 0.2, 0.25, 0.5, 1, 2]);
+    const sT = niceStep(v.T1 - v.T0, 8, [20, 25, 50, 100, 200]);
+    for (let c = Math.ceil(v.c0 / sc - 1e-9) * sc; c <= v.c1 + 1e-9; c += sc) {
+      const x = this.X(c);
+      el('line', { x1: x, x2: x, y1: y1, y2: y1 + 4, style: 'stroke:var(--ink);stroke-width:1' }, this.gAx);
+      tx(this.gAx, x, y1 + 14, fmt(c, sc < 0.1 ? 2 : sc < 1 ? 1 : 0), 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+    }
+    for (let T = Math.ceil(v.T0 / sT - 1e-9) * sT; T <= v.T1 + 1e-9; T += sT) {
+      const y = this.Y(T);
+      el('line', { x1: x0, x2: x1, y1: y, y2: y, style: 'stroke:var(--grid2);stroke-width:1' }, this.gAx);
+      tx(this.gAx, x0 - 11, y + 3.5, String(Math.round(T)), 'font-size:9.5px;fill:var(--ink2);text-anchor:end');
+    }
+    tx(this.gAx, (x0 + x1) / 2, H - 4, '% massique de carbone', 'font-size:10px;fill:var(--ink2);text-anchor:middle');
+    tx(this.gAx, 4, y0 + 2, '°C', 'font-size:10px;fill:var(--ink2);dominant-baseline:hanging');
+    el('rect', { x: x0, y: y0, width: x1 - x0, height: y1 - y0, style: 'fill:none;stroke:var(--ink);stroke-width:1.2' }, this.gAx);
+    // bande d’incandescence
+    this.grad.setAttribute('y1', this.Y(v.T0)); this.grad.setAttribute('y2', this.Y(v.T1));
+    this.grad.innerHTML = '';
+    for (let i = 0; i <= 10; i++) { const T = lerp(v.T0, v.T1, i / 10); el('stop', { offset: i / 10, 'stop-color': glow(T) }, this.grad); }
+    el('rect', { x: x0 - 8, y: y0, width: 5, height: y1 - y0, rx: 1.5, fill: 'url(#' + this.id + 'g)' }, this.gAx);
+    // domaines
+    this.gDom.innerHTML = '';
+    const st = this.step;
+    DOMS.forEach(d => {
+      const show = st >= d.st;
+      const p = el('path', { d: this.path(d.pts, true), class: 'reg' + (this.sel === d.k ? ' sel' : ''), style: 'fill:' + (show ? d.fill : 'transparent') + ';stroke:none', 'data-k': d.k }, this.gDom);
+      if (this.onPick) p.addEventListener('click', e => { e.stopPropagation(); this.onPick(d.k); });
+    });
+    el('path', { d: this.path([[6.67, TBOT], [8, TBOT], [8, TTOP], [6.67, TTOP]], true), style: 'fill:var(--bg);opacity:.7' }, this.gDom);
+    // lignes
+    this.gLines.innerHTML = '';
+    LINES.forEach(L => { if (st >= L.st) el('path', { d: this.path(L.pts), style: 'fill:none;stroke:' + (L.col || 'var(--ink)') + ';stroke-width:' + (L.w || 1.5) + ';stroke-linejoin:round' }, this.gLines); });
+    // stable
+    this.gStab.innerHTML = '';
+    if (this.stable) {
+      STAB.forEach(p => el('path', { d: this.path(p), style: 'fill:none;stroke:var(--ink2);stroke-width:1.4;stroke-dasharray:5 3' }, this.gStab));
+      const lab = (c, T, s, a) => { if (c > v.c0 && c < v.c1 && T > v.T0 && T < v.T1) tx(this.gStab, this.X(c), this.Y(T), s, 'font-size:9px;font-style:italic;fill:var(--ink2);text-anchor:' + (a || 'end')); };
+      const cm = v.c0 + (v.c1 - v.c0) * 0.58;
+      lab(cm, 1153 + (v.T1 - v.T0) * 0.025, 'stable 1153 °C', 'middle');
+      lab(cm, 740 + (v.T1 - v.T0) * 0.025, 'stable 740 °C', 'middle');
+      lab(0.65, 740 - (v.T1 - v.T0) * 0.05, '0,65', 'middle');
+      if (this.vname === 'full') lab(6.55, 1480, 'L + graphite');
+    }
+    // étiquettes
+    this.gLab.innerHTML = '';
+    if (this.sel) {
+      const d = DOMS.find(q => q.k === this.sel);
+      if (d) el('path', { d: this.path(d.pts, true), style: 'fill:none;stroke:var(--cL);stroke-width:3;stroke-linejoin:round' }, this.gLab);
+    }
+    if (st >= 6) DOMS.forEach(d => {
+      if (!d.mono && st < 7) return;
+      const cp = clipPoly(d.pts.map(p => [this.X(p[0]), this.Y(p[1])]), x0, y0, x1, y1);
+      if (cp.length < 3) return;
+      const s = polyStats(cp); if (!s) return;
+      const fs = d.mono ? 13 : 10.5, tw = d.lab.length * fs * 0.52;
+      if (s.w > tw + 6 && s.h > fs + 4 && s.A > (d.mono ? 500 : 1100)) {
+        tx(this.gLab, s.cx, s.cy + fs * 0.35, d.lab, 'font-size:' + fs + 'px;font-weight:' + (d.mono ? 800 : 650) + ';fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:var(--paper);stroke-width:3px;stroke-opacity:.6');
+      } else if (d.ptr && s.A > 0.2) {
+        const lx = s.cx + d.ptr[0], ly = s.cy + d.ptr[1];
+        el('line', { x1: s.cx, y1: s.cy, x2: lx - 6, y2: ly - 4, style: 'stroke:var(--ink);stroke-width:1' }, this.gLab);
+        el('circle', { cx: s.cx, cy: s.cy, r: 1.8, style: 'fill:var(--ink)' }, this.gLab);
+        tx(this.gLab, lx, ly, d.lab, 'font-size:12px;font-weight:800;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+      }
+    });
+    KP.forEach(k => {
+      if (st < k.st) return;
+      if (k.v && k.v.indexOf(this.vname) < 0) return;
+      if (k.c < v.c0 - 1e-9 || k.c > v.c1 + 1e-9 || k.T < v.T0 || k.T > v.T1) return;
+      const x = this.X(k.c), y = this.Y(k.T);
+      if (!k.nodot && k.c > 0.001 && k.c < 6.6) el('circle', { cx: x, cy: y, r: 2.4, style: 'fill:var(--ink)' }, this.gLab);
+      tx(this.gLab, x + k.dx, y + k.dy, k.lab, 'font-size:9.5px;font-weight:650;fill:var(--ink);text-anchor:' + (k.a || 'start') + ';paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+    });
+    this.drawOverlay();
+  }
+  drawOverlay() { this.gOver.innerHTML = ''; if (this.overlay) this.overlay(this.gOver, this); }
+}
+
+/* ================= MICROSTRUCTURE ================= */
+class Micro {
+  constructor(cv, seed, N) {
+    this.cv = cv; this.N = N || 220; this.mode = 'schema';
+    this.off = document.createElement('canvas'); this.off.width = this.off.height = this.N;
+    this.octx = this.off.getContext('2d'); this.img = this.octx.createImageData(this.N, this.N);
+    this.build(seed || 7);
+  }
+  build(seed) {
+    const N = this.N, P = N * N, rnd = mulberry32(seed);
+    const jit = (g, j) => { const s = []; for (let i = 0; i < g; i++) for (let k = 0; k < g; k++) s.push([(i + 0.5 + (rnd() - 0.5) * j) * N / g, (k + 0.5 + (rnd() - 0.5) * j) * N / g]); return s; };
+    const gs = jit(6, 0.85), cs = jit(15, 0.9);
+    const cang = cs.map(() => rnd() * Math.PI), cph = cs.map(() => rnd());
+    this.bd = new Float32Array(P); this.cbd = new Float32Array(P); this.cov = new Float32Array(P);
+    const d1 = new Float32Array(P), gid = new Int16Array(P), gmax = new Float32Array(gs.length);
+    const near2 = (S, x, y) => {
+      let a = -1, b = -1, da = 1e18, db = 1e18;
+      for (let i = 0; i < S.length; i++) { const dx = x - S[i][0], dy = y - S[i][1], d = dx * dx + dy * dy; if (d < da) { db = da; b = a; da = d; a = i; } else if (d < db) { db = d; b = i; } }
+      const L = Math.hypot(S[a][0] - S[b][0], S[a][1] - S[b][1]);
+      return [a, Math.sqrt(da), (db - da) / (2 * L)];
+    };
+    const lam = N / 40, w = 0.13, h = 0.6 / lam;
+    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+      const i = y * N + x;
+      const [g, dd, b] = near2(gs, x + 0.5, y + 0.5);
+      gid[i] = g; d1[i] = dd; this.bd[i] = b; if (dd > gmax[g]) gmax[g] = dd;
+      const [k, , cb] = near2(cs, x + 0.5, y + 0.5);
+      this.cbd[i] = cb;
+      const s0 = ((x * Math.cos(cang[k]) + y * Math.sin(cang[k])) / lam + cph[k]);
+      const s = s0 - Math.floor(s0);
+      let cov = 0;
+      for (const o of [-1, 0, 1]) { const a = Math.max(s - h, o), bb = Math.min(s + h, o + w); if (bb > a) cov += bb - a; }
+      this.cov[i] = clamp(cov / (2 * h), 0, 1);
+    }
+    const rank = arr => { const idx = Array.from({ length: P }, (_, i) => i); idx.sort((a, b) => arr[a] - arr[b]); const q = new Float32Array(P); idx.forEach((p, r) => { q[p] = (r + 0.5) / P; }); return q; };
+    const dn = new Float32Array(P); for (let i = 0; i < P; i++) dn[i] = d1[i] / gmax[gid[i]];
+    this.qD = rank(dn); this.qB = rank(this.bd);
+  }
+  colors() {
+    const g = n => hex2rgb(cssv(n) || '#888888');
+    if (this.mode === 'nital') return { L: g('--cLs'), d: [226, 222, 232], g: [214, 208, 200], a: [238, 236, 230], pa: [118, 114, 108], pc: [40, 38, 36], c: [252, 252, 248], gb: [70, 68, 66], gf: [168, 166, 160] };
+    const dark = (cssv('--bg') || '#fff').toLowerCase() === '#10161c';
+    const a = g('--cAs'), A = g('--cA');
+    return { L: g('--cLs'), d: g('--cDs'), g: g('--cGs'), a: a, pa: a, pc: dark ? [205, 210, 218] : g('--cC'), c: dark ? [205, 210, 218] : g('--cC'), gb: dark ? [150, 170, 190] : [60, 70, 82], gf: a.map((v, k) => Math.round(v * 0.55 + A[k] * 0.45)) };
+  }
+  draw(co) {
+    const N = this.N, P = N * N, d = this.img.data, C = this.colors();
+    const fs = 1 - co.L, dz = co.d;
+    const hypo = co.aPro > 0 || co.cPro === 0;
+    const pro = hypo ? co.aPro : co.cPro, per = co.perl;
+    for (let i = 0; i < P; i++) {
+      let col, gb = false, gf = false;
+      if (this.qD[i] >= fs - 1e-6 && co.L > 0) col = C.L;
+      else if (dz > 0 && this.qD[i] < dz) { col = C.d; gb = this.bd[i] < 0.8; }
+      else {
+        const q = this.qB[i];
+        if (q < pro) { if (hypo) { col = C.a; gf = this.cbd[i] < 0.5 || this.bd[i] < 0.5; } else col = C.c; }
+        else if (q < pro + per) { const u = this.cov[i]; col = [0, 1, 2].map(k => C.pa[k] + (C.pc[k] - C.pa[k]) * u); gb = this.bd[i] < 0.5; }
+        else { col = C.g; gb = this.bd[i] < 0.8; }
+      }
+      const j = i * 4;
+      if (gf) col = C.gf;
+      if (gb) { d[j] = C.gb[0]; d[j + 1] = C.gb[1]; d[j + 2] = C.gb[2]; }
+      else { d[j] = col[0]; d[j + 1] = col[1]; d[j + 2] = col[2]; }
+      d[j + 3] = 255;
+    }
+    this.octx.putImageData(this.img, 0, 0);
+    const ctx = this.cv.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.clearRect(0, 0, this.cv.width, this.cv.height);
+    ctx.drawImage(this.off, 0, 0, this.cv.width, this.cv.height);
+  }
+}
+
+/* ================= MAILLE 3D ================= */
+const CORN = [[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]];
+const EDGES = [];
+CORN.forEach((a, i) => CORN.forEach((b, j) => { if (j > i && Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]) === 1) EDGES.push([a, b]); }));
+const FACES = [[.5, .5, 0], [.5, .5, 1], [.5, 0, .5], [.5, 1, .5], [0, .5, .5], [1, .5, .5]];
+const EMID = EDGES.map(([a, b]) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2]);
+const TETF = []; [[.25, .25, .25]].forEach(() => { for (const x of [.25, .75]) for (const y of [.25, .75]) for (const z of [.25, .75]) TETF.push([x, y, z]); });
+const TETC = []; FACES.forEach(f => {
+  const ax = f.findIndex(v => v === 0 || v === 1);
+  const o = [0, 1, 2].filter(k => k !== ax);
+  [[.5, .25], [.5, .75], [.25, .5], [.75, .5]].forEach(([u, w]) => { const p = f.slice(); p[o[0]] = u; p[o[1]] = w; TETC.push(p); });
+});
+const STRUCT = {
+  cc: { atoms: CORN.concat([[.5, .5, .5]]), a: 2.87, R: 1.243, oct: FACES.concat(EMID), tet: TETC, roct: 0.192, rtet: 0.362, cpos: [.5, .5, 0] },
+  cfc: { atoms: CORN.concat(FACES), a: 3.57, R: 1.262, oct: [[.5, .5, .5]].concat(EMID), tet: TETF, roct: 0.523, rtet: 0.284, cpos: [.5, .5, .5] }
+};
+class Cell3D {
+  constructor(cv, o) {
+    this.cv = cv; this.ctx = cv.getContext('2d');
+    this.s = 'cc'; this.col = '--cA'; this.size = 'small'; this.sites = 'none'; this.liquid = false; this.octa = !!(o && o.octa);
+    this.ry = 0.62; this.rx = -0.38; this.auto = true; this.t = 0; this.visible = true;
+    let drag = null;
+    cv.addEventListener('pointerdown', e => { drag = [e.clientX, e.clientY, this.ry, this.rx]; this.auto = false; cv.setPointerCapture(e.pointerId); cv.style.cursor = 'grabbing'; });
+    cv.addEventListener('pointermove', e => { if (!drag) return; this.ry = drag[2] + (e.clientX - drag[0]) * 0.012; this.rx = clamp(drag[3] + (e.clientY - drag[1]) * 0.012, -1.4, 1.4); this.draw(); });
+    const up = () => { drag = null; cv.style.cursor = 'grab'; };
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    onVisible(cv, v => { this.visible = v; if (v) this.loop(); });
+  }
+  loop() {
+    if (this.running) return; this.running = true;
+    let last = performance.now();
+    const f = now => {
+      if (!this.visible) { this.running = false; return; }
+      const dt = Math.min(0.05, (now - last) / 1000); last = now;
+      this.t += dt;
+      if (this.auto && !RM) this.ry += dt * 0.35;
+      if ((this.auto && !RM) || this.liquid) this.draw();
+      requestAnimationFrame(f);
+    };
+    requestAnimationFrame(f);
+  }
+  set(o) { Object.assign(this, o); this.draw(); }
+  draw() {
+    const cv = this.cv, ctx = this.ctx, W = cv.width, S = STRUCT[this.s];
+    ctx.clearRect(0, 0, W, W);
+    const sc = W * 0.40, cx = W / 2, cy = W / 2;
+    const cy_ = Math.cos(this.ry), sy = Math.sin(this.ry), cx_ = Math.cos(this.rx), sx = Math.sin(this.rx);
+    const P = p => {
+      let x = p[0] - .5, y = p[1] - .5, z = p[2] - .5;
+      const x1 = x * cy_ + z * sy, z1 = -x * sy + z * cy_;
+      const y1 = y * cx_ - z1 * sx, z2 = y * sx + z1 * cx_;
+      const f = 1 / (1 + z2 * 0.28);
+      return [cx + x1 * sc * f, cy - y1 * sc * f, z2, f];
+    };
+    const ink = cssv('--ink') || '#16202A';
+    const k = this.size === 'real' ? 1 : 0.30 / (S.R / S.a) * 0.42;
+    const items = [];
+    const jig = p => this.liquid ? p.map((v, i) => v + 0.13 * Math.sin(this.t * (1.3 + i * 0.7) + p[0] * 9 + p[1] * 5 + p[2] * 7 + i)) : p;
+    S.atoms.forEach(p => items.push({ p: jig(p), r: S.R / S.a * k, kind: 'fe' }));
+    if (!this.liquid) {
+      if (this.sites === 'oct') S.oct.forEach(p => items.push({ p: p, r: Math.max(S.roct / S.a * k, 0.012), kind: 'oct' }));
+      if (this.sites === 'tet') S.tet.forEach(p => items.push({ p: p, r: Math.max(S.rtet / S.a * k, 0.012), kind: 'tet' }));
+      if (this.sites === 'C' || this.octa) items.push({ p: S.cpos, r: 0.77 / S.a * k, kind: 'C' });
+    }
+    ctx.lineWidth = W / 260; ctx.strokeStyle = ink; ctx.globalAlpha = this.liquid ? 0.12 : 0.55;
+    EDGES.forEach(([a, b]) => { const A = P(a), B = P(b); ctx.beginPath(); ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0], B[1]); ctx.stroke(); });
+    if (this.octa && !this.liquid) {
+      ctx.globalAlpha = 0.8; ctx.strokeStyle = cssv('--cL'); ctx.lineWidth = W / 200;
+      FACES.forEach((a, i) => FACES.forEach((b, j) => { if (j > i && Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) < 0.8) { const A = P(a), B = P(b); ctx.beginPath(); ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0], B[1]); ctx.stroke(); } }));
+    }
+    ctx.globalAlpha = 1;
+    items.forEach(it => { const q = P(it.p); it.x = q[0]; it.y = q[1]; it.z = q[2]; it.R = it.r * sc * q[3]; });
+    items.sort((a, b) => a.z - b.z);
+    const base = cssv(this.liquid ? '--cL' : this.col) || '#4C6C8F';
+    const dim = (this.size === 'real' && (this.sites !== 'none' || this.octa));
+    items.forEach(it => {
+      let c1, c2, alpha = 1;
+      if (it.kind === 'fe') { c1 = '#ffffff'; c2 = base; alpha = dim ? 0.38 : 1; }
+      else if (it.kind === 'oct') { c1 = '#fff4cf'; c2 = '#E8A317'; }
+      else if (it.kind === 'tet') { c1 = '#d9fff1'; c2 = '#1F9275'; }
+      else { c1 = '#8a8a8a'; c2 = '#111111'; }
+      const g = ctx.createRadialGradient(it.x - it.R * 0.35, it.y - it.R * 0.35, it.R * 0.1, it.x, it.y, it.R);
+      g.addColorStop(0, c1); g.addColorStop(1, c2);
+      ctx.globalAlpha = alpha; ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(it.x, it.y, Math.max(1, it.R), 0, Math.PI * 2); ctx.fill();
+      if (it.kind !== 'fe' || !dim) { ctx.globalAlpha = alpha * 0.6; ctx.strokeStyle = ink; ctx.lineWidth = W / 500; ctx.stroke(); }
+    });
+    ctx.globalAlpha = 1;
+  }
+}
+
+const redraws = [];
+
+/* ================= HÉROS : règle des températures ================= */
+(function ruler() {
+  const s = $('#ruler'), xr = T => 8 + (T - 20) / 1580 * 344;
+  const defs = el('defs', null, s), g = el('linearGradient', { id: 'rulg', x1: 0, x2: 1, y1: 0, y2: 0 }, defs);
+  for (let i = 0; i <= 16; i++) el('stop', { offset: i / 16, 'stop-color': glow(20 + 1580 * i / 16) }, g);
+  el('rect', { x: 8, y: 26, width: 344, height: 13, rx: 3, fill: 'url(#rulg)', style: 'stroke:var(--ink);stroke-width:1' }, s);
+  const up = [[727, '727'], [912, '912'], [1147, '1147'], [1394, '1394'], [1538, '1538 °C']];
+  up.forEach(([T, l]) => {
+    el('line', { x1: xr(T), x2: xr(T), y1: 22, y2: 43, style: 'stroke:var(--ink);stroke-width:1.3' }, s);
+    tx(s, xr(T), 17, l, 'font-size:10.5px;font-weight:700;fill:var(--ink);text-anchor:' + (T === 1538 ? 'end' : 'middle'));
+  });
+  [[727, 'perlite', 54], [912, 'α ↔ γ', 66], [1147, 'eutectique', 54], [1394, 'γ ↔ δ', 66], [1538, 'fusion', 54]].forEach(([T, l, y]) =>
+    tx(s, xr(T), y, l, 'font-size:9.5px;fill:var(--ink2);text-anchor:' + (T === 1538 ? 'end' : 'middle')));
+  tx(s, 8, 54, '20 °C', 'font-size:9.5px;fill:var(--ink2)');
+})();
+
+/* ---------- niveaux ---------- */
+$$('.seg button').forEach(b => b.addEventListener('click', () => {
+  document.body.dataset.level = b.dataset.l;
+  $$('.seg button').forEach(x => x.classList.toggle('on', x === b));
+}));
+function radio(box, attr, cb) {
+  $$('button', box).forEach(b => b.addEventListener('click', () => {
+    $$('button', box).forEach(x => x.classList.toggle('on', x === b));
+    cb(b.dataset[attr], b);
+  }));
+}
+
+/* ================= PARTIE 1 : fer pur ================= */
+(function part1() {
+  const s = $('#fe1'), slider = $('#fe1T');
+  const Yb = T => 236 - (T - 20) / 1630 * 222;
+  const Xd = T => 100 + (T - 20) / 1580 * 250, Yd = v => 214 - v / 2.6 * 190;
+  const dil = T => T < 912 ? 0.00135 * (T - 20) : T < 1394 ? 0.8742 + 0.0023 * (T - 912) : 2.2128 + 0.0018 * (T - 1394);
+  const defs = el('defs', null, s), g = el('linearGradient', { id: 'fe1g', gradientUnits: 'userSpaceOnUse', x1: 0, x2: 0, y1: Yb(20), y2: Yb(1650) }, defs);
+  for (let i = 0; i <= 12; i++) el('stop', { offset: i / 12, 'stop-color': glow(20 + 1630 * i / 12) }, g);
+  el('rect', { x: 16, y: Yb(1650), width: 5, height: Yb(20) - Yb(1650), rx: 1.5, fill: 'url(#fe1g)' }, s);
+  [[20, 912, 'var(--cAs)', 'α'], [912, 1394, 'var(--cGs)', 'γ'], [1394, 1538, 'var(--cDs)', 'δ'], [1538, 1650, 'var(--cLs)', 'L']].forEach(([a, b, f, l]) => {
+    el('rect', { x: 25, y: Yb(b), width: 26, height: Yb(a) - Yb(b), style: 'fill:' + f + ';stroke:var(--ink);stroke-width:1' }, s);
+    tx(s, 38, (Yb(a) + Yb(b)) / 2 + 4.5, l, 'font-size:13px;font-weight:800;fill:var(--ink);text-anchor:middle');
+  });
+  [[912, '912'], [1394, '1394'], [1538, '1538']].forEach(([T, l]) => tx(s, 54, Yb(T) + 3.5, l, 'font-size:9px;fill:var(--ink2)'));
+  tx(s, 38, 249, 'fer pur', 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+  // dilatométrie
+  el('rect', { x: Xd(1538), y: 24, width: Xd(1600) - Xd(1538), height: 190, style: 'fill:var(--cLs)' }, s);
+  tx(s, (Xd(1538) + Xd(1600)) / 2, 36, 'L', 'font-size:10px;font-weight:700;fill:var(--ink);text-anchor:middle');
+  for (let T = 200; T <= 1600; T += 200) { el('line', { x1: Xd(T), x2: Xd(T), y1: 214, y2: 218, style: 'stroke:var(--ink)' }, s); tx(s, Xd(T), 228, String(T), 'font-size:8.5px;fill:var(--ink2);text-anchor:middle'); }
+  for (let v = 0; v <= 2; v++) { el('line', { x1: Xd(20), x2: 350, y1: Yd(v), y2: Yd(v), style: 'stroke:var(--grid2)' }, s); tx(s, Xd(20) - 4, Yd(v) + 3, v + ' %', 'font-size:8.5px;fill:var(--ink2);text-anchor:end'); }
+  el('rect', { x: Xd(20), y: 24, width: 350 - Xd(20), height: 190, style: 'fill:none;stroke:var(--ink);stroke-width:1' }, s);
+  tx(s, Xd(20) + 4, 36, 'allongement ΔL/L₀', 'font-size:9.5px;fill:var(--ink2)');
+  tx(s, 225, 242, 'température (°C)', 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+  let d = '';
+  for (let T = 20; T <= 1538; T += 4) { const TT = Math.min(T, 1538); d += (d ? 'L' : 'M') + Xd(TT).toFixed(1) + ' ' + Yd(dil(TT)).toFixed(1); if (T < 912 && T + 4 >= 912) d += 'L' + Xd(912) + ' ' + Yd(dil(911.99)) + 'L' + Xd(912) + ' ' + Yd(dil(912)); if (T < 1394 && T + 4 >= 1394) d += 'L' + Xd(1394) + ' ' + Yd(dil(1393.99)) + 'L' + Xd(1394) + ' ' + Yd(dil(1394)); }
+  el('path', { d: d, style: 'fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round' }, s);
+  tx(s, Xd(912) + 5, Yd(0.62), 'contraction', 'font-size:9px;font-weight:650;fill:var(--cG)');
+  tx(s, Xd(912) + 5, Yd(0.48), 'α → γ', 'font-size:9px;fill:var(--cG)');
+  tx(s, Xd(1394) - 4, Yd(2.42), 'dilatation', 'font-size:9px;font-weight:650;fill:var(--cD);text-anchor:end');
+  const mk = el('g', null, s);
+  const cell = new Cell3D($('#cell1'));
+  const TXT = T => T < 770 ? 'Fer α, la ferrite : cubique centré. Il est ferromagnétique, un aimant l’attire.'
+    : T < 912 ? 'Toujours du fer α cubique centré, mais il n’est plus magnétique au-dessus de 770 °C (point de Curie). Pas de changement de maille.'
+    : T < 1394 ? 'Fer γ, l’austénite : cubique à faces centrées. Le barreau s’est raccourci en passant 912 °C, car le CFC est plus compact.'
+    : T < 1538 ? 'Fer δ : de nouveau cubique centré. Le barreau s’allonge d’un coup en passant 1394 °C.'
+    : 'Liquide : les atomes bougent en désordre, il n’y a plus de maille.';
+  const CTXT = () => {
+    if (cell.liquid) return 'Liquide : pas de maille à montrer.';
+    const cc = cell.s === 'cc';
+    if (cell.sites === 'C') return cc ? 'Carbone (noir, 0,77 Å) dans un site octaédrique aplati du CC : le trou ne fait que 0,19 Å. En « sphères jointives », on voit à quel point il déforme la maille.' : 'Carbone (noir, 0,77 Å) au centre du cube, dans le grand site octaédrique du CFC (0,52 Å). Il force, mais bien moins que dans le CC.';
+    if (cell.sites === 'oct') return cc ? 'CC : 6 sites octaédriques aux centres des faces et 12 aux milieux des arêtes (3 par atome de fer). Rayon 0,19 Å seulement, car aplatis.' : 'CFC : site octaédrique au centre du cube et aux 12 milieux d’arêtes (1 par atome de fer). Rayon 0,52 Å : le plus gros trou du fer.';
+    if (cell.sites === 'tet') return cc ? 'CC : 24 sites tétraédriques sur les faces (6 par atome de fer). Rayon 0,36 Å.' : 'CFC : 8 sites tétraédriques à l’intérieur du cube (2 par atome de fer). Rayon 0,28 Å.';
+    return cc ? 'Cubique centré : 2 atomes par maille, 8 voisins, compacité 0,68.' : 'Cubique à faces centrées : 4 atomes par maille, 12 voisins, compacité 0,74.';
+  };
+  let T = 20;
+  function upd() {
+    slider.value = Math.round(T);
+    $('#fe1Tv').textContent = Math.round(T) + NB + '°C';
+    $('#fe1glow').style.background = glow(T);
+    $('#fe1txt').textContent = TXT(T);
+    mk.innerHTML = '';
+    const y = Yb(T);
+    el('path', { d: 'M12 ' + (y - 5) + 'L22 ' + y + 'L12 ' + (y + 5) + 'Z', style: 'fill:var(--ink)' }, mk);
+    el('line', { x1: 24, x2: 52, y1: y, y2: y, style: 'stroke:var(--ink);stroke-width:2.2' }, mk);
+    const TT = Math.min(T, 1538);
+    el('line', { x1: Xd(TT), x2: Xd(TT), y1: Yd(dil(TT)), y2: 214, style: 'stroke:var(--cL);stroke-width:1.2;stroke-dasharray:3 3' }, mk);
+    if (T <= 1538) el('circle', { cx: Xd(TT), cy: Yd(dil(TT)), r: 5, style: 'fill:var(--cL);stroke:var(--ink);stroke-width:1.2' }, mk);
+    const st = T < 912 ? ['cc', '--cA', false] : T < 1394 ? ['cfc', '--cG', false] : T < 1538 ? ['cc', '--cD', false] : ['cfc', '--cL', true];
+    cell.set({ s: st[0], col: st[1], liquid: st[2] });
+    $('#cell1txt').textContent = CTXT();
+  }
+  slider.addEventListener('input', () => { stop(); T = +slider.value; upd(); });
+  $$('#s1 [data-t]').forEach(b => b.addEventListener('click', () => { stop(); T = +b.dataset.t; upd(); }));
+  radio($('#cell1opt'), 'size', v => { cell.set({ size: v }); $('#cell1txt').textContent = CTXT(); });
+  radio($('#cell1site'), 'site', v => { cell.set({ sites: v }); $('#cell1txt').textContent = CTXT(); });
+  let raf = null, dir = 1;
+  function stop() { if (raf) cancelAnimationFrame(raf); raf = null; $('#fe1play').textContent = 'Chauffer puis refroidir'; }
+  $('#fe1play').addEventListener('click', () => {
+    if (raf) { stop(); return; }
+    $('#fe1play').textContent = 'Pause';
+    if (T >= 1599) dir = -1; else if (T <= 21) dir = 1;
+    let last = performance.now();
+    const f = now => {
+      const dt = Math.min(0.05, (now - last) / 1000); last = now;
+      T += dir * dt * 190;
+      if (T >= 1600) { T = 1600; dir = -1; }
+      if (T <= 20) { T = 20; upd(); stop(); dir = 1; return; }
+      upd(); raf = requestAnimationFrame(f);
+    };
+    raf = requestAnimationFrame(f);
+  });
+  upd();
+  redraws.push(() => cell.draw());
+})();
+
+/* ================= PARTIE 2 : diagramme + quiz ================= */
+VIEWS.alpha = { c0: 0, c1: 0.05, T0: 640, T1: 940 };
+(function part2() {
+  const STEPS = [
+    'Étape 1 sur 7. Les deux bords : à gauche le fer pur (fusion à 1538 °C, changements de maille à 1394 et 912 °C), à droite la cémentite Fe₃C, une verticale à 6,67 % C.',
+    'Étape 2 sur 7. Le liquidus : au-dessus, tout est liquide. Il descend jusqu’à l’eutectique, à 1147 °C et 4,3 % C, puis remonte vers la cémentite.',
+    'Étape 3 sur 7. Les solidus de δ et de γ, et les frontières du petit domaine δ en haut à gauche. Utilise le zoom péritectique pour les voir.',
+    'Étape 4 sur 7. Deux horizontales invariantes : le péritectique à 1493 °C et l’eutectique à 1147 °C, de 2,14 à 6,67 % C.',
+    'Étape 5 sur 7. Le coin des aciers : A3 (de 912 °C à 0,76 %), Acm (de 2,14 % à 0,76 %) et l’eutectoïde à 727 °C. Tout le cours se joue ici.',
+    'Étape 6 sur 7. On colore les domaines monophasés : L, δ, γ et α. Le domaine α n’est qu’un liseré le long de l’axe : utilise le zoom eutectoïde.',
+    'Étape 7 sur 7. Les domaines biphasés, rayés des couleurs de leurs deux phases. Le diagramme est complet : touche les zones pour les identifier.'
+  ];
+  const info = $('#d2info');
+  const d = new Dia($('#d2'), { view: 'full', step: 1, onPick: k => {
+    if (d.step < 7) { info.textContent = 'Termine la construction (étape 7) pour identifier les zones.'; return; }
+    d.sel = k; d.render();
+    info.innerHTML = '<b>' + DOMS.find(q => q.k === k).lab + '</b> : ' + DINFO[k];
+  } });
+  const upd = () => {
+    $('#d2txt').textContent = STEPS[d.step - 1];
+    $('#d2prev').disabled = d.step <= 1;
+    $('#d2next').textContent = d.step >= 7 ? 'Reprendre depuis le début' : 'Étape suivante';
+    d.render();
+  };
+  $('#d2prev').addEventListener('click', () => { d.step = Math.max(1, d.step - 1); d.sel = null; upd(); });
+  $('#d2next').addEventListener('click', () => { d.step = d.step >= 7 ? 1 : d.step + 1; d.sel = null; upd(); });
+  $('#d2stable').addEventListener('click', e => { d.stable = !d.stable; e.currentTarget.classList.toggle('on', d.stable); e.currentTarget.textContent = d.stable ? 'Masquer le stable' : 'Afficher le stable'; d.render(); });
+  radio($('#d2zoom'), 'v', v => d.setView(v));
+  upd();
+
+  // ---- quiz ----
+  const QV = { 'L': ['full'], 'δ': ['delta'], 'L+δ': ['delta'], 'δ+γ': ['delta'], 'L+γ': ['full', 'steel'], 'γ': ['full', 'steel', 'eut'], 'L+Fe3C': ['full'], 'γ+Fe3C': ['full', 'steel'], 'α+γ': ['eut', 'steel'], 'α': ['alpha'], 'α+Fe3C': ['full', 'eut'] };
+  const q = new Dia($('#dq'), { view: 'full' });
+  const bx = $('#qbtns'), fb = $('#qfb');
+  let ans = null, pt = null, done = false, ok = 0, tot = 0;
+  DOMS.forEach(D => {
+    const b = document.createElement('button');
+    b.className = 'btn'; b.textContent = D.lab; b.dataset.k = D.k;
+    b.addEventListener('click', () => {
+      if (done) return;
+      done = true; tot++;
+      const good = D.k === ans;
+      if (good) ok++;
+      b.classList.add(good ? 'ok' : 'ko');
+      if (!good) $$('button', bx).find(x => x.dataset.k === ans).classList.add('ok');
+      fb.textContent = (good ? 'Exact. ' : 'Non : c’est ' + DOMS.find(x => x.k === ans).lab + '. ') + DINFO[ans];
+      $('#qscore').textContent = ok + ' / ' + tot;
+    });
+    bx.appendChild(b);
+  });
+  q.overlay = (g, D) => {
+    if (!pt) return;
+    el('circle', { cx: D.X(pt[0]), cy: D.Y(pt[1]), r: 6.5, style: 'fill:var(--bad);stroke:#fff;stroke-width:2' }, g);
+  };
+  function next() {
+    const keys = Object.keys(QV);
+    for (let tries = 0; tries < 50; tries++) {
+      const k = keys[Math.floor(Math.random() * keys.length)], vs = QV[k], vn = vs[Math.floor(Math.random() * vs.length)], V = VIEWS[vn];
+      q.vname = vn; q.v = Object.assign({}, V);
+      const px = 5, dc = px / (q.W - q.m.l - q.m.r) * (V.c1 - V.c0), dT = px / (q.H - q.m.t - q.m.b) * (V.T1 - V.T0);
+      for (let n = 0; n < 400; n++) {
+        const c = lerp(V.c0 + dc, Math.min(V.c1, 6.6) - dc, Math.random()), T = lerp(V.T0 + dT, V.T1 - dT, Math.random());
+        if (state(c, T).r !== k) continue;
+        if ([[dc, 0], [-dc, 0], [0, dT], [0, -dT]].some(([a, b]) => state(Math.max(0, c + a), T + b).r !== k)) continue;
+        ans = k; pt = [c, T]; done = false; fb.textContent = '';
+        $$('button', bx).forEach(x => x.classList.remove('ok', 'ko'));
+        q.render();
+        return;
+      }
+    }
+  }
+  $('#qnext').addEventListener('click', next);
+  next();
+})();
+
+/* ================= PARTIE 3 : perlite ================= */
+(function part3() {
+  const s = $('#pg'), X0 = 8, X1 = 352, Y0 = 26, Y1 = 242, LAMP = 48, WC = LAMP * 0.113;
+  const defs = el('defs', null, s);
+  const mkr = el('marker', { id: 'pgar', viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 5, markerHeight: 5, orient: 'auto-start-reverse' }, defs);
+  el('path', { d: 'M0 0L10 5L0 10Z', style: 'fill:var(--ink)' }, mkr);
+  const cp = el('clipPath', { id: 'pgc' }, defs); el('rect', { x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0 }, cp);
+  const root = el('g', { 'clip-path': 'url(#pgc)' }, s);
+  el('rect', { x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0, style: 'fill:var(--cGs)' }, root);
+  const gP = el('g', null, root), gA = el('g', null, root), gC = el('g', null, root);
+  el('rect', { x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0, style: 'fill:none;stroke:var(--ink);stroke-width:1.2' }, s);
+  tx(s, X0, 16, 'austénite γ à 0,76 % C, au-dessus', 'font-size:10px;font-weight:650;fill:var(--ink2)');
+  tx(s, X1, 16, 'perlite, en dessous', 'font-size:10px;font-weight:650;fill:var(--ink2);text-anchor:end');
+  const xs = []; for (let x = X0 + 20; x < X1; x += LAMP) xs.push(x);
+  const rnd = mulberry32(11);
+  let yf, parts, playing = true, vis = false, wait = 0;
+  function reset() {
+    yf = Y1 - 30; wait = 0;
+    parts = [];
+    for (let i = 0; i < 170; i++) parts.push({ x: lerp(X0 + 3, X1 - 3, rnd()), y: lerp(Y0 + 3, Y1 - 3, rnd()), st: 0 });
+    parts.forEach(p => { if (p.y > yf) { const xc = nearC(p.x); p.x = xc + (rnd() - 0.5) * WC * 0.7; p.st = 2; } });
+  }
+  const nearC = x => xs.reduce((b, c) => Math.abs(c - x) < Math.abs(b - x) ? c : b, xs[0]);
+  function draw() {
+    gP.innerHTML = ''; gA.innerHTML = ''; gC.innerHTML = '';
+    el('rect', { x: X0, y: yf, width: X1 - X0, height: Y1 - yf, style: 'fill:var(--cAs)' }, gP);
+    xs.forEach(x => el('rect', { x: x - WC / 2, y: yf - 2, width: WC, height: Y1 - yf + 2, style: 'fill:var(--cCs);stroke:var(--cC);stroke-width:.8' }, gP));
+    el('line', { x1: X0, x2: X1, y1: yf, y2: yf, style: 'stroke:var(--ink);stroke-width:1;stroke-dasharray:2 2' }, gP);
+    for (let i = 0; i < xs.length; i++) {
+      const xm = xs[i] + LAMP / 2;
+      if (xm > X1 - 6) continue;
+      [xs[i] + WC / 2 + 2, xs[i] + LAMP - WC / 2 - 2].forEach(xt => {
+        el('path', { d: 'M' + xm + ' ' + (yf - 5) + 'Q' + ((xm + xt) / 2) + ' ' + (yf - 16) + ' ' + xt + ' ' + (yf - 5), style: 'fill:none;stroke:var(--ink);stroke-width:1.1', 'marker-end': 'url(#pgar)' }, gA);
+      });
+    }
+    parts.forEach(p => el('circle', { cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: 2.1, style: 'fill:#111' }, gC));
+    if (yf < Y1 - 70) {
+      const xa = xs[2] + LAMP / 2, xc = xs[3];
+      tx(gC, xa, Y1 - 12, 'α', 'font-size:13px;font-weight:800;fill:var(--ink);text-anchor:middle');
+      tx(gC, xc, Y1 - 12, 'Fe₃C', 'font-size:10px;font-weight:800;fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:var(--paper);stroke-width:3px');
+    }
+  }
+  function step(dt) {
+    if (wait > 0) { wait -= dt; if (wait <= 0) reset(); return; }
+    yf -= 14 * dt;
+    if (yf < Y0 + 4) { yf = Y0 + 4; wait = 1.6; }
+    parts.forEach(p => {
+      if (p.st === 2) return;
+      if (p.st === 0) {
+        p.x += (rnd() - 0.5) * 18 * dt; p.y += (rnd() - 0.5) * 18 * dt;
+        p.x = clamp(p.x, X0 + 2, X1 - 2); p.y = clamp(p.y, Y0 + 2, Y1 - 2);
+        if (p.y > yf - 12) p.st = 1;
+      }
+      if (p.st === 1) {
+        const xc = nearC(p.x);
+        if (Math.abs(p.x - xc) < WC / 2) { if (p.y > yf - 1) p.st = 2; else p.y += 20 * dt; }
+        else { p.x += Math.sign(xc - p.x) * Math.min(Math.abs(xc - p.x), 46 * dt); p.y = Math.min(p.y, yf - 4); }
+      }
+    });
+  }
+  let last = 0;
+  function loop(now) {
+    if (!vis) { last = 0; return; }
+    const dt = last ? Math.min(0.05, (now - last) / 1000) : 0; last = now;
+    if (playing) { step(dt); draw(); }
+    requestAnimationFrame(loop);
+  }
+  reset(); draw();
+  onVisible(s, v => { const was = vis; vis = v; if (v && !was && !RM) requestAnimationFrame(loop); });
+  if (RM) { playing = false; $('#pgplay').textContent = 'Lecture'; }
+  $('#pgplay').addEventListener('click', e => {
+    playing = !playing; e.currentTarget.textContent = playing ? 'Pause' : 'Lecture';
+    if (playing && RM) { vis = true; requestAnimationFrame(loop); }
+  });
+  $('#pgreset').addEventListener('click', () => { reset(); draw(); });
+
+  // ---- Q2 : masse / volume ----
+  const wc = (0.76 - 0.022) / (6.67 - 0.022), wa = 1 - wc;
+  function q2(rho) {
+    const va = wa / 7.8, vc = wc / rho, fa = va / (va + vc), fc = 1 - fa;
+    stackFill($('#q2m'), [[wa, 'var(--cAs)', 'ferrite', 'α'], [wc, 'var(--cCs)', 'cémentite', 'Fe₃C']]);
+    stackFill($('#q2v'), [[fa, 'var(--cAs)', 'ferrite', 'α'], [fc, 'var(--cCs)', 'cémentite', 'Fe₃C']]);
+    $('#q2eq').innerHTML = 'f<sub>v,Fe3C</sub> = <span class="frac"><span>' + fmt(wc, 3) + ' / ' + fmt(rho, 2) + '</span><span>' + fmt(wa, 3) + ' / 7,8 + ' + fmt(wc, 3) + ' / ' + fmt(rho, 2) + '</span></span> = <span class="frac"><span>' + fmt(vc, 4) + '</span><span>' + fmt(va + vc, 4) + '</span></span> ≈ <b>' + fmt(fc * 100, 1) + NB + '%</b> &nbsp; donc f<sub>v,α</sub> ≈ <b>' + fmt(fa * 100, 1) + NB + '%</b>';
+    const L = $('#q2lam'); L.innerHTML = '';
+    const P = 340 / 3;
+    for (let k = 0; k < 3; k++) {
+      const x = 10 + k * P;
+      el('rect', { x: x, y: 14, width: P * fa, height: 36, style: 'fill:var(--cAs);stroke:var(--ink);stroke-width:.8' }, L);
+      el('rect', { x: x + P * fa, y: 14, width: P * fc, height: 36, style: 'fill:var(--cCs);stroke:var(--ink);stroke-width:.8' }, L);
+    }
+    tx(L, 10 + P * fa / 2, 37, 'α', 'font-size:13px;font-weight:800;fill:var(--ink);text-anchor:middle');
+    tx(L, 350, 64, 'rapport des épaisseurs α / Fe₃C ≈ ' + fmt(fa / fc, 1), 'font-size:10px;fill:var(--ink2);text-anchor:end');
+  }
+  $$('#rhoBtns button').forEach(b => b.addEventListener('click', () => {
+    $$('#rhoBtns button').forEach(x => x.classList.toggle('on', x === b)); q2(+b.dataset.r);
+  }));
+  q2(4.3);
+})();
+
+/* ================= PARTIE 4 : simulateur de refroidissement ================= */
+const PHC = { 'L': 'var(--cLs)', 'δ': 'var(--cDs)', 'γ': 'var(--cGs)', 'α': 'var(--cAs)', 'Fe3C': 'var(--cCs)' };
+const PHN = { 'L': 'liquide', 'δ': 'ferrite δ', 'γ': 'austénite γ', 'α': 'ferrite α', 'Fe3C': 'cémentite' };
+const PHT = { 'L': 'liquide', 'δ': 'ferrite δ', 'γ': 'austénite', 'α': 'ferrite', 'Fe3C': 'cémentite' };
+const PHCL = { 'L': 'ph-L', 'δ': 'ph-d', 'γ': 'ph-g', 'α': 'ph-a', 'Fe3C': 'ph-c' };
+const PERL_BG = 'repeating-linear-gradient(90deg,var(--cAs) 0 7px,var(--cCs) 7px 9px)';
+function stackFill(box, segs) {
+  box.innerHTML = '';
+  const W = box.clientWidth || 320;
+  segs.filter(s => s[0] > 0.0005).forEach(([f, bg, lab, sh]) => {
+    const d = document.createElement('div');
+    d.style.width = (f * 100).toFixed(2) + '%'; d.style.background = bg;
+    const pc = fmt(f * 100, 1) + NB + '%', av = W * f - 8;
+    const opts = [lab + ' ' + pc, (sh || lab) + ' ' + pc, pc, fmt(f * 100, 0) + NB + '%', ''];
+    d.title = lab + ' ' + pc; d.textContent = opts.find(t => t.length * 6.4 <= av) || '';
+    box.appendChild(d);
+  });
+}
+function coSegs(co, c) {
+  return [
+    [co.L, PHC.L, 'liquide', 'L'], [co.d, PHC['δ'], 'ferrite δ', 'δ'], [co.g, PHC['γ'], 'austénite', 'γ'],
+    [co.aPro, PHC['α'], c <= CP ? 'ferrite' : 'ferrite proeutectoïde', 'α pro'], [co.cPro, 'var(--cC)', 'Fe₃C proeutectoïde', 'Fe₃C'], [co.perl, PERL_BG, 'perlite', 'P']
+  ];
+}
+class Curve {
+  constructor(svg) { this.s = svg; this.W = 360; this.H = 190; this.m = { l: 40, r: 70, t: 10, b: 20 }; }
+  set(sim, trans, T0, T1) {
+    this.sim = sim; this.T0 = T0; this.T1 = T1;
+    const P = sim.pts;
+    let a = P.findIndex(p => p.T <= T1); if (a < 0) a = 0; a = Math.max(0, a - 1);
+    let b = P.length - 1; for (let i = P.length - 1; i >= 0; i--) if (P[i].T >= T0) { b = Math.min(P.length - 1, i + 1); break; }
+    this.ta = P[a].t; this.tb = Math.max(P[b].t, this.ta + 1e-6);
+    const s = this.s, m = this.m; s.innerHTML = '';
+    const defs = el('defs', null, s), cp = el('clipPath', { id: 'ccclip' }, defs);
+    el('rect', { x: m.l, y: m.t, width: this.W - m.l - m.r, height: this.H - m.t - m.b }, cp);
+    el('rect', { x: m.l, y: m.t, width: this.W - m.l - m.r, height: this.H - m.t - m.b, style: 'fill:var(--paper)' }, s);
+    const sT = niceStep(T1 - T0, 6, [20, 25, 50, 100, 200]);
+    for (let T = Math.ceil(T0 / sT) * sT; T <= T1; T += sT) {
+      el('line', { x1: m.l, x2: this.W - m.r, y1: this.Y(T), y2: this.Y(T), style: 'stroke:var(--grid2)' }, s);
+      tx(s, m.l - 4, this.Y(T) + 3.5, String(T), 'font-size:9px;fill:var(--ink2);text-anchor:end');
+    }
+    const g = el('g', { 'clip-path': 'url(#ccclip)' }, s);
+    const lastY = [];
+    trans.filter(t => t.T > T0 && t.T < T1).forEach(t => {
+      const y = this.Y(t.T);
+      el('line', { x1: m.l, x2: this.W - m.r, y1: y, y2: y, style: 'stroke:var(--cL);stroke-width:1;stroke-dasharray:4 3' }, g);
+      let ly = y + 3; while (lastY.some(v => Math.abs(v - ly) < 10)) ly += 10;
+      lastY.push(ly);
+      tx(s, this.W - m.r + 4, ly, Math.round(t.T) + ' ' + t.lab, 'font-size:8.5px;fill:var(--ink2)');
+    });
+    let d = '';
+    for (let i = a; i <= b; i += 2) d += (d ? 'L' : 'M') + this.X(P[i].t).toFixed(1) + ' ' + this.Y(P[i].T).toFixed(1);
+    el('path', { d: d, style: 'fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round' }, g);
+    sim.plats.filter(p => p.hi - p.lo > 8).forEach(p => {
+      const ia = P.findIndex(q => q.H <= p.hi), ib = P.findIndex(q => q.H < p.lo);
+      if (ia < 0) return;
+      const tb = ib < 0 ? P[P.length - 1].t : P[ib].t;
+      el('line', { x1: this.X(P[ia].t), x2: this.X(tb), y1: this.Y(p.T), y2: this.Y(p.T), style: 'stroke:var(--cL);stroke-width:4;stroke-linecap:round' }, g);
+    });
+    el('rect', { x: m.l, y: m.t, width: this.W - m.l - m.r, height: this.H - m.t - m.b, style: 'fill:none;stroke:var(--ink);stroke-width:1.2' }, s);
+    tx(s, (m.l + this.W - m.r) / 2, this.H - 5, 'temps →', 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+    tx(s, 4, 12, '°C', 'font-size:9.5px;fill:var(--ink2)');
+    this.mk = el('g', null, s);
+  }
+  X(t) { const m = this.m; return m.l + (t - this.ta) / (this.tb - this.ta) * (this.W - m.l - m.r); }
+  Y(T) { const m = this.m; return this.H - m.b - (T - this.T0) / (this.T1 - this.T0) * (this.H - m.t - m.b); }
+  mark(i) {
+    const p = this.sim.pts[i], m = this.m; this.mk.innerHTML = '';
+    if (p.T > this.T1 + 1 || p.T < this.T0 - 1 || p.t < this.ta || p.t > this.tb) {
+      tx(this.mk, (m.l + this.W - m.r) / 2, m.t + 14, p.T > this.T1 ? 'au-dessus de la fenêtre' : 'sous la fenêtre', 'font-size:9.5px;fill:var(--ink2);text-anchor:middle');
+      return;
+    }
+    const x = this.X(p.t), y = this.Y(p.T);
+    el('line', { x1: m.l, x2: x, y1: y, y2: y, style: 'stroke:var(--cL);stroke-width:1' }, this.mk);
+    el('circle', { cx: x, cy: y, r: 5.5, style: 'fill:var(--cL);stroke:var(--ink);stroke-width:1.3' }, this.mk);
+  }
+}
+(function part4() {
+  let c = 0.3, sim = simulate(c), idx = 0, playing = false, speed = 2;
+  const d = new Dia($('#d4'), { view: 'steel' });
+  const cur = new Curve($('#cc4'));
+  const micro = new Micro($('#mc4'), 7, 220);
+  const sl = $('#s4t');
+  const snapIdx = T => { const i = sim.pts.findIndex(p => p.T <= T); return i < 0 ? sim.pts.length - 1 : i; };
+  function rebuildCurve() { const V = VIEWS[d.vname]; cur.set(sim, transitions(c), V.T0, V.T1); cur.mark(idx); }
+  d.overlay = (g, D) => {
+    const x = D.X(c);
+    el('line', { x1: x, x2: x, y1: D.m.t, y2: D.H - D.m.b, style: 'stroke:var(--ink);stroke-width:1.4;stroke-dasharray:5 3' }, g);
+    transitions(c).forEach(t => el('circle', { cx: x, cy: D.Y(t.T), r: 3, style: 'fill:var(--paper);stroke:var(--ink);stroke-width:1.2' }, g));
+    const sn = snapshot(sim, idx), y = D.Y(sn.T);
+    const ks = Object.keys(sn.ph).filter(k => sn.ph[k].f > 0.0005);
+    if (ks.length > 1) {
+      const cs = ks.map(k => sn.ph[k].c), a = Math.min.apply(null, cs), b = Math.max.apply(null, cs);
+      el('line', { x1: D.X(a), x2: D.X(b), y1: y, y2: y, style: 'stroke:var(--cL);stroke-width:2.4' }, g);
+      ks.forEach(k => el('circle', { cx: D.X(sn.ph[k].c), cy: y, r: 4.5, style: 'fill:' + PHC[k] + ';stroke:var(--ink);stroke-width:1.3' }, g));
+    }
+    el('circle', { cx: x, cy: y, r: 6, style: 'fill:var(--cL);stroke:var(--ink);stroke-width:1.5' }, g);
+  };
+  const REG = {
+    'L': 'Tout est liquide.', 'L+δ': 'Solidification : des cristaux de ferrite δ poussent dans le liquide.', 'δ': 'Ferrite δ seule.',
+    'δ+γ': 'La ferrite δ se transforme progressivement en austénite.', 'L+γ': 'Fin de solidification : austénite + liquide.',
+    'γ': 'Austénite seule : tout le carbone est dissous. C’est l’état de la Q5.',
+    'α+γ': 'La ferrite proeutectoïde germe aux joints de grains ; l’austénite restante s’enrichit en carbone.',
+    'γ+Fe3C': 'La cémentite proeutectoïde se dépose aux joints de grains de l’austénite.',
+    'α': 'Ferrite seule.', 'α+Fe3C': 'État final : plus rien ne bouge en refroidissement lent.'
+  };
+  function plateauText(sn) {
+    const T = Math.round(sn.T);
+    if (T === 727) return 'Palier eutectoïde à 727 °C : γ (0,76 %) → α + Fe₃C, la perlite. Trois phases coexistent et la température reste fixe jusqu’à la fin de la réaction (' + fmt(sn.prog * 100, 0) + NB + '% fait).';
+    if (T === 1493) return 'Palier péritectique à 1493 °C : L + δ → γ (' + fmt(sn.prog * 100, 0) + NB + '% fait).';
+    if (T === 1538) return 'Palier de solidification du fer pur.';
+    if (T === 1394) return 'Palier du fer pur : δ → γ, changement de maille à température fixe.';
+    if (T === 912) return 'Palier du fer pur : γ → α, changement de maille à température fixe.';
+    return 'Transformation très rapide sur un petit intervalle de température.';
+  }
+  function show() {
+    const sn = snapshot(sim, idx);
+    sl.value = Math.round(idx / (sim.pts.length - 1) * 1000);
+    $('#s4T').textContent = Math.round(sn.T) + NB + '°C' + (sn.plateau && sim.plats.some(p => p.hi - p.lo > 8 && Math.abs(p.T - sn.T) < 0.2) ? ' (palier)' : '');
+    $('#s4glow').style.background = glow(sn.T);
+    const bigPlat = sn.plateau && sim.plats.some(p => p.hi - p.lo > 8 && Math.abs(p.T - sn.T) < 0.2);
+    $('#s4reg').textContent = bigPlat ? plateauText(sn) : (REG[state(c, sn.T).r] || '');
+    const ks = Object.keys(sn.ph).filter(k => sn.ph[k].f > 0.0005);
+    $('#s4tab').innerHTML = '<thead><tr><th>Phase</th><th class="num">% C</th><th class="num">Fraction massique</th></tr></thead><tbody>' +
+      ks.map(k => '<tr><td><span class="ph ' + PHCL[k] + '">' + (k === 'Fe3C' ? 'Fe<sub>3</sub>C' : k) + '</span> ' + PHT[k] + '</td><td class="num">' + fmt(sn.ph[k].c, sn.ph[k].c < 0.1 ? 3 : 2) + '</td><td class="num"><b>' + fmt(sn.ph[k].f * 100, 1) + NB + '%</b></td></tr>').join('') + '</tbody>';
+    stackFill($('#s4ph'), ['L', 'δ', 'γ', 'α', 'Fe3C'].map(k => [sn.ph[k] ? sn.ph[k].f : 0, PHC[k], PHN[k], k === 'Fe3C' ? 'Fe₃C' : k]));
+    stackFill($('#s4co'), coSegs(sn.co, c));
+    micro.draw(sn.co);
+    d.drawOverlay();
+    cur.mark(idx);
+  }
+  function setC(v, keepT) {
+    c = clamp(Math.round(v * 100) / 100, 0, 2.1);
+    const T = keepT ? snapshot(sim, idx).T : null;
+    sim = simulate(c);
+    idx = T == null ? 0 : snapIdx(T);
+    $('#s4c').value = c; $('#s4cn').value = c;
+    $$('#s4pre button').forEach(b => b.classList.toggle('on', Math.abs(+b.dataset.c - c) < 1e-6));
+    rebuildCurve(); show();
+  }
+  $('#s4c').addEventListener('input', e => setC(+e.target.value, true));
+  $('#s4cn').addEventListener('change', e => { const v = parseFloat(String(e.target.value).replace(',', '.')); if (!isNaN(v)) setC(v, true); });
+  $$('#s4pre button').forEach(b => b.addEventListener('click', () => setC(+b.dataset.c, true)));
+  radio($('#d4zoom'), 'v', v => { d.setView(v); rebuildCurve(); });
+  $$('#mc4mode button').forEach(b => b.addEventListener('click', () => { $$('#mc4mode button').forEach(x => x.classList.toggle('on', x === b)); micro.mode = b.dataset.m; show(); }));
+  sl.addEventListener('input', () => { pause(); idx = Math.round(+sl.value / 1000 * (sim.pts.length - 1)); show(); });
+  $('#s4j1000').addEventListener('click', () => { pause(); idx = snapIdx(1000); show(); });
+  $('#s4j726').addEventListener('click', () => { pause(); idx = snapIdx(726); show(); });
+  $$('#s4 [data-sp]').forEach(b => b.addEventListener('click', () => { speed = +b.dataset.sp; $$('#s4 [data-sp]').forEach(x => x.classList.toggle('on', x === b)); }));
+  let raf = null, acc = 0;
+  function pause() { playing = false; if (raf) cancelAnimationFrame(raf); raf = null; $('#s4play').textContent = 'Lecture'; }
+  $('#s4play').addEventListener('click', () => {
+    if (playing) { pause(); return; }
+    if (idx >= sim.pts.length - 1) idx = 0;
+    playing = true; $('#s4play').textContent = 'Pause';
+    let last = performance.now();
+    const f = now => {
+      const dt = Math.min(0.05, (now - last) / 1000); last = now;
+      acc += dt * speed * sim.pts.length / 24;
+      const n = Math.floor(acc); acc -= n;
+      idx = Math.min(sim.pts.length - 1, idx + n);
+      show();
+      if (idx >= sim.pts.length - 1) { pause(); return; }
+      raf = requestAnimationFrame(f);
+    };
+    raf = requestAnimationFrame(f);
+  });
+  idx = snapIdx(1000);
+  rebuildCurve(); show();
+  redraws.push(show);
+})();
+
+/* ================= PARTIE 5 : perlite = f(%C) ================= */
+(function part5() {
+  const s = $('#q4'), m = { l: 44, r: 12, t: 14, b: 36 }, W = 360, H = 250, CM = 2.2;
+  const X = c => m.l + c / CM * (W - m.l - m.r), Y = v => H - m.b - v / 100 * (H - m.t - m.b);
+  const micro = new Micro($('#mc5'), 23, 180);
+  let c = 0.3, mode = 'co';
+  const perl = c => c <= CP ? 0 : c <= CS ? (c - CP) / (CS - CP) : (CK - c) / (CK - CS);
+  const apro = c => c <= CP ? 1 : c <= CS ? (CS - c) / (CS - CP) : 0;
+  const cpro = c => c <= CS ? 0 : (c - CS) / (CK - CS);
+  const atot = c => c <= CP ? 1 : (CK - c) / (CK - CP);
+  const base = el('g', null, s), mk = el('g', null, s);
+  function drawBase() {
+    base.innerHTML = '';
+    el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, style: 'fill:var(--paper)' }, base);
+    for (let v = 0; v <= 100; v += 20) { el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), style: 'stroke:var(--grid2)' }, base); tx(base, m.l - 5, Y(v) + 3.5, v + ' %', 'font-size:9px;fill:var(--ink2);text-anchor:end'); }
+    for (let k = 0; k <= 2.2 + 1e-9; k += 0.2) { el('line', { x1: X(k), x2: X(k), y1: H - m.b, y2: H - m.b + 4, style: 'stroke:var(--ink)' }, base); tx(base, X(k), H - m.b + 14, fmt(k, 1), 'font-size:9px;fill:var(--ink2);text-anchor:middle'); }
+    tx(base, (m.l + W - m.r) / 2, H - 5, '% massique de carbone', 'font-size:10px;fill:var(--ink2);text-anchor:middle');
+    [[CS, '0,76', 3, 'start'], [2.14, '2,14', -3, 'end']].forEach(([cc, l, dx, a]) => { el('line', { x1: X(cc), x2: X(cc), y1: m.t, y2: H - m.b, style: 'stroke:var(--ink2);stroke-dasharray:3 3' }, base); tx(base, X(cc) + dx, H - m.b - 5, l, 'font-size:9px;fill:var(--ink2);text-anchor:' + a); });
+    tx(base, X(0.45), H - m.b - 5, 'hypo', 'font-size:9.5px;font-weight:700;fill:var(--ink2);text-anchor:middle');
+    tx(base, X(1.4), H - m.b - 5, 'hyper', 'font-size:9.5px;font-weight:700;fill:var(--ink2);text-anchor:middle');
+    const line = (f, col, w, dash) => { let d = ''; for (let k = 0; k <= 214; k++) { const cc = k / 100; d += (d ? 'L' : 'M') + X(cc).toFixed(1) + ' ' + Y(f(cc) * 100).toFixed(1); } el('path', { d: d, style: 'fill:none;stroke:' + col + ';stroke-width:' + w + ';stroke-linejoin:round' + (dash ? ';stroke-dasharray:' + dash : '') }, base); };
+    if (mode === 'co') {
+      let d = 'M' + X(0) + ' ' + Y(0); for (let k = 0; k <= 214; k++) d += 'L' + X(k / 100).toFixed(1) + ' ' + Y(perl(k / 100) * 100).toFixed(1); d += 'L' + X(2.14) + ' ' + Y(0) + 'Z';
+      el('path', { d: d, style: 'fill:url(#pAC);opacity:.55' }, base);
+      line(apro, 'var(--cA)', 2); line(cpro, 'var(--cC)', 2); line(perl, 'var(--ink)', 3);
+      tx(base, X(0.08), Y(88), 'ferrite proeut.', 'font-size:9.5px;font-weight:700;fill:var(--cA)');
+      tx(base, X(1.55), Y(28), 'Fe₃C proeut.', 'font-size:9.5px;font-weight:700;fill:var(--cC)');
+      tx(base, X(1.1), Y(84), 'perlite', 'font-size:11px;font-weight:800;fill:var(--ink)');
+    } else {
+      line(atot, 'var(--cA)', 3); line(c => 1 - atot(c), 'var(--cC)', 3);
+      tx(base, X(1.2), Y(84), 'ferrite α totale', 'font-size:10px;font-weight:700;fill:var(--cA)');
+      tx(base, X(1.2), Y(24), 'cémentite totale', 'font-size:10px;font-weight:700;fill:var(--cC)');
+    }
+    el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, style: 'fill:none;stroke:var(--ink);stroke-width:1.2' }, base);
+  }
+  function show() {
+    mk.innerHTML = '';
+    const x = X(c);
+    el('line', { x1: x, x2: x, y1: m.t, y2: H - m.b, style: 'stroke:var(--cL);stroke-width:2' }, mk);
+    const pts = mode === 'co' ? [[perl(c), 'var(--ink)'], [apro(c), 'var(--cA)'], [cpro(c), 'var(--cC)']] : [[atot(c), 'var(--cA)'], [1 - atot(c), 'var(--cC)']];
+    pts.forEach(([f, col]) => el('circle', { cx: x, cy: Y(f * 100), r: 4.5, style: 'fill:var(--paper);stroke:' + col + ';stroke-width:2.2' }, mk));
+    const p = perl(c);
+    let t;
+    if (c <= CP) t = 'À ' + fmt(c, 2) + ' % C : moins que la limite de solubilité de la ferrite. Pas de perlite, que de la ferrite.';
+    else if (c < CS) t = 'À ' + fmt(c, 2) + ' % C, acier hypoeutectoïde : perlite = (' + fmt(c, 2) + ' − 0,022) / 0,738 = ' + fmt(p * 100, 1) + ' %, et ' + fmt((1 - p) * 100, 1) + ' % de ferrite proeutectoïde.';
+    else if (c <= CS + 0.005) t = 'À 0,76 % C, acier eutectoïde : 100 % de perlite.';
+    else t = 'À ' + fmt(c, 2) + ' % C, acier hypereutectoïde : perlite = (6,67 − ' + fmt(c, 2) + ') / 5,91 = ' + fmt(p * 100, 1) + ' %, et ' + fmt((1 - p) * 100, 1) + ' % de cémentite proeutectoïde.';
+    if (mode === 'ph') t += ' Phases : ' + fmt(atot(c) * 100, 1) + ' % de ferrite et ' + fmt((1 - atot(c)) * 100, 1) + ' % de cémentite.';
+    $('#q4txt').textContent = t;
+    micro.draw({ L: 0, d: 0, g: 0, aPro: apro(c), cPro: cpro(c), perl: p });
+    $('#q4c').value = c;
+  }
+  $('#q4c').addEventListener('input', e => { c = +e.target.value; show(); });
+  const fromEv = e => { const r = s.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * W; c = clamp(Math.round((x - m.l) / (W - m.l - m.r) * CM * 100) / 100, 0, 2.14); show(); };
+  let dr = false;
+  s.addEventListener('pointerdown', e => { dr = true; s.setPointerCapture(e.pointerId); fromEv(e); });
+  s.addEventListener('pointermove', e => { if (dr) fromEv(e); });
+  s.addEventListener('pointerup', () => { dr = false; });
+  radio($('#q4mode'), 'm', v => { mode = v; drawBase(); show(); });
+  drawBase(); show();
+  redraws.push(show);
+})();
+
+/* ================= PARTIE 6 : austénite à 1000 °C ================= */
+(function part6() {
+  const cell = new Cell3D($('#cell6'), { octa: true });
+  cell.set({ s: 'cfc', col: '--cG' });
+  radio($('#cell6opt'), 'size', v => cell.set({ size: v }));
+  redraws.push(() => cell.draw());
+  const g = $('#q5grid');
+  let cubes = [], cur = 0, dot = null, vis = false, timer = null;
+  function calc(c) {
+    const n1 = c / 100 * 7.8 / 12 * 6.02e23;
+    const r = (c / 12) / ((100 - c) / 55.85), perCell = 4 * r, n2 = perCell / Math.pow(3.57e-8, 3);
+    return { n1, n2, r, perCell, cells: 1 / perCell };
+  }
+  const sci = v => { const e = Math.floor(Math.log10(v)), m = v / Math.pow(10, e); return fmt(m, 2) + '·10' + String(e).split('').map(ch => '⁰¹²³⁴⁵⁶⁷⁸⁹'['0123456789'.indexOf(ch)] || '⁻').join(''); };
+  function drawGrid(n) {
+    g.innerHTML = '';
+    const N = Math.min(60, Math.max(2, Math.round(n)));
+    const cols = Math.min(N, N > 30 ? 12 : 9), rows = Math.ceil(N / cols);
+    const s = Math.min(24, 330 / cols - 12, 118 / rows - 10), dd = s * 0.35, gap = 6;
+    const W0 = cols * (s + dd + gap), x0 = (360 - W0) / 2;
+    cubes = [];
+    for (let i = 0; i < N; i++) {
+      const x = x0 + (i % cols) * (s + dd + gap), y = 8 + dd + Math.floor(i / cols) * (s + dd + gap);
+      el('path', { d: 'M' + x + ' ' + y + 'l' + dd + ' ' + (-dd) + 'h' + s + 'l' + (-dd) + ' ' + dd + 'Z', style: 'fill:var(--paper);stroke:var(--ink);stroke-width:.7' }, g);
+      el('path', { d: 'M' + (x + s) + ' ' + y + 'l' + dd + ' ' + (-dd) + 'v' + s + 'l' + (-dd) + ' ' + dd + 'Z', style: 'fill:var(--cG);opacity:.55;stroke:var(--ink);stroke-width:.7' }, g);
+      el('rect', { x: x, y: y, width: s, height: s, style: 'fill:var(--cGs);stroke:var(--ink);stroke-width:.7' }, g);
+      cubes.push([x + s / 2, y + s / 2, cols, i]);
+    }
+    dot = el('circle', { cx: cubes[0][0], cy: cubes[0][1], r: Math.max(2.5, s * 0.2), style: 'fill:#111;stroke:#fff;stroke-width:1' }, g);
+    cur = 0;
+    const yb = 8 + dd + rows * (s + dd + gap) + 12;
+    tx(g, 355, yb, (n > 60 ? 'plus de 60' : '≈ ' + Math.round(n)) + ' mailles pour 1 atome de carbone', 'font-size:10px;font-weight:650;fill:var(--ink2);text-anchor:end');
+    g.setAttribute('viewBox', '0 0 360 ' + Math.ceil(yb + 6));
+  }
+  function hop() {
+    if (!vis || RM || !cubes.length) return;
+    const cols = cubes[0][2], i = cur, nb = [i - 1, i + 1, i - cols, i + cols].filter(j => j >= 0 && j < cubes.length && (Math.abs((j % cols) - (i % cols)) <= 1));
+    const j = nb[Math.floor(Math.random() * nb.length)], a = cubes[i], b = cubes[j], t0 = performance.now();
+    cur = j;
+    const f = now => { const u = easeIO(clamp((now - t0) / 350, 0, 1)); dot.setAttribute('cx', lerp(a[0], b[0], u)); dot.setAttribute('cy', lerp(a[1], b[1], u) - Math.sin(u * Math.PI) * 6); if (u < 1) requestAnimationFrame(f); };
+    requestAnimationFrame(f);
+  }
+  onVisible(g, v => { vis = v; clearInterval(timer); if (v && !RM) timer = setInterval(hop, 900); });
+  function upd(c) {
+    c = clamp(c, 0.05, 2.1);
+    $('#q5c').value = c; $('#q5cn').value = c;
+    const r = calc(c);
+    $('#q5res').innerHTML = [
+      ['Méthode 1 (ρ = 7,8)', sci(r.n1) + ' /cm³'],
+      ['Méthode 2 (maille)', sci(r.n2) + ' /cm³'],
+      ['Atome de C par atome de Fe', '1 pour ' + fmt(1 / r.r, 0)],
+      ['Atomes de C par maille', fmt(r.perCell, 3)],
+      ['Sites octaédriques occupés', fmt(r.r * 100, 1) + ' %']
+    ].map(([k, v]) => '<div><div class="k">' + k + '</div><div class="v">' + v + '</div></div>').join('');
+    drawGrid(r.cells);
+  }
+  $('#q5c').addEventListener('input', e => upd(+e.target.value));
+  $('#q5cn').addEventListener('change', e => { const v = parseFloat(String(e.target.value).replace(',', '.')); if (!isNaN(v)) upd(v); });
+  upd(0.3);
+})();
+
+/* ---------- thème ---------- */
+const rerenderAll = () => redraws.forEach(f => { try { f(); } catch (e) {} });
+try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', rerenderAll); } catch (e) {}
+})();
+</script>
+</body>
+</html>
