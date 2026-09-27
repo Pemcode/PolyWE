@@ -38,4 +38,4 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 - Ne pas corriger le fond scientifique sans tâche dédiée. Ne pas inventer de validation officielle, de sources ou de cours disponibles.
 - Pas de compte élève, suivi collectif, service externe ou publication automatique des brouillons dans la première version.
 - Garder les sauvegardes historiques locales hors du dépôt et de l'artefact publié.
-- Le dépôt désigné est `https://github.com/Pemcode/PolyWE`. GitHub Pages est validé, mais le dépôt est initialement privé et l’offre actuelle refuse Pages (API 422). Ne pas changer la visibilité sans instruction du propriétaire. La variable de dépôt `PAGES_ENABLED=true` autorise les étapes de publication après activation de Pages ; les tests fonctionnent indépendamment.
+- Le dépôt `https://github.com/Pemcode/PolyWE` a été rendu public par le propriétaire. GitHub Pages est activé via GitHub Actions à l’adresse `https://pemcode.github.io/PolyWE/`. La variable de dépôt `PAGES_ENABLED=true` autorise la publication après les contrôles sur `main` ; les pull requests ne déploient pas. Ne pas changer la visibilité sans instruction du propriétaire.

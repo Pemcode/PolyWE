@@ -1,6 +1,8 @@
 # Révisions IWE — Promo DU Ingénierie du soudage
 
-Projet : [Pemcode/PolyWE](https://github.com/Pemcode/PolyWE).
+Site de la promo : **[Révisions IWE](https://pemcode.github.io/PolyWE/)**.
+
+Dépôt : [Pemcode/PolyWE](https://github.com/Pemcode/PolyWE).
 
 Site statique destiné à GitHub Pages. Les cours interactifs restent des fichiers HTML éditables. Un catalogue JSON organise les matières, les cours et les parcours ; un générateur Python construit les pages et leur navigation.
 
@@ -73,16 +75,22 @@ uv run python -m wiki build
 
 Les tests rapides utilisent des cours fictifs pour vérifier l'ajout de matières, les états, les liens, les ressources et la conservation des sources. Les tests navigateur lancent leur propre serveur local et vérifient les parcours à la racine et sous `/promo/`, avec une largeur de téléphone. Les groupes de dépendances et leurs versions sont verrouillés dans `uv.lock`.
 
-## Publier avec GitHub Pages
+## Publier les mises à jour avec GitHub Pages
 
-1. Dépôt de la promo : [Pemcode/PolyWE](https://github.com/Pemcode/PolyWE).
-2. Avant le premier push, terminer la relecture des contenus à publier ou passer les cours concernés en `brouillon`.
-3. Dans le dépôt : **Settings → Pages → Build and deployment → Source : GitHub Actions**.
-4. Dans **Settings → Secrets and variables → Actions → Variables**, définir `PAGES_ENABLED` à `true` une fois Pages activé. Envoyer ensuite le projet sur la branche principale du dépôt, ou lancer le workflow manuellement. Le workflow teste, construit et publie uniquement `_site/`. Les pull requests testent et construisent sans déployer.
-5. Récupérer l'adresse fournie par le déploiement et la placer dans la description du groupe WhatsApp.
+Le site est en ligne à **https://pemcode.github.io/PolyWE/**. Le propriétaire a rendu le dépôt public ; la source Pages est **GitHub Actions** et la variable de dépôt `PAGES_ENABLED` vaut `true`.
 
-Les fichiers restent lisibles sous `https://compte.github.io/depot/` sans saisir ce préfixe dans le code : les liens du site sont relatifs. Le dépôt public et l'adresse du site sont deux surfaces distinctes : `.gitignore` exclut les sauvegardes historiques ; le générateur exclut les brouillons de l'artefact du site. Un brouillon suivi dans un dépôt public reste lisible dans ce dépôt.
+1. Modifier les HTML et le catalogue. Conserver les chemins `url` et les ancres déjà partagés. Un cours pas encore prêt reste en `brouillon`.
+2. Exécuter les vérifications décrites ci-dessus et contrôler le cours en prévisualisation.
+3. Committer et pousser sur `main`. Le workflow teste, construit puis publie uniquement `_site/`. Suivre son résultat dans [GitHub Actions](https://github.com/Pemcode/PolyWE/actions). Les pull requests testent et construisent sans déployer.
 
-Au premier raccordement, le dépôt est privé et l’API GitHub refuse Pages avec l’offre actuelle. La publication reste donc désactivée tant que `PAGES_ENABLED` n’est pas activé ; les contrôles continuent de s’exécuter. Le choix entre dépôt public et offre compatible avec un dépôt privé appartient au propriétaire. Les aperçus WhatsApp réels nécessitent ensuite l’URL publiée. Le partage natif et la copie ont une solution de repli quand le navigateur ne propose pas l'API attendue.
+Un lancement manuel est aussi possible dans **Actions → Vérifier et publier le wiki → Run workflow**. Pour reconfigurer le dépôt : **Settings → Pages → Source : GitHub Actions** ; puis **Settings → Secrets and variables → Actions → Variables → `PAGES_ENABLED=true`**.
+
+Les liens relatifs fonctionnent sous `/PolyWE/` et sur un domaine à la racine. Le dépôt public et l'adresse du site sont deux surfaces distinctes : `.gitignore` exclut les sauvegardes historiques ; le générateur exclut les brouillons de l'artefact du site. Un brouillon suivi dans un dépôt public reste lisible dans ce dépôt.
+
+## Partager dans WhatsApp
+
+Placer **https://pemcode.github.io/PolyWE/** dans la description du groupe et épingler le message d'annonce. Chacun peut naviguer par matière, rechercher une notion ou suivre un parcours reliant plusieurs cours.
+
+Dans un cours, **Partager** ouvre le menu de partage de l'appareil ; **Copier le lien** permet de coller l'adresse dans WhatsApp. **Partager cette section** cible directement le passage concerné. Le partage natif et la copie proposent un repli si le navigateur ne fournit pas l'API attendue. Les adresses restent valables quand le contenu d'un cours est mis à jour, à condition de conserver son `url` et ses ancres.
 
 Références de configuration : [uv](https://docs.astral.sh/uv/guides/projects/), [uv dans GitHub Actions](https://docs.astral.sh/uv/guides/integration/github/), [workflow GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).

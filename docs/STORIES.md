@@ -4,10 +4,10 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 
 | Story | Besoin | État |
 | --- | --- | --- |
-| S01 | Ajouter des matières et des cours sans changer le code | Terminé localement |
-| S02 | Parcourir les matières et ouvrir un cours avec un lien stable | Terminé localement |
-| S03 | Retrouver une notion et partager sa section | Terminé localement |
-| S04 | Construire et contrôler la publication GitHub Pages avec uv | Contrôles GitHub réussis ; Pages attend le choix de visibilité |
+| S01 | Ajouter des matières et des cours sans changer le code | Livré |
+| S02 | Parcourir les matières et ouvrir un cours avec un lien stable | Livré |
+| S03 | Retrouver une notion et partager sa section | Livré |
+| S04 | Construire et contrôler la publication GitHub Pages avec uv | Livré — site public vérifié |
 | S05 | Relecture éditoriale des cours par l'utilisateur | En cours côté utilisateur |
 | S06 | Favoris et reprise de lecture sur l'appareil | Plus tard |
 | S07 | Consultation hors connexion | Plus tard |
@@ -64,4 +64,6 @@ En tant que mainteneur, je veux qu'une erreur de catalogue ou de lien soit déte
 - Dépôt destinataire : Pemcode/PolyWE. Les tests sont indépendants de la publication ; `PAGES_ENABLED=true` est nécessaire pour déployer.
 
 
-État S04 : `uv.lock`, commandes locales et workflow présents. Installation verrouillée, tests et construction exécutés localement. La configuration CI utilise les actions officielles ; le déploiement reste suspendu : GitHub a refusé l’activation Pages sur le dépôt privé avec l’offre actuelle (HTTP 422). Les contrôles GitHub ont réussi sur le premier commit : installation verrouillée, tests Python, tests Chromium et build. [Exécution b685497](https://github.com/Pemcode/PolyWE/actions/runs/36343120426). La publication est volontairement ignorée tant que Pages ne peut pas être activé. Pas de test qui se contente de reproduire le texte du YAML. Références et procédure dans README.md.
+État S04 au 27 septembre 2026 : livré sur [le site public](https://pemcode.github.io/PolyWE/). Le propriétaire a rendu le dépôt public ; GitHub Pages a ensuite été activé avec la source GitHub Actions et `PAGES_ENABLED=true`. Installation verrouillée, tests Python (26 réussis et un cas Windows ignoré sous Linux), dix parcours Chromium, build et déploiement ont réussi : [première publication](https://github.com/Pemcode/PolyWE/actions/runs/36343734282). Pas de test qui se contente de reproduire le texte du YAML. Références et procédure dans README.md.
+
+Vérification de l'adresse publiée : 17 fichiers servis en HTTP 200, 243 liens locaux et ancres contrôlés à partir des fichiers téléchargés. Navigation mobile à 390 px sur les sept cours, recherche « prechauffage » jusqu'à la section `#s6`, copie effective de son URL HTTPS dans le presse-papiers, parcours de préchauffage et deux cours RDM à venir sans lien. Aucune erreur JavaScript ni débordement horizontal détecté sur les pages visitées. Accueil également chargé à 1440 px. Le partage natif reste couvert par les tests navigateur avec API simulée ; aucun message WhatsApp n'a été envoyé.
