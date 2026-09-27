@@ -1,5 +1,7 @@
 # Révisions IWE — Promo DU Ingénierie du soudage
 
+Projet : [Pemcode/PolyWE](https://github.com/Pemcode/PolyWE).
+
 Site statique destiné à GitHub Pages. Les cours interactifs restent des fichiers HTML éditables. Un catalogue JSON organise les matières, les cours et les parcours ; un générateur Python construit les pages et leur navigation.
 
 ## Démarrer avec uv

@@ -7,7 +7,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S01 | Ajouter des matières et des cours sans changer le code | Terminé localement |
 | S02 | Parcourir les matières et ouvrir un cours avec un lien stable | Terminé localement |
 | S03 | Retrouver une notion et partager sa section | Terminé localement |
-| S04 | Construire et contrôler la publication GitHub Pages avec uv | Projet prêt ; contrôles GitHub à lancer ; Pages bloqué par l’offre du dépôt privé |
+| S04 | Construire et contrôler la publication GitHub Pages avec uv | Contrôles GitHub réussis ; Pages attend le choix de visibilité |
 | S05 | Relecture éditoriale des cours par l'utilisateur | En cours côté utilisateur |
 | S06 | Favoris et reprise de lecture sur l'appareil | Plus tard |
 | S07 | Consultation hors connexion | Plus tard |
@@ -64,4 +64,4 @@ En tant que mainteneur, je veux qu'une erreur de catalogue ou de lien soit déte
 - Dépôt destinataire : Pemcode/PolyWE. Les tests sont indépendants de la publication ; `PAGES_ENABLED=true` est nécessaire pour déployer.
 
 
-État S04 : `uv.lock`, commandes locales et workflow présents. Installation verrouillée, tests et construction exécutés localement. La configuration CI utilise les actions officielles ; le déploiement reste suspendu : GitHub a refusé l’activation Pages sur le dépôt privé avec l’offre actuelle (HTTP 422). Les contrôles GitHub sont à lancer après le premier push. Pas de test qui se contente de reproduire le texte du YAML. Références et procédure dans README.md.
+État S04 : `uv.lock`, commandes locales et workflow présents. Installation verrouillée, tests et construction exécutés localement. La configuration CI utilise les actions officielles ; le déploiement reste suspendu : GitHub a refusé l’activation Pages sur le dépôt privé avec l’offre actuelle (HTTP 422). Les contrôles GitHub ont réussi sur le premier commit : installation verrouillée, tests Python, tests Chromium et build. [Exécution b685497](https://github.com/Pemcode/PolyWE/actions/runs/36343120426). La publication est volontairement ignorée tant que Pages ne peut pas être activé. Pas de test qui se contente de reproduire le texte du YAML. Références et procédure dans README.md.
