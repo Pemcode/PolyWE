@@ -12,3 +12,6 @@ artifacts/
 
 # Analyse initiale locale ; les décisions actuelles sont dans docs/.
 /PROPOSITION_WIKI.md
+
+# Plannings sources conservés localement ; seule la transcription est publiée.
+/Planning/

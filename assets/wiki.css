@@ -52,3 +52,8 @@
 @media (prefers-reduced-motion:no-preference) { .wiki-shell { scroll-behavior:smooth; } }
 @media print { .wiki-nav, .wiki-course-footer, .wiki-search, .wiki-top nav { display:none; } }
 .wiki-section-share { font:600 12px/1.4 system-ui,sans-serif; color:#254c57; background:#edf3f0; border:1px solid #b7cbc0; border-radius:5px; padding:7px 10px; cursor:pointer; margin:0 0 14px; } .wiki-section-share:focus-visible { outline:3px solid #d86632; outline-offset:3px; } @media print { .wiki-section-share { display:none; } }
+
+.wiki-planning-teaser { display:flex; justify-content:space-between; align-items:center; gap:24px; border:1px solid #cad8ce; background:#fff; border-left:4px solid #316d61; border-radius:10px; padding:22px 24px; margin:0 0 30px; text-decoration:none; }
+.wiki-planning-teaser strong { display:block; font-size:1.1rem; }.wiki-planning-teaser small { display:block; color:var(--wiki-muted); margin-top:5px; }.wiki-planning-teaser>span:last-child { font-size:.85rem; font-weight:650; white-space:nowrap; }
+.wiki-top nav { flex-wrap:wrap; }
+@media (max-width:640px) { .wiki-planning-teaser { align-items:start; flex-direction:column; gap:12px; padding:20px; }.wiki-top nav { gap:14px; font-size:.85rem; } }

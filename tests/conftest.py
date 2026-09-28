@@ -31,3 +31,32 @@ def project(tmp_path):
 
 def save_catalogue(root, data):
     (root / "catalogue-cours.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+
+
+def add_planning(project):
+    root, catalogue = project
+    (root / "Planning").mkdir()
+    (root / "Planning/source.pdf").write_bytes(b"%PDF-1.4\nfixture")
+    plan = {
+        "version": 1, "phase_reference": "pre-rentree",
+        "sources": [{"id": "source", "titre": "Planning source", "fichier": "Planning/source.pdf"}],
+        "themes": [{"id": "thermique", "titre": "Thermique"}, {"id": "examens", "titre": "Examens"}],
+        "phases": [
+            {"id": "pre-rentree", "titre": "Pré-rentrée IWE1", "debut": "2026-09-23", "fin": "2026-10-02", "source": "source"},
+            {"id": "formation", "titre": "Formation DU", "debut": "2026-10-05", "fin": "2027-02-26", "source": "source"}],
+        "sujets": [
+            {"id": "chauffer", "titre": "Traitements thermiques", "theme": "thermique", "code": "2.8", "supports": [{"cours": "th-01", "ancre": "calcul"}]},
+            {"id": "sans-support", "titre": "Notion à documenter", "theme": "thermique", "supports": []},
+            {"id": "examen", "titre": "Examen matériaux", "theme": "examens", "supports": []}],
+        "seances": [
+            {"id": "s1", "phase": "pre-rentree", "date": "2026-09-23", "sujet": "chauffer", "horaire": "08:00–12:30"},
+            {"id": "s2", "phase": "pre-rentree", "date": "2026-09-28", "sujet": "chauffer", "horaire": "08:00–11:25"},
+            {"id": "s3", "phase": "pre-rentree", "date": "2026-09-28", "sujet": "sans-support"},
+            {"id": "s4", "phase": "formation", "date": "2027-01-12", "sujet": "examen", "horaire": "10:15–12:00"}]}
+    (root / "planning-formation.json").write_text(json.dumps(plan, ensure_ascii=False), encoding="utf-8")
+    return root, catalogue, plan
+
+
+@pytest.fixture
+def planning_project(project):
+    return add_planning(project)

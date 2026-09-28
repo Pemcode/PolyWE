@@ -61,6 +61,14 @@ Ajouter un objet dans `matieres` avec un `id` sans accents (ex. `controles`), un
 
 Un objet de `parcours` comporte `id`, `titre`, `description` et `etapes`. Chaque étape référence `cours` et `ancre`. Exemple : `{"cours": "met-03", "ancre": "s6"}`. Le build refuse une étape vers un cours indisponible ou une ancre inexistante.
 
+## Planning de formation
+
+La [frise de formation](https://pemcode.github.io/PolyWE/planning.html) relie les séances aux supports disponibles. Elle propose la semaine actuelle, les filtres de période/matière et les examens, avec les références des deux plannings sources. L'affichage reste consultable sans JavaScript. Les PDF sources sont conservés localement, hors du dépôt et du site publics.
+
+`planning-formation.json` sépare les séances, sujets et sources du catalogue des cours. Ajouter un cours aux `supports` d'un sujet le fait apparaître sur toutes les séances correspondantes ; son état de disponibilité vient du catalogue. Après une modification du planning, `uv run python -m wiki check` vérifie aussi ses dates, références et ancres. Voir [l'analyse et la procédure de mise à jour](docs/PLANNING.md).
+
+Pour partager une semaine, utiliser « Lien vers cette semaine », par exemple [la semaine du 28 septembre](https://pemcode.github.io/PolyWE/planning.html#semaine-2026-40). Les filtres sont conservés dans l'adresse de la page.
+
 ## Tests et TDD
 
 Les règles sont dans [AGENTS.md](AGENTS.md), les critères et preuves dans [docs/STORIES.md](docs/STORIES.md). Cycle attendu : une story → un test en échec → implémentation minimale → refactorisation → vérification.

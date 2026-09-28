@@ -12,6 +12,8 @@
 flowchart LR
   A[HTML des cours] --> C[Générateur Python]
   B[Catalogue JSON] --> C
+  P[PDF de planning] -->|transcription vérifiée| J[planning-formation.json]
+  J --> C
   C --> D[Site statique dans _site]
   D --> E[GitHub Pages]
   E --> F[Liens partagés sur WhatsApp]
@@ -23,8 +25,11 @@ flowchart LR
 ```text
 AGENTS.md                  règles pour les prochaines interventions
 catalogue-cours.json        matières, cours, statuts et parcours
+planning-formation.json     phases, sujets, séances et PDF déclarés
+Planning/                  plannings sources locaux, ignorés par Git
 Metallurgie/ et RDM/        sources actuelles ; autres matières ajoutables
 wiki/catalogue.py          validation et extraction des sections
+wiki/planning.py           validation et rendu de la frise
 wiki/build.py              génération et contrôle des liens
 wiki/__main__.py           commandes check/build
 assets/                    interface commune, recherche et partage
@@ -46,11 +51,17 @@ Le catalogue conserve les informations éditoriales stables. Les titres de secti
 
 ## Isolation des cours
 
-Le générateur lit les sources et enrichit leurs copies avec une navigation commune. Il conserve les scripts et styles pédagogiques ; les nouveaux styles sont limités aux classes `wiki-*` et l'interface du portail à `.wiki-shell`. Chaque cours reste dans son document, ce qui évite les collisions entre les nombreuses variables, identifiants et canvas des cours.
+Le générateur lit les sources et enrichit leurs copies avec une navigation commune. Il conserve les scripts et styles pédagogiques ; les styles communs utilisent les classes `wiki-*` et le portail `.wiki-shell`. Les fichiers `planning.css` et `planning.js` sont chargés uniquement sur la page de frise. Chaque cours reste dans son document, ce qui évite les collisions entre les nombreuses variables, identifiants et canvas des cours.
 
 L'accueil et les pages matière sont préconstruits. Aucun routeur JavaScript, chargement des cours en iframe ou application monopage n'est nécessaire. Les liens relatifs préservent le fonctionnement sous le nom du dépôt GitHub Pages.
 
 Les sorties sont reconstruites depuis les seules entrées disponibles et leurs fichiers associés. Le générateur refuse de nettoyer une sortie non marquée ou un lien/jonction vers un autre dossier. Les fichiers associés doivent être déclarés ; les dépendances HTML manquantes bloquent le build. La validation ne prétend pas analyser tous les chargements dynamiques possibles à l'intérieur du JavaScript pédagogique.
+
+## Planning
+
+La frise est préconstruite à partir de `planning-formation.json` ; son analyse et ses rapprochements éditoriaux sont documentés dans [PLANNING.md](PLANNING.md). Les sources sont référencées mais leurs PDF restent locaux (`publier: false`, comportement par défaut). Le build n'exige alors pas ces fichiers en CI. Une publication ultérieure demanderait l'autorisation explicite du propriétaire puis `publier: true` pour chaque PDF autorisé ; seuls ces fichiers seraient copiés. Les dépendances d'analyse PDF utilisées ponctuellement via uv ne sont pas nécessaires à la génération ni à la CI.
+
+Les semaines ISO sont calculées en Python ; dans le navigateur, les filtres masquent les cartes et le repère actuel utilise l'heure de Paris. Les paramètres d'URL et ancres restaurent la vue, y compris une semaine future. Sans JavaScript, les semaines restent des éléments `details` consultables et les liens restent ordinaires. Le planning est facultatif pour les catalogues de test qui n'en possèdent pas.
 
 ## Harness proportionné
 

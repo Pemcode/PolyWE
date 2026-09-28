@@ -8,6 +8,7 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 
 - HTML/CSS/JavaScript natifs pour le site ; petit générateur Python ; catalogue JSON versionné comme source des métadonnées. Pas de serveur, de base SQL ni de framework frontend sans besoin démontré.
 - `catalogue-cours.json` décrit matières, cours et parcours. `fichier` désigne la source et `url` le chemin publié stable. Les sections sont extraites des HTML à chaque génération pour éviter un inventaire périmé.
+- `planning-formation.json` décrit les phases, séances, sujets et sources PDF déclarées. Les supports référencent les identifiants du catalogue et éventuellement une ancre ; ne pas déduire une affectation des fiches à des heures que le planning ne précise pas. Les PDF de `Planning/` restent locaux et ignorés par Git ; `publier` vaut `false` par défaut. Ne publier un PDF que sur autorisation explicite du propriétaire. Voir `docs/PLANNING.md`.
 - Garder des identifiants et chemins stables. Un cours `a_venir` n'a aucun lien de lecture. Un cours `brouillon` n'est pas publié.
 - Les HTML des matières sont les sources éditoriales. L'utilisateur est en train de les réviser : ne pas les écraser, renommer ou réécrire sans tâche explicite. Le générateur enrichit uniquement les copies dans `_site/`.
 - Ne publier que les cours disponibles explicitement inscrits au catalogue et leurs ressources déclarées. Ne jamais copier tout le dossier de travail dans le site.

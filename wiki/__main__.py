@@ -3,6 +3,7 @@ from pathlib import Path
 
 from .build import build
 from .catalogue import CatalogueError, load_catalogue
+from .planning import load_planning
 
 
 def main():
@@ -12,6 +13,9 @@ def main():
     try:
         if args.command == "check":
             data = load_catalogue(Path.cwd())
+            plan = load_planning(Path.cwd(), data)
+            if plan:
+                print(f"Planning valide : {len(plan['seances'])} séances et périodes.")
             available = [c for c in data["cours"] if c["statut"] == "disponible"]
             print(f"Catalogue valide : {len(available)} cours disponibles, {sum(len(c['sections']) for c in available)} sections.")
         else:

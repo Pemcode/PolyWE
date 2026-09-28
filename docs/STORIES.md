@@ -12,6 +12,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S06 | Favoris et reprise de lecture sur l'appareil | Plus tard |
 | S07 | Consultation hors connexion | Plus tard |
 | S08 | Intégrer le cours RDM 04 et ses sections | Intégré et vérifié |
+| S09 | Retrouver les supports à partir du planning de formation | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -82,3 +83,21 @@ En tant qu'élève, j'ouvre le cours sur les directions principales et le tricer
 Preuve TDD du 28 septembre 2026 : RED exécuté avec `uv run pytest tests/test_content.py -q` : le cours 4 n'était pas publié, car encore `a_venir`. GREEN après mise à jour du catalogue et du parcours : le test vérifie les liens depuis la matière, le cours 3, la recherche et le parcours des contraintes résiduelles. Aucun changement du générateur n'a été nécessaire.
 
 Validation locale : 28 tests Python et 10 parcours Chromium réussis ; catalogue et build valides (8 cours disponibles, 73 sections, seul le cours 5 à venir). Le nouveau cours comporte 10 sections. Empreinte SHA-256 du HTML source inchangée. Contrôle du cours réel sous `/PolyWE/` à 390 px et 1440 px : recherche « tricercle », navigation 3 ↔ 4, lien de parcours, copie dans le presse-papiers et partage de `#c4` avec API native simulée. Simulations du tricercle et des valeurs propres manipulées, quiz utilisé et réinitialisé ; aucune erreur JavaScript ni débordement horizontal détecté. Accueil du cours et simulateur inspectés visuellement sur mobile. Ces contrôles portent sur le fonctionnement, pas sur une validation scientifique des calculs.
+
+## S09 — Frise de formation
+
+En tant qu'élève, je situe ma semaine de formation, retrouve ses matières et ouvre les supports disponibles.
+
+- Frise chronologique par semaine, séances par jour, pré-rentrée IWE1 puis formation DU ; dates, horaires et références des plannings sources visibles. Les PDF restent locaux sans autorisation explicite de publication.
+- Pré-rentrée détaillée du 23 septembre au 2 octobre 2026. Planning annuel jusqu'au 26 février 2027 ; créneaux MAT5 seuls exclus selon la légende. Pratique et groupes, congés et examens visibles.
+- Matières de planning distinctes des fiches du wiki : rapprochements éditoriaux explicites, sans inventer une répartition des fiches par heure. Supports absents ou à venir signalés ; aucun brouillon exposé.
+- Filtres période, matière et supports disponibles ; état conservé dans l'URL, ancres de semaine partageables. Accès à la semaine actuelle calculé en heure de Paris ; lien direct vers une autre semaine prioritaire.
+- Navigation depuis l'accueil et les cours. Consultation sans JavaScript, utilisation au clavier et sur téléphone, aucun défilement horizontal de page.
+- Données extensibles sans modifier le code de navigation ; dates, références, ancres et PDF autorisés manquants bloquent le build avant publication.
+
+Preuve TDD du 28 septembre 2026 : RED des tests Python sur le module `wiki.planning` absent ; huit parcours navigateur RED sur la page inexistante (HTTP 404). GREEN final : 13 tests de planning et huit parcours de frise, à la racine et sous `/promo/`. La suite complète passe : 41 tests Python sous Windows et 18 parcours Chromium (un cas Windows est ignoré en CI Linux).
+
+Validation du contenu réel sous `/PolyWE/` : 23 semaines ; recherche des supports RDM depuis la semaine 40 et ouverture du cours 4 ; cinq dates d'examen contrôlées ; références des deux plannings visibles ; ouverture de semaine au clavier et accès aux cours sans JavaScript. Rendu inspecté à 1440 et 390 px, sans erreur JavaScript ni débordement horizontal détecté. Les données et limites d'interprétation sont consignées dans `docs/PLANNING.md`.
+
+
+Ajustement S09 : le contrôle automatique a refusé le push des PDF bruts faute d'autorisation spécifique. La frise est livrée avec les PDF locaux, exclus de Git et de l'artefact. Vérification finale : 354 liens valides, les deux adresses PDF renvoient une erreur 404 dans la prévisualisation, les deux fichiers originaux restent présents localement. Test RED exécuté sur la copie implicite d'un PDF, puis GREEN avec publication désactivée par défaut. Le build fonctionne aussi quand ces fichiers locaux sont absents ; les PDF ne sont exigés que si leur publication est explicitement activée.

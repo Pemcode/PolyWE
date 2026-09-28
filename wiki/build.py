@@ -8,6 +8,7 @@ from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit
 
 from .catalogue import CatalogueError, CourseHTML, load_catalogue
+from .planning import load_planning, render_planning
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
 MARKER = "wiki-iwe-generated\n"
@@ -24,7 +25,8 @@ def write(output, name, text):
     target.write_text(text, encoding="utf-8")
 
 
-def shell(current, title, body):
+def shell(current, title, body, has_planning=False, extra_head=""):
+    planning_nav = f'<a href="{link(current, "planning.html")}">Planning</a>' if has_planning else ""
     css = link(current, "assets/wiki.css")
     js = link(current, "assets/wiki.js")
     home = link(current, "index.html")
@@ -33,10 +35,10 @@ def shell(current, title, body):
 <title>{h(title)} · Révisions IWE</title>
 <meta name="description" content="Cours interactifs et parcours de révision de la promo DU Ingénierie du soudage / IWE.">
 <meta property="og:title" content="{h(title)} · Révisions IWE"><meta property="og:type" content="website">
-<link rel="stylesheet" href="{css}"><script id="wiki-runtime" defer src="{js}"></script></head>
+<link rel="stylesheet" href="{css}"><script id="wiki-runtime" defer src="{js}"></script>{extra_head}</head>
 <body class="wiki-shell"><a class="wiki-skip" href="#contenu">Aller au contenu</a>
 <header class="wiki-top"><a class="wiki-brand" href="{home}"><span class="wiki-mark" aria-hidden="true">W</span> Révisions IWE</a>
-<nav aria-label="Navigation principale"><a href="{home}#matieres">Matières</a><a href="{home}#rechercher">Rechercher</a><a href="{home}#parcours">Parcours</a></nav></header>
+<nav aria-label="Navigation principale">{planning_nav}<a href="{home}#matieres">Matières</a><a href="{home}#rechercher">Rechercher</a><a href="{home}#parcours">Parcours</a></nav></header>
 <main id="contenu" class="wiki-main">{body}</main>
 <footer class="wiki-bottom">Supports de révision de la promo · DU Ingénierie du soudage · Polytech Nantes<br>Un complément aux cours et aux TD de la formation.</footer></body></html>"""
 
@@ -80,6 +82,7 @@ def validate_site(output):
 def build(root):
     root = Path(root).resolve()
     data = load_catalogue(root)
+    plan = load_planning(root, data)
     output = root / "_site"
     # Ne nettoyer que notre sortie marquée, jamais un lien/jonction ou un dossier arbitraire.
     if output.is_symlink() or output.is_junction() or output.resolve() != root / "_site":
@@ -99,7 +102,7 @@ def build(root):
     output.mkdir(exist_ok=True)
     write(output, ".wiki-generated", MARKER)
     write(output, ".nojekyll", "")
-    for asset in ("wiki.css", "wiki.js"):
+    for asset in ("wiki.css", "wiki.js") + (("planning.css", "planning.js") if plan else ()):
         write(output, "assets/" + asset, (ASSETS / asset).read_text(encoding="utf-8"))
     courses = sorted((c for c in data["cours"] if c["statut"] != "brouillon"), key=lambda c: (c["ordre"], c["id"]))
     available = [c for c in courses if c["statut"] == "disponible"]
@@ -113,7 +116,7 @@ def build(root):
         current = f"matieres/{subject['id']}.html"
         cards = "".join(course_card(c, current) for c in grouped)
         body = f'<p class="wiki-eyebrow">Matière · {count} cours disponibles</p><h1>{h(subject["titre"])}</h1><p class="wiki-lead">{h(subject.get("description", ""))}</p><div class="wiki-grid">{cards}</div>'
-        write(output, current, shell(current, subject["titre"], body))
+        write(output, current, shell(current, subject["titre"], body, has_planning=bool(plan)))
         subject_cards.append(f'<a class="wiki-subject" href="{current}"><span class="wiki-eyebrow">{count} cours disponibles</span><h3>{h(subject["titre"])}</h3><p>{h(subject.get("description", ""))}</p><span aria-hidden="true">Explorer →</span></a>')
     route_cards = []
     for route in data["parcours"]:
@@ -125,21 +128,31 @@ def build(root):
             href = link(current, course["url"], step["ancre"])
             steps.append(f'<li><a href="{href}">{h(label)}</a><p>{h(subject_by_id[course["matiere"]]["titre"])} · {h(course.get("repere", ""))}</p></li>')
         body = f'<p class="wiki-eyebrow">Applications au soudage · {len(steps)} étapes</p><h1>{h(route["titre"])}</h1><p class="wiki-lead">{h(route.get("description", ""))}</p><ol class="wiki-steps">{"".join(steps)}</ol>'
-        write(output, current, shell(current, route["titre"], body))
+        write(output, current, shell(current, route["titre"], body, has_planning=bool(plan)))
         route_cards.append(f'<article class="wiki-card"><span class="wiki-eyebrow">{len(steps)} étapes</span><h3><a href="{current}">{h(route["titre"])}</a></h3><p>{h(route.get("description", ""))}</p></article>')
     options = ''.join(f'<option value="{s["id"]}">{h(s["titre"])}</option>' for s in subjects)
+    planning_teaser = '<a class="wiki-planning-teaser" href="planning.html"><span><strong>Suivre le fil de la formation</strong><small>Pré-rentrée, semaines de cours et examens : les supports au bon moment.</small></span><span aria-hidden="true">Explorer le planning →</span></a>' if plan else ""
     total_sections = sum(len(c["sections"]) for c in available)
     body = f"""<section class="wiki-hero"><p class="wiki-eyebrow">Polytech Nantes · DU Ingénierie du soudage</p>
 <h1>Comprendre.<br>Relier. <em>Réviser.</em></h1>
 <p class="wiki-lead">Les cours interactifs de la promo, réunis pour préparer l’IWE. Suivez une matière ou retrouvez directement la notion qui vous intéresse.</p>
 <p class="wiki-stats"><strong>{len(available)}</strong> cours <span> / </span><strong>{len(subjects)}</strong> matières <span> / </span><strong>{total_sections}</strong> sections</p></section>
-<section id="rechercher" class="wiki-search"><h2>Une notion en tête ?</h2><form id="wiki-search-form" role="search">
+{planning_teaser}<section id="rechercher" class="wiki-search"><h2>Une notion en tête ?</h2><form id="wiki-search-form" role="search">
 <label for="wiki-query">Rechercher une notion, un cours ou une section</label><div class="wiki-search-row"><input id="wiki-query" type="search" placeholder="Préchauffage, Mohr, règle du levier…" autocomplete="off">
 <label class="wiki-sr" for="wiki-subject-filter">Filtrer par matière</label><select id="wiki-subject-filter"><option value="">Toutes les matières</option>{options}</select><button type="submit">Rechercher</button></div></form>
 <p id="wiki-search-status" role="status">Explorez les matières ci-dessous ou recherchez un sujet précis.</p><ul id="wiki-results" class="wiki-results"></ul><noscript>La recherche nécessite JavaScript. Les matières et les cours restent accessibles ci-dessous.</noscript></section>
 <section id="matieres"><div class="wiki-section-title"><h2>Avancer par matière</h2><span>Les bases, dans l’ordre</span></div><div class="wiki-grid">{''.join(subject_cards)}</div></section>
 <section id="parcours"><div class="wiki-section-title"><h2>Faire le lien avec le soudage</h2><span>Des parcours entre les cours</span></div><div class="wiki-grid">{''.join(route_cards)}</div></section>"""
-    write(output, "index.html", shell("index.html", "Accueil", body))
+    write(output, "index.html", shell("index.html", "Accueil", body, has_planning=bool(plan)))
+    if plan:
+        for source in plan['sources']:
+            if not source.get('publier', False):
+                continue
+            target = output / source['fichier']
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(root / source['fichier'], target)
+        extra = '<link rel="stylesheet" href="assets/planning.css"><script defer src="assets/planning.js"></script>'
+        write(output, 'planning.html', shell('planning.html', 'Planning de formation', render_planning(plan, data, link), has_planning=True, extra_head=extra))
     search_rows = []
     for course in available:
         current = course["url"]
@@ -159,10 +172,11 @@ def build(root):
         home = link(current, "index.html")
         subject_url = link(current, f"matieres/{subject['id']}.html")
         section_links = ''.join(f'<li><a href="#{quote(s["ancre"])}">{h(s["titre"])}</a></li>' for s in course["sections"])
+        planning_link = f'<a class="wiki-planning-link" href="{link(current, "planning.html")}">Planning</a>' if plan else ""
         nav = f"""<nav class="wiki-nav" aria-label="Navigation du wiki"><div class="wiki-nav-inner">
 <div class="wiki-crumbs"><a href="{home}">Révisions IWE</a><span aria-hidden="true">/</span><a href="{subject_url}">{h(subject['titre'])}</a><span aria-current="page">{h(course.get('repere', 'Cours'))}</span></div>
 <details class="wiki-course-menu"><summary>Sommaire du cours</summary><ol>{section_links}</ol></details>
-<div class="wiki-actions"><button type="button" data-wiki-share="native">Partager</button><button type="button" data-wiki-share="copy">Copier le lien</button><span class="wiki-status" role="status" id="wiki-share-status"></span></div>
+{planning_link}<div class="wiki-actions"><button type="button" data-wiki-share="native">Partager</button><button type="button" data-wiki-share="copy">Copier le lien</button><span class="wiki-status" role="status" id="wiki-share-status"></span></div>
 <label class="wiki-copy-fallback" hidden>Lien à copier<input readonly aria-label="Lien à copier"></label></div></nav>"""
         footer = '<footer class="wiki-course-footer">'
         if prerequisites:
