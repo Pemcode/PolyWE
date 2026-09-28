@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "date_inventaire": "2026-09-27",
+  "date_inventaire": "2026-09-28",
   "description": "Catalogue éditorial du wiki de révision DU Ingénierie du soudage / IWE. Identifiants internes stables ; sections extraites automatiquement des HTML.",
   "cours": [
     {
@@ -237,16 +237,40 @@
     {
       "id": "rdm-04",
       "matiere": "rdm",
-      "titre": "Directions principales et cercle de Mohr",
-      "statut": "a_venir",
+      "titre": "Directions principales et tricercle de Mohr",
+      "statut": "disponible",
       "repere": "Cours 04",
       "ordre": 4,
       "prerequis_conseilles": [
+        "rdm-01",
+        "rdm-02",
         "rdm-03"
       ],
-      "mots_cles": [],
-      "ressources": [],
-      "fichiers_associes": []
+      "mots_cles": [
+        "directions principales",
+        "contraintes principales",
+        "Mohr",
+        "cercle de Mohr",
+        "tricercle",
+        "valeurs propres",
+        "invariants",
+        "contrainte plane",
+        "cisaillement maximal",
+        "triaxialité",
+        "contraintes résiduelles",
+        "état hydrostatique"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire"
+      ],
+      "fichiers_associes": [],
+      "fichier": "RDM/RDM, cours 4 _ directions principales et tricercle de Mohr.html",
+      "url": "RDM/04-directions-principales-mohr.html"
     },
     {
       "id": "rdm-05",
@@ -298,7 +322,7 @@
     {
       "id": "contraintes-residuelles",
       "titre": "Comprendre les contraintes résiduelles",
-      "description": "Du cycle thermique au bridage et aux déformations.",
+      "description": "Du cycle thermique au bridage, puis à la triaxialité des contraintes.",
       "etapes": [
         {
           "cours": "met-03",
@@ -307,6 +331,10 @@
         {
           "cours": "rdm-03",
           "ancre": "c5"
+        },
+        {
+          "cours": "rdm-04",
+          "ancre": "c4"
         }
       ]
     },

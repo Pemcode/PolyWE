@@ -1,0 +1,40 @@
+"""Parcours du contenu publié : les liens partagés restent utilisables."""
+import json
+from pathlib import Path
+import shutil
+
+from wiki.build import build
+from wiki.catalogue import CourseHTML
+
+
+REPOSITORY = Path(__file__).resolve().parents[1]
+RDM_04_URL = "RDM/04-directions-principales-mohr.html"
+
+
+def test_rdm_04_is_reachable_from_subject_previous_course_search_and_route(tmp_path):
+    # Construire le catalogue réel dans une copie, sans toucher aux sources locales.
+    catalogue = REPOSITORY / "catalogue-cours.json"
+    shutil.copyfile(catalogue, tmp_path / catalogue.name)
+    data = json.loads(catalogue.read_text(encoding="utf-8"))
+    for course in data["cours"]:
+        if course["statut"] != "disponible":
+            continue
+        for source in [course["fichier"], *course.get("fichiers_associes", [])]:
+            target = tmp_path / source
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(REPOSITORY / source, target)
+    output = build(tmp_path)
+    assert (output / RDM_04_URL).is_file(), "Le cours RDM 04 doit être publié."
+
+    def page(path):
+        parsed = CourseHTML()
+        parsed.feed((output / path).read_text(encoding="utf-8"))
+        return parsed
+
+    assert "../" + RDM_04_URL in page("matieres/rdm.html").links
+    assert "04-directions-principales-mohr.html" in page("RDM/03-tenseur-deformations.html").links
+    assert "03-tenseur-deformations.html" in page(RDM_04_URL).links
+    assert "c4" in page(RDM_04_URL).ids
+    assert "../" + RDM_04_URL + "#c4" in page("parcours/contraintes-residuelles.html").links
+    index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    assert any(row["url"] == RDM_04_URL + "#c4" and "tricercle" in row["titre"].lower() for row in index)

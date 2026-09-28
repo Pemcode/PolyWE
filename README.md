@@ -34,12 +34,12 @@ Exemple d'entrée, à adapter avec un fichier réellement présent :
   "matiere": "rdm",
   "repere": "Cours 04",
   "ordre": 4,
-  "titre": "Directions principales et cercle de Mohr",
+  "titre": "Directions principales et tricercle de Mohr",
   "statut": "disponible",
-  "fichier": "RDM/cours-4-version-relue.html",
+  "fichier": "RDM/RDM, cours 4 _ directions principales et tricercle de Mohr.html",
   "url": "RDM/04-directions-principales-mohr.html",
-  "prerequis_conseilles": ["rdm-02", "rdm-03"],
-  "mots_cles": ["Mohr", "contraintes principales"],
+  "prerequis_conseilles": ["rdm-01", "rdm-02", "rdm-03"],
+  "mots_cles": ["Mohr", "tricercle", "contraintes principales"],
   "ressources": ["cours", "exercices corrigés"],
   "fichiers_associes": []
 }
@@ -49,7 +49,7 @@ Exemple d'entrée, à adapter avec un fichier réellement présent :
 - `fichier` désigne le fichier source local. Il peut changer lors d'un remplacement.
 - `url` est le chemin publié : le conserver après partage. Il utilise un sous-dossier et l'extension `.html`.
 - `disponible` publie le cours ; `a_venir` affiche une carte sans lien ; `brouillon` exclut complètement le cours du site et de la recherche. Les deux derniers états n'exigent aucun fichier.
-- Les cours RDM 04 et 05 sont déjà déclarés `a_venir` : compléter ces entrées au lieu d'en ajouter des doublons.
+- Le cours RDM 04 est disponible. Le cours RDM 05 est déjà déclaré `a_venir` : compléter cette entrée à sa réception au lieu d'en ajouter un doublon.
 - Les sections sont extraites du HTML à chaque build : première rubrique h2/h3 de chaque section avec `id`, ou titre h2/h3 portant son propre `id`. Conserver les ancres déjà partagées.
 - Si un cours utilise des fichiers locaux externes, les déclarer individuellement dans `fichiers_associes`, avec leur chemin depuis la racine du projet. Les conserver dans le dossier du cours et vérifier leurs liens relatifs à son `url`. Les dépendances distantes, comme Google Fonts, restent distantes.
 
