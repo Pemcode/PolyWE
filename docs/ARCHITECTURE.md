@@ -31,7 +31,11 @@ Metallurgie/ et RDM/        sources actuelles ; autres matières ajoutables
 wiki/catalogue.py          validation et extraction des sections
 wiki/planning.py           validation et rendu de la frise
 wiki/build.py              génération et contrôle des liens
-wiki/__main__.py           commandes check/build
+wiki/maintenance.py        intégration validée et publication des contenus
+wiki/routine.py            assistant et aperçu local
+wiki/__main__.py           commandes du site et de maintenance
+Mettre-a-jour.cmd           entrée Windows vers le menu uv
+docs/MISE_A_JOUR.md         routine de réception et publication
 assets/                    interface commune, recherche et partage
 tests/                    tests de comportement du catalogue et du build
 tests/browser/            quelques parcours de bout en bout
@@ -68,3 +72,11 @@ Les semaines ISO sont calculées en Python ; dans le navigateur, les filtres mas
 Une seule suite pytest rapide et quelques parcours Chromium. Aucun framework frontend, conteneur Docker, serveur API, authentification, collecte de données ou métrique de couverture imposée. Les commandes CI sont les mêmes que celles de la documentation locale. Les tests protègent les invariants qui coûtent cher à perdre : adresses stables, sources intactes, absence de contenu non déclaré et navigation utilisable.
 
 Le dépôt public est Pemcode/PolyWE ; le site est publié à https://pemcode.github.io/PolyWE/. GitHub Pages utilise GitHub Actions, avec `PAGES_ENABLED=true`. Chaque push sur `main` déclenche les contrôles puis le déploiement ; les pull requests exécutent seulement les contrôles et la construction. Les comptes, synchronisation de progression, statistiques collectives et mode hors connexion sont hors du premier lot ; ils restent des stories distinctes si un besoin apparaît.
+
+## Routine de maintenance
+
+L’assistant est local et utilise Python standard, Git et uv. Il inscrit les HTML existants sans les déplacer ni les réécrire. Pour un PDF ou un document Office, il crée une page HTML dans `Supports/` et déclare le fichier original comme ressource associée : aucun second modèle de catalogue n’est nécessaire. La navigation, la frise, la recherche et le partage réutilisent le générateur. Les documents sont cherchables par leurs métadonnées, pas par leur texte intégral.
+
+Avant tout enregistrement, un build dans un dossier temporaire valide le catalogue candidat, le planning et les fichiers déclarés. Les originaux, les métadonnées et `_site/` ne sont pas touchés en cas d’erreur de validation. Une entrée annoncée conserve son identité et son adresse. Le HTML d’accès d’un document devient une source versionnée ; il n’est pas réécrit lors des corrections du document.
+
+La commande `publier` exécute les tests Python et le build puis sélectionne explicitement les contenus disponibles et les JSON. Elle refuse un index Git prérempli, les modifications suivies hors contenu, une branche autre que `main`, un retard sur GitHub ou des commits locaux contenant d’autres fichiers, y compris dans l’historique intermédiaire. Après affichage et confirmation, elle committe et pousse ; un échec du push laisse un commit réutilisable. Les parcours navigateur restent obligatoires en CI avant déploiement. Le circuit de développement garde les commits manuels pour le code et la documentation.

@@ -6,6 +6,19 @@ Dépôt : [Pemcode/PolyWE](https://github.com/Pemcode/PolyWE).
 
 Site statique destiné à GitHub Pages. Les cours interactifs restent des fichiers HTML éditables. Un catalogue JSON organise les matières, les cours et les parcours ; un générateur Python construit les pages et leur navigation.
 
+## Routine quotidienne
+
+**Double-cliquer sur `Mettre-a-jour.cmd`** pour ouvrir le menu.
+
+1. Déposer le nouveau fichier dans le dossier de sa matière.
+2. **Ajouter** : choisir le cours annoncé ou créer un support ; sélectionner la matière et, si utile, le sujet de planning. HTML, PDF, Word, PowerPoint et Excel sont acceptés.
+3. **Aperçu** : vérifier le résultat dans le navigateur.
+4. **Publier** : les tests et le build s’exécutent ; confirmer les fichiers affichés. GitHub Actions contrôle puis met Pages à jour.
+
+Pour corriger un cours ou document existant, modifier son fichier puis passer directement à l’aperçu et à la publication. Aucun JSON à rééditer pour une simple correction.
+
+En terminal : `uv run python -m wiki gerer`. Voir le **[guide de mise à jour](docs/MISE_A_JOUR.md)** pour les exemples, les documents et la reprise après une erreur.
+
 ## Démarrer avec uv
 
 ```powershell
@@ -20,11 +33,9 @@ Ouvrir http://127.0.0.1:8000. Arrêter le serveur avec Ctrl+C. Relancer la const
 
 `_site/` est une sortie générée : ne pas la modifier à la main. Les dossiers `.sauvegardes/`, `.venv/`, les tests et les documents de travail ne sont pas copiés dans le site.
 
-## Ajouter ou remplacer un cours
+## Catalogue : réglages avancés
 
-1. Déposer le HTML dans le dossier de sa matière.
-2. Ajouter ou modifier une entrée dans `catalogue-cours.json`.
-3. Lancer `uv run python -m wiki check`, les tests et le build ; vérifier le cours en prévisualisation.
+L’assistant d’ajout renseigne `catalogue-cours.json` et, si demandé, les supports du planning. L’édition manuelle reste possible pour les prérequis, les parcours, les états et les ajustements éditoriaux.
 
 Exemple d'entrée, à adapter avec un fichier réellement présent :
 
@@ -87,9 +98,9 @@ Les tests rapides utilisent des cours fictifs pour vérifier l'ajout de matière
 
 Le site est en ligne à **https://pemcode.github.io/PolyWE/**. Le propriétaire a rendu le dépôt public ; la source Pages est **GitHub Actions** et la variable de dépôt `PAGES_ENABLED` vaut `true`.
 
-1. Modifier les HTML et le catalogue. Conserver les chemins `url` et les ancres déjà partagés. Un cours pas encore prêt reste en `brouillon`.
-2. Exécuter les vérifications décrites ci-dessus et contrôler le cours en prévisualisation.
-3. Committer et pousser sur `main`. Le workflow teste, construit puis publie uniquement `_site/`. Suivre son résultat dans [GitHub Actions](https://github.com/Pemcode/PolyWE/actions). Les pull requests testent et construisent sans déployer.
+Pour les contenus, utiliser **Publier** dans le menu ou `uv run python -m wiki publier` : tests, build, liste des fichiers, confirmation, commit et push sur `main`. La routine sélectionne seulement les supports déclarés et les deux JSON ; elle conserve les fichiers non déclarés et refuse les changements de code en attente.
+
+Pour une évolution du code, suivre les tests ci-dessus puis faire un commit et un push de développement habituels. Dans les deux cas, le workflow contrôle puis publie uniquement `_site/`. Suivre son résultat dans [GitHub Actions](https://github.com/Pemcode/PolyWE/actions). Les pull requests testent et construisent sans déployer.
 
 Un lancement manuel est aussi possible dans **Actions → Vérifier et publier le wiki → Run workflow**. Pour reconfigurer le dépôt : **Settings → Pages → Source : GitHub Actions** ; puis **Settings → Secrets and variables → Actions → Variables → `PAGES_ENABLED=true`**.
 

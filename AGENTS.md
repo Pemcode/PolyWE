@@ -40,3 +40,11 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 - Pas de compte élève, suivi collectif, service externe ou publication automatique des brouillons dans la première version.
 - Garder les sauvegardes historiques locales hors du dépôt et de l'artefact publié.
 - Le dépôt `https://github.com/Pemcode/PolyWE` a été rendu public par le propriétaire. GitHub Pages est activé via GitHub Actions à l’adresse `https://pemcode.github.io/PolyWE/`. La variable de dépôt `PAGES_ENABLED=true` autorise la publication après les contrôles sur `main` ; les pull requests ne déploient pas. Ne pas changer la visibilité sans instruction du propriétaire.
+
+## Routine de réception des supports
+
+- Procédure utilisateur : `Mettre-a-jour.cmd` ou `uv run python -m wiki gerer`, documentée dans `docs/MISE_A_JOUR.md`.
+- Pour un ajout demandé, préférer `uv run python -m wiki ajouter FICHIER --id ...` avec les métadonnées explicites. Réutiliser l’identifiant d’un cours annoncé ; le rattachement au planning reste un choix éditorial explicite via `--sujet`.
+- Pour une correction, modifier seulement la source demandée, préserver URL et ancres, puis vérifier. Les documents PDF/Office utilisent une page HTML d’accès et `fichiers_associes`, sans nouveau stockage.
+- `preparer` lance tests et build ; `apercu` ouvre le site local ; `publier` est réservé aux contenus. Les évolutions de code et documentation suivent les commits de développement habituels, avec les vérifications utiles avant le push.
+- Ne pas contourner une exclusion Git ni inscrire automatiquement les fichiers déposés. La routine ne modifie pas l’autorisation propre aux PDF sources de Planning.

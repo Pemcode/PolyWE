@@ -13,6 +13,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S07 | Consultation hors connexion | Plus tard |
 | S08 | Intégrer le cours RDM 04 et ses sections | Intégré et vérifié |
 | S09 | Retrouver les supports à partir du planning de formation | Intégré et vérifié |
+| S10 | Ajouter des supports et publier avec une routine guidée | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -101,3 +102,21 @@ Validation du contenu réel sous `/PolyWE/` : 23 semaines ; recherche des suppor
 
 
 Ajustement S09 : le contrôle automatique a refusé le push des PDF bruts faute d'autorisation spécifique. La frise est livrée avec les PDF locaux, exclus de Git et de l'artefact. Vérification finale : 354 liens valides, les deux adresses PDF renvoient une erreur 404 dans la prévisualisation, les deux fichiers originaux restent présents localement. Test RED exécuté sur la copie implicite d'un PDF, puis GREEN avec publication désactivée par défaut. Le build fonctionne aussi quand ces fichiers locaux sont absents ; les PDF ne sont exigés que si leur publication est explicitement activée.
+
+## S10 — Routine de mise à jour
+
+En tant que mainteneur, je dépose un fichier dans le projet, je l’enregistre avec un assistant puis je vérifie et publie depuis un menu Windows ou une commande uv.
+
+- Ajout d’un HTML ou d’un document PDF/Office sans édition manuelle du JSON ; choix de la matière, création d’une matière et rattachement facultatif à un sujet du planning.
+- Activation d’un cours à venir en conservant son identifiant, son URL, ses prérequis et ses liens de planning. Les sources existantes restent intactes.
+- Les documents disposent d’une page partageable avec téléchargement, navigation, recherche et accès depuis la frise. Aucun document existant n’est inscrit automatiquement.
+- Validation du site candidat avant enregistrement ; une erreur de fichier, de lien ou de planning laisse les métadonnées inchangées.
+- Préparation avec tests et build ; aperçu local ; publication explicite des seuls contenus déclarés après affichage des fichiers concernés. Les brouillons, fichiers ignorés et modifications de code ne sont pas embarqués par la routine.
+- Un échec réseau est signalé ; un commit de contenu déjà créé peut être poussé au prochain essai. Le succès du push est distingué du déploiement Pages.
+- Guide court pour ajout, correction d’un fichier existant, documents et dépannage ; tests de parcours et vérification navigateur sous un sous-chemin.
+
+Preuve TDD du 28 septembre 2026 : RED exécuté sur `tests/test_maintenance.py` à l’import du module absent. GREEN après implémentation de l’inscription, de la validation en copie et de la publication ciblée. Un second RED a reproduit la perte d’une URL implicite lors du remplacement d’un fichier ; GREEN après conservation de l’adresse précédente.
+
+Validation finale : 61 tests Python sous Windows et 20 parcours Chromium réussis. Les nouveaux tests utilisent de vrais dépôts Git et remotes locaux pour vérifier la sélection des contenus, l’annulation, le refus d’un index prérempli ou de changements hors contenu, l’historique complet et la reprise après un push en échec sans commit supplémentaire. L’assistant est parcouru avec activation d’un support annoncé. Les erreurs d’ajout conservent les sources et métadonnées ; les PDF locaux de Planning et les fichiers ignorés sont refusés.
+
+La commande réelle `preparer` passe sur le projet : tests, build et bilan. Lanceur Windows testé par son chemin complet avec ouverture et fermeture du menu. Nouveau document consulté depuis la frise, téléchargé puis partagé par copie à la racine et sous `/promo/`. Rendu inspecté à 390 et 1440 px, sans débordement ni erreur JavaScript. Les cours existants et les deux JSON éditoriaux restent inchangés ; aucun document réel supplémentaire n’a été publié pendant les essais.
