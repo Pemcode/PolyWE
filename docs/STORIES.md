@@ -14,6 +14,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S08 | Intégrer le cours RDM 04 et ses sections | Intégré et vérifié |
 | S09 | Retrouver les supports à partir du planning de formation | Intégré et vérifié |
 | S10 | Ajouter des supports et publier avec une routine guidée | Intégré et vérifié |
+| S11 | Intégrer les cours RDM 05 à 07 | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -120,3 +121,19 @@ Preuve TDD du 28 septembre 2026 : RED exécuté sur `tests/test_maintenance.py` 
 Validation finale : 61 tests Python sous Windows et 20 parcours Chromium réussis. Les nouveaux tests utilisent de vrais dépôts Git et remotes locaux pour vérifier la sélection des contenus, l’annulation, le refus d’un index prérempli ou de changements hors contenu, l’historique complet et la reprise après un push en échec sans commit supplémentaire. L’assistant est parcouru avec activation d’un support annoncé. Les erreurs d’ajout conservent les sources et métadonnées ; les PDF locaux de Planning et les fichiers ignorés sont refusés.
 
 La commande réelle `preparer` passe sur le projet : tests, build et bilan. Lanceur Windows testé par son chemin complet avec ouverture et fermeture du menu. Nouveau document consulté depuis la frise, téléchargé puis partagé par copie à la racine et sous `/promo/`. Rendu inspecté à 390 et 1440 px, sans débordement ni erreur JavaScript. Les cours existants et les deux JSON éditoriaux restent inchangés ; aucun document réel supplémentaire n’a été publié pendant les essais.
+
+## S11 — Étendre la série RDM jusqu’aux diagrammes de sollicitations
+
+En tant qu’élève, je poursuis les cours après Mohr avec Hooke et les critères de résistance, puis le torseur de cohésion et les diagrammes de sollicitations.
+
+- Activer l’entrée `rdm-05` existante et ajouter `rdm-06` et `rdm-07`, avec titres, numéros, prérequis et mots-clés cohérents avec les sources.
+- Accès depuis la matière, navigation 4 ↔ 5 ↔ 6 ↔ 7, recherche des sections réelles et partage de leurs ancres.
+- Tous les nouveaux cours sont disponibles depuis les séances « Notions fondamentales de RDM ». Les sections sur la statique/les liaisons et les cas types complètent le sujet « Théorie de base des systèmes de structure » ; la section fatigue rejoint le sujet annuel « Fatigue ». Aucun horaire ni examen n’est modifié.
+- Sources HTML conservées octet pour octet, scripts et quiz fonctionnels dans les copies publiées. Aucun autre document local ajouté.
+- Test de parcours en RED avant l’inscription, puis suite Python, build et contrôles navigateur sous `/PolyWE/` à 390 et 1440 px.
+
+Preuve TDD du 29 septembre 2026 : RED de `test_rdm_05_to_07_continue_series_and_are_reachable_from_planning` sur l’absence de la page du cours 5. GREEN après inscription des trois sources avec la routine, complétion des métadonnées et rattachements aux sujets du planning. Le test protège les liens depuis la matière, la succession 4 ↔ 5 ↔ 6 ↔ 7, la recherche, les ancres du planning et la conservation des sources dans la copie de contrôle.
+
+Validation : 62 tests Python sous Windows et 20 parcours Chromium réussis ; build et contrôle de 463 liens locaux/ancres. Le catalogue contient 11 cours disponibles et 104 sections, dont 31 nouvelles sections. Contrôle des trois cours réels sous `/PolyWE/` à 390 et 1440 px : recherche jusqu’à une section, copie du lien, partage natif simulé, accès depuis la semaine 40, navigation entre cours et quiz/réinitialisation. Un cas du calculateur 3D du cours 5, la torsion du cours 6 et une console chargée du diagrammeur du cours 7 ont été manipulés. Aucune erreur JavaScript ni débordement horizontal détecté ; accueil des trois cours inspecté sur mobile. Ces essais vérifient le fonctionnement des interfaces, pas le fond scientifique des calculs.
+
+Les empreintes SHA-256 des trois HTML sont inchangées. Séances, dates, phases et sources PDF du planning inchangées ; seuls les liens vers les supports ont évolué. La documentation distingue le complément introductif sur la fatigue du futur enseignement spécialisé.

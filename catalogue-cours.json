@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "date_inventaire": "2026-09-28",
+  "date_inventaire": "2026-09-29",
   "description": "Catalogue éditorial du wiki de révision DU Ingénierie du soudage / IWE. Identifiants internes stables ; sections extraites automatiquement des HTML.",
   "cours": [
     {
@@ -276,15 +276,113 @@
       "id": "rdm-05",
       "matiere": "rdm",
       "titre": "Hooke généralisée et critères de résistance",
-      "statut": "a_venir",
+      "statut": "disponible",
       "repere": "Cours 05",
       "ordre": 5,
       "prerequis_conseilles": [
+        "rdm-01",
+        "rdm-02",
+        "rdm-03",
         "rdm-04"
       ],
-      "mots_cles": [],
-      "ressources": [],
-      "fichiers_associes": []
+      "mots_cles": [
+        "Hooke 3D",
+        "élasticité",
+        "Lamé",
+        "Tresca",
+        "von Mises",
+        "contrainte équivalente",
+        "limite élastique",
+        "coefficient de sécurité",
+        "fatigue",
+        "Wöhler",
+        "endurance"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire"
+      ],
+      "fichiers_associes": [],
+      "fichier": "RDM/RDM, cours 5 _ loi de Hooke en 3D et critères de résistance.html",
+      "url": "RDM/05-hooke-criteres-resistance.html"
+    },
+    {
+      "id": "rdm-06",
+      "titre": "Torseur de cohésion",
+      "matiere": "rdm",
+      "ordre": 6,
+      "repere": "Cours 06",
+      "prerequis_conseilles": [
+        "rdm-01",
+        "rdm-05"
+      ],
+      "mots_cles": [
+        "poutre",
+        "statique",
+        "équilibre",
+        "torseur de cohésion",
+        "efforts intérieurs",
+        "liaisons",
+        "réactions",
+        "effort normal",
+        "effort tranchant",
+        "moment fléchissant",
+        "torsion",
+        "flexion",
+        "sollicitations composées"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire"
+      ],
+      "fichiers_associes": [],
+      "fichier": "RDM/RDM, cours 6 _ le torseur de cohésion.html",
+      "url": "RDM/06-torseur-cohesion.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "rdm-07",
+      "titre": "Diagrammes de sollicitations",
+      "matiere": "rdm",
+      "ordre": 7,
+      "repere": "Cours 07",
+      "prerequis_conseilles": [
+        "rdm-06"
+      ],
+      "mots_cles": [
+        "diagrammes de sollicitations",
+        "poutre",
+        "effort normal",
+        "effort tranchant",
+        "moment fléchissant",
+        "charges ponctuelles",
+        "charges réparties",
+        "console",
+        "encastrement",
+        "flexion",
+        "section critique",
+        "diagrammeur"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire"
+      ],
+      "fichiers_associes": [],
+      "fichier": "RDM/RDM, cours 7 _ les diagrammes de sollicitations.html",
+      "url": "RDM/07-diagrammes-sollicitations.html",
+      "statut": "disponible"
     }
   ],
   "matieres": [

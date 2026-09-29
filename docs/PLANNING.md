@@ -23,8 +23,8 @@ Les codes ci-dessous viennent du planning ; les liens avec les fiches du wiki so
 | 2.1 | Structures et propriétés des métaux | Structure du fer, section `met-01#s1` |
 | 2.3 | Alliages fer–carbone | Cours `met-01` |
 | 2.8 | Traitements thermiques | Cinétique TTT/TRC (`met-02`) et traitements thermiques/soudage (`met-03`) |
-| 3.1 | Théorie de base des systèmes de structure | Pas de support associé pour le moment |
-| 3.2 | Notions fondamentales de RDM | Série `rdm-01` à `rdm-05` ; le cours 5 est à venir |
+| 3.1 | Théorie de base des systèmes de structure | Statique et liaisons (`rdm-06#c2`, `rdm-06#c3`), cas types de poutres (`rdm-07#c5`) |
+| 3.2 | Notions fondamentales de RDM | Série `rdm-01` à `rdm-07`, disponible |
 | 2.14 | Introduction à la corrosion | Pas de support associé pour le moment |
 | 1.1 | Introduction à la technologie du soudage | Pas de support associé pour le moment |
 | 2.7 | Ruptures et différents types de rupture | Pas de support associé pour le moment |
@@ -38,7 +38,7 @@ Le lundi 28 septembre : RDM de 8 h à 11 h 25, puis corrosion de 11 h 30 à 12 h
 
 Quatre familles organisent les enseignements : procédés (1.x), métallurgie et matériaux (2.x), RDM et conception (3.x), fabrication/contrôle/qualité (4.x). Les examens et périodes pratiques ont leurs propres filtres.
 
-Les liens complémentaires déjà possibles sont ciblés : structure du joint → `met-03#s4`, fissuration → `met-03#s6`, conception des joints → `rdm-02#c6`, contraintes/déformations → `rdm-03#c5` et `met-03#s4`. Un même code du PDF peut recouvrir plusieurs libellés ; les sujets ont donc des identifiants propres, plutôt qu'une correspondance automatique par numéro seul.
+Les liens complémentaires déjà possibles sont ciblés : structure du joint → `met-03#s4`, fissuration → `met-03#s6`, conception des joints → `rdm-02#c6`, contraintes/déformations → `rdm-03#c5` et `met-03#s4`. Le sujet annuel « Fatigue » (3.8) mène désormais à l’introduction de `rdm-05#c6` : ce complément ne remplace pas le cours spécialisé à venir. Un même code du PDF peut recouvrir plusieurs libellés ; les sujets ont donc des identifiants propres, plutôt qu'une correspondance automatique par numéro seul.
 
 | Examen indiqué | Date | Horaire |
 | --- | --- | --- |
@@ -57,7 +57,7 @@ La date d'un examen ou d'une séance reste celle du PDF prévisionnel, à actual
 - `sources` référence les PDF locaux. `publier` vaut `false` par défaut : le fichier n'est ni copié ni lié et sa présence n'est pas exigée en CI. Ne le passer à `true` qu'après autorisation explicite du propriétaire pour le document concerné ; le fichier doit alors être disponible dans le dépôt pour le build.
 - `phases` définit les étapes, dates et source ; `phase_reference` désigne la pré-rentrée comme point de départ avant la formation.
 - `themes` définit les filtres ; `sujets` porte les intitulés, codes et `supports`.
-- Un support contient `cours` (identifiant du catalogue) et éventuellement `ancre`. Un cours à venir n'a pas de lien ; un brouillon disparaît des supports. Passer le cours 5 en disponible suffira à rendre ses liens actifs.
+- Un support contient `cours` (identifiant du catalogue) et éventuellement `ancre`. Un cours à venir n'a pas de lien ; un brouillon disparaît des supports. Passer un cours annoncé en disponible active ses liens déjà déclarés.
 - `seances` référence un sujet et une phase avec une date ISO ; `horaire`, `intervenant` et `note` sont facultatifs. Les plages horaires affichées peuvent inclure les pauses du planning.
 
 Pour un nouveau cours, ajouter son identifiant aux supports du bon sujet une seule fois : toutes les séances de ce sujet en bénéficient. Pour une nouvelle version PDF, relire les cellules concernées et modifier la transcription, puis lancer `uv run python -m wiki check`, les tests et le build. Déposer un PDF seul ne modifie pas le calendrier.

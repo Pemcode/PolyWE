@@ -60,7 +60,7 @@ Exemple d'entrée, à adapter avec un fichier réellement présent :
 - `fichier` désigne le fichier source local. Il peut changer lors d'un remplacement.
 - `url` est le chemin publié : le conserver après partage. Il utilise un sous-dossier et l'extension `.html`.
 - `disponible` publie le cours ; `a_venir` affiche une carte sans lien ; `brouillon` exclut complètement le cours du site et de la recherche. Les deux derniers états n'exigent aucun fichier.
-- Le cours RDM 04 est disponible. Le cours RDM 05 est déjà déclaré `a_venir` : compléter cette entrée à sa réception au lieu d'en ajouter un doublon.
+- Les cours RDM 01 à 07 sont disponibles, de Hooke aux diagrammes de sollicitations. Lorsqu’un prochain cours possède déjà une entrée `a_venir`, compléter cette entrée plutôt qu’en créer un doublon.
 - Les sections sont extraites du HTML à chaque build : première rubrique h2/h3 de chaque section avec `id`, ou titre h2/h3 portant son propre `id`. Conserver les ancres déjà partagées.
 - Si un cours utilise des fichiers locaux externes, les déclarer individuellement dans `fichiers_associes`, avec leur chemin depuis la racine du projet. Les conserver dans le dossier du cours et vérifier leurs liens relatifs à son `url`. Les dépendances distantes, comme Google Fonts, restent distantes.
 

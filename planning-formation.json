@@ -80,7 +80,20 @@
       "titre": "Théorie de base des systèmes de structure",
       "theme": "rdm",
       "code": "3.1",
-      "supports": []
+      "supports": [
+        {
+          "cours": "rdm-06",
+          "ancre": "c2"
+        },
+        {
+          "cours": "rdm-06",
+          "ancre": "c3"
+        },
+        {
+          "cours": "rdm-07",
+          "ancre": "c5"
+        }
+      ]
     },
     {
       "id": "2-1-structures-et-proprietes-des-metaux",
@@ -139,6 +152,12 @@
         },
         {
           "cours": "rdm-05"
+        },
+        {
+          "cours": "rdm-06"
+        },
+        {
+          "cours": "rdm-07"
         }
       ]
     },
@@ -498,7 +517,12 @@
       "titre": "Fatigue",
       "theme": "rdm",
       "code": "3.8",
-      "supports": []
+      "supports": [
+        {
+          "cours": "rdm-05",
+          "ancre": "c6"
+        }
+      ]
     },
     {
       "id": "2-13-acier-cryogenique",

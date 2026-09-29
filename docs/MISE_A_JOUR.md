@@ -12,7 +12,7 @@ La routine se lance en **double-cliquant sur `Mettre-a-jour.cmd`** à la racine 
 6. **3 — Aperçu** ouvre le site dans le navigateur. Vérifier la matière, le support et son accès depuis le planning. Arrêter l’aperçu avec Ctrl+C pour revenir au menu.
 7. **4 — Publier** exécute les tests, construit le site, affiche les fichiers concernés et demande de taper `publier`. GitHub refait les contrôles, y compris les parcours navigateur, puis déploie automatiquement.
 
-**Pour le cours RDM 05**, choisir l’entrée annoncée plutôt que créer un nouveau cours : son identifiant, son adresse et les liens déjà prévus dans la frise seront conservés.
+**Pour un cours déjà annoncé**, choisir l’entrée existante plutôt que créer un nouveau cours : son identifiant, son adresse et les liens déjà prévus dans la frise seront conservés. Les cours RDM 05 à 07 sont désormais intégrés.
 
 Aucun support n’est enregistré au simple dépôt d’un fichier. L’enregistrement l’inscrit comme `disponible` pour la prochaine publication. Pour garder un brouillon, laisser le fichier non enregistré jusqu’à sa relecture ; si une annonce est souhaitée, utiliser une entrée `a_venir` dans le catalogue.
 
@@ -49,7 +49,7 @@ L’option `apercu --port 8001` permet de changer de port si 8000 est occupé. L
 Pour une intégration reproductible, l’ajout accepte aussi des paramètres. Exemples à adapter aux fichiers réellement présents :
 
 ```powershell
-# Compléter un cours déjà annoncé, en conservant toutes ses métadonnées.
+# Remplacer le fichier source d’un cours existant, en conservant ses métadonnées.
 uv run python -m wiki ajouter "RDM/cours-05.html" --id rdm-05
 
 # Nouveau document dans une matière existante.
