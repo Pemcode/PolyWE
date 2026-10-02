@@ -156,3 +156,41 @@ def test_relocated_sources_preserve_existing_bookmarks_and_scripts(tmp_path):
     assert (output / MOHR_FORGE).is_file()
     assert not (output / "Cours/RDM").exists()
     assert not (output / "Cours/Metallurgie").exists()
+
+
+def test_fatigue_courses_are_reachable_from_subject_planning_and_search(tmp_path):
+    data, plan = copy_real_project(tmp_path, planning=True)
+    output = build(tmp_path)
+    urls = ["Fatigue/01-cycles-chargement.html", "Fatigue/02-courbe-wohler.html", "Fatigue/03-amorcage-fissures.html"]
+    assert (output / "matieres/fatigue.html").is_file(), "La matière fatigue doit être accessible."
+
+    def page(path):
+        parsed = CourseHTML()
+        parsed.feed((output / path).read_text(encoding="utf-8"))
+        return parsed
+
+    assert "matieres/fatigue.html" in page("index.html").links
+    for first, second in zip(urls, urls[1:]):
+        assert Path(second).name in page(first).links
+        assert Path(first).name in page(second).links
+    courses = {c["id"]: c for c in data["cours"]}
+    topic = next(t for t in plan["sujets"] if t["id"] == "3-8-fatigue")
+    index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    for n, (url, anchor) in enumerate(zip(urls, ["c3", "c5", "c5"]), 1):
+        ident = f"fatigue-{n:02}"
+        assert "../" + url in page("matieres/fatigue.html").links
+        assert url in page("planning.html").links
+        assert {"cours": ident} in topic["supports"]
+        assert any(row["cours_id"] == ident and row["type"] == "section" and row["url"] == url + "#" + anchor for row in index)
+        course = courses[ident]
+        source = (tmp_path / course["fichier"]).read_text(encoding="utf-8-sig")
+        parsed = CourseHTML()
+        parsed.feed(source)
+        assert parsed.ids <= page(url).ids
+        scripts = re.findall(r"<script\b[^>]*>.*?</script>", source, flags=re.S)
+        published = (output / url).read_text(encoding="utf-8")
+        assert scripts and all(script in published for script in scripts)
+    assert "../RDM/04-directions-principales-mohr.html" in page(urls[2]).links
+    assert "../RDM/05-hooke-criteres-resistance.html" in page(urls[2]).links
+    assert urls[0] + "#c6" in page("planning.html").links
+    assert urls[2] + "#c5" in page("planning.html").links

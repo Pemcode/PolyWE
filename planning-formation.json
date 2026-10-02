@@ -180,14 +180,24 @@
       "titre": "Ruptures et différents types de rupture",
       "theme": "metallurgie",
       "code": "2.7",
-      "supports": []
+      "supports": [
+        {
+          "cours": "fatigue-01",
+          "ancre": "c6"
+        }
+      ]
     },
     {
       "id": "3-11-introduction-a-la-mecanique-de-la-rupture",
       "titre": "Introduction à la mécanique de la rupture",
       "theme": "rdm",
       "code": "3.11",
-      "supports": []
+      "supports": [
+        {
+          "cours": "fatigue-03",
+          "ancre": "c5"
+        }
+      ]
     },
     {
       "id": "2-4-elaboration-des-aciers",
@@ -521,6 +531,15 @@
         {
           "cours": "rdm-05",
           "ancre": "c6"
+        },
+        {
+          "cours": "fatigue-01"
+        },
+        {
+          "cours": "fatigue-02"
+        },
+        {
+          "cours": "fatigue-03"
         }
       ]
     },

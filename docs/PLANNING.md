@@ -27,8 +27,8 @@ Les codes ci-dessous viennent du planning ; les liens avec les fiches du wiki so
 | 3.2 | Notions fondamentales de RDM | Série `rdm-01` à `rdm-07`, disponible |
 | 2.14 | Introduction à la corrosion | Pas de support associé pour le moment |
 | 1.1 | Introduction à la technologie du soudage | Pas de support associé pour le moment |
-| 2.7 | Ruptures et différents types de rupture | Pas de support associé pour le moment |
-| 3.11 | Introduction à la mécanique de la rupture | Pas de support associé pour le moment |
+| 2.7 | Ruptures et différents types de rupture | Complément : le film d’une rupture par fatigue (`fatigue-01#c6`) |
+| 3.11 | Introduction à la mécanique de la rupture | Complément : fissures dormantes et seuil de propagation (`fatigue-03#c5`) |
 | 2.4 | Élaboration des aciers | Pas de support associé pour le moment |
 | 2.23 | Essais des matériaux | Pas de support associé pour le moment |
 
@@ -38,7 +38,7 @@ Le lundi 28 septembre : RDM de 8 h à 11 h 25, puis corrosion de 11 h 30 à 12 h
 
 Quatre familles organisent les enseignements : procédés (1.x), métallurgie et matériaux (2.x), RDM et conception (3.x), fabrication/contrôle/qualité (4.x). Les examens et périodes pratiques ont leurs propres filtres.
 
-Les liens complémentaires déjà possibles sont ciblés : structure du joint → `met-03#s4`, fissuration → `met-03#s6`, conception des joints → `rdm-02#c6`, contraintes/déformations → `rdm-03#c5` et `met-03#s4`. Le sujet annuel « Fatigue » (3.8) mène désormais à l’introduction de `rdm-05#c6` : ce complément ne remplace pas le cours spécialisé à venir. Un même code du PDF peut recouvrir plusieurs libellés ; les sujets ont donc des identifiants propres, plutôt qu'une correspondance automatique par numéro seul.
+Les liens complémentaires déjà possibles sont ciblés : structure du joint → `met-03#s4`, fissuration → `met-03#s6`, conception des joints → `rdm-02#c6`, contraintes/déformations → `rdm-03#c5` et `met-03#s4`. Le sujet annuel « Fatigue » (3.8) propose les trois premiers cours de la matière « Fatigue des métaux » : cycles de chargement (`fatigue-01`), courbe de Wöhler (`fatigue-02`) et amorçage (`fatigue-03`). L’introduction de `rdm-05#c6` reste proposée en complément. Cette série disponible ne prétend pas couvrir tout le module. La matière du wiki se retrouve dans la famille « RDM et conception » du planning, sans modifier le calendrier. Un même code du PDF peut recouvrir plusieurs libellés ; les sujets ont donc des identifiants propres, plutôt qu'une correspondance automatique par numéro seul.
 
 | Examen indiqué | Date | Horaire |
 | --- | --- | --- |

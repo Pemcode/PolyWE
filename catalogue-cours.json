@@ -419,6 +419,122 @@
       "fichier": "Cours/RDM/RDM, cours 8 _ les caractéristiques des sections.html",
       "url": "RDM/08-caracteristiques-sections.html",
       "statut": "disponible"
+    },
+    {
+      "id": "fatigue-01",
+      "titre": "Cycles de chargement et vocabulaire de la fatigue",
+      "matiere": "fatigue",
+      "ordre": 1,
+      "repere": "Cours 01",
+      "prerequis_conseilles": [
+        "rdm-01",
+        "rdm-08"
+      ],
+      "mots_cles": [
+        "cycle",
+        "chargement cyclique",
+        "amplitude",
+        "étendue de contrainte",
+        "contrainte moyenne",
+        "rapport de charge",
+        "rainflow",
+        "flexion rotative",
+        "concentration de contrainte",
+        "amorçage",
+        "propagation"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Fatigue/Fatigue, cours 1 _ le cycle, parler la langue de la fatigue.html",
+      "url": "Fatigue/01-cycles-chargement.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "fatigue-02",
+      "titre": "Courbe de Wöhler et durée de vie",
+      "matiere": "fatigue",
+      "ordre": 2,
+      "repere": "Cours 02",
+      "prerequis_conseilles": [
+        "fatigue-01"
+      ],
+      "mots_cles": [
+        "Wöhler",
+        "Wohler",
+        "courbe S-N",
+        "endurance",
+        "limite d’endurance",
+        "Basquin",
+        "fatigue oligocyclique",
+        "échelle logarithmique",
+        "dispersion",
+        "courbes FAT",
+        "classes FAT",
+        "soudures",
+        "durée de vie"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Fatigue/Fatigue, cours 2 _ la courbe de Wöhler.html",
+      "url": "Fatigue/02-courbe-wohler.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "fatigue-03",
+      "titre": "Amorçage des fissures de fatigue",
+      "matiere": "fatigue",
+      "ordre": 3,
+      "repere": "Cours 03",
+      "prerequis_conseilles": [
+        "fatigue-01",
+        "fatigue-02",
+        "rdm-04",
+        "rdm-05"
+      ],
+      "mots_cles": [
+        "amorçage",
+        "microglissements",
+        "Schmid",
+        "intrusions",
+        "extrusions",
+        "bandes de glissement",
+        "fissures dormantes",
+        "Kitagawa",
+        "seuil de propagation",
+        "Crossland",
+        "Dang Van",
+        "Tresca",
+        "von Mises"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Fatigue/Fatigue, cours 3 _ l'amorçage.html",
+      "url": "Fatigue/03-amorcage-fissures.html",
+      "statut": "disponible"
     }
   ],
   "matieres": [
@@ -431,6 +547,11 @@
       "id": "rdm",
       "titre": "Résistance des matériaux",
       "description": "Comprendre les contraintes, les déformations et le calcul des assemblages."
+    },
+    {
+      "id": "fatigue",
+      "titre": "Fatigue des métaux",
+      "description": "Décrire les cycles de chargement, lire les courbes de Wöhler et comprendre l’amorçage des fissures."
     }
   ],
   "parcours": [

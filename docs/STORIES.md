@@ -18,6 +18,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S12 | Intégrer le jeu Mohr Forge sans le mettre au centre | Livré — site public vérifié |
 | S13 | Intégrer le cours RDM 08 sur les caractéristiques des sections | Livré — site public vérifié |
 | S14 | Regrouper les sources dans Cours sans casser les liens publiés | Intégré et vérifié |
+| S15 | Intégrer les trois premiers cours de fatigue | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -189,4 +190,18 @@ Preuve TDD du 2 octobre 2026 : RED de `test_relocated_sources_preserve_existing_
 
 Validation : 83 tests Python et 23 parcours Chromium réussis ; catalogue valide (12 cours, 114 sections, 1 application), build et 522 liens/ancres contrôlés. Les 38 fichiers de l’artefact sont équivalents à ceux construits depuis le commit précédent, hors normalisation Git des fins de ligne de deux fichiers de Mohr Forge. Empreintes SHA-256 des 12 sources déplacées inchangées. L’application et ses fichiers restent à leurs emplacements ; aucun calendrier ou PDF source n’est modifié.
 
-Lors de la migration, le dossier local `Cours/Fatigue/` est vide. Aucun nouveau support de fatigue n’est donc inventorié ni publié ; ses fichiers restent à fournir pour leur intégration.
+Lors de la migration, le dossier local `Cours/Fatigue/` est vide. Aucun nouveau support de fatigue n’est donc inventorié ni publié ; les fichiers déposés ensuite sont intégrés dans S15.
+
+## S15 — Les bases de la fatigue des métaux
+
+En tant qu’élève, je retrouve les nouveaux supports de fatigue depuis une matière dédiée, le planning ou une recherche et je progresse des cycles à l’amorçage.
+
+- Trois supports disponibles : cycles de chargement, courbe de Wöhler et amorçage des fissures. Numéros, titres, mots-clés et prérequis tirés des fichiers déposés.
+- Une matière « Fatigue des métaux » apparaît automatiquement dans la navigation ; progression 1 ↔ 2 ↔ 3, sommaires et partage des sections.
+- Le sujet 3.8 « Fatigue » propose les trois cours, en conservant l’introduction RDM existante. Les sujets de rupture reçoivent seulement des sections complémentaires pertinentes ; leurs dates et horaires ne changent pas.
+- Sources sous `Cours/Fatigue/`, URL stables sous `Fatigue/`, scripts, thèmes et quiz préservés. Aucun cours absent n’est annoncé comme disponible.
+- Test du parcours en RED avant inscription, puis tests et build verts, vérification des interactions et du partage sur mobile et ordinateur avant publication.
+
+Preuve TDD du 2 octobre 2026 : RED exécuté avec `uv run pytest tests/test_content.py -q -k fatigue`, sur l’absence de la page matière. GREEN après enregistrement des trois HTML par `wiki ajouter` et ajustement des métadonnées : matière, progression, planning, prérequis, index des sections, conservation des ancres et des scripts. Aucun changement du générateur.
+
+Validation locale : 84 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (15 cours, 151 sections, 3 matières et 1 application). Contrôle des trois cours réels sous `/PolyWE/`, à 390 et 1440 px : recherche ciblée, copie effective des liens avec ancres, partage natif simulé, accès depuis la semaine 49 du planning, progression 1 ↔ 2 ↔ 3, un simulateur par cours, quiz et réinitialisation, thème clair/sombre et persistance après rechargement. Aucune erreur JavaScript ou HTTP locale ni débordement horizontal détecté. Captures de la matière, des cours et d’un simulateur inspectées. Les trois empreintes SHA-256 des sources restent inchangées ; les scripts et ancres sont conservés dans les copies publiées. Ces contrôles vérifient le fonctionnement, sans validation scientifique des calculs.

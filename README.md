@@ -6,6 +6,8 @@ Dépôt : [Pemcode/PolyWE](https://github.com/Pemcode/PolyWE).
 
 Site statique destiné à GitHub Pages. Les cours interactifs restent des fichiers HTML éditables. Un catalogue JSON organise les matières, les cours et les parcours ; un générateur Python construit les pages et leur navigation.
 
+La matière [Fatigue des métaux](https://pemcode.github.io/PolyWE/matieres/fatigue.html) réunit les trois premiers cours : cycles de chargement, courbe de Wöhler et amorçage des fissures. Ils sont aussi accessibles depuis le sujet « Fatigue » de la frise.
+
 ## Routine quotidienne
 
 **Double-cliquer sur `Mettre-a-jour.cmd`** pour ouvrir le menu.
@@ -60,7 +62,7 @@ Exemple d'entrée, à adapter avec un fichier réellement présent :
 - `fichier` désigne le fichier source local, désormais rangé dans `Cours/<matière>/`. Il peut changer lors d’un remplacement ; les URL publiées des cours existants restent inchangées.
 - `url` est le chemin publié : le conserver après partage. Il utilise un sous-dossier et l'extension `.html`.
 - `disponible` publie le cours ; `a_venir` affiche une carte sans lien ; `brouillon` exclut complètement le cours du site et de la recherche. Les deux derniers états n'exigent aucun fichier.
-- Les cours RDM 01 à 07 sont disponibles, de Hooke aux diagrammes de sollicitations. Lorsqu’un prochain cours possède déjà une entrée `a_venir`, compléter cette entrée plutôt qu’en créer un doublon.
+- Les cours RDM 01 à 08 sont disponibles, de Hooke aux caractéristiques des sections. Lorsqu’un prochain cours possède déjà une entrée `a_venir`, compléter cette entrée plutôt qu’en créer un doublon.
 - Les sections sont extraites du HTML à chaque build : première rubrique h2/h3 de chaque section avec `id`, ou titre h2/h3 portant son propre `id`. Conserver les ancres déjà partagées.
 - Si un cours utilise des fichiers locaux externes, les déclarer individuellement dans `fichiers_associes`, avec leur chemin depuis la racine du projet. Les conserver dans le dossier du cours et vérifier leurs liens relatifs à son `url`. Les dépendances distantes, comme Google Fonts, restent distantes.
 
