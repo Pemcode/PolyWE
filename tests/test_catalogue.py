@@ -2,7 +2,7 @@ import copy
 
 import pytest
 
-from conftest import save_catalogue
+from conftest import add_application, save_catalogue
 from wiki.catalogue import CatalogueError, load_catalogue
 
 
@@ -85,3 +85,46 @@ def test_published_url_cannot_escape_output(project):
     save_catalogue(root, data)
     with pytest.raises(CatalogueError, match="chemin"):
         load_catalogue(root)
+
+
+def test_application_is_declared_by_subject_with_a_stable_address(project):
+    root, data = project
+    add_application(root, data)
+    app = load_catalogue(root)["applications"][0]
+    assert app["matiere"] == "thermique"
+    assert app["url"] == "Thermique/quiz/index.html"
+
+
+@pytest.mark.parametrize("change, message", [
+    ({"matiere": "inconnue"}, "matière"),
+    ({"statut": "presque"}, "statut"),
+    ({"fichiers": ["index.html", "js/absent.js"]}, "introuvable"),
+    ({"fichiers": ["index.html", "../dehors.js"]}, "chemin"),
+    ({"source": "../ailleurs"}, "chemin"),
+    ({"publication": "assets/quiz"}, "chemin"),
+    ({"publication": "../quiz"}, "chemin"),
+    ({"entree": "absente.html"}, "entrée"),
+    ({"cours_lies": ["absent"]}, "cours lié"),
+    ({"id": "th-01"}, "doublon"),
+])
+def test_invalid_application_fails_with_actionable_message(project, change, message):
+    root, data = project
+    add_application(root, data, **change)
+    with pytest.raises(CatalogueError, match=message):
+        load_catalogue(root)
+
+
+def test_application_cannot_overwrite_a_published_course(project):
+    root, data = project
+    add_application(root, data, publication="Thermique", entree="introduction.html", fichiers=["introduction.html"])
+    (root / "applications/quiz/introduction.html").write_text("<html><head></head><body>Jeu</body></html>", encoding="utf-8")
+    with pytest.raises(CatalogueError, match="doublon"):
+        load_catalogue(root)
+
+
+def test_planned_or_draft_application_needs_no_file(project):
+    root, data = project
+    for status in ("a_venir", "brouillon"):
+        add_application(root, data, id="jeu-" + status.replace("_", "-"), statut=status,
+                        source="applications/absente", fichiers=[], publication="Thermique/" + status.replace("_", "-"))
+    assert [a["statut"] for a in load_catalogue(root)["applications"]] == ["a_venir", "brouillon"]

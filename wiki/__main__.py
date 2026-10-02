@@ -37,7 +37,8 @@ def main():
             if plan:
                 print(f"Planning valide : {len(plan['seances'])} séances et périodes.")
             available = [c for c in data["cours"] if c["statut"] == "disponible"]
-            print(f"Catalogue valide : {len(available)} cours disponibles, {sum(len(c['sections']) for c in available)} sections.")
+            apps = sum(a["statut"] == "disponible" for a in data["applications"])
+            print(f"Catalogue valide : {len(available)} cours disponibles, {sum(len(c['sections']) for c in available)} sections, {apps} application{'s' if apps > 1 else ''}.")
         elif args.command == "build":
             print(f"Site construit et liens contrôlés : {build(root)}")
         elif args.command == "ajouter":

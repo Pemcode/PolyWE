@@ -53,6 +53,29 @@ def course_card(course, current):
     return f'<article class="wiki-card"><span class="wiki-eyebrow">{repere}</span><h3><a href="{url}">{title}</a></h3><p>{h(tags)}</p><span class="wiki-card-end">{len(course["sections"])} sections <span aria-hidden="true">↗</span></span></article>'
 
 
+def app_card(app, current):
+    title = h(app["titre"])
+    genre = h(app.get("genre", "Application interactive"))
+    description = f'<p>{h(app["description"])}</p>' if app.get("description") else ""
+    if app["statut"] == "a_venir":
+        return f'<article class="wiki-card wiki-app-card wiki-planned"><span class="wiki-eyebrow">{genre}</span><h3>{title}</h3>{description}<p class="wiki-tag">À venir</p></article>'
+    tags = " · ".join(app["ressources"])
+    return f'<article class="wiki-card wiki-app-card"><span class="wiki-eyebrow">{genre}</span><h3><a href="{link(current, app["url"])}">{title}</a></h3>{description}<span class="wiki-card-end">{h(tags)} <span aria-hidden="true">↗</span></span></article>'
+
+
+def app_page(app, subject):
+    """Copie publiée d'une application : barre du wiki ajoutée, source et routes internes intactes."""
+    current = app["url"]
+    head = (f'<link rel="stylesheet" href="{link(current, "assets/wiki.css")}"><script id="wiki-runtime" defer src="{link(current, "assets/wiki.js")}"></script>'
+            f'<meta name="wiki-application" content="{h(app["id"])}"><meta name="wiki-course-title" content="{h(app["titre"])}">')
+    nav = f"""<nav class="wiki-nav wiki-app-nav" aria-label="Navigation du wiki"><div class="wiki-nav-inner">
+<div class="wiki-crumbs"><a href="{link(current, "index.html")}">Révisions IWE</a><span aria-hidden="true">/</span><a href="{link(current, f"matieres/{subject['id']}.html")}">{h(subject['titre'])}</a><span aria-current="page">{h(app['titre'])}</span></div>
+<div class="wiki-actions"><button type="button" data-wiki-share="native">Partager</button><button type="button" data-wiki-share="copy">Copier le lien</button><span class="wiki-status" role="status" id="wiki-share-status"></span></div>
+<label class="wiki-copy-fallback" hidden>Lien à copier<input readonly aria-label="Lien à copier"></label></div></nav>"""
+    html = re.sub(r"</head\s*>", lambda _: head + '\n</head>', app["_source"], count=1, flags=re.I)
+    return re.sub(r"(<body\b[^>]*>)", lambda m: m.group(1) + '\n' + nav, html, count=1, flags=re.I)
+
+
 def validate_site(output):
     output = Path(output).resolve()
     pages = {}
@@ -73,7 +96,9 @@ def validate_site(output):
                 target = target / "index.html"
             if not target.is_relative_to(output) or not target.is_file():
                 raise CatalogueError(f"lien local introuvable : {path.name} → {raw}")
-            if url.fragment and target in pages and unquote(url.fragment) not in pages[target].ids:
+            # Dans une application, #laboratoire ou #histoire/2 sont des routes internes, pas des sections.
+            routed = target in pages and "wiki-application" in pages[target].meta
+            if url.fragment and target in pages and not routed and unquote(url.fragment) not in pages[target].ids:
                 raise CatalogueError(f"lien vers une ancre absente : {path.name} → {raw}")
             checked += 1
     return checked
@@ -107,7 +132,10 @@ def build(root):
     courses = sorted((c for c in data["cours"] if c["statut"] != "brouillon"), key=lambda c: (c["ordre"], c["id"]))
     available = [c for c in courses if c["statut"] == "disponible"]
     by_id = {c["id"]: c for c in courses}
-    subjects = [s for s in data["matieres"] if any(c["matiere"] == s["id"] for c in courses)]
+    # Les applications complètent une matière ; l'accueil reste organisé par matières.
+    apps = sorted((a for a in data["applications"] if a["statut"] != "brouillon"), key=lambda a: (a["ordre"], a["id"]))
+    live_apps = [a for a in apps if a["statut"] == "disponible"]
+    subjects = [s for s in data["matieres"] if any(item["matiere"] == s["id"] for item in [*courses, *apps])]
     subject_by_id = {s["id"]: s for s in subjects}
     subject_cards = []
     for subject in subjects:
@@ -115,9 +143,13 @@ def build(root):
         count = sum(c["statut"] == "disponible" for c in grouped)
         current = f"matieres/{subject['id']}.html"
         cards = "".join(course_card(c, current) for c in grouped)
-        body = f'<p class="wiki-eyebrow">Matière · {count} cours disponibles</p><h1>{h(subject["titre"])}</h1><p class="wiki-lead">{h(subject.get("description", ""))}</p><div class="wiki-grid">{cards}</div>'
+        subject_apps = [a for a in apps if a["matiere"] == subject["id"]]
+        training = f'<section class="wiki-training" aria-labelledby="s-entrainer"><div class="wiki-section-title"><h2 id="s-entrainer">S’entraîner</h2><span>Jeux et applications interactives</span></div><div class="wiki-grid">{"".join(app_card(a, current) for a in subject_apps)}</div></section>' if subject_apps else ""
+        body = f'<p class="wiki-eyebrow">Matière · {count} cours disponibles</p><h1>{h(subject["titre"])}</h1><p class="wiki-lead">{h(subject.get("description", ""))}</p><div class="wiki-grid">{cards}</div>{training}'
         write(output, current, shell(current, subject["titre"], body, has_planning=bool(plan)))
-        subject_cards.append(f'<a class="wiki-subject" href="{current}"><span class="wiki-eyebrow">{count} cours disponibles</span><h3>{h(subject["titre"])}</h3><p>{h(subject.get("description", ""))}</p><span aria-hidden="true">Explorer →</span></a>')
+        playable = sum(a["statut"] == "disponible" for a in subject_apps)
+        mention = f" · {playable} application{'s' if playable > 1 else ''}" if playable else ""
+        subject_cards.append(f'<a class="wiki-subject" href="{current}"><span class="wiki-eyebrow">{count} cours disponibles{mention}</span><h3>{h(subject["titre"])}</h3><p>{h(subject.get("description", ""))}</p><span aria-hidden="true">Explorer →</span></a>')
     route_cards = []
     for route in data["parcours"]:
         current = f"parcours/{route['id']}.html"
@@ -181,6 +213,9 @@ def build(root):
         footer = '<footer class="wiki-course-footer">'
         if prerequisites:
             footer += '<p>Prérequis conseillés : ' + ' · '.join(prerequisites) + '</p>'
+        related = [a for a in live_apps if course["id"] in a["cours_lies"]]
+        if related:
+            footer += '<p class="wiki-training-link">S’entraîner : ' + ' · '.join(f'<a href="{link(current, a["url"])}">{h(a["titre"])}</a> <span>({h(a.get("genre", "Application interactive")).lower()})</span>' for a in related) + '</p>'
         footer += '<nav aria-label="Cours voisins">' + ''.join(previous_next) + '</nav></footer>'
         head = f'<link rel="stylesheet" href="{link(current, "assets/wiki.css")}"><script id="wiki-runtime" defer src="{link(current, "assets/wiki.js")}"></script><meta property="og:title" content="{h(course["titre"])}"><meta name="wiki-course-title" content="{h(course["titre"])}">'
         html = re.sub(r"<title\b[^>]*>.*?</title>", lambda _: '<title>'+h(subject['titre']+' — '+course.get('repere','Cours')+' — '+course['titre'])+'</title>', course["_source"], count=1, flags=re.I | re.S)
@@ -196,6 +231,16 @@ def build(root):
         search_rows.append({**common, 'titre': course['titre'], 'url': link('index.html', current), 'type': 'cours'})
         for section in course['sections']:
             search_rows.append({**common, 'titre': section['titre'], 'url': link('index.html', current, section['ancre']), 'type': 'section'})
+    for app in live_apps:
+        subject = subject_by_id[app["matiere"]]
+        for source, target in app["_files"]:
+            if target != app["url"]:
+                (output / target).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(root / source, output / target)
+        write(output, app["url"], app_page(app, subject))
+        search_rows.append({'cours_id': app['id'], 'cours': app['titre'], 'matiere': subject['id'], 'matiere_titre': subject['titre'],
+                            'mots_cles': app['mots_cles'], 'ressources': app['ressources'], 'titre': app['titre'],
+                            'url': link('index.html', app['url']), 'type': 'application'})
     write(output, 'assets/recherche.json', json.dumps(search_rows, ensure_ascii=False, indent=2)+'\n')
     validate_site(output)
     return output

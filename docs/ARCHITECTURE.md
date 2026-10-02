@@ -12,6 +12,7 @@
 flowchart LR
   A[HTML des cours] --> C[Générateur Python]
   B[Catalogue JSON] --> C
+  G[Code des applications déclarées] --> C
   P[PDF de planning] -->|transcription vérifiée| J[planning-formation.json]
   J --> C
   C --> D[Site statique dans _site]
@@ -28,6 +29,7 @@ catalogue-cours.json        matières, cours, statuts et parcours
 planning-formation.json     phases, sujets, séances et PDF déclarés
 Planning/                  plannings sources locaux, ignorés par Git
 Metallurgie/ et RDM/        sources actuelles ; autres matières ajoutables
+applications/              jeux et simulateurs : code, tests et documentation propres
 wiki/catalogue.py          validation et extraction des sections
 wiki/planning.py           validation et rendu de la frise
 wiki/build.py              génération et contrôle des liens
@@ -60,6 +62,14 @@ Le générateur lit les sources et enrichit leurs copies avec une navigation com
 L'accueil et les pages matière sont préconstruits. Aucun routeur JavaScript, chargement des cours en iframe ou application monopage n'est nécessaire. Les liens relatifs préservent le fonctionnement sous le nom du dépôt GitHub Pages.
 
 Les sorties sont reconstruites depuis les seules entrées disponibles et leurs fichiers associés. Le générateur refuse de nettoyer une sortie non marquée ou un lien/jonction vers un autre dossier. Les fichiers associés doivent être déclarés ; les dépendances HTML manquantes bloquent le build. La validation ne prétend pas analyser tous les chargements dynamiques possibles à l'intérieur du JavaScript pédagogique.
+
+## Applications interactives
+
+Une application (jeu, simulateur) est du code, pas un support éditorial : ses sources vivent dans `applications/<id>/` avec leurs propres tests et leur documentation. Le catalogue la déclare dans la liste `applications` : matière, état, `fichiers` publiés un à un, dossier de `publication`, `cours_lies`. Le générateur copie seulement ces fichiers et enrichit la copie de la page d’entrée avec la barre du wiki. Les routes internes par ancre (`#laboratoire`, `#histoire/3`) sont reconnues grâce à la balise `wiki-application` et ne passent pas au contrôle des sections.
+
+Place volontairement secondaire : section « S’entraîner » de la matière, lien en pied des cours liés, entrée de recherche ; l’accueil ne montre que le nombre d’applications dans la carte de la matière. Aucune matière n’est codée en dur. La routine de maintenance construit ses sites candidats avec le code déclaré des applications, mais `publier` ne l’embarque jamais. Le premier cas est Mohr Forge, publié à `RDM/mohr-forge/` ; son ancien dépôt autonome est archivé localement dans `.sauvegardes/`.
+
+La CI teste les moteurs des applications avec Node 24, sans npm, puis leurs parcours Chromium avant de publier.
 
 ## Planning
 

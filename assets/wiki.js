@@ -60,7 +60,7 @@
           anchor.href = row.url;
           anchor.textContent = row.titre;
           const context = document.createElement("small");
-          context.textContent = `${row.matiere_titre} · ${row.type === "section" ? row.cours : "Cours complet"}`;
+          context.textContent = `${row.matiere_titre} · ${row.type === "section" ? row.cours : row.type === "application" ? "Application interactive" : "Cours complet"}`;
           li.append(anchor, context);
           fragment.append(li);
         }

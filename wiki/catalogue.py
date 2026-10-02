@@ -15,6 +15,7 @@ class CourseHTML(HTMLParser):
         self.ids = set()
         self.sections = []
         self.links = []
+        self.meta = {}
         self._parents = []
         self._heading = None
         self._seen = set()
@@ -26,6 +27,8 @@ class CourseHTML(HTMLParser):
         for attr in ("href", "src", "poster"):
             if attrs.get(attr):
                 self.links.append(attrs[attr])
+        if tag == "meta" and attrs.get("name"):
+            self.meta[attrs["name"]] = attrs.get("content") or ""
         if tag == "section":
             self._parents.append(attrs.get("id"))
         if tag in ("h2", "h3"):
@@ -139,6 +142,7 @@ def load_catalogue(root):
         course["sections"] = parsed.sections
         course["_source"] = html
         course["_ids"] = parsed.ids
+    load_applications(root, data, subjects, identifiers, urls)
     by_id = {c["id"]: c for c in data["cours"]}
     for route in data["parcours"]:
         if not isinstance(route.get("etapes"), list) or not route["etapes"]:
@@ -150,3 +154,56 @@ def load_catalogue(root):
             if step.get("ancre") not in course["_ids"]:
                 raise CatalogueError(f"ancre de parcours inconnue : {route['id']} / {step.get('ancre')}")
     return data
+
+
+def load_applications(root, data, subjects, courses, course_urls):
+    """Applications interactives (jeux, simulateurs) : du code publié fichier par fichier."""
+    applications = data.setdefault("applications", [])
+    if not isinstance(applications, list):
+        raise CatalogueError("liste attendue : applications")
+    for ident in _unique(applications, "application"):
+        if ident in courses:
+            raise CatalogueError(f"doublon d'identifiant entre un cours et une application : {ident}")
+    # Les fichiers associés des cours sont publiés à leur chemin source.
+    published = set(course_urls) | {asset.casefold() for course in data["cours"]
+                                     if course["statut"] == "disponible" for asset in course["fichiers_associes"]}
+    for app in applications:
+        ident = app["id"]
+        if app.get("matiere") not in subjects:
+            raise CatalogueError(f"matière inconnue : {ident}")
+        if app.get("statut") not in {"disponible", "a_venir", "brouillon"}:
+            raise CatalogueError(f"statut invalide : {ident}")
+        if type(app.setdefault("ordre", 0)) is not int or app["ordre"] < 0:
+            raise CatalogueError(f"ordre entier positif ou nul attendu : {ident}")
+        for key in ("mots_cles", "ressources", "cours_lies", "fichiers"):
+            values = app.setdefault(key, [])
+            if not isinstance(values, list) or any(not isinstance(v, str) for v in values):
+                raise CatalogueError(f"liste de textes attendue : {ident}.{key}")
+        if any(course not in courses for course in app["cours_lies"]):
+            raise CatalogueError(f"cours lié inconnu : {ident}")
+        if app["statut"] != "disponible":
+            continue
+        source = relative_path(app.get("source"))
+        if not (root / source).resolve().is_relative_to(root) or not (root / source).is_dir():
+            raise CatalogueError(f"dossier d'application introuvable : {source}")
+        publication = relative_path(app.get("publication"))
+        if not app["fichiers"]:
+            raise CatalogueError(f"fichiers à publier attendus : {ident}")
+        entry = app.get("entree")
+        if entry not in app["fichiers"] or PurePosixPath(entry).suffix.lower() != ".html":
+            raise CatalogueError(f"entrée HTML à déclarer parmi les fichiers : {ident}")
+        pairs = []
+        for name in app["fichiers"]:
+            origin = relative_path(f"{source}/{name}")
+            source_file(root, origin)
+            target = relative_path(f"{publication}/{name}")
+            if target.casefold() in published:
+                raise CatalogueError(f"doublon de chemin publié : {target}")
+            published.add(target.casefold())
+            pairs.append((origin, target))
+        html = (root / source / entry).read_text(encoding="utf-8-sig")
+        if not re.search(r"<head\b", html, re.I) or not re.search(r"<body\b", html, re.I):
+            raise CatalogueError(f"page HTML complète attendue : {ident}")
+        app["url"] = f"{publication}/{entry}"
+        app["_files"] = pairs
+        app["_source"] = html

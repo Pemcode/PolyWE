@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from conftest import save_catalogue
+from conftest import add_application, save_catalogue
 from wiki.build import build, validate_site
 from wiki.catalogue import CatalogueError
 
@@ -120,3 +120,47 @@ def test_rebuild_tolerates_readonly_generated_directories(project):
     finally:
         if asset_dir.exists():
             asset_dir.chmod(stat.S_IREAD | stat.S_IWRITE)
+
+
+def test_application_is_published_from_declared_files_with_the_wiki_bar(project):
+    root, data = project
+    add_application(root, data)
+    sources = {p: p.read_bytes() for p in (root / "applications").rglob("*") if p.is_file()}
+    output = build(root)
+    base = output / "Thermique/quiz"
+    assert sorted(p.relative_to(base).as_posix() for p in base.rglob("*") if p.is_file()) == ["assets/app.css", "index.html", "js/app.js"]
+    assert not (output / "applications").exists()
+    assert {p: p.read_bytes() for p in sources} == sources
+    page = (base / "index.html").read_text(encoding="utf-8")
+    assert 'aria-label="Navigation du wiki"' in page
+    assert "../../index.html" in page and "../../matieres/thermique.html" in page
+    assert '<script defer src="js/app.js"></script>' in page and 'href="#jouer"' in page
+    # Les routes internes (#jouer) ne sont pas des ancres de section : le contrôle des liens les accepte.
+    assert validate_site(output) > 0
+
+
+def test_application_is_reachable_without_taking_the_home_page(project):
+    root, data = project
+    add_application(root, data)
+    output = build(root)
+    home = (output / "index.html").read_text(encoding="utf-8")
+    assert "quiz/index.html" not in home
+    assert "1 application" in home
+    subject = (output / "matieres/thermique.html").read_text(encoding="utf-8")
+    assert "S’entraîner" in subject and "../Thermique/quiz/index.html" in subject
+    course = (output / "Thermique/introduction.html").read_text(encoding="utf-8")
+    assert "quiz/index.html" in course
+    rows = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    app = [row for row in rows if row["type"] == "application"]
+    assert [(row["titre"], row["url"]) for row in app] == [("Quiz du préchauffage", "Thermique/quiz/index.html")]
+
+
+def test_draft_and_planned_applications_are_never_linked(project):
+    root, data = project
+    add_application(root, data, id="brouillon-jeu", titre="Brouillon secret", statut="brouillon", publication="Thermique/secret")
+    add_application(root, data, id="jeu-futur", titre="Jeu futur", statut="a_venir", publication="Thermique/futur")
+    output = build(root)
+    subject = (output / "matieres/thermique.html").read_text(encoding="utf-8")
+    assert "Brouillon secret" not in subject and not (output / "Thermique/secret").exists()
+    assert "Jeu futur" in subject and "À venir" in subject and not (output / "Thermique/futur").exists()
+    assert "futur/index.html" not in subject

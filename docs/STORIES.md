@@ -15,6 +15,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S09 | Retrouver les supports à partir du planning de formation | Intégré et vérifié |
 | S10 | Ajouter des supports et publier avec une routine guidée | Intégré et vérifié |
 | S11 | Intégrer les cours RDM 05 à 07 | Intégré et vérifié |
+| S12 | Intégrer le jeu Mohr Forge sans le mettre au centre | Intégré et vérifié localement ; publication à confirmer |
 
 ## S01 — Catalogue extensible
 
@@ -137,3 +138,20 @@ Preuve TDD du 29 septembre 2026 : RED de `test_rdm_05_to_07_continue_series_and_
 Validation : 62 tests Python sous Windows et 20 parcours Chromium réussis ; build et contrôle de 463 liens locaux/ancres. Le catalogue contient 11 cours disponibles et 104 sections, dont 31 nouvelles sections. Contrôle des trois cours réels sous `/PolyWE/` à 390 et 1440 px : recherche jusqu’à une section, copie du lien, partage natif simulé, accès depuis la semaine 40, navigation entre cours et quiz/réinitialisation. Un cas du calculateur 3D du cours 5, la torsion du cours 6 et une console chargée du diagrammeur du cours 7 ont été manipulés. Aucune erreur JavaScript ni débordement horizontal détecté ; accueil des trois cours inspecté sur mobile. Ces essais vérifient le fonctionnement des interfaces, pas le fond scientifique des calculs.
 
 Les empreintes SHA-256 des trois HTML sont inchangées. Séances, dates, phases et sources PDF du planning inchangées ; seuls les liens vers les supports ont évolué. La documentation distingue le complément introductif sur la fatigue du futur enseignement spécialisé.
+
+## S12 — Un jeu d’entraînement accessible, sans prendre le centre du wiki
+
+En tant qu’élève, depuis la matière RDM, un cours sur les contraintes et déformations ou la recherche, j’ouvre le jeu Mohr Forge publié avec le wiki, puis je reviens au wiki.
+
+- Le jeu devient une source du dépôt (`applications/mohr-forge/`). Le catalogue le déclare comme application de la matière RDM, sans nom de matière codé dans le générateur. L’ancien dépôt imbriqué est archivé localement, hors Git.
+- Seuls les fichiers déclarés sont publiés, à l’adresse stable `RDM/mohr-forge/index.html`. Tests, documentation et scripts du jeu ne le sont pas. Une application en brouillon n’est pas publiée ; à venir, elle n’a pas de lien.
+- Place discrète : l’accueil reste centré sur les matières, avec une simple mention dans la carte RDM. La page RDM présente une section « S’entraîner », les cours liés proposent le jeu en pied de page et la recherche le trouve.
+- La copie publiée reçoit la barre du wiki (fil d’Ariane, partage) ; la source reste intacte. Les routes internes du jeu (`#histoire`, `#laboratoire`…) ne bloquent pas le contrôle des liens.
+- Liens valides à la racine et sous un sous-chemin. La routine d’ajout de supports valide toujours un site candidat complet ; `publier` n’embarque pas le code du jeu.
+- La CI exécute les tests du moteur du jeu (Node, sans npm) et ses parcours Chromium avant toute publication.
+
+Preuve TDD du 30 septembre 2026 : RED exécuté avec `uv run pytest -q` (19 échecs). Les applications n’étaient pas lues par le catalogue (`KeyError: 'url'`), rien n’était publié et la liste des entrées du build (`build_inputs`) n’existait pas. Les trois parcours de `tests/browser/test_applications.py` échouaient faute de section « S’entraîner ». GREEN après implémentation : validation des applications dans le catalogue, publication fichier par fichier avec barre du wiki, reconnaissance des routes internes par la balise `wiki-application`, section de matière, lien en pied des cours liés, entrée de recherche et build candidat complet. Un test garde aussi le refus de `publier` pour le code d’une application.
+
+Migration : 29 fichiers du jeu copiés à l’identique (empreintes SHA-256 vérifiées) dans `applications/mohr-forge/`. La CI autonome, `pyproject.toml`, `uv.lock` et le build `dist/` du jeu sont remplacés par ceux du wiki. L’ancien dépôt imbriqué, avec son historique, est archivé dans `.sauvegardes/` ; son exclusion locale Git est retirée.
+
+Validation : 81 tests Python et 23 parcours Chromium du wiki, dont le vrai jeu joué sous `/PolyWE/` sur téléphone (matière → jeu → histoire → laboratoire 3D → retour à la matière). S’y ajoutent 25 tests Node et 34 parcours Chromium du jeu depuis son nouvel emplacement. Une simulation de polices larges, comme sur les runners Linux de la CI, a révélé un débordement de la navigation du jeu à 320 px. Un test de régression l’a reproduit (RED), puis l’a vu corrigé en autorisant le retour à la ligne (GREEN). Catalogue valide : 11 cours, 104 sections, 1 application ; build et contrôle des liens réussis. Le contrôle visuel du jeu publié couvre 84 vues à la racine et sous `/PolyWE/`, aux quatre largeurs, sans débordement ni erreur JS/HTTP. Accueil, page RDM, pied du cours 4, jeu avec la barre du wiki et recherche inspectés à 1440 et 390 px. La publication sur GitHub Pages attend la confirmation du propriétaire.

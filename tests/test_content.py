@@ -1,28 +1,18 @@
 """Parcours du contenu publié : les liens partagés restent utilisables."""
 import json
 from pathlib import Path
-import shutil
 
+from conftest import copy_real_project
 from wiki.build import build
 from wiki.catalogue import CourseHTML
 
 
-REPOSITORY = Path(__file__).resolve().parents[1]
 RDM_04_URL = "RDM/04-directions-principales-mohr.html"
 
 
 def test_rdm_04_is_reachable_from_subject_previous_course_search_and_route(tmp_path):
     # Construire le catalogue réel dans une copie, sans toucher aux sources locales.
-    catalogue = REPOSITORY / "catalogue-cours.json"
-    shutil.copyfile(catalogue, tmp_path / catalogue.name)
-    data = json.loads(catalogue.read_text(encoding="utf-8"))
-    for course in data["cours"]:
-        if course["statut"] != "disponible":
-            continue
-        for source in [course["fichier"], *course.get("fichiers_associes", [])]:
-            target = tmp_path / source
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(REPOSITORY / source, target)
+    copy_real_project(tmp_path)
     output = build(tmp_path)
     assert (output / RDM_04_URL).is_file(), "Le cours RDM 04 doit être publié."
 
@@ -41,19 +31,8 @@ def test_rdm_04_is_reachable_from_subject_previous_course_search_and_route(tmp_p
 
 
 def test_rdm_05_to_07_continue_series_and_are_reachable_from_planning(tmp_path):
-    catalogue = REPOSITORY / "catalogue-cours.json"
-    shutil.copyfile(catalogue, tmp_path / catalogue.name)
-    shutil.copyfile(REPOSITORY / "planning-formation.json", tmp_path / "planning-formation.json")
-    data = json.loads(catalogue.read_text(encoding="utf-8"))
-    originals = {}
-    for course in data["cours"]:
-        if course["statut"] != "disponible":
-            continue
-        for source in [course["fichier"], *course.get("fichiers_associes", [])]:
-            target = tmp_path / source
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(REPOSITORY / source, target)
-            originals[source] = target.read_bytes()
+    copy_real_project(tmp_path, planning=True)
+    originals = {p.relative_to(tmp_path).as_posix(): p.read_bytes() for p in tmp_path.rglob("*") if p.is_file()}
     output = build(tmp_path)
     urls = {
         "rdm-05": "RDM/05-hooke-criteres-resistance.html",
@@ -89,3 +68,29 @@ def test_rdm_05_to_07_continue_series_and_are_reachable_from_planning(tmp_path):
     assert urls["rdm-06"] + "#c2" in page("planning.html").links
     assert urls["rdm-07"] + "#c5" in page("planning.html").links
     assert all((tmp_path / name).read_bytes() == original for name, original in originals.items())
+
+
+MOHR_FORGE = "RDM/mohr-forge/index.html"
+
+
+def test_mohr_forge_is_published_with_rdm_without_taking_the_home_page(tmp_path):
+    copy_real_project(tmp_path)
+    output = build(tmp_path)
+    game = output / "RDM/mohr-forge"
+    for name in ("index.html", "assets/style.css", "js/scene3d.js", "js/story.js", "js/lab.js"):
+        assert (game / name).is_file(), name
+    assert not (game / "tests").exists() and not (game / "docs").exists() and not (output / "applications").exists()
+
+    def page(path):
+        parsed = CourseHTML()
+        parsed.feed((output / path).read_text(encoding="utf-8"))
+        return parsed
+
+    assert "../" + MOHR_FORGE in page("matieres/rdm.html").links
+    for url in ("RDM/02-tenseur-contraintes.html", "RDM/03-tenseur-deformations.html", RDM_04_URL, "RDM/05-hooke-criteres-resistance.html"):
+        assert "mohr-forge/index.html" in page(url).links, url
+    assert "mohr-forge/index.html" not in page("RDM/07-diagrammes-sollicitations.html").links
+    assert not any("mohr-forge" in link for link in page("index.html").links)
+    assert "../../matieres/rdm.html" in page(MOHR_FORGE).links
+    index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    assert any(row["type"] == "application" and row["url"] == MOHR_FORGE and "Mohr" in row["mots_cles"] for row in index)

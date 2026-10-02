@@ -12,6 +12,7 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 - Garder des identifiants et chemins stables. Un cours `a_venir` n'a aucun lien de lecture. Un cours `brouillon` n'est pas publié.
 - Les HTML des matières sont les sources éditoriales. L'utilisateur est en train de les réviser : ne pas les écraser, renommer ou réécrire sans tâche explicite. Le générateur enrichit uniquement les copies dans `_site/`.
 - Ne publier que les cours disponibles explicitement inscrits au catalogue et leurs ressources déclarées. Ne jamais copier tout le dossier de travail dans le site.
+- Les applications interactives (jeux, simulateurs) sont du code versionné dans `applications/<id>/` et déclaré dans la liste `applications` du catalogue : seuls leurs `fichiers` sont publiés sous `publication`. Elles complètent une matière (section « S’entraîner », pied des cours liés, recherche) sans place centrale sur l’accueil. `publier` ne les embarque jamais ; leurs évolutions suivent le circuit de développement.
 - Tous les liens doivent fonctionner sous `https://compte.github.io/depot/` et sur un domaine à la racine.
 
 ## Stories et TDD
@@ -29,6 +30,7 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 - Gérer Python et les dépendances avec `uv`, `pyproject.toml` et `uv.lock`. Ne pas ajouter pip, Poetry, npm ou un second gestionnaire pour ce projet sans nécessité explicite.
 - Installation : `uv sync --locked`. Tests : `uv run pytest`. Construction : `uv run python -m wiki build`. Contrôle du catalogue : `uv run python -m wiki check`.
 - Tests navigateur : `uv sync --locked --group browser`, `uv run --group browser playwright install chromium`, puis `uv run --group browser pytest tests/browser`.
+- Applications : `node --test applications/*/tests/*.test.cjs` (Node 24 seul, sans npm ni dépendance), puis `uv run --group browser pytest applications`.
 - Prévisualisation : `uv run python -m http.server 8000 --directory _site --bind 127.0.0.1`.
 - Versionner le lockfile ; ignorer environnement virtuel, caches, captures et fichiers générés.
 

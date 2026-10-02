@@ -4,7 +4,7 @@ import subprocess
 
 import pytest
 
-from conftest import HTML, save_catalogue
+from conftest import HTML, add_application, save_catalogue
 from wiki.build import build, validate_site
 from wiki.catalogue import CatalogueError, load_catalogue
 from wiki.maintenance import register, publish
@@ -247,3 +247,27 @@ def test_replacing_source_preserves_implicit_published_url(project):
     course = read_json(root)["cours"][0]
     assert course["fichier"] == source
     assert course["url"] == "Thermique/introduction.html"
+
+
+def test_registration_validates_a_complete_candidate_with_its_applications(project):
+    root, data = project
+    add_application(root, data)
+    source = new_source(root)
+    register(root, source, ident="th-02", title="Suite", subject="thermique")
+    output = build(root)
+    assert (output / "Thermique/quiz/index.html").is_file()
+    assert (output / "Thermique/th-02.html").is_file()
+
+
+def test_publish_leaves_application_code_to_the_development_circuit(repository, monkeypatch):
+    root, remote = repository
+    add_application(root, read_json(root))
+    git(root, "add", ".")
+    git(root, "commit", "-m", "Application")
+    git(root, "push", "origin", "main")
+    initial = git(remote, "rev-parse", "main")
+    (root / "applications/quiz/js/app.js").write_text("// évolution de code à relire", encoding="utf-8")
+    monkeypatch.setattr("wiki.maintenance.prepare", lambda root: None)
+    with pytest.raises(CatalogueError, match="hors contenu"):
+        publish(root, confirm=lambda message: "publier")
+    assert git(remote, "rev-parse", "main") == initial

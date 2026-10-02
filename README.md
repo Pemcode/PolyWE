@@ -72,6 +72,33 @@ Ajouter un objet dans `matieres` avec un `id` sans accents (ex. `controles`), un
 
 Un objet de `parcours` comporte `id`, `titre`, `description` et `etapes`. Chaque étape référence `cours` et `ancre`. Exemple : `{"cours": "met-03", "ancre": "s6"}`. Le build refuse une étape vers un cours indisponible ou une ancre inexistante.
 
+## Applications interactives
+
+Un jeu ou un simulateur complète une matière sans occuper l’accueil. Son code est versionné dans `applications/<id>/` et déclaré dans la liste `applications` du catalogue. Premier exemple : **[Mohr Forge](https://pemcode.github.io/PolyWE/RDM/mohr-forge/index.html)**, le laboratoire 3D des contraintes et déformations et son mode histoire, rattaché à la RDM.
+
+```json
+{
+  "id": "mohr-forge",
+  "titre": "Mohr Forge",
+  "genre": "Jeu d’entraînement",
+  "matiere": "rdm",
+  "statut": "disponible",
+  "ordre": 1,
+  "source": "applications/mohr-forge",
+  "entree": "index.html",
+  "fichiers": ["index.html", "assets/style.css", "js/app.js"],
+  "publication": "RDM/mohr-forge",
+  "cours_lies": ["rdm-01", "rdm-02", "rdm-03", "rdm-04", "rdm-05"],
+  "mots_cles": ["Mohr", "tricercle"],
+  "ressources": ["laboratoire 3D", "mode histoire"]
+}
+```
+
+- Seuls les `fichiers` listés sont publiés, dans le dossier `publication` : tests, documentation et scripts de l’application restent hors du site. Déclarer chaque nouveau fichier nécessaire au jeu.
+- L’application apparaît dans la section « S’entraîner » de sa matière, en pied des `cours_lies` et dans la recherche ; l’accueil ne mentionne que leur nombre dans la carte de la matière.
+- La copie publiée reçoit la barre du wiki (retour à la matière, partage) ; la source reste jouable seule, par exemple avec `applications/mohr-forge/Jouer.cmd`.
+- Les états `disponible`, `a_venir` et `brouillon` suivent les règles des cours. Une application est du code : la routine **Publier** ne l’embarque pas, ses évolutions passent par les commits de développement.
+
 ## Planning de formation
 
 La [frise de formation](https://pemcode.github.io/PolyWE/planning.html) relie les séances aux supports disponibles. Elle propose la semaine actuelle, les filtres de période/matière et les examens, avec les références des deux plannings sources. L'affichage reste consultable sans JavaScript. Les PDF sources sont conservés localement, hors du dépôt et du site publics.
@@ -89,8 +116,12 @@ uv run pytest
 uv sync --locked --group browser
 uv run --group browser playwright install chromium
 uv run --group browser pytest tests/browser
+node --test applications/mohr-forge/tests/*.test.cjs
+uv run --group browser pytest applications
 uv run python -m wiki build
 ```
+
+Les moteurs des applications sont testés avec Node 24 seul, sans npm ni dépendance ; leurs parcours Chromium utilisent l’environnement uv du wiki. Le contrôle visuel du jeu publié s’obtient avec `uv run --group browser python applications/mohr-forge/scripts/visual_check.py`.
 
 Les tests rapides utilisent des cours fictifs pour vérifier l'ajout de matières, les états, les liens, les ressources et la conservation des sources. Les tests navigateur lancent leur propre serveur local et vérifient les parcours à la racine et sous `/promo/`, avec une largeur de téléphone. Les groupes de dépendances et leurs versions sont verrouillés dans `uv.lock`.
 

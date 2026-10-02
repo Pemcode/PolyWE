@@ -67,6 +67,18 @@ def content_files(data, plan):
     return files
 
 
+def build_inputs(data, plan):
+    """Entrées du build : contenus publiables et code déclaré des applications.
+
+    Le code des applications n’appartient pas aux contenus : `publier` ne l’embarque pas,
+    mais un site candidat doit l’inclure pour être validé complet."""
+    files = content_files(data, plan)
+    for app in data.get("applications", []):
+        if app.get("statut") == "disponible":
+            files.update(f"{app['source']}/{name}" for name in app.get("fichiers", []))
+    return files
+
+
 def validate_candidate(root, data, plan, new_files):
     # Le build candidat ne touche ni les sources ni l’aperçu courant.
     with TemporaryDirectory(prefix="polywe-validation-") as directory:
@@ -74,7 +86,7 @@ def validate_candidate(root, data, plan, new_files):
         metadata = {CATALOGUE: json_text(data)}
         if plan is not None:
             metadata[PLANNING] = json_text(plan)
-        for name in content_files(data, plan):
+        for name in build_inputs(data, plan):
             relative_path(name)
             target = candidate / name
             target.parent.mkdir(parents=True, exist_ok=True)

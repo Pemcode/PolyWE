@@ -30,10 +30,18 @@ jobs:
         run: uv sync --locked --group browser
       - name: Tester le catalogue et la génération
         run: uv run pytest
+      - name: Installer Node pour les moteurs des applications (sans npm)
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+      - name: Tester les moteurs des applications
+        run: node --test applications/*/tests/*.test.cjs
       - name: Installer Chromium
         run: uv run --group browser playwright install --with-deps chromium
       - name: Tester les parcours navigateur
         run: uv run --group browser pytest tests/browser
+      - name: Tester les applications dans le navigateur
+        run: uv run --group browser pytest applications
       - name: Construire et vérifier tous les liens
         run: uv run python -m wiki build
       - name: Préparer GitHub Pages

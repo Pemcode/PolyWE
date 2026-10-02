@@ -470,5 +470,64 @@
         }
       ]
     }
+  ],
+  "applications": [
+    {
+      "id": "mohr-forge",
+      "titre": "Mohr Forge",
+      "genre": "Jeu d’entraînement",
+      "matiere": "rdm",
+      "statut": "disponible",
+      "ordre": 1,
+      "description": "Laboratoire 3D des contraintes et des déformations, mode histoire en douze épisodes, 24 défis et un examen blanc appliqués au soudage.",
+      "source": "applications/mohr-forge",
+      "entree": "index.html",
+      "fichiers": [
+        "index.html",
+        "assets/favicon.svg",
+        "assets/style.css",
+        "js/app.js",
+        "js/curriculum.js",
+        "js/lab.js",
+        "js/labmodel.js",
+        "js/mechanics.js",
+        "js/progression.js",
+        "js/scene3d.js",
+        "js/story.js"
+      ],
+      "publication": "RDM/mohr-forge",
+      "cours_lies": [
+        "rdm-01",
+        "rdm-02",
+        "rdm-03",
+        "rdm-04",
+        "rdm-05"
+      ],
+      "mots_cles": [
+        "Mohr",
+        "cercle de Mohr",
+        "tricercle",
+        "tenseur",
+        "contraintes",
+        "déformations",
+        "HPP",
+        "Hooke",
+        "Poisson",
+        "von Mises",
+        "Tresca",
+        "rosette",
+        "dilatation empêchée",
+        "cordon d’angle",
+        "Eurocode 3",
+        "jeu",
+        "laboratoire 3D"
+      ],
+      "ressources": [
+        "laboratoire 3D",
+        "mode histoire",
+        "défis",
+        "examen blanc"
+      ]
+    }
   ]
 }

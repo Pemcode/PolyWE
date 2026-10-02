@@ -57,3 +57,7 @@
 .wiki-planning-teaser strong { display:block; font-size:1.1rem; }.wiki-planning-teaser small { display:block; color:var(--wiki-muted); margin-top:5px; }.wiki-planning-teaser>span:last-child { font-size:.85rem; font-weight:650; white-space:nowrap; }
 .wiki-top nav { flex-wrap:wrap; }
 @media (max-width:640px) { .wiki-planning-teaser { align-items:start; flex-direction:column; gap:12px; padding:20px; }.wiki-top nav { gap:14px; font-size:.85rem; } }
+
+.wiki-training { margin-top:40px; }
+.wiki-app-card { border-left:4px solid #316d61; }
+.wiki-training-link span { color:#55665e; }

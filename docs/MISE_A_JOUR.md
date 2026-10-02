@@ -74,6 +74,7 @@ Le message « Envoyé sur GitHub » confirme le **push**, pas encore la mise en 
 | Tests en échec | Lire le premier échec et corriger avant de relancer. Aucun commit n’a été créé. |
 | Fichiers déjà dans l’index Git | Terminer ou désélectionner la sélection Git existante. La routine ne la modifie pas. |
 | Modifications ou commits hors contenu | Les traiter via le circuit de développement habituel. La routine est réservée aux supports et aux deux JSON ; elle ne publie pas automatiquement du code. |
+| Fichiers `applications/…` signalés hors contenu | C’est le code d’un jeu ou d’un simulateur, comme Mohr Forge : le tester puis le committer via le circuit de développement (voir « Applications interactives » dans le README). Publier ne l’embarque pas. |
 | GitHub contient des commits absents localement | Préserver ses modifications locales, puis synchroniser avec `git pull --ff-only`. Ne pas forcer le push. |
 | Échec du push après le commit | Rétablir la connexion ou l’accès GitHub puis relancer Publier. Le commit local est réutilisé. |
 | GitHub Actions en échec | Ouvrir le job en échec, corriger puis publier. Le dernier site déployé reste en ligne. |
