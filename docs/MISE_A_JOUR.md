@@ -4,7 +4,7 @@ La routine se lance en **double-cliquant sur `Mettre-a-jour.cmd`** à la racine 
 
 ## Un nouveau cours ou document arrive
 
-1. **Déposer le fichier dans le dossier de sa matière**, par exemple `RDM/` ou `Metallurgie/`. Un nouveau dossier est possible. Garder les images, CSS et scripts à proximité du HTML, selon ses liens relatifs.
+1. **Déposer le fichier dans `Cours/`, dans le dossier de sa matière**, par exemple `Cours/RDM/`, `Cours/Metallurgie/` ou `Cours/Fatigue/`. Un nouveau dossier est possible. Garder les images, CSS et scripts à proximité du HTML, selon ses liens relatifs.
 2. Ouvrir `Mettre-a-jour.cmd`, puis **1 — Ajouter**. Coller le chemin du fichier : dans l’Explorateur, clic droit → Copier en tant que chemin. Les guillemets et les accents sont acceptés.
 3. Choisir le cours déjà annoncé, ou créer un nouveau support. L’assistant propose les matières existantes et la création d’une matière. Les identifiants doivent rester stables ; les titres peuvent contenir des accents.
 4. Si nécessaire, donner des mots-clés, les chemins des ressources associées et un sujet de planning. Rechercher ce dernier par un mot ou un code IWE, puis le sélectionner. Répéter pour plusieurs sujets ; Entrée termine la sélection. Un rattachement vaut pour toutes les séances de ce sujet, sans inventer une date de cours.
@@ -20,7 +20,7 @@ Aucun support n’est enregistré au simple dépôt d’un fichier. L’enregist
 
 Modifier son **fichier source existant**, puis ouvrir l’aperçu et publier. Il n’est pas nécessaire de refaire l’ajout ou de modifier le catalogue à chaque correction. La recherche et le sommaire sont reconstruits à partir du HTML actuel.
 
-Garder les chemins `url` et les ancres déjà partagées. Le menu vérifie les liens internes mais ne connaît pas les anciens liens collés dans WhatsApp. Pour renommer un fichier source, utiliser l’ajout en ligne de commande avec son `--id` existant, puis traiter séparément le retrait Git de l’ancien fichier si nécessaire. Le renommage ne doit pas changer son URL publique.
+Les sources sont regroupées dans `Cours/`, mais les cours déjà publiés gardent leurs adresses `RDM/…` et `Metallurgie/…`. Garder les chemins `url` et les ancres déjà partagées. Le menu vérifie les liens internes mais ne connaît pas les anciens liens collés dans WhatsApp. Pour renommer un fichier source, utiliser l’ajout en ligne de commande avec son `--id` existant, puis traiter séparément le retrait Git de l’ancien fichier si nécessaire. Le renommage ne doit pas changer son URL publique.
 
 ## PDF et documents Office
 
@@ -50,16 +50,16 @@ Pour une intégration reproductible, l’ajout accepte aussi des paramètres. Ex
 
 ```powershell
 # Remplacer le fichier source d’un cours existant, en conservant ses métadonnées.
-uv run python -m wiki ajouter "RDM/cours-05.html" --id rdm-05
+uv run python -m wiki ajouter "Cours/RDM/cours-05.html" --id rdm-05
 
 # Nouveau document dans une matière existante.
-uv run python -m wiki ajouter "RDM/fiche-synthese.pdf" --id rdm-fiche --matiere rdm --titre "Fiche de synthèse RDM" --mot-cle contraintes
+uv run python -m wiki ajouter "Cours/RDM/fiche-synthese.pdf" --id rdm-fiche --matiere rdm --titre "Fiche de synthèse RDM" --mot-cle contraintes
 
 # Rechercher l’identifiant d’un sujet pour ajouter --sujet IDENTIFIANT à l’ajout.
 uv run python -m wiki sujets "rdm"
 
 # Nouvelle matière et ressources explicitement déclarées.
-uv run python -m wiki ajouter "Controles/ultrasons.html" --id cnd-01 --matiere controles --nouvelle-matiere "Contrôles non destructifs" --titre "Contrôle par ultrasons" --ressource "Controles/schema.svg"
+uv run python -m wiki ajouter "Cours/Controles/ultrasons.html" --id cnd-01 --matiere controles --nouvelle-matiere "Contrôles non destructifs" --titre "Contrôle par ultrasons" --ressource "Cours/Controles/schema.svg"
 ```
 
 `--sujet`, `--ressource` et `--mot-cle` peuvent être répétés. L’ajout par commande enregistre directement les paramètres fournis après validation ; il ne pousse rien sur GitHub. Les réglages avancés, prérequis, parcours et changements de séances restent éditables dans les deux JSON, décrits dans le README et [PLANNING.md](PLANNING.md).

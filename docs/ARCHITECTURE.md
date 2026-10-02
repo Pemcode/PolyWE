@@ -28,7 +28,7 @@ AGENTS.md                  règles pour les prochaines interventions
 catalogue-cours.json        matières, cours, statuts et parcours
 planning-formation.json     phases, sujets, séances et PDF déclarés
 Planning/                  plannings sources locaux, ignorés par Git
-Metallurgie/ et RDM/        sources actuelles ; autres matières ajoutables
+Cours/<matière>/           sources HTML et documents, rangés par matière
 applications/              jeux et simulateurs : code, tests et documentation propres
 wiki/catalogue.py          validation et extraction des sections
 wiki/planning.py           validation et rendu de la frise
@@ -51,7 +51,7 @@ _site/                    résultat local ignoré par Git
 
 Les identifiants sont internes au wiki, pas des numéros officiels IWE. Les noms de matières ne sont jamais codés en dur dans le générateur. Les cours à venir sont distincts des brouillons : le premier état annonce une suite, le second exclut la ressource de la publication.
 
-`fichier` identifie la source ; `url` identifie la destination stable. Cette séparation répond au remplacement des fichiers RDM pendant l'édition : le nom d'un export peut changer sans modifier l'adresse partagée. La navigation entre cours est calculée selon l'ordre dans la matière ; les prérequis et parcours peuvent traverser les matières.
+`fichier` identifie la source dans `Cours/<matière>/` ; `url` identifie la destination stable. Le déplacement des sources ne change pas les adresses publiques `RDM/…` et `Metallurgie/…`, ni les liens déjà partagés. Cette séparation répond au remplacement des fichiers RDM pendant l'édition : le nom d'un export peut changer sans modifier l'adresse partagée. La navigation entre cours est calculée selon l'ordre dans la matière ; les prérequis et parcours peuvent traverser les matières.
 
 Le catalogue conserve les informations éditoriales stables. Les titres de sections et ancres sont extraits du HTML à chaque génération. Les liens de parcours sont contrôlés contre les identifiants réellement présents. La recherche initiale porte sur les titres, sections, matières et mots-clés ; l'indexation intégrale du texte pourra être ajoutée si les usages le demandent.
 

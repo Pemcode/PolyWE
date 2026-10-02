@@ -9,7 +9,7 @@
       "repere": "Fondamentaux",
       "ordre": 0,
       "titre": "Diagramme plomb–étain : phases et microstructures",
-      "fichier": "Metallurgie/00-diagramme-plomb-etain.html",
+      "fichier": "Cours/Metallurgie/00-diagramme-plomb-etain.html",
       "statut": "disponible",
       "prerequis_conseilles": [],
       "mots_cles": [
@@ -36,7 +36,7 @@
       "repere": "Cours 01",
       "ordre": 1,
       "titre": "Fer–carbone : du fer pur à la perlite",
-      "fichier": "Metallurgie/01-fer-carbone.html",
+      "fichier": "Cours/Metallurgie/01-fer-carbone.html",
       "statut": "disponible",
       "prerequis_conseilles": [
         "met-base"
@@ -67,7 +67,7 @@
       "repere": "Cours 02",
       "ordre": 2,
       "titre": "Aciers : cinétique, TTT, TRC et éléments d’addition",
-      "fichier": "Metallurgie/02-cinetique-ttt-trc-elements-addition.html",
+      "fichier": "Cours/Metallurgie/02-cinetique-ttt-trc-elements-addition.html",
       "statut": "disponible",
       "prerequis_conseilles": [
         "met-01"
@@ -99,7 +99,7 @@
       "repere": "Cours 03",
       "ordre": 3,
       "titre": "Aciers : martensite, traitements thermiques et soudage",
-      "fichier": "Metallurgie/03-martensite-traitements-thermiques-soudage.html",
+      "fichier": "Cours/Metallurgie/03-martensite-traitements-thermiques-soudage.html",
       "statut": "disponible",
       "prerequis_conseilles": [
         "met-01",
@@ -137,7 +137,7 @@
       "repere": "Cours 01",
       "ordre": 1,
       "titre": "Contraintes, déformations, Hooke et Poisson",
-      "fichier": "RDM/RDM, cours 1 _ contrainte, déformation, Hooke et Poisson.html",
+      "fichier": "Cours/RDM/RDM, cours 1 _ contrainte, déformation, Hooke et Poisson.html",
       "statut": "disponible",
       "prerequis_conseilles": [],
       "mots_cles": [
@@ -170,7 +170,7 @@
       "repere": "Cours 02",
       "ordre": 2,
       "titre": "Tenseur des contraintes",
-      "fichier": "RDM/RDM, cours 2 _ le tenseur des contraintes.html",
+      "fichier": "Cours/RDM/RDM, cours 2 _ le tenseur des contraintes.html",
       "statut": "disponible",
       "prerequis_conseilles": [
         "rdm-01"
@@ -203,7 +203,7 @@
       "repere": "Cours 03",
       "ordre": 3,
       "titre": "Tenseur des déformations",
-      "fichier": "RDM/RDM, cours 3 _ le tenseur des déformations.html",
+      "fichier": "Cours/RDM/RDM, cours 3 _ le tenseur des déformations.html",
       "statut": "disponible",
       "prerequis_conseilles": [
         "rdm-01",
@@ -269,7 +269,7 @@
         "glossaire"
       ],
       "fichiers_associes": [],
-      "fichier": "RDM/RDM, cours 4 _ directions principales et tricercle de Mohr.html",
+      "fichier": "Cours/RDM/RDM, cours 4 _ directions principales et tricercle de Mohr.html",
       "url": "RDM/04-directions-principales-mohr.html"
     },
     {
@@ -307,7 +307,7 @@
         "glossaire"
       ],
       "fichiers_associes": [],
-      "fichier": "RDM/RDM, cours 5 _ loi de Hooke en 3D et critères de résistance.html",
+      "fichier": "Cours/RDM/RDM, cours 5 _ loi de Hooke en 3D et critères de résistance.html",
       "url": "RDM/05-hooke-criteres-resistance.html"
     },
     {
@@ -344,7 +344,7 @@
         "glossaire"
       ],
       "fichiers_associes": [],
-      "fichier": "RDM/RDM, cours 6 _ le torseur de cohésion.html",
+      "fichier": "Cours/RDM/RDM, cours 6 _ le torseur de cohésion.html",
       "url": "RDM/06-torseur-cohesion.html",
       "statut": "disponible"
     },
@@ -380,7 +380,7 @@
         "glossaire"
       ],
       "fichiers_associes": [],
-      "fichier": "RDM/RDM, cours 7 _ les diagrammes de sollicitations.html",
+      "fichier": "Cours/RDM/RDM, cours 7 _ les diagrammes de sollicitations.html",
       "url": "RDM/07-diagrammes-sollicitations.html",
       "statut": "disponible"
     },
@@ -416,7 +416,7 @@
         "glossaire"
       ],
       "fichiers_associes": [],
-      "fichier": "RDM/RDM, cours 8 _ les caractéristiques des sections.html",
+      "fichier": "Cours/RDM/RDM, cours 8 _ les caractéristiques des sections.html",
       "url": "RDM/08-caracteristiques-sections.html",
       "statut": "disponible"
     }

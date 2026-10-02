@@ -17,6 +17,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S11 | Intégrer les cours RDM 05 à 07 | Intégré et vérifié |
 | S12 | Intégrer le jeu Mohr Forge sans le mettre au centre | Livré — site public vérifié |
 | S13 | Intégrer le cours RDM 08 sur les caractéristiques des sections | Livré — site public vérifié |
+| S14 | Regrouper les sources dans Cours sans casser les liens publiés | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -173,3 +174,19 @@ Preuve TDD du 2 octobre 2026 : RED exécuté avec `uv run pytest tests/test_cont
 Validation locale : 82 tests Python et 23 parcours Chromium du wiki réussis ; catalogue valide (12 cours, 114 sections, 1 application), build et liens contrôlés. Contrôle du cours réel à la racine et sous `/PolyWE/`, à 390 et 1440 px : cinq simulations manipulées, quiz répondu puis remis à zéro, recherche « Huygens », navigation 7 ↔ 8 et copie effective du lien de `#c3`. Aucune erreur JavaScript ou HTTP locale ni débordement horizontal de page détecté. Captures de l’accueil du cours, du calculateur de sections composées et du quiz inspectées. Empreinte SHA-256 de la source inchangée : `d9ce014796006dd3acf61ad99a44ff74998abeffe76fc589e9e5040a3d2352f4`. Ces vérifications portent sur le fonctionnement, pas sur une validation scientifique.
 
 Preuve de publication du 2 octobre 2026 : [run n° 11, 36976863962](https://github.com/Pemcode/PolyWE/actions/runs/36976863962), commit `e2394f9`, tests Linux, build et déploiement réussis. HTTP 200 pour [le cours 8](https://pemcode.github.io/PolyWE/RDM/08-caracteristiques-sections.html), [la matière RDM](https://pemcode.github.io/PolyWE/matieres/rdm.html), [le cours 7](https://pemcode.github.io/PolyWE/RDM/07-diagrammes-sollicitations.html) et [l’index de recherche](https://pemcode.github.io/PolyWE/assets/recherche.json). Liens 7 ↔ 8 et entrée de recherche de Huygens (`#c3`) contrôlés ; ancres et scripts du cours publié identiques à ceux de la source. Mohr Forge et `scene3d.js` restent accessibles en HTTP 200, son répertoire `tests/` renvoie toujours 404.
+
+## S14 — Sources regroupées dans Cours
+
+En tant que mainteneur, je range les supports dans `Cours/<matière>/` tout en conservant les adresses du site déjà partagées.
+
+- Le catalogue référence les fichiers déplacés dans `Cours/Metallurgie/` et `Cours/RDM/`, sans réécrire les sources et sans changer leurs URL ni identifiants.
+- Les anciens liens de cours, leurs ancres, la recherche, les parcours, le planning et l’application Mohr Forge restent accessibles après reconstruction.
+- La routine et sa documentation utilisent les nouveaux chemins locaux ; l’ajout d’un support reste validé par un build candidat complet.
+- Les tests de contenu lisent l’emplacement source déclaré, sans imposer son ancien dossier.
+- Contrôles locaux et déploiement GitHub Pages réussis avant vérification des adresses publiques.
+
+Preuve TDD du 2 octobre 2026 : RED de `test_relocated_sources_preserve_existing_bookmarks_and_scripts` sur le fichier introuvable à l’ancien emplacement. GREEN après changement des champs `fichier` et adaptation du test RDM 08 pour lire le chemin déclaré dans le catalogue. Les 12 identifiants et URL de cours sont conservés ; aucun changement du générateur ou de la routine n’a été nécessaire.
+
+Validation : 83 tests Python et 23 parcours Chromium réussis ; catalogue valide (12 cours, 114 sections, 1 application), build et 522 liens/ancres contrôlés. Les 38 fichiers de l’artefact sont équivalents à ceux construits depuis le commit précédent, hors normalisation Git des fins de ligne de deux fichiers de Mohr Forge. Empreintes SHA-256 des 12 sources déplacées inchangées. L’application et ses fichiers restent à leurs emplacements ; aucun calendrier ou PDF source n’est modifié.
+
+Lors de la migration, le dossier local `Cours/Fatigue/` est vide. Aucun nouveau support de fatigue n’est donc inventorié ni publié ; ses fichiers restent à fournir pour leur intégration.

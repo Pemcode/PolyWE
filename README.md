@@ -10,7 +10,7 @@ Site statique destiné à GitHub Pages. Les cours interactifs restent des fichie
 
 **Double-cliquer sur `Mettre-a-jour.cmd`** pour ouvrir le menu.
 
-1. Déposer le nouveau fichier dans le dossier de sa matière.
+1. Déposer le nouveau fichier dans `Cours/<matière>/`, par exemple `Cours/RDM/`.
 2. **Ajouter** : choisir le cours annoncé ou créer un support ; sélectionner la matière et, si utile, le sujet de planning. HTML, PDF, Word, PowerPoint et Excel sont acceptés.
 3. **Aperçu** : vérifier le résultat dans le navigateur.
 4. **Publier** : les tests et le build s’exécutent ; confirmer les fichiers affichés. GitHub Actions contrôle puis met Pages à jour.
@@ -47,7 +47,7 @@ Exemple d'entrée, à adapter avec un fichier réellement présent :
   "ordre": 4,
   "titre": "Directions principales et tricercle de Mohr",
   "statut": "disponible",
-  "fichier": "RDM/RDM, cours 4 _ directions principales et tricercle de Mohr.html",
+  "fichier": "Cours/RDM/RDM, cours 4 _ directions principales et tricercle de Mohr.html",
   "url": "RDM/04-directions-principales-mohr.html",
   "prerequis_conseilles": ["rdm-01", "rdm-02", "rdm-03"],
   "mots_cles": ["Mohr", "tricercle", "contraintes principales"],
@@ -57,7 +57,7 @@ Exemple d'entrée, à adapter avec un fichier réellement présent :
 ```
 
 - `id` est l'identité stable du cours. `ordre` règle sa place dans la matière.
-- `fichier` désigne le fichier source local. Il peut changer lors d'un remplacement.
+- `fichier` désigne le fichier source local, désormais rangé dans `Cours/<matière>/`. Il peut changer lors d’un remplacement ; les URL publiées des cours existants restent inchangées.
 - `url` est le chemin publié : le conserver après partage. Il utilise un sous-dossier et l'extension `.html`.
 - `disponible` publie le cours ; `a_venir` affiche une carte sans lien ; `brouillon` exclut complètement le cours du site et de la recherche. Les deux derniers états n'exigent aucun fichier.
 - Les cours RDM 01 à 07 sont disponibles, de Hooke aux diagrammes de sollicitations. Lorsqu’un prochain cours possède déjà une entrée `a_venir`, compléter cette entrée plutôt qu’en créer un doublon.

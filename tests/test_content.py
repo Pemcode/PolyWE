@@ -98,7 +98,7 @@ def test_mohr_forge_is_published_with_rdm_without_taking_the_home_page(tmp_path)
 
 
 def test_rdm_08_is_reachable_and_preserves_the_interactive_source(tmp_path):
-    copy_real_project(tmp_path)
+    data, _ = copy_real_project(tmp_path)
     output = build(tmp_path)
     url = "RDM/08-caracteristiques-sections.html"
     assert (output / url).is_file(), "Le cours RDM 08 doit être publié."
@@ -117,7 +117,7 @@ def test_rdm_08_is_reachable_and_preserves_the_interactive_source(tmp_path):
     index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
     assert any(row["url"] == url + "#c3" and "Huygens" in row["titre"] for row in index)
 
-    source_path = "RDM/RDM, cours 8 _ les caractéristiques des sections.html"
+    source_path = next(c["fichier"] for c in data["cours"] if c["id"] == "rdm-08")
     source_bytes = (tmp_path / source_path).read_bytes()
     assert source_bytes == (Path(__file__).resolve().parents[1] / source_path).read_bytes()
     source = source_bytes.decode("utf-8")
@@ -127,3 +127,32 @@ def test_rdm_08_is_reachable_and_preserves_the_interactive_source(tmp_path):
     html = (output / url).read_text(encoding="utf-8")
     scripts = re.findall(r"<script\b[^>]*>.*?</script>", source, flags=re.S)
     assert scripts and all(script in html for script in scripts)
+
+
+def test_relocated_sources_preserve_existing_bookmarks_and_scripts(tmp_path):
+    data, _ = copy_real_project(tmp_path, planning=True)
+    migrated_ids = {"met-base", "met-01", "met-02", "met-03"} | {f"rdm-{n:02}" for n in range(1, 9)}
+    existing = [c for c in data["cours"] if c["id"] in migrated_ids and c["statut"] == "disponible"]
+    originals = {c["id"]: (tmp_path / c["fichier"]).read_bytes() for c in existing}
+    output = build(tmp_path)
+    shared = ["Metallurgie/00-diagramme-plomb-etain.html", "Metallurgie/01-fer-carbone.html#s3",
+              "Metallurgie/03-martensite-traitements-thermiques-soudage.html#s6",
+              "RDM/04-directions-principales-mohr.html#c4", "RDM/08-caracteristiques-sections.html#c3"]
+    index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    indexed = {row["url"] for row in index}
+    for bookmark in shared:
+        assert bookmark in indexed
+        path, _, anchor = bookmark.partition("#")
+        parser = CourseHTML()
+        parser.feed((output / path).read_text(encoding="utf-8"))
+        assert not anchor or anchor in parser.ids
+    for course in existing:
+        assert course["fichier"].startswith("Cours/")
+        assert not (output / course["fichier"]).is_file()
+        assert (tmp_path / course["fichier"]).read_bytes() == originals[course["id"]]
+        published = (output / course["url"]).read_text(encoding="utf-8")
+        scripts = re.findall(r"<script\b[^>]*>.*?</script>", originals[course["id"]].decode("utf-8-sig"), flags=re.S)
+        assert scripts and all(script in published for script in scripts)
+    assert (output / MOHR_FORGE).is_file()
+    assert not (output / "Cours/RDM").exists()
+    assert not (output / "Cours/Metallurgie").exists()
