@@ -16,7 +16,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S10 | Ajouter des supports et publier avec une routine guidée | Intégré et vérifié |
 | S11 | Intégrer les cours RDM 05 à 07 | Intégré et vérifié |
 | S12 | Intégrer le jeu Mohr Forge sans le mettre au centre | Livré — site public vérifié |
-| S13 | Intégrer le cours RDM 08 sur les caractéristiques des sections | Intégré et vérifié localement |
+| S13 | Intégrer le cours RDM 08 sur les caractéristiques des sections | Livré — site public vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -171,3 +171,5 @@ En tant qu’élève, j’ouvre le cours sur les caractéristiques des sections 
 Preuve TDD du 2 octobre 2026 : RED exécuté avec `uv run pytest tests/test_content.py -k rdm_08 -q`, sur l’absence du cours publié. GREEN après enregistrement par `wiki ajouter` et ajustement des métadonnées : accès depuis la matière, navigation 7 ↔ 8, prérequis, recherche de Huygens, conservation des ancres et des scripts. Aucun changement du générateur.
 
 Validation locale : 82 tests Python et 23 parcours Chromium du wiki réussis ; catalogue valide (12 cours, 114 sections, 1 application), build et liens contrôlés. Contrôle du cours réel à la racine et sous `/PolyWE/`, à 390 et 1440 px : cinq simulations manipulées, quiz répondu puis remis à zéro, recherche « Huygens », navigation 7 ↔ 8 et copie effective du lien de `#c3`. Aucune erreur JavaScript ou HTTP locale ni débordement horizontal de page détecté. Captures de l’accueil du cours, du calculateur de sections composées et du quiz inspectées. Empreinte SHA-256 de la source inchangée : `d9ce014796006dd3acf61ad99a44ff74998abeffe76fc589e9e5040a3d2352f4`. Ces vérifications portent sur le fonctionnement, pas sur une validation scientifique.
+
+Preuve de publication du 2 octobre 2026 : [run n° 11, 36976863962](https://github.com/Pemcode/PolyWE/actions/runs/36976863962), commit `e2394f9`, tests Linux, build et déploiement réussis. HTTP 200 pour [le cours 8](https://pemcode.github.io/PolyWE/RDM/08-caracteristiques-sections.html), [la matière RDM](https://pemcode.github.io/PolyWE/matieres/rdm.html), [le cours 7](https://pemcode.github.io/PolyWE/RDM/07-diagrammes-sollicitations.html) et [l’index de recherche](https://pemcode.github.io/PolyWE/assets/recherche.json). Liens 7 ↔ 8 et entrée de recherche de Huygens (`#c3`) contrôlés ; ancres et scripts du cours publié identiques à ceux de la source. Mohr Forge et `scene3d.js` restent accessibles en HTTP 200, son répertoire `tests/` renvoie toujours 404.
