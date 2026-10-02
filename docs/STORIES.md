@@ -16,6 +16,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S10 | Ajouter des supports et publier avec une routine guidée | Intégré et vérifié |
 | S11 | Intégrer les cours RDM 05 à 07 | Intégré et vérifié |
 | S12 | Intégrer le jeu Mohr Forge sans le mettre au centre | Livré — site public vérifié |
+| S13 | Intégrer le cours RDM 08 sur les caractéristiques des sections | Intégré et vérifié localement |
 
 ## S01 — Catalogue extensible
 
@@ -157,3 +158,16 @@ Migration : 29 fichiers du jeu copiés à l’identique (empreintes SHA-256 vér
 Validation : 81 tests Python et 23 parcours Chromium du wiki, dont le vrai jeu joué sous `/PolyWE/` sur téléphone (matière → jeu → histoire → laboratoire 3D → retour à la matière). S’y ajoutent 25 tests Node et 34 parcours Chromium du jeu depuis son nouvel emplacement. Une simulation de polices larges, comme sur les runners Linux de la CI, a révélé un débordement de la navigation du jeu à 320 px. Un test de régression l’a reproduit (RED), puis l’a vu corrigé en autorisant le retour à la ligne (GREEN). Catalogue valide : 11 cours, 104 sections, 1 application ; build et contrôle des liens réussis. Le contrôle visuel du jeu publié couvre 84 vues à la racine et sous `/PolyWE/`, aux quatre largeurs, sans débordement ni erreur JS/HTTP. Accueil, page RDM, pied du cours 4, jeu avec la barre du wiki et recherche inspectés à 1440 et 390 px.
 
 Preuve de publication du 2 octobre 2026 : [run n° 9, 36975927559](https://github.com/Pemcode/PolyWE/actions/runs/36975927559), commit `31db69c`, tests Linux (dont Node 24 via `actions/setup-node@v7`), build et déploiement réussis. HTTP 200 vérifié pour [le jeu](https://pemcode.github.io/PolyWE/RDM/mohr-forge/index.html), [scene3d.js](https://pemcode.github.io/PolyWE/RDM/mohr-forge/js/scene3d.js) et [la matière RDM](https://pemcode.github.io/PolyWE/matieres/rdm.html), avec « S’entraîner » et le lien du jeu ; HTTP 404 confirmé pour [le répertoire de tests](https://pemcode.github.io/PolyWE/RDM/mohr-forge/tests/).
+
+## S13 — Intégrer le cours RDM 08
+
+En tant qu’élève, j’ouvre le cours sur les caractéristiques des sections depuis la matière RDM, le cours 7 ou la recherche, puis j’utilise ses simulations et son quiz.
+
+- Le cours `rdm-08` est disponible à l’adresse stable `RDM/08-caracteristiques-sections.html`, avec les prérequis indiqués dans sa source : cours 6 et 7, et cours 4 pour les axes principaux.
+- La matière RDM et la navigation 7 ↔ 8 donnent accès au cours ; ses sections réelles figurent au sommaire et dans la recherche, notamment Huygens (`#c3`).
+- La source HTML, ses ancres et ses scripts restent intacts. Les simulations, le quiz et le partage sont vérifiés sous `/PolyWE/` sur téléphone et ordinateur.
+- Tests et build verts avant publication ; accès public au cours et à ses liens contrôlé après déploiement.
+
+Preuve TDD du 2 octobre 2026 : RED exécuté avec `uv run pytest tests/test_content.py -k rdm_08 -q`, sur l’absence du cours publié. GREEN après enregistrement par `wiki ajouter` et ajustement des métadonnées : accès depuis la matière, navigation 7 ↔ 8, prérequis, recherche de Huygens, conservation des ancres et des scripts. Aucun changement du générateur.
+
+Validation locale : 82 tests Python et 23 parcours Chromium du wiki réussis ; catalogue valide (12 cours, 114 sections, 1 application), build et liens contrôlés. Contrôle du cours réel à la racine et sous `/PolyWE/`, à 390 et 1440 px : cinq simulations manipulées, quiz répondu puis remis à zéro, recherche « Huygens », navigation 7 ↔ 8 et copie effective du lien de `#c3`. Aucune erreur JavaScript ou HTTP locale ni débordement horizontal de page détecté. Captures de l’accueil du cours, du calculateur de sections composées et du quiz inspectées. Empreinte SHA-256 de la source inchangée : `d9ce014796006dd3acf61ad99a44ff74998abeffe76fc589e9e5040a3d2352f4`. Ces vérifications portent sur le fonctionnement, pas sur une validation scientifique.

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "date_inventaire": "2026-09-29",
+  "date_inventaire": "2026-10-02",
   "description": "Catalogue éditorial du wiki de révision DU Ingénierie du soudage / IWE. Identifiants internes stables ; sections extraites automatiquement des HTML.",
   "cours": [
     {
@@ -382,6 +382,42 @@
       "fichiers_associes": [],
       "fichier": "RDM/RDM, cours 7 _ les diagrammes de sollicitations.html",
       "url": "RDM/07-diagrammes-sollicitations.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "rdm-08",
+      "titre": "Caractéristiques des sections",
+      "matiere": "rdm",
+      "ordre": 8,
+      "repere": "Cours 08",
+      "prerequis_conseilles": [
+        "rdm-06",
+        "rdm-07",
+        "rdm-04"
+      ],
+      "mots_cles": [
+        "centre de gravité",
+        "moment statique",
+        "moment quadratique",
+        "Huygens",
+        "sections composées",
+        "moment produit",
+        "axes principaux",
+        "moment polaire",
+        "module de flexion",
+        "section des cordons"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire"
+      ],
+      "fichiers_associes": [],
+      "fichier": "RDM/RDM, cours 8 _ les caractéristiques des sections.html",
+      "url": "RDM/08-caracteristiques-sections.html",
       "statut": "disponible"
     }
   ],

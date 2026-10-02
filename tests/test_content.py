@@ -1,5 +1,6 @@
 """Parcours du contenu publié : les liens partagés restent utilisables."""
 import json
+import re
 from pathlib import Path
 
 from conftest import copy_real_project
@@ -94,3 +95,35 @@ def test_mohr_forge_is_published_with_rdm_without_taking_the_home_page(tmp_path)
     assert "../../matieres/rdm.html" in page(MOHR_FORGE).links
     index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
     assert any(row["type"] == "application" and row["url"] == MOHR_FORGE and "Mohr" in row["mots_cles"] for row in index)
+
+
+def test_rdm_08_is_reachable_and_preserves_the_interactive_source(tmp_path):
+    copy_real_project(tmp_path)
+    output = build(tmp_path)
+    url = "RDM/08-caracteristiques-sections.html"
+    assert (output / url).is_file(), "Le cours RDM 08 doit être publié."
+
+    def page(path):
+        parsed = CourseHTML()
+        parsed.feed((output / path).read_text(encoding="utf-8"))
+        return parsed
+
+    assert "../" + url in page("matieres/rdm.html").links
+    assert Path(url).name in page("RDM/07-diagrammes-sollicitations.html").links
+    published = page(url)
+    for prerequisite in ("04-directions-principales-mohr.html", "06-torseur-cohesion.html", "07-diagrammes-sollicitations.html"):
+        assert prerequisite in published.links
+    assert "#c3" in published.links
+    index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    assert any(row["url"] == url + "#c3" and "Huygens" in row["titre"] for row in index)
+
+    source_path = "RDM/RDM, cours 8 _ les caractéristiques des sections.html"
+    source_bytes = (tmp_path / source_path).read_bytes()
+    assert source_bytes == (Path(__file__).resolve().parents[1] / source_path).read_bytes()
+    source = source_bytes.decode("utf-8")
+    original = CourseHTML()
+    original.feed(source)
+    assert original.ids <= published.ids
+    html = (output / url).read_text(encoding="utf-8")
+    scripts = re.findall(r"<script\b[^>]*>.*?</script>", source, flags=re.S)
+    assert scripts and all(script in html for script in scripts)
