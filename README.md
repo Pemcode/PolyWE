@@ -6,7 +6,7 @@ Dépôt : [Pemcode/PolyWE](https://github.com/Pemcode/PolyWE).
 
 Site statique destiné à GitHub Pages. Les cours interactifs restent des fichiers HTML éditables. Un catalogue JSON organise les matières, les cours et les parcours ; un générateur Python construit les pages et leur navigation.
 
-La matière [Fatigue des métaux](https://pemcode.github.io/PolyWE/matieres/fatigue.html) réunit les trois premiers cours : cycles de chargement, courbe de Wöhler et amorçage des fissures. Ils sont aussi accessibles depuis le sujet « Fatigue » de la frise.
+La matière [Fatigue des métaux](https://pemcode.github.io/PolyWE/matieres/fatigue.html) réunit les quatre cours de la première série : cycles de chargement, courbe de Wöhler, amorçage des fissures, puis propagation et loi de Paris. Ils sont aussi accessibles depuis le sujet « Fatigue » de la frise.
 
 ## Routine quotidienne
 

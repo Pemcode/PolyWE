@@ -184,6 +184,10 @@
         {
           "cours": "fatigue-01",
           "ancre": "c6"
+        },
+        {
+          "cours": "fatigue-04",
+          "ancre": "c2"
         }
       ]
     },
@@ -196,6 +200,10 @@
         {
           "cours": "fatigue-03",
           "ancre": "c5"
+        },
+        {
+          "cours": "fatigue-04",
+          "ancre": "c3"
         }
       ]
     },
@@ -540,6 +548,9 @@
         },
         {
           "cours": "fatigue-03"
+        },
+        {
+          "cours": "fatigue-04"
         }
       ]
     },

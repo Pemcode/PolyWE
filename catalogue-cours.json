@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "date_inventaire": "2026-10-02",
+  "date_inventaire": "2026-10-03",
   "description": "Catalogue éditorial du wiki de révision DU Ingénierie du soudage / IWE. Identifiants internes stables ; sections extraites automatiquement des HTML.",
   "cours": [
     {
@@ -535,6 +535,46 @@
       "fichier": "Cours/Fatigue/Fatigue, cours 3 _ l'amorçage.html",
       "url": "Fatigue/03-amorcage-fissures.html",
       "statut": "disponible"
+    },
+    {
+      "id": "fatigue-04",
+      "titre": "Propagation des fissures et loi de Paris",
+      "matiere": "fatigue",
+      "ordre": 4,
+      "repere": "Cours 04",
+      "prerequis_conseilles": [
+        "fatigue-01",
+        "fatigue-02",
+        "fatigue-03"
+      ],
+      "mots_cles": [
+        "propagation",
+        "loi de Paris",
+        "fissure",
+        "cassure",
+        "stries",
+        "lignes d’arrêt",
+        "facteur d’intensité de contrainte",
+        "ténacité",
+        "seuil de propagation",
+        "durée de vie",
+        "intervalle d’inspection",
+        "classes FAT",
+        "soudures"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Fatigue/Fatigue, cours 4 _ propagation et loi de Paris.html",
+      "url": "Fatigue/04-propagation-loi-paris.html",
+      "statut": "disponible"
     }
   ],
   "matieres": [
@@ -551,7 +591,7 @@
     {
       "id": "fatigue",
       "titre": "Fatigue des métaux",
-      "description": "Décrire les cycles de chargement, lire les courbes de Wöhler et comprendre l’amorçage des fissures."
+      "description": "Décrire les cycles de chargement, lire les courbes de Wöhler et comprendre l’amorçage puis la propagation des fissures."
     }
   ],
   "parcours": [

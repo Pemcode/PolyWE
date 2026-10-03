@@ -161,7 +161,8 @@ def test_relocated_sources_preserve_existing_bookmarks_and_scripts(tmp_path):
 def test_fatigue_courses_are_reachable_from_subject_planning_and_search(tmp_path):
     data, plan = copy_real_project(tmp_path, planning=True)
     output = build(tmp_path)
-    urls = ["Fatigue/01-cycles-chargement.html", "Fatigue/02-courbe-wohler.html", "Fatigue/03-amorcage-fissures.html"]
+    urls = ["Fatigue/01-cycles-chargement.html", "Fatigue/02-courbe-wohler.html",
+            "Fatigue/03-amorcage-fissures.html", "Fatigue/04-propagation-loi-paris.html"]
     assert (output / "matieres/fatigue.html").is_file(), "La matière fatigue doit être accessible."
 
     def page(path):
@@ -176,7 +177,7 @@ def test_fatigue_courses_are_reachable_from_subject_planning_and_search(tmp_path
     courses = {c["id"]: c for c in data["cours"]}
     topic = next(t for t in plan["sujets"] if t["id"] == "3-8-fatigue")
     index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
-    for n, (url, anchor) in enumerate(zip(urls, ["c3", "c5", "c5"]), 1):
+    for n, (url, anchor) in enumerate(zip(urls, ["c3", "c5", "c5", "c4"]), 1):
         ident = f"fatigue-{n:02}"
         assert "../" + url in page("matieres/fatigue.html").links
         assert url in page("planning.html").links
@@ -194,3 +195,7 @@ def test_fatigue_courses_are_reachable_from_subject_planning_and_search(tmp_path
     assert "../RDM/05-hooke-criteres-resistance.html" in page(urls[2]).links
     assert urls[0] + "#c6" in page("planning.html").links
     assert urls[2] + "#c5" in page("planning.html").links
+    for prerequisite in urls[:3]:
+        assert Path(prerequisite).name in page(urls[3]).links
+    assert urls[3] + "#c2" in page("planning.html").links
+    assert urls[3] + "#c3" in page("planning.html").links

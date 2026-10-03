@@ -19,6 +19,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S13 | Intégrer le cours RDM 08 sur les caractéristiques des sections | Livré — site public vérifié |
 | S14 | Regrouper les sources dans Cours sans casser les liens publiés | Intégré et vérifié |
 | S15 | Intégrer les trois premiers cours de fatigue | Intégré et vérifié |
+| S16 | Compléter la série fatigue avec la propagation et la loi de Paris | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -205,3 +206,17 @@ En tant qu’élève, je retrouve les nouveaux supports de fatigue depuis une ma
 Preuve TDD du 2 octobre 2026 : RED exécuté avec `uv run pytest tests/test_content.py -q -k fatigue`, sur l’absence de la page matière. GREEN après enregistrement des trois HTML par `wiki ajouter` et ajustement des métadonnées : matière, progression, planning, prérequis, index des sections, conservation des ancres et des scripts. Aucun changement du générateur.
 
 Validation locale : 84 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (15 cours, 151 sections, 3 matières et 1 application). Contrôle des trois cours réels sous `/PolyWE/`, à 390 et 1440 px : recherche ciblée, copie effective des liens avec ancres, partage natif simulé, accès depuis la semaine 49 du planning, progression 1 ↔ 2 ↔ 3, un simulateur par cours, quiz et réinitialisation, thème clair/sombre et persistance après rechargement. Aucune erreur JavaScript ou HTTP locale ni débordement horizontal détecté. Captures de la matière, des cours et d’un simulateur inspectées. Les trois empreintes SHA-256 des sources restent inchangées ; les scripts et ancres sont conservés dans les copies publiées. Ces contrôles vérifient le fonctionnement, sans validation scientifique des calculs.
+
+## S16 — Propagation et loi de Paris
+
+En tant qu’élève, je poursuis le cours sur l’amorçage avec la propagation des fissures et retrouve la loi de Paris depuis la matière, la recherche et le planning.
+
+- Cours `fatigue-04` disponible à `Fatigue/04-propagation-loi-paris.html`, avec les cours 1 à 3 en prérequis et navigation 3 ↔ 4.
+- Douze sections réelles indexées ; la recherche de la loi de Paris donne accès à `#c4`.
+- Le sujet 3.8 propose le cours complet ; les sujets 2.7 et 3.11 reçoivent respectivement les compléments sur la cassure (`#c2`) et le diagramme de propagation (`#c3`), sans changer les dates ni horaires.
+- Source conservée à l’identique, scripts et ancres préservés ; contrôle des simulateurs, du quiz, du thème et du partage sur mobile et ordinateur.
+- Test du parcours en RED puis GREEN, build et tests utiles réussis avant publication ; vérification de l’accès public après déploiement.
+
+Preuve TDD du 3 octobre 2026 : extension du test de parcours fatigue à la quatrième étape ; RED exécuté avec `uv run pytest tests/test_content.py -q -k fatigue`, sur l’absence du lien 3 → 4. GREEN après inscription par `wiki ajouter` et ajustement des métadonnées et du planning. Le test couvre les quatre cours, les prérequis du cours 4, les sections de recherche, les compléments de planning et la conservation des scripts et ancres.
+
+Validation locale : 84 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (16 cours, 163 sections, 1 application). Cours réel contrôlé sous `/PolyWE/`, à 390 et 1440 px : navigation 3 ↔ 4, recherche « loi de Paris », copie du lien `#c4`, partage natif simulé, accès depuis la semaine 49, trois simulateurs manipulés (Paris, durée de propagation, classes FAT), quiz et réinitialisation, thème clair/sombre et persistance. Captures du cours et du graphique inspectées ; aucune erreur JavaScript ou HTTP ni débordement horizontal détecté. Empreinte SHA-256 de la source inchangée ; aucune correction du fond scientifique.
