@@ -188,6 +188,12 @@
         {
           "cours": "fatigue-04",
           "ancre": "c2"
+        },
+        {
+          "cours": "rupture-01"
+        },
+        {
+          "cours": "rupture-02"
         }
       ]
     },
@@ -204,6 +210,12 @@
         {
           "cours": "fatigue-04",
           "ancre": "c3"
+        },
+        {
+          "cours": "rupture-03"
+        },
+        {
+          "cours": "rupture-04"
         }
       ]
     },
@@ -219,7 +231,19 @@
       "titre": "Essais des matériaux",
       "theme": "metallurgie",
       "code": "2.23",
-      "supports": []
+      "supports": [
+        {
+          "cours": "rupture-01",
+          "ancre": "c1"
+        },
+        {
+          "cours": "rupture-02"
+        },
+        {
+          "cours": "rupture-04",
+          "ancre": "c3"
+        }
+      ]
     },
     {
       "id": "rentree",
@@ -566,7 +590,16 @@
       "titre": "Essais des soudures",
       "theme": "metallurgie",
       "code": "2.23",
-      "supports": []
+      "supports": [
+        {
+          "cours": "rupture-02",
+          "ancre": "c6"
+        },
+        {
+          "cours": "rupture-04",
+          "ancre": "c3"
+        }
+      ]
     },
     {
       "id": "4-3-contraintes-et-deformations",

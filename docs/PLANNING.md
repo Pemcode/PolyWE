@@ -27,10 +27,10 @@ Les codes ci-dessous viennent du planning ; les liens avec les fiches du wiki so
 | 3.2 | Notions fondamentales de RDM | Série `rdm-01` à `rdm-07`, disponible |
 | 2.14 | Introduction à la corrosion | Pas de support associé pour le moment |
 | 1.1 | Introduction à la technologie du soudage | Pas de support associé pour le moment |
-| 2.7 | Ruptures et différents types de rupture | Compléments : le film d’une rupture par fatigue (`fatigue-01#c6`) et la lecture d’une cassure (`fatigue-04#c2`) |
-| 3.11 | Introduction à la mécanique de la rupture | Compléments : fissures dormantes (`fatigue-03#c5`) et diagramme de propagation (`fatigue-04#c3`) |
+| 2.7 | Ruptures et différents types de rupture | Mécanismes et faciès (`rupture-01`), Charpy et transition (`rupture-02`). Compléments : le film d’une rupture par fatigue (`fatigue-01#c6`) et la lecture d’une cassure (`fatigue-04#c2`) |
+| 3.11 | Introduction à la mécanique de la rupture | Défauts et facteur K (`rupture-03`), ténacité et FAD (`rupture-04`). Compléments : fissures dormantes (`fatigue-03#c5`) et diagramme de propagation (`fatigue-04#c3`) |
 | 2.4 | Élaboration des aciers | Pas de support associé pour le moment |
-| 2.23 | Essais des matériaux | Pas de support associé pour le moment |
+| 2.23 | Essais des matériaux | Traction (`rupture-01#c1`), Charpy (`rupture-02`), mesure de ténacité (`rupture-04#c3`) |
 
 Le lundi 28 septembre : RDM de 8 h à 11 h 25, puis corrosion de 11 h 30 à 12 h 30 et de 14 h à 15 h. Le planning ne permet pas d'attribuer un numéro précis de fiche RDM à une heure : la série est proposée sur chacune des séances de RDM.
 
@@ -39,6 +39,8 @@ Le lundi 28 septembre : RDM de 8 h à 11 h 25, puis corrosion de 11 h 30 à 12 h
 Quatre familles organisent les enseignements : procédés (1.x), métallurgie et matériaux (2.x), RDM et conception (3.x), fabrication/contrôle/qualité (4.x). Les examens et périodes pratiques ont leurs propres filtres.
 
 Les liens complémentaires déjà possibles sont ciblés : structure du joint → `met-03#s4`, fissuration → `met-03#s6`, conception des joints → `rdm-02#c6`, contraintes/déformations → `rdm-03#c5` et `met-03#s4`. Le sujet annuel « Fatigue » (3.8) propose les quatre cours de la première série de la matière « Fatigue des métaux » : cycles de chargement (`fatigue-01`), courbe de Wöhler (`fatigue-02`), amorçage (`fatigue-03`) et propagation / loi de Paris (`fatigue-04`). L’introduction de `rdm-05#c6` reste proposée en complément. Cette série disponible ne prétend pas couvrir tout le module. La matière du wiki se retrouve dans la famille « RDM et conception » du planning, sans modifier le calendrier. Un même code du PDF peut recouvrir plusieurs libellés ; les sujets ont donc des identifiants propres, plutôt qu'une correspondance automatique par numéro seul.
+
+La série « Mécanique de la rupture » reste une matière unique du wiki, même si ses supports concernent les familles matériaux (2.x) et conception (3.x) du planning. Pour les « Essais des soudures » (2.23), les compléments ciblent Charpy appliqué au soudage (`rupture-02#c6`) et la mesure de ténacité (`rupture-04#c3`). Aucun découpage des cours par heure n’est déduit de ces liens.
 
 | Examen indiqué | Date | Horaire |
 | --- | --- | --- |

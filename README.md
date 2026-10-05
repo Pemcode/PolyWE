@@ -8,6 +8,8 @@ Site statique destiné à GitHub Pages. Les cours interactifs restent des fichie
 
 La matière [Fatigue des métaux](https://pemcode.github.io/PolyWE/matieres/fatigue.html) réunit les quatre cours de la première série : cycles de chargement, courbe de Wöhler, amorçage des fissures, puis propagation et loi de Paris. Ils sont aussi accessibles depuis le sujet « Fatigue » de la frise.
 
+La matière [Mécanique de la rupture](https://pemcode.github.io/PolyWE/matieres/rupture.html) propose quatre cours : mécanismes et faciès, essai Charpy, défauts et facteur K, puis ténacité et diagramme FAD. Les sujets « Ruptures », « Mécanique de la rupture » et « Essais » du planning donnent accès aux supports correspondants.
+
 ## Routine quotidienne
 
 **Double-cliquer sur `Mettre-a-jour.cmd`** pour ouvrir le menu.

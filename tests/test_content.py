@@ -199,3 +199,47 @@ def test_fatigue_courses_are_reachable_from_subject_planning_and_search(tmp_path
         assert Path(prerequisite).name in page(urls[3]).links
     assert urls[3] + "#c2" in page("planning.html").links
     assert urls[3] + "#c3" in page("planning.html").links
+
+
+def test_rupture_series_is_reachable_and_preserves_interactive_sources(tmp_path):
+    data, plan = copy_real_project(tmp_path, planning=True)
+    output = build(tmp_path)
+    urls = ["Rupture/01-rupture-ductile-fragile.html", "Rupture/02-charpy-transition-ductile-fragile.html",
+            "Rupture/03-defauts-fissures-facteur-k.html", "Rupture/04-tenacite-ctod-j-fad.html"]
+    assert (output / "matieres/rupture.html").is_file(), "La matière Mécanique de la rupture doit être publiée."
+
+    def page(path):
+        parsed = CourseHTML()
+        parsed.feed((output / path).read_text(encoding="utf-8"))
+        return parsed
+
+    assert "matieres/rupture.html" in page("index.html").links
+    for first, second in zip(urls, urls[1:]):
+        assert Path(second).name in page(first).links
+        assert Path(first).name in page(second).links
+    courses = {c["id"]: c for c in data["cours"]}
+    topics = {t["id"]: t for t in plan["sujets"]}
+    index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    for n, (url, anchor) in enumerate(zip(urls, ["c3", "c1", "c5", "c6"]), 1):
+        ident = f"rupture-{n:02}"
+        assert "../" + url in page("matieres/rupture.html").links
+        assert url in page("planning.html").links
+        topic = "2-7-ruptures-et-differents-types-de-rupture" if n <= 2 else "3-11-introduction-a-la-mecanique-de-la-rupture"
+        assert {"cours": ident} in topics[topic]["supports"]
+        assert any(row["cours_id"] == ident and row["type"] == "section" and row["url"] == url + "#" + anchor for row in index)
+        source = (tmp_path / courses[ident]["fichier"]).read_text(encoding="utf-8-sig")
+        parsed = CourseHTML()
+        parsed.feed(source)
+        assert parsed.ids <= page(url).ids
+        scripts = re.findall(r"<script\b[^>]*>.*?</script>", source, flags=re.S)
+        published = (output / url).read_text(encoding="utf-8")
+        assert scripts and all(script in published for script in scripts)
+        for prerequisite in courses[ident]["prerequis_conseilles"]:
+            target = courses[prerequisite]["url"]
+            relative = Path(target).name if target.startswith("Rupture/") else "../" + target
+            assert relative in page(url).links
+    assert {"cours": "rupture-02"} in topics["2-23-essais-des-materiaux"]["supports"]
+    assert {"cours": "rupture-02", "ancre": "c6"} in topics["2-23-essais-des-soudures"]["supports"]
+    assert urls[3] + "#c3" in page("planning.html").links
+    assert {"cours": "fatigue-04", "ancre": "c3"} in topics["3-11-introduction-a-la-mecanique-de-la-rupture"]["supports"]
+    assert not (output / "Cours").exists()

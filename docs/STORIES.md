@@ -20,6 +20,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S14 | Regrouper les sources dans Cours sans casser les liens publiés | Intégré et vérifié |
 | S15 | Intégrer les trois premiers cours de fatigue | Intégré et vérifié |
 | S16 | Compléter la série fatigue avec la propagation et la loi de Paris | Intégré et vérifié |
+| S17 | Intégrer la série Mécanique de la rupture | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -220,3 +221,19 @@ En tant qu’élève, je poursuis le cours sur l’amorçage avec la propagation
 Preuve TDD du 3 octobre 2026 : extension du test de parcours fatigue à la quatrième étape ; RED exécuté avec `uv run pytest tests/test_content.py -q -k fatigue`, sur l’absence du lien 3 → 4. GREEN après inscription par `wiki ajouter` et ajustement des métadonnées et du planning. Le test couvre les quatre cours, les prérequis du cours 4, les sections de recherche, les compléments de planning et la conservation des scripts et ancres.
 
 Validation locale : 84 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (16 cours, 163 sections, 1 application). Cours réel contrôlé sous `/PolyWE/`, à 390 et 1440 px : navigation 3 ↔ 4, recherche « loi de Paris », copie du lien `#c4`, partage natif simulé, accès depuis la semaine 49, trois simulateurs manipulés (Paris, durée de propagation, classes FAT), quiz et réinitialisation, thème clair/sombre et persistance. Captures du cours et du graphique inspectées ; aucune erreur JavaScript ou HTTP ni débordement horizontal détecté. Empreinte SHA-256 de la source inchangée ; aucune correction du fond scientifique.
+
+## S17 — De la cassure au défaut acceptable
+
+En tant qu’élève, je retrouve les quatre cours de rupture dans une matière dédiée et depuis les sujets correspondants du planning, puis je progresse de la reconnaissance des cassures à l’évaluation des défauts.
+
+- Quatre cours disponibles sous des URL stables `Rupture/`, avec numéros, titres, prérequis et mots-clés tirés des sources déposées dans `Cours/Rupture/`.
+- Navigation 1 ↔ 2 ↔ 3 ↔ 4, accès depuis l’accueil et la matière, sommaires et recherche des sections (clivage, Charpy, facteur K, diagramme FAD).
+- Cours 1 et 2 liés au sujet 2.7 ; cours 3 et 4 liés au sujet 3.11 ; compléments ciblés pour les essais des matériaux et des soudures. Les supports de fatigue restent présents, les dates et horaires sont conservés.
+- Sources, scripts et ancres préservés ; seuls les supports déclarés sont publiés. Aucun polycopié local n’est embarqué.
+- Test de parcours en RED puis GREEN, tests et build valides ; interactions, partage, thèmes et affichage contrôlés aux largeurs 360, 390, 768 et 1280 px ; publication vérifiée sur GitHub Pages.
+
+Preuve TDD du 5 octobre 2026 : RED de `uv run pytest tests/test_content.py -q -k rupture_series` sur la page matière absente. GREEN après inscription des quatre cours par `wiki ajouter` et ajustement du catalogue et du planning. Le test vérifie la progression, les prérequis, les recherches de sections, les liens des sujets 2.7, 3.11 et 2.23, la conservation des scripts et ancres et l’exclusion du dossier source de l’artefact. Aucun changement du générateur.
+
+Validation locale : 85 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (20 cours, 211 sections, 4 matières et 1 application). Les quatre cours réels sont contrôlés sous `/PolyWE/` : recherche, copie effective du lien de section, partage natif simulé, frise de la semaine 40, navigation 1 ↔ 2 ↔ 3 ↔ 4, 24 manipulations et leurs animations, 48 questions de quiz avec corrections et remise à zéro, mémorisation des cases et du thème. Modes clair et sombre testés aux largeurs 360, 390, 768 et 1280 px, sans débordement horizontal de page ni erreur JavaScript ou HTTP. Empreintes SHA-256 des quatre sources inchangées. Les contrôles portent sur l’intégration et le fonctionnement, pas sur une nouvelle validation scientifique des supports fournis.
+
+Revue visuelle : les 24 schémas, les en-têtes sombres sur téléphone et un en-tête sur ordinateur ont été inspectés. Limite des sources conservées : certaines légendes de graphiques sont tronquées à 390 px, notamment `rupture-02#c4`, `rupture-03#c4` et `#c5`, `rupture-04#c2` et `#c4` avec certains réglages. Ce défaut interne aux SVG est distinct du débordement horizontal de page ; sa correction nécessite une évolution de présentation des supports, sans modifier leurs formules.
