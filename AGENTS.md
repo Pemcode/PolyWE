@@ -1,5 +1,93 @@
 # Instructions pour les agents
 
+Toujours ultra pédagogue
+Deux niveau d'enseignement à chaque fois que je te demande un cours
+Dans chaque cours des animations / graphiques / diagrammes etc... dynamiques et interactifs pour une bonne imprégnation des concepts. Qu'ils soient mathématiques, physiques, métallurgiques ou autres...
+
+Ne pas hésiter à faire des cours longs et complets !
+
+Me poser des questions pour affiner les cours que je demande si et seulement si c'est pertinent avant de les rédiger
+
+Les cours doivent aussi être ludique et permettre une bonne mémorisation des concepts.
+Les visualisations seront adapter à ma mémoire photographique.
+Les signes physiques / mathématiques doivent être posés et définie à chaque nouvel usage.
+Les acronymes / abréviations doivent aussi l'être.
+Si tu utilise un terme jugé technique ou issu d'un jargon technique il faut aussi l'expliquer.
+
+instructions complémentaires :
+
+# Instructions : présentation des cours
+
+## Livrable
+- Chaque cours est une page HTML unique et autonome, publiée comme artefact. Le CSS est dans <style>, le JavaScript dans <script>, et les dessins sont en SVG générés par JavaScript. Pas d'images ni de bibliothèques externes ; seule exception, les polices Google Fonts, avec polices de secours. La page doit fonctionner hors ligne.
+- Les cours sont longs et complets : environ 2 h 30 à 3 h de travail chacun, exercices compris.
+- Si le sujet est vaste, proposer une série de cours numérotés, chacun s'appuyant sur le précédent, avec un plan de série.
+- Avant de rédiger, poser des questions de calibrage seulement si c'est pertinent (3 maximum) : niveau, formation, périmètre, notations attendues.
+- Si un document de référence est fourni (polycopié, annales) :
+  - aligner les notations, les conventions de signe et les renvois de pages sur ce document ;
+  - signaler de façon neutre ses éventuelles erreurs ou ambiguïtés.
+
+## Direction visuelle (identique pour toute une série)
+- Esthétique « dessin technique » : fond papier millimétré léger.
+- Polices : Barlow Condensed pour les titres, Atkinson Hyperlegible pour le texte, STIX Two Text pour les formules.
+- Chaque chapitre s'ouvre sur un cartouche de plan en trois cases : numéro | titre et sous-titre | « Image à retenir » (un emoji et une phrase-image).
+- Code couleur fixe, expliqué en tête de chaque cours et respecté partout (textes, formules, manipulations) :
+  - les causes en couleurs chaudes (rouge, violet) ;
+  - les effets en couleurs froides (bleu, bleu-vert) ;
+  - les paramètres ou liens en vert ;
+  - les actions ou forces en orange ;
+  - les vecteurs géométriques en noir ;
+  - les encadrés « métier » en bronze.
+- Mode clair et mode sombre.
+- Responsive, sans aucun débordement horizontal sur téléphone : les formules passent à la ligne, les tableaux et formules larges défilent dans leur propre cadre.
+
+## Structure de chaque page
+1. **En-tête.**
+   - Un titre-cartouche à 4 cases : numéro du cours, durée conseillée, prérequis, « à la fin tu sais ».
+   - Un chapeau d'introduction et le rappel du code couleur.
+2. **Sommaire collant** qui surligne la section en cours de lecture.
+3. **« Avant de commencer ».**
+   - Le rappel du cours précédent en 3 cases.
+   - La correspondance avec le document de référence (s'il existe).
+   - Pourquoi ce cours compte dans la pratique.
+   - Le plan du cours.
+4. **5 à 7 chapitres**, chacun avec :
+   - « 👁 Niveau 1 : voir » : l'intuition, une analogie concrète, une image mentale, très peu de formules ;
+   - une manipulation interactive (SVG et JavaScript), avec des curseurs, des boutons d'exemples, une animation « lecture », des valeurs calculées en direct et un message qui commente ce qu'on observe ;
+   - « 🎓 Niveau 2 : maîtriser » : définitions rigoureuses, démonstrations, formules encadrées, pièges d'examen ;
+   - des encadrés typés : 📖 définition, 💡 astuce, ⚠️ piège, mnémotechnique, 🔥 métier.
+5. **Exercices corrigés** : 6 exercices et un défi.
+   - Chaque exercice est étiqueté N1 ou N2 et indique les chapitres concernés.
+   - Chaque sous-question a), b), c) est sur sa propre ligne.
+   - La correction est masquée derrière « Voir la correction » et détaillée pas à pas, avec les unités.
+6. **Quiz interactif** de 12 questions à choix multiples, avec une explication pour chaque réponse et un score.
+7. **Fiche mémoire** : 9 cases (emoji, titre, formule clé, une phrase), puis une « visite du musée », une courte histoire qui enchaîne les 9 images dans l'ordre.
+8. **Glossaire** de tous les termes, symboles et sigles du cours.
+9. **Check-list** « suis-je prêt pour la suite ? » : 10 points, avec les cases cochées mémorisées dans le navigateur.
+10. **Annonce du cours suivant**, puis pied de page.
+
+## Règles pédagogiques
+- Ton ultra pédagogue, bienveillant, au tutoiement, pour un lecteur qui peut partir de zéro.
+- Deux niveaux d'enseignement dans chaque chapitre.
+- Définir chaque symbole, sigle, abréviation et terme technique à sa première apparition dans chaque cours, même s'il a été défini dans un cours précédent. Cela inclut les notations mathématiques (∂, Σ, diag, transposée…).
+- Écrire la formule littérale avant les valeurs numériques, avec les unités partout et des ordres de grandeur.
+- Des visualisations pensées pour la mémoire photographique : une image forte par chapitre, des couleurs constantes, des schémas épurés.
+- Un ton ludique : analogies du quotidien, défis, quiz, musée mnémotechnique.
+
+## Neutralité
+- Les cours doivent pouvoir être partagés : aucune référence aux échanges de la conversation, à la situation personnelle de l'utilisateur, à ses délais ou à ses questions.
+- Les références aux documents sources sont formulées de façon neutre (« le polycopié… », « le cours de référence… »).
+
+## Contrôle qualité avant publication
+- Recalculer toutes les valeurs numériques : exercices, quiz, exemples des manipulations.
+- Vérifier les formules, les conventions de signe, et la cohérence avec les cours précédents et le document de référence.
+- Tester la page dans un navigateur :
+  - aucune erreur JavaScript, et toutes les manipulations fonctionnent ;
+  - en mode clair et en mode sombre ;
+  - sans débordement aux largeurs 360, 390, 768 et 1280 px ;
+  - contrôle visuel des schémas (étiquettes lisibles, rien ne se chevauche).
+- Publier, puis faire un résumé court dans le chat : contenu du cours et priorités de travail.
+
 ## Objectif et choix actés
 
 Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pour GitHub Pages. Le nombre de matières et de cours doit pouvoir augmenter sans modifier le code de navigation. Le site est public une fois publié.
