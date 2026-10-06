@@ -966,6 +966,13 @@ function txs(p,x,y,parts,attrs){/* parts: [["σ",""],["max","sub"],[" = 3",""]] 
   return t;
 }
 function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild);}
+function fitText(t,x0,x1,gap){/* garde un texte SVG entre x0 et x1 : il passe de l'autre côté de son repère (écart gap), sinon il glisse */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const a=t.getAttribute("text-anchor")||"start",x=+t.getAttribute("x");
+  if(gap&&a!=="middle"&&(b.x<x0||b.x+b.width>x1)){t.setAttribute("text-anchor",a==="end"?"start":"end");t.setAttribute("x",a==="end"?x+2*gap:x-2*gap);b=t.getBBox();}
+  const nx=+t.getAttribute("x");
+  if(b.x+b.width>x1)t.setAttribute("x",nx-(b.x+b.width-x1));else if(b.x<x0)t.setAttribute("x",nx+(x0-b.x));
+  return t;}
 function arrow(p,x1,y1,x2,y2,color,w,h){
   w=w||2.4;h=h||10;
   const g=el("g",{class:"arr"},p);g.style.color=color||"var(--ink)";
@@ -1065,7 +1072,7 @@ function animate(btn,label,dur,onStep,onEnd){/* petite aide : lecture interrompa
       el("circle",{cx:x,cy:yt,r:8,fill:"color-mix(in srgb, var(--ink) 18%, var(--card))",stroke:"var(--ink)","stroke-width":1.3},svg);}
     el("line",{x1:ax0,y1:yb+14,x2:ax0+aw,y2:yb+14,stroke:"var(--ink)","stroke-width":3},svg);
     const fa=Math.max(0,24*sig/p.sth);if(fa>2)for(let i=1;i<n-1;i+=2){const x=ax0+16+i*(aw-32)/(n-1);arrow(svg,x,yt-10,x,yt-10-fa,"var(--frc)",2.2,7);}
-    darrow(svg,ax0+aw+8,yb,yt,"var(--eps)",1.4);tx(svg,ax0+aw+14,(yb+yt)/2+4,"x",{class:"mth",fill:"var(--eps)"});
+    darrow(svg,ax0+aw+8,yb,yt,"var(--eps)",1.4);fitText(tx(svg,ax0+aw+14,(yb+yt)/2+4,"x",{class:"mth",fill:"var(--eps)"}),0,W-1);
     /* --- la courbe --- */
     const gx0=narrow?52:W*0.46,gx1=W-14,gy0=narrow?240:34,gy1=H-44,umax=p.lam*1.2,smax=p.sth*1.15;
     const ax=axes(svg,gx0,gx1,gy0,gy1,0,umax*1e9,0,smax/1e9,"écartement x − x₀ (nm)","σ (GPa)",niceStep(umax*1e9,4),niceStep(smax/1e9,4),v=>nf(v,2),v=>nf(v,0));
@@ -1076,7 +1083,7 @@ function animate(btn,label,dur,onStep,onEnd){/* petite aide : lecture interrompa
     if(u>0)el("path",{d:area,fill:"var(--gam)",opacity:.25},svg);
     el("path",{d:d,fill:"none",stroke:"var(--sig)","stroke-width":2.6},svg);
     const ut=Math.min(umax,p.sth*1.1*p.m.x0/p.m.E);el("line",{x1:X(0),y1:Y(0),x2:X(ut*1e9),y2:Y(p.m.E*ut/p.m.x0/1e9),stroke:"var(--mat)","stroke-width":1.4,"stroke-dasharray":"5 4"},svg);
-    tx(svg,X(ut*1e9)+4,Y(p.m.E*ut/p.m.x0/1e9)+12,"pente E/x₀ (Hooke)",{"font-size":"11.5",fill:"var(--mat)"});
+    tx(svg,X(ut*1e9)+4,Y(p.m.E*ut/p.m.x0/1e9)+12,narrow?"pente E/x₀":"pente E/x₀ (Hooke)",{"font-size":"11.5",fill:"var(--mat)"});
     el("line",{x1:gx0,y1:Y(p.sth/1e9),x2:gx1,y2:Y(p.sth/1e9),stroke:"var(--sig)","stroke-width":1,"stroke-dasharray":"3 3"},svg);
     txs(svg,gx1-4,Y(p.sth/1e9)-5,[["σ",""],["th","sub"],[" = "+fmtS(p.sth),""]],{"font-size":"12",fill:"var(--sig)","text-anchor":"end"});
     if(u>0&&!broken)el("circle",{cx:X(u*1e9),cy:Y(sig/1e9),r:5.5,fill:"var(--sig)",stroke:"var(--card)","stroke-width":2},svg);
@@ -1166,7 +1173,10 @@ function animate(btn,label,dur,onStep,onEnd){/* petite aide : lecture interrompa
     el("line",{x1:x0,y1:Y(Math.log10(st)),x2:x1,y2:Y(Math.log10(st)),stroke:"var(--sig)","stroke-width":1.3,"stroke-dasharray":"6 4"},svg);
     txs(svg,x1-4,Y(Math.log10(st))-5,[["plafond σ",""],["th","sub"],[" = "+fmtS(st),""]],{"font-size":"12",fill:"var(--sig)","text-anchor":"end"});
     if(m.Re){el("line",{x1:x0,y1:Y(Math.log10(m.Re)),x2:x1,y2:Y(Math.log10(m.Re)),stroke:"var(--mat)","stroke-width":1.3,"stroke-dasharray":"6 4"},svg);
-      txs(svg,x1-4,Y(Math.log10(m.Re))-5,[["R",""],["e","sub"],[" = 355 MPa : au-dessus, l'acier plastifie d'abord",""]],{"font-size":"11.5",fill:"var(--mat)","text-anchor":"end"});}
+      if(W<520){/* sur téléphone : deux lignes à gauche, là où les courbes restent au plafond */
+        txs(svg,x0+4,Y(Math.log10(m.Re))-22,[["R",""],["e","sub"],[" = 355 MPa :",""]],{"font-size":"11.5",fill:"var(--mat)"});
+        tx(svg,x0+4,Y(Math.log10(m.Re))-5,"au-dessus, plasticité d'abord",{"font-size":"11.5",fill:"var(--mat)"});}
+      else txs(svg,x1-4,Y(Math.log10(m.Re))-5,[["R",""],["e","sub"],[" = 355 MPa : au-dessus, l'acier plastifie d'abord",""]],{"font-size":"11.5",fill:"var(--mat)","text-anchor":"end"});}
     ["g","o"].forEach(f=>{let d="";for(let i=0;i<=160;i++){const la=-9+8*i/160,v=Math.min(st,sr(m,Math.pow(10,la),f));d+=(i?"L":"M")+X(la).toFixed(1)+" "+Y(Math.max(5,Math.log10(v))).toFixed(1)+" ";}
       el("path",{d:d,fill:"none",stroke:"var(--sig)","stroke-width":f===form?3:1.4,"stroke-dasharray":f===form?"":"5 4",opacity:f===form?1:.6},svg);});
     el("circle",{cx:X(Math.log10(a)),cy:Y(Math.log10(s)),r:6,fill:"var(--eps)",stroke:"var(--card)","stroke-width":2},svg);
@@ -1213,8 +1223,10 @@ function animate(btn,label,dur,onStep,onEnd){/* petite aide : lecture interrompa
       const ps=t=>Math.pow(K/Re,2)/(2*Math.PI)*Math.pow(Math.cos(t/2),2)*(1+3*Math.pow(Math.sin(t/2),2))*1000;
       const pd=t=>Math.pow(K/Re,2)/(2*Math.PI)*Math.pow(Math.cos(t/2),2)*(Math.pow(1-2*NU,2)+3*Math.pow(Math.sin(t/2),2))*1000;
       contour(ps,"var(--gam)","var(--gam)",0.25);contour(pd,"var(--gam)","var(--gam)",0.6);
-      tx(g,cx+ps(1.4)*sc*Math.cos(1.4)+6,cy-ps(1.4)*sc*Math.sin(1.4)-4,"contrainte plane (surface)",{"font-size":"11.5",fill:"var(--gam)","font-weight":"700"});
-      tx(g,cx+pd(-1.3)*sc*Math.cos(-1.3)+6,cy-pd(-1.3)*sc*Math.sin(-1.3)+12,"déformation plane (cœur)",{"font-size":"11.5",fill:"var(--gam)","font-weight":"700"});
+      /* étiquettes hors de la zone découpée, à l'écart du repère x, y et dans le cadre de la carte */
+      const lab=(r,t,dy,s)=>{const rr=Math.max(36,r*sc),y=Math.max(my0+14,Math.min(my0+mh-62,cy-rr*Math.sin(t)+dy));/* à l'écart des flèches d'effort et de l'échelle */
+        return fitText(tx(svg,cx+rr*Math.cos(t)+6,y,s,{"font-size":"11.5",fill:"var(--gam)","font-weight":"700"}),mx0+4,mx0+mw-34,6);};
+      lab(ps(1.4),1.4,-4,"contrainte plane (surface)");lab(pd(-1.3),-1.3,12,"déformation plane (cœur)");
     }
     /* fissure et repère */
     el("path",{d:"M"+mx0+" "+(cy-3)+" L"+cx+" "+cy+" L"+mx0+" "+(cy+3)+" Z",fill:"var(--ink)"},g);

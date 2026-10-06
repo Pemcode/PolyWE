@@ -42,6 +42,8 @@ Les liens complémentaires déjà possibles sont ciblés : structure du joint �
 
 La série « Mécanique de la rupture » reste une matière unique du wiki, même si ses supports concernent les familles matériaux (2.x) et conception (3.x) du planning. Pour les « Essais des soudures » (2.23), les compléments ciblent Charpy appliqué au soudage (`rupture-02#c6`) et la mesure de ténacité (`rupture-04#c3`). Aucun découpage des cours par heure n’est déduit de ces liens.
 
+Les deux cours de brasage (`brasage-01`, `brasage-02`) sont rattachés au sujet `1-16-brasage`, prévu les 5 et 6 octobre 2026. Le premier couvre le mouillage, la capillarité et la liaison ; le second, les oxydes, flux, atmosphères et apports. Le premier cours de fluage (`fluage-01`) introduit la courbe et les mécanismes du sujet `2-12-acier-resistant-au-fluage`, prévu le 15 octobre 2026 ; il ne couvre pas encore tout le choix des aciers résistants au fluage. Les suites annoncées dans les HTML ne sont pas présentées comme disponibles tant qu’elles ne sont pas livrées.
+
 | Examen indiqué | Date | Horaire |
 | --- | --- | --- |
 | Procédés | 17 décembre 2026 | 10 h 15–12 h |

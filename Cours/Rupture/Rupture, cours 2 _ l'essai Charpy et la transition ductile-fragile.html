@@ -1034,6 +1034,13 @@ function txs(p,x,y,parts,attrs){/* parts: [["σ",""],["max","sub"],[" = 3",""]] 
   return t;
 }
 function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild);}
+function fitText(t,x0,x1,gap){/* garde un texte SVG entre x0 et x1 : il passe de l'autre côté de son repère (écart gap), sinon il glisse */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const a=t.getAttribute("text-anchor")||"start",x=+t.getAttribute("x");
+  if(gap&&a!=="middle"&&(b.x<x0||b.x+b.width>x1)){t.setAttribute("text-anchor",a==="end"?"start":"end");t.setAttribute("x",a==="end"?x+2*gap:x-2*gap);b=t.getBBox();}
+  const nx=+t.getAttribute("x");
+  if(b.x+b.width>x1)t.setAttribute("x",nx-(b.x+b.width-x1));else if(b.x<x0)t.setAttribute("x",nx+(x0-b.x));
+  return t;}
 function arrow(p,x1,y1,x2,y2,color,w,h){
   w=w||2.4;h=h||10;
   const g=el("g",{class:"arr"},p);g.style.color=color||"var(--ink)";
@@ -1214,8 +1221,8 @@ function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt){
     const tc=Math.max(-200,Math.min(60,tt));
     if(isFinite(tt)&&tt>-200)el("rect",{x:x0,y:y0,width:X(tc)-x0,height:y1-y0,fill:"var(--sig)",opacity:.07},svg);
     el("rect",{x:X(tc),y:y0,width:x1-X(tc),height:y1-y0,fill:"var(--gam)",opacity:.07},svg);
-    if(isFinite(tt)&&tt>-190)tx(svg,(x0+X(tc))/2,y0+16,"fragile",{"font-size":"13","text-anchor":"middle",fill:"var(--sig)","font-weight":"700"});
-    if(tt<50)tx(svg,(X(tc)+x1)/2,y0+16,"ductile",{"font-size":"13","text-anchor":"middle",fill:"var(--gam)","font-weight":"700"});
+    if(isFinite(tt)&&tt>-190)fitText(tx(svg,(x0+X(tc))/2,y1-26,"fragile",{"font-size":"13","text-anchor":"middle",fill:"var(--sig)","font-weight":"700"}),x0+2,x1-2);
+    if(tt<50)fitText(tx(svg,(X(tc)+x1)/2,y1-26,"ductile",{"font-size":"13","text-anchor":"middle",fill:"var(--gam)","font-weight":"700"}),x0+2,x1-2);
     /* courbes */
     let dRef="",dCur="";
     for(let i=0;i<=130;i++){const t=-200+260*i/130;dRef+=(i?"L":"M")+X(t).toFixed(1)+" "+Y(Math.min(1800,Re(t,20,0))).toFixed(1)+" ";dCur+=(i?"L":"M")+X(t).toFixed(1)+" "+Y(Math.min(1800,q*Re(t,d,shift))).toFixed(1)+" ";}
@@ -1345,7 +1352,10 @@ function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt){
       el("line",{x1:48,y1:yy,x2:W-14,y2:yy,stroke:c.col,"stroke-width":1.1,"stroke-dasharray":"5 4",opacity:.8},svg);
       if(isFinite(t)&&t>-120&&t<60){el("circle",{cx:X(t),cy:yy,r:5,fill:c.col,stroke:"var(--card)","stroke-width":1.5},svg);
         const off=[[8,15,"start"],[-8,-6,"end"],[-8,15,"end"],[8,-6,"start"]][i];/* 27 J et TK35 dessous, 40 J et 50 % dessus */
-        tx(svg,X(t)+off[0],yy+off[1],c.n,{"font-size":"12",fill:c.col,"text-anchor":off[2],"font-weight":"700"});}});
+        const lb=tx(svg,X(t)+off[0],yy+off[1],c.n,{"font-size":"12",fill:c.col,"text-anchor":off[2],"font-weight":"700"});
+        let bx=99;try{bx=lb.getBBox().x;}catch(e){}
+        if(i===2&&bx<50){lb.setAttribute("text-anchor","start");lb.setAttribute("x",X(t)+8);lb.setAttribute("y",yy+30);}/* TK35 sous 27 J s'il manque de place à gauche */
+        fitText(lb,50,W-14,8);}});
     /* température de service */
     el("line",{x1:X(Ts),y1:30,x2:X(Ts),y2:H-46,stroke:"var(--tau)","stroke-width":2},svg);
     const ks=kvT(m,Ts);el("circle",{cx:X(Ts),cy:Y(k*ks),r:6,fill:"var(--tau)",stroke:"var(--card)","stroke-width":2},svg);
@@ -1443,9 +1453,9 @@ function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt){
     let d="";for(let i=0;i<=90;i++){const t=-60+i;d+=(i?"L":"M")+X(t).toFixed(1)+" "+Y(Math.min(100,kvT(m,t))).toFixed(1)+" ";}
     el("rect",{x:X(g.T),y:30,width:X(30)-X(g.T),height:Y(g.K)-30,fill:"var(--mat)",opacity:.09},svg);
     el("path",{d:d,fill:"none",stroke:"var(--muted)","stroke-width":1.6,"stroke-dasharray":"5 4"},svg);
-    tx(svg,X(Math.min(25,g.T+8)),Y(Math.min(96,kvT(m,Math.min(25,g.T+8))))-8,"acier tout juste conforme",{"font-size":"11.5",fill:"var(--muted)","text-anchor":"middle"});
+    fitText(tx(svg,X(Math.min(25,g.T+8)),Y(Math.min(96,kvT(m,Math.min(25,g.T+8))))-8,"acier tout juste conforme",{"font-size":"11.5",fill:"var(--muted)","text-anchor":"middle"}),50,W-14);
     const gx=X(g.T),gy=Y(g.K);el("polygon",{points:gx+","+(gy-8)+" "+(gx+8)+","+gy+" "+gx+","+(gy+8)+" "+(gx-8)+","+gy,fill:"var(--mat)",stroke:"var(--card)","stroke-width":1.5},svg);
-    tx(svg,gx+(g.T>10?-10:10),gy+20,"garantie : "+g.K+" J à "+tC(g.T),{"font-size":"12.5",fill:"var(--mat)","font-weight":"700","text-anchor":g.T>10?"end":"start"});
+    fitText(tx(svg,gx+(g.T>10?-10:10),gy+20,"garantie : "+g.K+" J à "+tC(g.T),{"font-size":"12.5",fill:"var(--mat)","font-weight":"700","text-anchor":g.T>10?"end":"start"}),50,W-14,10);
     el("line",{x1:X(Ts),y1:30,x2:X(Ts),y2:H-46,stroke:"var(--tau)","stroke-width":2},svg);
     tx(svg,X(Ts)+(Ts>15?-6:6),44,"service "+tC(Ts),{"font-size":"12",fill:"var(--tau)","text-anchor":Ts>15?"end":"start"});
     $("#m6So").textContent=tC(Ts);

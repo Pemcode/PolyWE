@@ -243,3 +243,41 @@ def test_rupture_series_is_reachable_and_preserves_interactive_sources(tmp_path)
     assert urls[3] + "#c3" in page("planning.html").links
     assert {"cours": "fatigue-04", "ancre": "c3"} in topics["3-11-introduction-a-la-mecanique-de-la-rupture"]["supports"]
     assert not (output / "Cours").exists()
+
+
+def test_fluage_and_brasage_are_reachable_with_their_declared_sources(tmp_path):
+    data, plan = copy_real_project(tmp_path, planning=True)
+    output = build(tmp_path)
+    expected = [
+        ("fluage-01", "fluage", "Fluage/01-courbe-mecanismes.html", "c3", "2-12-acier-resistant-au-fluage"),
+        ("brasage-01", "brasage", "Brasage/01-principes-mouillage-capillarite.html", "c3", "1-16-brasage"),
+        ("brasage-02", "brasage", "Brasage/02-oxydes-flux-atmospheres-apports.html", "c2", "1-16-brasage"),
+    ]
+    assert all((output / url).is_file() for _, _, url, _, _ in expected), "Les nouveaux cours de fluage et brasage doivent être publiés."
+
+    def page(path):
+        parsed = CourseHTML()
+        parsed.feed((output / path).read_text(encoding="utf-8"))
+        return parsed
+
+    courses = {c["id"]: c for c in data["cours"]}
+    topics = {t["id"]: t for t in plan["sujets"]}
+    index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    for ident, subject, url, anchor, topic in expected:
+        assert f"matieres/{subject}.html" in page("index.html").links
+        assert "../" + url in page(f"matieres/{subject}.html").links
+        assert url in page("planning.html").links
+        assert {"cours": ident} in topics[topic]["supports"]
+        assert any(row["cours_id"] == ident and row["url"] == url + "#" + anchor for row in index)
+        source = (tmp_path / courses[ident]["fichier"]).read_text(encoding="utf-8-sig")
+        parsed = CourseHTML()
+        parsed.feed(source)
+        assert parsed.ids <= page(url).ids
+        scripts = re.findall(r"<script\b[^>]*>.*?</script>", source, flags=re.S)
+        html = (output / url).read_text(encoding="utf-8")
+        assert scripts and all(script in html for script in scripts)
+    assert "02-oxydes-flux-atmospheres-apports.html" in page(expected[1][2]).links
+    assert "01-principes-mouillage-capillarite.html" in page(expected[2][2]).links
+    assert "../Metallurgie/00-diagramme-plomb-etain.html" in page(expected[1][2]).links
+    assert "../Rupture/01-rupture-ductile-fragile.html" in page(expected[0][2]).links
+    assert not (output / "Cours").exists()

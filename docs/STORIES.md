@@ -21,6 +21,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S15 | Intégrer les trois premiers cours de fatigue | Intégré et vérifié |
 | S16 | Compléter la série fatigue avec la propagation et la loi de Paris | Intégré et vérifié |
 | S17 | Intégrer la série Mécanique de la rupture | Intégré et vérifié |
+| S18 | Intégrer le fluage et le brasage, republier les corrections de rupture | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -237,3 +238,28 @@ Preuve TDD du 5 octobre 2026 : RED de `uv run pytest tests/test_content.py -q -k
 Validation locale : 85 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (20 cours, 211 sections, 4 matières et 1 application). Les quatre cours réels sont contrôlés sous `/PolyWE/` : recherche, copie effective du lien de section, partage natif simulé, frise de la semaine 40, navigation 1 ↔ 2 ↔ 3 ↔ 4, 24 manipulations et leurs animations, 48 questions de quiz avec corrections et remise à zéro, mémorisation des cases et du thème. Modes clair et sombre testés aux largeurs 360, 390, 768 et 1280 px, sans débordement horizontal de page ni erreur JavaScript ou HTTP. Empreintes SHA-256 des quatre sources inchangées. Les contrôles portent sur l’intégration et le fonctionnement, pas sur une nouvelle validation scientifique des supports fournis.
 
 Revue visuelle : les 24 schémas, les en-têtes sombres sur téléphone et un en-tête sur ordinateur ont été inspectés. Limite des sources conservées : certaines légendes de graphiques sont tronquées à 390 px, notamment `rupture-02#c4`, `rupture-03#c4` et `#c5`, `rupture-04#c2` et `#c4` avec certains réglages. Ce défaut interne aux SVG est distinct du débordement horizontal de page ; sa correction nécessite une évolution de présentation des supports, sans modifier leurs formules.
+
+## S18 — Fluage et brasage
+
+En tant qu’élève, je retrouve les premiers cours de fluage et de brasage depuis leurs matières, la recherche et les séances correspondantes du planning.
+
+- `fluage-01` introduit le sujet 2.12 « Acier résistant au fluage » par la courbe et les mécanismes ; il ne prétend pas couvrir à lui seul le choix des aciers.
+- `brasage-01` et `brasage-02` couvrent les bases puis les oxydes, flux, atmosphères et apports du sujet 1.16 « Brasage ». Progression 1 ↔ 2, sans inventer les cours de suite absents.
+- Matières dédiées, prérequis et mots-clés issus des HTML, chemins publiés stables sous `Fluage/` et `Brasage/` ; le rangement source imbriqué du brasage reste inchangé.
+- Liens de planning explicites sur les identifiants complets, dates et horaires conservés. Aucun fichier source de Planning ou Polycopies n’est publié.
+- Les quatre sources de rupture déjà corrigées sont republiées en conservant leurs URL, ancres et clés de stockage. L’intégration ne réécrit aucune source.
+- Test de parcours en RED puis GREEN, catalogue et build valides, contrôles navigateur des cours réels et des légendes SVG, puis vérification du déploiement public.
+
+Aucune fiche d’intégration séparée n’a été trouvée parmi les fichiers livrés ; les métadonnées sont établies à partir des titres, prérequis et sections des HTML et des identifiants renvoyés par `wiki sujets fluage` et `wiki sujets brasage`.
+
+Preuve TDD du 6 octobre 2026 : RED de `uv run pytest tests/test_content.py -q -k fluage_and_brasage` sur l’absence des trois pages publiées. GREEN après inscription par `wiki ajouter` et renseignement des métadonnées : matières, planning, recherche, navigation du brasage, prérequis et conservation des ancres et scripts. Aucun changement du générateur.
+
+Validation locale : 86 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (23 cours, 247 sections, 6 matières, 1 application). Contrôle des trois nouveaux cours et des quatre cours de rupture corrigés sous `/PolyWE/` : 43 manipulations, animations, 84 questions de quiz et remise à zéro, thèmes, mémorisation des cases, recherche, copie effective des liens de section, partage natif simulé, prérequis, navigation et planning (semaines 40 à 42). Le contrôle de l’animation de vieillissement du brasage 2 a été ajusté pour observer sa lecture chiffrée : cette animation ne modifie pas le graphique de température homologue. Pas d’erreur JavaScript ou HTTP ni de débordement horizontal de page constaté. Les sept empreintes de sources sont inchangées depuis la réception ; les URL, ancres et clés de stockage des quatre cours de rupture sont conservées.
+
+Contrôle SVG aux largeurs 360, 390, 768 et 1280 px, en clair et sombre : comparaison des boîtes de texte au viewBox après chargement des polices, avec tolérance de 2 unités. Les valeurs extrêmes prises individuellement donnent 1 320 états contrôlés sans débordement, puis 176 états supplémentaires dans le mode « zone plastique » du cours Rupture 3 également sans débordement. Le contrôle complémentaire de 168 états avec les curseurs simultanément au minimum ou au maximum retrouve deux défauts résiduels dans Rupture 3 (12 occurrences selon largeur et thème), consignés ci-dessous. Aucun texte hors cadre relevé dans les trois nouveaux cours pour ces configurations. Captures des nouveaux schémas, du mode sombre mobile, de l’affichage ordinateur et des légendes corrigées inspectées. Cette intégration n’effectue pas une nouvelle validation scientifique des cours livrés.
+
+Défauts résiduels à corriger dans la source `rupture-03`, sans changer ses ancres :
+- `#c4`, mode « Zone plastique » (`m4v`, option `pz`), curseurs `m4K` et `m4R` au maximum : la légende « rY = 1,6 mm » dépasse à droite, aux quatre largeurs.
+- `#c5`, curseurs au maximum simultanément : la légende « ténacité typique des aciers : 50 à 150 MPa·√m » dépasse à gauche à 360 et 390 px.
+
+Les corrections livrées des autres légendes de rupture sont conservées et republiées. La modification locale de `AGENTS.md` reste hors de ce commit de contenus et d’intégration.

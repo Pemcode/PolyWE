@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "date_inventaire": "2026-10-05",
+  "date_inventaire": "2026-10-06",
   "description": "Catalogue éditorial du wiki de révision DU Ingénierie du soudage / IWE. Identifiants internes stables ; sections extraites automatiquement des HTML.",
   "cours": [
     {
@@ -726,6 +726,119 @@
       "fichier": "Cours/Rupture/Rupture, cours 4 _ ténacité et défauts, KIC, CTOD, J et diagramme FAD.html",
       "url": "Rupture/04-tenacite-ctod-j-fad.html",
       "statut": "disponible"
+    },
+    {
+      "id": "fluage-01",
+      "titre": "Courbe de fluage et mécanismes de déformation à chaud",
+      "matiere": "fluage",
+      "ordre": 1,
+      "repere": "Cours 01",
+      "prerequis_conseilles": [
+        "rdm-01",
+        "rupture-01",
+        "met-02"
+      ],
+      "mots_cles": [
+        "fluage",
+        "Norton",
+        "Arrhenius",
+        "température homologue",
+        "relaxation",
+        "dislocations",
+        "diffusion",
+        "lacunes",
+        "joints de grains",
+        "vitesse de déformation",
+        "carte des mécanismes"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Fluage/Fluage, cours 1 _ la courbe de fluage et ses mécanismes.html",
+      "url": "Fluage/01-courbe-mecanismes.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "brasage-01",
+      "titre": "Principes du brasage : mouillage, capillarité et liaison",
+      "matiere": "brasage",
+      "ordre": 1,
+      "repere": "Cours 01",
+      "prerequis_conseilles": [
+        "met-base"
+      ],
+      "mots_cles": [
+        "brasage fort",
+        "brasage tendre",
+        "soudobrasage",
+        "mouillage",
+        "Young",
+        "capillarité",
+        "jeu",
+        "dilatation",
+        "solidus",
+        "liquidus",
+        "métal d’apport",
+        "interface",
+        "intermétalliques"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Procedes/1.16_Brasage_Fort_Brasage_Tendre/Brasage, cours 1 _ mouiller et remplir, les principes du brasage.html",
+      "url": "Brasage/01-principes-mouillage-capillarite.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "brasage-02",
+      "titre": "Brasage : oxydes, flux, atmosphères et métaux d’apport",
+      "matiere": "brasage",
+      "ordre": 2,
+      "repere": "Cours 02",
+      "prerequis_conseilles": [
+        "brasage-01"
+      ],
+      "mots_cles": [
+        "brasage fort",
+        "brasage tendre",
+        "oxydes",
+        "préparation de surface",
+        "Ellingham",
+        "flux",
+        "atmosphère contrôlée",
+        "vide",
+        "hydrogène",
+        "point de rosée",
+        "métal d’apport",
+        "évaporation"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Procedes/1.16_Brasage_Fort_Brasage_Tendre/Brasage, cours 2 _ vaincre les oxydes, flux, atmosphères et métaux d'apport.html",
+      "url": "Brasage/02-oxydes-flux-atmospheres-apports.html",
+      "statut": "disponible"
     }
   ],
   "matieres": [
@@ -748,6 +861,16 @@
       "id": "rupture",
       "titre": "Mécanique de la rupture",
       "description": "Reconnaître les cassures, comprendre la transition ductile-fragile et relier la sévérité des fissures à la ténacité du matériau."
+    },
+    {
+      "id": "fluage",
+      "titre": "Fluage des métaux",
+      "description": "Comprendre la déformation lente à chaud, les mécanismes de fluage et les bases de la tenue en service."
+    },
+    {
+      "id": "brasage",
+      "titre": "Brasage fort et brasage tendre",
+      "description": "Comprendre le mouillage et la capillarité, préparer les surfaces et choisir les flux, atmosphères et métaux d’apport."
     }
   ],
   "parcours": [

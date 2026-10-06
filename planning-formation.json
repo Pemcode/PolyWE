@@ -257,7 +257,14 @@
       "titre": "Brasage",
       "theme": "procedes",
       "code": "1.16",
-      "supports": []
+      "supports": [
+        {
+          "cours": "brasage-01"
+        },
+        {
+          "cours": "brasage-02"
+        }
+      ]
     },
     {
       "id": "1-9-soudage-a-lelectrode-enrobee",
@@ -365,7 +372,11 @@
       "titre": "Acier résistant au fluage",
       "theme": "metallurgie",
       "code": "2.12",
-      "supports": []
+      "supports": [
+        {
+          "cours": "fluage-01"
+        }
+      ]
     },
     {
       "id": "2-19-nickel",

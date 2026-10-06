@@ -982,6 +982,13 @@ function txs(p,x,y,parts,attrs){/* parts: [["σ",""],["max","sub"],[" = 3",""]] 
   return t;
 }
 function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild);}
+function fitText(t,x0,x1,gap){/* garde un texte SVG entre x0 et x1 : il passe de l'autre côté de son repère (écart gap), sinon il glisse */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const a=t.getAttribute("text-anchor")||"start",x=+t.getAttribute("x");
+  if(gap&&a!=="middle"&&(b.x<x0||b.x+b.width>x1)){t.setAttribute("text-anchor",a==="end"?"start":"end");t.setAttribute("x",a==="end"?x+2*gap:x-2*gap);b=t.getBBox();}
+  const nx=+t.getAttribute("x");
+  if(b.x+b.width>x1)t.setAttribute("x",nx-(b.x+b.width-x1));else if(b.x<x0)t.setAttribute("x",nx+(x0-b.x));
+  return t;}
 function arrow(p,x1,y1,x2,y2,color,w,h){
   w=w||2.4;h=h||10;
   const g=el("g",{class:"arr"},p);g.style.color=color||"var(--ink)";
@@ -1116,9 +1123,9 @@ function animate(btn,label,dur,onStep,onEnd){
     txs(svg,gx0+4,gy0-10,[["K",""],["C","sub"],[" (MPa·√m)",""]],{class:"lbl"});
     const X=ax.X,Y=ax.Y;
     el("line",{x1:gx0,y1:Y(m.K),x2:gx1,y2:Y(m.K),stroke:"var(--mat)","stroke-width":1.6,"stroke-dasharray":"6 4"},svg);
-    txs(svg,gx1-4,Y(m.K)-6,[["K",""],["IC","sub"],[" = "+m.K,""]],{"font-size":"12",fill:"var(--mat)","text-anchor":"end"});
+    txs(svg,gx0+6,Y(m.K)-6,[["K",""],["IC","sub"],[" = "+m.K,""]],{"font-size":"12",fill:"var(--mat)"});
     if(Bstar>1&&Bstar<316){el("line",{x1:X(Math.log10(Bstar)),y1:gy0,x2:X(Math.log10(Bstar)),y2:gy1,stroke:"var(--gam)","stroke-width":1.4,"stroke-dasharray":"4 3"},svg);
-      tx(svg,X(Math.log10(Bstar))+4,gy0+12,"B* = "+nf(Bstar,0)+" mm",{"font-size":"11.5",fill:"var(--gam)"});}
+      fitText(tx(svg,X(Math.log10(Bstar))+4,gy0+12,"B* = "+nf(Bstar,0)+" mm",{"font-size":"11.5",fill:"var(--gam)"}),gx0+4,gx1-2,4);}
     else if(Bstar>=316)tx(svg,gx1-4,gy0+12,"B* = "+nf(Bstar,0)+" mm, hors cadre",{"font-size":"11.5",fill:"var(--gam)","text-anchor":"end"});
     let d="";for(let i=0;i<=120;i++){const lb=2.5*i/120;d+=(i?"L":"M")+X(lb).toFixed(1)+" "+Y(KC(m,Math.pow(10,lb))).toFixed(1)+" ";}
     el("path",{d:d,fill:"none",stroke:"var(--sig)","stroke-width":2.8},svg);
@@ -1127,11 +1134,11 @@ function animate(btn,label,dur,onStep,onEnd){
     const cx0=narrow?20:W*0.62,cw=narrow?W-40:W*0.36,cy0=narrow?gy1+70:60,ch=narrow?150:180;
     tx(svg,cx0,cy0-14,"La cassure vue dans l'épaisseur",{class:"ttl"});
     const sc=cw/B,lip=Math.min(B/2,rps),full=lip>=B/2-1e-6;
-    const lw=lip*sc;
+    const lw=lip*sc,rise=lw*Math.min(0.9,(ch*0.45-8)/(cw/2));
     el("rect",{x:cx0,y:cy0,width:cw,height:ch,fill:"color-mix(in srgb, var(--ink) 12%, var(--card))",stroke:"var(--ink)","stroke-width":1.5},svg);
     if(!full)el("rect",{x:cx0+lw,y:cy0+ch*0.45,width:cw-2*lw,height:4,fill:"var(--eps)"},svg);
-    [[cx0,1],[cx0+cw,-1]].forEach(e=>{const x=e[0],sg=e[1];el("polygon",{points:x+","+(cy0+ch*0.45-lw*0.9)+" "+(x+sg*lw)+","+(cy0+ch*0.45)+" "+(x+sg*lw)+","+(cy0+ch*0.45+4)+" "+x+","+(cy0+ch*0.45+4-lw*0.9),fill:"var(--gam)",opacity:.75},svg);});
-    tx(svg,cx0+cw/2,cy0+ch*0.45-10,full?"cassure entièrement oblique":"zone plate (déformation plane)",{"font-size":"11.5","text-anchor":"middle",fill:"var(--eps)"});
+    [[cx0,1],[cx0+cw,-1]].forEach(e=>{const x=e[0],sg=e[1];el("polygon",{points:x+","+(cy0+ch*0.45-rise)+" "+(x+sg*lw)+","+(cy0+ch*0.45)+" "+(x+sg*lw)+","+(cy0+ch*0.45+4)+" "+x+","+(cy0+ch*0.45+4-rise),fill:"var(--gam)",opacity:.75},svg);});
+    tx(svg,cx0+cw/2,cy0+ch*0.45+(full?24:-10),full?"cassure entièrement oblique":"zone plate (déformation plane)",{"font-size":"11.5","text-anchor":"middle",fill:"var(--eps)"});
     tx(svg,cx0+4,cy0+ch-8,"lèvres : "+nf(lip,lip<1?2:1)+" mm de chaque côté",{"font-size":"11.5",fill:"var(--gam)"});
     darrow(svg,cx0+cw+0,cy0,cy0,"var(--ink)",1);
     el("line",{x1:cx0,y1:cy0+ch+12,x2:cx0+cw,y2:cy0+ch+12,stroke:"var(--ink)","stroke-width":1},svg);tx(svg,cx0+cw/2,cy0+ch+26,"B = "+nf(B,B<10?1:0)+" mm",{"font-size":"12","text-anchor":"middle"});
@@ -1180,11 +1187,13 @@ function animate(btn,label,dur,onStep,onEnd){
     for(let i=0;i<=200;i++){const F=Fn*i/200;d+=(i?"L":"M")+X(t.del(F)).toFixed(1)+" "+Y(F/1000).toFixed(1)+" ";}
     if(prog>=1&&!t.collapse){d+=" L"+X(t.del(t.Fend)*1.02).toFixed(1)+" "+Y(t.Fend/1000*0.25).toFixed(1);}
     el("path",{d:d,fill:"none",stroke:"var(--frc)","stroke-width":2.8},svg);
-    el("line",{x1:X(0),y1:Y(0),x2:X(dmax*0.97),y2:Y(dmax*0.97/t.C/1000),stroke:"var(--muted)","stroke-width":1.2,"stroke-dasharray":"2 4"},svg);
+    const d0=Math.min(dmax*0.97,t.C*fmax*1000*0.98);/* pente initiale arrêtée sous le haut du graphique */
+    el("line",{x1:X(0),y1:Y(0),x2:X(d0),y2:Y(d0/t.C/1000),stroke:"var(--muted)","stroke-width":1.2,"stroke-dasharray":"2 4"},svg);
     if(prog>=1){
       const ds=Math.min(dmax*0.97,t.C*fmax*1000/0.95*0.98);el("line",{x1:X(0),y1:Y(0),x2:X(ds),y2:Y(ds*0.95/t.C/1000),stroke:"var(--mat)","stroke-width":1.6,"stroke-dasharray":"6 4"},svg);
       el("circle",{cx:X(t.del(t.FQ)),cy:Y(t.FQ/1000),r:6,fill:"var(--mat)",stroke:"var(--card)","stroke-width":2},svg);
-      txs(svg,X(t.del(t.FQ))+8,Y(t.FQ/1000)+16,[["F",""],["Q","sub"],[" = "+nf(t.FQ/1000,1)+" kN",""]],{"font-size":"12",fill:"var(--mat)","font-weight":"700"});
+      const fq=fitText(txs(svg,X(t.del(t.FQ))+8,Y(t.FQ/1000)+16,[["F",""],["Q","sub"],[" = "+nf(t.FQ/1000,1)+" kN",""]],{"font-size":"12",fill:"var(--mat)","font-weight":"700"}),gx0+4,gx1-2,8);
+      if(fq.getAttribute("text-anchor")==="end"){fq.setAttribute("x",X(t.del(t.FQ))-18);fq.setAttribute("y",Y(t.FQ/1000)-10);}
       if(t.ratio>1.005){el("line",{x1:gx0,y1:Y(t.Fend/1000),x2:X(t.del(t.Fend)),y2:Y(t.Fend/1000),stroke:"var(--frc)","stroke-width":1,"stroke-dasharray":"3 3"},svg);
         txs(svg,gx0+4,Y(t.Fend/1000)-5,[["F",""],["max","sub"],[" = "+nf(t.Fend/1000,1)+" kN",""]],{"font-size":"12",fill:"var(--frc)"});}
       tx(svg,X(t.del(t.Fend)),Y(t.Fend/1000)-10,t.collapse?"plastification":"💥",{"font-size":t.collapse?"11.5":"15","text-anchor":"middle",fill:"var(--frc)"});}
@@ -1234,8 +1243,8 @@ function animate(btn,label,dur,onStep,onEnd){
     el("line",{x1:X(0),y1:Y(0),x2:X(1.15),y2:Y(1.15/C1),stroke:"var(--muted)","stroke-width":1,"stroke-dasharray":"2 4"},svg);
     el("line",{x1:X(0),y1:Y(0),x2:X(F2*C2),y2:Y(F2),stroke:"var(--muted)","stroke-width":1,"stroke-dasharray":"2 4"},svg);
     [["O",0,0,-12,14],["A",A[0],A[1],-4,-8],["B",B[0],B[1],6,mode==="F"?-8:14]].forEach(l=>tx(svg,X(l[1])+l[3],Y(l[2])+l[4],l[0],{class:"mth"}));
-    tx(svg,X(0.45)-6,Y(0.45/C1)-6,"pente 1/C₁ (fissure a)",{"font-size":"11",fill:"var(--muted)","text-anchor":"end"});
-    if(k>0.05)tx(svg,X(0.7*C2)+8,Y(0.7)+14,"pente 1/C₂ (a + δa)",{"font-size":"11",fill:"var(--muted)"});
+    const uL=narrow?0.85:0.45;fitText(tx(svg,X(uL)-6,Y(uL/C1)-6,"pente 1/C₁ (fissure a)",{"font-size":"11",fill:"var(--muted)","text-anchor":"end"}),gx0+4,gx1);
+    if(k>0.05)fitText(tx(svg,X(0.45*C2)+8,Y(0.45)+14,"pente 1/C₂ (a + δa)",{"font-size":"11",fill:"var(--muted)"}),gx0+4,gx1);
     const area=0.5*Math.abs(A[0]*B[1]-B[0]*A[1]);
     /* --- énergies des matériaux --- */
     const bx0=narrow?110:W*0.6+90,bx1=W-50,by0=narrow?gy1+70:54,lmin=0,lmax=5;
@@ -1299,7 +1308,7 @@ function animate(btn,label,dur,onStep,onEnd){
     el("path",{d:dr,fill:"none",stroke:"var(--eps)","stroke-width":2.6},svg);
     const bl=x=>2*m.Re*x;el("line",{x1:X(0),y1:Y(0),x2:X(Math.min(2,jm/(2*m.Re))),y2:Y(bl(Math.min(2,jm/(2*m.Re)))),stroke:"var(--muted)","stroke-width":1.4},svg);
     const xe=Math.min(2,0.2+jm/(2*m.Re));el("line",{x1:X(0.2),y1:Y(0),x2:X(xe),y2:Y(bl(xe-0.2)),stroke:"var(--mat)","stroke-width":1.6,"stroke-dasharray":"6 4"},svg);
-    tx(svg,X(0.2)+6,gy1-22,"0,2 mm",{"font-size":"11",fill:"var(--mat)"});
+    fitText(tx(svg,X(xe)+6,Y(bl(xe-0.2))+12,"décalée de 0,2 mm",{"font-size":"11",fill:"var(--mat)"}),gx0+4,gx1-2,6);
     el("circle",{cx:X(jc.da),cy:Y(jc.J),r:6,fill:"var(--mat)",stroke:"var(--card)","stroke-width":2},svg);
     txs(svg,X(jc.da)+8,Y(jc.J)+16,[["J",""],["IC","sub"],[" = "+nf(jc.J,0),""]],{"font-size":"12",fill:"var(--mat)","font-weight":"700"});
     if(J<jm){el("line",{x1:gx0,y1:Y(J),x2:gx1,y2:Y(J),stroke:"var(--sig)","stroke-width":1.4,"stroke-dasharray":"3 3"},svg);
@@ -1341,8 +1350,8 @@ function animate(btn,label,dur,onStep,onEnd){
     let dl="";for(let i=0;i<=120;i++){const L2=LRMAX*i/120;dl+=(i?"L":"M")+X(L2).toFixed(1)+" "+Y(fal(L2)).toFixed(1)+" ";}dl+=" L"+X(LRMAX)+" "+Y(0);
     el("path",{d:dl,fill:"none",stroke:"var(--ink)","stroke-width":2.6},svg);
     tx(svg,X(0.06),Y(1.03)-6,"ligne d'évaluation",{"font-size":"11.5"});
-    txs(svg,X(LRMAX)+4,Y(0.08),[["L",""],["r,max","sub"],[" = "+nf(LRMAX,2),""]],{"font-size":"11.5"});
-    tx(svg,X(0.3),Y(0.1),"zone acceptable",{"font-size":"13",fill:"var(--gam)","font-weight":"700","text-anchor":"middle"});
+    fitText(txs(svg,X(LRMAX)+4,Y(0.08),[["L",""],["r,max","sub"],[" = "+nf(LRMAX,2),""]],{"font-size":"11.5"}),x0+4,x1-2,4);
+    fitText(tx(svg,X(0.3),Y(0.1),"zone acceptable",{"font-size":"13",fill:"var(--gam)","font-weight":"700","text-anchor":"middle"}),x0+4,x1-2);
     tx(svg,X(1.3),Y(1.25),"défaillance",{"font-size":"13",fill:"var(--sig)","font-weight":"700","text-anchor":"middle"});
     /* droite de chargement : origine en (0, Ks/Kmat), passe par le point */
     const k0=p.Ks/Km,pc=pt(a,sp*L,Km);

@@ -1107,6 +1107,13 @@ function txs(p,x,y,parts,attrs){/* parts: [["σ",""],["max","sub"],[" = 3",""]] 
   return t;
 }
 function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild);}
+function fitText(t,x0,x1,gap){/* garde un texte SVG entre x0 et x1 : il passe de l'autre côté de son repère (écart gap), sinon il glisse */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const a=t.getAttribute("text-anchor")||"start",x=+t.getAttribute("x");
+  if(gap&&a!=="middle"&&(b.x<x0||b.x+b.width>x1)){t.setAttribute("text-anchor",a==="end"?"start":"end");t.setAttribute("x",a==="end"?x+2*gap:x-2*gap);b=t.getBBox();}
+  const nx=+t.getAttribute("x");
+  if(b.x+b.width>x1)t.setAttribute("x",nx-(b.x+b.width-x1));else if(b.x<x0)t.setAttribute("x",nx+(x0-b.x));
+  return t;}
 function arrow(p,x1,y1,x2,y2,color,w,h){
   w=w||2.4;h=h||10;
   const g=el("g",{class:"arr"},p);g.style.color=color||"var(--ink)";
@@ -1456,7 +1463,7 @@ function polyD(pts){return pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].t
   const dOf=v=>10*Math.pow(20,v/100),sOf=v=>8+40*v/100;
   function draw(){
     const W=svgW(svg),v=+sl.value,d=dOf(v),s=sOf(v);
-    const H1=W<520?190:210,H2=W<520?150:160,gap=48,H=26+H1+gap+H2+16;setVB(svg,W,H);clear(svg);
+    const H1=W<520?190:210,H2=W<520?150:160,gap=48,H=26+H1+gap+H2+24;setVB(svg,W,H);clear(svg);
     const y1=26,y2=26+H1+gap;
     tx(svg,0,16,"Coupe : la fissure traverse les grains",{class:"ttl"});
     tx(svg,0,y2-12,"La cassure vue de face : facettes et rivières",{class:"ttl"});
@@ -1494,8 +1501,9 @@ function polyD(pts){return pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].t
           el("path",{d:"M"+xs.toFixed(1)+" "+ys.toFixed(1)+" Q"+(h.x).toFixed(1)+" "+(ys*0.6+ye*0.4).toFixed(1)+" "+xe.toFixed(1)+" "+ye.toFixed(1),fill:"none",stroke:"var(--card)","stroke-width":1,opacity:.75},gf);}
       }else{el("line",{x1:h.x-0.6*s,y1:h.y,x2:h.x+0.6*s,y2:h.y,stroke:"var(--card)","stroke-width":1,opacity:.6},gf);}
     });
-    arrow(g2,W/2-40,H2+10,W/2+40,H2+10,"var(--eps)",2,8);
-    tx(g2,W/2+48,H2+14,"sens de propagation",{class:"lbl"});
+    const ac=W<440?W/2-60:W/2;/* sur téléphone, flèche décalée pour laisser la place au texte */
+    arrow(g2,ac-40,H2+10,ac+40,H2+10,"var(--eps)",2,8);
+    tx(g2,ac+48,H2+14,"sens de propagation",{class:"lbl"});
     /* --- lectures --- */
     const umPx=d/(1.36*s),wmm=W*umPx/1000,perMm=path.n/wmm,tort=path.len/W;/* d = intercept moyen d'un hexagone de côté s (≈ 1,36 s) */
     so.textContent="≈ "+nf(d,0)+" µm";
@@ -1546,7 +1554,7 @@ function polyD(pts){return pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].t
     el("path",{d:polyD(win),fill:"none",stroke:"var(--eps)","stroke-width":3.4,"stroke-linejoin":"round","clip-path":"url(#m4c2)"},svg);
     /* barres d'énergie */
     const by=H1+30,bx0=0,bx1=W-44,emax=Math.max(Et,zz.len*1.5)*1.02,BW=v=>(bx1-bx0)*v/emax;
-    tx(svg,0,by-8,"Énergie dépensée pour traverser la bande (unités arbitraires)",{class:"lbl"});
+    tx(svg,0,by-8,W<440?"Énergie dépensée (unités arbitraires)":"Énergie dépensée pour traverser la bande (unités arbitraires)",{class:"lbl"});
     [[Et,"à travers les grains (clivage + ressauts)",!inter,0],[Ei,"le long des joints",inter,1]].forEach(b=>{const yy=by+8+b[3]*44;
       tx(svg,0,yy+10,b[1],{"font-size":"12",fill:b[2]?"var(--eps)":"var(--muted)","font-weight":b[2]?"700":"400"});
       el("rect",{x:bx0,y:yy+15,width:BW(b[0]),height:16,rx:3,fill:b[2]?"var(--eps)":"var(--muted)",opacity:b[2]?.8:.4},svg);
@@ -1583,7 +1591,7 @@ function polyD(pts){return pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].t
   function eps(){return EMAX*(+sl.value)/1000;}
   function draw(){
     const W=svgW(svg),narrow=W<560,e=eps(),broken=e>=er();
-    const spW=narrow?84:140,win=Math.min(W-spW-16,narrow?300:330),H=win+70;setVB(svg,W,H);clear(svg);
+    const spW=narrow?84:140,win=Math.min(W-spW-28,narrow?300:330),H=win+70;setVB(svg,W,H);clear(svg);
     const g=e>EN?Math.exp(cG()*(e-EN)):1,Gc=gc(),fr=e>EN?Math.min(1,Math.log(g)/Math.log(Gc)):0;
     /* ---- éprouvette et col ---- */
     const cx=spW/2,top=40,bot=H-28,ym=(top+bot)/2,w0=narrow?30:40,hw=w0/2;
@@ -1604,7 +1612,7 @@ function polyD(pts){return pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].t
     el("line",{x1:cx+5,y1:ym-5,x2:wx,y2:wy,stroke:"var(--eps)","stroke-width":1,"stroke-dasharray":"3 3"},svg);
     el("line",{x1:cx+5,y1:ym+5,x2:wx,y2:wy+win,stroke:"var(--eps)","stroke-width":1,"stroke-dasharray":"3 3"},svg);
     /* ---- fenêtre microscopique ---- */
-    tx(svg,wx,20,broken?"La cassure vue de face : des cupules":"Au centre du col (schéma, cavités grossies)",{class:"ttl"});
+    tx(svg,wx,20,broken?"La cassure vue de face : des cupules":(W<440?"Centre du col (grossi)":"Au centre du col (schéma, cavités grossies)"),{class:"ttl"});
     const clip=el("clipPath",{id:"m5clip"},svg);el("rect",{x:wx,y:wy,width:win,height:win},clip);
     el("rect",{x:wx,y:wy,width:win,height:win,fill:broken?"#aeb5bb":"var(--card)",stroke:"var(--ink)","stroke-width":1.6},svg);
     const gw=el("g",{"clip-path":"url(#m5clip)"},svg);
