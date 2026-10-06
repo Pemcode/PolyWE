@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brasage, cours 3 : chauffer et exécuter, procédés et mode opératoire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F6F9; --paper-2:#E6ECF2; --card:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#C5CFD9;
+  --grid:rgba(40,90,160,.075);
+  --sig:#CF2438; --tau:#8A34B6; --eps:#1B5ED3; --gam:#06849A; --frc:#D46A00; --mat:#26844A; --weld:#9A5B12;
+  --ok:#26844A; --warn:#B86E00; --bad:#C62828;
+  --lv2:#E4EBF2; --hl:#FFF3B0;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-head:"Barlow Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+  --font-math:"STIX Two Text","Cambria Math","Cambria","Times New Roman",serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+    --grid:rgba(120,160,220,.07);
+    --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+    --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+  --grid:rgba(120,160,220,.07);
+  --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+  --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+  color-scheme: dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;color:var(--ink);font-family:var(--font-body);font-size:17.5px;line-height:1.62;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;overflow-x:hidden;
+}
+img,svg{max-width:100%}
+.wrap{max-width:800px;margin:0 auto;padding:0 20px}
+.wide{max-width:980px}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.1;margin:0}
+h3{font-size:1.65rem;font-weight:600;margin:2rem 0 .6rem}
+h4{font-size:1.3rem;font-weight:600;margin:1.4rem 0 .4rem}
+p{margin:.7em 0}
+a{color:var(--eps)}
+b,strong{font-weight:700}
+small{font-size:.8em}
+sub{font-size:.72em}
+.m{font-family:var(--font-math);font-size:1.08em;white-space:nowrap}
+.sig{color:var(--sig)} .tau{color:var(--tau)} .eps{color:var(--eps)} .gam{color:var(--gam)} .frc{color:var(--frc)} .mat{color:var(--mat)} .mut{color:var(--muted)} .wcol{color:var(--weld)}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .12em;line-height:1.1}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .2em .08em}
+.frac>span:last-child{padding:.08em .2em 0}
+ul,ol{padding-left:1.4em}
+li{margin:.25em 0}
+
+/* ---------- en-tête ---------- */
+.hero{padding:34px 0 10px}
+.title-block{border:2.5px solid var(--ink);background:var(--card);display:grid;grid-template-columns:1fr 300px}
+.tb-main{padding:22px 24px;border-right:2.5px solid var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.tb-series{margin:0 0 .5rem;color:var(--muted);font-size:.95rem}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:700;letter-spacing:-.01em}
+.tb-cells{display:grid;grid-template-rows:repeat(4,auto)}
+.tb-cells>div{padding:9px 16px;border-bottom:1.5px solid var(--ink);display:flex;flex-direction:column;justify-content:center}
+.tb-cells>div:last-child{border-bottom:0}
+.tb-cells small{color:var(--muted);font-size:.78rem}
+.tb-cells b{font-family:var(--font-head);font-size:1.25rem;font-weight:600;line-height:1.15}
+.lede{font-size:1.13rem;max-width:760px;margin:1.2rem 0}
+.theme-btn{align-self:flex-start;font-family:var(--font-body);font-size:.85rem;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
+@media (max-width:760px){.title-block{grid-template-columns:1fr}.tb-main{border-right:0;border-bottom:2.5px solid var(--ink)}.tb-cells{grid-template-rows:none;grid-template-columns:1fr 1fr}.tb-cells>div:nth-child(odd){border-right:1.5px solid var(--ink)}.tb-cells>div:nth-child(3){border-bottom:0}}
+@media (max-width:420px){.tb-cells{grid-template-columns:1fr}.tb-cells>div:nth-child(odd){border-right:0}.tb-cells>div:nth-child(3){border-bottom:1.5px solid var(--ink)}}
+
+/* code couleur */
+.cc{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin:1rem 0 .4rem}
+.cc-box{background:var(--card);border:2px solid var(--line);padding:12px 14px;border-radius:4px}
+.cc-cause{border-color:var(--sig)} .cc-link{border-color:var(--mat)} .cc-eff{border-color:var(--eps)}
+.cc-box small{display:block;color:var(--muted);font-size:.82rem;line-height:1.3}
+.cc-syms{font-family:var(--font-math);font-size:1.7rem;line-height:1.25;display:flex;flex-wrap:wrap;gap:.1em .45em;margin:.2rem 0}
+.cc-box p{margin:0;font-size:.9rem;line-height:1.35}
+.cc-arrow{align-self:center;font-size:1.8rem;color:var(--muted)}
+@media (max-width:700px){.cc{grid-template-columns:1fr}.cc-arrow{transform:rotate(90deg);justify-self:center;line-height:1}}
+.cc-more{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.5rem 0}
+.cc-more>div{border:2px solid var(--line);background:var(--card);border-radius:4px;padding:6px 10px;font-size:.9rem}
+@media (max-width:640px){.cc-more{grid-template-columns:1fr}}
+
+/* ---------- sommaire ---------- */
+.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1.5px solid var(--line);padding-top:env(safe-area-inset-top,0px);margin-top:18px}
+.toc-in{display:flex;gap:6px;overflow-x:auto;padding:9px 20px;max-width:980px;margin:0 auto;scrollbar-width:thin}
+.toc a{flex:none;text-decoration:none;color:var(--ink);font-size:.88rem;padding:4px 11px;border:1.5px solid var(--line);border-radius:999px;background:var(--card);white-space:nowrap}
+.toc a.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.toc a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--eps);outline-offset:2px}
+
+/* ---------- sections ---------- */
+section.chap{padding:46px 0 10px}
+.cartouche{display:grid;grid-template-columns:86px 1fr 250px;border:2.5px solid var(--ink);background:var(--card);margin-bottom:1.4rem}
+.c-num{font-family:var(--font-head);font-size:3.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;border-right:2.5px solid var(--ink)}
+.c-title{padding:14px 18px;border-right:2.5px solid var(--ink)}
+.c-title h2{font-size:2.1rem;font-weight:700}
+.c-title p{margin:.25rem 0 0;color:var(--muted)}
+.c-img{padding:12px 14px;display:flex;gap:12px;align-items:center;background:var(--paper-2)}
+.c-img .ico{font-size:2.3rem;line-height:1}
+.c-img small{display:block;color:var(--muted);font-size:.78rem}
+.c-img span{font-size:.95rem;line-height:1.3}
+@media (max-width:700px){.cartouche{grid-template-columns:64px 1fr}.c-num{font-size:2.6rem}.c-title{border-right:0}.c-img{grid-column:1/-1;border-top:2px solid var(--ink)}.c-title h2{font-size:1.7rem}}
+
+/* niveaux */
+.lv{margin:1.2rem 0;padding:6px 22px 14px;border-radius:4px}
+.lv1{background:var(--card);border:2px solid var(--ink)}
+.lv2{background:var(--lv2);border-left:6px solid var(--ink)}
+.lv-h{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-family:var(--font-head);font-size:1.35rem;font-weight:600;margin:10px 0 4px}
+.lv-h .tag{font-size:.95rem;font-family:var(--font-body);font-weight:400;color:var(--muted)}
+@media (max-width:520px){.lv{padding:6px 14px 12px}}
+
+/* formules et encadrés */
+.fx{margin:1.1rem auto;background:var(--card);border:2.5px solid var(--ink);padding:14px 18px;max-width:600px;text-align:center;border-radius:3px;overflow-x:auto}
+.fx .big{font-family:var(--font-math);font-size:1.9rem;line-height:1.4}
+.fx .cap{font-size:.85rem;color:var(--muted);margin:.3rem 0 0}
+.fx .row{display:flex;flex-wrap:wrap;justify-content:center;gap:.2em 1.4em}
+.syms{margin:.6rem 0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;align-items:baseline}
+.syms dt{font-family:var(--font-math);font-size:1.25rem;text-align:right;white-space:nowrap}
+.syms dd{margin:0}
+.def{margin:.9rem 0;padding:.5rem .9rem;border-left:3px dotted var(--muted);font-size:.96rem;background:color-mix(in srgb,var(--card) 60%,transparent)}
+.def>b:first-child{font-family:var(--font-head);font-size:1.08rem;font-weight:600}
+.tip{margin:1rem 0;padding:.7rem 1rem;border:1.5px dashed var(--mat);border-radius:4px;font-size:.97rem}
+.warn{margin:1rem 0;padding:.7rem 1rem;border:2px solid var(--bad);border-radius:4px;font-size:.97rem;background:color-mix(in srgb,var(--bad) 7%,transparent)}
+.mnemo{margin:1rem 0;padding:.7rem 1rem;background:var(--hl);border-radius:4px;font-size:.98rem}
+.meta{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--frc);border-radius:4px;background:color-mix(in srgb,var(--frc) 6%,transparent)}
+.weld{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--weld);border-radius:4px;background:color-mix(in srgb,var(--weld) 7%,transparent)}
+.weld>b:first-child{font-family:var(--font-head);font-size:1.15rem;font-weight:600;color:var(--weld)}
+.hp{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:9px;background:var(--weld);color:var(--card);vertical-align:middle;margin-left:4px;white-space:nowrap}
+.recall{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
+.recall>div{background:var(--card);border:1.5px solid var(--line);border-radius:4px;padding:8px 12px;font-size:.92rem}
+.recall .f{font-family:var(--font-math);font-size:1.2rem;margin-bottom:.2rem}
+@media (max-width:640px){.recall{grid-template-columns:1fr}}
+.hist{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1rem 0}
+.hist>div{background:var(--card);border:1.5px solid var(--weld);border-radius:4px;padding:8px 12px;font-size:.93rem}
+.hist .yr{font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--weld);line-height:1}
+@media (max-width:720px){.hist{grid-template-columns:1fr}}
+
+/* manipulations */
+.lab{background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:14px 16px 12px;margin:1.4rem 0}
+.lab-h{font-family:var(--font-head);font-size:1.3rem;font-weight:600;margin:0 0 .2rem}
+.lab-sub{margin:0 0 .6rem;color:var(--muted);font-size:.92rem}
+.lab svg{display:block;width:100%;height:auto;color:var(--ink);font-family:var(--font-body);touch-action:pan-y}
+.ctrl{display:grid;grid-template-columns:minmax(110px,auto) 1fr minmax(92px,auto);gap:4px 12px;align-items:center;margin:.5rem 0}
+.ctrl label{font-size:.95rem}
+.ctrl output{font-family:var(--font-math);font-size:1.08rem;text-align:right;white-space:nowrap}
+@media (max-width:520px){.ctrl{grid-template-columns:1fr auto}.ctrl input[type=range]{grid-column:1/-1;grid-row:2}}
+input[type=range]{width:100%;accent-color:var(--ink);height:28px;margin:0}
+input.r-sig{accent-color:var(--sig)} input.r-tau{accent-color:var(--tau)} input.r-frc{accent-color:var(--frc)} input.r-mat{accent-color:var(--mat)} input.r-eps{accent-color:var(--eps)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0}
+.btn{font-family:var(--font-body);font-size:.9rem;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 13px;cursor:pointer;line-height:1.3}
+.btn:hover{background:var(--paper-2)}
+.btn.on{background:var(--ink);color:var(--paper)}
+.btn.play{border-color:var(--eps);color:var(--eps);font-weight:700}
+.btn:disabled{opacity:.45;cursor:default}
+.readout{font-family:var(--font-math);font-size:1.08rem;background:var(--paper-2);border-radius:4px;padding:.5rem .8rem;margin:.5rem 0;overflow-x:auto;display:flex;flex-wrap:wrap;gap:.2em 1.3em}
+.readout>span{white-space:nowrap}
+.status{font-size:.97rem;margin:.5rem 0;padding:.5rem .8rem;border-left:4px solid var(--eps);background:color-mix(in srgb,var(--eps) 6%,transparent);border-radius:0 4px 4px 0;min-height:2.6em}
+.radios{display:flex;flex-wrap:wrap;gap:6px 14px;margin:.4rem 0;font-size:.95rem}
+.radios label{display:inline-block;cursor:pointer}
+.radios input{margin:0 6px 0 0;vertical-align:middle}
+
+/* svg */
+svg text{fill:currentColor;font-size:13px}
+svg .lbl{font-size:12.5px;fill:var(--muted)}
+svg .mth{font-family:var(--font-math);font-size:16px}
+svg .ttl{font-family:var(--font-head);font-size:15px;font-weight:600}
+svg .axis{stroke:var(--ink);stroke-width:1.4;fill:none}
+svg .tick{stroke:var(--muted);stroke-width:1}
+svg .gridbg{stroke:var(--line);stroke-width:1}
+svg .ref{stroke:var(--muted);stroke-width:1.3;stroke-dasharray:4 3;fill:none}
+.arr line{stroke:currentColor}
+.arr polygon{fill:currentColor}
+
+/* tableaux */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;-webkit-overflow-scrolling:touch}
+table.data{border-collapse:collapse;width:100%;font-size:.94rem;background:var(--card)}
+table.data th,table.data td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:middle}
+table.data th{font-family:var(--font-head);font-weight:600;font-size:1.05rem;background:var(--paper-2)}
+table.data td.n{font-family:var(--font-math);white-space:nowrap}
+table.data tr.now td{background:var(--hl)}
+
+/* parcours */
+.route{list-style:none;padding:0;margin:1rem 0;position:relative}
+.route::before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:4px;background:var(--line);border-radius:2px}
+.route li{position:relative;padding:0 0 14px 52px;margin:0}
+.route li .dot{position:absolute;left:4px;top:0;width:30px;height:30px;border-radius:50%;border:3px solid var(--ink);background:var(--card);font-family:var(--font-head);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+.route li b{font-family:var(--font-head);font-size:1.2rem;font-weight:600}
+.route li p{margin:.1rem 0 0;font-size:.95rem}
+.series{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:.8rem 0}
+.series>div{background:var(--card);border:1.5px solid var(--line);padding:8px 10px;border-radius:4px;font-size:.88rem}
+.series>div.here{border:2.5px solid var(--ink)}
+.series b{display:block;font-family:var(--font-head);font-size:1.05rem}
+@media (max-width:700px){.series{grid-template-columns:1fr 1fr}}
+
+/* exercices et quiz */
+.exo{background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--ink);padding:6px 20px 12px;margin:1.2rem 0;border-radius:4px}
+.exo.defi{border-left-color:var(--weld)}
+.exo h4{margin-top:.8rem}
+.exo .lvtag{font-family:var(--font-body);font-size:.85rem;font-weight:400;color:var(--muted);margin-left:.4rem}
+.exo .q{margin:.25rem 0}
+details{margin:.6rem 0}
+summary{cursor:pointer;font-weight:700;padding:4px 0}
+details .sol{padding:.4rem .9rem;border-left:3px solid var(--mat);margin:.4rem 0}
+details .sol p{margin:.45em 0}
+.qz{background:var(--card);border:1.5px solid var(--line);border-radius:6px;padding:10px 16px;margin:.8rem 0}
+.qz-q{margin:.3rem 0 .6rem}
+.qz-o{display:flex;flex-direction:column;gap:6px}
+.qz-b{text-align:left;font-family:var(--font-body);font-size:.97rem;padding:8px 12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:5px;cursor:pointer}
+.qz-b:hover{border-color:var(--ink)}
+.qz-b.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}
+.qz-b.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.qz-e{font-size:.94rem;margin:.6rem 0 .2rem}
+.score{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);display:inline-block;background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:999px;font-size:.95rem;margin:.6rem 0}
+
+/* fiche mémoire */
+.fiche{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2.5px solid var(--ink);background:var(--card);margin:1rem 0}
+.fiche>div{padding:12px 14px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.fiche>div:nth-child(3n){border-right:0}
+.fiche>div:nth-last-child(-n+3){border-bottom:0}
+.fiche .ic{font-size:1.9rem;line-height:1}
+.fiche h4{margin:.3rem 0 .2rem;font-size:1.15rem}
+.fiche .f{font-family:var(--font-math);font-size:1.1rem;margin:.2rem 0}
+.fiche p{margin:.2rem 0 0;font-size:.88rem;color:var(--muted)}
+@media (max-width:720px){.fiche{grid-template-columns:1fr 1fr}.fiche>div{border-right:1.5px solid var(--ink)!important;border-bottom:1.5px solid var(--ink)!important}.fiche>div:nth-child(2n){border-right:0!important}.fiche>div:last-child{border-bottom:0!important}}
+@media (max-width:440px){.fiche{grid-template-columns:1fr}.fiche>div{border-right:0!important}}
+.gloss{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:0;border-top:1.5px solid var(--line);margin:1rem 0}
+.gloss dt,.gloss dd{border-bottom:1.5px solid var(--line);padding:7px 8px;margin:0}
+.gloss dt{font-weight:700}
+.gloss dd{font-size:.95rem}
+@media (max-width:600px){.gloss{grid-template-columns:1fr}.gloss dt{border-bottom:0;padding-bottom:0}}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.check input{margin-top:.35em;width:18px;height:18px;accent-color:var(--mat);flex:none}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem}
+hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
+@media (max-width:700px){.m{white-space:normal}.fx{padding:12px 10px}.fx .big{font-size:1.4rem}}
+@media (max-width:400px){body{font-size:16.5px}.wrap{padding:0 14px}.lab{padding:12px 10px}}
+
+/* compléments de la série Rupture */
+.btn.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
+.btn.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+.ctrl[hidden]{display:none}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap wide">
+  <div class="title-block">
+    <div class="tb-main">
+      <div>
+        <p class="tb-series">Brasage fort et brasage tendre, série 1.16 : de la goutte qui mouille au joint qualifié</p>
+        <h1>Chauffer et exécuter : les procédés de brasage et le mode opératoire</h1>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Changer de thème">◐ Thème : automatique</button>
+    </div>
+    <div class="tb-cells">
+      <div><small>Cours</small><b>3 sur 4 : choisir le procédé, l'exécuter, le qualifier</b></div>
+      <div><small>Durée conseillée</small><b>≈ 2 h 30 à 3 h avec les exercices</b></div>
+      <div><small>Prérequis</small><b>cours 1 (capillarité, jeu, fusion de l'apport) et cours 2 (flux, atmosphères, apports)</b></div>
+      <div><small>À la fin tu sais</small><b>choisir un procédé de brasage selon la série et les matériaux, régler une flamme, une induction ou un cycle de four, lire un profil de refusion, et rédiger puis qualifier un mode opératoire de brasage en sécurité</b></div>
+    </div>
+  </div>
+  <p class="lede">Une surface propre, un flux ou une atmosphère, un apport bien choisi : il ne manque plus que la chaleur. Il faut l'apporter au bon endroit, à la bonne température et pendant le bon temps, tout en épargnant le reste de la pièce. Le plombier la donne au chalumeau, raccord par raccord. L'outilleur passe ses plaquettes de carbure dans une bobine d'induction, en quelques secondes. Le motoriste enfourne des centaines d'échangeurs dans un four sous vide pour une nuit, et l'électronicien fait défiler ses cartes dans un four de refusion. Ce cours passe en revue les <b>procédés de brasage</b> de l'ISO 4063, leurs paramètres, leurs atouts et leurs pièges, puis montre comment figer le savoir-faire dans un <b>mode opératoire de brasage</b>, le qualifier, qualifier les braseurs, et travailler en sécurité.</p>
+
+  <h4>Le code couleur de la série</h4>
+  <div class="cc" role="img" aria-label="Code couleur : les causes en rouge et violet, les paramètres en vert, les effets en bleu">
+    <div class="cc-box cc-cause"><small>Les causes</small><div class="cc-syms"><span class="sig">T</span><span class="sig">P</span><span class="tau">défaut</span></div><p><span class="sig">rouge</span> : la chaleur, la température T et la puissance de chauffe P ; <span class="tau">violet</span> : les ennemis du joint (surchauffe, étape oubliée, fumées)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-link"><small>Les paramètres</small><div class="cc-syms"><span class="mat">f</span><span class="mat">e</span><span class="mat">t<sub>p</sub></span></div><p>en <span class="mat">vert</span> : ce que l'on règle et ce qui caractérise les pièces (fréquence f, épaisseur e, durée de palier, jeu, apport)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-eff"><small>Les effets</small><div class="cc-syms"><span class="eps">δ</span><span class="eps">ΔT</span><span class="gam">TAL</span></div><p><span class="eps">bleu</span> : ce que l'on obtient (profondeur chauffée δ, écart de température entre pièces ΔT, joint réussi) ; <span class="gam">bleu-vert</span> : la métallurgie du joint (temps au-dessus du liquidus, érosion)</p></div>
+  </div>
+  <div class="cc-more">
+    <div><b class="frc">Orange</b> : les forces motrices et les apports d'énergie dirigés : flamme, champ magnétique, courant.</div>
+    <div><b>Noir</b> : la géométrie dessinée (pièces, inducteurs, repères).</div>
+    <div><b class="wcol">Bronze</b> : les encadrés « métier » 🔥, tournés vers l'atelier.</div>
+  </div>
+</div>
+</header>
+
+<nav class="toc" aria-label="Sommaire">
+  <div class="toc-in">
+    <a href="#avant">Avant de commencer</a>
+    <a href="#c1">1 Panorama</a>
+    <a href="#c2">2 Flamme et fer</a>
+    <a href="#c3">3 Induction</a>
+    <a href="#c4">4 Fours et bains</a>
+    <a href="#c5">5 Tendre et soudobrasage</a>
+    <a href="#c6">6 Mode opératoire</a>
+    <a href="#exos">Exercices</a>
+    <a href="#quiz-s">Quiz</a>
+    <a href="#fiche">Fiche mémoire</a>
+    <a href="#gloss">Glossaire</a>
+    <a href="#check">Check-list</a>
+  </div>
+</nav>
+
+<main>
+<section class="chap" id="avant">
+<div class="wrap">
+  <h3 style="margin-top:0">Avant de commencer</h3>
+  <h4>Les cours 1 et 2 en trois cases</h4>
+  <div class="recall">
+    <div><div class="f"><span class="mat">T<sub>liq</sub></span> ≤ <span class="sig">T<sub>b</sub></span> &lt; <span class="mat">T<sub>sol</sub></span>(base)</div>La température de brasage T<sub>b</sub> se place au-dessus du liquidus de l'apport et sous le solidus du métal de base. <b>La brasure suit la chaleur</b> : elle ne coule que là où le joint est assez chaud (cours 1).</div>
+    <div><div class="f">fondre avant, tenir après</div>Le flux doit être actif avant que l'apport fonde et le rester jusqu'à la fin du remplissage ; il s'épuise si la chauffe traîne. Sans flux, un four sous atmosphère sèche ou sous vide protège les surfaces (cours 2).</div>
+    <div><div class="f">chaud et long ⇒ érosion</div>Chaque degré et chaque seconde en trop au-dessus du liquidus augmentent l'érosion du métal de base et l'épaisseur des intermétalliques (cours 1, chapitre 6).</div>
+  </div>
+
+  <div class="def"><b>📘 Correspondance avec le planning et le référentiel</b>. Ce cours poursuit le sujet <b>1.16 « Brasage »</b> du planning de la formation. Dans le module 1.16 <i>Brazing and soldering</i> du référentiel de l'IIW (<i>International Institute of Welding</i>, l'Institut international de la soudure), il couvre les attendus : « décrire les différentes techniques et les modes opératoires normalisés, en identifiant leurs principales variables », et « choisir, pour une construction complexe, le procédé de brasage approprié avec ses paramètres ». Il prépare aussi le module de qualité (descriptifs et qualification des modes opératoires de brasage, qualification des braseurs). Normes et repères (ISO : Organisation internationale de normalisation ; EN : normes européennes) :
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Chapitre du cours</th><th>Ce qu'il apporte à l'IWE</th><th>Normes et repères</th></tr>
+      <tr><td>1 Panorama et choix</td><td>choisir un procédé selon la série, la pièce et les matériaux</td><td>ISO 4063 (numéros de procédés)</td></tr>
+      <tr><td>2 La flamme et le fer</td><td>régler et conduire un brasage manuel</td><td>procédé 912</td></tr>
+      <tr><td>3 Induction et résistance</td><td>régler une induction, comprendre l'effet de peau</td><td>procédés 916 et 918</td></tr>
+      <tr><td>4 Fours et bains</td><td>construire un cycle thermique de four</td><td>procédés 921 à 926</td></tr>
+      <tr><td>5 Brasage tendre industriel et soudobrasage</td><td>lire un profil de refusion, connaître le soudobrasage</td><td>groupes 94 et 95, procédé 972</td></tr>
+      <tr><td>6 Mode opératoire, qualification, sécurité</td><td>rédiger et qualifier un mode opératoire, qualifier les braseurs</td><td>ISO 17779, ISO 13585</td></tr>
+    </table></div>
+    Les modèles des manipulations 2 et 4 (chauffe au chalumeau, cycle de four) sont pédagogiques : ils reproduisent les tendances, pas les valeurs d'une installation donnée. Pour un cas réel, les fiches des fabricants, les normes et le cours de référence de la formation font foi.
+  </div>
+
+  <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
+    <p>(Formation IWE : <i>International Welding Engineer</i>, ingénieur international en soudage.) Le choix du procédé engage tout le reste : l'investissement, la cadence, le besoin de flux, la qualification des braseurs ou des opérateurs, les contrôles. Le coordinateur doit pouvoir défendre ce choix, écrire le mode opératoire qui le fige, le faire qualifier selon l'ISO 17779 et faire qualifier les braseurs selon l'ISO 13585. C'est aussi lui qui répond des risques : fumées, gaz combustibles, fours à hydrogène.</p>
+  </div>
+
+  <h4>La série en quatre cours</h4>
+  <div class="series">
+    <div><b>1 Mouiller et remplir</b>Les principes : mouillage, capillarité, jeu, fusion de l'apport, liaison.</div>
+    <div><b>2 Vaincre les oxydes</b>Préparation, flux, atmosphères, vide et métaux d'apport.</div>
+    <div class="here"><b>3 Chauffer et exécuter</b>Les procédés de brasage et le mode opératoire.</div>
+    <div><b>4 Concevoir et contrôler</b>Le joint, les matériaux, les imperfections et les contrôles.</div>
+  </div>
+
+  <h4>Le plan du cours</h4>
+  <ol class="route">
+    <li><span class="dot">1</span><b>Panorama et choix</b><p>Chauffage local ou global, série, pièce, matériaux : quel procédé pour quel joint.</p></li>
+    <li><span class="dot">2</span><b>La flamme et le fer</b><p>Le chalumeau, ses flammes et son geste ; le fer à braser.</p></li>
+    <li><span class="dot">3</span><b>Induction et résistance</b><p>La chaleur née dans la pièce, en surface : l'effet de peau.</p></li>
+    <li><span class="dot">4</span><b>Fours et bains</b><p>Tout chauffer à la fois : cycles, paliers, pièces minces et massives.</p></li>
+    <li><span class="dot">5</span><b>Brasage tendre industriel et soudobrasage</b><p>Vague, refusion, profil thermique ; le laiton déposé comme une soudure.</p></li>
+    <li><span class="dot">6</span><b>Mode opératoire, qualification et sécurité</b><p>Du descriptif préliminaire au mode opératoire qualifié, des braseurs qualifiés, des risques maîtrisés.</p></li>
+  </ol>
+</div>
+</section>
+<section class="chap" id="c1">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">1</div>
+    <div class="c-title"><h2>Panorama et choix</h2><p>Chauffer le joint, ou chauffer toute la pièce</p></div>
+    <div class="c-img"><span class="ico">🧰</span><span><small>Image à retenir</small>La caisse à outils : chaque procédé a sa taille de série, sa taille de pièce et ses matériaux ; on ne plante pas un clou au marteau-piqueur</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la caisse à outils</span></div>
+    <p>Tous les procédés de brasage font la même chose : porter le joint au-dessus du liquidus de l'apport, assez longtemps pour qu'il mouille et remplisse, sans fondre les pièces. Ils se rangent en deux familles.</p>
+    <ul>
+      <li><b>Le chauffage local</b> ne chauffe que la zone du joint : flamme du chalumeau, induction, résistance électrique, faisceau laser ou infrarouge, fer à braser. Il est rapide, économe en énergie, souvent manuel ou facile à automatiser. Il travaille à l'air, donc presque toujours avec un flux.</li>
+      <li><b>Le chauffage global</b> porte tout l'assemblage à la température de brasage : four sous atmosphère, four sous vide, bain de sel. Il brase des dizaines de joints, même cachés, en une seule fois, souvent sans flux, avec une température uniforme et peu de déformation. Mais les cycles sont longs et l'installation coûteuse.</li>
+    </ul>
+    <p>Le choix se fait sur cinq critères : la <b>taille de la série</b>, la <b>taille et la masse</b> de la pièce, le <b>nombre et l'accès</b> des joints, les <b>matériaux</b> (un oxyde tenace réclame une atmosphère sèche ou le vide), et le <b>lieu</b> (sur chantier, seule la flamme se transporte). Le brasage tendre a ses propres procédés (fer, vague, refusion), et le soudobrasage, qui dépose l'apport comme une soudure, a les siens.</p>
+  </div>
+
+  <div class="lab" id="m1">
+    <p class="lab-h">Manipulation 1 : choisir le procédé</p>
+    <p class="lab-sub">Décris le travail : matériaux, taille de la pièce, nombre de joints, lieu et taille de la série. Les barres classent les procédés selon leur adéquation ; le message explique le premier choix. Barème pédagogique, qui résume les usages courants.</p>
+    <div class="btns" id="m1mat">
+      <button class="btn on" data-k="cu" type="button">Cuivre</button>
+      <button class="btn" data-k="acier" type="button">Acier</button>
+      <button class="btn" data-k="inox" type="button">Inox, superalliage</button>
+      <button class="btn" data-k="alu" type="button">Aluminium</button>
+      <button class="btn" data-k="carbure" type="button">Carbure sur acier</button>
+      <button class="btn" data-k="galva" type="button">Tôle galvanisée</button>
+      <button class="btn" data-k="elec" type="button">Carte électronique</button>
+    </div>
+    <div class="btns" id="m1size">
+      <button class="btn on" data-k="s" type="button">Petite pièce</button>
+      <button class="btn" data-k="m" type="button">Pièce moyenne</button>
+      <button class="btn" data-k="l" type="button">Grande pièce</button>
+    </div>
+    <div class="btns" id="m1joints">
+      <button class="btn on" data-k="1" type="button">Un joint accessible</button>
+      <button class="btn" data-k="few" type="button">Quelques joints</button>
+      <button class="btn" data-k="many" type="button">Des dizaines de joints, cachés</button>
+    </div>
+    <div class="btns" id="m1site">
+      <button class="btn on" data-k="atelier" type="button">En atelier</button>
+      <button class="btn" data-k="chantier" type="button">Sur chantier</button>
+    </div>
+    <div class="ctrl"><label for="m1s">Série annuelle</label><input type="range" id="m1s" class="r-mat" min="0" max="1000" step="1" value="333"><output id="m1so"></output></div>
+    <div class="btns"><button class="btn play" id="m1play" type="button">▶ Faire grandir la série</button></div>
+    <svg id="m1svg" role="img" aria-label="Classement des procédés de brasage selon le travail décrit"></svg>
+    <div class="readout" id="m1r"></div>
+    <p class="status" id="m1msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les numéros et les critères</span></div>
+    <p>L'ISO 4063 numérote les procédés du groupe 9 (brasage fort, brasage tendre et soudobrasage). Pour le brasage fort, ce sont ceux que vise la norme de qualification des modes opératoires, l'ISO 17779 :</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>N°</th><th>Procédé</th><th>Chauffage</th><th>Emplois typiques</th></tr>
+      <tr><td class="n">911</td><td>brasage par infrarouge</td><td>local</td><td>petites pièces, électronique, laboratoire</td></tr>
+      <tr><td class="n">912</td><td>brasage à la flamme (au chalumeau)</td><td>local</td><td>plomberie, froid, réparation, petites séries</td></tr>
+      <tr><td class="n">913</td><td>brasage par faisceau laser</td><td>local</td><td>joints de pavillon de carrosserie, micro-assemblage</td></tr>
+      <tr><td class="n">914</td><td>brasage par faisceau d'électrons</td><td>local, sous vide</td><td>applications spéciales</td></tr>
+      <tr><td class="n">916</td><td>brasage par induction</td><td>local</td><td>outils carbure, raccords, séries automatisées</td></tr>
+      <tr><td class="n">918</td><td>brasage par résistance</td><td>local</td><td>contacts électriques, connecteurs</td></tr>
+      <tr><td class="n">919</td><td>brasage-diffusion</td><td>maintien long</td><td>superalliages, aubes de turbines</td></tr>
+      <tr><td class="n">921</td><td>brasage au four</td><td>global, atmosphère</td><td>cuivre sur acier en continu, aluminium (CAB)</td></tr>
+      <tr><td class="n">922</td><td>brasage sous vide</td><td>global</td><td>inox, superalliages, titane, aluminium au magnésium</td></tr>
+      <tr><td class="n">923 à 926</td><td>brasage en bain (bain d'apport, de sel, de flux, immersion)</td><td>global</td><td>assemblages d'aluminium au trempé, petites pièces</td></tr>
+      <tr><td class="n">972</td><td>soudobrasage à l'arc</td><td>local</td><td>tôles galvanisées (« brasage MIG »)</td></tr>
+    </table></div>
+    <p>Le brasage tendre occupe les groupes <b>94</b> (chauffage local : fer, flamme, induction…) et <b>95</b> (chauffage global : vague, four, bains).</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Critère</th><th>Penche vers le chauffage local</th><th>Penche vers le chauffage global</th></tr>
+      <tr><td>Série</td><td>pièce unique à série moyenne (sauf induction automatisée)</td><td>grandes séries, ou pièces de très grande valeur</td></tr>
+      <tr><td>Joints</td><td>un ou quelques joints accessibles</td><td>nombreux joints, inaccessibles</td></tr>
+      <tr><td>Pièce</td><td>grande pièce dont on ne chauffe qu'un bout</td><td>pièce qui entre dans le four</td></tr>
+      <tr><td>Matériaux</td><td>oxydes que le flux sait dissoudre</td><td>oxydes tenaces (inox, superalliages, titane)</td></tr>
+      <tr><td>Exigences</td><td>coût d'installation faible, souplesse</td><td>reproductibilité, absence de flux, faible déformation</td></tr>
+    </table></div>
+    <p>La reproductibilité dépend aussi de qui tient la chaleur. Au chalumeau, c'est la main du <b>braseur</b> ; en induction ou au four, c'est le réglage de la machine, préparé par un <b>opérateur de brasage</b>. La norme de qualification du personnel, l'ISO 13585, distingue ces deux métiers (chapitre 6).</p>
+    <div class="tip">💡 <b>Penser au coût par joint</b> : un four sous vide coûte cher par cycle, mais brase des centaines de joints à la fois, sans flux ni nettoyage ; un chalumeau ne coûte presque rien, mais chaque joint demande une minute de braseur qualifié, puis le lavage des résidus de flux.</div>
+    <div class="warn"><b>⚠️ Piège : « on a toujours brasé au chalumeau »</b>. Quand la série grossit, un brasage manuel devient le goulot d'étranglement et la source principale de défauts. L'induction ou le four apportent à la fois la cadence et la répétabilité.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « peu de joints, chauffe le joint ; beaucoup de joints, chauffe la pièce »</b>.</div>
+    <div class="weld"><b>🔥 Un même produit, trois procédés</b>
+      <p>Un échangeur cuivre-aluminium de climatisation peut cumuler un brasage au four sous azote (CAB) pour son faisceau en aluminium, un brasage par induction des raccords de cuivre en usine, puis un brasage à la flamme des liaisons frigorifiques sur le chantier. Chacun a son mode opératoire, son apport et son flux.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c2">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">2</div>
+    <div class="c-title"><h2>La flamme et le fer</h2><p>Le geste du braseur, procédés 912 et brasage tendre manuel</p></div>
+    <div class="c-img"><span class="ico">🍳</span><span><small>Image à retenir</small>La poêle en fonte et la crêpe : la pièce massive met plus longtemps à chauffer ; c'est elle qu'on chauffe d'abord</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la poêle et la crêpe</span></div>
+    <p>Le <b>chalumeau</b> mélange un gaz combustible (acétylène ou propane) à de l'oxygène, ou à l'air, et produit une flamme très chaude. On la règle selon le rapport des deux gaz :</p>
+    <ul>
+      <li><b>flamme neutre</b> : juste assez d'oxygène pour brûler le combustible ; c'est la flamme de base du brasage ;</li>
+      <li><b>flamme réductrice</b> (ou carburante), avec un excès de combustible : un panache autour du dard, qui protège des oxydes ; légèrement réductrice, elle convient aux brasures à l'argent et au cuivre-phosphore ;</li>
+      <li><b>flamme oxydante</b>, avec un excès d'oxygène : dard court et sifflant ; on ne l'emploie qu'en soudobrasage au laiton, où une fine pellicule d'oxyde de zinc freine l'évaporation du zinc.</li>
+    </ul>
+    <p>Le geste compte plus que la flamme. Dans un emboîtement, le raccord, plus massif, met plus de temps à chauffer que le tube, comme une poêle en fonte comparée à une crêpe. On <b>chauffe largement</b>, en balayant, d'abord la pièce massive, puis tout le joint, jusqu'à ce que le flux devienne clair. On présente alors la baguette au bord du joint, sans la fondre dans la flamme : c'est la chaleur des pièces qui doit la faire fondre. Elle file dans le jeu, attirée vers la zone la plus chaude, et ressort en congé de l'autre côté.</p>
+    <p>Pour le brasage tendre, le <b>fer à braser</b> chauffe par contact une petite zone : panne étamée, posée à la fois sur la patte et sur la plage de cuivre, puis apport du fil d'étain fourré de flux au contact des pièces, pas sur la panne.</p>
+  </div>
+
+  <div class="lab" id="m2">
+    <p class="lab-h">Manipulation 2 : chauffer un emboîtement au chalumeau</p>
+    <p class="lab-sub">Un tube de cuivre de 22 mm entre dans un raccord en cuivre deux fois plus lourd ; le tube évacue aussi la chaleur vers le reste de la tuyauterie. Règle la puissance de flamme absorbée par les pièces et la part dirigée sur le raccord, puis lance la chauffe. Le joint est prêt quand le raccord <b>et</b> le tube dépassent la température de travail de l'apport. Modèle pédagogique à deux pièces (inerties, pertes et échanges thermiques simplifiés).</p>
+    <div class="btns" id="m2ap">
+      <button class="btn on" data-k="cup" type="button">CuP 284 (travail ≈ 700 °C)</button>
+      <button class="btn" data-k="ag" type="button">Ag 155 (travail ≈ 680 °C)</button>
+      <button class="btn" data-k="sn" type="button">Sn97Cu3 (travail ≈ 250 °C)</button>
+    </div>
+    <div class="ctrl"><label for="m2P">Puissance absorbée <span class="sig">P</span></label><input type="range" id="m2P" class="r-sig" min="0.2" max="4" step="0.1" value="1.5"><output id="m2Po"></output></div>
+    <div class="ctrl"><label for="m2f">Part sur le raccord</label><input type="range" id="m2f" class="r-frc" min="0" max="100" step="5" value="50"><output id="m2fo"></output></div>
+    <div class="ctrl"><label for="m2t">Temps <span class="sig">t</span></label><input type="range" id="m2t" class="r-sig" min="0" max="90" step="1" value="30"><output id="m2to"></output></div>
+    <div class="btns"><button class="btn play" id="m2play" type="button">▶ Chauffer</button></div>
+    <svg id="m2svg" role="img" aria-label="Températures du raccord et du tube en fonction du temps pendant la chauffe au chalumeau"></svg>
+    <div class="readout" id="m2r"></div>
+    <p class="status" id="m2msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">bilan thermique et réglages</span></div>
+    <p>Porter une pièce de masse m et de capacité thermique massique c de la température ambiante à la température de travail demande une énergie :</p>
+    <div class="fx"><div class="big"><span class="eps">Q</span> = <span class="mat">m</span>·<span class="mat">c</span>·Δ<span class="sig">T</span></div><p class="cap">Q en J ; m en kg ; c en J/(kg·K), 385 pour le cuivre, ≈ 460 à 500 pour l'acier ; ΔT en K (ou en °C)</p></div>
+    <p><b>Exemple.</b> Raccord de cuivre de 60 g porté de 20 à 700 °C : <span class="m">Q = 0,060 × 385 × 680 ≈ 15,7 kJ</span>. La portion de tube voisine, de 30 g, ne demande que 7,9 kJ, mais elle évacue sans cesse la chaleur vers le reste du tube. La flamme doit se partager en proportion de ces besoins : une flamme dirigée sur le seul tube le surchauffe pendant que le raccord reste froid. La brasure fond alors sur le tube, file vers lui et ne mouille pas le raccord.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Mélange</th><th>Température de flamme (ordre de grandeur)</th><th>Emplois</th></tr>
+      <tr><td>Oxygène-acétylène</td><td class="n">≈ 3 100 °C</td><td>chauffe rapide et concentrée, brasage fort, soudobrasage</td></tr>
+      <tr><td>Oxygène-propane</td><td class="n">≈ 2 800 °C</td><td>brasage fort, chauffe plus douce et plus large</td></tr>
+      <tr><td>Air-propane</td><td class="n">≈ 1 900 °C</td><td>brasage tendre, petits diamètres en brasage fort</td></tr>
+    </table></div>
+    <p>La surchauffe a plusieurs visages : le zinc des apports à l'argent fume (vapeurs blanches), le flux noircit et s'épuise, l'érosion du métal de base s'emballe, le cuivre écroui se recuit et perd sa résistance, l'oxydation gagne tout autour du joint. Une température trop basse, à l'inverse, laisse la brasure en perles sans pénétration. Au fer à braser, la panne est réglée vers 320 à 380 °C selon l'alliage, et le contact dure quelques secondes ; une brasure qui fond sur la panne mais pas sur les pièces donne un joint terne et granuleux, la « soudure froide ».</p>
+    <p><b>Mécaniser la flamme.</b> En série, des brûleurs fixes, souvent en couronne, chauffent les pièces portées par un plateau tournant (carrousel), avec un apport en anneau préplacé : la chaleur et le temps sont alors réglés une fois pour toutes.</p>
+    <div class="tip">💡 <b>Le flux comme thermomètre</b> : sous la flamme, la pâte bouillonne, sèche en blanc, puis fond en un liquide clair. Clair partout, sur le tube comme sur le raccord : c'est le moment de présenter la baguette.</div>
+    <div class="warn"><b>⚠️ Piège : chauffer la baguette.</b> Fondre l'apport dans la flamme et le faire couler sur une pièce encore froide donne un cordon posé, sans mouillage ni pénétration. La brasure doit fondre au contact des pièces.</div>
+    <div class="warn"><b>⚠️ Piège : la flamme immobile.</b> Une flamme fixée sur un point le porte bien au-delà de la température de travail pendant que le reste du joint est froid. Il faut balayer, et répartir la chaleur selon les masses.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « chauffe la poêle, pas la crêpe »</b> : la pièce massive d'abord, la baguette en dernier, la flamme toujours en mouvement.</div>
+    <div class="weld"><b>🔥 Le brasage sur chantier</b>
+      <p>Sur un chantier de froid ou de plomberie, la flamme reste irremplaçable. Le mode opératoire y précise le diamètre des tubes, l'apport, le flux éventuel, le balayage à l'azote de l'intérieur des tubes pendant le brasage (pour éviter la calamine qui encrasserait le circuit frigorifique), les écrans de protection et le permis de feu.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c3">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">3</div>
+    <div class="c-title"><h2>Induction et résistance</h2><p>La chaleur naît dans la pièce, procédés 916 et 918</p></div>
+    <div class="c-img"><span class="ico">🍲</span><span><small>Image à retenir</small>La plaque à induction : c'est la casserole qui chauffe, pas la plaque, et elle chauffe d'abord dans sa « peau »</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la plaque à induction</span></div>
+    <p>En <b>induction</b>, un courant alternatif circule dans une bobine de cuivre refroidie à l'eau, l'<b>inducteur</b>, placée autour du joint ou tout près. Elle crée un champ magnétique alternatif, qui fait naître dans la pièce des courants tourbillonnaires. Ces courants chauffent la pièce par effet Joule, comme une casserole sur une plaque à induction.</p>
+    <p>Ces courants ne circulent pas dans toute la pièce : ils se concentrent dans une couche superficielle, la <b>peau</b>, d'autant plus mince que la fréquence est élevée. La chaleur gagne ensuite le cœur par conduction. On choisit donc la fréquence selon la taille de la pièce : basse pour les pièces massives, haute pour les petites pièces ou les parois minces.</p>
+    <p>L'induction chauffe en quelques secondes, exactement là où l'inducteur est placé, toujours de la même façon : c'est le procédé des séries automatisées (outils à plaquettes de carbure, raccords, rotors). En contrepartie, chaque forme de pièce demande son inducteur.</p>
+    <p>En <b>brasage par résistance</b>, on fait passer un fort courant à travers le joint, serré entre deux électrodes (graphite, tungstène ou molybdène) : la chaleur naît dans les zones les plus résistantes. On brase ainsi des contacts électriques en argent sur des supports en cuivre, des connecteurs, des petites pièces, avec un apport préplacé en feuillard.</p>
+  </div>
+
+  <div class="lab" id="m3">
+    <p class="lab-h">Manipulation 3 : la profondeur de pénétration</p>
+    <p class="lab-sub">Choisis un métal et sa température, puis la fréquence et l'épaisseur de la paroi (ou le rayon d'une pièce pleine). Le graphique donne la profondeur de pénétration <span class="eps">δ</span> en fonction de la fréquence <span class="mat">f</span> ; la coupe montre la répartition de la chauffe dans la paroi. Résistivités et perméabilités : ordres de grandeur.</p>
+    <div class="btns" id="m3mat">
+      <button class="btn on" data-k="cu" type="button">Cuivre</button>
+      <button class="btn" data-k="laiton" type="button">Laiton</button>
+      <button class="btn" data-k="alu" type="button">Aluminium</button>
+      <button class="btn" data-k="inox" type="button">Inox austénitique</button>
+      <button class="btn" data-k="acier" type="button">Acier non allié</button>
+    </div>
+    <div class="btns" id="m3tmp">
+      <button class="btn on" data-k="0" type="button">à 20 °C</button>
+      <button class="btn" data-k="1" type="button">vers 700 °C</button>
+      <button class="btn" data-k="2" type="button">vers 800 °C</button>
+    </div>
+    <div class="ctrl"><label for="m3f">Fréquence <span class="mat">f</span></label><input type="range" id="m3f" class="r-mat" min="0" max="1000" step="1" value="535"><output id="m3fo"></output></div>
+    <div class="ctrl"><label for="m3e">Épaisseur ou rayon <span class="mat">e</span></label><input type="range" id="m3e" class="r-mat" min="0" max="1000" step="1" value="500"><output id="m3eo"></output></div>
+    <div class="btns"><button class="btn play" id="m3play" type="button">▶ Monter en fréquence</button></div>
+    <svg id="m3svg" role="img" aria-label="Profondeur de pénétration en fonction de la fréquence, et coupe de la paroi chauffée"></svg>
+    <div class="readout" id="m3r"></div>
+    <p class="status" id="m3msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">l'effet de peau</span></div>
+    <p>La densité des courants induits décroît exponentiellement depuis la surface. On appelle <b>profondeur de pénétration</b> δ la profondeur où elle est divisée par e ≈ 2,72 ; environ 86 % de la puissance est dissipée dans cette couche.</p>
+    <div class="fx"><div class="big"><span class="eps">δ</span> ≈ 503 √<span style="font-size:1.1em">(</span><span class="frac"><span><span class="mat">ρ</span></span><span><span class="mat">μ<sub>r</sub></span> <span class="mat">f</span></span></span><span style="font-size:1.1em">)</span></div><p class="cap">δ en m ; ρ : résistivité électrique (Ω·m) ; μ<sub>r</sub> : perméabilité magnétique relative (1 pour les métaux non magnétiques) ; f : fréquence (Hz) ; √ : racine carrée</p></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Métal</th><th>ρ à 20 °C (Ω·m)</th><th>ρ vers 700 à 800 °C</th><th>μ<sub>r</sub></th><th>δ à 10 kHz, à chaud</th></tr>
+      <tr><td>Cuivre</td><td class="n">1,7 × 10⁻⁸</td><td class="n">≈ 5,5 × 10⁻⁸</td><td class="n">1</td><td class="n">≈ 1,2 mm</td></tr>
+      <tr><td>Aluminium</td><td class="n">2,7 × 10⁻⁸</td><td class="n">≈ 8 × 10⁻⁸ (600 °C)</td><td class="n">1</td><td class="n">≈ 1,4 mm</td></tr>
+      <tr><td>Inox austénitique</td><td class="n">7,2 × 10⁻⁷</td><td class="n">≈ 1,15 × 10⁻⁶</td><td class="n">1</td><td class="n">≈ 5,4 mm</td></tr>
+      <tr><td>Acier non allié, sous 770 °C</td><td class="n">1,6 × 10⁻⁷</td><td class="n">≈ 9 × 10⁻⁷ (700 °C)</td><td class="n">≈ 200 à froid, ≈ 50 à 700 °C</td><td class="n">≈ 0,7 mm</td></tr>
+      <tr><td>Acier non allié, au-dessus de 770 °C</td><td class="n">—</td><td class="n">≈ 1,15 × 10⁻⁶</td><td class="n">1</td><td class="n">≈ 5,4 mm</td></tr>
+    </table></div>
+    <p><b>Exemple.</b> Cuivre à 20 °C et 10 kHz : <span class="m">δ = 503 × √(1,7 × 10⁻⁸/10⁴) ≈ 0,66 mm</span>. Acier à froid, μ<sub>r</sub> ≈ 200 : <span class="m">δ = 503 × √(1,6 × 10⁻⁷/(200 × 10⁴)) ≈ 0,14 mm</span>. Le même acier au-delà de 770 °C n'est plus magnétique (<b>point de Curie</b>) : <span class="m">δ ≈ 503 × √(1,15 × 10⁻⁶/10⁴) ≈ 5,4 mm</span>. La couche chauffée s'épaissit d'un coup, la puissance absorbée chute, et la montée en température ralentit.</p>
+    <p>Règle pratique : le couplage est bon quand l'épaisseur chauffée (ou le rayon d'une pièce pleine) vaut au moins 2 à 3 fois δ. Si δ dépasse l'épaisseur, le champ traverse la pièce sans y laisser beaucoup d'énergie : il faut monter en fréquence. Ordres de grandeur des générateurs de brasage : quelques kilohertz pour les pièces massives, 10 à 50 kHz pour les pièces moyennes, 100 à 500 kHz pour les petites pièces et les parois minces.</p>
+    <p>L'inducteur se dessine pour la pièce : forme épousant le joint, écart de quelques millimètres (le couplage s'effondre quand on l'éloigne), concentrateurs de champ en ferrite pour diriger la chaleur. Le générateur se règle en puissance et en durée, ou en boucle fermée sur un pyromètre.</p>
+    <p>En résistance, la chaleur dégagée vaut <span class="m">Q = R·I²·t</span> (R : résistance du circuit traversé, en Ω ; I : intensité, en A ; t : durée, en s) : elle se concentre là où la résistance est la plus forte, d'où l'intérêt d'électrodes en graphite, résistives, qui chauffent elles-mêmes le joint.</p>
+    <div class="tip">💡 <b>Le cuivre se chauffe mal, l'acier très bien</b> (sous Curie) : très conducteur et non magnétique, le cuivre demande plus de fréquence et de puissance. Pour braser un tube de cuivre dans une pièce d'acier, l'inducteur chauffe surtout l'acier, et le cuivre suit par conduction.</div>
+    <div class="warn"><b>⚠️ Piège : le point de Curie.</b> Un réglage calé sur un acier à froid devient insuffisant au-delà de 770 °C. Il faut le vérifier jusqu'à la température de brasage, avec une mesure de température, pas seulement en chronométrant.</div>
+    <div class="warn"><b>⚠️ Piège : les champs électromagnétiques.</b> Les inducteurs rayonnent un champ intense : distances de sécurité, signalisation, et interdiction d'approcher pour les porteurs de stimulateur cardiaque ou d'implant métallique.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « haute fréquence, peau fine »</b> : δ varie comme 1/√f.</div>
+    <div class="weld"><b>🔥 L'outil carbure en dix secondes</b>
+      <p>Une plaquette de carbure, un feuillard d'Ag 449, une goutte de flux FH12, un inducteur en épingle sous la tige d'acier : en dix secondes, l'acier rougit, l'apport file sous la plaquette, et le poste suivant arrive. Réglage, positionnement et refroidissement sont fixés par le mode opératoire, et le métier est celui d'un opérateur de brasage.</p>
+    </div>
+  </div>
+</div>
+</section>
+<section class="chap" id="c4">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">4</div>
+    <div class="c-title"><h2>Fours et bains</h2><p>Tout chauffer à la fois, procédés 921 à 926</p></div>
+    <div class="c-img"><span class="ico">🍞</span><span><small>Image à retenir</small>Le pain au four : la croûte (la pièce mince) est cuite bien avant la mie (la pièce massive) ; le palier laisse à la mie le temps de rattraper</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le pain au four</span></div>
+    <p>Au four, l'assemblage entier monte en température. Tous les joints, même invisibles, sont brasés en même temps, avec l'apport déjà en place (anneaux, feuillards, pâte, tôles plaquées). L'atmosphère contrôlée ou le vide remplace le flux (cours 2). La température est uniforme, les déformations et les contraintes sont faibles.</p>
+    <ul>
+      <li><b>Le four continu à bande</b> fait défiler les pièces dans des zones de chauffe, de brasage et de refroidissement, sous mélange azote-hydrogène ou gaz endothermique : brasage au cuivre de pièces d'acier en grande série.</li>
+      <li><b>Le four sous vide</b>, en charges, chauffe par rayonnement des résistances en graphite ou en molybdène, puis refroidit par injection de gaz : inox, superalliages, titane, aluminium au magnésium.</li>
+      <li><b>Le four CAB</b>, continu et sous azote, brase l'aluminium avec un flux non corrosif : radiateurs, condenseurs.</li>
+      <li><b>Les bains</b> : la pièce plonge dans un bain de sel fondu qui la chauffe très vite et uniformément, et parfois la décape (bain de flux pour l'aluminium), ou dans un bain d'apport fondu.</li>
+    </ul>
+    <p>Le piège du four, c'est l'<b>inertie</b>. Une tôle de 2 mm suit la consigne presque sans retard ; une bride de 40 mm traîne loin derrière. Si l'on monte d'une traite jusqu'à la température de brasage, l'apport fond sur les pièces minces bien avant que les massives soient chaudes : il coule vers les zones chaudes, érode les parois minces, et laisse des joints mal remplis côté massif. D'où le <b>palier d'homogénéisation</b> : on s'arrête quelques dizaines de degrés sous le solidus de l'apport, le temps que tout s'égalise, puis on monte franchement à la température de brasage, pour un palier court.</p>
+  </div>
+
+  <div class="lab" id="m4">
+    <p class="lab-h">Manipulation 4 : le cycle du four sous vide</p>
+    <p class="lab-sub">Un échangeur en inox associe une tôle de 2 mm et une bride massive, brasées avec un BNi-2 (solidus 970 °C, liquidus 1 000 °C) à 1 050 °C pendant 15 min. Règle la vitesse de montée, la durée du palier d'homogénéisation à 950 °C et l'épaisseur de la bride. Le graphique compare la consigne du four et les températures des deux pièces. Modèle pédagogique : chaque pièce suit la consigne avec un retard proportionnel à son épaisseur.</p>
+    <div class="btns" id="m4pre">
+      <button class="btn on" data-k="sans" type="button">Sans palier</button>
+      <button class="btn" data-k="palier" type="button">Palier de 30 min à 950 °C</button>
+      <button class="btn" data-k="lent" type="button">Montée lente à 3 °C/min</button>
+    </div>
+    <div class="ctrl"><label for="m4r">Vitesse de montée</label><input type="range" id="m4r" class="r-sig" min="2" max="30" step="1" value="10"><output id="m4ro"></output></div>
+    <div class="ctrl"><label for="m4d">Palier à 950 °C <span class="mat">t<sub>p</sub></span></label><input type="range" id="m4d" class="r-mat" min="0" max="120" step="5" value="0"><output id="m4do"></output></div>
+    <div class="ctrl"><label for="m4e">Épaisseur de la bride <span class="mat">e</span></label><input type="range" id="m4e" class="r-mat" min="5" max="80" step="1" value="40"><output id="m4eo"></output></div>
+    <div class="btns"><button class="btn play" id="m4play" type="button">▶ Lancer le cycle</button></div>
+    <svg id="m4svg" role="img" aria-label="Cycle thermique du four avec la consigne et les températures d'une pièce mince et d'une pièce massive"></svg>
+    <div class="readout" id="m4r2"></div>
+    <p class="status" id="m4msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">construire un cycle de four</span></div>
+    <p>Une pièce mince, chauffée sur ses deux faces, suit la consigne avec une <b>constante de temps</b> τ (« tau ») d'autant plus grande qu'elle est épaisse :</p>
+    <div class="fx"><div class="row big" style="font-size:1.5rem"><span><span class="eps">τ</span> ≈ <span class="frac"><span><span class="mat">ρ</span> <span class="mat">c</span> <span class="mat">e</span></span><span>2 <span class="mat">h</span></span></span></span><span>retard ≈ <span class="sig">v</span>·<span class="eps">τ</span></span></div><p class="cap">ρ : masse volumique (kg/m³) ; c : capacité thermique massique (J/(kg·K)) ; e : épaisseur (m) ; h : coefficient d'échange thermique avec le four (W/(m²·K)) ; v : vitesse de montée de la consigne (K/s)</p></div>
+    <p><b>Exemple</b> (acier, ρc ≈ 4,7 × 10⁶ J/(m³·K), h ≈ 120 W/(m²·K), ordre de grandeur sous vide vers 1 000 °C) : pour 2 mm, <span class="m">τ ≈ 4,7 × 10⁶ × 0,002/240 ≈ 39 s</span> ; pour 40 mm, <span class="m">τ ≈ 785 s</span>, soit 13 min. À 10 °C/min (0,167 K/s), la tôle traîne de 6,5 °C et la bride de 130 °C. Au palier, l'écart fond comme exp(−t/τ) : après 30 min, il ne reste qu'environ un dixième de l'écart initial.</p>
+    <p>Le cycle type de brasage au four comprend :</p>
+    <ol>
+      <li>une montée, parfois avec un palier de dégazage (liants des pâtes, humidité) vers quelques centaines de degrés ;</li>
+      <li>un <b>palier d'homogénéisation</b>, 20 à 50 °C sous le solidus de l'apport, dont la durée se règle sur la pièce la plus massive ;</li>
+      <li>une montée rapide à la <b>température de brasage</b> et un palier court, juste assez pour que tout le joint soit rempli (érosion, cours 1) ;</li>
+      <li>un <b>refroidissement</b> réglé : sous gaz neutre dans un four sous vide, assez lent pour éviter les contraintes, ou combiné avec un traitement thermique (trempe, revenu, vieillissement d'un superalliage).</li>
+    </ol>
+    <p>On ne règle pas un four sur la consigne : on place des <b>thermocouples de charge</b> sur la pièce la plus massive et sur la plus mince, et l'on n'entame le palier de brasage que lorsque la plus massive est en place. Les pièces reposent sur des supports en graphite ou en céramique ; un produit d'arrêt empêche la brasure de couler sur les supports.</p>
+    <p>Les <b>bains de sel</b> chauffent beaucoup plus vite que les fours, par contact liquide, et uniformément. Leurs risques : sels piégés dans les cavités, projections au contact de l'humidité, nettoyage soigneux des pièces après brasage.</p>
+    <div class="tip">💡 <b>Charger le four intelligemment</b> : regrouper des pièces d'épaisseurs voisines dans une même charge raccourcit le palier d'homogénéisation, donc tout le cycle.</div>
+    <div class="warn"><b>⚠️ Piège : monter plus lentement pour homogénéiser.</b> Une montée lente réduit l'écart, mais allonge énormément le cycle et prolonge le séjour à chaud de toute la charge. Un palier placé juste sous le solidus est plus efficace (manipulation 4).</div>
+    <div class="warn"><b>⚠️ Piège : le palier de brasage trop long.</b> Une fois la pièce massive à température, chaque minute de plus érode les parois minces et épaissit les intermétalliques. Le mode opératoire fixe une durée maximale, pas seulement minimale.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « la mie avant la croûte »</b> : on attend la pièce massive au palier, puis on brase vite et court.</div>
+    <div class="weld"><b>🔥 Le four, partenaire du traitement thermique</b>
+      <p>Un four sous vide permet de braser puis de tremper ou de vieillir dans le même cycle : on choisit alors un apport dont la température de brasage convient au traitement des pièces (mise en solution d'un superalliage, austénitisation d'un acier), et l'on vérifie que le joint supportera le revenu qui suit sans refondre.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c5">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">5</div>
+    <div class="c-title"><h2>Brasage tendre industriel et soudobrasage</h2><p>La vague, le four de refusion, et le laiton déposé comme une soudure</p></div>
+    <div class="c-img"><span class="ico">🌊</span><span><small>Image à retenir</small>La vague : la carte glisse sur une crête d'étain fondu, et chaque patte en garde juste ce qu'il faut</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la vague</span></div>
+    <p>L'électronique brase des millions de joints par jour. Deux procédés dominent.</p>
+    <ul>
+      <li><b>Le brasage à la vague</b>, pour les composants dont les pattes traversent la carte : la carte, fluxée puis préchauffée, glisse sur une vague d'étain fondu pompée en continu. Chaque patte et chaque trou métallisé prennent leur ménisque.</li>
+      <li><b>La refusion</b>, pour les composants montés en surface : une crème à braser (poudre d'alliage dans un flux) est déposée par sérigraphie sur les plages de cuivre, les composants sont posés dessus, puis la carte traverse un four dont le <b>profil de température</b> fond la crème et forme les joints.</li>
+    </ul>
+    <p>Le profil de refusion se lit comme une recette : un <b>préchauffage</b> progressif, un <b>maintien</b> qui active le flux et égalise les températures, un passage au-dessus du liquidus pendant un <b>temps au-dessus du liquidus</b> mesuré (en anglais <i>time above liquidus</i>, TAL), un <b>pic</b> limité pour ne pas abîmer les composants, puis un refroidissement. Trop court ou trop froid : joints mal mouillés. Trop long ou trop chaud : composants abîmés et intermétalliques épais.</p>
+    <p>Le <b>soudobrasage</b> dépose un apport de brasage fort dans un chanfrein ou en angle, comme une soudure, sans fondre le métal de base : au chalumeau avec un laiton pour réparer une fonte ou assembler des tubes galvanisés, à l'arc (MIG ou TIG) ou au laser avec un bronze au silicium (CuSi3) pour les tôles galvanisées de carrosserie, dont il préserve le zinc.</p>
+  </div>
+
+  <div class="lab" id="m5">
+    <p class="lab-h">Manipulation 5 : le profil de refusion</p>
+    <p class="lab-sub">Choisis l'alliage de la crème, puis règle la durée du maintien, la vitesse de montée finale, la température du pic et la vitesse de refroidissement. Le graphique trace le profil et le message le compare aux fenêtres usuelles. Fenêtres indicatives des fabricants de crèmes : étain-plomb, pic 205 à 230 °C ; SAC305, pic 235 à 250 °C ; dans les deux cas, 45 à 90 s au-dessus du liquidus.</p>
+    <div class="btns" id="m5al">
+      <button class="btn" data-k="snpb" type="button">Sn63Pb37 (liquidus 183 °C)</button>
+      <button class="btn on" data-k="sac" type="button">SAC305 (liquidus 217 °C)</button>
+    </div>
+    <div class="btns" id="m5pre">
+      <button class="btn on" data-k="type" type="button">Profil type</button>
+      <button class="btn" data-k="court" type="button">Profil trop court</button>
+      <button class="btn" data-k="erreur" type="button">Profil étain-plomb sur crème SAC</button>
+    </div>
+    <div class="ctrl"><label for="m5s">Maintien (activation)</label><input type="range" id="m5s" class="r-sig" min="30" max="150" step="5" value="90"><output id="m5so"></output></div>
+    <div class="ctrl"><label for="m5r">Montée finale</label><input type="range" id="m5r" class="r-sig" min="0.5" max="3" step="0.1" value="0.8"><output id="m5ro"></output></div>
+    <div class="ctrl"><label for="m5p">Pic <span class="sig">T<sub>pic</sub></span></label><input type="range" id="m5p" class="r-sig" min="200" max="270" step="1" value="245"><output id="m5po"></output></div>
+    <div class="ctrl"><label for="m5c">Refroidissement</label><input type="range" id="m5c" class="r-eps" min="1" max="6" step="0.5" value="2"><output id="m5co"></output></div>
+    <div class="btns"><button class="btn play" id="m5play" type="button">▶ Faire passer la carte</button></div>
+    <svg id="m5svg" role="img" aria-label="Profil de température d'un four de refusion avec le liquidus et la fenêtre du pic"></svg>
+    <div class="readout" id="m5r2"></div>
+    <p class="status" id="m5msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">profils et soudobrasage</span></div>
+    <h4>Le temps au-dessus du liquidus</h4>
+    <p>Pour un profil formé d'une montée à la vitesse v<sub>m</sub> jusqu'au pic T<sub>pic</sub>, puis d'une descente à la vitesse v<sub>r</sub> :</p>
+    <div class="fx"><div class="big"><span class="gam">TAL</span> = (<span class="sig">T<sub>pic</sub></span> − <span class="mat">T<sub>liq</sub></span>)·<span style="font-size:1.1em">(</span><span class="frac"><span>1</span><span><span class="mat">v<sub>m</sub></span></span></span> + <span class="frac"><span>1</span><span><span class="mat">v<sub>r</sub></span></span></span><span style="font-size:1.1em">)</span></div><p class="cap">TAL en s ; températures en °C ; vitesses en °C/s</p></div>
+    <p><b>Exemple</b> (SAC305, liquidus 217 °C) : pic à 245 °C, montée à 0,8 °C/s, refroidissement à 2 °C/s : <span class="m">TAL = 28 × (1/0,8 + 1/2) = 28 × 1,75 = 49 s</span>, dans la fenêtre. Avec une montée à 2 °C/s et un refroidissement à 3 °C/s, <span class="m">TAL = 28 × (0,5 + 0,33) ≈ 23 s</span> : trop court, les joints mouillent mal. Le même profil appliqué à l'étain-plomb (liquidus 183 °C) donnerait <span class="m">62 × 0,83 ≈ 52 s</span> et un pic de 62 °C au-dessus du liquidus, trop chaud pour cet alliage.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Défaut de refusion</th><th>Cause probable</th></tr>
+      <tr><td>Joint terne, granuleux, mal mouillé</td><td>pic trop bas ou TAL trop court ; flux épuisé par un maintien trop long</td></tr>
+      <tr><td>Billes d'étain autour des composants</td><td>montée trop rapide (le solvant de la crème bout et projette la poudre), crème oxydée</td></tr>
+      <tr><td>Vides dans les joints</td><td>dégazage insuffisant du flux, maintien trop court</td></tr>
+      <tr><td>Composant dressé sur une extrémité (effet « pierre tombale »)</td><td>les deux extrémités ne fondent pas en même temps : chauffe déséquilibrée</td></tr>
+      <tr><td>Composants ou carte abîmés, intermétalliques épais</td><td>pic trop chaud, TAL trop long</td></tr>
+    </table></div>
+    <p><b>La vague</b> se règle par la température du bain (de l'ordre de 245 à 250 °C en étain-plomb, 255 à 265 °C en sans-plomb), le préchauffage de la carte, la vitesse du convoyeur, qui fixe le temps de contact (quelques secondes), et souvent une atmosphère d'azote qui limite l'oxydation du bain. Le cuivre des pistes se dissout dans la vague : sa teneur dans le bain est surveillée et corrigée, sinon la viscosité et le liquidus du bain dérivent.</p>
+    <h4>Le soudobrasage</h4>
+    <p>Le joint se prépare comme une soudure : chanfrein en V, ou angle. Au chalumeau, on emploie une baguette de laiton enrobée ou un flux FH21, une flamme légèrement oxydante, et l'on dépose l'apport de proche en proche en mouillant les deux bords, sans les fondre. C'est la réparation classique des pièces en fonte : la fonte ne fond pas, ce qui évite la fonte blanche fragile et les fissures du soudage. À l'arc (procédé 972) ou au laser, un fil CuSi3 ou CuAl8, qui fond vers 900 à 1 050 °C, assemble des tôles galvanisées : le zinc, qui bout à 907 °C, est bien moins vaporisé qu'en soudage de l'acier, vers 1 500 °C, et le revêtement reste protecteur près du joint.</p>
+    <div class="tip">💡 <b>Le profil se mesure, il ne se devine pas</b> : on fait passer une carte témoin équipée de thermocouples sur les composants les plus massifs et les plus légers, comme les thermocouples de charge d'un four de brasage fort.</div>
+    <div class="warn"><b>⚠️ Piège : changer d'alliage sans changer de profil.</b> Une crème SAC passée dans un four réglé pour l'étain-plomb ne fond presque pas : pic à peine au-dessus de 217 °C, quelques secondes de TAL, joints granuleux.</div>
+    <div class="warn"><b>⚠️ Piège : le soudobrasage n'est pas une soudure.</b> Il ne fond pas le métal de base : sa résistance est celle de l'apport et de l'interface, et sa tenue en température celle d'un laiton ou d'un bronze.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « monte, mijote, fonds, refroidis »</b>, les quatre temps du profil de refusion.</div>
+    <div class="weld"><b>🔥 Le brasage MIG en carrosserie</b>
+      <p>Les constructeurs automobiles soudobrasent les tôles galvanisées au fil CuSi3 avec des postes MIG pulsés, puis au laser pour les joints de pavillon visibles. Peu de chaleur, peu de déformation, revêtement préservé, cordon lisse qui se peint sans reprise : le soudobrasage y a remplacé une partie du soudage par points et du soudage à l'arc.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c6">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">6</div>
+    <div class="c-title"><h2>Mode opératoire, qualification et sécurité</h2><p>Écrire, prouver, puis répéter sans risque</p></div>
+    <div class="c-img"><span class="ico">📜</span><span><small>Image à retenir</small>La recette signée : ingrédients, gestes, temps et contrôle ; essayée une fois devant témoin, puis suivie à la lettre</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la recette signée</span></div>
+    <p>Un joint brasé réussi une fois ne prouve rien ; il faut le réussir à chaque fois. Le savoir-faire se fige dans un <b>mode opératoire de brasage</b>, qui suit la même logique qu'en soudage :</p>
+    <ol>
+      <li>on rédige un <b>descriptif préliminaire</b> (en anglais <i>pBPS</i>, <i>preliminary brazing procedure specification</i>) : matériaux, joint, jeu, préparation, apport, flux ou atmosphère, procédé, températures et durées ;</li>
+      <li>on brase une <b>pièce d'essai</b> représentative de la production, devant un examinateur ou un organisme d'examen ;</li>
+      <li>on la <b>contrôle</b> : examen visuel, coupes métallographiques, essais de pelage, de cisaillement, de pliage ou de traction selon le type de joint ;</li>
+      <li>si tout est conforme, on établit le <b>procès-verbal de qualification</b> (en anglais <i>BPQR</i>, <i>brazing procedure qualification record</i>), puis le <b>descriptif de mode opératoire de brasage</b> qualifié (en anglais <i>BPS</i>, abrégé ici DMOB), document d'atelier utilisé en production.</li>
+    </ol>
+    <p>C'est l'objet de l'<b>ISO 17779</b>. Les personnes, elles, se qualifient selon l'<b>ISO 13585</b> : le <b>braseur</b>, qui tient lui-même la source de chaleur (au chalumeau), et l'<b>opérateur de brasage</b>, qui prépare et règle une installation mécanisée (induction, four). Une qualification vaut pour un domaine (procédé, matériaux, type de joint, apport) et pour une durée limitée.</p>
+    <p>Enfin, le brasage a ses risques : fumées (zinc, fluorures des flux, colophane, cadmium des anciens apports), gaz combustibles et oxygène, fours à hydrogène, brûlures, rayonnement des flammes. Le mode opératoire et le poste de travail les prennent en compte.</p>
+  </div>
+
+  <div class="lab" id="m6">
+    <p class="lab-h">Manipulation 6 : construire et tenir un mode opératoire</p>
+    <p class="lab-sub">Choisis un cas qualifié. Son DMOB s'affiche avec le domaine validé par le procès-verbal. Change un paramètre : la manipulation dit s'il reste dans le DMOB, s'il impose une nouvelle qualification, ou s'il est incompatible. Décoche une étape de la gamme pour voir le défaut qu'elle provoque. Règles simplifiées, inspirées de l'ISO 17779.</p>
+    <div class="btns" id="m6sc">
+      <button class="btn on" data-k="froid" type="button">Raccord frigorifique Cu-Cu, chalumeau</button>
+      <button class="btn" data-k="carbure" type="button">Plaquette carbure, induction</button>
+      <button class="btn" data-k="inox" type="button">Échangeur inox, four sous vide</button>
+    </div>
+    <p class="mut" style="margin:.4rem 0 0;font-size:.9rem">Procédé, apport, flux ou atmosphère</p>
+    <div class="btns" id="m6proc">
+      <button class="btn" data-k="912" type="button">912 flamme</button>
+      <button class="btn" data-k="916" type="button">916 induction</button>
+      <button class="btn" data-k="921" type="button">921 four atmosphère</button>
+      <button class="btn" data-k="922" type="button">922 vide</button>
+    </div>
+    <div class="btns" id="m6ap">
+      <button class="btn" data-k="cup" type="button">CuP 284</button>
+      <button class="btn" data-k="ag155" type="button">Ag 155</button>
+      <button class="btn" data-k="ag449" type="button">Ag 449</button>
+      <button class="btn" data-k="bni" type="button">Ni 620 (BNi-2)</button>
+    </div>
+    <div class="btns" id="m6fx">
+      <button class="btn" data-k="aucun" type="button">sans flux</button>
+      <button class="btn" data-k="FH10" type="button">FH10</button>
+      <button class="btn" data-k="FH12" type="button">FH12</button>
+      <button class="btn" data-k="H2" type="button">H₂ sec</button>
+      <button class="btn" data-k="vide" type="button">vide</button>
+    </div>
+    <div class="ctrl"><label for="m6j">Jeu <span class="mat">h</span></label><input type="range" id="m6j" class="r-mat" min="0" max="0.3" step="0.01" value="0.08"><output id="m6jo"></output></div>
+    <div class="ctrl"><label for="m6T">Température <span class="sig">T<sub>b</sub></span></label><input type="range" id="m6T" class="r-sig" min="600" max="1150" step="10" value="720"><output id="m6To"></output></div>
+    <div class="radios" id="m6seq">
+      <label><input type="checkbox" data-s="0" checked>1 dégraisser</label>
+      <label><input type="checkbox" data-s="1" checked>2 décaper</label>
+      <label><input type="checkbox" data-s="2" checked>3 fluxer</label>
+      <label><input type="checkbox" data-s="3" checked>4 monter, tenir le jeu</label>
+      <label><input type="checkbox" data-s="4" checked>5 chauffer selon le DMOB</label>
+      <label><input type="checkbox" data-s="5" checked>6 refroidir sans bridage</label>
+      <label><input type="checkbox" data-s="6" checked>7 éliminer les résidus</label>
+      <label><input type="checkbox" data-s="7" checked>8 contrôler</label>
+    </div>
+    <div class="btns"><button class="btn play" id="m6play" type="button">▶ Exécuter la gamme</button></div>
+    <div class="tbl-wrap" id="m6card"></div>
+    <svg id="m6svg" role="img" aria-label="Enchaînement des étapes de la gamme de brasage, avec les étapes oubliées"></svg>
+    <div class="readout" id="m6r"></div>
+    <p class="status" id="m6msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">ISO 17779, ISO 13585 et sécurité</span></div>
+    <h4>Le contenu d'un DMOB</h4>
+    <p>Identification et référence du procès-verbal ; procédé (numéro ISO 4063) ; matériaux de base (groupe, désignation, épaisseurs ou diamètres) ; type et dimensions du joint, jeu et recouvrement ; préparation des surfaces ; apport (désignation ISO 17672, forme, mode et lieu de dépôt) ; flux (type ISO 18496) ou atmosphère (nature, point de rosée, pression) ; position et sens d'écoulement de la brasure ; température et durée de brasage, vitesses de chauffe et de refroidissement ; maintien des pièces ; traitement après brasage (élimination des résidus, traitement thermique) ; contrôles.</p>
+    <h4>L'épreuve de qualification selon l'ISO 17779</h4>
+    <p>La pièce d'essai est brasée selon le descriptif préliminaire, dans les conditions de la production, devant l'examinateur. Les contrôles minimaux dépendent du type de joint :</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Pièce d'essai</th><th>Contrôles minimaux</th></tr>
+      <tr><td>Joint à recouvrement</td><td>examen visuel complet, deux coupes métallographiques, puis deux essais de cisaillement ou deux essais de pelage</td></tr>
+      <tr><td>Joint bout à bout</td><td>examen visuel complet, deux coupes, puis deux essais de traction ou deux essais de pliage</td></tr>
+      <tr><td>Joint en T</td><td>examen visuel complet, puis deux coupes ou deux essais de pliage</td></tr>
+    </table></div>
+    <p>Les essais destructifs suivent l'EN 12797, les contrôles non destructifs l'EN 12799, et les imperfections se jugent selon l'ISO 18279 (cours 4). Une norme d'application peut demander davantage : radiographie ou ultrasons, essais de corrosion, analyses. L'aéronautique a sa propre norme, l'ISO 11745.</p>
+    <p>Les <b>variables essentielles</b> sont les paramètres dont le changement, hors du domaine qualifié, impose une nouvelle qualification. L'ISO 17779 les regroupe ainsi : procédé de brasage, type de produit (tôle, tube), type de joint, piquage, groupes de matériaux de base, apport, flux et mode de dépôt de l'apport, dimensions, sens d'écoulement de la brasure, traitement thermique après brasage, et le fabricant lui-même (une qualification n'est pas transférable à un autre atelier). Elle donne aussi, en annexe, des exigences de qualité pour le brasage, comparables à celles que l'ISO 3834 fixe pour le soudage.</p>
+    <h4>Les braseurs et les opérateurs selon l'ISO 13585</h4>
+    <p>Le braseur ou l'opérateur brase une pièce d'essai, contrôlée selon les mêmes principes. Sa qualification vaut <b>3 ans</b>, à condition qu'un responsable de l'employeur confirme <b>tous les 6 mois</b> qu'il a brasé avec une continuité raisonnable dans son domaine (pas d'interruption de plus de 6 mois), dans des conditions techniques comparables, et sans raison de mettre en doute son savoir-faire. Elle peut être prolongée par périodes de 3 ans si la qualité des productions est démontrée et enregistrée. Une révision de la norme est en cours. Un braseur qui réussit l'épreuve de qualification d'un mode opératoire est qualifié pour le domaine correspondant.</p>
+    <h4>Sécurité</h4>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Risque</th><th>Origine</th><th>Prévention</th></tr>
+      <tr><td>Fumées métalliques</td><td>zinc des apports à l'argent et des laitons (« fièvre des fondeurs »), cadmium des anciens apports, plomb</td><td>éviter la surchauffe, aspiration à la source, apports sans cadmium, hygiène (ne pas manger au poste)</td></tr>
+      <tr><td>Fumées de flux</td><td>fluorures et composés du bore ; colophane des flux de brasage tendre, sensibilisante (asthme)</td><td>aspiration, quantité de flux juste nécessaire, flux adaptés</td></tr>
+      <tr><td>Gaz combustibles</td><td>acétylène, propane, oxygène</td><td>bouteilles arrimées, détendeurs, clapets antiretour et pare-flammes, contrôle d'étanchéité, permis de feu</td></tr>
+      <tr><td>Atmosphères de four</td><td>hydrogène explosif, azote et argon asphyxiants, monoxyde de carbone des gaz endothermiques</td><td>purges, détection, ventilation, procédures d'ouverture</td></tr>
+      <tr><td>Rayonnement</td><td>flammes, pièces incandescentes, laser</td><td>lunettes à verres filtrants adaptés, écrans</td></tr>
+      <tr><td>Brûlures et produits chimiques</td><td>pièces chaudes, bains de sel, bains de décapage acides</td><td>gants, tabliers, lunettes ; manipulation outillée</td></tr>
+      <tr><td>Champs électromagnétiques</td><td>inducteurs</td><td>distances, signalisation, porteurs d'implants tenus à l'écart</td></tr>
+    </table></div>
+    <div class="tip">💡 <b>Le DMOB, outil d'atelier</b> : un bon DMOB tient sur une page, avec un croquis du joint et des valeurs chiffrées (jeu, température, durée, débit de gaz) ; un DMOB vague (« chauffer suffisamment ») ne protège ni la qualité ni le braseur.</div>
+    <div class="warn"><b>⚠️ Piège : confondre les deux qualifications.</b> Qualifier le mode opératoire (ISO 17779) prouve que la recette marche ; qualifier le braseur (ISO 13585) prouve que la personne sait l'appliquer. Il faut les deux.</div>
+    <div class="warn"><b>⚠️ Piège : la petite modification.</b> Changer d'apport « équivalent », de flux, de procédé ou de groupe de matériaux, même en apparence anodin, sort du domaine qualifié et impose une nouvelle qualification.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « pDMOB, épreuve, PV, DMOB »</b> : écrire, prouver, signer, appliquer. Et pour les braseurs : « trois ans, signés tous les six mois ».</div>
+    <div class="weld"><b>🔥 La traçabilité</b>
+      <p>En production, chaque lot de joints renvoie à un DMOB, à un braseur ou un opérateur qualifié, à un lot d'apport et de flux, et à des enregistrements (courbes du four, réglages du générateur, résultats des contrôles d'étanchéité). C'est cette chaîne qui permet, le jour d'une fuite, de retrouver la cause et les pièces concernées.</p>
+    </div>
+  </div>
+</div>
+</section>
+<section class="chap" id="exos">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✎</div>
+    <div class="c-title"><h2>Exercices corrigés</h2><p>Six exercices et un défi, du choix du procédé au cycle de four</p></div>
+    <div class="c-img"><span class="ico">🏋️</span><span><small>Image à retenir</small>La salle de musculation : on ne progresse qu'en soulevant soi-même</span></div>
+  </div>
+  <div class="lv lv1"><div class="lv-h">👁 Mode d'emploi <span class="tag">unités du Système international dans les formules</span></div>
+    <p>Cherche chaque question sur papier avant d'ouvrir la correction. Écris la formule littérale, puis les valeurs avec leurs unités. Les manipulations 1 à 6 permettent de vérifier tes résultats ; le défi se rejoue entièrement dans la manipulation 4.</p>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 1 : un procédé par situation <span class="lvtag">N1 · chapitre 1</span></h4>
+    <p>Propose un procédé (nom et numéro ISO 4063 si possible) et justifie-le en une phrase.</p>
+    <p class="q"><b>a)</b> Raccords de cuivre d'une installation frigorifique, sur chantier.</p>
+    <p class="q"><b>b)</b> 20 000 raccords cuivre-acier de compresseurs par an, tous identiques.</p>
+    <p class="q"><b>c)</b> Échangeurs à plaques en inox de 60 joints cachés, quelques centaines par an.</p>
+    <p class="q"><b>d)</b> Radiateurs automobiles en aluminium, 500 000 par an.</p>
+    <p class="q"><b>e)</b> Cartes électroniques à composants montés en surface.</p>
+    <p class="q"><b>f)</b> Pavillon de voiture en tôle galvanisée, joint visible.</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <b>Flamme, 912</b> : seul procédé transportable, souple, pour quelques joints accessibles (cuivre-phosphore sans flux).</p>
+      <p><b>b)</b> <b>Induction, 916</b> (ou flamme mécanisée en carrousel) : joint unique et axisymétrique, grande série, chauffe rapide et répétable, avec un apport à l'argent en anneau et un flux.</p>
+      <p><b>c)</b> <b>Four sous vide, 922</b> : joints nombreux et cachés, oxyde de chrome, brasage sans flux au nickel ou au cuivre.</p>
+      <p><b>d)</b> <b>Four sous azote avec flux FL20 (CAB), 921</b> : grande série, tôles plaquées Al-Si, résidus non corrosifs.</p>
+      <p><b>e)</b> <b>Refusion</b> d'une crème à braser dans un four à profil (brasage tendre, groupe 95).</p>
+      <p><b>f)</b> <b>Soudobrasage</b> à l'arc (<b>972</b>) ou au laser, au fil CuSi3 : peu de chaleur, zinc préservé, cordon propre.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 2 : chauffer au chalumeau <span class="lvtag">N1 · chapitre 2</span></h4>
+    <p>Raccord de cuivre de 60 g sur un tube de 22 mm (portion utile de 30 g) ; c = 385 J/(kg·K) ; température de travail de l'apport : 700 °C.</p>
+    <p class="q"><b>a)</b> Quelle énergie faut-il pour porter le raccord, puis la portion de tube, de 20 à 700 °C ?</p>
+    <p class="q"><b>b)</b> Un braseur dirige 1 kW absorbé sur le seul tube. Sans pertes, en combien de temps le tube atteint-il 700 °C ? Que se passe-t-il pour le joint ?</p>
+    <p class="q"><b>c)</b> Quelle flamme régler pour un brasage au cuivre-phosphore, puis pour un soudobrasage au laiton ?</p>
+    <p class="q"><b>d)</b> Au fer à braser, un joint sort terne et granuleux. Diagnostic ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Raccord : <span class="m">Q = 0,060 × 385 × 680 ≈ 15 700 J ≈ 15,7 kJ</span> ; tube : <span class="m">0,030 × 385 × 680 ≈ 7,9 kJ</span>.</p>
+      <p><b>b)</b> <span class="m">t = 7 900/1 000 ≈ 8 s</span>. Le tube est chaud en quelques secondes, le raccord reste froid : la brasure fond sur le tube, file vers lui, et ne mouille pas le raccord. En insistant, on surchauffe le tube. Il faut répartir la flamme selon les besoins, en commençant par le raccord (manipulation 2).</p>
+      <p><b>c)</b> Brasage CuP : flamme <b>neutre ou légèrement réductrice</b>. Soudobrasage au laiton : flamme <b>légèrement oxydante</b>, pour former une pellicule d'oxyde de zinc qui freine l'évaporation du zinc.</p>
+      <p><b>d)</b> Une « soudure froide » : la brasure a fondu sur la panne mais les pièces n'ont pas atteint la température de mouillage (panne trop petite ou trop froide, contact trop court, flux épuisé). Il faut chauffer patte et plage ensemble, et apporter le fil sur les pièces.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 3 : l'effet de peau <span class="lvtag">N2 · chapitre 3</span></h4>
+    <p>δ ≈ 503√(ρ/(μ<sub>r</sub>f)). Données : cuivre, ρ = 1,7 × 10⁻⁸ Ω·m à 20 °C et 5,5 × 10⁻⁸ Ω·m vers 700 °C ; acier non allié à froid, ρ = 1,6 × 10⁻⁷ Ω·m et μ<sub>r</sub> ≈ 200 ; au-delà de 770 °C, ρ ≈ 1,15 × 10⁻⁶ Ω·m et μ<sub>r</sub> = 1.</p>
+    <p class="q"><b>a)</b> Calcule δ à 10 kHz pour le cuivre à 20 °C, l'acier à froid et l'acier au-delà de 770 °C.</p>
+    <p class="q"><b>b)</b> Quelle fréquence donne δ = 0,5 mm dans du cuivre vers 700 °C ?</p>
+    <p class="q"><b>c)</b> Pourquoi la chauffe d'un acier par induction ralentit-elle vers 770 °C ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Cuivre : <span class="m">δ = 503 × √(1,7 × 10⁻⁸/10⁴) ≈ 6,6 × 10⁻⁴ m = 0,66 mm</span>. Acier à froid : <span class="m">503 × √(1,6 × 10⁻⁷/(200 × 10⁴)) ≈ 0,14 mm</span>. Acier au-delà de 770 °C : <span class="m">503 × √(1,15 × 10⁻⁶/10⁴) ≈ 5,4 mm</span>.</p>
+      <p><b>b)</b> <span class="m">f = ρ(503/δ)²/μ<sub>r</sub> = 5,5 × 10⁻⁸ × (503/0,0005)² ≈ 5,6 × 10⁴ Hz</span>, soit environ <b>56 kHz</b>.</p>
+      <p><b>c)</b> Au point de Curie, l'acier perd son magnétisme : μ<sub>r</sub> passe d'environ 50 à 1, δ est multipliée par plusieurs, la couche chauffée devient épaisse et la puissance absorbée diminue. Le réglage doit être validé jusqu'à la température de brasage.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 4 : la mie et la croûte <span class="lvtag">N2 · chapitre 4</span></h4>
+    <p>Acier : ρc ≈ 4,7 × 10⁶ J/(m³·K) ; coefficient d'échange h ≈ 120 W/(m²·K) ; consigne montant à 10 °C/min.</p>
+    <p class="q"><b>a)</b> Calcule la constante de temps d'une tôle de 2 mm et d'une bride de 40 mm.</p>
+    <p class="q"><b>b)</b> Quel retard chacune prend-elle sur la consigne pendant la montée ?</p>
+    <p class="q"><b>c)</b> Au début d'un palier à 950 °C, l'écart entre les deux pièces vaut 124 °C. Que vaut-il après 30 min de palier ?</p>
+    <p class="q"><b>d)</b> La manipulation 4 indique pourtant un écart de 28 °C quand la tôle atteint le solidus (970 °C). Pourquoi ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">τ = ρce/(2h)</span> : tôle, <span class="m">4,7 × 10⁶ × 0,002/240 ≈ 39 s</span> ; bride, <span class="m">4,7 × 10⁶ × 0,040/240 ≈ 785 s</span>, soit 13 min.</p>
+      <p><b>b)</b> <span class="m">v = 10/60 ≈ 0,167 K/s</span>. Retards : <span class="m">0,167 × 39 ≈ 6,5 °C</span> pour la tôle, <span class="m">0,167 × 785 ≈ 131 °C</span> pour la bride.</p>
+      <p><b>c)</b> <span class="m">124 × exp(−1 800/785) ≈ 124 × 0,10 ≈ 12,5 °C</span>.</p>
+      <p><b>d)</b> Après le palier, la consigne repart vers 1 050 °C : en montant de 950 à 970 °C (2 min), la bride reprend une partie de son retard. Le palier sert à partir d'un état homogène juste sous le solidus ; la montée finale doit rester franche mais pas trop rapide.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 5 : profils de refusion et soudobrasage <span class="lvtag">N1 · chapitre 5</span></h4>
+    <p>TAL = (T<sub>pic</sub> − T<sub>liq</sub>)(1/v<sub>m</sub> + 1/v<sub>r</sub>). Fenêtre visée : 45 à 90 s.</p>
+    <p class="q"><b>a)</b> Crème SAC305 (liquidus 217 °C), pic à 245 °C, montée à 0,8 °C/s, refroidissement à 2 °C/s : TAL ?</p>
+    <p class="q"><b>b)</b> Même pic, montée à 2 °C/s, refroidissement à 3 °C/s : TAL ? Conséquence ?</p>
+    <p class="q"><b>c)</b> On passe une crème SAC dans un four réglé pour l'étain-plomb : pic à 220 °C, montée à 1 °C/s, refroidissement à 2 °C/s. TAL ? Verdict ?</p>
+    <p class="q"><b>d)</b> Pourquoi le soudobrasage au CuSi3 convient-il mieux que le soudage MAG aux tôles galvanisées ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">TAL = 28 × (1/0,8 + 1/2) = 28 × 1,75 = 49 s</span> : dans la fenêtre.</p>
+      <p><b>b)</b> <span class="m">TAL = 28 × (0,5 + 0,33) ≈ 23 s</span> : trop court, joints mal mouillés, vides. Ralentir la montée finale ou le refroidissement près du pic.</p>
+      <p><b>c)</b> <span class="m">TAL = (220 − 217) × (1 + 0,5) = 4,5 s</span>, avec un pic de 3 °C seulement au-dessus du liquidus : la crème fond à peine, les joints sont granuleux. Il faut le profil SAC (pic 235 à 250 °C).</p>
+      <p><b>d)</b> Le zinc bout à 907 °C. Le soudage MAG fond l'acier vers 1 500 °C et vaporise le revêtement autour du joint (fumées, porosités, corrosion). L'apport CuSi3 fond vers 900 à 1 050 °C sans fondre l'acier : le zinc est bien moins vaporisé et la protection subsiste près du joint, avec moins de déformation.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 6 : le mode opératoire et le braseur <span class="lvtag">N1 · chapitre 6</span></h4>
+    <p>Un DMOB qualifié prévoit : flamme (912), cuivre-cuivre, CuP 284, sans flux, jeu 0,05 à 0,13 mm, 700 à 750 °C.</p>
+    <p class="q"><b>a)</b> L'atelier veut passer au CuP 179, moins cher. Faut-il requalifier ?</p>
+    <p class="q"><b>b)</b> Un lot de raccords donne un jeu de 0,10 mm. Faut-il requalifier ?</p>
+    <p class="q"><b>c)</b> On remplace le chalumeau par une induction automatisée. Faut-il requalifier ?</p>
+    <p class="q"><b>d)</b> Un braseur, qualifié le 15 mars 2026 selon l'ISO 13585, a brasé régulièrement jusqu'au 30 avril 2026, puis plus du tout. Peut-il braser en décembre 2026 ? Sinon, jusqu'à quand sa qualification aurait-elle couru ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <b>Oui</b> : l'apport est une variable essentielle, un autre apport sort du domaine qualifié.</p>
+      <p><b>b)</b> <b>Non</b> : 0,10 mm reste dans le domaine qualifié de 0,05 à 0,13 mm ; on reste dans le DMOB.</p>
+      <p><b>c)</b> <b>Oui</b> : le procédé est une variable essentielle. Et le personnel change de métier : il faudra des opérateurs de brasage qualifiés.</p>
+      <p><b>d)</b> <b>Non</b> : l'interruption dépasse 6 mois (de mai à décembre), la confirmation semestrielle ne peut pas être signée ; il doit repasser l'épreuve. Avec une activité continue et des confirmations signées tous les 6 mois, sa qualification aurait couru jusqu'au 15 mars 2029 (3 ans), puis aurait pu être prolongée.</p>
+    </div></details>
+  </div>
+
+  <div class="exo defi">
+    <h4>🏆 Défi : le palier juste suffisant <span class="lvtag">N2 · chapitre 4, à rejouer dans la manipulation 4</span></h4>
+    <p>Échangeur en inox : tôle de 2 mm et bride de 40 mm, BNi-2 (solidus 970 °C, liquidus 1 000 °C), brasage à 1 050 °C, montée à 10 °C/min. On veut un écart de moins de 30 °C entre les deux pièces au moment où la tôle atteint le solidus.</p>
+    <p class="q"><b>a)</b> Sans palier, quel est cet écart ?</p>
+    <p class="q"><b>b)</b> Quelle durée minimale de palier à 950 °C (par pas de 5 min) respecte l'objectif ?</p>
+    <p class="q"><b>c)</b> Une montée lente à 3 °C/min, sans palier, suffit-elle ? Compare les durées de cycle.</p>
+    <p class="q"><b>d)</b> Avec une bride de 80 mm, quelle durée de palier faut-il ? Commente.</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Environ <b>124 °C</b> : la bride est encore vers 846 °C quand la tôle commence à fondre l'apport.</p>
+      <p><b>b)</b> 25 min donnent environ 33 °C ; <b>30 min</b> donnent environ 28 °C. Le palier de 30 min suffit.</p>
+      <p><b>c)</b> À 3 °C/min, l'écart tombe à environ 37 °C seulement, pour un cycle d'environ 6 h, contre environ 2 h 30 avec la montée à 10 °C/min et le palier de 30 min. Le palier sous le solidus est bien plus efficace qu'une montée lente.</p>
+      <p><b>d)</b> La constante de temps double (≈ 1 570 s). Il faut environ <b>80 min</b> de palier pour passer sous 30 °C (≈ 29,6 °C). Doubler l'épaisseur fait presque tripler le palier, car l'écart de départ double aussi. D'où l'intérêt de charger ensemble des pièces d'épaisseurs voisines.</p>
+    </div></details>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="quiz-s">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">?</div>
+    <div class="c-title"><h2>Quiz : 12 questions éclair</h2><p>Chaque réponse est expliquée, même quand tu as juste</p></div>
+    <div class="c-img"><span class="ico">🎯</span><span><small>Image à retenir</small>La cible : vise 10 sur 12</span></div>
+  </div>
+  <div id="quiz"></div>
+  <div class="score" id="qzScore" aria-live="polite">Score : 0 / 12</div>
+  <div class="btns"><button class="btn" id="qzReset" type="button">↺ Recommencer le quiz</button></div>
+</div>
+</section>
+
+<section class="chap" id="fiche">
+<div class="wrap wide">
+  <div class="cartouche">
+    <div class="c-num">★</div>
+    <div class="c-title"><h2>Fiche mémoire du cours 3</h2><p>Neuf cases, neuf images : à photographier, puis à redessiner de tête</p></div>
+    <div class="c-img"><span class="ico">📸</span><span><small>Image à retenir</small>Le musée du brasage, salle 3</span></div>
+  </div>
+  <div class="fiche">
+    <div><div class="ic">🧰</div><h4>La caisse à outils</h4><div class="f">91x local · 92x global</div><p>Peu de joints : chauffe le joint (912, 916, 918). Beaucoup de joints ou oxydes tenaces : chauffe la pièce (921, 922). Soudobrasage : 972.</p></div>
+    <div><div class="ic">🍳</div><h4>La poêle et la crêpe</h4><div class="f"><span class="eps">Q</span> = <span class="mat">m</span><span class="mat">c</span>Δ<span class="sig">T</span></div><p>Raccord de 60 g : 15,7 kJ. Chauffer d'abord la pièce massive, balayer, présenter la baguette sur les pièces chaudes.</p></div>
+    <div><div class="ic">🎚️</div><h4>Le réglage de flamme</h4><div class="f">neutre · réductrice · oxydante</div><p>Neutre ou légèrement réductrice pour l'argent et le CuP ; légèrement oxydante pour le laiton. Flux clair = moment de l'apport.</p></div>
+    <div><div class="ic">🍲</div><h4>La plaque à induction</h4><div class="f"><span class="eps">δ</span> ≈ 503√(<span class="mat">ρ</span>/(<span class="mat">μ<sub>r</sub></span><span class="mat">f</span>))</div><p>Haute fréquence, peau fine. Cuivre 0,66 mm à 10 kHz ; acier au-delà de 770 °C : δ bondit (Curie).</p></div>
+    <div><div class="ic">🍞</div><h4>Le pain au four</h4><div class="f"><span class="eps">τ</span> ≈ <span class="mat">ρ</span><span class="mat">c</span><span class="mat">e</span>/(2<span class="mat">h</span>)</div><p>La bride traîne de v·τ. Palier 20 à 50 °C sous le solidus, puis brasage court. Thermocouples de charge.</p></div>
+    <div><div class="ic">🌊</div><h4>La vague et le four</h4><div class="f"><span class="gam">TAL</span> = Δ<span class="sig">T</span>(1/<span class="mat">v<sub>m</sub></span> + 1/<span class="mat">v<sub>r</sub></span>)</div><p>45 à 90 s au-dessus du liquidus ; pic 205 à 230 °C (étain-plomb), 235 à 250 °C (SAC).</p></div>
+    <div><div class="ic">🧱</div><h4>Le mur de laiton</h4><div class="f">chanfrein, sans capillarité</div><p>Soudobrasage : fonte au laiton (flamme oxydante, FH21) ; tôles galvanisées au CuSi3 (972), le zinc bout à 907 °C.</p></div>
+    <div><div class="ic">📜</div><h4>La recette signée</h4><div class="f">pDMOB → épreuve → PV → DMOB</div><p>ISO 17779. Variables essentielles : procédé, matériaux, joint, apport, flux, dimensions… hors domaine : requalifier.</p></div>
+    <div><div class="ic">🦺</div><h4>Le braseur protégé</h4><div class="f">ISO 13585 : 3 ans, signé tous les 6 mois</div><p>Fumées (zinc, fluorures, colophane), gaz, hydrogène, champs d'induction : aspiration, purges, distances.</p></div>
+  </div>
+  <div class="mnemo">🏛 <b>La visite du musée, salle 3</b> (2 minutes, les yeux fermés) : à l'entrée, une grande <b>caisse à outils</b> 🧰 ouverte sur des chalumeaux, des bobines et une porte de four. Dans la cuisine du musée, un cuisinier chauffe une <b>poêle</b> 🍳 en fonte avant d'y verser la pâte à crêpe, puis règle la <b>flamme</b> 🎚️ de sa gazinière du bleu au jaune. À côté, une casserole chauffe sur une <b>plaque à induction</b> 🍲, et un boulanger sort un <b>pain</b> 🍞 dont la croûte est dorée mais la mie encore tiède. Par la fenêtre, une <b>vague</b> 🌊 d'étain fondu lèche une carte électronique ; au fond du jardin, un maçon jointoie un <b>mur</b> 🧱 au laiton. À la sortie, on signe une <b>recette</b> 📜 sous les yeux d'un témoin, et l'on enfile son <b>gilet</b> 🦺 avant de repartir.</div>
+</div>
+</section>
+
+<section class="chap" id="gloss">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">A–Z</div>
+    <div class="c-title"><h2>Glossaire</h2><p>Les mots, symboles et sigles de ce cours</p></div>
+    <div class="c-img"><span class="ico">📖</span><span><small>Image à retenir</small>Le dictionnaire : un mot flou, un clic</span></div>
+  </div>
+  <dl class="gloss">
+    <dt>BPQR, BPS, pBPS</dt><dd>Sigles anglais de l'ISO 17779 : procès-verbal de qualification du mode opératoire de brasage ; descriptif de mode opératoire qualifié (DMOB) ; descriptif préliminaire (pDMOB).</dd>
+    <dt>Braseur, opérateur de brasage</dt><dd>Personne qui tient elle-même la source de chaleur (chalumeau) ; personne qui prépare et règle une installation mécanisée (induction, four). Qualifiés selon l'ISO 13585.</dd>
+    <dt>c</dt><dd>Capacité thermique massique (J/(kg·K)) : 385 pour le cuivre, environ 460 à 500 pour l'acier.</dd>
+    <dt>CAB</dt><dd><i>Controlled atmosphere brazing</i> : brasage de l'aluminium au four sous azote, avec un flux FL20 non corrosif.</dd>
+    <dt>Carrousel</dt><dd>Plateau tournant qui fait défiler les pièces devant des brûleurs fixes : brasage à la flamme mécanisé.</dd>
+    <dt>Chauffage local, global</dt><dd>Chauffage de la seule zone du joint (flamme, induction, résistance, laser) ; de tout l'assemblage (four, bain).</dd>
+    <dt>Crème à braser</dt><dd>Poudre d'alliage de brasage tendre dispersée dans un flux, déposée par sérigraphie avant la refusion.</dd>
+    <dt>δ</dt><dd>Profondeur de pénétration des courants induits (m) ; environ 86 % de la puissance est dissipée dans cette couche.</dd>
+    <dt>DMOB</dt><dd>Descriptif de mode opératoire de brasage, qualifié par un procès-verbal (QMOB) ; document d'atelier.</dd>
+    <dt>e, h</dt><dd>Épaisseur d'une pièce (m) ; coefficient d'échange thermique entre le four et la pièce (W/(m²·K)).</dd>
+    <dt>EN 12797, EN 12799</dt><dd>Normes des essais destructifs et des contrôles non destructifs des joints brasés.</dd>
+    <dt>f</dt><dd>Fréquence du courant d'induction (Hz).</dd>
+    <dt>Flamme neutre, réductrice, oxydante</dt><dd>Réglage stœchiométrique ; avec excès de combustible (panache) ; avec excès d'oxygène (dard court et sifflant).</dd>
+    <dt>I, R, Q</dt><dd>Intensité (A), résistance (Ω) et chaleur dégagée Q = R·I²·t (J) en brasage par résistance ; Q désigne aussi l'énergie de chauffe m·c·ΔT.</dd>
+    <dt>Inducteur</dt><dd>Bobine de cuivre refroidie à l'eau qui crée le champ magnétique alternatif.</dd>
+    <dt>ISO 11745</dt><dd>Qualification du brasage pour l'aéronautique.</dd>
+    <dt>ISO 13585</dt><dd>Qualification des braseurs et des opérateurs de brasage : validité de 3 ans, confirmée tous les 6 mois par l'employeur.</dd>
+    <dt>ISO 17779</dt><dd>Descriptif et qualification d'un mode opératoire de brasage fort pour les matériaux métalliques.</dd>
+    <dt>ISO 4063</dt><dd>Numéros des procédés : 911 à 926 pour le brasage fort, groupes 94 et 95 pour le brasage tendre, 972 pour le soudobrasage à l'arc.</dd>
+    <dt>m</dt><dd>Masse (kg).</dd>
+    <dt>μ<sub>r</sub>, ρ</dt><dd>Perméabilité magnétique relative (sans unité) ; résistivité électrique (Ω·m). Au chapitre 4, ρ désigne la masse volumique (kg/m³).</dd>
+    <dt>Palier d'homogénéisation</dt><dd>Maintien à 20 à 50 °C sous le solidus de l'apport, qui laisse les pièces massives rattraper les pièces minces.</dd>
+    <dt>Point de Curie</dt><dd>Température (≈ 770 °C pour le fer) au-dessus de laquelle l'acier n'est plus magnétique : μ<sub>r</sub> tombe à 1.</dd>
+    <dt>Profil de refusion</dt><dd>Courbe température-temps d'un four de refusion : préchauffage, maintien, refusion, refroidissement.</dd>
+    <dt>Refusion, vague</dt><dd>Brasage tendre par fusion d'une crème à braser dans un four ; par passage de la carte sur une vague d'étain fondu.</dd>
+    <dt>Soudobrasage</dt><dd>Dépôt d'un apport de brasage fort dans un chanfrein, comme une soudure, sans fondre le métal de base (au chalumeau, à l'arc, au laser).</dd>
+    <dt>Soudure froide</dt><dd>Joint brasé tendre terne et granuleux : la brasure a fondu sans que les pièces atteignent la température de mouillage.</dd>
+    <dt>TAL</dt><dd><i>Time above liquidus</i> : temps passé au-dessus du liquidus pendant la refusion.</dd>
+    <dt>τ</dt><dd>Constante de temps thermique d'une pièce dans un four (s) : ρ·c·e/(2h).</dd>
+    <dt>Thermocouple de charge</dt><dd>Capteur de température fixé sur une pièce de la charge (la plus massive, la plus mince) pour piloter le cycle.</dd>
+    <dt>v, v<sub>m</sub>, v<sub>r</sub></dt><dd>Vitesse de montée de la consigne d'un four ; vitesses de montée et de refroidissement d'un profil de refusion (°C/s).</dd>
+    <dt>Variable essentielle</dt><dd>Paramètre dont le changement hors du domaine qualifié impose une nouvelle qualification du mode opératoire.</dd>
+  </dl>
+</div>
+</section>
+
+<section class="chap" id="check">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✓</div>
+    <div class="c-title"><h2>Suis-je prêt pour la suite ?</h2><p>Dix points à cocher de tête</p></div>
+    <div class="c-img"><span class="ico">🚦</span><span><small>Image à retenir</small>Le feu passe au vert quand tout est coché</span></div>
+  </div>
+  <p>Coche seulement ce que tu sais faire <b>sans regarder</b>. Tes coches restent enregistrées dans ce navigateur.</p>
+  <div class="check" id="checklist">
+    <label><input type="checkbox" data-c="1"> <span>Je sais distinguer chauffage local et global, et citer les numéros ISO 4063 des principaux procédés de brasage.</span></label>
+    <label><input type="checkbox" data-c="2"> <span>Je sais choisir un procédé selon la série, la pièce, les joints, les matériaux et le lieu.</span></label>
+    <label><input type="checkbox" data-c="3"> <span>Je sais régler une flamme et décrire le geste du brasage au chalumeau.</span></label>
+    <label><input type="checkbox" data-c="4"> <span>Je sais calculer l'énergie de chauffe d'une pièce et expliquer pourquoi on chauffe d'abord la pièce massive.</span></label>
+    <label><input type="checkbox" data-c="5"> <span>Je sais calculer une profondeur de pénétration et choisir une fréquence d'induction.</span></label>
+    <label><input type="checkbox" data-c="6"> <span>Je sais construire un cycle de four avec un palier d'homogénéisation et justifier sa durée.</span></label>
+    <label><input type="checkbox" data-c="7"> <span>Je sais lire un profil de refusion et calculer un temps au-dessus du liquidus.</span></label>
+    <label><input type="checkbox" data-c="8"> <span>Je sais expliquer le soudobrasage et ses usages (fonte, tôles galvanisées).</span></label>
+    <label><input type="checkbox" data-c="9"> <span>Je sais décrire la qualification d'un mode opératoire selon l'ISO 17779 et reconnaître une variable essentielle.</span></label>
+    <label><input type="checkbox" data-c="10"> <span>Je connais la qualification des braseurs (ISO 13585) et les principaux risques du brasage.</span></label>
+  </div>
+  <p class="status" id="checkMsg"></p>
+
+  <div class="meta">🔭 <b>Au prochain épisode, cours 4 : concevoir et contrôler, dernier cours de la série.</b> On saura chauffer et qualifier ; reste à bien dessiner le joint et à le juger. On calculera la longueur de recouvrement nécessaire et la répartition des contraintes dans un joint à recouvrement, puis on verra les contraintes thermiques et la fissuration par métal liquide, qui imposent parfois un détensionnement. Ensuite viendra le brasage de chaque famille de matériaux, des aciers aux céramiques. Le cours se terminera par les imperfections des joints brasés et leurs contrôles, destructifs et non destructifs.</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+  <p>Cours 3 sur 4 de la série « Brasage fort et brasage tendre : de la goutte qui mouille au joint qualifié » (sujet 1.16 du planning). Vocabulaire aligné sur l'ISO 857-2, l'ISO 4063 et l'ISO 17779 ; pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+</div>
+</footer>
+<script>
+(function(){
+"use strict";
+const NS="http://www.w3.org/2000/svg";
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function el(tag,attrs,parent){
+  const e=document.createElementNS(NS,tag);
+  if(attrs){for(const k in attrs){const v=attrs[k];if(v===undefined||v===null)continue;
+    if(typeof v==="string"&&v.indexOf("var(")>=0&&k!=="style")e.style.setProperty(k,v);else e.setAttribute(k,v);}}
+  if(parent)parent.appendChild(e);
+  return e;
+}
+function tx(p,x,y,str,attrs){const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);t.textContent=str;return t;}
+function txs(p,x,y,parts,attrs){/* parts: [["σ",""],["max","sub"],[" = 3",""]] */
+  const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);
+  parts.forEach(pt=>{const s=el("tspan",pt[1]==="sub"?{"font-size":"0.72em",dy:"3"}:(pt[2]?{dy:pt[2]}:{}),t);s.textContent=pt[0];
+    if(pt[1]==="sub"){const r=el("tspan",{dy:"-3"},t);r.textContent="\u200b";}});
+  return t;
+}
+function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild);}
+function fitText(t,x0,x1,gap){/* garde un texte SVG entre x0 et x1 : il passe de l'autre côté de son repère (écart gap), sinon il glisse */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const a=t.getAttribute("text-anchor")||"start",x=+t.getAttribute("x");
+  if(gap&&a!=="middle"&&(b.x<x0||b.x+b.width>x1)){t.setAttribute("text-anchor",a==="end"?"start":"end");t.setAttribute("x",a==="end"?x+2*gap:x-2*gap);b=t.getBBox();}
+  const nx=+t.getAttribute("x");
+  if(b.x+b.width>x1)t.setAttribute("x",nx-(b.x+b.width-x1));else if(b.x<x0)t.setAttribute("x",nx+(x0-b.x));
+  return t;}
+function arrow(p,x1,y1,x2,y2,color,w,h){
+  w=w||2.4;h=h||10;
+  const g=el("g",{class:"arr"},p);g.style.color=color||"var(--ink)";
+  const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy);
+  if(L<1)return g;
+  const ux=dx/L,uy=dy/L,hh=Math.min(h,L*0.6),bx=x2-ux*hh,by=y2-uy*hh,hw=hh*0.45+w*0.3;
+  el("line",{x1:x1,y1:y1,x2:bx,y2:by,"stroke-width":w,"stroke-linecap":"round"},g);
+  el("polygon",{points:x2+","+y2+" "+(bx-uy*hw)+","+(by+ux*hw)+" "+(bx+uy*hw)+","+(by-ux*hw)},g);
+  return g;
+}
+function darrow(p,x,y1,y2,color,w){/* double flèche verticale */
+  const g=el("g",{},p);const m=(y1+y2)/2;
+  if(Math.abs(y2-y1)<4){el("line",{x1:x-5,y1:y1,x2:x+5,y2:y1,stroke:color,"stroke-width":2},g);return g;}
+  arrow(g,x,m,x,y1,color,w||2,8);arrow(g,x,m,x,y2,color,w||2,8);return g;
+}
+function nf(v,d){
+  if(d===undefined)d=1;
+  if(Math.abs(v)<0.5*Math.pow(10,-d))v=0;
+  return v.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d}).replace("-","−").replace(/[\u202f\u2009]/g,"\u00a0");
+}
+const SUP={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sci(v,d){
+  if(v===0)return "0";
+  if(!isFinite(v))return "∞";
+  let e=Math.floor(Math.log10(Math.abs(v)));
+  let m=v/Math.pow(10,e);
+  const dd=d===undefined?1:d;
+  if(Math.abs(Number(m.toFixed(dd)))>=10){m/=10;e+=1;}
+  return nf(m,dd)+" × 10"+String(e).split("").map(c=>SUP[c]).join("");
+}
+function bigN(v){/* nombre de cycles lisible */
+  if(!isFinite(v))return "∞";
+  if(v===0)return "0";
+  if(v<10)return nf(v,v<1?2:0);
+  if(v<1e5)return nf(Math.round(v),0);
+  return sci(v,1);
+}
+function dur(s){
+  if(!isFinite(s))return "∞";
+  if(s<60)return nf(s,s<10?1:0)+" s";
+  if(s<3600)return nf(s/60,0)+" min";
+  if(s<86400)return nf(s/3600,1)+" h";
+  if(s<86400*365)return nf(s/86400,1)+" jours";
+  return nf(s/(86400*365),1)+" ans";
+}
+function svgW(svg){const r=svg.getBoundingClientRect();return Math.max(290,Math.round(r.width||(svg.parentNode&&svg.parentNode.clientWidth)||600));}
+function setVB(svg,W,H){svg.setAttribute("viewBox","0 0 "+W+" "+H);}
+const redraws=[];
+let rzT=null,lastWW=window.innerWidth;
+window.addEventListener("resize",()=>{if(window.innerWidth===lastWW)return;lastWW=window.innerWidth;clearTimeout(rzT);rzT=setTimeout(()=>redraws.forEach(f=>{try{f();}catch(e){console.error(e);}}),120);});
+
+function niceStep(range,n){const raw=range/(n||5),p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<1.5?1:m<3?2:m<7?5:10)*p;}
+function setOn(sel,btn){$$(sel+" .btn").forEach(b=>b.classList.toggle("on",b===btn));}
+function fmtmm(mm){return mm<0.1?nf(mm*1000,0)+" µm":mm<10?nf(mm,mm<1?2:1)+" mm":nf(mm,0)+" mm";}
+function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt,yfmt){
+  const X=v=>x0+(x1-x0)*(v-xmin)/(xmax-xmin),Y=v=>y1-(y1-y0)*(v-ymin)/(ymax-ymin);
+  for(let v=Math.ceil(ymin/ystep-1e-9)*ystep;v<=ymax+1e-9;v+=ystep){el("line",{x1:x0,y1:Y(v),x2:x1,y2:Y(v),class:"gridbg"},svg);tx(svg,x0-5,Y(v)+4,yfmt?yfmt(v):nf(v,ystep<1?1:0),{class:"lbl","text-anchor":"end"});}
+  for(let v=Math.ceil(xmin/xstep-1e-9)*xstep;v<=xmax+1e-9;v+=xstep){el("line",{x1:X(v),y1:y1,x2:X(v),y2:y1+4,class:"tick"},svg);tx(svg,X(v),y1+17,xfmt?xfmt(v):nf(v,xstep<1?1:0),{class:"lbl","text-anchor":"middle"});}
+  el("line",{x1:x0,y1:y1,x2:x1,y2:y1,class:"axis"},svg);el("line",{x1:x0,y1:y0-4,x2:x0,y2:y1,class:"axis"},svg);
+  tx(svg,x0+4,y0-10,ylab,{class:"lbl"});tx(svg,x1,y1+32,xlab,{class:"lbl","text-anchor":"end"});
+  return {X:X,Y:Y};
+}
+function animate(btn,label,dur,onStep,onEnd){
+  let raf=null,run=false;
+  function stop(){run=false;if(raf)cancelAnimationFrame(raf);raf=null;btn.textContent=label;}
+  function start(){if(run){stop();return;}if(RM){onStep(1);stop();if(onEnd)onEnd();return;}
+    run=true;btn.textContent="⏸ Pause";const t0=performance.now();
+    const step=now=>{const p=Math.min(1,(now-t0)/dur);onStep(p);if(p>=1){stop();if(onEnd)onEnd();return;}raf=requestAnimationFrame(step);};raf=requestAnimationFrame(step);}
+  btn.addEventListener("click",start);return {stop:stop,running:()=>run};
+}
+
+
+function sig2(v){/* arrondi à deux chiffres significatifs */
+  if(v<=0)return 0;const p=Math.pow(10,Math.floor(Math.log10(v))-1);return Math.round(v/p)*p;}
+function halo(t,svg){/* liseré de fond, puis passage au premier plan */
+  t.setAttribute("paint-order","stroke");t.style.setProperty("stroke","var(--card)");t.setAttribute("stroke-width","4");t.setAttribute("stroke-linejoin","round");if(svg)svg.appendChild(t);return t;}
+function plate(t,svg){/* fond plein derrière une étiquette */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const r=el("rect",{x:b.x-3,y:b.y-1,width:b.width+6,height:b.height+2,fill:"var(--card)",opacity:.92,rx:2});svg.appendChild(r);svg.appendChild(t);return t;}
+function le(n,f){return /^[aeiouyhéèâî]/i.test(n)?"l'"+n:(f?"la ":"le ")+n;}
+function du(n,f){return /^[aeiouyhéèâî]/i.test(n)?"de l'"+n:(f?"de la ":"du ")+n;}
+function fmtG(v){return nf(v,v<0.1?3:2)+" N/m";}
+function fmtPa(p){return p<1000?nf(p,0)+" Pa":p<1e5?nf(p/1000,1)+" kPa":nf(p/1e5,2)+" bar";}
+function fmtLen(m){/* m en mètres */
+  const mm=m*1000;if(mm<1)return nf(mm*1000,0)+" µm";if(mm<10)return nf(mm,1)+" mm";if(mm<1000)return nf(mm,0)+" mm";return nf(m,1)+" m";}
+function fmtT(s){if(!isFinite(s))return "∞";if(s<0.01)return nf(s*1000,1)+" ms";if(s<1)return nf(s,3)+" s";if(s<60)return nf(s,s<10?1:0)+" s";return nf(s/60,s<600?1:0)+" min";}
+
+function spread(items,gap,ymin,ymax){/* écarte verticalement des étiquettes {y} triées */
+  items.sort((a,b)=>a.y-b.y);
+  for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;
+  if(items.length&&items[items.length-1].y>ymax){items[items.length-1].y=ymax;for(let i=items.length-2;i>=0;i--)if(items[i+1].y-items[i].y<gap)items[i].y=items[i+1].y-gap;}
+  if(items.length&&items[0].y<ymin){items[0].y=ymin;for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;}
+  return items;}
+function declutter(ts,ymin,ymax){/* décale verticalement les textes qui se chevauchent */
+  const box=t=>{try{return t.getBBox();}catch(e){return null;}};
+  for(let i=1;i<ts.length;i++){const ti=ts[i];if(!ti)continue;
+    for(let pass=0;pass<6;pass++){const bi=box(ti);if(!bi)break;let moved=false;
+      for(let j=0;j<i;j++){const bj=ts[j]&&box(ts[j]);if(!bj)continue;
+        const ix=Math.min(bi.x+bi.width,bj.x+bj.width)-Math.max(bi.x,bj.x),iy=Math.min(bi.y+bi.height,bj.y+bj.height)-Math.max(bi.y,bj.y);
+        if(ix>1&&iy>1){let dy=(bi.y+bi.height/2>=bj.y+bj.height/2)?(bj.y+bj.height-bi.y+1):-(bi.y+bi.height-bj.y+1);
+          if(bi.y+dy<ymin||bi.y+bi.height+dy>ymax)dy=dy>0?-(bi.y+bi.height-bj.y+1):(bj.y+bj.height-bi.y+1);
+          ti.setAttribute("y",+ti.getAttribute("y")+dy);moved=true;break;}}
+      if(!moved)break;}}
+  return ts;}
+const SUPD={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function p10(e){return "10"+String(e).split("").map(c=>SUPD[c]||c).join("");}
+function fmtP(p){/* pression en Pa, lisible */
+  if(p>=1e5)return nf(p/1e5,1)+" bar";if(p>=1000)return nf(p/1000,p<1e4?1:0)+" kPa";if(p>=1)return nf(p,p<10?1:0)+" Pa";return sci(p,1)+" Pa";}
+
+
+/* =========================================================
+   M1 : choisir le procédé
+   ========================================================= */
+(function(){
+  const svg=$("#m1svg");if(!svg)return;
+  const ss=$("#m1s"),ro=$("#m1r"),msg=$("#m1msg");
+  const P=[
+    {n:"Flamme manuelle (912)",m:{cu:1,acier:.9,inox:.6,alu:.4,carbure:.7,galva:.2,elec:.05},s:[0,3.5],j:{"1":1,few:.8,many:.15},z:{s:1,m:1,l:1},site:1,why:"transportable et souple, pour quelques joints accessibles ; sa limite est la cadence et la répétabilité, qui reposent sur le braseur"},
+    {n:"Flamme mécanisée (912)",m:{cu:1,acier:.9,inox:.6,alu:.5,carbure:.6,galva:0,elec:0},s:[3,6],j:{"1":1,few:.7,many:.2},z:{s:1,m:.8,l:.3},site:0,why:"brûleurs fixes et carrousel : cadence et répétabilité pour des pièces simples, avec apport en anneau"},
+    {n:"Induction (916)",m:{cu:.9,acier:1,inox:.8,alu:.5,carbure:1,galva:0,elec:.05},s:[2,6],j:{"1":1,few:.6,many:.15},z:{s:1,m:.9,l:.5},site:0,why:"chauffe localisée en quelques secondes, répétable et automatisable ; un inducteur par forme de pièce"},
+    {n:"Résistance (918)",m:{cu:.8,acier:.6,inox:.4,alu:.2,carbure:.5,galva:0,elec:.3},s:[2.5,6],j:{"1":1,few:.4,many:.1},z:{s:1,m:.5,l:.2},site:0,why:"courant à travers le joint : petites pièces, contacts électriques, connecteurs"},
+    {n:"Four sous atmosphère (921)",m:{cu:.7,acier:1,inox:.7,alu:0,carbure:.6,galva:0,elec:0},s:[3,6],j:{"1":.5,few:.8,many:1},z:{s:1,m:.9,l:.5},site:0,why:"tous les joints en un passage, sans flux, avec une atmosphère réductrice : le brasage au cuivre des aciers en grande série"},
+    {n:"Four CAB, aluminium (921)",m:{cu:0,acier:0,inox:0,alu:1,carbure:0,galva:0,elec:0},s:[4,6.5],j:{"1":.4,few:.8,many:1},z:{s:1,m:1,l:.6},site:0,why:"four continu sous azote avec flux FL20 : échangeurs en aluminium en très grande série"},
+    {n:"Four sous vide (922)",m:{cu:.5,acier:.6,inox:1,alu:.8,carbure:.7,galva:0,elec:0},s:[0.5,4.5],j:{"1":.4,few:.8,many:1},z:{s:1,m:1,l:.6},site:0,why:"joints nombreux et cachés, oxydes tenaces (inox, superalliages, titane), sans flux ni nettoyage"},
+    {n:"Bain de sel ou de flux (923 à 926)",m:{cu:.3,acier:.4,inox:.2,alu:.6,carbure:.3,galva:0,elec:0},s:[2,5],j:{"1":.4,few:.7,many:.8},z:{s:1,m:.7,l:.3},site:0,why:"chauffe très rapide et uniforme par immersion, assemblages complexes en aluminium"},
+    {n:"Fer à braser (tendre)",m:{cu:.3,acier:0,inox:0,alu:0,carbure:0,galva:0,elec:1},s:[0,3],j:{"1":1,few:.7,many:.2},z:{s:1,m:.2,l:0},site:.6,why:"retouches, réparations et petites séries en électronique"},
+    {n:"Vague (tendre)",m:{cu:0,acier:0,inox:0,alu:0,carbure:0,galva:0,elec:.8},s:[3,6.5],j:{"1":.2,few:.6,many:1},z:{s:1,m:.8,l:.2},site:0,why:"cartes à composants traversants, en grande série"},
+    {n:"Refusion (tendre)",m:{cu:0,acier:0,inox:0,alu:0,carbure:0,galva:0,elec:1},s:[3,6.5],j:{"1":.2,few:.6,many:1},z:{s:1,m:.8,l:.2},site:0,why:"cartes à composants montés en surface : crème sérigraphiée et four à profil"},
+    {n:"Soudobrasage arc, laser (972, 913)",m:{cu:0,acier:.5,inox:.2,alu:0,carbure:0,galva:1,elec:0},s:[0,6.5],j:{"1":1,few:.9,many:.3},z:{s:.8,m:1,l:1},site:.5,why:"apport CuSi3 déposé comme une soudure : peu de chaleur, zinc préservé sur les tôles galvanisées"}];
+  const ctx={mat:"cu",size:"s",joints:"1",site:"atelier"};
+  const NOf=()=>Math.round(Math.pow(10,6*(+ss.value)/1000));
+  function score(p,N){const lg=Math.log10(Math.max(1,N));let d=0;if(lg<p.s[0])d=p.s[0]-lg;else if(lg>p.s[1])d=lg-p.s[1];
+    const sf=Math.exp(-d*d/0.8);return 100*p.m[ctx.mat]*sf*p.j[ctx.joints]*p.z[ctx.size]*(ctx.site==="chantier"?p.site:1);}
+  function draw(){
+    const W=svgW(svg),narrow=W<520,N=NOf();$("#m1so").textContent=(N>=1000?nf(N,0):N)+" pièce"+(N>1?"s":"")+"/an";
+    const R=P.map(p=>({p:p,sc:score(p,N)})).sort((a,b)=>b.sc-a.sc),top=R.slice(0,narrow?6:8);
+    const rowH=narrow?34:30,H=26+top.length*rowH+6;setVB(svg,W,H);clear(svg);
+    const x0=narrow?12:272,x1=W-46,X=v=>x0+(x1-x0)*v/100;
+    top.forEach((r,i)=>{const y=26+i*rowH;
+      if(narrow){const t=tx(svg,12,y+2,(i===0?"★ ":"")+r.p.n,{"font-size":"12","font-weight":i===0?"700":"400"});
+        el("rect",{x:x0,y:y+7,width:Math.max(2,X(r.sc)-x0),height:12,rx:3,fill:i===0?"var(--eps)":"var(--muted)",opacity:i===0?1:.55},svg);
+        tx(svg,X(r.sc)+5,y+18,nf(r.sc,0),{"font-size":"11.5"});}
+      else{const t=tx(svg,x0-8,y+13,(i===0?"★ ":"")+r.p.n,{"font-size":"12.5","text-anchor":"end","font-weight":i===0?"700":"400"});
+        el("rect",{x:x0,y:y+2,width:Math.max(2,X(r.sc)-x0),height:15,rx:3,fill:i===0?"var(--eps)":"var(--muted)",opacity:i===0?1:.55},svg);
+        tx(svg,X(r.sc)+5,y+14,nf(r.sc,0),{"font-size":"11.5"});}});
+    tx(svg,narrow?12:x0,12,"adéquation (sur 100)",{class:"lbl"});
+    const b=R[0],s=R[1];
+    const sh=n=>n.replace(/ \(.*\)$/,"");ro.innerHTML="<span>série : <b class='mat'>"+nf(N,0)+"/an</b></span><span>1<sup>er</sup> : <b class='eps'>"+sh(b.p.n)+"</b> ("+nf(b.sc,0)+")</span><span>2<sup>e</sup> : "+sh(s.p.n)+" ("+nf(s.sc,0)+")</span>";
+    let m;
+    if(b.sc<15)m="❌ Aucun procédé ne convient bien à cette combinaison : revois le matériau, le lieu ou la série.";
+    else m="★ <b>"+b.p.n+"</b> : "+b.p.why+"."+(s.sc>0.75*b.sc?" Très proche : <b>"+s.p.n+"</b> ("+s.p.why+").":"");
+    if(ctx.site==="chantier")m+=" Sur chantier, seuls les procédés transportables restent possibles.";
+    if(ctx.mat==="inox"&&b.p.n.indexOf("Flamme")===0)m+=" Sur l'inox, la flamme exige un flux FH12 et un soin particulier ; dès que la série grandit, le four sous vide reprend l'avantage.";
+    msg.innerHTML=m;
+  }
+  const A=animate($("#m1play"),"▶ Faire grandir la série",5000,p=>{ss.value=Math.round(1000*p);draw();});
+  ss.addEventListener("input",()=>{A.stop();draw();});
+  [["#m1mat","mat"],["#m1size","size"],["#m1joints","joints"],["#m1site","site"]].forEach(g=>$$(g[0]+" .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();ctx[g[1]]=b.dataset.k;setOn(g[0],b);draw();})));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M2 : chauffer un emboîtement au chalumeau
+   ========================================================= */
+(function(){
+  const svg=$("#m2svg");if(!svg)return;
+  const sP=$("#m2P"),sf=$("#m2f"),st=$("#m2t"),ro=$("#m2r"),msg=$("#m2msg");
+  const AP={cup:{n:"CuP 284",w:700,o:850},ag:{n:"Ag 155",w:680,o:780},sn:{n:"Sn97Cu3",w:250,o:350}};
+  const Cs=0.060*385,Ct=0.030*385,Ls=0.4,Lt=1.0,K=4,TEND=90,DT=0.05;
+  let ka="cup";
+  function sim(){const P=(+sP.value)*1000,f=(+sf.value)/100,a=AP[ka];let Ts=20,Tt=20,t=0,ready=null,over=null,mx=20;const pts=[[0,20,20]];
+    let melt=false;
+    for(let i=1;i<=TEND/DT;i++){const Pe=ready&&i*DT>ready.t+8?0:P;const dTs=(f*Pe-Ls*(Ts-20)-K*(Ts-Tt))/Cs,dTt=((1-f)*Pe-Lt*(Tt-20)+K*(Ts-Tt))/Ct;Ts+=dTs*DT;Tt+=dTt*DT;t=i*DT;
+      if(Ts>=1083||Tt>=1083){melt=true;Ts=Math.min(Ts,1083);Tt=Math.min(Tt,1083);}
+      if(ready===null){mx=Math.max(mx,Ts,Tt);if(Ts>=a.w&&Tt>=a.w)ready={t:t,Ts:Ts,Tt:Tt};else if(over===null&&Math.max(Ts,Tt)>=a.o)over={t:t,Ts:Ts,Tt:Tt};}
+      if(i%10===0)pts.push([t,Ts,Tt]);}
+    return {pts:pts,ready:ready,over:over,mx:mx,a:a,melt:melt};}
+  function draw(){
+    const W=svgW(svg),narrow=W<520,H=narrow?374:356;setVB(svg,W,H);clear(svg);
+    $("#m2Po").textContent=nf(+sP.value,1)+" kW";$("#m2fo").textContent=(+sf.value)+" %";$("#m2to").textContent=(+st.value)+" s";
+    const S=sim(),a=S.a,t=+st.value,k=Math.min(S.pts.length-1,Math.round(t/(10*DT))),cur=S.pts[k],Ts=cur[1],Tt=cur[2];
+    /* schéma */
+    const sx0=14,sx1=W-14,sy=40,heat=T=>Math.max(0,Math.min(1,(T-20)/(a.o-20)));
+    el("rect",{x:sx0,y:sy,width:(sx1-sx0)*0.78,height:16,fill:"var(--paper-2)",stroke:"var(--ink)","stroke-width":1.2},svg);
+    el("rect",{x:sx0,y:sy,width:(sx1-sx0)*0.78,height:16,fill:"var(--sig)",opacity:.85*heat(Tt)},svg);
+    const rx0=sx0+(sx1-sx0)*0.55,rx1=sx1;
+    el("rect",{x:rx0,y:sy-10,width:rx1-rx0,height:36,fill:"var(--paper-2)",stroke:"var(--ink)","stroke-width":1.4},svg);
+    el("rect",{x:rx0,y:sy-10,width:rx1-rx0,height:36,fill:"var(--sig)",opacity:.85*heat(Ts)},svg);
+    const f=(+sf.value)/100,fxp=sx0+(sx1-sx0)*(0.32+0.5*f);
+    arrow(svg,fxp,4,fxp,sy-14,"var(--frc)",3,9);
+    const tl=[tx(svg,sx0+6,sy+31,"tube : "+nf(Tt,0)+" °C",{"font-size":"12"}),tx(svg,rx1-6,sy+43,"raccord : "+nf(Ts,0)+" °C",{"font-size":"12","text-anchor":"end"})];
+    const fl=tx(svg,fxp+8,14,"flamme",{"font-size":"11.5",fill:"var(--frc)"});fitText(fl,4,W-4);tl.forEach(x=>halo(x,svg));
+    /* graphique */
+    const x0=narrow?44:56,x1=W-14,y0=narrow?118:112,y1=H-40,Tm=Math.max(a.o+100,1000*(ka==="sn"?0.45:1));
+    const ax=axes(svg,x0,x1,y0,y1,0,TEND,0,Tm,"temps (s)","T (°C)",narrow?30:15,ka==="sn"?100:200,v=>nf(v,0),v=>nf(v,0));
+    const X=ax.X,Y=ax.Y;
+    el("rect",{x:x0,y:Y(Tm),width:x1-x0,height:Y(a.o)-Y(Tm),fill:"var(--tau)",opacity:.1},svg);
+    el("line",{x1:x0,y1:Y(a.w),x2:x1,y2:Y(a.w),stroke:"var(--mat)","stroke-width":1.8,"stroke-dasharray":"7 4"},svg);
+    const lw=tx(svg,x0+6,Y(a.w)-5,"travail "+a.w+" °C",{"font-size":"11.5",fill:"var(--mat)"});halo(lw);
+    const lo=tx(svg,x1-6,Y(Tm)+13,"surchauffe",{"font-size":"11.5",fill:"var(--tau)","text-anchor":"end"});halo(lo);
+    let ds="",dt="";S.pts.forEach((p,i)=>{ds+=(i?"L":"M")+X(p[0]).toFixed(1)+" "+Y(Math.min(Tm,p[1])).toFixed(1)+" ";dt+=(i?"L":"M")+X(p[0]).toFixed(1)+" "+Y(Math.min(Tm,p[2])).toFixed(1)+" ";});
+    el("path",{d:ds,fill:"none",stroke:"var(--sig)","stroke-width":2.6},svg);
+    el("path",{d:dt,fill:"none",stroke:"var(--sig)","stroke-width":2.2,"stroke-dasharray":"6 4"},svg);
+    const last=S.pts[S.pts.length-1];
+    const L=[lw,lo,tx(svg,x1-4,Math.max(y0+28,Y(Math.min(Tm,last[1]))-6),"raccord",{"font-size":"11.5",fill:"var(--sig)","text-anchor":"end","font-weight":"700"}),tx(svg,x1-4,Math.max(y0+42,Y(Math.min(Tm,last[2]))+15),"tube",{"font-size":"11.5",fill:"var(--sig)","text-anchor":"end"})];
+    L.forEach(x=>halo(x,svg));declutter(L,y0,y1);
+    el("line",{x1:X(t),y1:y0,x2:X(t),y2:y1,stroke:"var(--ink)","stroke-width":1,"stroke-dasharray":"3 3"},svg);
+    if(S.ready)el("circle",{cx:X(S.ready.t),cy:Y(a.w),r:5.5,fill:"var(--eps)",stroke:"var(--card)","stroke-width":2},svg);
+    const r=S.ready;
+    ro.innerHTML="<span>à t = "+t+" s : raccord <b class='sig'>"+nf(Ts,0)+" °C</b></span><span>tube <b class='sig'>"+nf(Tt,0)+" °C</b></span><span>joint prêt : <b class='eps'>"+(r?nf(r.t,0)+" s":"non")+"</b></span>"+(r?"<span>écart alors : "+nf(Math.abs(r.Ts-r.Tt),0)+" °C</span>":"");
+    let m;
+    if(!r)m="❌ En "+TEND+" s, le joint n'atteint pas "+a.w+" °C partout"+(S.mx>=a.o?", et une pièce surchauffe":"")+" : "+(+sP.value<1?"flamme trop faible pour ces masses, le flux s'épuiserait":"répartis mieux la flamme")+".";
+    else if(S.over)m="⚠️ Surchauffe du "+(S.over.Ts>S.over.Tt?"raccord":"tube")+" ("+nf(Math.max(S.over.Ts,S.over.Tt),0)+" °C à "+nf(S.over.t,0)+" s) avant que l'autre pièce soit prête"+(ka==="ag"?" : le zinc fume, le flux noircit.":" : érosion, oxydation, cuivre recuit.");
+    else if(Math.abs(r.Ts-r.Tt)>60)m="⚠️ Joint prêt à "+nf(r.t,0)+" s, mais le "+(r.Tt>r.Ts?"tube":"raccord")+" a "+nf(Math.abs(r.Ts-r.Tt),0)+" °C d'avance : la brasure filera vers lui et mouillera mal l'autre pièce. Rééquilibre la flamme.";
+    else m="✅ Joint prêt en "+nf(r.t,0)+" s, avec seulement "+nf(Math.abs(r.Ts-r.Tt),0)+" °C d'écart entre raccord et tube : présente la baguette au bord du joint.";
+    if(S.melt)m+=" ❌ Le cuivre a atteint sa température de fusion : pièce perdue.";
+    if(r)m+=" La flamme est retirée 8 s après, le temps de présenter la baguette.";
+    if(+sP.value>3)m+=" Flamme très dure : attention à la surchauffe locale du point visé.";
+    msg.innerHTML=m;
+  }
+  const A=animate($("#m2play"),"▶ Chauffer",4500,p=>{st.value=Math.round(TEND*p);draw();});
+  [sP,sf,st].forEach(e=>e.addEventListener("input",()=>{if(e!==st)A.stop();draw();}));
+  $$("#m2ap .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();ka=b.dataset.k;setOn("#m2ap",b);draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M3 : la profondeur de pénétration
+   ========================================================= */
+(function(){
+  const svg=$("#m3svg");if(!svg)return;
+  const sf=$("#m3f"),se=$("#m3e"),ro=$("#m3r"),msg=$("#m3msg");
+  const MAT={cu:{n:"cuivre",d:[[1.7e-8,1],[5.5e-8,1],[5.5e-8,1]]},laiton:{n:"laiton",d:[[6.5e-8,1],[1.1e-7,1],[1.1e-7,1]]},alu:{n:"aluminium",d:[[2.7e-8,1],[8e-8,1],[8e-8,1]]},inox:{n:"inox austénitique",d:[[7.2e-7,1],[1.15e-6,1],[1.15e-6,1]]},acier:{n:"acier non allié",d:[[1.6e-7,200],[9e-7,50],[1.15e-6,1]]}};
+  const TL=["20 °C","≈ 700 °C","≈ 800 °C"];
+  let km="cu",kt=0;
+  const fOf=()=>Math.pow(10,1.69897+4.30103*(+sf.value)/1000),eOf=()=>Math.pow(10,-0.69897+2*(+se.value)/1000);
+  const del=(m,i,f)=>503*Math.sqrt(MAT[m].d[i][0]/(MAT[m].d[i][1]*f))*1000;/* mm */
+  const fmtf=f=>f<1000?nf(f,0)+" Hz":f<1e6?nf(f/1000,f<1e4?1:0)+" kHz":nf(f/1e6,1)+" MHz";
+  function draw(){
+    const W=svgW(svg),narrow=W<560,H=narrow?470:300;setVB(svg,W,H);clear(svg);
+    const f=fOf(),e=eOf(),d=del(km,kt,f),ratio=e/d;
+    $("#m3fo").textContent=fmtf(f);$("#m3eo").textContent=nf(e,e<1?2:1)+" mm";
+    const x0=narrow?50:58,x1=narrow?W-30:W*0.62,y0=24,y1=narrow?250:H-46;
+    const ax=axes(svg,x0,x1,y0,y1,Math.log10(50),6,-2,2,"fréquence (log)","δ (mm, log)",1,1,v=>fmtf(Math.pow(10,Math.round(v))),v=>{const p=Math.round(v);return p<0?nf(Math.pow(10,p),-p):nf(Math.pow(10,p),0);});
+    const X=v=>ax.X(Math.log10(v)),Y=v=>ax.Y(Math.max(-2,Math.min(2,Math.log10(v))));
+    Object.keys(MAT).forEach(m=>{const on=m===km;let p="";for(let i=0;i<=60;i++){const ff=Math.pow(10,Math.log10(50)+(6-Math.log10(50))*i/60),dd=del(m,kt,ff);p+=(i?"L":"M")+X(ff).toFixed(1)+" "+Y(dd).toFixed(1)+" ";}
+      el("path",{d:p,fill:"none",stroke:on?"var(--eps)":"var(--muted)","stroke-width":on?2.8:1.2,opacity:on?1:.6},svg);});
+    el("line",{x1:x0,y1:Y(e),x2:x1,y2:Y(e),stroke:"var(--mat)","stroke-width":2,"stroke-dasharray":"7 4"},svg);
+    const le_=tx(svg,x1-4,Y(e)-5,"e = "+nf(e,e<1?2:1)+" mm",{"font-size":"11.5",fill:"var(--mat)","text-anchor":"end"});halo(le_);
+    el("line",{x1:X(f),y1:y0,x2:X(f),y2:y1,stroke:"var(--sig)","stroke-width":1.2,"stroke-dasharray":"4 3"},svg);
+    el("circle",{cx:X(f),cy:Y(d),r:6,fill:"var(--eps)",stroke:"var(--card)","stroke-width":2},svg);
+    const ld=tx(svg,X(f)+8,Math.max(y0+18,Y(d)-8),"δ = "+(d<1?nf(d,2):nf(d,1))+" mm",{"font-size":"12",fill:"var(--eps)","font-weight":"700"});fitText(ld,x0,x1);halo(ld);declutter([le_,ld],y0+10,y1);
+    /* coupe de la paroi */
+    const cx0=narrow?20:x1+30,cx1=W-16,cy0=narrow?y1+60:50,cy1=narrow?H-24:H-60,cw=cx1-cx0;
+    tx(svg,cx0,cy0-12,"coupe de la paroi (puissance dissipée)",{class:"lbl"});
+    const n=40;for(let i=0;i<n;i++){const xx=e*i/n,p=Math.exp(-2*xx/d);el("rect",{x:cx0+cw*i/n,y:cy0,width:cw/n+0.6,height:cy1-cy0,fill:"var(--sig)",opacity:.9*p},svg);}
+    el("rect",{x:cx0,y:cy0,width:cw,height:cy1-cy0,fill:"none",stroke:"var(--ink)","stroke-width":1.4},svg);
+    const xd=cx0+cw*Math.min(1,d/e);el("line",{x1:xd,y1:cy0-4,x2:xd,y2:cy1+4,stroke:"var(--eps)","stroke-width":2,"stroke-dasharray":"4 3"},svg);
+    const ls=tx(svg,cx0,cy1+16,"surface (inducteur)",{"font-size":"11",fill:"var(--muted)"});
+    const lc=tx(svg,cx1,cy1+16,"cœur",{"font-size":"11",fill:"var(--muted)","text-anchor":"end"});
+    if(d<e){const t=tx(svg,xd+4,cy0+14,"δ",{"font-size":"14",fill:"var(--eps)","font-family":"var(--font-math)"});halo(t);}
+    else{const t=tx(svg,cx1-4,cy0+14,"δ > e",{"font-size":"12",fill:"var(--eps)","text-anchor":"end"});halo(t);}
+    const frac=1-Math.exp(-2*ratio);
+    const mm=MAT[km],dd=mm.d[kt];
+    ro.innerHTML="<span>ρ = "+sci(dd[0],2)+" Ω·m</span><span>μ<sub>r</sub> = "+dd[1]+"</span><span>δ = <b class='eps'>"+(d<1?nf(d,2):nf(d,1))+" mm</b></span><span>e/δ = <b>"+nf(ratio,ratio<10?1:0)+"</b></span><span>puissance dans l'épaisseur ≈ "+nf(100*frac,0)+" %</span>";
+    let m;
+    if(ratio>=2.5)m="✅ <b>Bon couplage</b> (e/δ = "+nf(ratio,1)+") : les courants restent dans une peau de "+(d<1?nf(d,2):nf(d,1))+" mm, la conduction répartit ensuite la chaleur.";
+    else if(ratio>=1)m="⚠️ Couplage moyen (e/δ = "+nf(ratio,1)+") : une partie du champ traverse la pièce. Monter un peu en fréquence améliore le rendement.";
+    else m="❌ <b>Couplage faible</b> (e/δ = "+nf(ratio,2)+") : δ dépasse l'épaisseur, le champ traverse la paroi sans y laisser beaucoup d'énergie. Il faut une fréquence plus élevée (δ varie comme 1/√f).";
+    if(km==="acier"&&kt<2)m+=" Au-delà de 770 °C (point de Curie), l'acier perd son magnétisme : choisis « vers 800 °C » pour voir δ bondir.";
+    if(km==="acier"&&kt===2)m+=" Au-dessus du point de Curie, μ<sub>r</sub> = 1 : δ est bien plus grande qu'à froid, la chauffe ralentit.";
+    msg.innerHTML=m;
+  }
+  const A=animate($("#m3play"),"▶ Monter en fréquence",5000,p=>{sf.value=Math.round(1000*p);draw();});
+  [sf,se].forEach(x=>x.addEventListener("input",()=>{A.stop();draw();}));
+  $$("#m3mat .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();km=b.dataset.k;setOn("#m3mat",b);draw();}));
+  $$("#m3tmp .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();kt=+b.dataset.k;setOn("#m3tmp",b);draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M4 : le cycle du four sous vide
+   ========================================================= */
+(function(){
+  const svg=$("#m4svg");if(!svg)return;
+  const sr=$("#m4r"),sd=$("#m4d"),se=$("#m4e"),ro=$("#m4r2"),msg=$("#m4msg");
+  const TSOL=970,TLIQ=1000,TB=1050,TST=950,TBH=15,RC=4.7e6,H=120,DT=2;
+  let tcur=null;
+  const tau=e=>RC*e/1000/(2*H);
+  function sim(){const r=(+sr.value)/60,tp=(+sd.value)*60,e=+se.value,ta=tau(2),tb=tau(e);
+    const segs=[];if(tp>0)segs.push(["r",TST],["h",tp]);segs.push(["r",TB],["h",TBH*60]);
+    let Tf=20,Ta=20,Tb=20,t=0;const pts=[[0,20,20,20]],o={};
+    const chk=()=>{if(!o.sol&&Ta>=TSOL)o.sol=[t,Ta,Tb];if(!o.liq&&Ta>=TLIQ)o.liq=[t,Ta,Tb];if(!o.tliq&&Tb>=TLIQ)o.tliq=t;};
+    let n=0;for(const s of segs){if(s[0]==="r"){while(Tf<s[1]){Tf=Math.min(s[1],Tf+r*DT);Ta+=(Tf-Ta)*DT/ta;Tb+=(Tf-Tb)*DT/tb;t+=DT;chk();if(++n%15===0)pts.push([t,Tf,Ta,Tb]);}}
+      else{for(let i=0;i<s[1]/DT;i++){Ta+=(Tf-Ta)*DT/ta;Tb+=(Tf-Tb)*DT/tb;t+=DT;chk();if(++n%15===0)pts.push([t,Tf,Ta,Tb]);}}}
+    pts.push([t,Tf,Ta,Tb]);o.total=t;o.pts=pts;return o;}
+  function draw(){
+    const W=svgW(svg),narrow=W<520,Hh=narrow?320:300;setVB(svg,W,Hh);clear(svg);
+    $("#m4ro").textContent=(+sr.value)+" °C/min";$("#m4do").textContent=(+sd.value)+" min";$("#m4eo").textContent=(+se.value)+" mm";
+    const S=sim(),tm=S.total/60;
+    const x0=narrow?46:56,x1=W-14,y0=26,y1=Hh-46;
+    const ax=axes(svg,x0,x1,y0,y1,0,tm,0,1100,"temps (min)","T (°C)",niceStep(tm,narrow?4:6),250,v=>nf(v,0),v=>nf(v,0));
+    const X=ax.X,Y=ax.Y;
+    el("rect",{x:x0,y:Y(TLIQ),width:x1-x0,height:Y(TSOL)-Y(TLIQ),fill:"var(--mat)",opacity:.35},svg);
+    const lb=tx(svg,x0+6,Y(TLIQ)-5,"BNi-2 : 970 → 1 000 °C",{"font-size":"11.5",fill:"var(--mat)"});halo(lb);
+    const tc=tcur===null?S.total:tcur;const P=S.pts.filter(p=>p[0]<=tc);
+    const path=i=>P.map((p,k)=>(k?"L":"M")+X(p[0]/60).toFixed(1)+" "+Y(p[i]).toFixed(1)).join(" ");
+    el("path",{d:path(1),fill:"none",stroke:"var(--sig)","stroke-width":1.6,"stroke-dasharray":"6 4"},svg);
+    el("path",{d:path(2),fill:"none",stroke:"var(--eps)","stroke-width":2.4},svg);
+    el("path",{d:path(3),fill:"none",stroke:"var(--gam)","stroke-width":2.8},svg);
+    const pc=S.pts.find(p=>p[0]>=S.total*0.12)||S.pts[S.pts.length-1];const L=[tx(svg,X(pc[0]/60)+6,Y(pc[1])-8,"consigne",{"font-size":"11.5",fill:"var(--sig)"})];
+    if(S.sol&&S.sol[0]<=tc){el("circle",{cx:X(S.sol[0]/60),cy:Y(S.sol[1]),r:5,fill:"var(--eps)"},svg);el("circle",{cx:X(S.sol[0]/60),cy:Y(S.sol[2]),r:5,fill:"var(--gam)"},svg);
+      el("line",{x1:X(S.sol[0]/60),y1:Y(S.sol[1]),x2:X(S.sol[0]/60),y2:Y(S.sol[2]),stroke:"var(--ink)","stroke-width":1.2},svg);
+      L.push(tx(svg,X(S.sol[0]/60)-6,(Y(S.sol[1])+Y(S.sol[2]))/2+4,"ΔT = "+nf(S.sol[1]-S.sol[2],0)+" °C",{"font-size":"12","text-anchor":"end","font-weight":"700"}));}
+    L.push(tx(svg,x1-4,y1-24,"tôle 2 mm",{"font-size":"11.5",fill:"var(--eps)","text-anchor":"end","font-weight":"700"}));
+    L.push(tx(svg,x1-4,y1-8,"bride "+(+se.value)+" mm",{"font-size":"11.5",fill:"var(--gam)","text-anchor":"end","font-weight":"700"}));
+    L.forEach(t=>{fitText(t,x0,x1);halo(t);});declutter(L,y0,y1);
+    if(tcur!==null)el("line",{x1:X(tc/60),y1:y0,x2:X(tc/60),y2:y1,stroke:"var(--ink)","stroke-width":1,"stroke-dasharray":"3 3"},svg);
+    const dT=S.sol?S.sol[1]-S.sol[2]:null,wait=S.liq&&S.tliq?S.tliq-S.liq[0]:null;
+    ro.innerHTML="<span>retard de la bride : <b class='gam'>"+nf((+sr.value)/60*tau(+se.value),0)+" °C</b></span><span>ΔT au solidus : <b class='eps'>"+(dT===null?"—":nf(dT,0)+" °C")+"</b></span><span>bride au liquidus :</span><span>"+(wait===null?"—":nf(wait/60,1)+" min après la tôle")+"</span><span>cycle : "+nf(S.total/60,0)+" min</span>";
+    if(tcur!==null&&tcur<S.total){const p=P[P.length-1];msg.innerHTML="t = "+nf(tc/60,0)+" min : consigne "+nf(p[1],0)+" °C, tôle "+nf(p[2],0)+" °C, bride "+nf(p[3],0)+" °C.";return;}
+    let m;
+    if(dT===null)m="La tôle n'atteint pas le solidus : vérifie le cycle.";
+    else if(dT<30)m="✅ <b>Charge homogène</b> : "+nf(dT,0)+" °C d'écart quand la tôle atteint le solidus. L'apport fond partout presque en même temps.";
+    else if(dT<60)m="⚠️ "+nf(dT,0)+" °C d'écart au solidus : la tôle fond l'apport nettement avant la bride. Allonge le palier sous le solidus.";
+    else m="❌ <b>"+nf(dT,0)+" °C d'écart</b> au solidus : l'apport coule vers les parties minces et chaudes, érode la tôle, et le joint côté bride se remplit mal. Il faut un palier d'homogénéisation.";
+    if(wait!==null&&wait>600)m+=" La tôle reste "+nf(wait/60,0)+" min au-dessus du liquidus avant que la bride y arrive : érosion des parois minces.";
+    if(S.total>300*60)m+=" Cycle très long ("+nf(S.total/3600,1)+" h) : coûteux, et toute la charge séjourne à chaud.";
+    msg.innerHTML=m;
+  }
+  const PRE={sans:[10,0],palier:[10,30],lent:[3,0]};
+  const A=animate($("#m4play"),"▶ Lancer le cycle",5000,p=>{const S=sim();tcur=p*S.total;draw();},()=>{tcur=null;draw();});
+  [sr,sd,se].forEach(x=>x.addEventListener("input",()=>{A.stop();tcur=null;setOn("#m4pre",null);draw();}));
+  $$("#m4pre .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();tcur=null;const q=PRE[b.dataset.k];sr.value=q[0];sd.value=q[1];setOn("#m4pre",b);draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M5 : le profil de refusion
+   ========================================================= */
+(function(){
+  const svg=$("#m5svg");if(!svg)return;
+  const ss=$("#m5s"),sr=$("#m5r"),sp=$("#m5p"),sc=$("#m5c"),ro=$("#m5r2"),msg=$("#m5msg");
+  const AL={snpb:{n:"Sn63Pb37",liq:183,soak:170,pk:[205,230]},sac:{n:"SAC305",liq:217,soak:190,pk:[235,250]}};
+  let ka="sac",tcur=null,soakOverride=null;
+  function prof(){const a=AL[ka],se=soakOverride===null?a.soak:soakOverride,r1=1.5,ts=+ss.value,r2=+sr.value,Tp=+sp.value,rc=+sc.value;
+    const pts=[[0,25]];let t=(150-25)/r1;pts.push([t,150]);t+=ts;pts.push([t,se]);t+=Math.max(0,Tp-se)/r2;pts.push([t,Tp]);t+=(Tp-50)/rc;pts.push([t,50]);
+    const tal=Tp>a.liq?(Tp-a.liq)*(1/r2+1/rc):0;return {a:a,pts:pts,tal:tal,Tp:Tp,end:t,r2:r2,ts:ts};}
+  const Tat=(pts,t)=>{for(let i=0;i<pts.length-1;i++){if(t<=pts[i+1][0])return pts[i][1]+(pts[i+1][1]-pts[i][1])*(t-pts[i][0])/(pts[i+1][0]-pts[i][0]);}return pts[pts.length-1][1];};
+  function draw(){
+    const W=svgW(svg),narrow=W<520,H=narrow?300:290;setVB(svg,W,H);clear(svg);
+    $("#m5so").textContent=(+ss.value)+" s";$("#m5ro").textContent=nf(+sr.value,1)+" °C/s";$("#m5po").textContent=(+sp.value)+" °C";$("#m5co").textContent=nf(+sc.value,1)+" °C/s";
+    const P=prof(),a=P.a,x0=narrow?44:54,x1=W-14,y0=24,y1=H-46,tm=Math.max(360,P.end);
+    const ax=axes(svg,x0,x1,y0,y1,0,tm,0,280,"temps (s)","T (°C)",narrow?120:60,50,v=>nf(v,0),v=>nf(v,0));
+    const X=ax.X,Y=ax.Y;
+    el("rect",{x:x0,y:Y(a.pk[1]),width:x1-x0,height:Y(a.pk[0])-Y(a.pk[1]),fill:"var(--sig)",opacity:.1},svg);
+    el("line",{x1:x0,y1:Y(a.liq),x2:x1,y2:Y(a.liq),stroke:"var(--mat)","stroke-width":1.8,"stroke-dasharray":"7 4"},svg);
+    const L=[tx(svg,x0+6,Y(a.liq)+14,"liquidus "+a.liq+" °C",{"font-size":"11.5",fill:"var(--mat)"}),tx(svg,x1-4,Y(a.pk[1])-5,"fenêtre du pic "+a.pk[0]+"–"+a.pk[1]+" °C",{"font-size":"11.5",fill:"var(--sig)","text-anchor":"end"})];
+    const tc=tcur===null?P.end:tcur;
+    let d="";const N=120;for(let i=0;i<=N;i++){const t=tc*i/N;d+=(i?"L":"M")+X(t).toFixed(1)+" "+Y(Tat(P.pts,t)).toFixed(1)+" ";}
+    el("path",{d:d,fill:"none",stroke:"var(--sig)","stroke-width":2.8},svg);
+    if(P.Tp>a.liq){const t1=P.pts[3][0]-(P.Tp-a.liq)/P.r2,t2=P.pts[3][0]+(P.Tp-a.liq)/(+sc.value);
+      el("line",{x1:X(t1),y1:Y(a.liq),x2:X(t2),y2:Y(a.liq),stroke:"var(--gam)","stroke-width":5,opacity:.8},svg);
+      L.push(tx(svg,(X(t1)+X(t2))/2,Y(a.liq)-8,"TAL "+nf(P.tal,0)+" s",{"font-size":"12",fill:"var(--gam)","text-anchor":"middle","font-weight":"700"}));}
+    L.forEach(t=>{fitText(t,x0,x1);halo(t);});declutter(L,y0,y1);
+    if(tcur!==null)el("circle",{cx:X(tc),cy:Y(Tat(P.pts,tc)),r:5,fill:"var(--sig)",stroke:"var(--card)","stroke-width":2},svg);
+    ro.innerHTML="<span>alliage : <b>"+a.n+"</b></span><span>pic : <b class='sig'>"+P.Tp+" °C</b></span><span>TAL = <b class='gam'>"+nf(P.tal,0)+" s</b></span><span>durée : "+nf(P.end/60,1)+" min</span>";
+    if(tcur!==null&&tcur<P.end){const T=Tat(P.pts,tcur);msg.innerHTML="t = "+nf(tcur,0)+" s, "+nf(T,0)+" °C : "+(tcur<P.pts[1][0]?"préchauffage, le solvant de la crème s'évapore.":tcur<P.pts[2][0]?"maintien : le flux s'active, la carte s'égalise.":T>=a.liq?"refusion : la poudre fond, la brasure mouille les plages.":tcur<P.pts[3][0]?"montée vers le pic.":"refroidissement : les joints se solidifient.");return;}
+    const ok=[];let bad=0;const m=[];
+    if(P.Tp<=a.liq+5){m.push("❌ Le pic dépasse à peine le liquidus : la crème ne fond pas vraiment, joints granuleux.");bad=1;}
+    else{if(P.Tp<a.pk[0]){m.push("⚠️ Pic un peu bas ("+P.Tp+" °C) : mouillage limité.");bad=1;}
+      if(P.Tp>a.pk[1]){m.push("⚠️ Pic trop chaud ("+P.Tp+" °C) : composants et carte surchauffés"+(ka==="snpb"?", et l'étain-plomb n'en a pas besoin":"")+".");bad=1;}
+      if(P.tal<45){m.push("⚠️ TAL trop court ("+nf(P.tal,0)+" s) : mouillage incomplet, vides.");bad=1;}
+      if(P.tal>90){m.push("⚠️ TAL trop long ("+nf(P.tal,0)+" s) : intermétalliques épais, composants stressés.");bad=1;}}
+    if(P.ts<45)m.push("⚠️ Maintien court : flux mal activé, risque de vides.");
+    if(P.r2>2.5)m.push("⚠️ Montée finale rapide : risque de billes et d'effet « pierre tombale ».");
+    msg.innerHTML=(!bad&&m.length===0?"✅ <b>Profil dans la fenêtre</b> : pic à "+P.Tp+" °C et "+nf(P.tal,0)+" s au-dessus du liquidus de "+a.liq+" °C.":m.join(" "));
+  }
+  const PRE={type:null,court:null,erreur:null};
+  function preset(k){soakOverride=null;
+    if(k==="type"){if(ka==="sac"){ss.value=90;sr.value=0.8;sp.value=245;sc.value=2;}else{ss.value=90;sr.value=1;sp.value=220;sc.value=2;}}
+    else if(k==="court"){ss.value=90;sr.value=2;sc.value=3;sp.value=ka==="sac"?245:220;}
+    else if(k==="erreur"){ka="sac";setOn("#m5al",$('#m5al .btn[data-k="sac"]'));ss.value=90;sr.value=1;sp.value=220;sc.value=2;soakOverride=170;}}
+  const A=animate($("#m5play"),"▶ Faire passer la carte",5000,p=>{tcur=p*prof().end;draw();},()=>{tcur=null;draw();});
+  [ss,sr,sp,sc].forEach(x=>x.addEventListener("input",()=>{A.stop();tcur=null;setOn("#m5pre",null);draw();}));
+  $$("#m5al .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();tcur=null;ka=b.dataset.k;setOn("#m5al",b);preset("type");setOn("#m5pre",$('#m5pre .btn[data-k="type"]'));draw();}));
+  $$("#m5pre .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();tcur=null;preset(b.dataset.k);setOn("#m5pre",b);draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M6 : construire et tenir un mode opératoire
+   ========================================================= */
+(function(){
+  const svg=$("#m6svg");if(!svg)return;
+  const sj=$("#m6j"),sT=$("#m6T"),ro=$("#m6r"),msg=$("#m6msg"),card=$("#m6card");
+  const SC={froid:{n:"Raccord frigorifique cuivre-cuivre",base:"cuivre Cu-DHP",bs:1083,cu:1,proc:"912",ap:"cup",fx:"aucun",j:[0.05,0.13],jv:0.08,T:[700,750],Tv:720},
+    carbure:{n:"Plaquette carbure sur acier",base:"carbure WC-Co sur acier",bs:1300,cu:0,proc:"916",ap:"ag449",fx:"FH12",j:[0.05,0.15],jv:0.08,T:[720,760],Tv:740},
+    inox:{n:"Échangeur à plaques inox",base:"inox austénitique",bs:1400,cu:0,proc:"922",ap:"bni",fx:"vide",j:[0.02,0.10],jv:0.05,T:[1040,1060],Tv:1050}};
+  const PROC={"912":"912 flamme","916":"916 induction","921":"921 four sous atmosphère","922":"922 four sous vide"};
+  const AP={cup:{n:"CuP 284",liq:800,w:700,zn:0},ag155:{n:"Ag 155",liq:660,w:680,zn:1},ag449:{n:"Ag 449",liq:705,w:720,zn:1},bni:{n:"Ni 620 (BNi-2)",liq:1000,w:1040,zn:0}};
+  const FX={aucun:{n:"sans flux"},FH10:{n:"flux FH10",max:800,flux:1},FH12:{n:"flux FH12",max:850,flux:1},H2:{n:"hydrogène sec"},vide:{n:"vide"}};
+  const STEPS=["dégraisser","décaper","fluxer","monter, tenir le jeu","chauffer selon le DMOB","refroidir sans bridage","éliminer les résidus","contrôler"];
+  const SHORT=["dégraisser","décaper","fluxer","tenir le jeu","chauffer (DMOB)","refroidir libre","ôter les résidus","contrôler"];
+  const DEF=["zones non mouillées (graisse carbonisée)","manque de liaison sur l'oxyde ou la calamine","brasure qui perle, oxydation","jeu irrégulier : manques de remplissage, coulures","chauffe non maîtrisée : surchauffe ou manque de fusion","fissures ou déformations dues au bridage","corrosion sous les résidus de flux","défauts non détectés, aucune preuve de conformité"];
+  let ks="froid",cur={proc:"912",ap:"cup",fx:"aucun"},hl=-1;
+  function load(k){ks=k;const s=SC[k];cur={proc:s.proc,ap:s.ap,fx:s.fx};sj.value=s.jv;sT.value=s.Tv;
+    setOn("#m6proc",$('#m6proc .btn[data-k="'+s.proc+'"]'));setOn("#m6ap",$('#m6ap .btn[data-k="'+s.ap+'"]'));setOn("#m6fx",$('#m6fx .btn[data-k="'+s.fx+'"]'));
+    $$("#m6seq input").forEach(c=>{c.checked=true;});}
+  const applicable=i=>{const f=FX[cur.fx];if(i===2||i===6)return !!f.flux;return true;};
+  function checks(){const s=SC[ks],a=AP[cur.ap],f=FX[cur.fx],T=+sT.value,j=+sj.value,out=[];
+    const air=cur.proc==="912"||cur.proc==="916";
+    if(cur.ap==="cup"&&!s.cu)out.push(["❌","Cuivre-phosphore sur "+s.base+" : phosphures fragiles."]);
+    if(a.zn&&cur.fx==="vide")out.push(["❌","Apport au zinc sous vide : le zinc s'évapore et pollue le four."]);
+    if(cur.fx==="vide"&&cur.proc!=="922")out.push(["❌","Le vide suppose un four sous vide (922)."]);
+    if(cur.proc==="922"&&cur.fx!=="vide")out.push(["❌","Un four sous vide (922) travaille sans flux ni gaz réducteur."]);
+    if(cur.fx==="H2"&&cur.proc!=="921")out.push(["❌","L'hydrogène sec suppose un four sous atmosphère (921)."]);
+    if(f.flux&&!air)out.push(["❌","Un flux FH se réserve au chauffage à l'air (flamme, induction)."]);
+    if(cur.fx==="aucun"&&air&&!(cur.ap==="cup"&&s.cu))out.push(["❌","À l'air sans flux, l'oxyde empêche le mouillage (seul le CuP sur cuivre est autodécapant)."]);
+    if(cur.fx==="aucun"&&!air)out.push(["❌","Au four, il faut une atmosphère ou le vide."]);
+    if(cur.ap==="bni"&&air)out.push(["⚠️","Les apports au nickel se brasent normalement sous vide ou sous hydrogène très sec."]);
+    if(f.flux&&T>f.max)out.push(["❌",f.n+" actif jusqu'à "+f.max+" °C seulement : il serait brûlé à "+T+" °C."]);
+    if(T<a.w-20)out.push(["❌","À "+T+" °C, l'apport "+a.n+" ne coule pas (température de travail ≈ "+a.w+" °C)."]);
+    if(T>=s.bs)out.push(["❌","À "+T+" °C, le métal de base fondrait."]);
+    else if(T>a.w+120)out.push(["⚠️","Surchauffe de "+nf(T-a.w,0)+" °C au-dessus de la température de travail : érosion"+(a.zn?", fumées de zinc":"")+"."]);
+    const jr=air?[0.05,0.15]:[0,0.10];if(j<jr[0]||j>jr[1])out.push(["⚠️","Jeu de "+nf(j,2)+" mm hors des recommandations ("+nf(jr[0],2)+" à "+nf(jr[1],2)+" mm pour ce mode de chauffage)."]);
+    return out;}
+  function qual(){const s=SC[ks],T=+sT.value,j=+sj.value,r={};
+    r.proc=cur.proc===s.proc?"ok":"req";r.ap=cur.ap===s.ap?"ok":"req";r.fx=cur.fx===s.fx?"ok":"req";
+    r.j=j>=s.j[0]-1e-9&&j<=s.j[1]+1e-9?"ok":"req";r.T=T>=s.T[0]&&T<=s.T[1]?"ok":"hors";return r;}
+  const badge=v=>v==="ok"?"<span style='color:var(--ok)'>✓ conforme</span>":v==="req"?"<span style='color:var(--bad)'>⟳ requalifier</span>":"<span style='color:var(--warn)'>⚠ hors DMOB</span>";
+  function draw(){
+    const s=SC[ks],T=+sT.value,j=+sj.value,q=qual(),C=checks();
+    $("#m6jo").textContent=nf(j,2)+" mm";$("#m6To").textContent=nf(T,0)+" °C";
+    const cb=$$("#m6seq input");
+    card.innerHTML="<table class='data'><tr><th>Rubrique du DMOB</th><th>Qualifié (PV)</th><th>Choisi</th><th>Statut</th></tr>"+
+      "<tr><td>Procédé</td><td>"+PROC[s.proc]+"</td><td>"+PROC[cur.proc]+"</td><td>"+badge(q.proc)+"</td></tr>"+
+      "<tr><td>Matériaux de base</td><td>"+s.base+"</td><td>"+s.base+"</td><td>"+badge("ok")+"</td></tr>"+
+      "<tr><td>Apport</td><td>"+AP[s.ap].n+"</td><td>"+AP[cur.ap].n+"</td><td>"+badge(q.ap)+"</td></tr>"+
+      "<tr><td>Flux ou atmosphère</td><td>"+FX[s.fx].n+"</td><td>"+FX[cur.fx].n+"</td><td>"+badge(q.fx)+"</td></tr>"+
+      "<tr><td>Jeu</td><td class='n'>"+nf(s.j[0],2)+" à "+nf(s.j[1],2)+" mm</td><td class='n'>"+nf(j,2)+" mm</td><td>"+badge(q.j)+"</td></tr>"+
+      "<tr><td>Température de brasage</td><td class='n'>"+s.T[0]+" à "+s.T[1]+" °C</td><td class='n'>"+T+" °C</td><td>"+badge(q.T)+"</td></tr></table>";
+    /* gamme */
+    const W=svgW(svg),narrow=W<520,cols=narrow?2:4,rows=Math.ceil(8/cols),bw=(W-24-(cols-1)*8)/cols,bh=44,H=14+rows*(bh+8)+4;setVB(svg,W,H);clear(svg);
+    const miss=[];
+    STEPS.forEach((n,i)=>{const c=i%cols,r=Math.floor(i/cols),x=12+c*(bw+8),y=10+r*(bh+8),ap=applicable(i),done=cb[i].checked;
+      if(ap&&!done)miss.push(i);
+      el("rect",{x:x,y:y,width:bw,height:bh,rx:6,fill:!ap?"var(--paper-2)":done?"var(--ok)":"var(--bad)","fill-opacity":!ap?1:.14,stroke:i===hl?"var(--ink)":!ap?"var(--line)":done?"var(--ok)":"var(--bad)","stroke-width":i===hl?3:1.6,"stroke-dasharray":ap?"":"5 4"},svg);
+      const t=tx(svg,x+8,y+18,(i+1)+" "+(bw<190?SHORT[i]:n),{"font-size":narrow?"11.5":"12","font-weight":"700",fill:ap?"var(--ink)":"var(--muted)"});fitText(t,x+2,x+bw-2);
+      const t2=tx(svg,x+8,y+35,!ap?"sans objet":done?"✓ fait":"✕ oublié",{"font-size":"11.5",fill:!ap?"var(--muted)":done?"var(--ok)":"var(--bad)"});});
+    const nreq=["proc","ap","fx","j"].filter(k=>q[k]==="req").length,nko=C.filter(c=>c[0]==="❌").length;
+    ro.innerHTML="<span>incompatibilités : <b class='"+(nko?"tau":"eps")+"'>"+nko+"</b></span><span>variables essentielles modifiées : <b>"+nreq+"</b></span><span>température : "+(q.T==="ok"?"dans le DMOB":"hors DMOB")+"</span><span>étapes oubliées : <b>"+miss.length+"</b></span>";
+    if(hl>=0)return;
+    let m=[];
+    if(nko)m.push(C.filter(c=>c[0]==="❌").map(c=>"❌ "+c[1]).join(" "));
+    if(nreq)m.push("⟳ <b>Nouvelle qualification nécessaire</b> : "+["proc","ap","fx","j"].filter(k=>q[k]==="req").map(k=>({proc:"procédé",ap:"apport",fx:"flux ou atmosphère",j:"jeu hors du domaine qualifié"})[k]).join(", ")+" (variables essentielles).");
+    if(q.T!=="ok")m.push("⚠ Température hors du DMOB ("+s.T[0]+" à "+s.T[1]+" °C) : à corriger avant production.");
+    C.filter(c=>c[0]==="⚠️").forEach(c=>m.push("⚠️ "+c[1]));
+    if(miss.length)m.push("Étapes oubliées : "+miss.map(i=>"<b>"+(i+1)+"</b> → "+DEF[i]).join(" ; ")+".");
+    msg.innerHTML=m.length?m.join(" "):"✅ <b>Conforme au DMOB qualifié</b> : "+s.n.toLowerCase()+", gamme complète. Le braseur ou l'opérateur qualifié peut produire.";
+  }
+  const A=animate($("#m6play"),"▶ Exécuter la gamme",5600,p=>{hl=Math.min(7,Math.floor(p*8));draw();const cb=$$("#m6seq input");
+      msg.innerHTML="Étape "+(hl+1)+" : "+STEPS[hl]+(applicable(hl)?(cb[hl].checked?" ✓":" ✕ oubliée → "+DEF[hl]):" (sans objet ici)")+".";},
+    ()=>{hl=-1;draw();});
+  [sj,sT].forEach(x=>x.addEventListener("input",()=>{A.stop();hl=-1;draw();}));
+  $$("#m6seq input").forEach(c=>c.addEventListener("change",()=>{A.stop();hl=-1;draw();}));
+  $$("#m6sc .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();hl=-1;load(b.dataset.k);setOn("#m6sc",b);draw();}));
+  [["#m6proc","proc"],["#m6ap","ap"],["#m6fx","fx"]].forEach(g=>$$(g[0]+" .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();hl=-1;cur[g[1]]=b.dataset.k;setOn(g[0],b);draw();})));
+  load("froid");redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   Quiz, check-list, sommaire, thème
+   ========================================================= */
+(function(){
+  const box=$("#quiz");if(!box)return;
+  const Q=[
+    {q:"On choisit plutôt un chauffage global (four) quand :",o:["il n'y a qu'un joint accessible sur une grande pièce","on travaille sur chantier","les joints sont nombreux et cachés, ou les oxydes tenaces, en série","la pièce est unique et simple"],c:2,e:"Le four brase <b>tous les joints à la fois</b>, sans flux, avec une température uniforme : idéal pour des joints nombreux, cachés, ou des oxydes tenaces."},
+    {q:"Pour une brasure à l'argent ou au cuivre-phosphore, on règle la flamme :",o:["neutre ou légèrement réductrice","fortement oxydante","sans oxygène","comme pour un coupage"],c:0,e:"Flamme <b>neutre ou légèrement réductrice</b> ; la flamme légèrement oxydante se réserve au soudobrasage au laiton."},
+    {q:"Au chalumeau, on présente la baguette :",o:["dans la flamme, avant de chauffer les pièces","au contact des pièces chaudes, quand le flux est devenu clair","sur la pièce la plus froide","n'importe quand"],c:1,e:"C'est la <b>chaleur des pièces</b> qui doit fondre l'apport ; le flux clair signale la bonne température."},
+    {q:"Un raccord massif et un tube mince : on dirige d'abord la flamme sur :",o:["le tube","la baguette","l'air ambiant","le raccord, puis tout le joint"],c:3,e:"La pièce massive met plus longtemps à chauffer (Q = m·c·ΔT) : <b>le raccord d'abord</b>, puis tout le joint, en balayant."},
+    {q:"Si la fréquence d'induction est multipliée par 4, la profondeur de pénétration δ est :",o:["multipliée par 4","divisée par 2","divisée par 4","inchangée"],c:1,e:"δ varie comme 1/√f : √4 = 2, donc δ est <b>divisée par 2</b>."},
+    {q:"Au-delà de 770 °C, un acier non allié se chauffe moins bien par induction parce que :",o:["il fond","sa résistivité devient nulle","il perd son magnétisme (point de Curie) : δ augmente fortement","l'inducteur fond"],c:2,e:"Au point de Curie, μ<sub>r</sub> tombe à 1 : <b>δ bondit</b> (de 0,7 à 5,4 mm environ à 10 kHz) et la puissance absorbée chute."},
+    {q:"Le palier d'homogénéisation d'un cycle de four se place :",o:["20 à 50 °C sous le solidus de l'apport","au-dessus du liquidus","à 100 °C","pendant le refroidissement"],c:0,e:"Juste <b>sous le solidus</b> : les pièces massives rattrapent les minces avant que l'apport fonde."},
+    {q:"Le TAL d'un profil de refusion désigne :",o:["la température du pic","le taux d'activation du flux","la tolérance d'alignement des composants","le temps passé au-dessus du liquidus"],c:3,e:"<i>Time above liquidus</i> : le <b>temps au-dessus du liquidus</b>, typiquement 45 à 90 s."},
+    {q:"Une crème SAC305 passée dans un four réglé pour l'étain-plomb (pic 220 °C) donne :",o:["des joints parfaits","des joints granuleux, mal fondus","des composants brûlés","des intermétalliques très épais"],c:1,e:"Le pic dépasse à peine le liquidus de 217 °C : quelques secondes de TAL, <b>crème à peine fondue</b>."},
+    {q:"Le soudobrasage au CuSi3 convient aux tôles galvanisées parce que :",o:["il fond l'acier plus vite","il exige un flux FL20","il n'a pas besoin de chanfrein","l'apport fond vers 900 à 1 050 °C sans fondre l'acier, ce qui épargne le zinc"],c:3,e:"Le zinc bout à 907 °C : un apport qui fond bien <b>sous la fusion de l'acier</b> vaporise beaucoup moins le revêtement."},
+    {q:"La qualification d'un mode opératoire de brasage fort relève de :",o:["l'ISO 17779","l'ISO 13585","l'ISO 9606","l'ISO 18279"],c:0,e:"<b>ISO 17779</b> pour le mode opératoire ; ISO 13585 pour les braseurs et opérateurs ; ISO 18279 pour les imperfections."},
+    {q:"La qualification d'un braseur selon l'ISO 13585 :",o:["est valable à vie","vaut 3 ans, confirmée tous les 6 mois par l'employeur","vaut 1 an sans confirmation","n'existe pas pour le brasage"],c:1,e:"<b>3 ans</b>, sous réserve d'une activité continue confirmée <b>tous les 6 mois</b> ; prolongeable par périodes de 3 ans."}
+  ];
+  let score=0,done=0;const sc=$("#qzScore");
+  function upd(){let t="Score : "+score+" / "+Q.length;if(done===Q.length)t+=score>=10?"  ·  🎉 prêt pour le cours 4":score>=7?"  ·  relis les explications":"  ·  refais un tour des chapitres";sc.textContent=t;}
+  function render(){box.innerHTML="";score=0;done=0;
+    Q.forEach((it,n)=>{const d=document.createElement("div");d.className="qz";
+      d.innerHTML='<p class="qz-q"><b>'+(n+1)+".</b> "+it.q+'</p><div class="qz-o"></div><div class="qz-e" hidden></div>';
+      const o=d.querySelector(".qz-o"),ex=d.querySelector(".qz-e");let answered=false;
+      it.o.forEach((txt,i)=>{const b=document.createElement("button");b.type="button";b.className="qz-b";b.innerHTML=String.fromCharCode(65+i)+". "+txt;
+        b.addEventListener("click",()=>{if(answered)return;answered=true;done++;const ok=i===it.c;if(ok)score++;b.classList.add(ok?"ok":"ko");o.children[it.c].classList.add("ok");ex.hidden=false;ex.innerHTML=(ok?"✅ <b>Bien joué.</b> ":"❌ <b>Pas tout à fait.</b> ")+it.e;upd();});
+        o.appendChild(b);});
+      box.appendChild(d);});
+    upd();}
+  $("#qzReset").addEventListener("click",render);render();
+})();
+(function(){
+  const boxes=$$("#checklist input[type=checkbox]"),msg=$("#checkMsg"),KEY="procedes-brasage-cours3-check";
+  if(!boxes.length)return;
+  let saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||"[]")||[];}catch(e){saved=[];}
+  boxes.forEach(b=>{b.checked=saved.indexOf(b.dataset.c)>=0;});
+  function upd(){const on=boxes.filter(b=>b.checked).map(b=>b.dataset.c);try{localStorage.setItem(KEY,JSON.stringify(on));}catch(e){}
+    msg.innerHTML=on.length===boxes.length?"🎉 <b>Tout est coché : tu es prêt pour le cours 4 !</b>":on.length+" / "+boxes.length+" : reviens sur les points non cochés (les manipulations sont faites pour ça).";}
+  boxes.forEach(b=>b.addEventListener("change",upd));upd();
+})();
+(function(){
+  const links=$$(".toc a"),tin=$(".toc-in");
+  if(!links.length||!("IntersectionObserver" in window))return;
+  const map={};links.forEach(a=>{map[a.getAttribute("href").slice(1)]=a;});
+  const obs=new IntersectionObserver(ents=>{ents.forEach(en=>{if(!en.isIntersecting)return;const a=map[en.target.id];if(!a)return;
+    links.forEach(l=>l.classList.toggle("on",l===a));
+    if(tin){const tgt=a.offsetLeft-tin.clientWidth/2+a.offsetWidth/2;try{tin.scrollTo({left:tgt,behavior:RM?"auto":"smooth"});}catch(e){tin.scrollLeft=tgt;}}});},{rootMargin:"-45% 0px -50% 0px"});
+  Object.keys(map).forEach(id=>{const s=document.getElementById(id);if(s)obs.observe(s);});
+})();
+(function(){
+  const b=$("#themeBtn");if(!b)return;const KEY="procedes-theme",root=document.documentElement;
+  const lab={auto:"◐ Thème : automatique",light:"☀️ Thème : clair",dark:"🌙 Thème : sombre"};
+  let t="auto";try{t=localStorage.getItem(KEY)||"auto";}catch(e){}
+  function apply(){if(t==="auto")root.removeAttribute("data-theme");else root.setAttribute("data-theme",t);b.textContent=lab[t];}
+  b.addEventListener("click",()=>{t=t==="auto"?"light":t==="light"?"dark":"auto";try{localStorage.setItem(KEY,t);}catch(e){}apply();});
+  apply();
+})();
+})();
+</script>
+</body>
+</html>

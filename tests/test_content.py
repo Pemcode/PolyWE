@@ -252,6 +252,8 @@ def test_fluage_and_brasage_are_reachable_with_their_declared_sources(tmp_path):
         ("fluage-01", "fluage", "Fluage/01-courbe-mecanismes.html", "c3", "2-12-acier-resistant-au-fluage"),
         ("brasage-01", "brasage", "Brasage/01-principes-mouillage-capillarite.html", "c3", "1-16-brasage"),
         ("brasage-02", "brasage", "Brasage/02-oxydes-flux-atmospheres-apports.html", "c2", "1-16-brasage"),
+        ("brasage-03", "brasage", "Brasage/03-procedes-mode-operatoire.html", "c3", "1-16-brasage"),
+        ("brasage-04", "brasage", "Brasage/04-conception-metaux-controle.html", "c6", "1-16-brasage"),
     ]
     assert all((output / url).is_file() for _, _, url, _, _ in expected), "Les nouveaux cours de fluage et brasage doivent être publiés."
 
@@ -281,3 +283,11 @@ def test_fluage_and_brasage_are_reachable_with_their_declared_sources(tmp_path):
     assert "../Metallurgie/00-diagramme-plomb-etain.html" in page(expected[1][2]).links
     assert "../Rupture/01-rupture-ductile-fragile.html" in page(expected[0][2]).links
     assert not (output / "Cours").exists()
+
+    brasage_urls = [row[2] for row in expected if row[1] == "brasage"]
+    for previous, following in zip(brasage_urls, brasage_urls[1:]):
+        assert Path(following).name in page(previous).links
+        assert Path(previous).name in page(following).links
+    for n in (3, 4):
+        for prerequisite in brasage_urls[:n-1]:
+            assert Path(prerequisite).name in page(brasage_urls[n-1]).links

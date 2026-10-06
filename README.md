@@ -10,7 +10,7 @@ La matière [Fatigue des métaux](https://pemcode.github.io/PolyWE/matieres/fati
 
 La matière [Mécanique de la rupture](https://pemcode.github.io/PolyWE/matieres/rupture.html) propose quatre cours : mécanismes et faciès, essai Charpy, défauts et facteur K, puis ténacité et diagramme FAD. Les sujets « Ruptures », « Mécanique de la rupture » et « Essais » du planning donnent accès aux supports correspondants.
 
-Les matières [Fluage des métaux](https://pemcode.github.io/PolyWE/matieres/fluage.html) et [Brasage fort et brasage tendre](https://pemcode.github.io/PolyWE/matieres/brasage.html) accueillent respectivement le premier cours sur les mécanismes du fluage et les deux premiers cours de brasage (principes, puis préparation et apports). Leurs supports sont reliés aux sujets 2.12 et 1.16 du planning.
+Les matières [Fluage des métaux](https://pemcode.github.io/PolyWE/matieres/fluage.html) et [Brasage fort et brasage tendre](https://pemcode.github.io/PolyWE/matieres/brasage.html) accueillent respectivement le premier cours sur les mécanismes du fluage et les quatre cours de brasage (principes, préparation et apports, procédés, puis conception et contrôle). Leurs supports sont reliés aux sujets 2.12 et 1.16 du planning.
 
 ## Routine quotidienne
 

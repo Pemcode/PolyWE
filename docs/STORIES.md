@@ -22,6 +22,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S16 | Compléter la série fatigue avec la propagation et la loi de Paris | Intégré et vérifié |
 | S17 | Intégrer la série Mécanique de la rupture | Intégré et vérifié |
 | S18 | Intégrer le fluage et le brasage, republier les corrections de rupture | Intégré et vérifié |
+| S19 | Compléter la série brasage avec les cours 3 et 4 | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -263,3 +264,23 @@ Défauts résiduels à corriger dans la source `rupture-03`, sans changer ses an
 - `#c5`, curseurs au maximum simultanément : la légende « ténacité typique des aciers : 50 à 150 MPa·√m » dépasse à gauche à 360 et 390 px.
 
 Les corrections livrées des autres légendes de rupture sont conservées et republiées. La modification locale de `AGENTS.md` reste hors de ce commit de contenus et d’intégration.
+
+## S19 — Exécuter, concevoir et contrôler le brasage
+
+En tant qu’élève, je poursuis la série de brasage par les procédés et le mode opératoire, puis la conception, les familles de métaux et le contrôle des joints.
+
+- `brasage-03` et `brasage-04` disponibles sous `Brasage/03-procedes-mode-operatoire.html` et `Brasage/04-conception-metaux-controle.html`, sans changer les URL des cours 1 et 2.
+- La matière présente les quatre cours dans l’ordre ; progression 1 ↔ 2 ↔ 3 ↔ 4, prérequis, recherche des sections et partage.
+- Les deux cours sont associés à `1-16-brasage`, sans modifier les dates et horaires ; documentation du planning actualisée.
+- Sources livrées conservées à l’identique ; les limites observées sont consignées pour correction par l’auteur.
+- Test de parcours RED puis GREEN, tests et build verts, interactions et SVG contrôlés aux quatre largeurs, puis publication GitHub Pages vérifiée.
+
+Aucune fiche d’intégration séparée trouvée pour ces deux cours ; leurs métadonnées reprennent les en-têtes et sections des sources. Le sujet est confirmé par `wiki sujets brasage`.
+
+Preuve TDD du 6 octobre 2026 : extension du test `fluage_and_brasage` aux cours 3 et 4 ; RED exécuté avec `uv run pytest tests/test_content.py -q -k fluage_and_brasage` sur l’absence des deux pages publiées. GREEN après inscription par `wiki ajouter` et renseignement des métadonnées. Le test contrôle la progression des quatre cours, les prérequis, la recherche, les liens de planning et la conservation des scripts et ancres. Aucun changement du générateur.
+
+Contrôle des deux cours réels sous `/PolyWE/` : 12 manipulations et leurs animations, 24 questions de quiz et remise à zéro, mémorisation des cases et des thèmes, recherche, copie effective des liens de section, partage natif simulé, accès depuis la semaine 41 et navigation 1 ↔ 2 ↔ 3 ↔ 4. Modes clair et sombre aux largeurs 360, 390, 768 et 1280 px, sans débordement horizontal de page ni erreur JavaScript ou HTTP. Les captures des 12 schémas, des en-têtes sur téléphone et ordinateur et de la matière ont été inspectées.
+
+Contrôle des légendes SVG : 1 336 états vérifiés après chargement des polices (réglages initiaux, extrêmes individuels et simultanés, boutons de préréglage), aux quatre largeurs et dans les deux thèmes. Aucun texte hors viewBox détecté avec une tolérance de 2 unités. Empreintes SHA-256 des deux sources inchangées ; cette intégration vérifie le fonctionnement sans nouvelle validation scientifique. La modification locale de `AGENTS.md` reste hors du commit.
+
+Validation locale : 86 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (25 cours, 271 sections, 6 matières, 1 application).
