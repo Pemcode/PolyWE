@@ -312,24 +312,12 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div><div class="f"><span class="eps">a<sub>0</sub></span> = (<span class="mat">ΔK<sub>S</sub></span>/(<span class="mat">Y</span><span class="mat">Δσ<sub>D</sub></span>))²</div>Kitagawa : une fissure courte est arrêtée par Δσ<sub>D</sub>, une fissure longue par le seuil ΔK<sub>S</sub>. Un défaut de soudure de 0,3 mm est déjà une fissure longue.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> de référence (Partie II : Fatigue). Ce cours couvre le § C « Propagation des fissures de fatigue – Loi de Paris », <b>pages 7 à 9, figures 11 à 15</b> :
-    <div class="tbl-wrap"><table class="data">
-      <tr><th>Chapitre du cours</th><th>Polycopié</th></tr>
-      <tr><td>1 Le mécanisme cycle par cycle</td><td>p. 7, § C.1 et figure 11</td></tr>
-      <tr><td>2 Lire une cassure de fatigue</td><td>p. 7 et 8, figures 12 et 13, lignes d'arrêt</td></tr>
-      <tr><td>3 Le diagramme da/dN–ΔK</td><td>p. 8 et 9, § C.2, figures 14 et 15</td></tr>
-      <tr><td>4 La loi de Paris</td><td>p. 9 ; <span class="hp">hors poly</span> constantes C et m des aciers</td></tr>
-      <tr><td>5 Intégrer la loi de Paris</td><td><span class="hp">hors poly</span> durée de propagation, inspections</td></tr>
-      <tr><td>6 De Paris aux classes FAT</td><td><span class="hp">hors poly</span> lien avec les courbes des soudures</td></tr>
-    </table></div>
-  </div>
-
   <div class="def"><b>🔎 Cinq remarques de lecture</b>
-    <p><b>1. « Effet de courbe-R »</b> (p. 7). Ce R n'a rien à voir avec le rapport de charge R = σ<sub>min</sub>/σ<sub>max</sub>. Le mécanisme d'émoussement puis d'affûtage de la pointe décrit page 7 est le plus souvent appelé <b>modèle de Laird</b> (1967) ; l'expression « courbe-R » désigne d'ordinaire, en mécanique de la rupture, la résistance à la déchirure qui croît avec l'avancée de la fissure.</p>
-    <p><b>2. La forme de K.</b> Le polycopié écrit K<sub>I</sub> = σY√a : son facteur Y contient le √π que beaucoup d'abaques écrivent à part (K = Yσ√(πa)). Une petite fissure de surface a Y ≈ 1,12√π ≈ 2 dans la convention du polycopié. Un Y pris dans une autre source doit être converti.</p>
-    <p><b>3. K<sub>IC</sub> ou K<sub>C</sub> ?</b> La page 7 parle de K<sub>IC</sub>, la figure 14 et la page 8 de K<sub>C</sub>. K<sub>IC</sub> est la ténacité en déformation plane (pièces épaisses) ; K<sub>C</sub> la ténacité pour une épaisseur donnée, plus élevée pour les tôles minces. Dans les deux cas, c'est K<sub>max</sub> (au sommet du cycle) qui l'atteint à la rupture, pas ΔK.</p>
-    <p><b>4. Le seuil « vers 10⁻⁹ m par cycle »</b> (p. 8 et 9). La norme d'essai ASTM E647 (ASTM : <i>American Society for Testing and Materials</i>) le définit conventionnellement à <b>10⁻¹⁰ m/cycle</b>, ce qui colle mieux à l'argument « moins d'une distance interatomique » (environ 2,5 × 10⁻¹⁰ m). On mesure d'ailleurs des vitesses moyennes inférieures à une distance atomique par cycle : le front n'avance pas partout à la fois.</p>
-    <p><b>5. La figure 15</b> dessine K négatif pendant la compression. Physiquement, la fissure se referme et K négatif n'a pas de sens ; pour R &lt; 0, les conventions diffèrent (l'ASTM E647 prend ΔK = K<sub>max</sub>). Quant à la difficulté expérimentale évoquée p. 9, la pratique normalisée utilise justement des essais à amplitude de charge constante, où ΔK augmente, avec une mesure continue de la longueur de fissure.</p>
+    <p><b>1. Modèle de Laird et « courbe-R ».</b> Le mécanisme d'émoussement puis d'affûtage de la pointe (chapitre 1) est le plus souvent appelé <b>modèle de Laird</b> (1967). On le voit parfois associé à un « effet de courbe-R » ; mais en mécanique de la rupture, l'expression « courbe-R » désigne d'ordinaire la résistance à la déchirure qui croît avec l'avancée de la fissure. Ce R n'a rien à voir avec le rapport de charge R = σ<sub>min</sub>/σ<sub>max</sub>.</p>
+    <p><b>2. La forme de K.</b> La série écrit K<sub>I</sub> = σY√a : son facteur Y contient le √π que beaucoup d'abaques écrivent à part (K = Yσ√(πa)). Une petite fissure de surface a Y ≈ 1,12√π ≈ 2 dans cette convention. Un Y pris dans une autre source doit être converti.</p>
+    <p><b>3. K<sub>IC</sub> ou K<sub>C</sub> ?</b> On rencontre les deux notations pour la ténacité qui met fin à la propagation. K<sub>IC</sub> est la ténacité en déformation plane (pièces épaisses) ; K<sub>C</sub> la ténacité pour une épaisseur donnée, plus élevée pour les tôles minces. Dans les deux cas, c'est K<sub>max</sub> (au sommet du cycle) qui l'atteint à la rupture, pas ΔK.</p>
+    <p><b>4. Le seuil : 10⁻⁹ ou 10⁻¹⁰ m par cycle ?</b> Selon les sources, le seuil de propagation est situé vers 10⁻⁹ ou 10⁻¹⁰ m par cycle. La norme d'essai ASTM E647 (ASTM : <i>American Society for Testing and Materials</i>) le définit conventionnellement à <b>10⁻¹⁰ m/cycle</b>, ce qui colle mieux à l'argument « moins d'une distance interatomique » (environ 2,5 × 10⁻¹⁰ m). On mesure d'ailleurs des vitesses moyennes inférieures à une distance atomique par cycle : le front n'avance pas partout à la fois.</p>
+    <p><b>5. K négatif ?</b> Quand le cycle passe en compression, certains schémas tracent K négatif. Physiquement, la fissure se referme et K négatif n'a pas de sens ; pour R &lt; 0, les conventions diffèrent (l'ASTM E647 prend ΔK = K<sub>max</sub>).</p>
   </div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
@@ -365,7 +353,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la chenille arpenteuse</span></div>
     <div class="def"><b>📖 Rappel express : le facteur d'intensité de contrainte</b> (détaillé dans une autre série). À la pointe d'une fissure de longueur <span class="eps">a</span>, la contrainte est concentrée, d'autant plus que la contrainte nominale <span class="sig">σ</span> et la fissure sont grandes. Un seul nombre résume cette sévérité : <span class="m"><span class="sig">K<sub>I</sub></span> = <span class="sig">σ</span>·<span class="mat">Y</span>·√<span class="eps">a</span></span> (en MPa·√m, avec a en mètres ; Y, facteur géométrique sans unité ; l'indice I désigne le mode I, l'ouverture). Tant que K<sub>I</sub> reste sous la <b>ténacité</b> <span class="mat">K<sub>IC</sub></span> du matériau, pas de rupture brutale. Quand la fissure atteint la <b>longueur critique</b> a<sub>C</sub> où K<sub>I</sub> = K<sub>IC</sub>, la pièce casse d'un coup.</div>
-    <p>Entre les deux, la fissure avance un peu à chaque cycle, de façon essentiellement <b>transgranulaire</b> (à travers les grains). Le polycopié décrit ce mouvement en quatre temps (figure 11) :</p>
+    <p>Entre les deux, la fissure avance un peu à chaque cycle, de façon essentiellement <b>transgranulaire</b> (à travers les grains). On décrit ce mouvement en quatre temps :</p>
     <ul>
       <li><b>début</b> : la pointe de la fissure est aiguë ;</li>
       <li><b>traction</b> : la matière plastifie juste devant la pointe ; la pointe s'ouvre, s'arrondit (elle s'<b>émousse</b>) et avance un peu. Une fissure émoussée est moins dangereuse : elle s'arrête ;</li>
@@ -387,7 +375,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">zone plastique et stries</span></div>
     <div class="def"><b>📖 Strie de fatigue</b> : fine ondulation de la surface de rupture, parallèle au front de fissure, laissée par un cycle de chargement. Dans le régime de Paris, une strie correspond à un cycle : l'écart entre deux stries mesure la vitesse <b>da/dN</b>, l'avancée de la fissure par cycle (a : longueur de fissure ; N : nombre de cycles ; d : « petite variation de »).</div>
-    <h4>La taille de la zone plastique <span class="hp">hors poly</span></h4>
+    <h4>La taille de la zone plastique <span class="hp">complément</span></h4>
     <p>Devant la pointe, la matière dépasse R<sub>e</sub> dans une petite zone. Son rayon s'estime (formule d'Irwin, contraintes planes) par :</p>
     <div class="fx"><div class="big" style="font-size:1.6rem"><span class="gam">r<sub>p</sub></span> ≈ <span class="frac"><span>1</span><span>2π</span></span><span style="font-size:1.25em">(</span><span class="frac"><span><span class="sig">K<sub>max</sub></span></span><span>R<sub>e</sub></span></span><span style="font-size:1.25em">)</span>²</div>
       <p class="cap">K<sub>max</sub> en MPa·√m et R<sub>e</sub> en MPa : r<sub>p</sub> sort en mètres. La valeur de K est la même quelle que soit la façon d'écrire Y.</p></div>
@@ -412,14 +400,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le coquillage</span></div>
-    <p>Une rupture par fatigue a un visage reconnaissable entre mille (figure 12 du polycopié). Sur la surface cassée, on distingue :</p>
+    <p>Une rupture par fatigue a un visage reconnaissable entre mille. Sur la surface cassée, on distingue :</p>
     <ul>
       <li>l'<b>origine</b>, le point d'amorçage, presque toujours en surface ;</li>
       <li>une <b>zone lisse et plane</b>, celle de la propagation lente, où la fissure a avancé cycle après cycle. Elle porte souvent des <b>lignes d'arrêt</b> : des arcs concentriques autour de l'origine, comme les lignes de croissance d'un coquillage ;</li>
       <li>une <b>zone rugueuse</b>, celle de la <b>rupture brutale</b> finale, quand la section restante n'a plus suffi.</li>
     </ul>
     <p>Les <b>lignes d'arrêt</b> se forment quand le chargement cyclique s'interrompt (la nuit, le week-end, à l'arrêt d'une machine) : le fond de fissure, exposé à l'air, s'oxyde un peu plus, d'où un contraste de couleur. Elles apparaissent aussi quand le chargement change (amplitude ou contrainte moyenne plus forte ou plus faible).</p>
-    <p>Au microscope électronique, la zone lisse révèle les <b>stries</b> de fatigue (figure 13, sur un aluminium) : des milliers de petites rides parallèles, une par cycle. Les lignes d'arrêt se voient à l'œil nu ; les stries, seulement au microscope.</p>
+    <p>Au microscope électronique, la zone lisse révèle les <b>stries</b> de fatigue : des milliers de petites rides parallèles, une par cycle. Les lignes d'arrêt se voient à l'œil nu ; les stries, seulement au microscope.</p>
   </div>
 
   <div class="lab" id="m2">
@@ -440,7 +428,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <tr><td><b>Origine</b></td><td>un cycle de chargement</td><td>une interruption ou un changement de chargement</td></tr>
       <tr><td><b>Ce qu'on en tire</b></td><td>la vitesse da/dN, donc ΔK et la contrainte</td><td>l'histoire du chargement (arrêts, changements)</td></tr>
     </table></div>
-    <p><b>Ce que l'expert lit sur la cassure</b> <span class="hp">hors poly</span> :</p>
+    <p><b>Ce que l'expert lit sur la cassure</b> :</p>
     <ul>
       <li><b>la taille de la zone de rupture finale</b> : la fissure casse la pièce à a<sub>C</sub> = (K<sub>IC</sub>/(Y·σ<sub>max</sub>))². Une petite zone de fatigue et une grande zone brutale signalent une contrainte maximale élevée ; une grande zone de fatigue, une contrainte faible ou un matériau tenace ;</li>
       <li><b>le nombre d'origines</b> : une seule origine trahit souvent un défaut local ; plusieurs origines, séparées par de petites marches (les « marches de rochet »), une contrainte élevée ou une concentration de contrainte étendue, comme un pied de cordon ;</li>
@@ -466,14 +454,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">trois domaines</span></div>
     <p>On mesure, au laboratoire, la <b>vitesse</b> d'avancée de la fissure, da/dN (en mètres par cycle), et on la reporte en fonction de l'<b>étendue du facteur d'intensité de contrainte</b> pendant le cycle :</p>
-    <div class="fx"><div class="big" style="font-size:1.6rem"><span class="sig">ΔK</span> = <span class="sig">K<sub>max</sub></span> − <span class="sig">K<sub>min</sub></span> = <span class="sig">Δσ</span>·<span class="mat">Y</span>·√<span class="eps">a</span></div><p class="cap">polycopié, p. 8 ; ΔK en MPa·√m</p></div>
-    <p>En échelles logarithmiques sur les deux axes, la courbe a toujours la même allure (figure 14 du polycopié), comme une autoroute :</p>
+    <div class="fx"><div class="big" style="font-size:1.6rem"><span class="sig">ΔK</span> = <span class="sig">K<sub>max</sub></span> − <span class="sig">K<sub>min</sub></span> = <span class="sig">Δσ</span>·<span class="mat">Y</span>·√<span class="eps">a</span></div><p class="cap">ΔK en MPa·√m</p></div>
+    <p>En échelles logarithmiques sur les deux axes, la courbe a toujours la même allure, comme une autoroute :</p>
     <ul>
       <li><b>domaine 1, le péage</b> : en dessous d'une valeur seuil <span class="mat">ΔK<sub>S</sub></span>, la fissure ne se propage pas. Près du seuil, elle avance de moins d'une distance entre atomes par cycle : en réalité, elle n'avance plus ;</li>
       <li><b>domaine 2, l'autoroute</b> : pour les sollicitations intermédiaires, une longue ligne droite. C'est la <b>loi de Paris</b> (chapitre 4) ;</li>
       <li><b>domaine 3, la falaise</b> : quand K<sub>max</sub> s'approche de la ténacité <span class="mat">K<sub>C</sub></span>, la vitesse explose ; si K<sub>max</sub> atteint K<sub>C</sub>, la rupture se fait en un quart de cycle (le temps de monter jusqu'au maximum).</li>
     </ul>
-    <p><b>Attention</b> (figure 15) : même si on impose une étendue de contrainte Δσ constante, ΔK <b>augmente</b> au fur et à mesure que la fissure grandit, puisqu'il contient √a. La fissure « monte » donc toute seule le long de la courbe : plus elle est longue, plus elle va vite, plus elle s'allonge vite… C'est un emballement.</p>
+    <p><b>Attention</b> : même si on impose une étendue de contrainte Δσ constante, ΔK <b>augmente</b> au fur et à mesure que la fissure grandit, puisqu'il contient √a. La fissure « monte » donc toute seule le long de la courbe : plus elle est longue, plus elle va vite, plus elle s'allonge vite… C'est un emballement.</p>
   </div>
 
   <div class="lab" id="m3">
@@ -491,10 +479,10 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div class="def"><b>📖 Ténacité K<sub>C</sub> (ou K<sub>IC</sub>)</b> : valeur de K<sub>max</sub> qui provoque la rupture brutale. Aciers de construction : de l'ordre de 50 à 200 MPa·√m à température ambiante, beaucoup moins à froid pour certains.</div>
     <p>Avec R = K<sub>min</sub>/K<sub>max</sub> = σ<sub>min</sub>/σ<sub>max</sub> (R ≥ 0), on a :</p>
     <div class="fx"><div class="row big" style="font-size:1.5rem"><span><span class="sig">K<sub>max</sub></span> = <span class="frac"><span><span class="sig">ΔK</span></span><span>1 − <span class="mat">R</span></span></span></span><span>falaise à <span class="sig">ΔK</span> = (1 − <span class="mat">R</span>)·<span class="mat">K<sub>C</sub></span></span></div></div>
-    <p><b>Effet de R</b> <span class="hp">hors poly</span>. À ΔK égal, une fissure soumise à un R plus élevé va plus vite et a un seuil plus bas. Explication principale (Elber, 1970) : à R faible, les lèvres de la fissure se touchent avant la fin de la décharge (<b>fermeture de fissure</b>), et une partie de ΔK ne sert à rien ; à R élevé, la fissure reste ouverte pendant tout le cycle.</p>
-    <p><b>Ordres de grandeur de la figure 14.</b> Domaine 1 vers 10⁻⁹ m/cycle et en dessous (polycopié ; la norme ASTM E647 fixe conventionnellement le seuil à 10⁻¹⁰ m/cycle) ; domaine 2 entre environ 10⁻⁸ et 10⁻⁶ m/cycle, soit 0,01 à 1 µm par cycle ; domaine 3 au-delà.</p>
+    <p><b>Effet de R</b>. À ΔK égal, une fissure soumise à un R plus élevé va plus vite et a un seuil plus bas. Explication principale (Elber, 1970) : à R faible, les lèvres de la fissure se touchent avant la fin de la décharge (<b>fermeture de fissure</b>), et une partie de ΔK ne sert à rien ; à R élevé, la fissure reste ouverte pendant tout le cycle.</p>
+    <p><b>Ordres de grandeur.</b> Domaine 1 vers 10⁻⁹ m/cycle et en dessous (la norme ASTM E647 fixe conventionnellement le seuil à 10⁻¹⁰ m/cycle) ; domaine 2 entre environ 10⁻⁸ et 10⁻⁶ m/cycle, soit 0,01 à 1 µm par cycle ; domaine 3 au-delà.</p>
     <p><b>Exemple.</b> Δσ = 100 MPa, Y = 2, a = 2 mm : <span class="m">ΔK = 100 × 2 × √0,002 = 8,9 MPa·√m</span>, au-dessus d'un seuil de 6 MPa·√m : la fissure se propage. À a = 8 mm (quatre fois plus longue), ΔK double : 17,9 MPa·√m.</p>
-    <div class="tip"><b>💡 Comment mesure-t-on da/dN ?</b> Sur une éprouvette déjà fissurée (par exemple l'éprouvette compacte de traction, dite CT, un bloc entaillé tiré par deux goupilles), on impose une amplitude de charge constante et on suit la longueur de fissure en continu (par la variation de raideur de l'éprouvette, ou par la résistance électrique). ΔK augmente tout seul, comme sur la figure 15 : on parcourt ainsi les domaines 2 et 3. Pour le seuil, on fait au contraire décroître la charge pas à pas.</div>
+    <div class="tip"><b>💡 Comment mesure-t-on da/dN ?</b> Sur une éprouvette déjà fissurée (par exemple l'éprouvette compacte de traction, dite CT, un bloc entaillé tiré par deux goupilles), on impose une amplitude de charge constante et on suit la longueur de fissure en continu (par la variation de raideur de l'éprouvette, ou par la résistance électrique). ΔK augmente tout seul, comme on vient de le voir : on parcourt ainsi les domaines 2 et 3. Pour le seuil, on fait au contraire décroître la charge pas à pas.</div>
     <div class="warn"><b>⚠️ Piège : ΔK, pas K.</b> La vitesse dépend de l'<b>étendue</b> ΔK ; la rupture finale, de K<sub>max</sub>. Deux cycles de même ΔK mais de R différents n'ont ni la même vitesse, ni la même longueur critique.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique :</b> « <b>péage, autoroute, falaise</b> » : ΔK<sub>S</sub>, Paris, K<sub>C</sub>.</div>
     <div class="weld"><b>🔥 Des soudures à R élevé</b>
@@ -514,7 +502,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">une droite et deux leviers</span></div>
     <p>Dans le domaine 2, les logarithmes de la vitesse et de ΔK sont liés par une droite. En 1963, Paul Paris et Fazil Erdogan ont écrit cette observation sous la forme qui porte le nom du premier :</p>
-    <div class="fx"><div class="big"><span class="frac"><span>d<span class="eps">a</span></span><span>d<span class="eps">N</span></span></span> = <span class="mat">C</span>·(<span class="sig">ΔK</span>)<sup><span class="mat">m</span></sup></div><p class="cap">C et m : coefficients caractéristiques du matériau (polycopié, p. 9)</p></div>
+    <div class="fx"><div class="big"><span class="frac"><span>d<span class="eps">a</span></span><span>d<span class="eps">N</span></span></span> = <span class="mat">C</span>·(<span class="sig">ΔK</span>)<sup><span class="mat">m</span></sup></div><p class="cap">C et m : coefficients caractéristiques du matériau</p></div>
     <p>Pour les aciers, m vaut environ 3. Cela donne deux leviers à retenir :</p>
     <ul>
       <li><b>doubler ΔK multiplie la vitesse par 2³ = 8</b> ;</li>
@@ -540,7 +528,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">constantes, unités et limites</span></div>
-    <p><b>Constantes des aciers</b> <span class="hp">hors poly</span> (valeurs moyennes publiées par J. M. Barsom, avec da/dN en m/cycle et ΔK en MPa·√m) :</p>
+    <p><b>Constantes des aciers</b> (valeurs moyennes publiées par J. M. Barsom, avec da/dN en m/cycle et ΔK en MPa·√m) :</p>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Famille d'aciers</th><th>C</th><th>m</th></tr>
       <tr><td>ferrito-perlitiques (aciers de construction)</td><td class="n">6,9 × 10⁻¹²</td><td class="n">3,0</td></tr>
@@ -567,7 +555,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 <div class="wrap">
   <div class="cartouche">
     <div class="c-num">5</div>
-    <div class="c-title"><h2>Intégrer la loi de Paris</h2><p>Combien de cycles avant la rupture ? <span class="hp">hors poly</span></p></div>
+    <div class="c-title"><h2>Intégrer la loi de Paris</h2><p>Combien de cycles avant la rupture ?</p></div>
     <div class="c-img"><span class="ico">⏳</span><span><small>Image à retenir</small>Le sablier : le sable coule à peine au début, puis de plus en plus vite à la fin</span></div>
   </div>
 
@@ -629,7 +617,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 <div class="wrap">
   <div class="cartouche">
     <div class="c-num">6</div>
-    <div class="c-title"><h2>De Paris aux classes FAT</h2><p>La boucle est bouclée <span class="hp">hors poly</span></p></div>
+    <div class="c-title"><h2>De Paris aux classes FAT</h2><p>La boucle est bouclée</p></div>
     <div class="c-img"><span class="ico">🔁</span><span><small>Image à retenir</small>La boucle : la pente 3 des courbes FAT, c'est l'exposant 3 de Paris</span></div>
   </div>
 
@@ -723,12 +711,12 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <p class="q"><b>a)</b> Calcule ΔK. La fissure se propage-t-elle ?</p>
     <p class="q"><b>b)</b> Calcule σ<sub>max</sub> et K<sub>max</sub>.</p>
     <p class="q"><b>c)</b> Calcule la longueur critique a<sub>C</sub>.</p>
-    <p class="q"><b>d)</b> Que vaut ΔK quand la fissure atteint 8 mm ? Commente avec la figure 15 du polycopié.</p>
+    <p class="q"><b>d)</b> Que vaut ΔK quand la fissure atteint 8 mm ? Commente ce résultat obtenu à Δσ constant.</p>
     <details><summary>Voir la correction</summary><div class="sol">
       <p><b>a)</b> <span class="m">ΔK = Δσ·Y·√a = 100 × 2 × √0,002 = 100 × 2 × 0,0447 = <b>8,9 MPa·√m</b></span> &gt; ΔK<sub>S</sub> = 6 : <b>elle se propage</b>.</p>
       <p><b>b)</b> <span class="m">σ<sub>max</sub> = Δσ/(1 − R) = 100/0,9 = <b>111,1 MPa</b></span> ; <span class="m">K<sub>max</sub> = 111,1 × 2 × 0,0447 = <b>9,9 MPa·√m</b></span>, loin de K<sub>IC</sub>.</p>
       <p><b>c)</b> <span class="m">a<sub>C</sub> = (K<sub>IC</sub>/(Y·σ<sub>max</sub>))² = (60/222,2)² = 0,0729 m ≈ <b>73 mm</b></span>.</p>
-      <p><b>d)</b> <span class="m">ΔK = 100 × 2 × √0,008 = <b>17,9 MPa·√m</b></span> : quatre fois plus de longueur, deux fois plus de ΔK. À Δσ constant, ΔK grandit avec la fissure (figure 15), et la vitesse avec lui : 2³ = 8 fois plus vite avec m = 3.</p>
+      <p><b>d)</b> <span class="m">ΔK = 100 × 2 × √0,008 = <b>17,9 MPa·√m</b></span> : quatre fois plus de longueur, deux fois plus de ΔK. À Δσ constant, ΔK grandit avec la fissure, et la vitesse avec lui : 2³ = 8 fois plus vite avec m = 3.</p>
     </div></details>
   </div>
 
@@ -866,7 +854,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <dt>Strie de fatigue</dt><dd>Ride microscopique de la cassure laissée par un cycle ; son espacement vaut da/dN.</dd>
     <dt>Tolérance aux dommages</dt><dd>Conception qui admet des fissures, à condition de les détecter par inspection avant qu'elles ne deviennent critiques.</dd>
     <dt>Transgranulaire</dt><dd>Qui traverse les grains.</dd>
-    <dt>Y</dt><dd>Facteur géométrique, sans unité (≈ 2 pour une petite fissure de surface, convention du polycopié qui y inclut √π).</dd>
+    <dt>Y</dt><dd>Facteur géométrique, sans unité (≈ 2 pour une petite fissure de surface, convention de la série qui y inclut √π).</dd>
     <dt>ZAT</dt><dd>Zone affectée thermiquement : partie du métal de base modifiée par la chaleur du soudage.</dd>
   </dl>
 </div>
@@ -894,14 +882,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
   <p class="status" id="checkMsg"></p>
 
-  <div class="meta">🔭 <b>Fin de la série « la vie d'une fissure ».</b> Les quatre cours ont suivi le polycopié jusqu'à la loi de Paris. La suite du polycopié aborde d'autres questions, qui pourront faire l'objet d'une nouvelle série : le <b>cumul des dommages</b> sous chargement variable (règle de Miner, qui exploite le comptage rainflow du cours 1), l'estimation des <b>limites d'endurance</b> et l'effet des paramètres de chargement, et la <b>fatigue plastique oligocyclique</b> (loi de Manson-Coffin).</div>
+  <div class="meta">🔭 <b>Fin de la série « la vie d'une fissure ».</b> Les quatre cours ont suivi la fissure de sa naissance jusqu'à la loi de Paris. D'autres questions pourront faire l'objet d'une nouvelle série : le <b>cumul des dommages</b> sous chargement variable (règle de Miner, qui exploite le comptage rainflow du cours 1), l'estimation des <b>limites d'endurance</b> et l'effet des paramètres de chargement, et la <b>fatigue plastique oligocyclique</b> (loi de Manson-Coffin).</div>
 </div>
 </section>
 </main>
 
 <footer>
 <div class="wrap">
-  <p>Cours 4 sur 4 de la série « Fatigue des métaux : la vie d'une fissure ». Notations alignées sur le polycopié de référence (Partie II : Fatigue) ; pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 4 sur 4 de la série « Fatigue des métaux : la vie d'une fissure ». Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1135,7 +1123,7 @@ function mmTxt(a){return a<1e-3?nf(a*1e6,0)+" µm":nf(a*1e3,a<1e-2?2:1)+" mm";}
     el("line",{x1:x0,y1:y1,x2:x1,y2:y1,class:"axis"},svg);el("line",{x1:x0,y1:y0,x2:x0,y2:y1,class:"axis"},svg);
     tx(svg,x0-6,y0-10,"da/dN (m/cycle)",{class:"lbl"});tx(svg,x1,y1+31,"ΔK (MPa·√m, échelle log)",{class:"lbl","text-anchor":"end"});
     /* repères */
-    [[1e-9,"10⁻⁹ : seuil (polycopié)"],[1e-10,"10⁻¹⁰ : seuil (ASTM E647)"]].forEach(q=>{el("line",{x1:x0,y1:Y(q[0]),x2:x1,y2:Y(q[0]),stroke:"var(--muted)","stroke-width":1,"stroke-dasharray":"2 4"},svg);if(W>=480)tx(svg,x1-4,Y(q[0])-4,q[1],{class:"lbl","text-anchor":"end"});});
+    [[1e-9,"10⁻⁹ : seuil usuel"],[1e-10,"10⁻¹⁰ : seuil (ASTM E647)"]].forEach(q=>{el("line",{x1:x0,y1:Y(q[0]),x2:x1,y2:Y(q[0]),stroke:"var(--muted)","stroke-width":1,"stroke-dasharray":"2 4"},svg);if(W>=480)tx(svg,x1-4,Y(q[0])-4,q[1],{class:"lbl","text-anchor":"end"});});
     [1e-8,1e-6].forEach(s=>el("line",{x1:x0,y1:Y(s),x2:x1,y2:Y(s),stroke:"var(--muted)","stroke-width":1.2,"stroke-dasharray":"6 4"},svg));
     /* droite de Paris */
     el("line",{x1:X(1),y1:Y(PC),x2:X(100),y2:Y(PC*1e6),stroke:"var(--mat)","stroke-width":1.4,"stroke-dasharray":"7 5",opacity:.7},svg);
@@ -1241,9 +1229,9 @@ function mmTxt(a){return a<1e-3?nf(a*1e6,0)+" µm":nf(a*1e3,a<1e-2?2:1)+" mm";}
         el("line",{x1:X(Nd),y1:ay0,x2:X(Nd),y2:ay1,stroke:"var(--mat)","stroke-width":1.2,"stroke-dasharray":"3 3"},svg);}
       const Nt=NX*t,at=Math.min(c.ac,c.aOf(Nt));el("circle",{cx:X(Nt),cy:Ya(at),r:6,fill:"var(--ink)"},svg);
     }
-    /* panneau K(t), figure 15 */
+    /* panneau K(t) */
     const ky0=ay1+60,ky1=H-30,Kmx=c.K*1.12,Yk=k=>ky1-(ky1-ky0)*k/Kmx;
-    tx(svg,x0-50,ky0-12,W<520?"K(t) en MPa·√m, comme la figure 15":"K au cours du temps (MPa·√m), comme la figure 15",{class:"lbl"});
+    tx(svg,x0-50,ky0-12,W<520?"K(t) en MPa·√m":"K au cours du temps (MPa·√m)",{class:"lbl"});
     for(let i=0;i<=4;i++){const k=Kmx*i/4;el("line",{x1:x0,y1:Yk(k),x2:x1,y2:Yk(k),class:"gridbg",opacity:.6},svg);tx(svg,x0-6,Yk(k)+4,nf(k,0),{class:"lbl","text-anchor":"end"});}
     el("line",{x1:x0,y1:ky1,x2:x1,y2:ky1,class:"axis"},svg);el("line",{x1:x0,y1:ky0,x2:x0,y2:ky1,class:"axis"},svg);
     el("line",{x1:x0,y1:Yk(c.K),x2:x1,y2:Yk(c.K),stroke:"var(--mat)","stroke-width":1.6,"stroke-dasharray":"6 4"},svg);
@@ -1262,7 +1250,7 @@ function mmTxt(a){return a<1e-3?nf(a*1e6,0)+" µm":nf(a*1e3,a<1e-2?2:1)+" mm";}
     const Nd2=(ad>c.a0&&ad<c.ac)?c.Nab(ad,c.ac):NaN;
     ro.innerHTML="<span class='eps'>a<sub>C</sub> = "+mmTxt(c.ac)+"</span><span class='sig'>ΔK initial = "+nf(c.dK0,1)+" MPa·√m</span><span class='mat'>ΔK<sub>S</sub> = "+nf(c.th,1)+"</span>"+(prop?"<span class='eps'>N<sub>p</sub> = "+sciS(c.Np)+" cycles</span>"+(isFinite(Nd2)?"<span class='eps'>de 2 mm à a<sub>C</sub> : "+sciS(Nd2)+"</span><span class='mat'>intervalle (÷ 2) : "+sciS(Nd2/2)+"</span>":""):"<span><b>pas de propagation</b></span>");
     {const half=c.Nab(c.a0,Math.min(c.ac,2*c.a0))/c.Np;
-      msg.innerHTML=(below?"⚠️ ΔK initial = "+nf(c.dK0,1)+" MPa·√m est sous le seuil ΔK<sub>S</sub> = "+nf(c.th,1)+" : en réalité, la fissure dormirait. La loi de Paris seule, prudente, prévoit quand même la courbe ci-dessus. ":"")+"La fissure met <b>"+nf(half*100,0)+" %</b> de sa durée de propagation à doubler de longueur (de "+mmTxt(c.a0)+" à "+mmTxt(Math.min(c.ac,2*c.a0))+"), puis s'emballe : c'est le sablier. En bas, à Δσ constant, l'enveloppe de K s'élargit comme √a (figure 15), jusqu'à ce que K<sub>max</sub> touche K<sub>IC</sub>.";}
+      msg.innerHTML=(below?"⚠️ ΔK initial = "+nf(c.dK0,1)+" MPa·√m est sous le seuil ΔK<sub>S</sub> = "+nf(c.th,1)+" : en réalité, la fissure dormirait. La loi de Paris seule, prudente, prévoit quand même la courbe ci-dessus. ":"")+"La fissure met <b>"+nf(half*100,0)+" %</b> de sa durée de propagation à doubler de longueur (de "+mmTxt(c.a0)+" à "+mmTxt(Math.min(c.ac,2*c.a0))+"), puis s'emballe : c'est le sablier. En bas, à Δσ constant, l'enveloppe de K s'élargit comme √a, jusqu'à ce que K<sub>max</sub> touche K<sub>IC</sub>.";}
   }
   bP.addEventListener("click",()=>{if(run){run=false;cancelAnimationFrame(raf);bP.textContent="▶ Lecture";return;}
     if(RM){t=1;draw();return;}
@@ -1323,7 +1311,7 @@ function mmTxt(a){return a<1e-3?nf(a*1e6,0)+" µm":nf(a*1e3,a<1e-2?2:1)+" mm";}
     {q:"Les lignes d'arrêt :",o:["se voient seulement au MEB","marquent une interruption ou un changement du chargement","comptent les cycles","sont des fissures secondaires"],c:1,e:"Visibles à l'œil nu, elles racontent les <b>événements</b> (arrêts, changements), pas les cycles."},
     {q:"Une petite zone de fatigue et une grande zone de rupture brutale indiquent :",o:["une contrainte maximale faible","une contrainte maximale forte","un matériau très tenace","une corrosion"],c:1,e:"a<sub>C</sub> = (K<sub>IC</sub>/(Yσ<sub>max</sub>))² : un a<sub>C</sub> petit signale un σ<sub>max</sub> <b>élevé</b>."},
     {q:"Δσ = 50 MPa, Y = 2, a = 4 mm. ΔK vaut environ :",o:["0,4 MPa·√m","6,3 MPa·√m","200 MPa·√m","12,6 MPa·√m"],c:1,e:"ΔK = 50 × 2 × √0,004 = 100 × 0,0632 ≈ <b>6,3 MPa·√m</b> (a en mètres !)."},
-    {q:"À Δσ constant, si la fissure devient quatre fois plus longue, ΔK :",o:["reste constant","double","quadruple","est divisé par deux"],c:1,e:"ΔK ∝ √a : √4 = 2, ΔK <b>double</b> (figure 15)."},
+    {q:"À Δσ constant, si la fissure devient quatre fois plus longue, ΔK :",o:["reste constant","double","quadruple","est divisé par deux"],c:1,e:"ΔK ∝ √a : √4 = 2, ΔK <b>double</b>."},
     {q:"Sous le seuil ΔK<sub>S</sub> :",o:["la fissure se propage très vite","la fissure ne se propage pas","la pièce casse","la loi de Paris s'applique"],c:1,e:"Domaine 1 : <b>pas de propagation</b>, la fissure dort."},
     {q:"Loi de Paris avec m = 3 : si ΔK double, la vitesse est :",o:["doublée","triplée","multipliée par 8","multipliée par 9"],c:2,e:"2³ = <b>8</b>."},
     {q:"Pour passer C de (m/cycle ; MPa·√m) à (mm/cycle ; N·mm<sup>−3/2</sup>), on multiplie par :",o:["1 000","1 000/31,62<sup>m</sup>","31,62<sup>m</sup>","1/1 000"],c:1,e:"Facteur 1 000 pour les longueurs, divisé par 31,62<sup>m</sup> pour l'unité de K : <b>1 000/31,62<sup>m</sup></b>."},

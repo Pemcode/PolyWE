@@ -374,10 +374,10 @@ input.r-gam{accent-color:var(--gam)}
   <div class="recall">
     <div><div class="f"><span class="vec">T</span> = <span class="sig">[σ]</span>·<span class="vec">n</span></div>La matrice des contraintes donne le vecteur contrainte sur n'importe quelle facette. N'oublie jamais de <b>normaliser</b> n⃗.</div>
     <div><div class="f">M-P-P</div>Multiplier (T⃗ = [σ]n⃗), Projeter (σₙ = T⃗·n⃗), Pythagoriser (|τ| = √(T² − σₙ²)).</div>
-    <div><div class="f">cercle C ± R</div>En 2D, le point (σₙ ; τ) décrit un cercle. Convention de la série (celle du polycopié) : quand la facette tourne de θ, le point tourne de 2θ en sens inverse.</div>
+    <div><div class="f">cercle C ± R</div>En 2D, le point (σₙ ; τ) décrit un cercle. Convention de la série : quand la facette tourne de θ, le point tourne de 2θ en sens inverse.</div>
   </div>
 
-  <div class="def"><b>📘 Dans le polycopié</b> (Polytech Nantes, « Notions de base de RDM », IWE1) : ce cours de RDM (résistance des matériaux) correspond à la <b>page 3</b> (§ 2, cinématique) et aux <b>pages 9 à 11</b> (§ 7, parties a à e). Les notations sont celles du polycopié : <b>ℇ</b> (un ε en écriture ronde ; on l'écrit aussi simplement ε dans ce cours) pour le tenseur des déformations, <b>ε<sub>x</sub>, ε<sub>y</sub>, ε<sub>xy</sub></b> pour ses composantes en 2D, <b>φ</b> pour l'angle de la facette, <b>𝔽</b> et <b>𝔼</b> (lettres à double barre) pour les tenseurs gradient de transformation et de Green-Lagrange, <b>𝕀</b> pour la matrice identité, et un <b>t</b> en exposant pour la transposée. Les chapitres 5 (thermique) et 6 (jauges et rosettes) vont au-delà du polycopié : ils sont signalés 🔥, car ils servent surtout dans la pratique du soudage.</div>
+  <div class="def"><b>📘 Les notations de ce cours de RDM</b> (résistance des matériaux) : <b>ℇ</b> (un ε en écriture ronde ; on l'écrit aussi simplement ε dans ce cours) pour le tenseur des déformations, <b>ε<sub>x</sub>, ε<sub>y</sub>, ε<sub>xy</sub></b> pour ses composantes en 2D, <b>φ</b> pour l'angle de la facette, <b>𝔽</b> et <b>𝔼</b> (lettres à double barre) pour les tenseurs gradient de transformation et de Green-Lagrange, <b>𝕀</b> pour la matrice identité, et un <b>t</b> en exposant pour la transposée. Les chapitres 5 (thermique) et 6 (jauges et rosettes) sont signalés 🔥 : ils servent surtout dans la pratique du soudage.</div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage (formation IWE)</b>
     <p>(IWE : <i>International Welding Engineer</i>, ingénieur international en soudage.) Une soudure, c'est d'abord une histoire de <b>déformations</b> : le métal chauffé se dilate, le cordon se rétracte en refroidissant, les tôles se déforment (on parle de « distorsion »), et ce qui ne peut pas se déformer librement reste en contrainte. Le chapitre 5 te montre comment naît une contrainte résiduelle de soudage, et le chapitre 6 comment on la mesure avec une rosette de jauges.</p>
@@ -404,9 +404,9 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">chaque point a sa flèche</span></div>
-    <p>Quand une pièce se charge, chacun de ses points bouge un peu. Le point qui était en P₀ arrive en P. La flèche qui va de P₀ à P est le <b>vecteur déplacement</b> (polycopié, p. 3) :</p>
+    <p>Quand une pièce se charge, chacun de ses points bouge un peu. Le point qui était en P₀ arrive en P. La flèche qui va de P₀ à P est le <b>vecteur déplacement</b> :</p>
     <div class="fx"><div class="big"><span class="vec">u</span> = <span style="text-decoration:overline">P₀P</span></div><p class="cap">en 2D, ses composantes s'appellent u (selon x) et v (selon y) ; en 3D on ajoute w (selon z)</p></div>
-    <p>L'ensemble des flèches de tous les points s'appelle le <b>champ de déplacement</b>. Pense à une nuée d'oiseaux : chaque oiseau a sa propre flèche de mouvement. Trois cas se présentent, exactement ceux de la figure de la page 3 du polycopié :</p>
+    <p>L'ensemble des flèches de tous les points s'appelle le <b>champ de déplacement</b>. Pense à une nuée d'oiseaux : chaque oiseau a sa propre flèche de mouvement. Trois cas se présentent :</p>
     <p><b>Translation :</b> toutes les flèches sont identiques. La nuée glisse en bloc, sa forme ne change pas.<br><b>Rotation :</b> les flèches tournent autour d'un centre et grandissent avec la distance. La nuée pivote, sa forme ne change toujours pas.<br><b>Déformation :</b> les flèches diffèrent de façon à changer les <b>distances</b> entre oiseaux ou les <b>angles</b> entre leurs directions. Là, la forme change.</p>
     <p>Translation et rotation sont des <b>mouvements de corps rigide</b> : ils ne créent aucune contrainte (ils relèvent de la mécanique générale). La RDM ne s'intéresse qu'au troisième cas. La manipulation te fait vérifier le critère : on mesure deux segments et l'angle entre eux.</p>
   </div>
@@ -434,14 +434,14 @@ input.r-gam{accent-color:var(--gam)}
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">le gradient et le tenseur 𝔽</span></div>
     <div class="def"><b>📖 Dérivée partielle ∂u/∂x :</b> le symbole ∂ (un « d » arrondi, qu'on lit « d rond ») désigne une dérivée <b>partielle</b> : de combien u varie quand on avance un tout petit peu selon x, <b>en gardant y fixe</b>. C'est la pente de u dans la direction x. De même, ∂u/∂y est la pente de u quand on avance selon y.</div>
     <div class="fx" style="max-width:640px"><div class="big" style="font-size:1.3rem;line-height:1.7"><span style="text-decoration:overline">grad</span> <span class="vec">u</span> = <span class="inlinemat" style="grid-template-columns:repeat(2,auto)"><span>∂u/∂x</span><span>∂u/∂y</span><span>∂v/∂x</span><span>∂v/∂y</span></span> &nbsp; en 2D</div><p class="cap">ligne = la composante du déplacement (u, puis v) ; colonne = la direction dans laquelle on se décale (x, puis y) ; en 3D, c'est une matrice 3 × 3 avec w et z</p></div>
-    <p>Ce gradient suffit à décrire comment un tout petit segment d<span class="vec">X</span> (avant) devient d<span class="vec">x</span> (après) : <span class="m">d<span class="vec">x</span> = d<span class="vec">X</span> + <span style="text-decoration:overline">Grad</span> <span class="vec">u</span>·d<span class="vec">X</span></span> (Grad avec une majuscule : on dérive par rapport à la position initiale, voir ci-dessous). En factorisant, on obtient le <b>tenseur gradient de transformation</b> 𝔽 du polycopié (p. 9) :</p>
+    <p>Ce gradient suffit à décrire comment un tout petit segment d<span class="vec">X</span> (avant) devient d<span class="vec">x</span> (après) : <span class="m">d<span class="vec">x</span> = d<span class="vec">X</span> + <span style="text-decoration:overline">Grad</span> <span class="vec">u</span>·d<span class="vec">X</span></span> (Grad avec une majuscule : on dérive par rapport à la position initiale, voir ci-dessous). En factorisant, on obtient le <b>tenseur gradient de transformation</b> 𝔽 :</p>
     <div class="fx"><div class="big">𝔽 = 𝕀 + <span style="text-decoration:overline">Grad</span> <span class="vec">u</span> &nbsp;&nbsp; et &nbsp;&nbsp; d<span class="vec">x</span> = 𝔽·d<span class="vec">X</span></div><p class="cap">𝕀 est la matrice identité : des 1 sur la diagonale, des 0 ailleurs ; elle ne change rien au vecteur qu'elle multiplie</p></div>
     <dl class="syms">
-      <dt>𝔽</dt><dd>gradient de transformation : la « machine » qui transforme les petits segments de la pièce. 𝔽 = 𝕀 veut dire « rien ne bouge localement ». Le polycopié signale qu'on le trouve aussi écrit <u>F</u>, F avec deux barres, ou F<sub>ij</sub> (écriture indicielle)</dd>
-      <dt>Grad, grad</dt><dd>Grad (majuscule) dérive par rapport à la position <b>initiale</b> X, grad (minuscule) par rapport à la position <b>actuelle</b> x. En HPP (chapitre 3), les deux sont égaux, comme l'indique la remarque de la page 10 du polycopié</dd>
+      <dt>𝔽</dt><dd>gradient de transformation : la « machine » qui transforme les petits segments de la pièce. 𝔽 = 𝕀 veut dire « rien ne bouge localement ». On le trouve aussi écrit <u>F</u>, F avec deux barres, ou F<sub>ij</sub> (écriture indicielle)</dd>
+      <dt>Grad, grad</dt><dd>Grad (majuscule) dérive par rapport à la position <b>initiale</b> X, grad (minuscule) par rapport à la position <b>actuelle</b> x. En HPP (chapitre 3), les deux sont égaux</dd>
     </dl>
     <p><b>Exemples.</b> Translation : u et v sont constants, toutes les dérivées sont nulles, 𝔽 = 𝕀. Étirement de 40 % selon x : u = 0,4x, donc ∂u/∂x = 0,4 et 𝔽 = diag(1,4 ; 1), où diag(a ; b) désigne la matrice qui a a et b sur sa diagonale et des zéros ailleurs. Rotation d'angle α : 𝔽 est la matrice de rotation, ses termes valent cos α et ± sin α. La manipulation affiche ce gradient pour chaque mouvement.</p>
-    <div class="warn">⚠️ <b>Une précision sur la remarque de la page 3 du polycopié.</b> Elle semble inverser les deux descriptions. En description <b>lagrangienne</b> (celle de la RDM), on <b>suit chaque particule</b>, repérée par sa position initiale X. En description <b>eulérienne</b> (celle de la mécanique des fluides), on se place en un <b>point fixe de l'espace</b> et on regarde la matière qui y passe.</div>
+    <div class="warn">⚠️ <b>Ne confonds pas les deux descriptions</b> : on les inverse facilement. En description <b>lagrangienne</b> (celle de la RDM), on <b>suit chaque particule</b>, repérée par sa position initiale X. En description <b>eulérienne</b> (celle de la mécanique des fluides), on se place en un <b>point fixe de l'espace</b> et on regarde la matière qui y passe.</div>
   </div>
 </div>
 </section>
@@ -456,7 +456,7 @@ input.r-gam{accent-color:var(--gam)}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">deux morceaux</span></div>
     <p>Une porte qui tourne sur ses gonds bouge beaucoup, mais elle ne se tord pas. Le gradient du déplacement mélange ces deux choses : la vraie <b>déformation</b> (qui change longueurs et angles, et crée des contraintes) et la <b>rotation</b> (qui ne fait que faire pivoter, sans aucun effet sur la matière). On les sépare toujours de la même façon :</p>
-    <div class="fx" style="max-width:700px"><div class="big" style="font-size:1.35rem"><span style="text-decoration:overline">grad</span> <span class="vec">u</span> = <span class="eps">ε</span> + <span>ω</span> &nbsp; avec &nbsp; <span class="eps">ε</span> = ½(<span style="text-decoration:overline">grad</span> <span class="vec">u</span> + <span style="text-decoration:overline">grad</span> <span class="vec">u</span><sup>t</sup>)</div><p class="cap">ε est la partie symétrique : c'est le tenseur des petites déformations du polycopié (p. 9) ; ω (« oméga ») est la partie antisymétrique : la rotation</p></div>
+    <div class="fx" style="max-width:700px"><div class="big" style="font-size:1.35rem"><span style="text-decoration:overline">grad</span> <span class="vec">u</span> = <span class="eps">ε</span> + <span>ω</span> &nbsp; avec &nbsp; <span class="eps">ε</span> = ½(<span style="text-decoration:overline">grad</span> <span class="vec">u</span> + <span style="text-decoration:overline">grad</span> <span class="vec">u</span><sup>t</sup>)</div><p class="cap">ε est la partie symétrique : c'est le tenseur des petites déformations ; ω (« oméga ») est la partie antisymétrique : la rotation</p></div>
     <div class="def"><b>📖 Transposée (exposant t) :</b> la matrice retournée autour de sa diagonale (on échange les lignes et les colonnes). Additionner une matrice et sa transposée, puis diviser par 2, fabrique une matrice <b>symétrique</b> : on fait la moyenne de chaque case et de sa jumelle.</div>
     <p>Appliqué case par case, cela donne :</p>
     <div class="fx" style="max-width:640px"><div class="big" style="font-size:1.3rem;line-height:1.9"><span class="eps">ε<sub>x</sub></span> = ∂u/∂x &nbsp;&nbsp; <span class="eps">ε<sub>y</sub></span> = ∂v/∂y &nbsp;&nbsp; <span class="gam">ε<sub>xy</sub></span> = ½(∂u/∂y + ∂v/∂x)</div></div>
@@ -485,9 +485,9 @@ input.r-gam{accent-color:var(--gam)}
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">la rotation et les conséquences du γ/2</span></div>
     <p>La partie antisymétrique <span class="m">ω = ½(<span style="text-decoration:overline">grad</span> <span class="vec">u</span> − <span style="text-decoration:overline">grad</span> <span class="vec">u</span><sup>t</sup>)</span> n'a qu'un seul nombre utile en 2D : l'angle de rotation locale <span class="m">ω<sub>z</sub> = ½(∂v/∂x − ∂u/∂y)</span> (en radians, positif dans le sens trigonométrique). Il ne crée aucune contrainte.</p>
-    <p>En 3D, on obtient le tenseur complet de la page 10 du polycopié, symétrique par construction, donc avec 6 composantes indépendantes :</p>
+    <p>En 3D, on obtient le tenseur complet, symétrique par construction, donc avec 6 composantes indépendantes :</p>
     <div class="fx" style="max-width:560px"><div class="big" style="font-size:1.25rem;line-height:1.7"><span class="eps">ε</span> = <span class="inlinemat"><span class="eps">ε<sub>xx</sub></span><span class="gam">ε<sub>xy</sub></span><span class="gam">ε<sub>xz</sub></span><span class="gam">ε<sub>xy</sub></span><span class="eps">ε<sub>yy</sub></span><span class="gam">ε<sub>yz</sub></span><span class="gam">ε<sub>xz</sub></span><span class="gam">ε<sub>yz</sub></span><span class="eps">ε<sub>zz</sub></span></span></div><p class="cap">avec ε<sub>xz</sub> = ½(∂u/∂z + ∂w/∂x) et ε<sub>yz</sub> = ½(∂v/∂z + ∂w/∂y)</p></div>
-    <p><b>Conséquence pour la loi de Hooke (cours 5).</b> Puisque <span class="m"><span class="tau">τ</span> = <span class="mat">G</span><span class="gam">γ</span></span> (cours 1) et <span class="m"><span class="gam">γ</span> = 2<span class="gam">ε<sub>xy</sub></span></span>, on a <span class="m"><span class="tau">σ<sub>xy</sub></span> = 2<span class="mat">G</span><span class="gam">ε<sub>xy</sub></span></span> (σ<sub>xy</sub> est la notation du polycopié pour le cisaillement τ<sub>xy</sub>). C'est exactement le « 2μ » de la loi de Lamé de la page 13 du polycopié (σ = 2μℇ + λ trace(ℇ)𝕀), où λ et μ (« lambda » et « mu ») sont les deux coefficients de Lamé du matériau, avec μ = G, et où trace(ℇ) est la somme de la diagonale de ℇ (cours 1). Le cours 5 détaille cette loi. Le 2 n'est pas mystérieux : il répare le γ/2.</p>
+    <p><b>Conséquence pour la loi de Hooke (cours 5).</b> Puisque <span class="m"><span class="tau">τ</span> = <span class="mat">G</span><span class="gam">γ</span></span> (cours 1) et <span class="m"><span class="gam">γ</span> = 2<span class="gam">ε<sub>xy</sub></span></span>, on a <span class="m"><span class="tau">σ<sub>xy</sub></span> = 2<span class="mat">G</span><span class="gam">ε<sub>xy</sub></span></span> (σ<sub>xy</sub> est une autre notation du cisaillement τ<sub>xy</sub>). C'est exactement le « 2μ » de la loi de Lamé (σ = 2μℇ + λ trace(ℇ)𝕀), où λ et μ (« lambda » et « mu ») sont les deux coefficients de Lamé du matériau, avec μ = G, et où trace(ℇ) est la somme de la diagonale de ℇ (cours 1). Le cours 5 détaille cette loi. Le 2 n'est pas mystérieux : il répare le γ/2.</p>
     <div class="warn">⚠️ <b>Le piège, dans les deux sens.</b> Une jauge, un logiciel de calcul ou un fournisseur peut te donner γ (la distorsion « de l'ingénieur ») ou ε<sub>xy</sub> (la composante du tenseur). Demande-toi toujours lequel des deux tu as sous les yeux : ils diffèrent d'un facteur 2.</div>
   </div>
 </div>
@@ -502,10 +502,10 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">deux façons de mesurer</span></div>
-    <p>Il existe deux tenseurs des déformations dans le polycopié (p. 9). Ils répondent à la même question (« de combien les longueurs et les angles ont-ils changé ? ») avec plus ou moins de précision.</p>
+    <p>Il existe deux tenseurs des déformations. Ils répondent à la même question (« de combien les longueurs et les angles ont-ils changé ? ») avec plus ou moins de précision.</p>
     <p><b>Le tenseur de Green-Lagrange 𝔼, la mesure exacte.</b> Il compare les longueurs <b>au carré</b> avant et après. Or une rotation ne change aucune longueur : pour une cabine de grande roue qui tourne sans se déformer, 𝔼 vaut exactement zéro, quel que soit l'angle de rotation.</p>
     <div class="fx" style="max-width:680px"><div class="big" style="font-size:1.3rem;line-height:1.8">𝔼 = ½(𝔽<sup>t</sup>𝔽 − 𝕀) = ½(<span style="text-decoration:overline">Grad</span> <span class="vec">u</span> + <span style="text-decoration:overline">Grad</span> <span class="vec">u</span><sup>t</sup> + <b><span style="text-decoration:overline">Grad</span> <span class="vec">u</span><sup>t</sup>·<span style="text-decoration:overline">Grad</span> <span class="vec">u</span></b>)</div><p class="cap">le dernier terme, en gras, est un produit de deux gradients : il est tout petit quand les gradients sont petits</p></div>
-    <p><b>Le tenseur des petites déformations ℇ, la mesure simplifiée.</b> Si tous les termes du gradient sont petits (quelques millièmes), leur produit est encore mille fois plus petit : on le jette. On retrouve le ℇ = ½(grad u + grad u<sup>t</sup>) du chapitre 2. C'est l'<b>hypothèse des petites perturbations</b> (HPP) du polycopié.</p>
+    <p><b>Le tenseur des petites déformations ℇ, la mesure simplifiée.</b> Si tous les termes du gradient sont petits (quelques millièmes), leur produit est encore mille fois plus petit : on le jette. On retrouve le ℇ = ½(grad u + grad u<sup>t</sup>) du chapitre 2. C'est l'<b>hypothèse des petites perturbations</b> (HPP).</p>
     <p><b>Le piège :</b> « gradients petits » ne veut pas seulement dire « petites déformations ». Une rotation, même sans aucune déformation, donne des termes de gradient de l'ordre de l'angle (sin α, cos α − 1). Si la pièce tourne trop, le tenseur simplifié invente une déformation qui n'existe pas. La manipulation le montre sur une rotation pure.</p>
   </div>
 
@@ -523,7 +523,7 @@ input.r-gam{accent-color:var(--gam)}
     <p><b>D'où vient 𝔼.</b> Un petit segment d<span class="vec">X</span> devient d<span class="vec">x</span> = 𝔽 d<span class="vec">X</span>. Sa longueur au carré vaut <span class="m">d<span class="vec">x</span><sup>t</sup>d<span class="vec">x</span> = d<span class="vec">X</span><sup>t</sup>𝔽<sup>t</sup>𝔽 d<span class="vec">X</span></span>. La variation des longueurs au carré s'écrit donc <span class="m">|d<span class="vec">x</span>|² − |d<span class="vec">X</span>|² = 2 d<span class="vec">X</span><sup>t</sup> 𝔼 d<span class="vec">X</span></span> : 𝔼 mesure exactement cette variation. En remplaçant 𝔽 par 𝕀 + H (H = Grad u), on obtient 𝔽<sup>t</sup>𝔽 − 𝕀 = H + H<sup>t</sup> + H<sup>t</sup>H.</p>
     <p><b>Le calcul de la rotation pure.</b> Pour une rotation d'angle α, <span class="m">H = <span class="inlinemat" style="grid-template-columns:repeat(2,auto)"><span>cos α − 1</span><span>−sin α</span><span>sin α</span><span>cos α − 1</span></span></span>. Le tenseur simplifié donne <span class="m"><span class="eps">ε<sub>x</sub></span> = <span class="eps">ε<sub>y</sub></span> = cos α − 1 ≈ −α²/2</span> : une <b>fausse compression</b>. Le terme H<sup>t</sup>H vaut exactement l'opposé, et 𝔼 = 0.</p>
     <p><b>L'ordre de grandeur qui fait réfléchir.</b> Pour α = 5°, la fausse déformation vaut cos 5° − 1 = −0,0038, soit −3 800 µε. Or l'acier de construction S235 atteint sa limite d'élasticité vers Rₑ/E = 235/210 000 = 1 120 µε. L'erreur est <b>plus de trois fois</b> la déformation élastique maximale de l'acier. Pour qu'elle reste sous 10 % de cette valeur, il faut une rotation inférieure à environ 0,9°.</p>
-    <div class="tip">💡 <b>Les conditions de l'HPP, précisément :</b> petites déformations (|ε| ≪ 1, le symbole ≪ se lisant « très petit devant ») <b>et</b> petites rotations, donc petits déplacements devant les dimensions de la pièce. On peut alors aussi confondre la géométrie avant et après (Grad = grad, remarque de la p. 10 du polycopié), et écrire l'équilibre sur la forme initiale. C'est le cadre de toute la RDM classique.</div>
+    <div class="tip">💡 <b>Les conditions de l'HPP, précisément :</b> petites déformations (|ε| ≪ 1, le symbole ≪ se lisant « très petit devant ») <b>et</b> petites rotations, donc petits déplacements devant les dimensions de la pièce. On peut alors aussi confondre la géométrie avant et après (Grad = grad), et écrire l'équilibre sur la forme initiale. C'est le cadre de toute la RDM classique.</div>
     <div class="weld"><b>🔥 Quand l'HPP ne suffit plus en soudage</b>
       <p>Les structures élancées (poutres longues, tôles minces) peuvent tourner beaucoup tout en se déformant peu : c'est le cas du <b>voilement</b> d'une tôle mince sous l'effet du retrait des cordons, ou de la distorsion angulaire d'un assemblage. Les simulations numériques de soudage sur ces pièces utilisent alors des formulations en grandes transformations, basées sur 𝔼, et non la formule simplifiée.</p>
     </div>
@@ -542,7 +542,7 @@ input.r-gam{accent-color:var(--gam)}
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la même méthode qu'au cours 2</span></div>
     <p>Bonne nouvelle : tout ce que tu as appris sur <span class="sig">[σ]</span> au cours 2 se transpose tel quel à <span class="eps">ε</span>. Imagine une aiguille de boussole posée sur la pièce, orientée selon <span class="m"><span class="vec">n</span></span> (angle φ avec l'axe x). Deux questions :</p>
     <p><b>1. De combien l'aiguille s'allonge-t-elle ?</b> C'est <span class="eps">ε<sub>n</sub></span>, l'allongement relatif dans la direction n⃗. Il se calcule avec les deux premiers gestes de la méthode M-P-P : multiplier (<span class="eps">ε</span>·<span class="vec">n</span>) puis projeter sur <span class="vec">n</span>.<br><b>2. De combien l'angle droit entre n⃗ et sa perpendiculaire t⃗ se referme-t-il ?</b> C'est <span class="gam">ε<sub>nt</sub></span>, le demi-glissement (encore le γ/2).</p>
-    <p>En 2D, cela donne les deux formules de la page 11 du polycopié, à connaître par cœur :</p>
+    <p>En 2D, cela donne deux formules à connaître par cœur :</p>
     <div class="fx" style="max-width:720px"><div class="big" style="font-size:1.28rem;line-height:1.9">
       <span class="eps">ε<sub>n</sub></span> = <span class="frac"><span>ε<sub>x</sub> + ε<sub>y</sub></span><span>2</span></span> + <span class="frac"><span>ε<sub>x</sub> − ε<sub>y</sub></span><span>2</span></span> cos 2φ + <span class="gam">ε<sub>xy</sub></span> sin 2φ<br>
       <span class="gam">ε<sub>nt</sub></span> = −<span class="frac"><span>ε<sub>x</sub> − ε<sub>y</sub></span><span>2</span></span> sin 2φ + <span class="gam">ε<sub>xy</sub></span> cos 2φ
@@ -551,12 +551,12 @@ input.r-gam{accent-color:var(--gam)}
     <div class="fx" style="max-width:720px"><div class="big" style="font-size:1.28rem;line-height:1.9">
       tan(2φ) = <span class="frac"><span>2ε<sub>xy</sub></span><span>ε<sub>x</sub> − ε<sub>y</sub></span></span> &nbsp;&nbsp;&nbsp; <span class="eps">ε<sub>I, II</sub></span> = <span class="frac"><span>ε<sub>x</sub> + ε<sub>y</sub></span><span>2</span></span> ± ½√((ε<sub>x</sub> − ε<sub>y</sub>)² + 4ε<sub>xy</sub>²)
     </div><p class="cap">en abrégé : ε<sub>I, II</sub> = C ± R, avec C = (ε<sub>x</sub> + ε<sub>y</sub>)/2 le centre du cercle, a = (ε<sub>x</sub> − ε<sub>y</sub>)/2 et R = √(a² + ε<sub>xy</sub>²) = ½√((ε<sub>x</sub> − ε<sub>y</sub>)² + 4ε<sub>xy</sub>²) son rayon</p></div>
-    <div class="mnemo">🧭 <b>Le cercle de Mohr des déformations</b> (p. 11 du polycopié) : axe horizontal ε<sub>n</sub>, axe vertical ε<sub>nt</sub> (noté « g » sur la figure du polycopié, vraisemblablement pour γ/2). Centre C sur l'axe, rayon R. L'aiguille posée selon x (φ = 0°) donne le point (ε<sub>x</sub> ; ε<sub>xy</sub>), l'aiguille selon y (φ = 90°) le point diamétralement opposé (ε<sub>y</sub> ; −ε<sub>xy</sub>). Quand l'aiguille tourne de φ, le point tourne de 2φ <b>dans l'autre sens</b>.</div>
+    <div class="mnemo">🧭 <b>Le cercle de Mohr des déformations</b> : axe horizontal ε<sub>n</sub>, axe vertical ε<sub>nt</sub> (le demi-glissement, γ/2). Centre C sur l'axe, rayon R. L'aiguille posée selon x (φ = 0°) donne le point (ε<sub>x</sub> ; ε<sub>xy</sub>), l'aiguille selon y (φ = 90°) le point diamétralement opposé (ε<sub>y</sub> ; −ε<sub>xy</sub>). Quand l'aiguille tourne de φ, le point tourne de 2φ <b>dans l'autre sens</b>.</div>
   </div>
 
   <div class="lab" id="m4">
     <p class="lab-h">Manipulation 4 : l'aiguille qui mesure l'allongement</p>
-    <p class="lab-sub">Règle l'état de déformation (en µε, microdéformations). À gauche, le petit carré déformé (très exagéré) et l'aiguille bleue orientée à φ ; les directions principales I et II sont en vert. À droite, le point (ε<sub>n</sub> ; ε<sub>nt</sub>) sur le cercle de Mohr des déformations, avec la convention du polycopié.</p>
+    <p class="lab-sub">Règle l'état de déformation (en µε, microdéformations). À gauche, le petit carré déformé (très exagéré) et l'aiguille bleue orientée à φ ; les directions principales I et II sont en vert. À droite, le point (ε<sub>n</sub> ; ε<sub>nt</sub>) sur le cercle de Mohr des déformations, avec la convention de la série.</p>
     <div class="btns" id="m4pre">
       <button class="btn on" type="button" data-v="600,-200,300">Exemple de l'exercice 3</button>
       <button class="btn" type="button" data-v="476,-143,0">Traction simple (acier)</button>
@@ -584,14 +584,14 @@ input.r-gam{accent-color:var(--gam)}
     <p>Le point le plus haut du cercle donne ε<sub>nt, max</sub> = R, qui est un <b>demi</b>-glissement. La distorsion maximale est donc <span class="m"><span class="gam">γ</span><sub>max</sub> = 2R = ε<sub>I</sub> − ε<sub>II</sub></span>. Encore le facteur 2.</p>
     <h4>Déformation plane et contrainte plane : ne pas confondre</h4>
     <div class="tbl-wrap"><table class="data">
-      <tr><th></th><th>Déformation plane (polycopié, p. 10)</th><th>Contrainte plane (polycopié, p. 12)</th></tr>
+      <tr><th></th><th>Déformation plane</th><th>Contrainte plane</th></tr>
       <tr><td>Hypothèse</td><td>u(x, y), v(x, y), pas de déplacement selon z</td><td>aucune force sur les faces de normale z</td></tr>
       <tr><td>Conséquence</td><td><span class="eps">ε<sub>zz</sub></span> = 0, mais <span class="sig">σ<sub>zz</sub></span> ≠ 0</td><td><span class="sig">σ<sub>zz</sub></span> = 0, mais <span class="eps">ε<sub>zz</sub></span> ≠ 0 (Poisson)</td></tr>
       <tr><td>Où la rencontrer</td><td>pièces très longues selon z et bloquées à leurs extrémités (tunnel, barrage, conduite enterrée) ; c'est aussi l'approximation utilisée pour simuler la section courante d'un long cordon dans une tôle épaisse</td><td>tôles minces, et <b>toute surface libre</b> (c'est là qu'on colle les jauges)</td></tr>
     </table></div>
     <p>Dans les deux cas, z est une direction principale et les formules de ε<sub>n</sub>, ε<sub>nt</sub> et le cercle dans le plan xy restent <b>identiques</b>. Seule la troisième déformation principale diffère : nulle en déformation plane, non nulle en contrainte plane.</p>
     <h4>En 3D : trois cercles</h4>
-    <p>Dans la base principale, <span class="eps">ε</span> est diagonale : diag(ε<sub>I</sub> ; ε<sub>II</sub> ; ε<sub>III</sub>) (p. 10 du polycopié). On trace alors trois cercles, chacun construit sur deux des trois valeurs principales : c'est le <b>tricercle de Mohr</b> de la page 11, que le cours 4 construit pas à pas pour les contraintes. Une remarque sur le polycopié : à la page 10, il nomme « III » la direction z par convention, ce qui ne veut pas forcément dire que ε<sub>zz</sub> est la plus petite des trois.</p>
+    <p>Dans la base principale, <span class="eps">ε</span> est diagonale : diag(ε<sub>I</sub> ; ε<sub>II</sub> ; ε<sub>III</sub>). On trace alors trois cercles, chacun construit sur deux des trois valeurs principales : c'est le <b>tricercle de Mohr</b>, que le cours 4 construit pas à pas pour les contraintes. Attention : quand on nomme « III » la direction z par simple convention, cela ne veut pas forcément dire que ε<sub>zz</sub> est la plus petite des trois.</p>
     <div class="tip">💡 <b>Rappel du cours 1 :</b> la somme de la diagonale (la trace) ne dépend pas du repère, et elle vaut ΔV/V, la variation relative de volume. Vérifie-le sur le cercle : ε<sub>I</sub> + ε<sub>II</sub> = 2C = ε<sub>x</sub> + ε<sub>y</sub>, quel que soit l'angle.</div>
   </div>
 </div>
@@ -641,7 +641,7 @@ input.r-gam{accent-color:var(--gam)}
     <p>La déformation totale mesurée est la somme de morceaux d'origines différentes, et <b>seule la partie élastique crée des contraintes</b> :</p>
     <div class="fx"><div class="big" style="font-size:1.55rem"><span class="eps">ε</span> = <span class="eps">ε<sub>él</sub></span> + <span class="eps">ε<sub>th</sub></span> + <span class="eps">ε<sub>p</sub></span> &nbsp;&nbsp;⇒&nbsp;&nbsp; <span class="sig">σ</span> = <span class="mat">E</span>(<span class="eps">ε</span> − <span class="mat">α</span>ΔT − <span class="eps">ε<sub>p</sub></span>) &nbsp;(en 1D)</div><p class="cap">ε<sub>él</sub> : élastique (réversible) ; ε<sub>th</sub> : thermique ; ε<sub>p</sub> : plastique (permanente)</p></div>
     <p><b>Le calcul du cycle.</b> Barre bridée : ε = 0. À la chauffe, σ = −EαΔT jusqu'à −Rₑ, atteint pour <span class="m">ΔT<sub>1</sub> = Rₑ/(Eα) = 235/2,52 ≈ 93 °C</span>. Au-delà, σ reste à −Rₑ et la déformation plastique vaut <span class="m"><span class="eps">ε<sub>p</sub></span> = −αΔT + Rₑ/E</span>. Au sommet ΔT<sub>max</sub>, elle est figée. Au refroidissement : <span class="m"><span class="sig">σ</span> = Eα(ΔT<sub>max</sub> − ΔT) − Rₑ</span>. À la fin (ΔT = 0) : <span class="m"><span class="sig">σ<sub>résiduelle</sub></span> = min(EαΔT<sub>max</sub> − Rₑ ; Rₑ)</span>, qui vaut +Rₑ dès que <span class="m">ΔT<sub>max</sub> ≥ 2Rₑ/(Eα) ≈ 187 °C</span>.</p>
-    <p><b>En 3D</b>, la loi de Hooke du polycopié (p. 13) s'écrit en ajoutant simplement la dilatation : <span class="m">ℇ = <span class="frac"><span>1 + ν</span><span>E</span></span>σ − <span class="frac"><span>ν</span><span>E</span></span> trace(σ)𝕀 + αΔT·𝕀</span>. Le cours 5 détaille cette loi.</p>
+    <p><b>En 3D</b>, la loi de Hooke s'écrit en ajoutant simplement la dilatation : <span class="m">ℇ = <span class="frac"><span>1 + ν</span><span>E</span></span>σ − <span class="frac"><span>ν</span><span>E</span></span> trace(σ)𝕀 + αΔT·𝕀</span>. Le cours 5 détaille cette loi.</p>
     <div class="weld"><b>🔥 Trois conséquences pratiques</b>
       <p><b>1. Distorsion.</b> La zone plastifiée en compression pendant la chauffe reste « trop courte » : le cordon tire sur les tôles, qui se déforment (retrait longitudinal et transversal, distorsion angulaire, voilement des tôles minces).</p>
       <p><b>2. Inox austénitique.</b> Son α est environ 40 % plus grand que celui de l'acier au carbone, et il conduit beaucoup moins bien la chaleur : les gradients de température sont plus forts, et les distorsions nettement plus importantes.</p>
@@ -664,9 +664,9 @@ input.r-gam{accent-color:var(--gam)}
     <div class="fx"><div class="big">ΔR/R = k·<span class="eps">ε<sub>n</sub></span></div><p class="cap">R : résistance électrique (en ohms) ; k : facteur de jauge, environ 2 pour les jauges métalliques courantes</p></div>
     <p>Cette variation est minuscule (0,2 % pour 1 000 µε) : on la mesure avec un montage électrique de quatre résistances appelé <b>pont de Wheatstone</b>.</p>
     <p>Une jauge ne mesure que <b>l'allongement dans sa propre direction</b> : c'est l'aiguille de la boussole du chapitre 4, en vrai. Or un état plan demande 3 nombres (ε<sub>x</sub>, ε<sub>y</sub>, ε<sub>xy</sub>). Il faut donc <b>trois jauges</b> dans trois directions différentes, collées au même endroit : une <b>rosette</b>. La plus courante est la rosette « à 45° », avec des jauges à 0°, 45° et 90°.</p>
-    <p>La formule de ε<sub>n</sub> du polycopié donne directement, pour φ = 0°, 45° et 90° :</p>
+    <p>La formule de ε<sub>n</sub> (chapitre 4) donne directement, pour φ = 0°, 45° et 90° :</p>
     <div class="fx" style="max-width:640px"><div class="big" style="font-size:1.35rem;line-height:1.9"><span class="eps">ε<sub>x</sub></span> = ε<sub>0</sub> &nbsp;&nbsp; <span class="eps">ε<sub>y</sub></span> = ε<sub>90</sub> &nbsp;&nbsp; <span class="gam">ε<sub>xy</sub></span> = ε<sub>45</sub> − <span class="frac"><span>ε<sub>0</sub> + ε<sub>90</sub></span><span>2</span></span></div><p class="cap">ensuite : déformations principales et directions avec les formules du chapitre 4</p></div>
-    <p>Dernière étape : passer aux contraintes. Une jauge est collée sur une <b>surface libre</b>, donc en <b>contrainte plane</b> (remarque de la page 12 du polycopié). La loi de Hooke dans ce cas (démontrée au cours 5) donne :</p>
+    <p>Dernière étape : passer aux contraintes. Une jauge est collée sur une <b>surface libre</b>, donc en <b>contrainte plane</b>. La loi de Hooke dans ce cas (démontrée au cours 5) donne :</p>
     <div class="fx"><div class="big" style="font-size:1.45rem"><span class="sig">σ<sub>I</sub></span> = <span class="frac"><span>E</span><span>1 − ν²</span></span>(<span class="eps">ε<sub>I</sub></span> + ν<span class="eps">ε<sub>II</sub></span>) &nbsp;&nbsp; <span class="sig">σ<sub>II</sub></span> = <span class="frac"><span>E</span><span>1 − ν²</span></span>(<span class="eps">ε<sub>II</sub></span> + ν<span class="eps">ε<sub>I</sub></span>)</div></div>
   </div>
 
@@ -695,7 +695,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">démonstration et piège</span></div>
-    <p><b>D'où vient la formule de ε<sub>xy</sub>.</b> À φ = 45°, cos 2φ = 0 et sin 2φ = 1 : la formule du polycopié devient <span class="m">ε<sub>45</sub> = (ε<sub>x</sub> + ε<sub>y</sub>)/2 + ε<sub>xy</sub></span>. On isole ε<sub>xy</sub>, et on remplace ε<sub>x</sub> et ε<sub>y</sub> par les lectures à 0° et 90°.</p>
+    <p><b>D'où vient la formule de ε<sub>xy</sub>.</b> À φ = 45°, cos 2φ = 0 et sin 2φ = 1 : la formule de ε<sub>n</sub> devient <span class="m">ε<sub>45</sub> = (ε<sub>x</sub> + ε<sub>y</sub>)/2 + ε<sub>xy</sub></span>. On isole ε<sub>xy</sub>, et on remplace ε<sub>x</sub> et ε<sub>y</sub> par les lectures à 0° et 90°.</p>
     <p><b>Le piège de la troisième direction.</b> En contrainte plane, σ<sub>zz</sub> = 0 mais la pièce s'amincit sous la jauge (effet Poisson) : <span class="m"><span class="eps">ε<sub>zz</sub></span> = −<span class="frac"><span>ν</span><span>1 − ν</span></span>(<span class="eps">ε<sub>x</sub></span> + <span class="eps">ε<sub>y</sub></span>)</span>, non nul. Si tu utilisais les hypothèses de la déformation plane (ε<sub>zz</sub> = 0), tu te tromperais sur les contraintes. Les formules de ε<sub>n</sub> et le cercle dans le plan, eux, restent justes.</p>
     <p><b>Vérification rapide.</b> En traction simple σ selon x : ε<sub>0</sub> = σ/E, ε<sub>90</sub> = −νσ/E, et ε<sub>45</sub> = (1 − ν)σ/(2E). Pour σ = 100 MPa et l'acier, cela donne 476, −143 et 167 µε : c'est le premier exemple de la manipulation.</p>
     <div class="weld"><b>🔥 Mesurer une contrainte résiduelle de soudage</b>
@@ -863,10 +863,10 @@ input.r-gam{accent-color:var(--gam)}
     <dt>Pont de Wheatstone</dt><dd>Montage électrique de 4 résistances qui permet de mesurer de très petites variations de résistance, donc les signaux des jauges.</dd>
     <dt>Retrait</dt><dd>Contraction d'un cordon qui refroidit ; empêchée par le métal environnant, elle crée contraintes résiduelles et distorsions.</dd>
     <dt>Rosette</dt><dd>Trois jauges collées au même endroit dans trois directions (souvent 0°, 45°, 90°) pour mesurer l'état de déformation plan complet.</dd>
-    <dt>ℇ (petites déformations)</dt><dd>Tenseur des déformations linéarisé du polycopié : ℇ = ½(grad u + grad u<sup>t</sup>). Symétrique, 6 composantes.</dd>
+    <dt>ℇ (petites déformations)</dt><dd>Tenseur des déformations linéarisé : ℇ = ½(grad u + grad u<sup>t</sup>). Symétrique, 6 composantes.</dd>
     <dt>Transposée (exposant t)</dt><dd>Matrice obtenue en échangeant lignes et colonnes.</dd>
     <dt>Tricercle de Mohr</dt><dd>Les trois cercles construits sur les trois valeurs principales, deux à deux (cours 4).</dd>
-    <dt>VER</dt><dd>Volume élémentaire représentatif (polycopié, p. 2) : le plus petit morceau de matière assez grand pour contenir beaucoup de grains, sur lequel on peut définir contrainte et déformation.</dd>
+    <dt>VER</dt><dd>Volume élémentaire représentatif : le plus petit morceau de matière assez grand pour contenir beaucoup de grains, sur lequel on peut définir contrainte et déformation.</dd>
   </dl>
 
   <hr class="sep">
@@ -878,7 +878,7 @@ input.r-gam{accent-color:var(--gam)}
     <label><input type="checkbox" data-c="3"> Je sais calculer ε<sub>x</sub>, ε<sub>y</sub>, ε<sub>xy</sub> et la rotation ω<sub>z</sub>.</label>
     <label><input type="checkbox" data-c="4"> Je sais expliquer d'où vient ε<sub>xy</sub> = γ/2.</label>
     <label><input type="checkbox" data-c="5"> Je sais dire ce qui distingue 𝔼 et ℇ, et les deux conditions de l'HPP.</label>
-    <label><input type="checkbox" data-c="6"> Je connais par cœur les formules de ε<sub>n</sub> et ε<sub>nt</sub> de la page 11.</label>
+    <label><input type="checkbox" data-c="6"> Je connais par cœur les formules de ε<sub>n</sub> et ε<sub>nt</sub>.</label>
     <label><input type="checkbox" data-c="7"> Je sais calculer ε<sub>I</sub>, ε<sub>II</sub>, la direction principale et γ<sub>max</sub>.</label>
     <label><input type="checkbox" data-c="8"> Je sais faire la différence entre déformation plane et contrainte plane.</label>
     <label><input type="checkbox" data-c="9"> Je sais calculer la contrainte d'une barre bridée chauffée, et expliquer la contrainte résiduelle de soudage.</label>
@@ -886,14 +886,14 @@ input.r-gam{accent-color:var(--gam)}
   </div>
   <p class="status" id="checkMsg"></p>
 
-  <div class="meta">🔭 <b>Au prochain épisode, cours 4 : directions principales et tricercle de Mohr.</b> On revient aux contraintes, en 3D cette fois (pages 12 et 13 du polycopié). Tu apprendras à trouver les trois contraintes principales d'une matrice 3 × 3 (valeurs propres, invariants), à tracer le tricercle de Mohr, à lire le cisaillement maximal en 3D, et tu verras enfin sur le dessin pourquoi l'état triaxial d'une soudure épaisse empêche la plasticité.</div>
+  <div class="meta">🔭 <b>Au prochain épisode, cours 4 : directions principales et tricercle de Mohr.</b> On revient aux contraintes, en 3D cette fois. Tu apprendras à trouver les trois contraintes principales d'une matrice 3 × 3 (valeurs propres, invariants), à tracer le tricercle de Mohr, à lire le cisaillement maximal en 3D, et tu verras enfin sur le dessin pourquoi l'état triaxial d'une soudure épaisse empêche la plasticité.</div>
 </div>
 </section>
 </main>
 
 <footer>
 <div class="wrap">
-  <p>Cours 3 sur 5 de la série « Résistance des matériaux, de zéro aux matrices ». Valeurs des matériaux données comme ordres de grandeur usuels ; le modèle thermique de la manipulation 5 est volontairement simplifié (E et Rₑ constants). Pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 3 sur 5 de la série « Résistance des matériaux, de zéro aux matrices ». Valeurs des matériaux données comme ordres de grandeur usuels ; le modèle thermique de la manipulation 5 est volontairement simplifié (E et Rₑ constants). Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1124,7 +1124,7 @@ const S=(c,t)=>'<span class="'+c+'">'+t+'</span>';
 })();
 
 /* =========================================================
-   m4 : l'aiguille et le cercle de Mohr des déformations (convention du polycopié)
+   m4 : l'aiguille et le cercle de Mohr des déformations (convention de la série)
    ========================================================= */
 (function(){
   const svg=$("#m4svg");if(!svg)return;
@@ -1186,7 +1186,7 @@ const S=(c,t)=>'<span class="'+c+'">'+t+'</span>';
     let no;
     if(R<0.5)no="💧 R = 0 : le cercle est un point. L'allongement est le même dans toutes les directions, aucun angle droit ne se referme : c'est la dilatation thermique libre (chapitre 5).";
     else if(Math.abs(v[1])<R*0.0175+0.5)no="🎯 <b>ε<sub>nt</sub> = 0 : l'aiguille est sur une direction principale</b> ("+(v[0]>Cc?"I, l'allongement maximal":"II, l'allongement minimal")+"). Elle est alignée sur une ligne verte.";
-    else no="L'aiguille a tourné de φ = "+nf(f,0)+"° ; le point a tourné de <b>2φ = "+nf(2*f,0)+"° dans le sens contraire</b> sur le cercle (convention du polycopié). Cherche les deux positions où l'aiguille se pose sur une ligne verte.";
+    else no="L'aiguille a tourné de φ = "+nf(f,0)+"° ; le point a tourné de <b>2φ = "+nf(2*f,0)+"° dans le sens contraire</b> sur le cercle (convention de la série). Cherche les deux positions où l'aiguille se pose sur une ligne verte.";
     $("#m4note").innerHTML=no;
   }
   function addR(p,q){for(let k=Math.min(p,q);k<=Math.max(p,q);k++)vis.add(k);}
@@ -1330,7 +1330,7 @@ const S=(c,t)=>'<span class="'+c+'">'+t+'</span>';
 (function(){
   const box=$("#quiz");if(!box)return;
   const Q=[
-    {q:"Le vecteur déplacement u⃗ d'un point est :",o:["la flèche qui va de sa position initiale P₀ à sa position finale P","sa vitesse","la force qui s'exerce sur lui","son allongement relatif"],c:0,e:"u⃗ = P₀P⃗ (polycopié, p. 3). L'ensemble des flèches de tous les points forme le <b>champ de déplacement</b>."},
+    {q:"Le vecteur déplacement u⃗ d'un point est :",o:["la flèche qui va de sa position initiale P₀ à sa position finale P","sa vitesse","la force qui s'exerce sur lui","son allongement relatif"],c:0,e:"u⃗ = P₀P⃗. L'ensemble des flèches de tous les points forme le <b>champ de déplacement</b>."},
     {q:"Dans un champ de déplacement, toutes les flèches sont identiques. C'est :",o:["une déformation uniforme","une translation, sans aucune déformation","une rotation","un cisaillement"],c:1,e:"Flèches identiques = <b>translation</b> : le gradient est nul, rien ne se déforme. La déformation vient de la <b>différence</b> de déplacement entre voisins, pas de sa taille."},
     {q:"La déformation ε<sub>x</sub> s'écrit :",o:["∂u/∂x","∂u/∂y","u/x","½(∂u/∂y + ∂v/∂x)"],c:0,e:"ε<sub>x</sub> = <b>∂u/∂x</b> : la pente du déplacement selon x quand on avance selon x. La 4e réponse est ε<sub>xy</sub>."},
     {q:"Un angle droit se referme de γ = 0,004 rad. La case ε<sub>xy</sub> du tenseur vaut :",o:["0,004","0,002","0,008","0"],c:1,e:"ε<sub>xy</sub> = γ/2 = <b>0,002</b>. Le tenseur range la moitié de l'angle perdu : c'est le piège n° 1 depuis le cours 1."},
@@ -1338,10 +1338,10 @@ const S=(c,t)=>'<span class="'+c+'">'+t+'</span>';
     {q:"Une pièce tourne en bloc de 10°, sans se déformer. Le tenseur des petites déformations donne ε<sub>x</sub> ≈ :",o:["0, comme il se doit","−1,5 % : une fausse compression","+10 %","il n'est pas défini"],c:1,e:"ε<sub>x</sub> = cos 10° − 1 ≈ <b>−0,015</b>. Green-Lagrange donne 0 exactement. D'où la condition de petites rotations de l'HPP."},
     {q:"L'hypothèse des petites perturbations (HPP) suppose :",o:["seulement de petites déformations","de petites déformations et de petites rotations (donc de petits déplacements)","des matériaux fragiles","l'absence de plasticité"],c:1,e:"Il faut que <b>tous</b> les termes du gradient soient petits : déformations <b>et</b> rotations. Sinon le terme Grad u<sup>t</sup>·Grad u n'est plus négligeable."},
     {q:"ε<sub>x</sub> = 600, ε<sub>y</sub> = −200, ε<sub>xy</sub> = 300 µε. La déformation principale ε<sub>I</sub> vaut :",o:["700 µε","500 µε","800 µε","1 000 µε"],c:0,e:"C = 200, R = √(400² + 300²) = 500, donc ε<sub>I</sub> = C + R = <b>700 µε</b> (et ε<sub>II</sub> = −300 µε)."},
-    {q:"Sur le cercle de Mohr des déformations du polycopié, l'axe vertical porte :",o:["ε<sub>nt</sub>, le demi-glissement","γ, le glissement complet","ε<sub>zz</sub>","la contrainte τ"],c:0,e:"Axe horizontal ε<sub>n</sub>, axe vertical <b>ε<sub>nt</sub></b> = γ<sub>nt</sub>/2. D'où γ<sub>max</sub> = 2R."},
+    {q:"Sur le cercle de Mohr des déformations, l'axe vertical porte :",o:["ε<sub>nt</sub>, le demi-glissement","γ, le glissement complet","ε<sub>zz</sub>","la contrainte τ"],c:0,e:"Axe horizontal ε<sub>n</sub>, axe vertical <b>ε<sub>nt</sub></b> = γ<sub>nt</sub>/2. D'où γ<sub>max</sub> = 2R."},
     {q:"Une barre d'acier bridée (E = 210 GPa, α = 12 × 10⁻⁶ K⁻¹) est chauffée de 50 °C. Sa contrainte vaut :",o:["−126 MPa","+126 MPa","0","−12,6 MPa"],c:0,e:"σ = −EαΔT = −210 000 × 12 × 10⁻⁶ × 50 = <b>−126 MPa</b> : compression, car les murs l'empêchent de s'allonger. Libre, elle serait à 0."},
-    {q:"Avec une rosette 0°/45°/90°, ε<sub>xy</sub> vaut :",o:["ε<sub>45</sub> − (ε<sub>0</sub> + ε<sub>90</sub>)/2","ε<sub>45</sub>","ε<sub>45</sub> − ε<sub>0</sub>","(ε<sub>0</sub> + ε<sub>90</sub>)/2"],c:0,e:"À 45°, la formule du polycopié donne ε<sub>45</sub> = (ε<sub>x</sub> + ε<sub>y</sub>)/2 + ε<sub>xy</sub>, d'où <b>ε<sub>xy</sub> = ε<sub>45</sub> − (ε<sub>0</sub> + ε<sub>90</sub>)/2</b>."},
-    {q:"Une jauge est collée sur la surface libre d'une pièce. L'état au point de mesure est :",o:["une contrainte plane : σ<sub>zz</sub> = 0 mais ε<sub>zz</sub> ≠ 0","une déformation plane : ε<sub>zz</sub> = 0","un état hydrostatique","un état sans contrainte"],c:0,e:"Surface libre = <b>contrainte plane</b> (polycopié, p. 12). La pièce s'amincit sous la jauge (Poisson) : ε<sub>zz</sub> = −ν/(1 − ν)(ε<sub>x</sub> + ε<sub>y</sub>)."}
+    {q:"Avec une rosette 0°/45°/90°, ε<sub>xy</sub> vaut :",o:["ε<sub>45</sub> − (ε<sub>0</sub> + ε<sub>90</sub>)/2","ε<sub>45</sub>","ε<sub>45</sub> − ε<sub>0</sub>","(ε<sub>0</sub> + ε<sub>90</sub>)/2"],c:0,e:"À 45°, la formule de ε<sub>n</sub> donne ε<sub>45</sub> = (ε<sub>x</sub> + ε<sub>y</sub>)/2 + ε<sub>xy</sub>, d'où <b>ε<sub>xy</sub> = ε<sub>45</sub> − (ε<sub>0</sub> + ε<sub>90</sub>)/2</b>."},
+    {q:"Une jauge est collée sur la surface libre d'une pièce. L'état au point de mesure est :",o:["une contrainte plane : σ<sub>zz</sub> = 0 mais ε<sub>zz</sub> ≠ 0","une déformation plane : ε<sub>zz</sub> = 0","un état hydrostatique","un état sans contrainte"],c:0,e:"Surface libre = <b>contrainte plane</b>. La pièce s'amincit sous la jauge (Poisson) : ε<sub>zz</sub> = −ν/(1 − ν)(ε<sub>x</sub> + ε<sub>y</sub>)."}
   ];
   let score=0,done=0;const sc=$("#qzScore");
   function upd(){let t="Score : "+score+" / "+Q.length;if(done===Q.length)t+=score>=10?"  ·  🎉 prêt pour le cours 4":score>=7?"  ·  relis les explications":"  ·  refais un tour des chapitres";sc.textContent=t;}

@@ -266,7 +266,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <div><small>À la fin tu sais</small><b>expliquer comment une fissure naît sous R<sub>e</sub>, et estimer si elle naîtra, puis si elle grandira</b></div>
     </div>
   </div>
-  <p class="lede">Comment une pièce qui ne dépasse jamais sa limite d'élasticité peut-elle se fissurer ? La réponse est cachée à l'échelle du <b>grain</b>, le petit cristal dont le métal est fait. Sous une contrainte moyenne modeste, quelques grains mal placés glissent quand même, un peu, à chaque cycle. Ces glissements ne reviennent pas tout à fait en arrière : ils sculptent la surface de creux et de saillies, puis l'un des creux s'ouvre en microfissure. Ce cours suit cette naissance pas à pas (polycopié, p. 4 à 7), puis montre comment on la prévoit par le calcul.</p>
+  <p class="lede">Comment une pièce qui ne dépasse jamais sa limite d'élasticité peut-elle se fissurer ? La réponse est cachée à l'échelle du <b>grain</b>, le petit cristal dont le métal est fait. Sous une contrainte moyenne modeste, quelques grains mal placés glissent quand même, un peu, à chaque cycle. Ces glissements ne reviennent pas tout à fait en arrière : ils sculptent la surface de creux et de saillies, puis l'un des creux s'ouvre en microfissure. Ce cours suit cette naissance pas à pas, puis montre comment on la prévoit par le calcul.</p>
 
   <h4>Le code couleur de la série</h4>
   <div class="cc" role="img" aria-label="Code couleur : contraintes en rouge et aggravants en violet, paramètres en vert, fissures en bleu et glissements en bleu-vert">
@@ -312,23 +312,11 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div><div class="f"><span class="tau">K<sub>f</sub></span> = 1 + <span class="mat">q</span>(<span class="tau">K<sub>t</sub></span> − 1)</div>Une entaille divise la limite d'endurance par K<sub>f</sub>. Un détail soudé se vérifie avec sa <b>classe FAT</b> : γ<sub>Ff</sub>·Δσ ≤ Δσ<sub>R</sub>(N)/γ<sub>Mf</sub>.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> de référence (Partie II : Fatigue). Ce cours couvre le § B « Amorçage des fissures de fatigue », <b>pages 4 à 7, figures 5 à 10</b> :
-    <div class="tbl-wrap"><table class="data">
-      <tr><th>Chapitre du cours</th><th>Polycopié</th></tr>
-      <tr><td>1 Plastifier sous R<sub>e</sub></td><td>p. 4, § B.1, premier paragraphe</td></tr>
-      <tr><td>2 Pourquoi 45°</td><td>p. 4, bandes de glissement, figure 5</td></tr>
-      <tr><td>3 Intrusions et extrusions</td><td>p. 4 et 5, figures 6 et 7</td></tr>
-      <tr><td>4 La fissure qui tourne</td><td>p. 5, figure 8 ; amorçage sur défauts internes</td></tr>
-      <tr><td>5 Wöhler à l'amorçage et fissures dormantes</td><td>p. 6, § B.2.a, figures 9 et 10 ; <span class="hp">hors poly</span> diagramme de Kitagawa</td></tr>
-      <tr><td>6 Les critères d'amorçage</td><td>p. 7, § B.2.b ; <span class="hp">hors poly</span> formules de von Mises et de Crossland</td></tr>
-    </table></div>
-  </div>
-
   <div class="def"><b>🔎 Quatre remarques de lecture</b>
-    <p><b>1. « À 45° de la contrainte »</b> (p. 4). Le cisaillement est maximal à 45° de l'effort, mais chaque grain ne peut glisser que sur ses propres plans cristallins. Ce sont donc les grains dont les plans sont <b>proches</b> de 45° qui glissent les premiers (loi de Schmid, chapitre 2) : le 45° est une tendance statistique, pas un angle exact dans chaque grain.</p>
-    <p><b>2. Écrouissage, adoucissement, relaxation</b> (p. 4) : ces trois mots sont définis au chapitre 1. Ils décrivent la façon dont les propriétés de surface changent sous les cycles.</p>
-    <p><b>3. Les fissures « dormantes »</b> (p. 6, figure 10). Le polycopié en donne les causes physiques. Le diagramme de Kitagawa, hors polycopié, en donne une explication chiffrée (chapitre 5), en s'appuyant sur le seuil de propagation ΔK<sub>S</sub> du cours 4.</p>
-    <p><b>4. Des critères « basés sur la déformation plastique »</b> (p. 7). Tresca, von Mises, Dang Van et Crossland s'écrivent en <b>contraintes</b> (cisaillement, pression hydrostatique) ; c'est leur justification physique qui repose sur le glissement plastique. Le polycopié les expose plus loin ; ce cours n'en donne qu'un aperçu chiffré.</p>
+    <p><b>1. « À 45° de la contrainte ».</b> Le cisaillement est maximal à 45° de l'effort, mais chaque grain ne peut glisser que sur ses propres plans cristallins. Ce sont donc les grains dont les plans sont <b>proches</b> de 45° qui glissent les premiers (loi de Schmid, chapitre 2) : le 45° est une tendance statistique, pas un angle exact dans chaque grain.</p>
+    <p><b>2. Écrouissage, adoucissement, relaxation</b> : ces trois mots sont définis au chapitre 1. Ils décrivent la façon dont les propriétés de surface changent sous les cycles.</p>
+    <p><b>3. Les fissures « dormantes ».</b> Le chapitre 5 en donne les causes physiques, puis le diagramme de Kitagawa en donne une explication chiffrée, en s'appuyant sur le seuil de propagation ΔK<sub>S</sub> du cours 4.</p>
+    <p><b>4. Des critères « basés sur la déformation plastique ».</b> Tresca, von Mises, Dang Van et Crossland s'écrivent en <b>contraintes</b> (cisaillement, pression hydrostatique) ; c'est leur justification physique qui repose sur le glissement plastique. Ce cours n'en donne qu'un aperçu chiffré.</p>
   </div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
@@ -366,7 +354,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <p>Un métal n'est pas un bloc uniforme : c'est un assemblage de petits cristaux, les <b>grains</b>, de 10 à 100 µm environ (µm : micromètre, un millième de millimètre). Dans chaque grain, les atomes sont rangés en plans réguliers, et chaque grain a sa propre orientation, comme des voyageurs tournés dans tous les sens.</p>
     <p>Pour déformer un grain de façon permanente, il faut faire <b>glisser</b> ses plans d'atomes les uns sur les autres, comme les cartes d'un jeu qu'on pousse. Ce glissement se fait grâce à des défauts mobiles du cristal, les <b>dislocations</b> : comme une ride qu'on fait courir dans un tapis pour le déplacer sans le soulever d'un coup.</p>
     <p>La limite d'élasticité R<sub>e</sub> mesurée en traction est une <b>moyenne</b> : c'est la contrainte à laquelle la plupart des grains glissent. Mais dans la foule, certains grains sont tournés exactement comme il faut pour glisser facilement : ils commencent bien avant. Comme dans un métro bondé où, sous la même secousse, seuls quelques voyageurs mal placés trébuchent.</p>
-    <p>Où sont ces grains ? <b>Surtout près de la surface</b>, pour deux raisons données par le polycopié :</p>
+    <p>Où sont ces grains ? <b>Surtout près de la surface</b>, pour deux raisons :</p>
     <ul>
       <li>la surface est souvent le lieu des contraintes maximales (flexion, torsion, entailles : cours 1) ;</li>
       <li>un grain de surface n'a de voisins que d'un côté : il est moins tenu, moins « confiné », et se déforme plus librement. Comme le voyageur près des portes, qui n'a personne pour le retenir.</li>
@@ -388,8 +376,8 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div class="def"><b>📖 Polycristal, grain, joint de grains</b> : un métal courant est un <b>polycristal</b>, assemblage de cristaux appelés <b>grains</b>, chacun avec sa propre orientation ; la frontière entre deux grains est un <b>joint de grains</b>.</div>
     <div class="def"><b>📖 Dislocation</b> : défaut linéaire du cristal, une rangée d'atomes « en trop » ou décalée, dont le déplacement fait glisser un plan d'atomes sur son voisin. La déformation plastique est le résultat du mouvement de milliards de dislocations.</div>
     <div class="def"><b>📖 Système de glissement</b> : couple formé d'un <b>plan de glissement</b> (un plan dense d'atomes) et d'une <b>direction de glissement</b> dans ce plan. Un grain ne peut glisser que sur ses propres systèmes.</div>
-    <div class="def"><b>📖 Microglissements</b> (polycopié, p. 4) : petite déformation plastique localisée dans certains grains, alors que la contrainte macroscopique (celle que calcule la RDM, résistance des matériaux) reste inférieure à R<sub>e</sub>.</div>
-    <p>Le polycopié note que ces microglissements modifient les propriétés macroscopiques de la surface. Trois mots à connaître :</p>
+    <div class="def"><b>📖 Microglissements</b> : petite déformation plastique localisée dans certains grains, alors que la contrainte macroscopique (celle que calcule la RDM, résistance des matériaux) reste inférieure à R<sub>e</sub>.</div>
+    <p>Ces microglissements modifient les propriétés macroscopiques de la surface. Trois mots à connaître :</p>
     <ul>
       <li><b>écrouissage cyclique</b> : la matière durcit au fil des cycles (les dislocations s'enchevêtrent et se gênent) ; c'est le cas des métaux recuits, initialement mous ;</li>
       <li><b>adoucissement cyclique</b> : la matière s'affaiblit au fil des cycles (les obstacles aux dislocations se réarrangent) ; c'est le cas de métaux déjà durcis, écrouis à froid ou trempés ;</li>
@@ -415,8 +403,8 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la coupe en biais</span></div>
     <p>Coupe en pensée une barre tendue par un plan perpendiculaire à l'effort : sur ce plan, la contrainte est purement normale, elle tend à écarter les deux morceaux. Incline maintenant le plan : une partie de l'effort tend à faire <b>glisser</b> un morceau sur l'autre. C'est le <b>cisaillement</b> τ (« tau »). Il est nul pour le plan droit, nul pour un plan parallèle à l'effort, et <b>maximal pour le plan à 45°</b>, où il vaut la moitié de la contrainte de traction.</p>
-    <p>Or un glissement plastique a besoin de cisaillement. En traction-compression, les grains glissent donc préférentiellement sur des plans <b>proches de 45°</b> de l'effort (polycopié, p. 4). Chaque grain a ses propres plans : ceux qui sont bien orientés glissent, les autres attendent.</p>
-    <p>Après quelques milliers de cycles, ces glissements laissent des traces sur la surface polie : de fines lignes parallèles, les <b>bandes de glissement</b> (figure 5 du polycopié : un acier observé au microscope à force atomique, un superalliage base nickel au microscope électronique à balayage).</p>
+    <p>Or un glissement plastique a besoin de cisaillement. En traction-compression, les grains glissent donc préférentiellement sur des plans <b>proches de 45°</b> de l'effort. Chaque grain a ses propres plans : ceux qui sont bien orientés glissent, les autres attendent.</p>
+    <p>Après quelques milliers de cycles, ces glissements laissent des traces sur la surface polie : de fines lignes parallèles, les <b>bandes de glissement</b>, qu'on observe au microscope à force atomique ou au microscope électronique à balayage.</p>
   </div>
 
   <div class="lab" id="m2">
@@ -434,7 +422,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div class="fx"><div class="row big" style="font-size:1.5rem"><span><span class="sig">σ<sub>n</sub></span> = <span class="sig">σ</span>·cos²<span class="mat">θ</span></span><span><span class="sig">τ</span> = <span class="sig">σ</span>·sin <span class="mat">θ</span>·cos <span class="mat">θ</span> = <span class="frac"><span><span class="sig">σ</span></span><span>2</span></span>·sin 2<span class="mat">θ</span></span></div>
       <p class="cap">τ est maximal pour sin 2θ = 1, soit θ = 45° : τ<sub>max</sub> = σ/2</p></div>
     <p>Ces valeurs se lisent sur le <b>cercle de Mohr</b> (série RDM, cours 4) : centre σ/2, rayon σ/2 ; le point du plan d'angle θ est vu sous l'angle 2θ depuis le centre. Le sommet du cercle donne τ<sub>max</sub> = σ/2.</p>
-    <h4>La loi de Schmid <span class="hp">hors poly</span></h4>
+    <h4>La loi de Schmid <span class="hp">complément</span></h4>
     <p>Dans un grain, ce qui compte est le cisaillement <b>résolu</b> sur son système de glissement : la part de τ qui agit sur son plan, dans sa direction.</p>
     <div class="fx"><div class="big" style="font-size:1.6rem"><span class="sig">τ<sub>r</sub></span> = <span class="sig">σ</span>·cos <span class="mat">φ</span>·cos <span class="mat">λ</span> = <span class="mat">m<sub>S</sub></span>·<span class="sig">σ</span></div>
       <p class="cap">φ (« phi ») : angle entre l'effort et la normale au plan de glissement ; λ (« lambda ») : angle entre l'effort et la direction de glissement</p></div>
@@ -460,17 +448,17 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le jeu de cartes</span></div>
-    <p>Pose un jeu de cartes incliné sur la table et pousse-le d'avant en arrière. Si toutes les cartes reviennent exactement à leur place, le jeu redevient parfaitement net : c'est le <b>cas réversible</b> (figure 6a du polycopié). En traction, des lamelles de métal glissent vers l'extérieur ; en compression, les mêmes lamelles reviennent par le même chemin, et la surface redevient plane.</p>
-    <p>Dans la réalité, le retour ne se fait pas tout à fait par le même chemin : une carte revient un peu moins loin, sa voisine un peu plus. Au fil des cycles, des lamelles <b>sortent</b> de la surface et d'autres s'y <b>enfoncent</b> : ce sont les <b>extrusions</b> et les <b>intrusions</b> (figure 6b, et figure 7 sur une éprouvette de cuivre). C'est le <b>cas irréversible</b>.</p>
-    <p>Une intrusion, c'est une entaille microscopique : un sillon étroit et profond de quelques micromètres. Et une entaille concentre la contrainte (cours 1). Au fond de l'intrusion, la contrainte locale devient assez forte pour ouvrir une <b>microfissure</b> (figure 6b).</p>
+    <p>Pose un jeu de cartes incliné sur la table et pousse-le d'avant en arrière. Si toutes les cartes reviennent exactement à leur place, le jeu redevient parfaitement net : c'est le <b>cas réversible</b>. En traction, des lamelles de métal glissent vers l'extérieur ; en compression, les mêmes lamelles reviennent par le même chemin, et la surface redevient plane.</p>
+    <p>Dans la réalité, le retour ne se fait pas tout à fait par le même chemin : une carte revient un peu moins loin, sa voisine un peu plus. Au fil des cycles, des lamelles <b>sortent</b> de la surface et d'autres s'y <b>enfoncent</b> : ce sont les <b>extrusions</b> et les <b>intrusions</b>. C'est le <b>cas irréversible</b>.</p>
+    <p>Une intrusion, c'est une entaille microscopique : un sillon étroit et profond de quelques micromètres. Et une entaille concentre la contrainte (cours 1). Au fond de l'intrusion, la contrainte locale devient assez forte pour ouvrir une <b>microfissure</b>.</p>
   </div>
 
   <div class="lab" id="m3">
     <p class="lab-h">Manipulation 3 : les cartes qui glissent</p>
     <p class="lab-sub">Une coupe près de la surface : les lamelles inclinées à 45° sont des plans de glissement actifs. Lance les cycles en mode réversible, puis irréversible, et regarde le profil de la surface.</p>
     <div class="radios" role="radiogroup" aria-label="Mode">
-      <label><input type="radio" name="m3m" value="rev">réversible (figure 6a)</label>
-      <label><input type="radio" name="m3m" value="irr" checked>irréversible (figure 6b)</label>
+      <label><input type="radio" name="m3m" value="rev">réversible</label>
+      <label><input type="radio" name="m3m" value="irr" checked>irréversible</label>
     </div>
     <div class="btns"><button class="btn play" id="m3play" type="button">▶ Cycler</button><button class="btn" id="m3reset" type="button">↺ Surface neuve</button></div>
     <svg id="m3svg" role="img" aria-label="Lamelles de glissement à 45° sous la surface, formation d'intrusions et d'extrusions"></svg>
@@ -480,7 +468,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">irréversibilité et concentration</span></div>
     <div class="def"><b>📖 Extrusion, intrusion</b> : relief de surface créé par l'accumulation de glissements irréversibles ; une <b>extrusion</b> est une lamelle de métal qui dépasse de la surface, une <b>intrusion</b> un sillon qui s'y enfonce. Hauteurs typiques : de quelques dixièmes à quelques micromètres.</div>
-    <div class="def"><b>📖 Bande de glissement persistante</b> <span class="hp">hors poly</span> (en anglais <i>persistent slip band</i>, PSB) : bande étroite d'un grain où le glissement se concentre cycle après cycle. Si on polit la surface pour effacer les traces puis qu'on reprend les cycles, les bandes réapparaissent au même endroit : d'où le mot « persistante ». C'est le siège des intrusions et des extrusions.</div>
+    <div class="def"><b>📖 Bande de glissement persistante</b> (en anglais <i>persistent slip band</i>, PSB) : bande étroite d'un grain où le glissement se concentre cycle après cycle. Si on polit la surface pour effacer les traces puis qu'on reprend les cycles, les bandes réapparaissent au même endroit : d'où le mot « persistante ». C'est le siège des intrusions et des extrusions.</div>
     <p><b>Pourquoi le glissement ne revient-il pas ?</b> Plusieurs raisons s'ajoutent : les dislocations s'accrochent les unes aux autres et ne repartent pas toutes par le même plan ; certaines changent de plan (glissement dévié) ; et la marche fraîchement créée en surface s'oxyde aussitôt à l'air, ce qui l'empêche de se refermer exactement. Sous vide, les durées de vie en fatigue sont d'ailleurs souvent plus longues qu'à l'air.</p>
     <h4>L'intrusion, une entaille</h4>
     <p>Pour une entaille de profondeur <span class="mat">a</span> et de rayon à fond d'entaille <span class="mat">ρ</span>, la formule d'Inglis du cours 1 (K<sub>t</sub> = 1 + 2a/b, ellipse de demi-axes a et b) se réécrit avec ρ = b²/a :</p>
@@ -505,8 +493,8 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le sentier en biais, puis la ligne droite</span></div>
-    <p>La microfissure née au fond d'une intrusion suit d'abord le chemin le plus facile : le <b>plan de glissement</b>, incliné à environ 45° de l'effort (polycopié, p. 5). Elle reste à l'échelle d'un ou deux grains ; chaque joint de grains, où l'orientation change, la freine ou la dévie.</p>
-    <p>En traction-compression, la fissure finit par <b>tourner</b> et devenir perpendiculaire à la surface, c'est-à-dire perpendiculaire à la contrainte qui l'ouvre (figure 8 du polycopié, sur une éprouvette d'aluminium grossie 300 fois). Elle traverse alors les grains en ligne presque droite. C'est le passage de la <b>microfissure</b>, à l'échelle du grain, à la <b>macrofissure</b>, qui obéira à la mécanique de la rupture (cours 4).</p>
+    <p>La microfissure née au fond d'une intrusion suit d'abord le chemin le plus facile : le <b>plan de glissement</b>, incliné à environ 45° de l'effort. Elle reste à l'échelle d'un ou deux grains ; chaque joint de grains, où l'orientation change, la freine ou la dévie.</p>
+    <p>En traction-compression, la fissure finit par <b>tourner</b> et devenir perpendiculaire à la surface, c'est-à-dire perpendiculaire à la contrainte qui l'ouvre. Elle traverse alors les grains en ligne presque droite. C'est le passage de la <b>microfissure</b>, à l'échelle du grain, à la <b>macrofissure</b>, qui obéira à la mécanique de la rupture (cours 4).</p>
     <p>Toutes les fissures ne partent pas de la surface. Elles peuvent aussi naître <b>dans le volume</b>, autour de défauts préexistants : <span class="tau">pores</span> (petites bulles de gaz), <span class="tau">inclusions</span> (particules étrangères : oxydes, sulfures, laitier), <span class="tau">interfaces</span> diverses (entre deux phases, sous un revêtement). Autour de ces défauts, une déformation plastique très localisée joue le même rôle que les bandes de glissement en surface.</p>
   </div>
 
@@ -525,9 +513,9 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">stades I et II, modes de fissuration</span></div>
-    <div class="def"><b>📖 Stade I et stade II</b> <span class="hp">hors poly</span> (vocabulaire introduit par P. J. E. Forsyth, 1961) : le <b>stade I</b> est la propagation de la microfissure le long des plans de glissement, à environ 45° de l'effort, sur un à quelques grains ; le <b>stade II</b> est la propagation perpendiculaire à la contrainte principale de traction, à travers les grains.</div>
+    <div class="def"><b>📖 Stade I et stade II</b> (vocabulaire introduit par P. J. E. Forsyth, 1961) : le <b>stade I</b> est la propagation de la microfissure le long des plans de glissement, à environ 45° de l'effort, sur un à quelques grains ; le <b>stade II</b> est la propagation perpendiculaire à la contrainte principale de traction, à travers les grains.</div>
     <div class="def"><b>📖 Les trois modes de fissuration</b> : <b>mode I</b>, ouverture (les lèvres s'écartent, sous une traction perpendiculaire au plan de fissure) ; <b>mode II</b>, glissement plan (les lèvres glissent l'une sur l'autre dans la direction de propagation) ; <b>mode III</b>, glissement anti-plan (les lèvres glissent parallèlement au front, comme des ciseaux). Le stade I est dominé par le cisaillement (modes II et III), le stade II par le <b>mode I</b>.</div>
-    <div class="def"><b>📖 Transgranulaire, intergranulaire</b> : une fissure transgranulaire traverse les grains ; une fissure intergranulaire suit les joints de grains. En fatigue des métaux, la propagation est essentiellement transgranulaire (polycopié, p. 7).</div>
+    <div class="def"><b>📖 Transgranulaire, intergranulaire</b> : une fissure transgranulaire traverse les grains ; une fissure intergranulaire suit les joints de grains. En fatigue des métaux, la propagation est essentiellement transgranulaire.</div>
     <p><b>Pourquoi la fissure tourne-t-elle ?</b> Tant qu'elle est plus petite qu'un grain, sa pointe « voit » la cristallographie : elle avance là où le glissement est facile. Quand elle devient longue, la concentration de contrainte à sa pointe domine : elle avance là où sa pointe est le plus ouverte, c'est-à-dire perpendiculairement à la contrainte principale maximale. Le stade I occupe souvent une grande part de la durée de vie d'une éprouvette lisse, même s'il ne couvre que quelques dizaines de micromètres.</p>
     <p><b>Surface ou volume ?</b> En endurance classique, l'amorçage se fait presque toujours en surface. Il passe dans le volume quand la surface a été renforcée (grenaillage, cémentation, nitruration) ou aux très grands nombres de cycles : c'est l'« œil de poisson » autour d'une inclusion, vu au cours 2.</p>
     <div class="warn"><b>⚠️ Piège : la direction d'une fissure renseigne sur l'effort.</b> Une macrofissure de fatigue est perpendiculaire à la contrainte principale de traction : une fissure transversale sur un arbre trahit de la flexion, une fissure en hélice à 45° de la torsion. C'est la base de l'expertise des ruptures.</div>
@@ -547,22 +535,22 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">deux courbes au lieu d'une</span></div>
-    <p>Il est possible, mais difficile, de repérer l'apparition des premières microfissures pendant un essai (microscope, répliques de la surface). On peut alors tracer une seconde courbe de Wöhler, la courbe <b>à l'amorçage</b>, à côté de la courbe à rupture (figure 9 du polycopié). Elle est forcément <b>à gauche</b> : on se fissure toujours avant de casser. Elle partage le diagramme en trois domaines :</p>
+    <p>Il est possible, mais difficile, de repérer l'apparition des premières microfissures pendant un essai (microscope, répliques de la surface). On peut alors tracer une seconde courbe de Wöhler, la courbe <b>à l'amorçage</b>, à côté de la courbe à rupture. Elle est forcément <b>à gauche</b> : on se fissure toujours avant de casser. Elle partage le diagramme en trois domaines :</p>
     <ul>
       <li><b>domaine 1</b>, à gauche de la courbe d'amorçage : non fissuré ;</li>
       <li><b>domaine 2</b>, entre les deux courbes : fissuré, pas encore rompu ;</li>
       <li><b>domaine 3</b>, à droite de la courbe de rupture : rompu.</li>
     </ul>
-    <p>Plus surprenant : on observe parfois que la courbe d'amorçage passe aussi <b>en dessous</b> de la courbe de rupture (figure 10), avec une limite d'endurance à l'amorçage <span class="mat">σ<sub>Di</sub></span> plus basse que <span class="mat">σ<sub>D</sub></span>. Entre les deux apparaît un <b>domaine 4</b> : la pièce est microfissurée, parfois sur plusieurs centaines de micromètres, mais les fissures deviennent <b>dormantes</b> et ne conduiront <b>jamais</b> à la rupture. Comme une graine tombée sur un rocher : elle germe, pousse un peu, puis s'arrête faute de terre.</p>
-    <p>Le polycopié cite trois situations où cela arrive : des <span class="tau">contraintes résiduelles</span> de surface (une compression qui « serre » la fissure), un matériau aux propriétés différentes en surface et à cœur (surface traitée), et des géométries complexes à fortes concentrations de contraintes (la fissure naît au fond d'une entaille aiguë, puis sort de la zone surchargée).</p>
+    <p>Plus surprenant : on observe parfois que la courbe d'amorçage passe aussi <b>en dessous</b> de la courbe de rupture, avec une limite d'endurance à l'amorçage <span class="mat">σ<sub>Di</sub></span> plus basse que <span class="mat">σ<sub>D</sub></span>. Entre les deux apparaît un <b>domaine 4</b> : la pièce est microfissurée, parfois sur plusieurs centaines de micromètres, mais les fissures deviennent <b>dormantes</b> et ne conduiront <b>jamais</b> à la rupture. Comme une graine tombée sur un rocher : elle germe, pousse un peu, puis s'arrête faute de terre.</p>
+    <p>Ces fissures dormantes apparaissent dans trois situations : des <span class="tau">contraintes résiduelles</span> de surface (une compression qui « serre » la fissure), un matériau aux propriétés différentes en surface et à cœur (surface traitée), et des géométries complexes à fortes concentrations de contraintes (la fissure naît au fond d'une entaille aiguë, puis sort de la zone surchargée).</p>
   </div>
 
   <div class="lab" id="m5">
     <p class="lab-h">Manipulation 5 : les quatre domaines</p>
-    <p class="lab-sub">Place un point (σ<sub>a</sub>, N) avec les deux curseurs : le domaine où il tombe s'affiche. Bascule entre la figure 9 et la figure 10 du polycopié.</p>
+    <p class="lab-sub">Place un point (σ<sub>a</sub>, N) avec les deux curseurs : le domaine où il tombe s'affiche. Bascule entre le cas σ<sub>Di</sub> = σ<sub>D</sub> et le cas des fissures dormantes, σ<sub>Di</sub> &lt; σ<sub>D</sub>.</p>
     <div class="radios" role="radiogroup" aria-label="Figure">
-      <label><input type="radio" name="m5f" value="9">figure 9 (σ<sub>Di</sub> = σ<sub>D</sub>)</label>
-      <label><input type="radio" name="m5f" value="10" checked>figure 10 (σ<sub>Di</sub> &lt; σ<sub>D</sub>)</label>
+      <label><input type="radio" name="m5f" value="9">sans fissures dormantes (σ<sub>Di</sub> = σ<sub>D</sub>)</label>
+      <label><input type="radio" name="m5f" value="10" checked>avec fissures dormantes (σ<sub>Di</sub> &lt; σ<sub>D</sub>)</label>
     </div>
     <div class="ctrl"><label for="m5s">Amplitude <span class="sig">σ<sub>a</sub></span></label><input type="range" id="m5s" class="r-sig" min="180" max="450" step="5" value="250"><output id="m5so"></output></div>
     <div class="ctrl"><label for="m5n">log <span class="eps">N</span></label><input type="range" id="m5n" class="r-eps" min="2" max="9" step="0.05" value="7.5"><output id="m5no"></output></div>
@@ -571,10 +559,10 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <p class="status" id="m5msg" aria-live="polite"></p>
   </div>
 
-  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">le diagramme de Kitagawa</span> <span class="hp">hors poly</span></div>
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">le diagramme de Kitagawa</span> <span class="hp">complément</span></div>
     <p>Pourquoi une fissure s'endort-elle ? Une fissure longue se propage si son <b>étendue du facteur d'intensité de contrainte</b> dépasse un seuil (simple rappel ; le cours 4 détaille tout) :</p>
     <div class="fx"><div class="big" style="font-size:1.6rem"><span class="sig">ΔK</span> = <span class="sig">Δσ</span>·<span class="mat">Y</span>·√<span class="eps">a</span> ≥ <span class="mat">ΔK<sub>S</sub></span></div>
-      <p class="cap">ΔK en MPa·√m ; a, longueur de fissure, en m ; Y, facteur géométrique sans unité (≈ 2 pour une petite fissure de surface, dans la convention du polycopié qui y inclut √π) ; ΔK<sub>S</sub> : seuil de fissuration</p></div>
+      <p class="cap">ΔK en MPa·√m ; a, longueur de fissure, en m ; Y, facteur géométrique sans unité (≈ 2 pour une petite fissure de surface, dans la convention de la série qui y inclut √π) ; ΔK<sub>S</sub> : seuil de fissuration</p></div>
     <p>Une fissure très courte, elle, n'est arrêtée que si l'étendue de contrainte reste sous la limite d'endurance Δσ<sub>D</sub> = 2σ<sub>D</sub>. En 1976, Kitagawa et Takahashi ont réuni les deux conditions sur un même diagramme (log Δσ en fonction de log a) : la frontière est une horizontale à Δσ<sub>D</sub> pour les fissures courtes, puis la droite Δσ = ΔK<sub>S</sub>/(Y√a) pour les fissures longues. Les deux se croisent pour la longueur caractéristique :</p>
     <div class="fx"><div class="big" style="font-size:1.6rem"><span class="eps">a<sub>0</sub></span> = <span style="font-size:1.25em">(</span><span class="frac"><span><span class="mat">ΔK<sub>S</sub></span></span><span><span class="mat">Y</span>·<span class="mat">Δσ<sub>D</sub></span></span></span><span style="font-size:1.25em">)</span>²</div>
       <p class="cap">souvent de l'ordre de la taille de grain, quelques dizaines à quelques centaines de µm</p></div>
@@ -614,7 +602,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la carte au trésor</span></div>
-    <p>Quand on connaît les sollicitations subies par une pièce, on peut chercher <b>où</b> et <b>quand</b> elle va s'amorcer (polycopié, p. 7). La démarche est toujours la même :</p>
+    <p>Quand on connaît les sollicitations subies par une pièce, on peut chercher <b>où</b> et <b>quand</b> elle va s'amorcer. La démarche est toujours la même :</p>
     <ol>
       <li>calculer les contraintes en tout point de la pièce : par la RDM (résistance des matériaux), la MMC (mécanique des milieux continus) ou les éléments finis (calcul numérique qui découpe la pièce en milliers de petits morceaux) ;</li>
       <li>en chaque point, calculer la valeur d'un <b>critère d'amorçage</b> : un nombre qui résume l'état de contrainte cyclique ;</li>
@@ -636,7 +624,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <p class="status" id="m6msg" aria-live="polite"></p>
   </div>
 
-  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">deux critères en pratique</span> <span class="hp">hors poly</span></div>
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">deux critères en pratique</span> <span class="hp">complément</span></div>
     <h4>L'amplitude équivalente de von Mises</h4>
     <p>Pour une contrainte normale σ<sub>a</sub> et un cisaillement τ<sub>a</sub> alternés et en phase (moyennes nulles), on se ramène à une contrainte uniaxiale équivalente, comparée à la limite d'endurance en flexion f<sub>−1</sub> (l'indice −1 rappelle R = −1) :</p>
     <div class="fx"><div class="big" style="font-size:1.6rem"><span class="sig">σ<sub>eq,a</sub></span> = √(<span class="sig">σ<sub>a</sub></span>² + 3<span class="sig">τ<sub>a</sub></span>²) ≤ <span class="mat">f<sub>−1</sub></span></div><p class="cap">Tresca donne √(σ<sub>a</sub>² + 4τ<sub>a</sub>²), plus prudent</p></div>
@@ -722,7 +710,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="exo">
     <h4>Exercice 4 : dormir ou grandir <span class="lvtag">N2 · chapitre 5</span></h4>
-    <p>Un acier a un seuil de fissuration ΔK<sub>S</sub> = 7 MPa·√m et une limite d'endurance en étendue Δσ<sub>D</sub> = 380 MPa (à R = 0). On prend Y = 2 (petite fissure de surface, convention du polycopié).</p>
+    <p>Un acier a un seuil de fissuration ΔK<sub>S</sub> = 7 MPa·√m et une limite d'endurance en étendue Δσ<sub>D</sub> = 380 MPa (à R = 0). On prend Y = 2 (petite fissure de surface, convention de la série).</p>
     <p class="q"><b>a)</b> Calcule la longueur caractéristique a<sub>0</sub> de Kitagawa.</p>
     <p class="q"><b>b)</b> Une fissure de 30 µm subit Δσ = 350 MPa. Se propage-t-elle ?</p>
     <p class="q"><b>c)</b> Une fissure de 0,5 mm subit Δσ = 200 MPa. Se propage-t-elle ?</p>
@@ -843,7 +831,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <dt>f<sub>−1</sub>, t<sub>−1</sub></dt><dd>Limites d'endurance en flexion alternée et en torsion alternée (R = −1).</dd>
     <dt>Facteur de Schmid m<sub>S</sub></dt><dd>m<sub>S</sub> = cos φ·cos λ ≤ 0,5 : fraction de la contrainte appliquée qui cisaille un système de glissement.</dd>
     <dt>φ, λ, θ</dt><dd>« Phi », « lambda », « thêta » : angles entre l'effort et la normale au plan de glissement, la direction de glissement, la normale à un plan de coupe.</dd>
-    <dt>Fissure dormante</dt><dd>Fissure amorcée qui cesse de se propager (domaine 4 de la figure 10).</dd>
+    <dt>Fissure dormante</dt><dd>Fissure amorcée qui cesse de se propager (domaine 4, entre σ<sub>Di</sub> et σ<sub>D</sub>).</dd>
     <dt>Grain, joint de grains, polycristal</dt><dd>Cristal élémentaire d'un métal ; frontière entre deux grains ; assemblage de grains.</dd>
     <dt>J<sub>2</sub>, √J<sub>2,a</sub></dt><dd>Second invariant du déviateur des contraintes, mesure de la part cisaillante ; amplitude de sa racine au cours du cycle.</dd>
     <dt>K<sub>t</sub></dt><dd>Coefficient de concentration de contrainte : 1 + 2√(a/ρ) pour une entaille de profondeur a et de rayon ρ.</dd>
@@ -861,7 +849,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <dt>Système de glissement</dt><dd>Couple plan de glissement et direction de glissement d'un cristal.</dd>
     <dt>TIG</dt><dd><i>Tungsten Inert Gas</i> : soudage à électrode de tungstène sous gaz inerte ; la refusion TIG améliore un pied de cordon.</dd>
     <dt>Transgranulaire</dt><dd>Qui traverse les grains (contraire : intergranulaire, le long des joints).</dd>
-    <dt>Y</dt><dd>Facteur géométrique de la fissure, sans unité (≈ 2 pour une petite fissure de surface dans la convention du polycopié).</dd>
+    <dt>Y</dt><dd>Facteur géométrique de la fissure, sans unité (≈ 2 pour une petite fissure de surface dans la convention de la série).</dd>
   </dl>
 </div>
 </section>
@@ -882,20 +870,20 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <label><input type="checkbox" data-c="5"> <span>Je sais calculer le K<sub>t</sub> d'une entaille avec 1 + 2√(a/ρ).</span></label>
     <label><input type="checkbox" data-c="6"> <span>Je sais décrire les stades I et II, et les modes I, II et III.</span></label>
     <label><input type="checkbox" data-c="7"> <span>Je sais citer les sites d'amorçage interne et les défauts de soudage qui en jouent le rôle.</span></label>
-    <label><input type="checkbox" data-c="8"> <span>Je sais lire les domaines 1 à 4 des figures 9 et 10.</span></label>
+    <label><input type="checkbox" data-c="8"> <span>Je sais lire les domaines 1 à 4 du diagramme d'amorçage, avec et sans fissures dormantes.</span></label>
     <label><input type="checkbox" data-c="9"> <span>Je sais calculer a<sub>0</sub> et dire si une fissure dort ou grandit (Kitagawa).</span></label>
     <label><input type="checkbox" data-c="10"> <span>Je sais appliquer von Mises et Crossland à un point en flexion et torsion combinées.</span></label>
   </div>
   <p class="status" id="checkMsg"></p>
 
-  <div class="meta">🔭 <b>Au prochain épisode, cours 4 : propagation et loi de Paris.</b> La fissure est née ; on la suit cycle par cycle jusqu'à la rupture (polycopié, p. 7 à 9) : le mécanisme d'émoussement et d'affûtage de sa pointe, les stries et les lignes d'arrêt qu'elle laisse sur la cassure, le diagramme da/dN–ΔK et ses trois domaines, le seuil ΔK<sub>S</sub>, la loi de Paris da/dN = C(ΔK)<sup>m</sup>, et son intégration pour calculer la durée de propagation, le chiffre qui fixe l'intervalle entre deux inspections.</div>
+  <div class="meta">🔭 <b>Au prochain épisode, cours 4 : propagation et loi de Paris.</b> La fissure est née ; on la suit cycle par cycle jusqu'à la rupture : le mécanisme d'émoussement et d'affûtage de sa pointe, les stries et les lignes d'arrêt qu'elle laisse sur la cassure, le diagramme da/dN–ΔK et ses trois domaines, le seuil ΔK<sub>S</sub>, la loi de Paris da/dN = C(ΔK)<sup>m</sup>, et son intégration pour calculer la durée de propagation, le chiffre qui fixe l'intervalle entre deux inspections.</div>
 </div>
 </section>
 </main>
 
 <footer>
 <div class="wrap">
-  <p>Cours 3 sur 4 de la série « Fatigue des métaux : la vie d'une fissure ». Notations alignées sur le polycopié de référence (Partie II : Fatigue) ; pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 3 sur 4 de la série « Fatigue des métaux : la vie d'une fissure ». Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1243,7 +1231,7 @@ function NrOf(s){if(s>=ST.Rm)return 1;if(s>=ST.Re)return Math.pow(10,4*(ST.Rm-s)
 })();
 
 /* =========================================================
-   M5 : les quatre domaines (figures 9 et 10)
+   M5 : les quatre domaines (avec ou sans fissures dormantes)
    ========================================================= */
 (function(){
   const svg=$("#m5svg");if(!svg)return;
@@ -1293,7 +1281,7 @@ function NrOf(s){if(s>=ST.Rm)return 1;if(s>=ST.Re)return Math.pow(10,4*(ST.Rm-s)
     $("#m5so").textContent=s+" MPa";$("#m5no").textContent=bigN(N);
     ro.innerHTML="<span class='sig'>σ<sub>a</sub> = "+s+" MPa</span><span class='eps'>N = "+bigN(N)+"</span><span class='eps'>N<sub>amorçage</sub> = "+(isFinite(Na)?bigN(Na):"∞")+"</span><span class='mat'>N<sub>rupture</sub> = "+(isFinite(Nr)?bigN(Nr):"∞")+"</span><span><b>domaine "+dom+"</b></span>";
     const M={1:"<b>Domaine 1 : non fissuré.</b> Pas encore de microfissure détectable à ce nombre de cycles.",2:"<b>Domaine 2 : fissuré, pas encore rompu.</b> Des microfissures existent et grandissent ; la rupture viendra à N<sub>r</sub>.",3:"<b>Domaine 3 : rompu.</b> La fissure a traversé la pièce.",4:"<b>Domaine 4 : fissures dormantes.</b> σ<sub>Di</sub> &lt; σ<sub>a</sub> ≤ σ<sub>D</sub> : des microfissures sont nées (parfois sur plusieurs centaines de µm), mais elles se sont arrêtées et ne conduiront jamais à la rupture."};
-    msg.innerHTML=M[dom]+(fig===9&&s<=ST.sD?" Sous σ<sub>D</sub> (figure 9), ni amorçage ni rupture.":"");
+    msg.innerHTML=M[dom]+(fig===9&&s<=ST.sD?" Sous σ<sub>D</sub> (σ<sub>Di</sub> = σ<sub>D</sub>), ni amorçage ni rupture.":"");
   }
   [ss,sn].forEach(x=>x.addEventListener("input",draw));
   $$("input[name=m5f]").forEach(r=>r.addEventListener("change",()=>{if(r.checked){fig=+r.value;draw();}}));
@@ -1396,15 +1384,15 @@ function NrOf(s){if(s>=ST.Rm)return 1;if(s>=ST.Re)return Math.pow(10,4*(ST.Rm-s)
   const box=$("#quiz");if(!box)return;
   const Q=[
     {q:"Sous une contrainte macroscopique inférieure à R<sub>e</sub>, les microglissements apparaissent :",o:["dans tous les grains à la fois","dans quelques grains bien orientés, surtout près de la surface","seulement à cœur","jamais"],c:1,e:"R<sub>e</sub> est une moyenne : les grains <b>bien orientés</b>, surtout <b>en surface</b>, glissent bien avant."},
-    {q:"Pourquoi les grains de surface glissent-ils plus facilement ?",o:["ils sont plus gros","ils sont moins confinés (voisins d'un seul côté) et souvent plus chargés","ils sont plus durs","ils sont en compression"],c:1,e:"Le polycopié donne deux raisons : <b>contraintes maximales</b> en surface et grains <b>moins confinés</b>."},
+    {q:"Pourquoi les grains de surface glissent-ils plus facilement ?",o:["ils sont plus gros","ils sont moins confinés (voisins d'un seul côté) et souvent plus chargés","ils sont plus durs","ils sont en compression"],c:1,e:"Deux raisons : <b>contraintes maximales</b> en surface et grains <b>moins confinés</b>."},
     {q:"En traction simple σ, le cisaillement maximal vaut :",o:["σ, sur le plan droit","σ/2, sur les plans à 45°","2σ, à 90°","0 partout"],c:1,e:"τ = (σ/2)·sin 2θ : maximal à <b>45°</b>, où il vaut <b>σ/2</b>."},
     {q:"Le facteur de Schmid m<sub>S</sub> vaut au plus :",o:["1","0,707","0,5","0,25"],c:2,e:"m<sub>S</sub> = cos φ·cos λ ≤ <b>0,5</b>, atteint pour φ = λ = 45°."},
     {q:"Les intrusions et extrusions naissent :",o:["d'un glissement parfaitement réversible","de l'irréversibilité du glissement, cycle après cycle","de la corrosion seule","d'un usinage grossier"],c:1,e:"Les lamelles ne reviennent pas exactement par le même chemin : le relief <b>s'accumule</b>."},
     {q:"Une intrusion de 2 µm de profondeur et 0,5 µm de rayon a un K<sub>t</sub> d'environ :",o:["2","3","5","9"],c:2,e:"K<sub>t</sub> = 1 + 2√(2/0,5) = 1 + 2 × 2 = <b>5</b>."},
     {q:"Le stade I d'une fissure de fatigue :",o:["est perpendiculaire à l'effort","suit les plans de glissement, à environ 45°, sur quelques grains","traverse toute la pièce","n'existe que dans les soudures"],c:1,e:"Stade I : le long des <b>plans de glissement</b> ; stade II : perpendiculaire à l'effort."},
     {q:"Le mode I de fissuration correspond à :",o:["l'ouverture des lèvres","le glissement plan","le glissement anti-plan","la fermeture"],c:0,e:"Mode I : <b>ouverture</b>, sous une traction perpendiculaire au plan de fissure. C'est le mode du stade II."},
-    {q:"La courbe de Wöhler à l'amorçage se situe :",o:["à droite de la courbe à rupture","à gauche de la courbe à rupture","toujours confondue avec elle","au-dessus de R<sub>m</sub>"],c:1,e:"On se fissure avant de casser : la courbe d'amorçage est <b>à gauche</b> (figure 9)."},
-    {q:"Dans le domaine 4 de la figure 10, la pièce est :",o:["intacte","fissurée, avec des fissures dormantes qui ne mèneront pas à la rupture","rompue","en fatigue oligocyclique"],c:1,e:"Entre σ<sub>Di</sub> et σ<sub>D</sub> : microfissures, parfois longues de centaines de µm, mais <b>dormantes</b>."},
+    {q:"La courbe de Wöhler à l'amorçage se situe :",o:["à droite de la courbe à rupture","à gauche de la courbe à rupture","toujours confondue avec elle","au-dessus de R<sub>m</sub>"],c:1,e:"On se fissure avant de casser : la courbe d'amorçage est <b>à gauche</b>."},
+    {q:"Dans le domaine 4 du diagramme d'amorçage, la pièce est :",o:["intacte","fissurée, avec des fissures dormantes qui ne mèneront pas à la rupture","rompue","en fatigue oligocyclique"],c:1,e:"Entre σ<sub>Di</sub> et σ<sub>D</sub> : microfissures, parfois longues de centaines de µm, mais <b>dormantes</b>."},
     {q:"ΔK<sub>S</sub> = 6 MPa·√m, Y = 2, Δσ<sub>D</sub> = 300 MPa : a<sub>0</sub> vaut :",o:["10 µm","100 µm","1 mm","10 mm"],c:1,e:"a<sub>0</sub> = (6/(2 × 300))² = (0,01)² = 10⁻⁴ m = <b>100 µm</b>."},
     {q:"Par rapport à von Mises, le critère de Crossland ajoute :",o:["la température","la pression hydrostatique maximale","la vitesse de chargement","le nombre de cycles"],c:1,e:"√J<sub>2,a</sub> + α·<b>P<sub>max</sub></b> ≤ β : la traction hydrostatique aide à ouvrir les microfissures."}
   ];

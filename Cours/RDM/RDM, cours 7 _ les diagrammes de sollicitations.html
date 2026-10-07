@@ -346,7 +346,7 @@ input.r-gam{accent-color:var(--gam)}
     <div class="cc-arrow">→</div>
     <div class="cc-box cc-link"><small>Les appuis</small><div class="cc-syms"><span class="mat">▲</span><span class="mat">▥</span></div><p>en vert</p></div>
   </div>
-  <p class="cc-note">Même code couleur qu'au cours 6. Sur tous les diagrammes, les valeurs positives sont tracées vers le haut. Convention du polycopié : le torseur de cohésion est l'action de la partie droite sur la partie gauche.</p>
+  <p class="cc-note">Même code couleur qu'au cours 6. Sur tous les diagrammes, les valeurs positives sont tracées vers le haut. Convention de la série : le torseur de cohésion est l'action de la partie droite sur la partie gauche.</p>
 </div>
 </header>
 
@@ -376,7 +376,7 @@ input.r-gam{accent-color:var(--gam)}
     <div><div class="f"><span class="sig">N, Mf → σ</span> · <span class="tau">T, Mt → τ</span></div>Les efforts intérieurs, rouges ou violets selon la contrainte qu'ils créent.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> « Notions de base de RDM » (Polytech Nantes, IWE1) : ce cours prolonge la méthode des <b>pages 20 et 21</b> (torseur de cohésion, sollicitations internes) : un diagramme n'est rien d'autre que la représentation graphique de ces sollicitations le long de la poutre. On garde la convention du polycopié ({S<sub>2</sub> → S<sub>1</sub>}) et ses notations (N, T, Mf, repère x le long de la poutre, y vers le haut).</div>
+  <div class="def"><b>📘 Dans le prolongement du cours 6</b> (torseur de cohésion, sollicitations internes) : un diagramme n'est rien d'autre que la représentation graphique de ces sollicitations le long de la poutre. On garde la convention de la série ({S<sub>2</sub> → S<sub>1</sub>}) et ses notations (N, T, Mf, repère x le long de la poutre, y vers le haut).</div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage (formation IWE)</b>
     <p>(IWE : <i>International Welding Engineer</i>, ingénieur international en soudage.) Le diagramme de moment de flexion dit où une poutre travaille le plus. Une règle de bon sens des constructeurs en découle : on évite de placer un joint soudé (un raboutage de poutre, une attache) dans la zone où le moment est maximal, et en tout cas on le vérifie là en priorité. Et pour une console soudée à un poteau, c'est à l'encastrement, donc dans les cordons eux-mêmes, que le moment est le plus grand.</p>
@@ -423,7 +423,7 @@ input.r-gam{accent-color:var(--gam)}
     <p>Poutre sur deux appuis A (x = 0) et B (x = L), charge F vers le bas en x = a. Réactions (cours 6) : Y<sub>A</sub> = F(L − a)/L, Y<sub>B</sub> = F·a/L.</p>
     <p><b>Tronçon 1 : 0 &lt; x &lt; a.</b> À gauche de la coupe, seulement Y<sub>A</sub>. <span class="m"><span class="tau">T<sub>y</sub></span> = −Y<sub>A</sub></span> (constant) et <span class="m"><span class="sig">Mf<sub>z</sub></span> = Y<sub>A</sub>·x</span> (droite qui monte).<br><b>Tronçon 2 : a &lt; x &lt; L.</b> Y<sub>A</sub> et F. <span class="m"><span class="tau">T<sub>y</sub></span> = F − Y<sub>A</sub> = Y<sub>B</sub></span> (constant) et <span class="m"><span class="sig">Mf<sub>z</sub></span> = Y<sub>A</sub>·x − F(x − a) = Y<sub>B</sub>(L − x)</span> (droite qui redescend à 0).</p>
     <p><b>Lecture :</b> T saute de −Y<sub>A</sub> à +Y<sub>B</sub> sous la charge, soit un saut de F. Mf forme un triangle dont le sommet, sous la charge, vaut <span class="m">Mf<sub>max</sub> = F·a(L − a)/L</span> ; au milieu, FL/4.</p>
-    <div class="warn">⚠️ <b>Selon la convention, le diagramme de T peut être inversé.</b> Avec la convention du polycopié, T est négatif à gauche de la charge. Des ouvrages qui prennent l'action de la gauche sur la droite trouvent l'inverse. Les valeurs absolues, la position des sauts et la section la plus sollicitée ne changent jamais. Et certains métiers (le génie civil notamment) tracent le moment du côté des fibres tendues, donc vers le bas : regarde toujours la légende.</div>
+    <div class="warn">⚠️ <b>Selon la convention, le diagramme de T peut être inversé.</b> Avec la convention de la série, T est négatif à gauche de la charge. Des ouvrages qui prennent l'action de la gauche sur la droite trouvent l'inverse. Les valeurs absolues, la position des sauts et la section la plus sollicitée ne changent jamais. Et certains métiers (le génie civil notamment) tracent le moment du côté des fibres tendues, donc vers le bas : regarde toujours la légende.</div>
   </div>
 </div>
 </section>
@@ -454,7 +454,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les sauts, en toute rigueur</span></div>
-    <p>Pour une force ponctuelle de composantes (F<sub>x</sub> ; F<sub>y</sub>) en x<sub>0</sub>, quand la coupe passe de x<sub>0</sub>⁻ (juste avant) à x<sub>0</sub>⁺ (juste après), la force rejoint la partie gauche, d'où, avec la convention du polycopié :</p>
+    <p>Pour une force ponctuelle de composantes (F<sub>x</sub> ; F<sub>y</sub>) en x<sub>0</sub>, quand la coupe passe de x<sub>0</sub>⁻ (juste avant) à x<sub>0</sub>⁺ (juste après), la force rejoint la partie gauche, d'où, avec la convention de la série :</p>
     <div class="fx"><div class="big" style="font-size:1.4rem">Δ<span class="sig">N</span> = −F<sub>x</sub> &nbsp;&nbsp; Δ<span class="tau">T<sub>y</sub></span> = −F<sub>y</sub> &nbsp;&nbsp; Δ<span class="sig">Mf<sub>z</sub></span> = 0</div><p class="cap">une charge de F vers le bas (F<sub>y</sub> = −F) fait monter T de F ; le moment ne saute pas, il change seulement de pente</p></div>
     <p>Les <b>réactions d'appui</b> sont des forces ponctuelles comme les autres : T saute aussi au droit de chaque appui. Vérification très efficace : aux deux extrémités d'une poutre sur deux appuis, T part de 0 et revient à 0 après le dernier saut.</p>
   </div>
@@ -505,7 +505,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">l'altitude et la pente</span></div>
-    <p>Imagine que le diagramme de Mf est le profil d'une randonnée. Alors T est lié à la <b>pente</b> du chemin : avec la convention du polycopié, la pente de Mf vaut −T. Quand T est négatif, Mf monte ; quand T est positif, Mf descend ; <b>quand T s'annule (ou change de signe), Mf passe par un sommet</b> : c'est là que se trouve la section la plus sollicitée en flexion. Exception à connaître : pour une console, T ne s'annule pas ; le maximum de |Mf| est en bout de diagramme, à l'encastrement.</p>
+    <p>Imagine que le diagramme de Mf est le profil d'une randonnée. Alors T est lié à la <b>pente</b> du chemin : avec la convention de la série, la pente de Mf vaut −T. Quand T est négatif, Mf monte ; quand T est positif, Mf descend ; <b>quand T s'annule (ou change de signe), Mf passe par un sommet</b> : c'est là que se trouve la section la plus sollicitée en flexion. Exception à connaître : pour une console, T ne s'annule pas ; le maximum de |Mf| est en bout de diagramme, à l'encastrement.</p>
     <p>Et de même, la charge répartie donne la pente de T : sous une charge répartie p vers le bas, T monte de p par mètre ; sans charge répartie, T est plat.</p>
     <p><b>Le lien par les aires :</b> la variation de Mf entre deux points est égale à <b>moins l'aire</b> du diagramme de T entre ces deux points. Pour une poutre sur deux appuis, Mf(x) = −(aire de T entre 0 et x). La manipulation te montre la tangente et l'aire en direct.</p>
   </div>
@@ -521,7 +521,7 @@ input.r-gam{accent-color:var(--gam)}
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">la démonstration sur une tranche</span></div>
     <p>Isole une tranche de poutre entre x et x + dx, qui porte la charge répartie p<sub>y</sub>·dx (p<sub>y</sub> : composante selon y de la charge par mètre ; p<sub>y</sub> = −p pour une charge p vers le bas). Elle reçoit, à droite, l'action de la matière de droite, {τ}<sub>coh</sub>(x + dx), et, à gauche, l'action de la matière de gauche, −{τ}<sub>coh</sub>(x). Son équilibre donne :</p>
-    <div class="fx" style="max-width:640px"><div class="big" style="font-size:1.4rem;line-height:1.9"><span class="frac"><span>d<span class="tau">T<sub>y</sub></span></span><span>dx</span></span> = −p<sub>y</sub> &nbsp;&nbsp;&nbsp; <span class="frac"><span>d<span class="sig">Mf<sub>z</sub></span></span><span>dx</span></span> = −<span class="tau">T<sub>y</sub></span> &nbsp;&nbsp;&nbsp; <span class="frac"><span>d<span class="sig">N</span></span><span>dx</span></span> = −p<sub>x</sub></div><p class="cap">d/dx : la dérivée, c'est-à-dire la pente de la courbe ; convention du polycopié</p></div>
+    <div class="fx" style="max-width:640px"><div class="big" style="font-size:1.4rem;line-height:1.9"><span class="frac"><span>d<span class="tau">T<sub>y</sub></span></span><span>dx</span></span> = −p<sub>y</sub> &nbsp;&nbsp;&nbsp; <span class="frac"><span>d<span class="sig">Mf<sub>z</sub></span></span><span>dx</span></span> = −<span class="tau">T<sub>y</sub></span> &nbsp;&nbsp;&nbsp; <span class="frac"><span>d<span class="sig">N</span></span><span>dx</span></span> = −p<sub>x</sub></div><p class="cap">d/dx : la dérivée, c'est-à-dire la pente de la courbe ; convention de la série</p></div>
     <p><b>Conséquences pratiques :</b> <b>1.</b> Pas de charge répartie : T constant, Mf linéaire. <b>2.</b> Charge répartie uniforme : T linéaire, Mf parabolique. <b>3.</b> Mf est extrémal là où T s'annule ou change de signe. <b>4.</b> En intégrant : <span class="m">Mf(x<sub>2</sub>) − Mf(x<sub>1</sub>) = −∫ T dx</span>, moins l'aire de T entre x<sub>1</sub> et x<sub>2</sub> (∫ : le symbole d'intégrale, qui calcule une aire).</p>
     <p><b>Les couples concentrés.</b> Un couple C (sens trigonométrique) appliqué en x<sub>0</sub> ne change pas T, mais fait sauter le moment : <span class="m">ΔMf<sub>z</sub> = −C</span>. C'est le seul cas où Mf a une marche (voir le défi).</p>
     <div class="tip">💡 <b>Et avec d'autres conventions ?</b> Si l'on prend l'action de la gauche sur la droite, N, T et Mf changent <b>tous</b> de signe : la relation dMf/dx = −T garde alors la même forme. En revanche, certaines combinaisons de conventions (en génie civil, par exemple, on compte positif le moment qui tend les fibres du bas et l'effort tranchant qui fait tourner la tranche dans le sens horaire) conduisent à dM/dx = +V, où V désigne l'effort tranchant. Ce qui ne change jamais : les extremums de Mf sont là où T s'annule ou change de signe, ou aux extrémités de la poutre.</div>
@@ -596,7 +596,7 @@ input.r-gam{accent-color:var(--gam)}
     <div class="c-img"><span class="ico">🏋️</span><span><small>Image à retenir</small>La salle de muscu : on ne progresse qu'en soulevant soi-même</span></div>
   </div>
   <div class="lv lv1"><div class="lv-h">👁 Mode d'emploi <span class="tag">de tête, puis la fiche, puis le cours</span></div>
-    <p>Pour chaque exercice : réactions, tronçons, expressions, valeurs remarquables, tracé. Convention du polycopié : T<sub>y</sub> = −ΣF<sub>y</sub>(gauche), Mf<sub>z</sub> = −ΣM<sub>G</sub>(gauche). Le diagrammeur (manipulation 5) te permet de vérifier chaque tracé.</p>
+    <p>Pour chaque exercice : réactions, tronçons, expressions, valeurs remarquables, tracé. Convention de la série : T<sub>y</sub> = −ΣF<sub>y</sub>(gauche), Mf<sub>z</sub> = −ΣM<sub>G</sub>(gauche). Le diagrammeur (manipulation 5) te permet de vérifier chaque tracé.</p>
   </div>
 
   <div class="exo">
@@ -720,7 +720,7 @@ input.r-gam{accent-color:var(--gam)}
     <dt>Aire (sous un diagramme)</dt><dd>Surface comprise entre la courbe et l'axe, comptée négativement sous l'axe ; l'aire de T donne la variation de Mf (au signe près).</dd>
     <dt>Charge ponctuelle F</dt><dd>Force appliquée en un point, en kN.</dd>
     <dt>Charge répartie p</dt><dd>Charge étalée sur une longueur, en kN/m ; sur une longueur ℓ, sa résultante vaut p·ℓ, appliquée au milieu de la zone.</dd>
-    <dt>Couple concentré C</dt><dd>Moment appliqué en un point, en kN·m ; il fait sauter Mf de −C (convention du polycopié).</dd>
+    <dt>Couple concentré C</dt><dd>Moment appliqué en un point, en kN·m ; il fait sauter Mf de −C (convention de la série).</dd>
     <dt>d/dx (dérivée)</dt><dd>Pente d'une courbe : de combien elle monte par mètre parcouru.</dd>
     <dt>Diagramme de sollicitations</dt><dd>Graphe de N(x), T(x) ou Mf(x) le long de la poutre.</dd>
     <dt>∫ (intégrale)</dt><dd>Symbole qui calcule l'aire sous une courbe entre deux bornes.</dd>
@@ -757,7 +757,7 @@ input.r-gam{accent-color:var(--gam)}
 
 <footer>
 <div class="wrap">
-  <p>Cours 7 de la série « Résistance des matériaux » (série 2 : la théorie des poutres). Pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 7 de la série « Résistance des matériaux » (série 2 : la théorie des poutres). Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -832,7 +832,7 @@ function support(svg,type,x,y){ // y : niveau de la poutre
 }
 
 
-/* ---------- moteur de calcul (convention du polycopié : droite sur gauche) ---------- */
+/* ---------- moteur de calcul (convention de la série : droite sur gauche) ---------- */
 function beamSolve(cfg){
   const P=cfg.P||[],q=(cfg.q||[]).filter(o=>o.b>o.a+1e-9&&Math.abs(o.p)>1e-12),C=cfg.C||[],H=cfg.H||0,L=cfg.L;
   let S=0,Mx=0;P.forEach(o=>{S+=o.F;Mx+=o.F*o.x;});q.forEach(o=>{const l=o.b-o.a;S+=o.p*l;Mx+=o.p*l*(o.a+o.b)/2;});

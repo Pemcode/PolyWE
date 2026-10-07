@@ -322,27 +322,17 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div><div class="f"><span class="mat">D</span> ∝ exp(−<span class="mat">Q</span>/R<span class="tau">T</span>)</div>Les atomes d'un solide ne sont pas figés : ils sautent d'un site à l'autre, le plus souvent en échangeant leur place avec une <b>lacune</b> (un site vide du réseau). Cette <b>diffusion</b> s'accélère exponentiellement avec la température T, en kelvins (Métallurgie, cours 2). Le signe ∝ se lit « proportionnel à ».</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> de référence (Partie III : Fluage, endommagement et rupture sous charge à haute température). Ce cours couvre les chapitres A à D, <b>pages 1 à 5, figures 1 à 5</b> :
-    <div class="tbl-wrap"><table class="data">
-      <tr><th>Chapitre du cours</th><th>Polycopié</th></tr>
-      <tr><td>1 Le métal qui coule</td><td>p. 1, chapitre A (définition, relaxation, seuil de 0,4 T<sub>f</sub>, vitesses de déformation)</td></tr>
-      <tr><td>2 Les trois stades</td><td>p. 1 et 2, chapitre A, figure 1</td></tr>
-      <tr><td>3 Chaleur et contrainte : la loi de Norton</td><td>p. 2 (équation de Norton) ; p. 4 (lois du glissement thermiquement activé)</td></tr>
-      <tr><td>4 Le fluage-dislocations</td><td>p. 2 et 3, chapitre B, figures 2 et 3 ; p. 4, chapitre C</td></tr>
-      <tr><td>5 Le fluage-diffusion</td><td>p. 3, chapitre B ; p. 5, chapitre D, figure 5</td></tr>
-      <tr><td>6 La carte des mécanismes</td><td>p. 3, figure 4 ; leviers de conception et aciers <span class="hp">hors poly</span></td></tr>
-    </table></div>
-    Les compléments qui ne figurent pas dans le polycopié portent l'étiquette <span class="hp">hors poly</span> : la relaxation chiffrée et le détensionnement, le lien entre température homologue et diffusion, la mesure de n et de Q, les ordres de grandeur, les leviers de conception des alliages et les applications au soudage. Les pages 6 à 12 (endommagement, durée de vie, Larson-Miller) feront le cours 2.
-    <p style="margin-bottom:0"><b>Sujets du planning de la formation.</b> Ce cours relève du sujet <b>2.7 « Ruptures et différents types de rupture »</b> : le polycopié de référence, commun aux modules 2.7 et 3.11, y range le fluage parmi les modes de rupture. Il prépare aussi le sujet <b>2.12 « Acier résistant au fluage »</b>, dont il pose les bases physiques (chapitres 4 et 6).</p>
+  <div class="def"><b>📘 Ce cours dans la formation.</b> Il traite la courbe de fluage et ses mécanismes ; l'endommagement, la durée de vie et le paramètre de Larson-Miller feront l'objet du cours 2.
+    <p style="margin-bottom:0"><b>Sujets du planning de la formation.</b> Ce cours relève du sujet <b>2.7 « Ruptures et différents types de rupture »</b>, qui range le fluage parmi les modes de rupture. Il prépare aussi le sujet <b>2.12 « Acier résistant au fluage »</b>, dont il pose les bases physiques (chapitres 4 et 6).</p>
   </div>
 
   <div class="def"><b>🔎 Six remarques de lecture</b>
-    <p><b>1. k ou R ?</b> Pages 2, 4 et 5, les lois s'écrivent avec exp(−Q/kT), où k = 1,381 × 10⁻²³ J/K est la constante de Boltzmann : Q est alors une énergie <b>par atome</b>, en joules. Pages 10 et 11 (cours 2), elles s'écrivent avec exp(−Q/RT), où R = 8,314 J/(mol·K) est la constante des gaz parfaits : Q est alors une énergie <b>par mole</b>. C'est la même physique, puisque R = N<sub>A</sub>·k (N<sub>A</sub> = 6,022 × 10²³ mol⁻¹, le nombre d'Avogadro). Ce cours chiffre surtout avec R et des kJ/mol, l'usage des données sur les aciers.</p>
-    <p><b>2. La lettre b.</b> Page 4, b est le <b>vecteur de Burgers</b> de la dislocation ; page 5, dans les lois du fluage-diffusion, b est appelé « paramètre de maille ». Dans ces formules, b³ représente en fait le volume d'un atome (souvent noté Ω, « oméga »). Dans les métaux, distance entre atomes, vecteur de Burgers et paramètre de maille valent tous environ 0,25 à 0,4 nm, d'où l'usage d'une même lettre.</p>
-    <p><b>3. n ≈ 3</b> (p. 4). C'est la valeur que donnent les modèles simples de montée des dislocations pour les métaux purs. Les mesures donnent souvent n ≈ 4 à 5 ; les alliages à phase dispersée vont bien au-delà (chapitre 4).</p>
-    <p><b>4. Un stade « qui ne peut pas exister »</b> (p. 1). Le polycopié précise qu'on peut montrer que le stade secondaire ne peut pas exister physiquement. Il faut comprendre : une vitesse rigoureusement constante supposerait une matière figée ; en réalité la vitesse passe par un minimum très plat, d'où son nom de <b>vitesse minimale</b>. Le stade secondaire désigne ce plateau apparent.</p>
-    <p><b>5. Nabarro ou Nabarro-Herring ?</b> Le fluage-diffusion en volume, appelé « fluage de Nabarro » page 5, est le plus souvent nommé <b>fluage de Nabarro-Herring</b>, d'après les deux physiciens qui l'ont proposé. C'est le même mécanisme.</p>
-    <p><b>6. Le signe de r</b> (p. 4). Avec la définition du polycopié, la restauration r est <b>négative</b> (elle fait baisser la contrainte interne au cours du temps) : la vitesse <span class="ed">ε̇</span> = −r/h est donc bien positive. Certains ouvrages comptent r positivement et écrivent <span class="ed">ε̇</span> = r/h (relation de Bailey-Orowan) : c'est la même relation.</p>
+    <p><b>1. k ou R ?</b> Les lois d'activation s'écrivent tantôt avec exp(−Q/kT), où k = 1,381 × 10⁻²³ J/K est la constante de Boltzmann : Q est alors une énergie <b>par atome</b>, en joules ; tantôt avec exp(−Q/RT), où R = 8,314 J/(mol·K) est la constante des gaz parfaits : Q est alors une énergie <b>par mole</b>. C'est la même physique, puisque R = N<sub>A</sub>·k (N<sub>A</sub> = 6,022 × 10²³ mol⁻¹, le nombre d'Avogadro). Ce cours chiffre surtout avec R et des kJ/mol, l'usage des données sur les aciers.</p>
+    <p><b>2. La lettre b.</b> Dans les lois du fluage-dislocations, b est le <b>vecteur de Burgers</b> de la dislocation ; dans celles du fluage-diffusion, on l'appelle parfois « paramètre de maille ». Dans ces formules, b³ représente en fait le volume d'un atome (souvent noté Ω, « oméga »). Dans les métaux, distance entre atomes, vecteur de Burgers et paramètre de maille valent tous environ 0,25 à 0,4 nm, d'où l'usage d'une même lettre.</p>
+    <p><b>3. n ≈ 3.</b> C'est la valeur que donnent les modèles simples de montée des dislocations pour les métaux purs. Les mesures donnent souvent n ≈ 4 à 5 ; les alliages à phase dispersée vont bien au-delà (chapitre 4).</p>
+    <p><b>4. Un stade « qui ne peut pas exister ».</b> On lit parfois que le stade secondaire ne peut pas exister physiquement. Il faut comprendre : une vitesse rigoureusement constante supposerait une matière figée ; en réalité la vitesse passe par un minimum très plat, d'où son nom de <b>vitesse minimale</b>. Le stade secondaire désigne ce plateau apparent.</p>
+    <p><b>5. Nabarro ou Nabarro-Herring ?</b> Le fluage-diffusion en volume, parfois appelé « fluage de Nabarro », est le plus souvent nommé <b>fluage de Nabarro-Herring</b>, d'après les deux physiciens qui l'ont proposé. C'est le même mécanisme.</p>
+    <p><b>6. Le signe de r.</b> Avec la définition de ce cours, la restauration r est <b>négative</b> (elle fait baisser la contrainte interne au cours du temps) : la vitesse <span class="ed">ε̇</span> = −r/h est donc bien positive. Certains ouvrages comptent r positivement et écrivent <span class="ed">ε̇</span> = r/h (relation de Bailey-Orowan) : c'est la même relation.</p>
   </div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
@@ -377,15 +367,15 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le miel tiède</span></div>
     <p>Retourne un pot de miel sorti du réfrigérateur : il ne coule presque pas. Laisse-le tiédir : il s'écoule, lentement, sans qu'on le pousse davantage. Un métal chaud et chargé se comporte un peu de la même façon, en infiniment plus lent. Il ne casse pas d'un coup, il ne plie pas d'un coup : il s'allonge jour après jour sous une charge pourtant <b>constante</b> et <b>modérée</b>. C'est le <b>fluage</b>.</p>
     <div class="fx"><div class="big"><span class="sig">σ</span> constante &nbsp;+&nbsp; <span class="tau">T</span> élevée &nbsp;⟹&nbsp; <span class="eps">ε</span> qui augmente avec le temps</div><p class="cap">le fluage : une déformation plastique qui continue tant que la charge reste appliquée</p></div>
-    <p>L'exemple-type du polycopié (p. 1) est l'<b>aube de turbine</b> à gaz : la force centrifuge la tire en permanence, à très haute température, et elle s'allonge lentement pendant toute sa vie. On en croise beaucoup d'autres :</p>
+    <p>L'exemple-type est l'<b>aube de turbine</b> à gaz : la force centrifuge la tire en permanence, à très haute température, et elle s'allonge lentement pendant toute sa vie. On en croise beaucoup d'autres :</p>
     <ul>
       <li>les <b>tuyauteries de vapeur</b> et les tubes de chaudière, qui gonflent sous la pression interne ;</li>
       <li>les <b>gouttières et toitures en plomb</b> des vieilles églises, qui s'affaissent en un siècle… à température ambiante ;</li>
       <li>les <b>soudures étain-plomb</b> des cartes électroniques, qui fluent dès qu'elles tiédissent ;</li>
       <li>les <b>glaciers</b>, de la glace qui flue à quelques degrés sous sa température de fusion.</li>
     </ul>
-    <p>Mais « chaud », c'est chaud par rapport à quoi ? Par rapport à la <b>température de fusion</b> du matériau, comptée en <b>kelvins</b> : le polycopié situe le fluage au-dessus d'environ <b>0,4 fois la température de fusion</b>. Le plomb fond à 327 °C, soit 600 K : à 20 °C (293 K), il est déjà à 0,49 de sa fusion, aussi « chaud » qu'un acier à 600 °C. Le tungstène des filaments de lampe, lui, ne flue qu'au-delà de 1 200 °C.</p>
-    <p>Le fluage a un jumeau, la <b>relaxation</b>. Serre un boulon sur une bride chaude : son allongement est bloqué par les pièces serrées. Au fil des heures, une partie de sa déformation élastique se transforme en déformation de fluage : la tension du boulon baisse, et le serrage se perd. <b>Fluage</b> : on impose la force, l'allongement grandit. <b>Relaxation</b> : on impose l'allongement, la force baisse. Ce sont les mêmes mécanismes physiques (p. 1).</p>
+    <p>Mais « chaud », c'est chaud par rapport à quoi ? Par rapport à la <b>température de fusion</b> du matériau, comptée en <b>kelvins</b> : on situe le fluage au-dessus d'environ <b>0,4 fois la température de fusion</b>. Le plomb fond à 327 °C, soit 600 K : à 20 °C (293 K), il est déjà à 0,49 de sa fusion, aussi « chaud » qu'un acier à 600 °C. Le tungstène des filaments de lampe, lui, ne flue qu'au-delà de 1 200 °C.</p>
+    <p>Le fluage a un jumeau, la <b>relaxation</b>. Serre un boulon sur une bride chaude : son allongement est bloqué par les pièces serrées. Au fil des heures, une partie de sa déformation élastique se transforme en déformation de fluage : la tension du boulon baisse, et le serrage se perd. <b>Fluage</b> : on impose la force, l'allongement grandit. <b>Relaxation</b> : on impose l'allongement, la force baisse. Ce sont les mêmes mécanismes physiques.</p>
   </div>
 
   <div class="lab" id="m1">
@@ -424,8 +414,8 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">définitions, seuil et ordres de grandeur</span></div>
-    <div class="def"><b>📖 Fluage</b> (polycopié, p. 1) : déformation plastique continue sous charge ou sous contrainte imposée, généralement à relativement haute température. On fixe la contrainte et on suit la déformation dans le temps.</div>
-    <div class="def"><b>📖 Relaxation</b> (p. 1) : diminution, au cours du temps, de la contrainte d'une pièce dont la déformation totale est maintenue constante. Exemple-type : le boulon serré qui travaille à haute température.</div>
+    <div class="def"><b>📖 Fluage</b> : déformation plastique continue sous charge ou sous contrainte imposée, généralement à relativement haute température. On fixe la contrainte et on suit la déformation dans le temps.</div>
+    <div class="def"><b>📖 Relaxation</b> : diminution, au cours du temps, de la contrainte d'une pièce dont la déformation totale est maintenue constante. Exemple-type : le boulon serré qui travaille à haute température.</div>
     <h4>La température homologue</h4>
     <p>On appelle <b>température homologue</b> le rapport T/T<sub>f</sub> entre la température de travail T et la température de fusion T<sub>f</sub>, toutes deux en kelvins (K) :</p>
     <div class="fx"><div class="row big" style="font-size:1.55rem"><span><span class="tau">T</span>(K) = <span class="tau">T</span>(°C) + 273,15</span><span><span class="tau">T</span>/<span class="mat">T<sub>f</sub></span> ≳ 0,4 &nbsp;⟹&nbsp; fluage à considérer</span></div><p class="cap">le signe ≳ se lit « supérieur ou de l'ordre de » : le seuil n'est pas une frontière nette, mais une zone où le fluage devient sensible à l'échelle d'une vie de service</p></div>
@@ -439,13 +429,13 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <tr><td>Fer (aciers : 1 450 à 1 530 °C)</td><td class="n">1 538</td><td class="n">1 811</td><td class="n">451</td></tr>
       <tr><td>Tungstène</td><td class="n">3 422</td><td class="n">3 695</td><td class="n">1 205</td></tr>
     </table></div>
-    <p>Pour un acier, le fluage devient donc une préoccupation vers 400 à 450 °C : c'est là que les codes de construction des appareils à pression passent d'un dimensionnement sur la limite d'élasticité à un dimensionnement sur les propriétés de fluage <span class="hp">hors poly</span>.</p>
-    <h4>Pourquoi T/T<sub>f</sub> ? Parce que la diffusion ne regarde que lui <span class="hp">hors poly</span></h4>
+    <p>Pour un acier, le fluage devient donc une préoccupation vers 400 à 450 °C : c'est là que les codes de construction des appareils à pression passent d'un dimensionnement sur la limite d'élasticité à un dimensionnement sur les propriétés de fluage.</p>
+    <h4>Pourquoi T/T<sub>f</sub> ? Parce que la diffusion ne regarde que lui <span class="hp">complément</span></h4>
     <p>Le fluage a besoin que les atomes bougent : c'est la diffusion, dont le coefficient D (en m²/s) suit la loi d'Arrhenius D = D<sub>0</sub>·exp(−Q/RT), où exp désigne la fonction exponentielle, Q l'énergie d'activation (J/mol) et R = 8,314 J/(mol·K). Or, pour les métaux, l'énergie d'activation de l'autodiffusion (la diffusion des atomes du métal dans leur propre réseau) vaut à peu près <span class="m">Q ≈ 18·R·T<sub>f</sub></span> (corrélation empirique). D'où :</p>
     <div class="fx"><div class="big"><span class="mat">D</span> ≈ <span class="mat">D<sub>0</sub></span>·exp(−18 <span class="mat">T<sub>f</sub></span>/<span class="tau">T</span>)</div><p class="cap">avec D<sub>0</sub> ≈ 10⁻⁴ m²/s : la diffusion ne dépend (en ordre de grandeur) que de la température homologue</p></div>
     <p>La distance parcourue par diffusion en un temps t vaut environ √(D·t). Sur un an (t ≈ 3,16 × 10⁷ s) : à 0,3 T<sub>f</sub>, environ 0,005 nm, soit bien moins qu'un saut atomique ; à 0,4 T<sub>f</sub>, environ 10 nm, une quarantaine de distances atomiques ; à 0,5 T<sub>f</sub>, environ 1 µm ; à 0,6 T<sub>f</sub>, environ 20 µm. Le seuil de 0,4 T<sub>f</sub> est celui où les atomes commencent à se déplacer de quelques dizaines de rangs par an : peu, mais assez pour débloquer les dislocations (chapitre 4).</p>
     <h4>Les vitesses de déformation</h4>
-    <p>La <b>vitesse de déformation</b>, notée <span class="m"><span class="ed">ε̇</span></span> (« epsilon point » : le point au-dessus d'une grandeur désigne sa dérivée par rapport au temps), est la quantité de déformation gagnée par seconde : <span class="m"><span class="ed">ε̇</span> = dε/dt</span>, en s⁻¹. Le polycopié (p. 1) cite deux extrêmes : de l'ordre de 1 s⁻¹ dans le <b>formage à chaud</b> (forgeage, laminage), et moins de 10⁻¹⁰ s⁻¹ pour les <b>pièces en service</b>, qui accumulent quelques pour cent de déformation en plusieurs dizaines d'années.</p>
+    <p>La <b>vitesse de déformation</b>, notée <span class="m"><span class="ed">ε̇</span></span> (« epsilon point » : le point au-dessus d'une grandeur désigne sa dérivée par rapport au temps), est la quantité de déformation gagnée par seconde : <span class="m"><span class="ed">ε̇</span> = dε/dt</span>, en s⁻¹. Deux extrêmes donnent l'échelle des vitesses : de l'ordre de 1 s⁻¹ dans le <b>formage à chaud</b> (forgeage, laminage), et moins de 10⁻¹⁰ s⁻¹ pour les <b>pièces en service</b>, qui accumulent quelques pour cent de déformation en plusieurs dizaines d'années.</p>
     <div class="tip">💡 <b>Astuce : les conversions à connaître.</b> 1 an ≈ 3,16 × 10⁷ s ≈ 8 766 h ; 100 000 h ≈ 11,4 ans. Une vitesse de 10⁻¹⁰ s⁻¹ fait 0,32 % par an ; 10⁻⁸ s⁻¹ fait 32 % par an, soit la rupture en quelques mois.</div>
     <h4>Fluage et relaxation, une seule équation</h4>
     <p>Dans le boulon, la déformation totale reste fixe. Elle est la somme d'une part élastique σ/E et d'une part de fluage ε<sub>f</sub> :</p>
@@ -470,7 +460,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">une histoire en trois actes</span></div>
-    <p>Pour mesurer le fluage, on place une éprouvette de traction dans un <b>four</b> réglé à température constante, on y accroche une <b>charge constante</b> (souvent un poids au bout d'un bras de levier), et un extensomètre enregistre son allongement. Pendant des heures… ou des dizaines de milliers d'heures. La courbe de la déformation ε en fonction du temps t raconte toujours la même histoire en trois actes (polycopié, p. 1, figure 1) :</p>
+    <p>Pour mesurer le fluage, on place une éprouvette de traction dans un <b>four</b> réglé à température constante, on y accroche une <b>charge constante</b> (souvent un poids au bout d'un bras de levier), et un extensomètre enregistre son allongement. Pendant des heures… ou des dizaines de milliers d'heures. La courbe de la déformation ε en fonction du temps t raconte toujours la même histoire en trois actes :</p>
     <ul>
       <li><b>Acte I, le fluage primaire.</b> Au début, la déformation est rapide, puis elle ralentit : le métal <b>se durcit</b>, ses dislocations s'enchevêtrent.</li>
       <li><b>Acte II, le fluage secondaire.</b> La vitesse se stabilise à sa valeur la plus faible, la <b>vitesse minimale</b> : la courbe ε(t) devient une droite. Durcissement et adoucissement s'équilibrent (chapitre 4).</li>
@@ -501,19 +491,19 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les stades et les grandeurs de l'essai</span></div>
-    <div class="def"><b>📖 Vitesse de déformation</b> : <span class="m"><span class="ed">ε̇</span> = dε/dt</span>, la dérivée de la déformation par rapport au temps, c'est-à-dire la pente de la tangente à la courbe ε(t). Unité : s⁻¹ (on trouve aussi %/h). Le polycopié l'obtient « en dérivant la déformation par rapport au temps » (p. 1, figure 1b).</div>
+    <div class="def"><b>📖 Vitesse de déformation</b> : <span class="m"><span class="ed">ε̇</span> = dε/dt</span>, la dérivée de la déformation par rapport au temps, c'est-à-dire la pente de la tangente à la courbe ε(t). Unité : s⁻¹ (on trouve aussi %/h). On l'obtient en dérivant la déformation par rapport au temps.</div>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Stade</th><th>Vitesse</th><th>Ce qui se passe</th><th>Part de la vie</th></tr>
-      <tr><td>I primaire</td><td>décroissante : d<span class="ed">ε̇</span>/dt &lt; 0</td><td>durcissement, enchevêtrement des dislocations</td><td>souvent négligeable (p. 1)</td></tr>
+      <tr><td>I primaire</td><td>décroissante : d<span class="ed">ε̇</span>/dt &lt; 0</td><td>durcissement, enchevêtrement des dislocations</td><td>souvent négligeable</td></tr>
       <tr><td>II secondaire</td><td>quasi constante, <span class="ed">ε̇</span> ≈ <span class="ed">ε̇</span><sub>min</sub></td><td>équilibre durcissement-restauration, sous-structure stable</td><td>importante, voire dominante dans les métaux purs</td></tr>
-      <tr><td>III tertiaire</td><td>croissante : d<span class="ed">ε̇</span>/dt &gt; 0</td><td>endommagement décelable (cavités), striction</td><td>souvent un tiers ou plus dans les alliages industriels <span class="hp">hors poly</span></td></tr>
+      <tr><td>III tertiaire</td><td>croissante : d<span class="ed">ε̇</span>/dt &gt; 0</td><td>endommagement décelable (cavités), striction</td><td>souvent un tiers ou plus dans les alliages industriels</td></tr>
     </table></div>
-    <p><b>Les grandeurs extraites d'un essai</b> (p. 2) : les durées et les déformations de chaque stade, la <b>vitesse de déformation minimale</b> <span class="m"><span class="ed">ε̇</span><sub>min</sub></span> (ou vitesse secondaire), la <b>durée de vie</b> <span class="m">t<sub>r</sub></span>, la <b>ductilité en fluage</b> <span class="m">ε<sub>r</sub></span> (déformation totale en fin de vie). Pour un matériau, on fournit souvent la <b>contrainte de rupture par fluage</b> en un temps et à une température donnés : par exemple la contrainte qui provoque la rupture en 100 000 h (≈ 11,4 ans) à 550 °C.</p>
-    <p>On peut décomposer la courbe en une somme de termes <span class="hp">hors poly</span> :</p>
-    <div class="fx"><div class="big" style="font-size:1.5rem"><span class="eps">ε</span>(t) = <span class="eps">ε<sub>0</sub></span> + <span class="eps">ε<sub>I</sub></span>(t) + <span class="eps"><span class="ed">ε̇</span><sub>min</sub></span>·t + <span class="eps">ε<sub>III</sub></span>(t)</div><p class="cap">ε<sub>0</sub> : déformation instantanée à la mise en charge (élastique, σ/E ≈ 0,04 % sous 70 MPa) ; ε<sub>I</sub> sature, ε<sub>III</sub> explose en fin de vie ; la manipulation 2 utilise une forme de ce type (le cours 2 présentera la « projection θ » du polycopié, qui suit la même idée)</p></div>
+    <p><b>Les grandeurs extraites d'un essai</b> : les durées et les déformations de chaque stade, la <b>vitesse de déformation minimale</b> <span class="m"><span class="ed">ε̇</span><sub>min</sub></span> (ou vitesse secondaire), la <b>durée de vie</b> <span class="m">t<sub>r</sub></span>, la <b>ductilité en fluage</b> <span class="m">ε<sub>r</sub></span> (déformation totale en fin de vie). Pour un matériau, on fournit souvent la <b>contrainte de rupture par fluage</b> en un temps et à une température donnés : par exemple la contrainte qui provoque la rupture en 100 000 h (≈ 11,4 ans) à 550 °C.</p>
+    <p>On peut décomposer la courbe en une somme de termes :</p>
+    <div class="fx"><div class="big" style="font-size:1.5rem"><span class="eps">ε</span>(t) = <span class="eps">ε<sub>0</sub></span> + <span class="eps">ε<sub>I</sub></span>(t) + <span class="eps"><span class="ed">ε̇</span><sub>min</sub></span>·t + <span class="eps">ε<sub>III</sub></span>(t)</div><p class="cap">ε<sub>0</sub> : déformation instantanée à la mise en charge (élastique, σ/E ≈ 0,04 % sous 70 MPa) ; ε<sub>I</sub> sature, ε<sub>III</sub> explose en fin de vie ; la manipulation 2 utilise une forme de ce type (le cours 2 présentera la « projection θ », qui suit la même idée)</p></div>
     <p><b>Exemple</b> (manipulation 2, réglage « Tuyauterie ») : à 550 °C sous 70 MPa, l'acier modèle a <span class="m"><span class="ed">ε̇</span><sub>min</sub> ≈ 1,5 × 10⁻¹⁰ s⁻¹</span>, soit environ 0,5 % par an, et rompt au bout de <span class="m">t<sub>r</sub> ≈ 90 000 h</span>, une dizaine d'années, après environ 15 % de déformation. Le stade I y dure environ 13 % de la vie, le stade II environ 45 %, le stade III environ 42 % : mais le stade III fournit les deux tiers de la déformation totale.</p>
     <h4>Charge constante ou contrainte constante ?</h4>
-    <p>L'essai le plus simple impose une <b>force</b> constante (un poids). Mais quand l'éprouvette s'allonge, sa section diminue (le volume se conserve) : la contrainte vraie σ<sub>vraie</sub> = F/S augmente, d'environ σ<sub>0</sub>(1 + ε). Ce n'est pas la cause première du stade III, mais cela l'accélère. Certains bancs de laboratoire réduisent la charge au fil de l'essai pour maintenir la contrainte constante. Les essais de fluage des métaux en traction sont normalisés (NF EN ISO 204) <span class="hp">hors poly</span>.</p>
+    <p>L'essai le plus simple impose une <b>force</b> constante (un poids). Mais quand l'éprouvette s'allonge, sa section diminue (le volume se conserve) : la contrainte vraie σ<sub>vraie</sub> = F/S augmente, d'environ σ<sub>0</sub>(1 + ε). Ce n'est pas la cause première du stade III, mais cela l'accélère. Certains bancs de laboratoire réduisent la charge au fil de l'essai pour maintenir la contrainte constante. Les essais de fluage des métaux en traction sont normalisés (NF EN ISO 204).</p>
     <p>On distingue enfin l'<b>essai de fluage</b>, qui enregistre toute la courbe ε(t), et l'<b>essai de rupture par fluage</b>, qui ne note que t<sub>r</sub> (et parfois ε<sub>r</sub>) : plus simple, il permet de multiplier les éprouvettes.</p>
     <div class="warn"><b>⚠️ Piège : la vitesse minimale est un minimum de <span class="ed">ε̇</span>, pas de ε.</b> La déformation ne fait qu'augmenter. C'est sa <b>pente</b> qui passe par un minimum, au stade II.</div>
     <div class="warn"><b>⚠️ Piège : 100 000 h, c'est plus de onze ans.</b> On ne peut pas attendre la fin d'un essai à la contrainte de service avant de construire. On teste donc plus chaud ou plus chargé, sur des durées plus courtes, puis on <b>extrapole</b> : tout l'enjeu du cours 2 (Monkman-Grant, Larson-Miller).</div>
@@ -535,15 +525,15 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">les dés pipés</span></div>
     <p>Pour qu'un atome change de place, ou qu'une dislocation franchisse un obstacle, il faut passer une <b>barrière d'énergie</b>, comme une colline. L'énergie nécessaire s'appelle l'<b>énergie d'activation</b>, notée Q. D'où vient-elle ? De l'<b>agitation thermique</b> : les atomes vibrent sans cesse, et de temps en temps, par hasard, une vibration est assez forte pour passer la colline.</p>
-    <p>Imagine qu'il faille faire un double six aux dés pour sauter. Chauffer, c'est piper les dés : la chance de réussir grimpe <b>exponentiellement</b>. Physiquement, la probabilité qu'une vibration dépasse Q vaut exp(−Q/RT) : c'est le <b>facteur de Boltzmann</b>, où T est la température absolue en kelvins. Quelques degrés de plus, et les sauts deviennent nettement plus fréquents. On dit que le fluage est <b>thermiquement activé</b> (polycopié, p. 2).</p>
-    <p>La contrainte, elle, <b>penche</b> le terrain : en tirant, on aide les sauts dans le bon sens. Le polycopié résume les deux effets par l'<b>équation de Norton</b>, qui décrit la vitesse du stade secondaire :</p>
+    <p>Imagine qu'il faille faire un double six aux dés pour sauter. Chauffer, c'est piper les dés : la chance de réussir grimpe <b>exponentiellement</b>. Physiquement, la probabilité qu'une vibration dépasse Q vaut exp(−Q/RT) : c'est le <b>facteur de Boltzmann</b>, où T est la température absolue en kelvins. Quelques degrés de plus, et les sauts deviennent nettement plus fréquents. On dit que le fluage est <b>thermiquement activé</b>.</p>
+    <p>La contrainte, elle, <b>penche</b> le terrain : en tirant, on aide les sauts dans le bon sens. On résume les deux effets par l'<b>équation de Norton</b>, qui décrit la vitesse du stade secondaire :</p>
     <div class="fx"><div class="big"><span class="eps"><span class="ed">ε̇</span></span> = <span class="eps"><span class="ed">ε̇</span><sub>0</sub></span>·(<span class="sig">σ</span>/<span class="mat">μ</span>)<sup><span class="mat">n</span></sup>·exp(−<span class="mat">Q</span>/k<span class="tau">T</span>)</div><p class="cap">deux boutons : la contrainte, au travers d'une puissance n ; la température, au travers d'une exponentielle</p></div>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Exposant n</th><th>1</th><th>3</th><th>5</th><th>8</th></tr>
       <tr><td>Doubler σ multiplie <span class="ed">ε̇</span> par 2ⁿ</td><td class="n">2</td><td class="n">8</td><td class="n">32</td><td class="n">256</td></tr>
       <tr><td>Contrainte +10 % : <span class="ed">ε̇</span> multipliée par 1,1ⁿ</td><td class="n">1,1</td><td class="n">1,33</td><td class="n">1,61</td><td class="n">2,14</td></tr>
     </table></div>
-    <p>Plus la contrainte et la température sont élevées, plus la déformation est rapide : l'équation, bien que partiellement empirique, traduit ces tendances (p. 2).</p>
+    <p>Plus la contrainte et la température sont élevées, plus la déformation est rapide : l'équation, bien que partiellement empirique, traduit ces tendances.</p>
   </div>
 
   <div class="lab" id="m3">
@@ -566,7 +556,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">la loi, ses termes, et comment la mesurer</span></div>
-    <div class="def"><b>📖 Équation de Norton</b> (polycopié, p. 2) : <span class="m"><span class="ed">ε̇</span> = <span class="ed">ε̇</span><sub>0</sub>·(σ/μ)<sup>n</sup>·exp(−Q/kT)</span>, vitesse de fluage secondaire.</div>
+    <div class="def"><b>📖 Équation de Norton</b> : <span class="m"><span class="ed">ε̇</span> = <span class="ed">ε̇</span><sub>0</sub>·(σ/μ)<sup>n</sup>·exp(−Q/kT)</span>, vitesse de fluage secondaire.</div>
     <dl class="syms">
       <dt><span class="ed">ε̇</span><sub>0</sub></dt><dd>vitesse de référence (s⁻¹), une constante du matériau ;</dd>
       <dt>μ</dt><dd>module de cisaillement (« mu », en MPa), l'équivalent du module d'Young en cisaillement : μ = E/(2(1 + ν)) ≈ 0,38 E pour un métal (ν ≈ 0,3, coefficient de Poisson). Diviser σ par μ rend la contrainte sans dimension et compare des métaux différents ;</dd>
@@ -575,7 +565,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <dt>k, R</dt><dd>constante de Boltzmann, 1,381 × 10⁻²³ J/K ; constante des gaz parfaits, 8,314 J/(mol·K) ;</dd>
       <dt>T</dt><dd>température absolue, en kelvins.</dd>
     </dl>
-    <p>Dans une plage de température modérée, μ varie peu : on regroupe alors les constantes et l'on écrit la <b>forme pratique</b> <span class="hp">hors poly</span>, avec Q en J/mol :</p>
+    <p>Dans une plage de température modérée, μ varie peu : on regroupe alors les constantes et l'on écrit la <b>forme pratique</b>, avec Q en J/mol :</p>
     <div class="fx"><div class="big"><span class="eps"><span class="ed">ε̇</span></span> = <span class="mat">B</span>·<span class="sig">σ</span><sup><span class="mat">n</span></sup>·exp(−<span class="mat">Q</span>/R<span class="tau">T</span>)</div><p class="cap">acier modèle de ce cours : B = 1 MPa⁻⁵·s⁻¹ (σ en MPa), n = 5, Q = 300 kJ/mol</p></div>
     <h4>Deux droites pour tout mesurer</h4>
     <p>Prenons le logarithme népérien ln (la fonction réciproque de l'exponentielle) : <span class="m">ln <span class="ed">ε̇</span> = ln B + n·ln σ − Q/(RT)</span>. Deux conséquences :</p>
@@ -586,8 +576,8 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <p>D'où les formules pour dépouiller deux essais :</p>
     <div class="fx"><div class="row big" style="font-size:1.45rem"><span><span class="mat">n</span> = <span class="frac"><span>ln(<span class="ed">ε̇</span><sub>2</sub>/<span class="ed">ε̇</span><sub>1</sub>)</span><span>ln(σ<sub>2</sub>/σ<sub>1</sub>)</span></span></span><span><span class="mat">Q</span> = <span class="frac"><span>R·ln(<span class="ed">ε̇</span><sub>2</sub>/<span class="ed">ε̇</span><sub>1</sub>)</span><span>1/T<sub>1</sub> − 1/T<sub>2</sub></span></span></span></div><p class="cap">n : deux essais à même température ; Q : deux essais à même contrainte, températures en kelvins</p></div>
     <p><b>Exemple</b> (acier modèle). À 550 °C, 80 MPa donne 3,00 × 10⁻¹⁰ s⁻¹ et 120 MPa donne 2,28 × 10⁻⁹ s⁻¹ : <span class="m">n = ln(7,59)/ln(1,5) = 2,027/0,405 = <b>5,0</b></span>. Sous 100 MPa, 550 °C (823,15 K) donne 9,17 × 10⁻¹⁰ s⁻¹ et 600 °C (873,15 K) donne 1,13 × 10⁻⁸ s⁻¹ : <span class="m">Q</span> <span class="m">= 8,314 × ln(12,3)/(1/823,15 − 1/873,15)</span> <span class="m">= 8,314 × 2,51/(6,96 × 10⁻⁵)</span> <span class="m">≈ <b>300 kJ/mol</b></span>.</p>
-    <h4>La forme « glissement » du polycopié</h4>
-    <p>Pour le glissement thermiquement activé (p. 4), la contrainte abaisse directement la barrière, du travail mécanique b·σ<sub>e</sub>·A fourni par la force sur la dislocation :</p>
+    <h4>La forme « glissement »</h4>
+    <p>Pour le glissement thermiquement activé, la contrainte abaisse directement la barrière, du travail mécanique b·σ<sub>e</sub>·A fourni par la force sur la dislocation :</p>
     <div class="fx"><div class="row big" style="font-size:1.4rem"><span><span class="eps"><span class="ed">ε̇</span></span> = <span class="eps"><span class="ed">ε̇</span><sub>0</sub></span>·exp(−(<span class="mat">Q</span> − <span class="mat">b</span><span class="sig">σ<sub>e</sub></span><span class="mat">A</span>)/k<span class="tau">T</span>)</span><span>ou &nbsp;<span class="eps"><span class="ed">ε̇</span></span> = <span class="eps"><span class="ed">ε̇</span><sub>0</sub></span>(<span class="sig">σ<sub>e</sub></span>/<span class="mat">μ</span>)<sup>n</sup>·exp(−(<span class="mat">Q</span> − <span class="mat">b</span><span class="sig">σ<sub>e</sub></span><span class="mat">A</span>)/k<span class="tau">T</span>)</span></div><p class="cap">b : vecteur de Burgers ; A : aire d'activation, qui peut elle-même dépendre de la contrainte ; σ<sub>e</sub> : contrainte efficace (chapitre 4)</p></div>
     <div class="warn"><b>⚠️ Piège : toujours des kelvins dans l'exponentielle.</b> Avec des degrés Celsius, exp(−Q/RT) donne des résultats absurdes, et 1/T<sub>1</sub> − 1/T<sub>2</sub> n'a plus de sens.</div>
     <div class="warn"><b>⚠️ Piège : n et Q sont « apparents ».</b> Ils changent quand le mécanisme dominant change (chapitre 6). Une loi ajustée sur des essais courts à forte contrainte (n = 5) puis extrapolée aux faibles contraintes du service peut <b>sous-estimer</b> la vitesse réelle, si le fluage-diffusion (n = 1) y prend le relais : le mécanisme le plus rapide l'emporte toujours.</div>
@@ -609,7 +599,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">l'alpiniste et le bras de fer</span></div>
     <p>Rappelle-toi la ride dans le tapis : une <b>dislocation coin</b> est un demi-plan d'atomes en trop, glissé dans le cristal. Sous l'effet d'un cisaillement, elle avance dans son <b>plan de glissement</b>, rang après rang. À froid, quand elle rencontre un obstacle (un précipité, une autre dislocation), elle s'arrête : elle ne sait que glisser dans son plan. Les dislocations s'accumulent, s'enchevêtrent, et le métal <b>durcit</b>. C'est l'écrouissage.</p>
-    <p>À chaud, deux portes s'ouvrent (polycopié, p. 2) :</p>
+    <p>À chaud, deux portes s'ouvrent :</p>
     <ul>
       <li>le <b>glissement thermiquement activé</b> : l'agitation thermique donne à la dislocation les « coups de pouce » qui l'aident à franchir les obstacles faibles ;</li>
       <li>la <b>montée</b> : une lacune vient se loger au bas du demi-plan en trop, un atome du bord de ce demi-plan saute dans la lacune, et le demi-plan raccourcit d'un atome. La dislocation « monte » d'un cran, quitte son plan, et peut passer <b>par-dessus</b> l'obstacle, puis glisser à nouveau.</li>
@@ -637,7 +627,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <li>le <b>durcissement</b> : chaque pas de déformation crée de nouvelles dislocations, qui s'enchevêtrent ; σ<sub>i</sub> monte ;</li>
       <li>la <b>restauration</b> : avec le temps, grâce à la montée, les dislocations se réarrangent en parois et celles de signes opposés s'annihilent ; σ<sub>i</sub> descend.</li>
     </ul>
-    <p>Au début, le métal est « mou » : la déformation va vite, le durcissement gagne, σ<sub>i</sub> grimpe et la vitesse chute. C'est le <b>stade primaire</b>. Puis les deux équipes s'équilibrent : σ<sub>i</sub> se stabilise, la vitesse aussi. C'est le <b>stade secondaire</b>. Les dislocations s'y organisent en <b>cellules</b> et en <b>sous-grains</b> : des parois denses autour de zones presque vides (p. 3, figure 3). Cette sous-structure paraît figée, mais elle est <b>dynamique</b> : multiplication, empilement et annihilation s'y équilibrent sans cesse.</p>
+    <p>Au début, le métal est « mou » : la déformation va vite, le durcissement gagne, σ<sub>i</sub> grimpe et la vitesse chute. C'est le <b>stade primaire</b>. Puis les deux équipes s'équilibrent : σ<sub>i</sub> se stabilise, la vitesse aussi. C'est le <b>stade secondaire</b>. Les dislocations s'y organisent en <b>cellules</b> et en <b>sous-grains</b> : des parois denses autour de zones presque vides. Cette sous-structure paraît figée, mais elle est <b>dynamique</b> : multiplication, empilement et annihilation s'y équilibrent sans cesse.</p>
   </div>
 
   <div class="lab" id="m5">
@@ -655,23 +645,23 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">glissement, montée, et la relation <span class="ed">ε̇</span> = −r/h</span></div>
-    <div class="def"><b>📖 Glissement thermiquement activé</b> (polycopié, p. 2 et 4) : déplacement des dislocations par cisaillement dans leur plan de glissement, comme en plasticité ordinaire, mais où l'agitation thermique fournit une part importante de l'énergie nécessaire au franchissement des barrières. Il se produit pour des contraintes assez élevées. Température et contrainte y contribuent, par agitation thermique et par travail mécanique : <span class="m"><span class="ed">ε̇</span> = <span class="ed">ε̇</span><sub>0</sub>·exp(−(Q − bσ<sub>e</sub>A)/kT)</span> (chapitre 3).</div>
-    <div class="def"><b>📖 Montée</b> (p. 2, figure 2) : lorsque l'atome du cœur de la dislocation est absorbé par une lacune du réseau, la dislocation « monte » d'un cran. Ce mécanisme est partiellement contrôlé par la diffusion des lacunes.</div>
-    <div class="def"><b>📖 Contrainte interne et contrainte efficace</b> (p. 4) : la contrainte interne σ<sub>i</sub> est la résistance qu'opposent les dislocations déjà présentes ; la contrainte efficace σ<sub>e</sub> = σ − σ<sub>i</sub> est la part de la contrainte appliquée qui fait réellement avancer les dislocations (dans certains modèles, σ<sub>e</sub> = σ).</div>
+    <div class="def"><b>📖 Glissement thermiquement activé</b> : déplacement des dislocations par cisaillement dans leur plan de glissement, comme en plasticité ordinaire, mais où l'agitation thermique fournit une part importante de l'énergie nécessaire au franchissement des barrières. Il se produit pour des contraintes assez élevées. Température et contrainte y contribuent, par agitation thermique et par travail mécanique : <span class="m"><span class="ed">ε̇</span> = <span class="ed">ε̇</span><sub>0</sub>·exp(−(Q − bσ<sub>e</sub>A)/kT)</span> (chapitre 3).</div>
+    <div class="def"><b>📖 Montée</b> : lorsque l'atome du cœur de la dislocation est absorbé par une lacune du réseau, la dislocation « monte » d'un cran. Ce mécanisme est partiellement contrôlé par la diffusion des lacunes.</div>
+    <div class="def"><b>📖 Contrainte interne et contrainte efficace</b> : la contrainte interne σ<sub>i</sub> est la résistance qu'opposent les dislocations déjà présentes ; la contrainte efficace σ<sub>e</sub> = σ − σ<sub>i</sub> est la part de la contrainte appliquée qui fait réellement avancer les dislocations (dans certains modèles, σ<sub>e</sub> = σ).</div>
     <h4>Le bilan durcissement-restauration</h4>
     <p>La contrainte interne évolue pour deux raisons : la déformation la fait monter, le temps (la restauration) la fait baisser. On l'écrit avec des <b>dérivées partielles</b>, notées ∂ (« d rond ») : la variation d'une grandeur par rapport à une variable, toutes les autres étant figées.</p>
     <div class="fx"><div class="big" style="font-size:1.45rem">d<span class="gam">σ<sub>i</sub></span>/dt = <span class="frc">(∂σ<sub>i</sub>/∂ε)</span>·<span class="eps"><span class="ed">ε̇</span></span> + <span class="tau">(∂σ<sub>i</sub>/∂t)</span> = <span class="frc">h</span>·<span class="eps"><span class="ed">ε̇</span></span> + <span class="tau">r</span></div><p class="cap">h = ∂σ<sub>i</sub>/∂ε, à temps figé : le taux de durcissement (en MPa, positif) ; r = ∂σ<sub>i</sub>/∂t, à déformation figée : la vitesse de restauration (en MPa/s, négative)</p></div>
-    <p>Au stade secondaire, la sous-structure est stable : dσ<sub>i</sub>/dt = 0 (p. 4). D'où :</p>
+    <p>Au stade secondaire, la sous-structure est stable : dσ<sub>i</sub>/dt = 0. D'où :</p>
     <div class="fx"><div class="big"><span class="eps"><span class="ed">ε̇</span></span><sub>II</sub> = −<span class="tau">r</span>/<span class="frc">h</span></div><p class="cap">la vitesse secondaire est fixée par le rapport entre la vitesse de restauration et le taux de durcissement (relation de Bailey-Orowan)</p></div>
     <p><b>Exemple.</b> Avec h = 5 000 MPa et r = −5,0 × 10⁻⁶ MPa/s : <span class="m"><span class="ed">ε̇</span> = 5,0 × 10⁻⁶/5 000 = <b>1,0 × 10⁻⁹ s⁻¹</b></span>, soit environ 3,2 % par an. Si la restauration est trois fois plus rapide (température plus haute), la vitesse triple ; si des précipités la ralentissent dix fois, la vitesse est divisée par dix.</p>
     <h4>Ce que disent les modèles</h4>
-    <p>Divers modèles de fluage-dislocations conduisent presque tous à des équations du type (p. 4) :</p>
+    <p>Divers modèles de fluage-dislocations conduisent presque tous à des équations du type :</p>
     <div class="fx"><div class="row big" style="font-size:1.4rem"><span><span class="eps"><span class="ed">ε̇</span></span> = <span class="eps"><span class="ed">ε̇</span><sub>0</sub></span>(<span class="sig">σ<sub>e</sub></span>/<span class="mat">μ</span>)<sup>n</sup>·exp(−<span class="mat">Q</span>/k<span class="tau">T</span>)</span><span>ou &nbsp;<span class="eps"><span class="ed">ε̇</span></span> = <span class="eps"><span class="ed">ε̇</span><sub>0</sub></span>(<span class="sig">σ<sub>e</sub></span>/<span class="mat">μ</span>)<sup>n</sup>·<span class="frac"><span><span class="mat">μb³</span></span><span>k<span class="tau">T</span></span></span>·exp(−<span class="mat">Q</span>/k<span class="tau">T</span>)</span></div><p class="cap">Q proche de l'énergie d'activation de l'autodiffusion (métaux purs) : la montée dépend de la diffusion ; n voisin de 3 pour les métaux purs selon les modèles (4 à 5 mesurés), plus élevé pour les alliages à phase dispersée</p></div>
-    <p>Pour le fer α (ferrite), l'énergie d'activation de l'autodiffusion vaut environ 250 kJ/mol : mesurer Q ≈ 250 kJ/mol en fluage, c'est signer un fluage contrôlé par la montée <span class="hp">hors poly</span>.</p>
+    <p>Pour le fer α (ferrite), l'énergie d'activation de l'autodiffusion vaut environ 250 kJ/mol : mesurer Q ≈ 250 kJ/mol en fluage, c'est signer un fluage contrôlé par la montée.</p>
     <h4>Les cellules et les sous-grains</h4>
-    <p>Au stade secondaire, la taille des cellules est d'autant plus petite que la contrainte est élevée (p. 3). Les mesures donnent une taille inversement proportionnelle à la contrainte, de l'ordre de 10 à 20 fois μb/σ <span class="hp">hors poly</span> : pour un acier à 550 °C (μ ≈ 64 GPa, b ≈ 0,25 nm) sous 70 MPa, quelques micromètres.</p>
+    <p>Au stade secondaire, la taille des cellules est d'autant plus petite que la contrainte est élevée. Les mesures donnent une taille inversement proportionnelle à la contrainte, de l'ordre de 10 à 20 fois μb/σ : pour un acier à 550 °C (μ ≈ 64 GPa, b ≈ 0,25 nm) sous 70 MPa, quelques micromètres.</p>
     <div class="warn"><b>⚠️ Piège : restauration n'est pas recristallisation.</b> La restauration réarrange et annihile des dislocations sans créer de nouveaux grains. La recristallisation fait germer de nouveaux grains sans défauts : c'est un autre phénomène, à plus haute température ou après forte déformation.</div>
-    <div class="warn"><b>⚠️ Piège : sans restauration, pas de stade secondaire.</b> À basse température, la restauration est presque nulle : le durcissement l'emporte, σ<sub>i</sub> rattrape σ et la déformation s'arrête après un petit stade primaire. Le fluage s'épuise (on parle de fluage logarithmique) <span class="hp">hors poly</span>. Essaie 400 °C dans la manipulation 5.</div>
+    <div class="warn"><b>⚠️ Piège : sans restauration, pas de stade secondaire.</b> À basse température, la restauration est presque nulle : le durcissement l'emporte, σ<sub>i</sub> rattrape σ et la déformation s'arrête après un petit stade primaire. Le fluage s'épuise (on parle de fluage logarithmique). Essaie 400 °C dans la manipulation 5.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « h travaille en marchant, r travaille en dormant »</b>. Le durcissement h agit à chaque pas de déformation, la restauration r agit avec le temps. Au stade II, ils font match nul : <span class="ed">ε̇</span> = −r/h.</div>
     <div class="weld"><b>🔥 Précipités, soudage et vieillissement</b>
       <p>Les aciers résistant au fluage (sujet 2.12) misent sur des <b>précipités fins et stables</b> : carbures de chrome M<sub>23</sub>C<sub>6</sub> et carbonitrures de vanadium et de niobium MX dans le P91 (M désigne un métal, X le carbone ou l'azote). Ils bloquent les dislocations et épinglent les parois des sous-grains : la restauration ralentit, et la vitesse de fluage avec elle. Mais le cycle thermique du soudage peut dissoudre ou faire grossir ces précipités dans la ZAT, et le revenu après soudage doit restaurer une microstructure stable. En service, au fil des décennies, les précipités grossissent lentement (coalescence) : l'acier vieillit et flue plus vite (cours 2).</p>
@@ -689,7 +679,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">les fourmis déménageuses</span></div>
-    <p>À très haute température et sous faible contrainte, les dislocations bougent à peine. Le métal flue pourtant encore : ce sont les <b>atomes eux-mêmes</b> qui se déplacent, un à un, par diffusion. C'est le <b>fluage-diffusion</b> (polycopié, p. 3 et 5).</p>
+    <p>À très haute température et sous faible contrainte, les dislocations bougent à peine. Le métal flue pourtant encore : ce sont les <b>atomes eux-mêmes</b> qui se déplacent, un à un, par diffusion. C'est le <b>fluage-diffusion</b>.</p>
     <p>Regarde un grain tiré verticalement. Sur ses faces du haut et du bas, la traction écarte les atomes : il y est plus facile de créer des lacunes. Sur ses faces latérales, non tirées, il y en a moins. Ce déséquilibre fait <b>diffuser les lacunes</b> des faces tirées vers les flancs… et donc les <b>atomes en sens inverse</b>, des flancs vers les faces tirées. Comme une colonne de fourmis qui viderait les côtés pour empiler sur le dessus et le dessous : le grain s'allonge dans le sens de la traction et s'amincit.</p>
     <p>Les atomes ont deux chemins :</p>
     <ul>
@@ -717,8 +707,8 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les lois de Nabarro et de Coble</span></div>
-    <div class="def"><b>📖 Fluage-diffusion</b> (polycopié, p. 3) : déformation due principalement aux mécanismes diffusionnels, aux hautes températures et aux faibles contraintes. Le transport de matière se fait par diffusion en volume (fluage de Nabarro, aux plus hautes températures) ou aux joints de grains (fluage de Coble, aux températures plus basses).</div>
-    <p>Pour un grain de taille d sous une traction uniaxiale, le polycopié donne (p. 5), le signe ∝ signifiant « proportionnel à » :</p>
+    <div class="def"><b>📖 Fluage-diffusion</b> : déformation due principalement aux mécanismes diffusionnels, aux hautes températures et aux faibles contraintes. Le transport de matière se fait par diffusion en volume (fluage de Nabarro, aux plus hautes températures) ou aux joints de grains (fluage de Coble, aux températures plus basses).</div>
+    <p>Pour un grain de taille d sous une traction uniaxiale, on obtient, le signe ∝ signifiant « proportionnel à » :</p>
     <div class="fx"><div class="row big" style="font-size:1.4rem"><span>Coble : &nbsp;<span class="eps"><span class="ed">ε̇</span></span> ∝ <span class="frac"><span><span class="mat">D<sub>j</sub></span><span class="mat">δ</span><span class="sig">σ</span><span class="mat">b</span>³</span><span><span class="mat">d</span>³k<span class="tau">T</span></span></span></span><span>Nabarro : &nbsp;<span class="eps"><span class="ed">ε̇</span></span> ∝ <span class="frac"><span><span class="mat">D</span><span class="sig">σ</span><span class="mat">b</span>³</span><span><span class="mat">d</span>²k<span class="tau">T</span></span></span></span></div><p class="cap">avec D<sub>j</sub> = D<sub>j0</sub>·exp(−Q<sub>Dj</sub>/kT) et D = D<sub>0</sub>·exp(−Q<sub>D</sub>/kT)</p></div>
     <dl class="syms">
       <dt>d</dt><dd>taille de grain (m) ;</dd>
@@ -727,10 +717,10 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <dt>D<sub>j</sub>, Q<sub>Dj</sub></dt><dd>coefficient d'autodiffusion du métal aux joints (m²/s) et son énergie d'activation ;</dd>
       <dt>D, Q<sub>D</sub></dt><dd>coefficient d'autodiffusion en volume et son énergie d'activation ; D<sub>0</sub> et D<sub>j0</sub> sont les facteurs pré-exponentiels.</dd>
     </dl>
-    <p>Dans les deux cas, la vitesse augmente quand la taille de grain diminue, avec un exposant différent (p. 5) : <b>d⁻² pour Nabarro, d⁻³ pour Coble</b>. Et dans les deux cas, <span class="ed">ε̇</span> ∝ σ : l'exposant de contrainte vaut <b>n = 1</b>.</p>
-    <h4>Pourquoi d² et d³ ? <span class="hp">hors poly</span></h4>
+    <p>Dans les deux cas, la vitesse augmente quand la taille de grain diminue, avec un exposant différent : <b>d⁻² pour Nabarro, d⁻³ pour Coble</b>. Et dans les deux cas, <span class="ed">ε̇</span> ∝ σ : l'exposant de contrainte vaut <b>n = 1</b>.</p>
+    <h4>Pourquoi d² et d³ ? <span class="hp">complément</span></h4>
     <p>Le flux d'atomes est poussé par une différence de concentration en lacunes, proportionnelle à σ, sur une distance de l'ordre de d : il varie comme D·σ/d. Pour allonger le grain (de volume d³) d'une fraction ε, il faut déplacer un volume de matière proportionnel à ε·d³, à travers une section de l'ordre de d² quand la diffusion passe par le volume : <span class="ed">ε̇</span>·d³ ∝ (Dσ/d)·d², d'où <span class="ed">ε̇</span> ∝ Dσ/d². Le long des joints, la section offerte n'est plus d² mais δ·d, une fine couche : on perd un facteur d/δ, d'où <span class="ed">ε̇</span> ∝ D<sub>j</sub>δσ/d³.</p>
-    <h4>Qui l'emporte, Nabarro ou Coble ? <span class="hp">hors poly</span></h4>
+    <h4>Qui l'emporte, Nabarro ou Coble ? <span class="hp">complément</span></h4>
     <p>Avec les coefficients numériques usuels, le rapport des deux vitesses vaut :</p>
     <div class="fx"><div class="row big" style="font-size:1.45rem"><span><span class="frac"><span><span class="ed">ε̇</span><sub>Coble</sub></span><span><span class="ed">ε̇</span><sub>Nabarro</sub></span></span> = <span class="frac"><span>π<span class="mat">δD<sub>j</sub></span></span><span><span class="mat">d</span>·<span class="mat">D</span></span></span></span><span><span class="mat">d*</span> = <span class="frac"><span>π<span class="mat">δD<sub>j</sub></span></span><span><span class="mat">D</span></span></span></span></div><p class="cap">Coble domine pour d &lt; d*, Nabarro pour d &gt; d* ; comme Q<sub>Dj</sub> ≈ 0,4 à 0,6 Q<sub>D</sub>, d* diminue vite quand la température monte</p></div>
     <p><b>Exemple</b> (métal modèle de la manipulation 6, à 0,7 T<sub>f</sub>) : D ≈ 1,0 × 10⁻¹⁶ m²/s et δD<sub>j</sub> ≈ 3,7 × 10⁻²⁰ m³/s, d'où <span class="m">d*</span> <span class="m">= π × 3,7 × 10⁻²⁰/1,0 × 10⁻¹⁶</span> <span class="m">≈ 1,2 × 10⁻³ m</span> : jusqu'à des grains de 1 mm, c'est Coble qui domine. À 0,9 T<sub>f</sub>, d* tombe à environ 30 µm : un grain de 100 µm flue alors surtout par Nabarro.</p>
@@ -754,7 +744,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le pays du fluage</span></div>
     <p>Les mécanismes des chapitres 4 et 5 ne s'excluent pas : ils fonctionnent <b>en même temps</b>, et leurs vitesses s'ajoutent. Mais leurs vitesses diffèrent souvent de plusieurs ordres de grandeur : en pratique, <b>le plus rapide gagne</b> et fixe le comportement.</p>
-    <p>Pour savoir qui gagne, on dessine une <b>carte</b> (polycopié, p. 3, figure 4). En abscisse, la température homologue T/T<sub>f</sub> ; en ordonnée, la <b>contrainte réduite</b> σ/μ, en échelle logarithmique. La carte se découpe en provinces :</p>
+    <p>Pour savoir qui gagne, on dessine une <b>carte</b>. En abscisse, la température homologue T/T<sub>f</sub> ; en ordonnée, la <b>contrainte réduite</b> σ/μ, en échelle logarithmique. La carte se découpe en provinces :</p>
     <ul>
       <li>tout en haut, au-delà de σ/μ ≈ 10⁻², le <b>glissement des dislocations</b> : la contrainte dépasse la limite d'élasticité, c'est la plasticité ordinaire ;</li>
       <li>en bas à gauche, le <b>domaine élastique</b> : trop froid, ou pas assez chargé, rien ne bouge à l'échelle d'une vie ;</li>
@@ -792,8 +782,8 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">construire, lire, et déplacer les frontières</span></div>
-    <div class="def"><b>📖 Carte des mécanismes de déformation</b> (polycopié, p. 3) : représentation, en fonction de la température réduite T/T<sub>f</sub> et de la contrainte réduite σ/μ, des domaines où chaque mécanisme de fluage est dominant. Les axes réduits permettent de comparer des métaux de même structure cristalline, dont les cartes se ressemblent.</div>
-    <h4>Comment on la construit <span class="hp">hors poly</span></h4>
+    <div class="def"><b>📖 Carte des mécanismes de déformation</b> : représentation, en fonction de la température réduite T/T<sub>f</sub> et de la contrainte réduite σ/μ, des domaines où chaque mécanisme de fluage est dominant. Les axes réduits permettent de comparer des métaux de même structure cristalline, dont les cartes se ressemblent.</div>
+    <h4>Comment on la construit <span class="hp">complément</span></h4>
     <p>Pour chaque point (T/T<sub>f</sub>, σ/μ), on calcule la vitesse de chaque mécanisme avec sa loi (chapitres 3 à 5) ; le mécanisme dont la vitesse est la plus grande donne sa couleur au point. Une <b>frontière</b> est la ligne où deux mécanismes ont la même vitesse. La frontière du domaine élastique est conventionnelle : c'est la ligne où la vitesse totale atteint un seuil jugé négligeable, par exemple 10⁻¹⁰ s⁻¹ (0,3 % par an). Changer ce seuil déplace la frontière : « élastique » veut dire « trop lent pour compter à l'échelle du service ».</p>
     <p>Quelques frontières se lisent directement dans les lois :</p>
     <ul>
@@ -801,7 +791,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <li><b>Nabarro / Coble</b> : le rapport ne dépend pas de σ ; la frontière est <b>verticale</b>, à la température où d* = d ;</li>
       <li>des <b>grains plus fins</b> étendent les deux provinces du fluage-diffusion vers le haut, Coble surtout.</li>
     </ul>
-    <h4>Les leviers pour résister au fluage <span class="hp">hors poly</span></h4>
+    <h4>Les leviers pour résister au fluage <span class="hp">complément</span></h4>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Levier</th><th>Mécanisme visé</th><th>Exemples</th></tr>
       <tr><td>Température de fusion élevée</td><td>tous : à T donnée, T/T<sub>f</sub> baisse</td><td>alliages de nickel, de cobalt ; métaux réfractaires (W, Mo)</td></tr>
@@ -810,7 +800,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <tr><td>Précipités fins et stables</td><td>bloquent les dislocations, freinent la restauration</td><td>carbonitrures de V et Nb du P91 ; phase γ′ (« gamma prime ») Ni<sub>3</sub>(Al,Ti) des superalliages</td></tr>
       <tr><td>Gros grains, grains colonnaires, monocristaux</td><td>fluage-diffusion, glissement et cavités aux joints</td><td>aubes de turbine monocristallines ; nuances austénitiques « H »</td></tr>
     </table></div>
-    <h4>Les aciers résistant au fluage, en ordres de grandeur <span class="hp">hors poly</span></h4>
+    <h4>Les aciers résistant au fluage, en ordres de grandeur <span class="hp">complément</span></h4>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Famille</th><th>Exemples de nuances</th><th>Ordre de grandeur de la température maximale de service</th></tr>
       <tr><td>Aciers non alliés pour appareils à pression</td><td>P265GH, P355GH</td><td class="n">≈ 400 à 425 °C</td></tr>
@@ -1078,14 +1068,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
   <p class="status" id="checkMsg"></p>
 
-  <div class="meta">🔭 <b>Au prochain épisode, cours 2 : endommagement et durée de vie en fluage.</b> Le stade tertiaire y passe au microscope : des cavités rondes ou en coin naissent aux joints de grains, grossissent et se rejoignent jusqu'à la rupture intergranulaire (polycopié, p. 6 et 7), tandis que la microstructure évolue (coalescence des précipités, « rafting » des superalliages). On y apprendra surtout à <b>prévoir la durée de vie</b> à partir d'essais courts : la relation de Monkman-Grant (le produit <span class="ed">ε̇</span><sub>min</sub>·t<sub>r</sub> de l'exercice 2), le <b>paramètre de Larson-Miller</b>, cousin du paramètre de Hollomon-Jaffe du revenu, puis les modèles de projection θ, de Rabotnov-Kachanov et de Wilshire (p. 8 à 12). Un dernier chapitre sera consacré au <b>fluage des joints soudés</b> : fissuration de type IV, coefficients de réduction des soudures et traitements thermiques.</div>
+  <div class="meta">🔭 <b>Au prochain épisode, cours 2 : endommagement et durée de vie en fluage.</b> Le stade tertiaire y passe au microscope : des cavités rondes ou en coin naissent aux joints de grains, grossissent et se rejoignent jusqu'à la rupture intergranulaire, tandis que la microstructure évolue (coalescence des précipités, « rafting » des superalliages). On y apprendra surtout à <b>prévoir la durée de vie</b> à partir d'essais courts : la relation de Monkman-Grant (le produit <span class="ed">ε̇</span><sub>min</sub>·t<sub>r</sub> de l'exercice 2), le <b>paramètre de Larson-Miller</b>, cousin du paramètre de Hollomon-Jaffe du revenu, puis les modèles de projection θ, de Rabotnov-Kachanov et de Wilshire. Un dernier chapitre sera consacré au <b>fluage des joints soudés</b> : fissuration de type IV, coefficients de réduction des soudures et traitements thermiques.</div>
 </div>
 </section>
 </main>
 
 <footer>
 <div class="wrap">
-  <p>Cours 1 sur 2 de la série « Fluage : la lente coulée des métaux chauds ». Notations alignées sur le polycopié de référence (Partie III : Fluage, endommagement et rupture sous charge à haute température) ; pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 1 sur 2 de la série « Fluage : la lente coulée des métaux chauds ». Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1853,7 +1843,7 @@ function fmtD(d){return d<1e-5?nf(d*1e6,1)+" µm":d<1e-3?nf(d*1e6,0)+" µm":nf(d
   const box=$("#quiz");if(!box)return;
   const E=EDH;
   const Q=[
-    {q:"Le fluage, c'est :",o:["une rupture sous chargement cyclique","une déformation plastique continue sous charge constante, à haute température","une déformation élastique instantanée","une corrosion à chaud"],c:1,e:"Définition du polycopié (p. 1) : une déformation plastique <b>continue</b> sous charge ou contrainte imposée, généralement à haute température. La rupture sous cycles, c'est la fatigue."},
+    {q:"Le fluage, c'est :",o:["une rupture sous chargement cyclique","une déformation plastique continue sous charge constante, à haute température","une déformation élastique instantanée","une corrosion à chaud"],c:1,e:"Définition : une déformation plastique <b>continue</b> sous charge ou contrainte imposée, généralement à haute température. La rupture sous cycles, c'est la fatigue."},
     {q:"Une gouttière en plomb (T<sub>f</sub> = 327,5 °C) à 20 °C est à une température homologue d'environ :",o:["0,06","0,9","0,49","1,6"],c:2,e:"En kelvins : 293/601 ≈ <b>0,49</b>, au-delà de 0,4 T<sub>f</sub> : le plomb flue à température ambiante. 0,06 est le piège du calcul en degrés Celsius."},
     {q:"Un boulon de bride chaude perd peu à peu son serrage : c'est",o:["de la relaxation","de la fatigue","du fluage tertiaire","de l'écrouissage"],c:0,e:"Allongement bloqué, contrainte qui baisse : la <b>relaxation</b>. Mêmes mécanismes que le fluage, conditions inverses."},
     {q:"Au stade secondaire du fluage :",o:["la déformation reste constante","la vitesse de déformation est nulle","la vitesse est minimale et à peu près constante","la vitesse augmente"],c:2,e:"La vitesse passe par un <b>minimum très plat</b>, "+E+"<sub>min</sub> : la courbe ε(t) est presque une droite."},
@@ -1861,10 +1851,10 @@ function fmtD(d){return d<1e-5?nf(d*1e6,1)+" µm":d<1e-3?nf(d*1e6,0)+" µm":nf(d
     {q:"Loi de Norton avec n = 5 : doubler la contrainte multiplie la vitesse de fluage par :",o:["2","10","25","32"],c:3,e:"2⁵ = <b>32</b>. Avec n = 1 (fluage-diffusion), ce ne serait que 2."},
     {q:"Dans exp(−Q/RT), la température s'exprime en :",o:["kelvins","degrés Celsius","peu importe","degrés Fahrenheit"],c:0,e:"Toujours en <b>kelvins</b>, la température absolue : T(K) = T(°C) + 273,15."},
     {q:"Sur un diagramme d'Arrhenius (ln "+E+" en fonction de 1/T), la pente de la droite vaut :",o:["n","−Q/R","Q·R","ln σ"],c:1,e:"ln "+E+" = ln B + n·ln σ − Q/(RT) : pente <b>−Q/R</b>. La pente n se lit sur le tracé log-log, à température fixée."},
-    {q:"La montée d'une dislocation coin a besoin :",o:["d'une contrainte supérieure à R<sub>m</sub>","d'un joint de grains","de lacunes, donc de diffusion","d'une température inférieure à 0,2 T<sub>f</sub>"],c:2,e:"Le demi-plan raccourcit quand l'atome du cœur saute dans une <b>lacune</b> (p. 2, figure 2) : la montée est contrôlée par la diffusion, d'où Q ≈ Q d'autodiffusion."},
-    {q:"Au stade secondaire, avec h le taux de durcissement et r la vitesse de restauration (négative), la vitesse de fluage vaut :",o:["−r/h","h/r","h·r","r − h"],c:0,e:"dσ<sub>i</sub>/dt = h"+E+" + r = 0, donc "+E+" = <b>−r/h</b> (p. 4) : plus la restauration est rapide, plus le fluage est rapide."},
+    {q:"La montée d'une dislocation coin a besoin :",o:["d'une contrainte supérieure à R<sub>m</sub>","d'un joint de grains","de lacunes, donc de diffusion","d'une température inférieure à 0,2 T<sub>f</sub>"],c:2,e:"Le demi-plan raccourcit quand l'atome du cœur saute dans une <b>lacune</b> : la montée est contrôlée par la diffusion, d'où Q ≈ Q d'autodiffusion."},
+    {q:"Au stade secondaire, avec h le taux de durcissement et r la vitesse de restauration (négative), la vitesse de fluage vaut :",o:["−r/h","h/r","h·r","r − h"],c:0,e:"dσ<sub>i</sub>/dt = h"+E+" + r = 0, donc "+E+" = <b>−r/h</b> : plus la restauration est rapide, plus le fluage est rapide."},
     {q:"On divise la taille de grain par 2. La vitesse du fluage de Coble est :",o:["multipliée par 2","multipliée par 4","multipliée par 8","divisée par 8"],c:2,e:"Coble varie en 1/d³ : 2³ = <b>×8</b>. Nabarro, en 1/d², serait multiplié par 4."},
-    {q:"Sur la carte des mécanismes, sous très faible contrainte et tout près de la fusion, domine :",o:["le domaine élastique","le glissement des dislocations","le fluage de Coble","le fluage de Nabarro"],c:3,e:"Aux plus hautes températures, la diffusion en volume l'emporte : <b>Nabarro</b>. Coble domine aux températures plus modérées (p. 3, figure 4)."}
+    {q:"Sur la carte des mécanismes, sous très faible contrainte et tout près de la fusion, domine :",o:["le domaine élastique","le glissement des dislocations","le fluage de Coble","le fluage de Nabarro"],c:3,e:"Aux plus hautes températures, la diffusion en volume l'emporte : <b>Nabarro</b>. Coble domine aux températures plus modérées."}
   ];
   let score=0,done=0;const sc=$("#qzScore");
   function upd(){let t="Score : "+score+" / "+Q.length;if(done===Q.length)t+=score>=10?"  ·  🎉 prêt pour le cours 2":score>=7?"  ·  relis les explications":"  ·  refais un tour des chapitres";sc.textContent=t;}

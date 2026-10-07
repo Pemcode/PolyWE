@@ -316,24 +316,11 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div><div class="f">ductile : mat, fibreux</div>La rupture ductile fait germer, croître et se rejoindre des cavités autour des inclusions : cassure <b>mate, grise, fibreuse</b>, cupules au microscope, <b>lèvres de cisaillement</b> à 45° près des surfaces libres. Elle absorbe beaucoup d'énergie.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> de référence (Partie I : Mécanique de la rupture). Ce cours couvre le § II.B « L'essai de résilience », <b>pages 11 et 12, figures 15 à 17</b>, et s'appuie sur les états de contrainte plane et de déformation plane des pages 19 et 20 :
-    <div class="tbl-wrap"><table class="data">
-      <tr><th>Chapitre du cours</th><th>Polycopié</th></tr>
-      <tr><td>1 Le mouton-pendule</td><td>p. 11, § II.B.1, figure 15</td></tr>
-      <tr><td>2 Entaille, choc et froid</td><td>p. 11, § II.B.2 ; p. 19 et 20, figures 24 et 25 ; mécanisme <span class="hp">hors poly</span></td></tr>
-      <tr><td>3 La courbe de transition</td><td>p. 11 et 12, § II.B.2, figures 16 et 17</td></tr>
-      <tr><td>4 Les températures de transition</td><td>p. 12, figure 17 (TK35, TK50) ; T<sub>27J</sub> <span class="hp">hors poly</span></td></tr>
-      <tr><td>5 Ce qui déplace la transition</td><td>p. 11 (CC et CFC) ; facteurs métallurgiques <span class="hp">hors poly</span></td></tr>
-      <tr><td>6 Charpy et soudage</td><td><span class="hp">hors poly</span> : nuances d'acier, qualifications, histoire</td></tr>
-    </table></div>
-    Le polycopié consacre deux pages à cet essai ; ce cours les complète largement (étiquette <span class="hp">hors poly</span>), car la résilience est l'une des propriétés les plus utilisées en soudage : nuances d'acier, certificats, qualifications de modes opératoires.
-  </div>
-
   <div class="def"><b>🔎 Quatre remarques de lecture</b>
-    <p><b>1. Les ordres de grandeur de la page 11.</b> Le polycopié indique des énergies « de 10³ à 10⁴ J/m² pour les métaux et alliages ». Pour la résilience Charpy d'un acier, sa propre figure 17 monte à 150 J/cm², soit 1,5 × 10⁶ J/m² (1 J/cm² = 10⁴ J/m²). Les valeurs de la page 11 ne correspondent donc pas à la résilience Charpy des aciers. Les valeurs usuelles des aciers de construction vont d'environ 5 à 300 J/cm², soit 5 × 10⁴ à 3 × 10⁶ J/m².</p>
-    <p><b>2. KC ou K<sub>C</sub> ?</b> Le polycopié note la résilience KC = W<sub>r</sub>/A (en J/cm²), avec A l'aire du ligament rompu. À ne confondre ni avec la <b>ténacité K<sub>C</sub></b> (en MPa·√m, cours 3 et 4), ni avec l'allongement A du cours 1. Ce cours note cette aire <b>S</b>.</p>
+    <p><b>1. Ordres de grandeur.</b> La résilience Charpy des aciers de construction va d'environ 5 à 300 J/cm², soit 5 × 10⁴ à 3 × 10⁶ J/m² (1 J/cm² = 10⁴ J/m²) : vérifie toujours l'unité d'une valeur de résilience avant de la comparer.</p>
+    <p><b>2. KC ou K<sub>C</sub> ?</b> La résilience se note KC = W<sub>r</sub>/S (en J/cm²), avec S l'aire du ligament rompu, parfois notée A. À ne confondre ni avec la <b>ténacité K<sub>C</sub></b> (en MPa·√m, cours 3 et 4), ni avec l'allongement A du cours 1.</p>
     <p><b>3. KCV ou KV ?</b> KCV, en J/cm², est l'ancienne notation française (énergie divisée par l'aire). La norme actuelle, EN ISO 148-1, et toutes les normes d'aciers expriment l'<b>énergie absorbée KV</b>, directement en joules, sans division. Pour une éprouvette normale, S = 0,8 cm², donc KV = 0,8 × KCV (chapitre 4).</p>
-    <p><b>4. La figure 17.</b> Elle superpose l'échelle d'énergie et l'échelle de cristallinité comme si elles variaient ensemble : 50 % de surface cristalline y tombe exactement à mi-hauteur de la courbe d'énergie. C'est une simplification commode : en pratique, les deux grandeurs sont mesurées séparément, et la température à 50 % de cristallinité ne coïncide pas exactement avec celle de l'énergie moyenne. Le titre de la figure parle de transition « fragile-ductile », le paragraphe de transition « ductile-fragile » : c'est le même phénomène, vu dans les deux sens.</p>
+    <p><b>4. Énergie et cristallinité.</b> Ce cours, comme beaucoup de schémas, fait coïncider les deux échelles : 50 % de surface cristalline y tombe exactement à mi-hauteur de la courbe d'énergie. C'est une simplification commode : en pratique, les deux grandeurs sont mesurées séparément, et la température à 50 % de cristallinité ne coïncide pas exactement avec celle de l'énergie moyenne. On dit indifféremment transition « fragile-ductile » ou « ductile-fragile » : c'est le même phénomène, vu dans les deux sens.</p>
   </div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
@@ -369,7 +356,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la balançoire qui casse une barre</span></div>
     <p>Lâche une balançoire depuis une certaine hauteur sans la pousser : elle remonte de l'autre côté presque à la même hauteur. Pose maintenant sur son chemin une barre de chocolat. La balançoire la casse au passage et remonte <b>moins haut</b> : elle a laissé une partie de son énergie dans la rupture de la barre. Plus la barre était difficile à casser, plus la balançoire a perdu de hauteur.</p>
-    <p>L'<b>essai Charpy</b>, du nom de l'ingénieur français Georges Charpy qui l'a mis au point vers 1901, applique exactement cette idée (polycopié, p. 11, figure 15). Un lourd marteau, le <b>mouton</b>, est fixé au bout d'un bras qui pivote : c'est un <b>mouton-pendule</b>. Son <b>couteau</b> vient frapper, au point le plus bas de sa course, une petite barre posée sur deux appuis : l'<b>éprouvette</b>, entaillée du côté opposé au choc. On la casse d'un seul coup, en flexion. On lit sur un cadran la hauteur de remontée, et on en déduit l'énergie absorbée par la rupture.</p>
+    <p>L'<b>essai Charpy</b>, du nom de l'ingénieur français Georges Charpy qui l'a mis au point vers 1901, applique exactement cette idée. Un lourd marteau, le <b>mouton</b>, est fixé au bout d'un bras qui pivote : c'est un <b>mouton-pendule</b>. Son <b>couteau</b> vient frapper, au point le plus bas de sa course, une petite barre posée sur deux appuis : l'<b>éprouvette</b>, entaillée du côté opposé au choc. On la casse d'un seul coup, en flexion. On lit sur un cadran la hauteur de remontée, et on en déduit l'énergie absorbée par la rupture.</p>
     <p>Cette énergie s'appelle l'<b>énergie de rupture en flexion par choc</b>, et, rapportée à la section rompue, la <b>résilience</b> (du latin <i>resilire</i>, « rebondir »). C'est une mesure simple, rapide et bon marché de la capacité d'un matériau à encaisser un choc sans casser net.</p>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Éprouvette</th><th>Énergie absorbée typique</th><th>Le marteau remonte…</th></tr>
@@ -398,12 +385,12 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">le bilan d'énergie et l'éprouvette normalisée</span></div>
     <h4>Le bilan d'énergie</h4>
-    <p>Repérons la position du bras par son angle θ (« thêta ») avec la verticale descendante. Le marteau, de masse M, au bout d'un bras de longueur R, est alors à une hauteur <span class="m">h = R(1 − cos θ)</span> au-dessus de son point le plus bas. Son énergie potentielle vaut <span class="m">M·g·h</span>, avec g = 9,81 m/s² l'accélération de la pesanteur. Entre le lâcher (θ<sub>i</sub>, i pour initial) et la remontée (θ<sub>f</sub>, f pour final), l'énergie perdue est celle de la rupture (polycopié, p. 11) :</p>
+    <p>Repérons la position du bras par son angle θ (« thêta ») avec la verticale descendante. Le marteau, de masse M, au bout d'un bras de longueur R, est alors à une hauteur <span class="m">h = R(1 − cos θ)</span> au-dessus de son point le plus bas. Son énergie potentielle vaut <span class="m">M·g·h</span>, avec g = 9,81 m/s² l'accélération de la pesanteur. Entre le lâcher (θ<sub>i</sub>, i pour initial) et la remontée (θ<sub>f</sub>, f pour final), l'énergie perdue est celle de la rupture :</p>
     <div class="fx"><div class="big"><span class="eps">W<sub>r</sub></span> = <span class="frc">M·g</span>·<span class="mat">R</span>·(cos <span class="mat">θ<sub>f</sub></span> − cos <span class="mat">θ<sub>i</sub></span>)</div><p class="cap">W<sub>r</sub> en joules (J) avec M en kg, g en m/s², R en m ; θ mesuré depuis la verticale descendante</p></div>
     <p><b>Exemple.</b> M = 20 kg, R = 0,8 m, d'où <span class="m">M·g·R = 20 × 9,81 × 0,8 = 157,0 J</span>. Lâché de θ<sub>i</sub> = 150°, le marteau dispose de <span class="m">157,0 × (1 − cos 150°) = 157,0 × 1,866 = <b>293 J</b></span> : c'est une machine dite « de 300 J ». Il frappe à la vitesse <span class="m">v = √(2gR(1 − cos θ<sub>i</sub>)) = √(2 × 9,81 × 0,8 × 1,866) = <b>5,4 m/s</b></span>, soit près de 20 km/h. S'il remonte à θ<sub>f</sub> = 120° : <span class="m">W<sub>r</sub> = 157,0 × (cos 120° − cos 150°) = 157,0 × (−0,500 + 0,866) = <b>57,5 J</b></span>.</p>
-    <div class="def"><b>📖 KV, KCV et KCU</b>. La norme EN ISO 148-1 note <b>KV</b> l'énergie absorbée par une éprouvette entaillée en V, en joules (KU pour une entaille en U). Le polycopié (p. 11) divise cette énergie par l'aire S du ligament rompu : c'est la <b>résilience</b> <span class="m">KC = W<sub>r</sub>/S</span>, en J/cm², notée <b>KCV</b> ou <b>KCU</b> selon la forme de l'entaille. Sur l'exemple, <span class="m">KCV = 57,5/0,8 = 71,9 J/cm²</span>.</div>
+    <div class="def"><b>📖 KV, KCV et KCU</b>. La norme EN ISO 148-1 note <b>KV</b> l'énergie absorbée par une éprouvette entaillée en V, en joules (KU pour une entaille en U). Divisée par l'aire S du ligament rompu, cette énergie donne la <b>résilience</b> <span class="m">KC = W<sub>r</sub>/S</span>, en J/cm², notée <b>KCV</b> ou <b>KCU</b> selon la forme de l'entaille. Sur l'exemple, <span class="m">KCV = 57,5/0,8 = 71,9 J/cm²</span>.</div>
 
-    <h4>L'éprouvette normalisée <span class="hp">hors poly</span></h4>
+    <h4>L'éprouvette normalisée <span class="hp">complément</span></h4>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Élément</th><th>Valeur (EN ISO 148-1)</th></tr>
       <tr><td>Barreau</td><td class="n">10 × 10 × 55 mm</td></tr>
@@ -461,19 +448,19 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m2svg" role="img" aria-label="Contrainte de glissement et contrainte de clivage en fonction de la température, et leur croisement"></svg>
     <div class="readout" id="m2r"></div>
     <p class="status" id="m2msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">Modèle illustratif <span class="hp">hors poly</span>, prolongeant celui du cours 1 : R<sub>e</sub> ≈ 350, 550 et 950 MPa à +20, −100 et −196 °C pour un grain de 20 µm ; un choc équivaut à un refroidissement d'environ 40 °C pour R<sub>e</sub> ; σ<sub>c</sub> ≈ 900 MPa à 20 µm, plus élevée pour un grain plus fin.</p>
+    <p class="mut" style="font-size:.85rem;margin:0">Modèle illustratif, prolongeant celui du cours 1 : R<sub>e</sub> ≈ 350, 550 et 950 MPa à +20, −100 et −196 °C pour un grain de 20 µm ; un choc équivaut à un refroidissement d'environ 40 °C pour R<sub>e</sub> ; σ<sub>c</sub> ≈ 900 MPa à 20 µm, plus élevée pour un grain plus fin.</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">le diagramme de Davidenkov</span></div>
-    <p>Ce diagramme, construit entre les années 1920 et 1940 par Paul Ludwik, Nikolaï Davidenkov puis Egon Orowan, résume le mécanisme de la transition <span class="hp">hors poly</span>. On compare deux courbes en fonction de la température T :</p>
+    <p>Ce diagramme, construit entre les années 1920 et 1940 par Paul Ludwik, Nikolaï Davidenkov puis Egon Orowan, résume le mécanisme de la transition. On compare deux courbes en fonction de la température T :</p>
     <dl class="syms">
       <dt class="tau">q·R<sub>e</sub>(T, ε̇)</dt><dd>la contrainte d'ouverture σ<sub>I</sub> nécessaire pour plastifier au fond de l'entaille ; q (sans unité) est le <b>facteur de bridage plastique</b> de l'entaille (1 pour un barreau lisse, jusqu'à environ 2,5 à 3 pour une entaille aiguë dans une pièce épaisse) ; ε̇ (« epsilon point ») est la <b>vitesse de déformation</b>, en s⁻¹</dd>
       <dt class="sig">σ<sub>c</sub>(d)</dt><dd>la contrainte critique de clivage, presque indépendante de T, mais d'autant plus élevée que la taille de grain d est petite</dd>
     </dl>
     <div class="fx"><div class="big"><span class="tau">q</span>·<span class="mat">R<sub>e</sub></span>(<span class="mat">T<sub>t</sub></span>, <span class="tau">ε̇</span>) = <span class="sig">σ<sub>c</sub></span>(<span class="mat">d</span>)</div><p class="cap">au-dessus de la température de transition T<sub>t</sub>, la matière plastifie avant de cliver : rupture ductile ; en dessous, elle clive sans plastifier : rupture fragile</p></div>
     <p>Avec les valeurs de la manipulation (grain de 20 µm) : barreau lisse en traction lente, T<sub>t</sub> ≈ <b>−188 °C</b> (il faut presque l'azote liquide pour le casser fragile) ; même barreau en choc, ≈ −148 °C ; entaille en U et choc, ≈ −90 °C ; entaille en V et choc, ≈ <b>−40 °C</b>. Entaille et choc ont fait monter la transition de près de 150 °C : elle tombe désormais dans le domaine des températures de service d'une structure extérieure en hiver.</p>
-    <div class="def"><b>📖 Pourquoi R<sub>e</sub> dépend de T et de la vitesse</b> <span class="hp">hors poly</span> : dans le fer α (cubique centré), une dislocation doit franchir à chaque pas une petite barrière d'énergie, qu'elle passe en partie grâce à l'agitation thermique. Moins il fait chaud, ou moins elle a de temps (choc), moins l'agitation l'aide : il faut plus de contrainte. C'est un phénomène <b>thermiquement activé</b>, ce qui explique l'équivalence approximative entre « plus vite » et « plus froid ». Dans les métaux CFC, cette barrière est négligeable : R<sub>e</sub> varie peu, et il n'y a pas de transition.</div>
-    <div class="def"><b>📖 Contrainte plane et déformation plane</b> (polycopié, p. 19 et 20, figures 24 et 25). Près des faces de l'éprouvette, la contrainte perpendiculaire à la surface est nulle (contrainte plane) : la matière glisse à 45°, d'où les <b>lèvres de cisaillement</b> sur les bords de la cassure (figure 16c). Au cœur, la matière ne peut pas se contracter dans l'épaisseur (déformation plane) : l'état est triaxial et la rupture s'ouvre à plat. Plus une pièce est épaisse, plus la part de déformation plane est grande : à acier égal, <b>une tôle épaisse est plus fragile qu'une tôle mince</b>, et une éprouvette réduite (5 mm) transite à plus basse température qu'une éprouvette normale.</div>
+    <div class="def"><b>📖 Pourquoi R<sub>e</sub> dépend de T et de la vitesse</b> : dans le fer α (cubique centré), une dislocation doit franchir à chaque pas une petite barrière d'énergie, qu'elle passe en partie grâce à l'agitation thermique. Moins il fait chaud, ou moins elle a de temps (choc), moins l'agitation l'aide : il faut plus de contrainte. C'est un phénomène <b>thermiquement activé</b>, ce qui explique l'équivalence approximative entre « plus vite » et « plus froid ». Dans les métaux CFC, cette barrière est négligeable : R<sub>e</sub> varie peu, et il n'y a pas de transition.</div>
+    <div class="def"><b>📖 Contrainte plane et déformation plane.</b> Près des faces de l'éprouvette, la contrainte perpendiculaire à la surface est nulle (contrainte plane) : la matière glisse à 45°, d'où les <b>lèvres de cisaillement</b> sur les bords de la cassure. Au cœur, la matière ne peut pas se contracter dans l'épaisseur (déformation plane) : l'état est triaxial et la rupture s'ouvre à plat. Plus une pièce est épaisse, plus la part de déformation plane est grande : à acier égal, <b>une tôle épaisse est plus fragile qu'une tôle mince</b>, et une éprouvette réduite (5 mm) transite à plus basse température qu'une éprouvette normale.</div>
     <div class="warn"><b>⚠️ Piège : la transition n'est pas une propriété du seul acier.</b> Elle dépend aussi de la géométrie (entaille, épaisseur) et de la vitesse. On ne compare deux températures de transition que si elles sont mesurées de la même façon (même éprouvette, même critère, chapitre 4).</div>
     <div class="warn"><b>⚠️ Piège : la transition ne dit pas que la pièce cassera.</b> En dessous de T<sub>t</sub>, une rupture fragile <b>peut</b> se produire si une contrainte suffisante agit sur un défaut ; au-dessus, la rupture, si elle arrive, sera ductile. La question « à quelle contrainte, pour quel défaut » relève des cours 3 et 4.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « entaille, choc et froid montent le plafond »</b>. Le mur σ<sub>c</sub>, lui, ne monte qu'avec un grain plus fin.</div>
@@ -492,20 +479,20 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">l'acier qui change de caractère</span></div>
-    <p>Casse des éprouvettes Charpy du même acier ferritique à des températures de plus en plus basses, et reporte l'énergie absorbée en fonction de la température : tu obtiens une courbe en forme de <b>S</b> (polycopié, figure 17).</p>
+    <p>Casse des éprouvettes Charpy du même acier ferritique à des températures de plus en plus basses, et reporte l'énergie absorbée en fonction de la température : tu obtiens une courbe en forme de <b>S</b>.</p>
     <ul>
-      <li><b>Le plateau du haut</b>, ou <b>palier ductile</b>, aux températures élevées : beaucoup d'énergie, une cassure tourmentée, mate et fibreuse, avec de grandes lèvres et une éprouvette déformée (figure 16c). Ce sont les cupules du cours 1.</li>
-      <li><b>Le plateau du bas</b>, ou <b>palier fragile</b>, aux basses températures : très peu d'énergie, une cassure plate et brillante, « cristalline » (figure 16a). C'est le clivage du cours 1.</li>
-      <li><b>La falaise</b> entre les deux, la <b>zone de transition</b> : l'énergie s'effondre sur quelques dizaines de degrés. La cassure est <b>mixte</b> (figure 16b) : une zone centrale cristalline entourée d'une bordure fibreuse. Et les résultats sont <b>dispersés</b> : à la même température, une éprouvette peut absorber 15 J et sa voisine 80 J.</li>
+      <li><b>Le plateau du haut</b>, ou <b>palier ductile</b>, aux températures élevées : beaucoup d'énergie, une cassure tourmentée, mate et fibreuse, avec de grandes lèvres et une éprouvette déformée. Ce sont les cupules du cours 1.</li>
+      <li><b>Le plateau du bas</b>, ou <b>palier fragile</b>, aux basses températures : très peu d'énergie, une cassure plate et brillante, « cristalline ». C'est le clivage du cours 1.</li>
+      <li><b>La falaise</b> entre les deux, la <b>zone de transition</b> : l'énergie s'effondre sur quelques dizaines de degrés. La cassure est <b>mixte</b> : une zone centrale cristalline entourée d'une bordure fibreuse. Et les résultats sont <b>dispersés</b> : à la même température, une éprouvette peut absorber 15 J et sa voisine 80 J.</li>
     </ul>
-    <p>Le polycopié (p. 11) le résume : certains matériaux sont toujours ductiles (la plupart des métaux cubiques à faces centrées), d'autres toujours fragiles (céramiques, certains intermétalliques) ; mais les métaux cubiques centrés comme les <b>aciers ferritiques</b> passent de l'un à l'autre avec la température. C'est le comportement le plus traître : le même acier, dans la même structure, peut être excellent en été et fragile en hiver.</p>
+    <p>En résumé : certains matériaux sont toujours ductiles (la plupart des métaux cubiques à faces centrées), d'autres toujours fragiles (céramiques, certains intermétalliques) ; mais les métaux cubiques centrés comme les <b>aciers ferritiques</b> passent de l'un à l'autre avec la température. C'est le comportement le plus traître : le même acier, dans la même structure, peut être excellent en été et fragile en hiver.</p>
   </div>
 
   <div class="lab" id="m3">
     <p class="lab-h">Manipulation 3 : le laboratoire Charpy</p>
     <p class="lab-sub">Choisis un matériau et une température, puis casse des éprouvettes. Chaque point est un essai, avec la dispersion d'un vrai laboratoire. À côté du graphique, la cassure de la dernière éprouvette : zone cristalline (claire et scintillante), zone fibreuse (grise) et lèvres. Quand tu as assez de points, affiche la courbe moyenne.</p>
     <div class="btns" id="m3mat">
-      <button class="btn on" data-k="poly" type="button">Acier de la figure 17</button>
+      <button class="btn on" data-k="poly" type="button">Acier témoin</button>
       <button class="btn" data-k="j2" type="button">S355J2</button>
       <button class="btn" data-k="nl" type="button">S355NL</button>
       <button class="btn" data-k="zat" type="button">ZAT à gros grains</button>
@@ -516,12 +503,12 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m3svg" role="img" aria-label="Énergie Charpy en fonction de la température, points d'essai, et cassure de la dernière éprouvette"></svg>
     <div class="readout" id="m3r"></div>
     <p class="status" id="m3msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">Courbes illustratives ; l'acier de la figure 17 reprend la courbe du polycopié, convertie en joules (KV = 0,8 × KCV).</p>
+    <p class="mut" style="font-size:.85rem;margin:0">Courbes illustratives ; l'acier témoin, un acier ferritique de construction typique, est décrit en KCV puis converti en joules (KV = 0,8 × KCV).</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">paliers, dispersion et faciès mixtes</span></div>
     <div class="def"><b>📖 Palier ductile</b> (en anglais <i>upper shelf</i>) : domaine des hautes températures, où la rupture est entièrement ductile ; son énergie dépend surtout de la <b>propreté</b> de l'acier (les inclusions, cours 1, chapitre 5) et peu de la température. <b>Palier fragile</b> (<i>lower shelf</i>) : domaine des basses températures, rupture entièrement par clivage, quelques joules seulement. <b>Zone de transition</b> : entre les deux, rupture mixte et énergie très sensible à la température.</div>
-    <div class="def"><b>📖 Pourcentage de surface cristalline</b> (« cristallinité » de la figure 17) : part de la section rompue occupée par la zone de clivage, brillante. Son complément est le <b>pourcentage de surface ductile</b> (fibreuse), en anglais <i>shear fracture appearance</i>. On l'estime en mesurant la zone cristalline ou en comparant la cassure à des images types (annexe de l'EN ISO 148-1).</div>
+    <div class="def"><b>📖 Pourcentage de surface cristalline</b> (« cristallinité ») : part de la section rompue occupée par la zone de clivage, brillante. Son complément est le <b>pourcentage de surface ductile</b> (fibreuse), en anglais <i>shear fracture appearance</i>. On l'estime en mesurant la zone cristalline ou en comparant la cassure à des images types (annexe de l'EN ISO 148-1).</div>
     <h4>L'histoire d'une éprouvette mixte</h4>
     <ol>
       <li>Au fond de l'entaille, une petite fissure <b>ductile</b> s'amorce et avance de quelques dixièmes de millimètre : une bande fibreuse sous l'entaille ;</li>
@@ -529,12 +516,12 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <li>les bords et le côté frappé, en contrainte plane, cèdent en <b>cisaillement</b> : les lèvres et la bordure fibreuse.</li>
     </ol>
     <p>Plus la température est élevée, plus l'étape 1 dure et plus la zone fibreuse est grande ; à haute température, l'étape 2 n'a jamais lieu.</p>
-    <h4>Pourquoi tant de dispersion ? <span class="hp">hors poly</span></h4>
+    <h4>Pourquoi tant de dispersion ? <span class="hp">complément</span></h4>
     <p>Le clivage démarre sur un « maillon faible » : une particule fragile (un carbure, une inclusion) ou un grain mal orienté, placé au bon endroit dans la petite zone très chargée devant l'entaille. Selon l'éprouvette, ce maillon est plus ou moins proche, et le clivage part plus ou moins tôt : l'énergie varie beaucoup. Sur les paliers, cette loterie n'a plus d'effet : le clivage part toujours (palier bas) ou jamais (palier haut).</p>
-    <h4>Mettre la courbe en équation <span class="hp">hors poly</span></h4>
+    <h4>Mettre la courbe en équation <span class="hp">complément</span></h4>
     <p>On ajuste couramment les points par une tangente hyperbolique (tanh, une fonction en S qui va de −1 à +1) :</p>
     <div class="fx"><div class="big" style="font-size:1.55rem"><span class="eps">KV</span>(<span class="mat">T</span>) = <span class="mat">A</span> + <span class="mat">B</span>·tanh<span style="font-size:1.2em">(</span><span class="frac"><span><span class="mat">T</span> − <span class="mat">T<sub>0</sub></span></span><span><span class="mat">C</span></span></span><span style="font-size:1.2em">)</span></div><p class="cap">A = (palier haut + palier bas)/2 ; B = (palier haut − palier bas)/2 ; T<sub>0</sub> : température du milieu de la falaise ; C : demi-largeur de la transition, en °C</p></div>
-    <p><b>Exemple</b> : la courbe de la figure 17 du polycopié est bien représentée, en KCV, par A ≈ 80 J/cm², B ≈ 72 J/cm², T<sub>0</sub> ≈ −45 °C et C ≈ 23 °C. À −20 °C : <span class="m">KCV = 80 + 72 × tanh(25/23) = 80 + 72 × 0,79 ≈ <b>137 J/cm²</b></span> ; à −62 °C : <span class="m">80 + 72 × tanh(−17/23) ≈ 80 − 72 × 0,625 ≈ <b>35 J/cm²</b></span>.</p>
+    <p><b>Exemple</b> : la courbe de l'acier témoin est bien représentée, en KCV, par A ≈ 80 J/cm², B ≈ 72 J/cm², T<sub>0</sub> ≈ −45 °C et C ≈ 23 °C. À −20 °C : <span class="m">KCV = 80 + 72 × tanh(25/23) = 80 + 72 × 0,79 ≈ <b>137 J/cm²</b></span> ; à −62 °C : <span class="m">80 + 72 × tanh(−17/23) ≈ 80 − 72 × 0,625 ≈ <b>35 J/cm²</b></span>.</p>
     <div class="warn"><b>⚠️ Piège : un seul essai dans la transition ne veut rien dire.</b> La dispersion y est énorme : c'est pourquoi on casse au moins trois éprouvettes par température, et pourquoi les normes jugent la moyenne <b>et</b> la plus faible valeur (chapitre 6).</div>
     <div class="warn"><b>⚠️ Piège : palier haut et transition sont deux choses différentes.</b> Un acier sale (beaucoup de soufre) a un palier ductile bas, mais pas forcément une transition plus chaude ; un acier à gros grains a une transition plus chaude, mais pas forcément un palier plus bas.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « plateau, falaise, plateau »</b>. En haut on marche (ductile), en bas on est tombé (fragile), et sur la falaise on ne sait jamais où l'on va glisser (dispersion).</div>
@@ -556,11 +543,11 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">une falaise, plusieurs repères</span></div>
     <p>Une courbe entière est difficile à comparer ou à exiger dans un contrat. On la résume donc par une <b>température de transition</b> : la température à laquelle la courbe franchit un certain repère. Mais une falaise n'a pas une altitude unique : on peut repérer son pied, son milieu, ou le point où elle devient dangereuse. De même, il existe plusieurs températures de transition, selon le repère choisi :</p>
     <ul>
-      <li><b>TK35</b> (polycopié, figure 17) : la température où la résilience KCV vaut <b>35 J/cm²</b> ;</li>
-      <li><b>TK50</b> (figure 17) : la température où la cassure est à <b>50 % cristalline</b> (en anglais FATT, <i>fracture appearance transition temperature</i>) ;</li>
-      <li><b>T<sub>27J</sub></b> <span class="hp">hors poly</span> : la température où l'énergie absorbée KV vaut <b>27 J</b>, le repère des normes européennes d'aciers et de l'Eurocode 3 ; on rencontre aussi T<sub>40J</sub>.</li>
+      <li><b>TK35</b> : la température où la résilience KCV vaut <b>35 J/cm²</b> ;</li>
+      <li><b>TK50</b> : la température où la cassure est à <b>50 % cristalline</b> (en anglais FATT, <i>fracture appearance transition temperature</i>) ;</li>
+      <li><b>T<sub>27J</sub></b> : la température où l'énergie absorbée KV vaut <b>27 J</b>, le repère des normes européennes d'aciers et de l'Eurocode 3 ; on rencontre aussi T<sub>40J</sub>.</li>
     </ul>
-    <p>Sur la figure 17 du polycopié, TK35 ≈ −62 °C et TK50 ≈ −45 °C : le même acier, deux repères, deux températures distantes de près de 20 °C. Ce qui compte, c'est de toujours dire <b>quel</b> repère on utilise, et de comparer la température de transition à la <b>température de service</b> : plus elle est loin en dessous, plus la marge est grande.</p>
+    <p>Pour l'acier témoin, TK35 ≈ −62 °C et TK50 ≈ −45 °C : le même acier, deux repères, deux températures distantes de près de 20 °C. Ce qui compte, c'est de toujours dire <b>quel</b> repère on utilise, et de comparer la température de transition à la <b>température de service</b> : plus elle est loin en dessous, plus la marge est grande.</p>
   </div>
 
   <div class="lab" id="m4">
@@ -571,7 +558,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div class="ctrl"><label for="m4U">Palier ductile</label><input type="range" id="m4U" class="r-eps" min="40" max="250" step="1" value="121"><output id="m4Uo"></output></div>
     <div class="ctrl"><label for="m4S">Température de service</label><input type="range" id="m4S" class="r-tau" min="-80" max="40" step="1" value="-20"><output id="m4So"></output></div>
     <div class="btns" id="m4ex">
-      <button class="btn" data-v="-45,23,121" type="button">Figure 17 du polycopié</button>
+      <button class="btn" data-v="-45,23,121" type="button">Acier témoin</button>
       <button class="btn" data-v="-20,18,180" type="button">S355J2 typique</button>
       <button class="btn" data-v="-60,18,220" type="button">S355NL typique</button>
       <button class="btn" data-v="5,20,150" type="button">ZAT à gros grains</button>
@@ -585,7 +572,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">conversions, critères et interpolation</span></div>
     <h4>Joules ou joules par cm² ?</h4>
     <div class="fx"><div class="big"><span class="eps">KV</span> = <span class="eps">KCV</span> × <span class="mat">S</span> &nbsp; avec &nbsp; <span class="mat">S</span> = 0,8 cm²</div><p class="cap">éprouvette normale 10 × 10 mm, entaille en V de 2 mm : ligament de 8 × 10 mm</p></div>
-    <p>Donc <span class="m">35 J/cm² × 0,8 cm² = 28 J</span> : le TK35 du polycopié est pratiquement le <b>T<sub>27J</sub></b> des normes actuelles. Le repère de 27 J vient d'un seuil anglo-saxon converti en joules : <b>20 ft·lbf</b> (pied-livre force, l'unité d'énergie anglo-saxonne : 1 ft·lbf = 1,356 J, donc 20 ft·lbf = 27,1 J).</p>
+    <p>Donc <span class="m">35 J/cm² × 0,8 cm² = 28 J</span> : le TK35, repère exprimé en J/cm², est pratiquement le <b>T<sub>27J</sub></b> des normes actuelles. Le repère de 27 J vient d'un seuil anglo-saxon converti en joules : <b>20 ft·lbf</b> (pied-livre force, l'unité d'énergie anglo-saxonne : 1 ft·lbf = 1,356 J, donc 20 ft·lbf = 27,1 J).</p>
     <div class="def"><b>📖 Température de transition T<sub>x</sub></b> : température à laquelle la courbe de transition (moyenne) atteint le critère x : une énergie (T<sub>27J</sub>, T<sub>40J</sub>), une résilience (TK35, TK28), ou un aspect de cassure (TK50, ou FATT, à 50 % de surface cristalline). Une température de transition <b>plus basse</b> signifie un acier <b>meilleur</b> vis-à-vis de la rupture fragile.</div>
     <h4>Interpoler entre deux essais</h4>
     <p>Sans courbe complète, on interpole linéairement entre deux températures d'essai qui encadrent le critère. Si la moyenne vaut KV<sub>1</sub> à T<sub>1</sub> et KV<sub>2</sub> à T<sub>2</sub> :</p>
@@ -647,11 +634,11 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m5svg" role="img" aria-label="Courbe de transition de référence et courbe modifiée par les facteurs choisis"></svg>
     <div class="readout" id="m5r"></div>
     <p class="status" id="m5msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">Ordres de grandeur illustratifs <span class="hp">hors poly</span>. L'effet du grain suit la relation empirique de Pickering (ci-dessous) ; les autres décalages sont des valeurs typiques arrondies, qui varient d'un acier à l'autre.</p>
+    <p class="mut" style="font-size:.85rem;margin:0">Ordres de grandeur illustratifs. L'effet du grain suit la relation empirique de Pickering (ci-dessous) ; les autres décalages sont des valeurs typiques arrondies, qui varient d'un acier à l'autre.</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les mécanismes et une relation chiffrée</span></div>
-    <h4>La taille de grain : la relation de Pickering <span class="hp">hors poly</span></h4>
+    <h4>La taille de grain : la relation de Pickering <span class="hp">complément</span></h4>
     <p>Pour les aciers ferrito-perlitiques, une relation empirique établie par F. B. Pickering dans les années 1960 donne la température de transition (en °C) :</p>
     <div class="fx"><div class="big" style="font-size:1.35rem"><span class="mat">T<sub>t</sub></span> ≈ −19 + 44·(%Si) + 700·√(%N<sub>libre</sub>) + 2,2·(%perlite) − 11,5·<span class="tau">d</span><sup>−1/2</sup></div><p class="cap">teneurs en % massique ; %perlite en % de la structure ; d : taille de grain de la ferrite en mm, donc d<sup>−1/2</sup> en mm<sup>−1/2</sup></p></div>
     <p>Le terme du grain domine. Passer de 20 µm (d<sup>−1/2</sup> = 1/√0,020 = 7,07 mm<sup>−1/2</sup>) à 10 µm (10,0 mm<sup>−1/2</sup>) abaisse la transition de <span class="m">11,5 × (10,0 − 7,07) ≈ <b>34 °C</b></span>. À l'inverse, des grains de 150 µm (2,58 mm<sup>−1/2</sup>) la relèvent de <span class="m">11,5 × (7,07 − 2,58) ≈ <b>52 °C</b></span>. Les autres termes montrent le rôle néfaste du silicium, de l'azote libre et de la perlite (donc du carbone).</p>
@@ -734,7 +721,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">normes, positions d'entaille et règles de réception</span></div>
-    <h4>Les garanties des aciers de construction <span class="hp">hors poly</span></h4>
+    <h4>Les garanties des aciers de construction <span class="hp">complément</span></h4>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Symbole</th><th>Norme</th><th>Énergie KV minimale</th><th>Température d'essai</th></tr>
       <tr><td>JR</td><td>EN 10025-2 (non allié)</td><td class="n">27 J</td><td class="n">+20 °C</td></tr>
@@ -799,14 +786,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="exo">
-    <h4>Exercice 3 : l'acier de la figure 17 <span class="lvtag">N2 · chapitres 3 et 4</span></h4>
-    <p>La courbe de la figure 17 du polycopié est représentée par <span class="m">KCV(T) = 80 + 72·tanh((T + 45)/23,2)</span>, en J/cm², avec T en °C.</p>
+    <h4>Exercice 3 : l'acier témoin <span class="lvtag">N2 · chapitres 3 et 4</span></h4>
+    <p>La courbe de l'acier témoin est représentée par <span class="m">KCV(T) = 80 + 72·tanh((T + 45)/23,2)</span>, en J/cm², avec T en °C.</p>
     <p class="q"><b>a)</b> Que valent les paliers haut et bas ? Que représente −45 °C ?</p>
     <p class="q"><b>b)</b> Calcule KCV puis KV à −20 °C et à −50 °C.</p>
     <p class="q"><b>c)</b> Calcule T<sub>27J</sub> et T<sub>40J</sub>.</p>
     <p class="q"><b>d)</b> Cet acier satisferait-il les garanties K2 (40 J à −20 °C) et NL (27 J à −50 °C) ?</p>
     <details><summary>Voir la correction</summary><div class="sol">
-      <p><b>a)</b> tanh varie de −1 à +1 : palier haut <span class="m">80 + 72 = <b>152 J/cm²</b></span>, palier bas <span class="m">80 − 72 = <b>8 J/cm²</b></span>. −45 °C est le milieu de la falaise (KCV = 80 J/cm²), le TK50 de la figure 17.</p>
+      <p><b>a)</b> tanh varie de −1 à +1 : palier haut <span class="m">80 + 72 = <b>152 J/cm²</b></span>, palier bas <span class="m">80 − 72 = <b>8 J/cm²</b></span>. −45 °C est le milieu de la falaise (KCV = 80 J/cm²), le TK50 de l'acier témoin.</p>
       <p><b>b)</b> À −20 °C : <span class="m">tanh(25/23,2) = tanh(1,078) = 0,792</span> ; <span class="m">KCV = 80 + 72 × 0,792 = <b>137 J/cm²</b></span>, soit <span class="m">KV = 0,8 × 137 = <b>110 J</b></span>. À −50 °C : <span class="m">tanh(−5/23,2) = −0,212</span> ; <span class="m">KCV = 80 − 15,3 = <b>64,7 J/cm²</b></span>, soit <span class="m">KV = <b>51,8 J</b></span>.</p>
       <p><b>c)</b> 27 J correspondent à <span class="m">27/0,8 = 33,75 J/cm²</span> : <span class="m">tanh(x) = (33,75 − 80)/72 = −0,642</span>, donc <span class="m">x = atanh(−0,642) = −0,762</span> (atanh : fonction réciproque de tanh) et <span class="m">T<sub>27J</sub> = −45 − 0,762 × 23,2 = <b>−62,7 °C</b></span>. Pour 40 J (50 J/cm²) : <span class="m">tanh(x) = −0,417</span>, <span class="m">x = −0,444</span>, <span class="m">T<sub>40J</sub> = −45 − 10,3 = <b>−55,3 °C</b></span>.</p>
       <p><b>d)</b> K2 : 110 J ≥ 40 J à −20 °C ✅. NL : 51,8 J ≥ 27 J à −50 °C ✅. Il les satisferait toutes deux (à condition que la dispersion des trois éprouvettes respecte la règle des 70 %).</p>
@@ -909,7 +896,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div><div class="ic">🍬</div><h4>Le sachet de bonbons</h4><div class="f"><span class="tau">q</span>·<span class="mat">R<sub>e</sub></span>(<span class="mat">T<sub>t</sub></span>, <span class="tau">ε̇</span>) = <span class="sig">σ<sub>c</sub></span></div><p>Entaille, choc et froid montent le plafond jusqu'au mur : la transition remonte de −188 °C à −40 °C.</p></div>
     <div><div class="ic">⛰️</div><h4>La falaise</h4><div class="f"><span class="eps">KV</span> = <span class="mat">A</span> + <span class="mat">B</span>·tanh((<span class="mat">T</span> − <span class="mat">T<sub>0</sub></span>)/<span class="mat">C</span>)</div><p>Plateau ductile fibreux, falaise mixte et dispersée, plateau fragile cristallin. Les CFC n'ont pas de falaise.</p></div>
     <div><div class="ic">🎲</div><h4>Les dés</h4><div class="f">moyenne ≥ exigence ; une seule ≥ 70 %</div><p>Dans la transition, la loterie du maillon faible : jamais un essai seul.</p></div>
-    <div><div class="ic">🌡️</div><h4>Le thermomètre-étiquette</h4><div class="f">TK35 ≈ <span class="mat">T<sub>27J</sub></span> ; TK50 = 50 % cristallin</div><p>Figure 17 : TK35 ≈ −62 °C, TK50 ≈ −45 °C. Toujours dire quel repère.</p></div>
+    <div><div class="ic">🌡️</div><h4>Le thermomètre-étiquette</h4><div class="f">TK35 ≈ <span class="mat">T<sub>27J</sub></span> ; TK50 = 50 % cristallin</div><p>Acier témoin : TK35 ≈ −62 °C, TK50 ≈ −45 °C. Toujours dire quel repère.</p></div>
     <div><div class="ic">🎚️</div><h4>La table de mixage</h4><div class="f">Δ<span class="mat">T<sub>t</sub></span> ≈ −11,5·Δ(<span class="tau">d</span><sup>−1/2</sup>)</div><p>Grain fin, nickel, manganèse au frais ; gros grain, carbone, azote vieilli, épaisseur au chaud.</p></div>
     <div><div class="ic">🏷️</div><h4>L'étiquette de la nuance</h4><div class="f">JR +20 · J0 0 · J2 −20 · K2 40 J · NL −50</div><p>J = 27 J, K = 40 J. La garantie de la tôle ne couvre pas la ZAT.</p></div>
     <div><div class="ic">🚢</div><h4>Le navire coupé en deux</h4><div class="f">VWT, VHT · E 42 4 B</div><p>Qualifier le métal fondu et la ZAT ; limiter l'énergie de soudage ; Liberty, Duplessis, King's Bridge.</p></div>
@@ -945,7 +932,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <dt>EN ISO 15614-1, EN ISO 9016</dt><dd>Qualification des modes opératoires de soudage des aciers ; essais de flexion par choc sur soudures et codage des positions d'entaille (VWT, VHT).</dd>
     <dt>Énergie de soudage Q</dt><dd>Chaleur apportée par millimètre de cordon : Q = k·U·I/v, en kJ/mm (k : rendement thermique du procédé, 0,8 en MAG).</dd>
     <dt>Expansion latérale</dt><dd>Élargissement de l'éprouvette rompue du côté comprimé, en mm : mesure de la déformation plastique.</dd>
-    <dt>FATT</dt><dd><i>Fracture appearance transition temperature</i> : température à 50 % de surface cristalline ; le TK50 du polycopié.</dd>
+    <dt>FATT</dt><dd><i>Fracture appearance transition temperature</i> : température à 50 % de surface cristalline ; notée aussi TK50.</dd>
     <dt>Ferrite aciculaire</dt><dd>Structure du métal fondu faite de fines aiguilles de ferrite enchevêtrées, très tenace.</dd>
     <dt>ft·lbf</dt><dd>Pied-livre force, unité d'énergie anglo-saxonne : 1 ft·lbf = 1,356 J ; 20 ft·lbf ≈ 27 J.</dd>
     <dt>g</dt><dd>Accélération de la pesanteur, 9,81 m/s².</dd>
@@ -964,7 +951,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <dt>PV</dt><dd>Procès-verbal d'essai : document qui consigne les résultats.</dd>
     <dt>R<sub>e</sub></dt><dd>Limite d'élasticité, en MPa ; elle augmente au froid et avec la vitesse dans les aciers ferritiques.</dd>
     <dt>Résilience</dt><dd>Énergie de rupture par choc rapportée à l'aire rompue (KC) ; par extension, aptitude à résister au choc.</dd>
-    <dt>S</dt><dd>Aire du ligament rompu, en cm² (notée A dans le polycopié).</dd>
+    <dt>S</dt><dd>Aire du ligament rompu, en cm² (parfois notée A).</dd>
     <dt>σ<sub>c</sub></dt><dd>Contrainte critique de clivage, en MPa ; presque indépendante de T, plus élevée pour un grain fin.</dd>
     <dt>T, T<sub>K</sub></dt><dd>Température en °C ; en kelvins, T<sub>K</sub> = T + 273,15.</dd>
     <dt>T<sub>t</sub>, T<sub>27J</sub>, T<sub>40J</sub>, TK35, TK50</dt><dd>Températures de transition : générale ; à 27 J ; à 40 J ; à 35 J/cm² ; à 50 % de surface cristalline.</dd>
@@ -1001,14 +988,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
   <p class="status" id="checkMsg"></p>
 
-  <div class="meta">🔭 <b>Au prochain épisode, cours 3 : du défaut à la fissure.</b> L'essai Charpy compare les aciers, mais ne dit pas à quelle contrainte une pièce fissurée va casser. Pour le savoir, il faut passer de l'entaille grossière à la fissure aiguë. On verra pourquoi les matériaux réels cassent cent à mille fois plus tôt que ne le prévoit la cohésion des atomes (polycopié, p. 12 à 14), comment un trou ou une entaille concentrent la contrainte (le facteur K<sub>t</sub>), pourquoi la contrainte à la pointe d'une fissure devient infinie, et comment un seul nombre, le <b>facteur d'intensité de contrainte K = σY√a</b>, résume la sévérité d'une fissure (p. 14 à 21).</div>
+  <div class="meta">🔭 <b>Au prochain épisode, cours 3 : du défaut à la fissure.</b> L'essai Charpy compare les aciers, mais ne dit pas à quelle contrainte une pièce fissurée va casser. Pour le savoir, il faut passer de l'entaille grossière à la fissure aiguë. On verra pourquoi les matériaux réels cassent cent à mille fois plus tôt que ne le prévoit la cohésion des atomes, comment un trou ou une entaille concentrent la contrainte (le facteur K<sub>t</sub>), pourquoi la contrainte à la pointe d'une fissure devient infinie, et comment un seul nombre, le <b>facteur d'intensité de contrainte K = σY√a</b>, résume la sévérité d'une fissure.</div>
 </div>
 </section>
 </main>
 
 <footer>
 <div class="wrap">
-  <p>Cours 2 sur 4 de la série « Mécanique de la rupture : de la cassure au défaut acceptable ». Notations alignées sur le polycopié de référence (Partie I : Mécanique de la rupture) ; pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 2 sur 4 de la série « Mécanique de la rupture : de la cassure au défaut acceptable ». Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1261,7 +1248,7 @@ function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt){
   const svg=$("#m3svg");if(!svg)return;
   const sT=$("#m3T"),sTo=$("#m3To"),b1=$("#m3one"),b3=$("#m3three"),bC=$("#m3camp"),bF=$("#m3fit"),bX=$("#m3clr"),ro=$("#m3r"),msg=$("#m3msg");
   const MAT={
-    poly:{n:"l'acier de la figure 17",US:121.6,LS:6.4,T0:-45,C:23.2},
+    poly:{n:"l'acier témoin",US:121.6,LS:6.4,T0:-45,C:23.2},
     j2:{n:"un S355J2 typique",US:180,LS:5,T0:-20,C:18},
     nl:{n:"un S355NL typique",US:220,LS:5,T0:-60,C:18},
     zat:{n:"une ZAT à gros grains",US:150,LS:4,T0:5,C:20},
@@ -1485,7 +1472,7 @@ function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt){
     {q:"Pour la limite d'élasticité d'un acier ferritique, un choc rapide équivaut à peu près à :",o:["un refroidissement","un réchauffement","aucun changement","un affinement du grain"],c:0,e:"Le glissement est <b>thermiquement activé</b> : moins de temps (choc) ou moins d'agitation (froid), et il faut plus de contrainte. Le choc relève donc la transition."},
     {q:"Dans la zone de transition, les énergies Charpy sont :",o:["identiques d'une éprouvette à l'autre","toujours celles du palier bas","très dispersées","impossibles à mesurer"],c:2,e:"Le clivage part sur un « maillon faible » plus ou moins proche de l'entaille : la dispersion est <b>maximale</b> sur la falaise. D'où les trois éprouvettes par température."},
     {q:"Un inox austénitique cassé au Charpy à −196 °C :",o:["casse fragile, au palier bas","reste ductile : un métal CFC n'a pas de transition","n'a pas de palier ductile","ne peut pas être essayé"],c:1,e:"Structure <b>cubique à faces centrées</b> : R<sub>e</sub> varie peu avec la température, le glissement gagne toujours. D'où son emploi en cryogénie."},
-    {q:"Le TK35 du polycopié (KCV = 35 J/cm²) correspond pratiquement à :",o:["T<sub>40J</sub>","TK50","la température de service","T<sub>27J</sub>"],c:3,e:"35 J/cm² × 0,8 cm² = <b>28 J</b> : c'est presque le critère de 27 J des normes actuelles."},
+    {q:"Le TK35 (KCV = 35 J/cm²) correspond pratiquement à :",o:["T<sub>40J</sub>","TK50","la température de service","T<sub>27J</sub>"],c:3,e:"35 J/cm² × 0,8 cm² = <b>28 J</b> : c'est presque le critère de 27 J des normes actuelles."},
     {q:"TK50, ou FATT, est la température à laquelle :",o:["la cassure est cristalline à 50 %","KV vaut 50 J","KCV vaut 50 J/cm²","la moitié des éprouvettes casse"],c:0,e:"C'est un critère d'<b>aspect</b> de la cassure (<i>fracture appearance</i>), pas d'énergie."},
     {q:"Lequel de ces facteurs déplace la transition vers le froid ?",o:["un grain grossi par une forte énergie de soudage","l'azote libre et le vieillissement après écrouissage","un grain plus fin","une tôle plus épaisse"],c:2,e:"Le <b>grain fin</b> élève σ<sub>c</sub> : selon Pickering, environ −11,5 °C par mm<sup>−1/2</sup> de d<sup>−1/2</sup> gagné. Les trois autres réchauffent la transition."},
     {q:"Que garantit la nuance S355J2 ?",o:["40 J à −20 °C","27 J à +20 °C","27 J à 0 °C","27 J à −20 °C"],c:3,e:"J = 27 J, 2 = −20 °C. (40 J à −20 °C, c'est K2 ; 27 J à +20 °C, JR ; 27 J à 0 °C, J0.)"},
