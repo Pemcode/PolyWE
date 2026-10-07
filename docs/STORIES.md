@@ -23,6 +23,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S17 | Intégrer la série Mécanique de la rupture | Intégré et vérifié |
 | S18 | Intégrer le fluage et le brasage, republier les corrections de rupture | Intégré et vérifié |
 | S19 | Compléter la série brasage avec les cours 3 et 4 | Intégré et vérifié |
+| S21 | Naviguer avec un panneau latéral repliable et lire les cours en paysage | Intégré et vérifié |
 
 ## S01 — Catalogue extensible
 
@@ -306,3 +307,20 @@ Validation locale : 87 tests Python et 23 parcours Chromium réussis ; catalogue
 Contrôle des quatre cours réels sous `/PolyWE/` : 24 manipulations et leurs animations, 48 questions de quiz et remise à zéro, cases mémorisées après rechargement, persistance du thème, partage de section via l’API native simulée, recherche sans accents vers le chapitre de soufflage magnétique, liens de la matière et du planning. Vérification des modes clair et sombre aux largeurs 360, 390, 768 et 1280 px. Les 2 880 états contrôlés (initiaux, extrêmes individuels et simultanés des curseurs, boutons de préréglage) ne présentent aucun débordement horizontal de page ni aucun texte SVG hors viewBox avec une tolérance de 2 unités. Aucune erreur JavaScript ou HTTP locale. Captures des 24 manipulations et des quatre en-têtes mobiles sombres inspectées. Empreintes SHA-256 des quatre sources inchangées depuis la réception.
 
 La mise à jour existante de `AGENTS.md` est versionnée dans un commit de documentation distinct, conformément à la demande de synchroniser toutes les modifications sur `main`. Le cinquième cours annoncé reste à livrer ; aucune nouvelle validation scientifique n’est revendiquée.
+
+## S21 — Panneau latéral et lecture paysage
+
+En tant qu’élève sur ordinateur portable, je navigue depuis un panneau latéral plutôt que depuis un bandeau en haut de page, et je vois une manipulation entière sur un seul écran ; sur téléphone, la navigation reste à portée de pouce sans gêner la lecture.
+
+- Toutes les pages publiées (accueil, matières, parcours, planning, cours, documents, applications) remplacent le bandeau supérieur par un panneau latéral gauche : marque, recherche, accueil, planning, matières dépliables avec leurs cours disponibles, parcours. Les brouillons, les cours à venir et les applications n’y figurent pas ; les applications restent hors de l’accueil.
+- Sur un cours : matière, titre, sommaire du cours avec la section en cours de lecture surlignée, cours précédent et suivant, partage et copie du lien. Les boutons « Partager cette section » restent dans le contenu.
+- Sur un écran d’au moins 1 000 px, le panneau est ouvert par défaut et se replie en rail d’icônes ; l’état est mémorisé dans le navigateur (`wiki-panneau`). Les applications démarrent avec le panneau replié. En dessous, il devient un tiroir fermé par défaut, ouvert par un bouton « Menu » et refermé par Échap, le fond, le bouton de fermeture ou un lien suivi.
+- Sur un écran paysage assez large, les cours utilisent la largeur disponible : contenu élargi, manipulations à un seul schéma affichées côte à côte (schéma à gauche, réglages et lectures à droite), quiz et check-list sur deux colonnes. Le sommaire horizontal du cours laisse la place à celui du panneau quand le panneau est ouvert. En portrait et sur téléphone, la présentation des sources est conservée.
+- Thème clair ou sombre suivi par le panneau et les pages du wiki ; aucun débordement horizontal à 360, 390, 768, 1280 et 1440 px ; liens valides à la racine et sous un sous-chemin ; sources des cours intactes, scripts et ancres préservés.
+- Tests de parcours RED puis GREEN ; vérification au navigateur des cours réels.
+
+Preuve TDD du 7 octobre 2026 : RED de `uv run --group browser pytest tests/browser/test_navigation_panel.py` (10 échecs : ni panneau, ni bouton « Menu », bandeau encore présent, manipulation empilée). GREEN après implémentation : 10 réussis, à la racine et sous `/promo/`. Les parcours existants qui utilisaient le bandeau ouvrent d’abord le menu sur téléphone ; le parcours paysage a été ajusté au choix final (lectures et commentaire sous le schéma). Suites complètes : 86 tests Python, 33 parcours Chromium et 34 tests navigateur des applications.
+
+Mesure sur les 153 manipulations des cours réels, nombre plus hautes que la fenêtre avant → après : 86 → 18 à 1280×800, 98 → 13 à 1366×768, 38 → 2 à 1440×900, 1 → 1 à 1920×1080 (hauteur médiane : 1,09 → 0,83 écran à 1366×768). Les dessins mesurés par les cours restent à l’échelle 1 après regroupement. Balayage des 43 pages publiées à 360, 390, 768, 1280 et 1440 px, en clair et en sombre : aucun débordement horizontal ni erreur JavaScript. Captures du panneau ouvert, du rail, du tiroir sur téléphone, de l’accueil, d’une matière, du planning et du jeu inspectées.
+
+Limites : la série Métallurgie garde sa largeur d’origine, ses figures s’allongeant avec la largeur ; les manipulations à deux schémas ou à matrices restent empilées ; quelques manipulations très riches en réglages dépassent encore un écran de 768 px de haut.

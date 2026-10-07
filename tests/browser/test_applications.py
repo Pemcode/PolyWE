@@ -50,7 +50,8 @@ def test_application_opens_from_its_subject_and_returns_to_the_wiki(app_site):
     expect(page.locator("#ecran")).to_have_text("Prêt à jouer")
     page.get_by_role("link", name="Jouer", exact=True).click()
     expect(page.locator("#ecran")).to_have_text("Partie en cours")
-    page.get_by_role("navigation", name="Navigation du wiki").get_by_role("link", name="Thermique").click()
+    page.get_by_role("button", name="Menu", exact=True).click()
+    page.get_by_role("navigation", name="Navigation du wiki").get_by_role("link", name="Thermique", exact=True).click()
     expect(page.get_by_role("heading", level=1)).to_have_text("Thermique")
     page.goto(base + "index.html")
     page.get_by_label("Rechercher une notion, un cours ou une section").fill("quiz")
@@ -76,7 +77,8 @@ def test_real_game_is_playable_under_the_published_subpath(tmp_path):
             expect(page.locator("#element-3d")).to_be_visible()
             assert page.locator("#element-3d").evaluate(PAINTED) > 300
             assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-            page.get_by_role("navigation", name="Navigation du wiki").get_by_role("link", name="Résistance des matériaux").click()
+            page.get_by_role("button", name="Menu", exact=True).click()
+            page.get_by_role("navigation", name="Navigation du wiki").get_by_role("link", name="Résistance des matériaux", exact=True).click()
             expect(page.get_by_role("heading", level=1)).to_have_text("Résistance des matériaux")
             browser.close()
     finally:

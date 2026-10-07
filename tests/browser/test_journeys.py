@@ -45,6 +45,7 @@ def test_find_unaccented_notion_and_open_exact_section(site):
     result.click()
     expect(page).to_have_url(base+"Thermique/introduction.html#intro")
     expect(page.get_by_text("Animation active", exact=True)).to_be_visible()
+    page.get_by_role("button", name="Menu", exact=True).click()
     page.get_by_role("link", name="Thermique", exact=True).click()
     expect(page).to_have_url(base+"matieres/thermique.html")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
@@ -55,6 +56,7 @@ def test_copy_and_share_include_current_section(site):
     page.add_init_script("""Object.defineProperty(navigator, 'clipboard', {value: {writeText: async text => {window.copied = text;}}});
     Object.defineProperty(navigator, 'share', {value: async data => {window.shared = data;}});""")
     page.goto(base+"Thermique/introduction.html#calcul")
+    page.get_by_role("button", name="Menu", exact=True).click()
     page.get_by_role("button", name="Copier le lien", exact=True).click()
     expect(page.locator("#wiki-share-status")).to_have_text("Lien copié.")
     assert page.evaluate("window.copied") == base+"Thermique/introduction.html#calcul"
@@ -81,6 +83,7 @@ def test_copy_fallback_without_clipboard(site):
     page, base = site
     page.add_init_script("Object.defineProperty(navigator, 'clipboard', {value: undefined});")
     page.goto(base+"Thermique/introduction.html#intro")
+    page.get_by_role("button", name="Menu", exact=True).click()
     page.get_by_role("button", name="Copier le lien", exact=True).click()
     expect(page.get_by_role("textbox", name="Lien à copier", exact=True)).to_have_value(base+"Thermique/introduction.html#intro")
 
