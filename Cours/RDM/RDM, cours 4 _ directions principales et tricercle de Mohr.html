@@ -376,7 +376,7 @@ input.r-gam{accent-color:var(--gam)}
     <div><div class="f">surface libre</div>Là où l'on colle une jauge, l'état est une contrainte plane : σ<sub>zz</sub> = 0, mais ε<sub>zz</sub> ≠ 0.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> « Notions de base de RDM » (Polytech Nantes, IWE1) : ce cours correspond au § 7, parties i à k, <b>pages 12 et 13</b> (contraintes principales, état de contrainte plane, cercle et tricercle de Mohr). Le polycopié annonce que le cercle des contraintes se trace « par les mêmes formules » que celui des déformations (p. 11) : on reprend donc ses notations, <b>φ</b> pour l'angle de la facette (θ dans le cours 2) et <b>I, II, III</b> pour les valeurs principales, rangées de la plus grande à la plus petite. Rappel : le polycopié écrit σ<sub>xy</sub> les cisaillements que ce cours note <span class="tau">τ<sub>xy</sub></span>.</div>
+  <div class="def"><b>📘 Notations.</b> Le cercle des contraintes se trace par les mêmes formules que celui des déformations (cours 3) : on en garde donc les notations, <b>φ</b> pour l'angle de la facette (θ dans le cours 2) et <b>I, II, III</b> pour les valeurs principales, rangées de la plus grande à la plus petite. Rappel : on trouve aussi l'écriture σ<sub>xy</sub> pour les cisaillements que ce cours note <span class="tau">τ<sub>xy</sub></span>.</div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage (formation IWE)</b>
     <p>(IWE : <i>International Welding Engineer</i>, ingénieur international en soudage.) Toutes les vérifications de résistance du cours 5 (critères de Tresca et de von Mises, et la formule des cordons d'angle du cours 2 qui en dérive) s'expriment avec les contraintes principales. Et le tricercle de Mohr te montrera, sur un dessin, pourquoi le cœur d'une soudure épaisse tirée dans les trois directions risque de casser sans prévenir.</p>
@@ -433,7 +433,7 @@ input.r-gam{accent-color:var(--gam)}
     <p>Une facette de normale n⃗ est <b>principale</b> si le vecteur contrainte est colinéaire à n⃗ (même direction, au sens près) :</p>
     <div class="fx"><div class="big" style="font-size:1.8rem"><span class="sig">[σ]</span>·<span class="vec">n</span> = <span class="sig">σ</span>·<span class="vec">n</span></div><p class="cap">le nombre σ est la contrainte principale associée à la direction n⃗</p></div>
     <div class="def"><b>📖 Valeur propre et vecteur propre :</b> en mathématiques, une équation de la forme « matrice × vecteur = nombre × vecteur » définit un <b>vecteur propre</b> (ici n⃗, la direction principale) et sa <b>valeur propre</b> (ici σ, la contrainte principale). Chercher les directions principales, c'est « diagonaliser » la matrice.</div>
-    <p>Comme <span class="sig">[σ]</span> est <b>symétrique</b> (le petit carré qui ne tourne pas, cours 1), un théorème de mathématiques (le théorème spectral) garantit qu'il existe toujours <b>trois</b> directions principales, <b>perpendiculaires</b> entre elles, et trois contraintes principales <b>réelles</b>. Dans cette base principale (<span class="vec">e</span><sub>I</sub>, <span class="vec">e</span><sub>II</sub>, <span class="vec">e</span><sub>III</sub>), la matrice est diagonale (polycopié, p. 12) :</p>
+    <p>Comme <span class="sig">[σ]</span> est <b>symétrique</b> (le petit carré qui ne tourne pas, cours 1), un théorème de mathématiques (le théorème spectral) garantit qu'il existe toujours <b>trois</b> directions principales, <b>perpendiculaires</b> entre elles, et trois contraintes principales <b>réelles</b>. Dans cette base principale (<span class="vec">e</span><sub>I</sub>, <span class="vec">e</span><sub>II</sub>, <span class="vec">e</span><sub>III</sub>), la matrice est diagonale :</p>
     <div class="fx"><div class="big" style="font-size:1.4rem"><span class="sig">[σ]</span> = <span class="inlinemat"><span class="mat">σ<sub>I</sub></span><span>0</span><span>0</span><span>0</span><span class="mat">σ<sub>II</sub></span><span>0</span><span>0</span><span>0</span><span class="mat">σ<sub>III</sub></span></span> &nbsp; avec &nbsp; σ<sub>I</sub> ≥ σ<sub>II</sub> ≥ σ<sub>III</sub></div><p class="cap">convention de rangement : I la plus grande (traction la plus forte), III la plus petite (compression la plus forte, ou traction la plus faible)</p></div>
     <div class="warn">⚠️ <b>Le rangement se fait sur les valeurs algébriques</b>, signes compris : −80 MPa est plus petit que 10 MPa. Une compression forte est donc σ<sub>III</sub>, pas σ<sub>I</sub>.</div>
   </div>
@@ -450,13 +450,13 @@ input.r-gam{accent-color:var(--gam)}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">deux points suffisent</span></div>
     <p>En état plan (σ<sub>xx</sub>, σ<sub>yy</sub>, τ<sub>xy</sub>), chaque orientation de facette donne un point (σ<sub>n</sub> ; τ), et tous ces points forment un cercle : tu l'as vu aux cours 2 et 3. La bonne nouvelle, c'est qu'on n'a pas besoin de calculer tous les points : <b>deux suffisent</b>, ceux des faces x et y du petit carré.</p>
-    <p><b>La recette de construction</b> (avec la convention du polycopié) :<br><b>1.</b> Place <b>X</b> = (σ<sub>xx</sub> ; τ<sub>xy</sub>), le point de la face x.<br><b>2.</b> Place <b>Y</b> = (σ<sub>yy</sub> ; −τ<sub>xy</sub>), le point de la face y : il est symétrique de X par rapport au centre.<br><b>3.</b> Le segment XY est un diamètre : son milieu, sur l'axe horizontal, est le centre C.<br><b>4.</b> Trace le cercle de centre C passant par X.<br><b>5.</b> Les deux points où le cercle coupe l'axe horizontal sont les <b>contraintes principales</b> (τ = 0).<br><b>6.</b> Les points le plus haut et le plus bas donnent le <b>cisaillement maximal</b> dans le plan.</p>
+    <p><b>La recette de construction</b> (avec la convention de la série) :<br><b>1.</b> Place <b>X</b> = (σ<sub>xx</sub> ; τ<sub>xy</sub>), le point de la face x.<br><b>2.</b> Place <b>Y</b> = (σ<sub>yy</sub> ; −τ<sub>xy</sub>), le point de la face y : il est symétrique de X par rapport au centre.<br><b>3.</b> Le segment XY est un diamètre : son milieu, sur l'axe horizontal, est le centre C.<br><b>4.</b> Trace le cercle de centre C passant par X.<br><b>5.</b> Les deux points où le cercle coupe l'axe horizontal sont les <b>contraintes principales</b> (τ = 0).<br><b>6.</b> Les points le plus haut et le plus bas donnent le <b>cisaillement maximal</b> dans le plan.</p>
     <div class="mnemo">🪞 <b>Le miroir :</b> quand la facette tourne de φ sur la pièce, son point tourne de 2φ sur le cercle, <b>dans l'autre sens</b>. Deux directions à 90° sur la pièce (les faces x et y) sont donc diamétralement opposées sur le cercle (180°).</div>
   </div>
 
   <div class="lab" id="w2">
     <p class="lab-h">Manipulation 2 : construire le cercle pas à pas</p>
-    <p class="lab-sub">Règle l'état de contrainte, puis avance étape par étape. À gauche, le petit carré : à l'étape 6, les directions principales apparaissent en vert. À droite, le plan de Mohr (σ<sub>n</sub> ; τ), avec la convention du polycopié.</p>
+    <p class="lab-sub">Règle l'état de contrainte, puis avance étape par étape. À gauche, le petit carré : à l'étape 6, les directions principales apparaissent en vert. À droite, le plan de Mohr (σ<sub>n</sub> ; τ), avec la convention de la série.</p>
     <svg id="w2svg" viewBox="0 0 680 340" role="img" aria-label="Construction pas à pas du cercle de Mohr"></svg>
     <div class="ctrl"><label for="w2x"><span class="sig">σ<sub>xx</sub></span></label><input id="w2x" class="r-frc" type="range" min="-100" max="100" step="5" value="80"><output id="w2xv"></output></div>
     <div class="ctrl"><label for="w2y"><span class="sig">σ<sub>yy</sub></span></label><input id="w2y" class="r-frc" type="range" min="-100" max="100" step="5" value="-40"><output id="w2yv"></output></div>
@@ -470,17 +470,17 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les formules et les pièges</span></div>
-    <p>Avec la convention du polycopié (t⃗ = n⃗ tourné de +90°), les formules des cours 2 et 3 s'écrivent :</p>
+    <p>Avec la convention de la série (t⃗ = n⃗ tourné de +90°), les formules des cours 2 et 3 s'écrivent :</p>
     <div class="fx" style="max-width:700px"><div class="big" style="font-size:1.28rem;line-height:1.9">
       <span class="sig">σ<sub>n</sub></span> = <span class="frac"><span>σ<sub>xx</sub> + σ<sub>yy</sub></span><span>2</span></span> + <span class="frac"><span>σ<sub>xx</sub> − σ<sub>yy</sub></span><span>2</span></span> cos 2φ + <span class="tau">τ<sub>xy</sub></span> sin 2φ<br>
       <span class="tau">τ</span> = −<span class="frac"><span>σ<sub>xx</sub> − σ<sub>yy</sub></span><span>2</span></span> sin 2φ + <span class="tau">τ<sub>xy</sub></span> cos 2φ
-    </div><p class="cap">ce sont les formules de ε<sub>n</sub> et ε<sub>nt</sub> de la page 11 du polycopié, avec σ à la place de ε</p></div>
+    </div><p class="cap">ce sont les formules de ε<sub>n</sub> et ε<sub>nt</sub> du cours 3, avec σ à la place de ε</p></div>
     <div class="fx" style="max-width:700px"><div class="big" style="font-size:1.28rem;line-height:1.9">
       C = <span class="frac"><span>σ<sub>xx</sub> + σ<sub>yy</sub></span><span>2</span></span> &nbsp;&nbsp; R = ½√((σ<sub>xx</sub> − σ<sub>yy</sub>)² + 4τ<sub>xy</sub>²) &nbsp;&nbsp; <span class="mat">σ<sub>1, 2</sub></span> = C ± R &nbsp;&nbsp; tan 2φ<sub>p</sub> = <span class="frac"><span>2τ<sub>xy</sub></span><span>σ<sub>xx</sub> − σ<sub>yy</sub></span></span>
     </div><p class="cap">φ<sub>p</sub> : angle d'une direction principale ; les deux contraintes principales du plan sont notées σ<sub>1</sub> ≥ σ<sub>2</sub> tant qu'on ne les a pas rangées avec la troisième (chapitre 4)</p></div>
     <p><b>Piège 1 : tan 2φ<sub>p</sub> a deux solutions</b>, à 90° l'une de l'autre sur la pièce. Pour savoir laquelle correspond à σ<sub>1</sub> : remplace dans la formule de σ<sub>n</sub>, ou utilise <span class="m">φ<sub>1</sub> = ½·atan2(2τ<sub>xy</sub>, σ<sub>xx</sub> − σ<sub>yy</sub>)</span> (atan2 : l'arc tangente à deux arguments des logiciels, qui tient compte des signes ; Excel inverse l'ordre de ses deux arguments). Règle rapide : si σ<sub>xx</sub> &gt; σ<sub>yy</sub>, la solution entre −45° et +45° est σ<sub>1</sub>.</p>
     <p><b>Piège 2 : sur les facettes du cisaillement maximal, σ<sub>n</sub> n'est pas nul.</b> Le point le plus haut du cercle a pour abscisse C : ces facettes, à 45° des directions principales, portent τ = R <b>et</b> σ<sub>n</sub> = C.</p>
-    <p><b>Piège 3 : en contrainte plane, il y a une troisième contrainte principale</b>, σ<sub>zz</sub> = 0 (direction z, perpendiculaire au plan). Elle n'apparaît pas sur le cercle du plan, mais elle compte pour le cisaillement maximal réel : c'est tout le chapitre 4. Rappel du polycopié (p. 12) : tout point d'une surface libre est en contrainte plane.</p>
+    <p><b>Piège 3 : en contrainte plane, il y a une troisième contrainte principale</b>, σ<sub>zz</sub> = 0 (direction z, perpendiculaire au plan). Elle n'apparaît pas sur le cercle du plan, mais elle compte pour le cisaillement maximal réel : c'est tout le chapitre 4. Rappel : tout point d'une surface libre est en contrainte plane.</p>
   </div>
 </div>
 </section>
@@ -547,7 +547,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">trois cercles, une zone</span></div>
-    <p>Une fois σ<sub>I</sub> ≥ σ<sub>II</sub> ≥ σ<sub>III</sub> connues, on trace trois cercles sur l'axe horizontal, chacun ayant pour diamètre l'écart entre deux contraintes principales : [σ<sub>III</sub> ; σ<sub>II</sub>], [σ<sub>II</sub> ; σ<sub>I</sub>] et le grand [σ<sub>III</sub> ; σ<sub>I</sub>]. C'est le <b>tricercle de Mohr</b> de la page 13 du polycopié : trois bulles de savon, la grande contenant les deux petites.</p>
+    <p>Une fois σ<sub>I</sub> ≥ σ<sub>II</sub> ≥ σ<sub>III</sub> connues, on trace trois cercles sur l'axe horizontal, chacun ayant pour diamètre l'écart entre deux contraintes principales : [σ<sub>III</sub> ; σ<sub>II</sub>], [σ<sub>II</sub> ; σ<sub>I</sub>] et le grand [σ<sub>III</sub> ; σ<sub>I</sub>]. C'est le <b>tricercle de Mohr</b> : trois bulles de savon, la grande contenant les deux petites.</p>
     <p>Le résultat remarquable : le point (σ<sub>n</sub> ; τ) de <b>n'importe quelle facette</b>, dans n'importe quelle direction de l'espace, tombe dans la zone située <b>à l'intérieur du grand cercle et à l'extérieur des deux petits</b>. La manipulation le montre en tirant des centaines de facettes au hasard.</p>
     <p>Et donc, le cisaillement maximal en ce point est le rayon du grand cercle :</p>
     <div class="fx"><div class="big" style="font-size:1.8rem"><span class="tau">τ<sub>max</sub></span> = <span class="frac"><span>σ<sub>I</sub> − σ<sub>III</sub></span><span>2</span></span></div><p class="cap">atteint sur les facettes inclinées à 45° entre les directions principales I et III</p></div>
@@ -579,7 +579,7 @@ input.r-gam{accent-color:var(--gam)}
     <p><b>Pour une facette quelconque</b>, de normale n⃗ = (n<sub>1</sub> ; n<sub>2</sub> ; n<sub>3</sub>) dans la base principale : <span class="m">σ<sub>n</sub> = σ<sub>I</sub>n<sub>1</sub>² + σ<sub>II</sub>n<sub>2</sub>² + σ<sub>III</sub>n<sub>3</sub>²</span> et <span class="m">τ² = σ<sub>I</sub>²n<sub>1</sub>² + σ<sub>II</sub>²n<sub>2</sub>² + σ<sub>III</sub>²n<sub>3</sub>² − σ<sub>n</sub>²</span> (c'est la méthode M-P-P du cours 2, dans la base principale). Les facettes qui contiennent une direction principale (n<sub>i</sub> = 0 pour un i) sont sur les cercles eux-mêmes ; toutes les autres sont dans la zone.</p>
     <p><b>Le cisaillement maximal</b> vaut (σ<sub>I</sub> − σ<sub>III</sub>)/2, sur les facettes de normale n⃗ = (1/√2 ; 0 ; ±1/√2) dans la base principale, qui portent aussi σ<sub>n</sub> = (σ<sub>I</sub> + σ<sub>III</sub>)/2.</p>
     <div class="warn">⚠️ <b>Piège n° 1 : oublier la troisième contrainte principale en contrainte plane.</b> Paroi de réservoir : σ<sub>θθ</sub> = 100 MPa, σ<sub>zz</sub> = 50 MPa, et σ<sub>rr</sub> ≈ 0 (surface libre). Le cercle du plan (θ, z) donne un cisaillement de 25 MPa. Mais les trois contraintes principales sont 100, 50 et <b>0</b> : le vrai τ<sub>max</sub> vaut (100 − 0)/2 = <b>50 MPa</b>, sur des facettes inclinées à 45° dans l'épaisseur de la paroi. Deux fois plus !</div>
-    <div class="warn">⚠️ <b>Piège n° 2 : les lettres de la figure.</b> Sur la figure de la page 13 du polycopié, A, B et C désignent les points σ<sub>I</sub>, σ<sub>II</sub> et σ<sub>III</sub> sur l'axe. Ne les confonds pas avec le centre, que ce cours note aussi C.</div>
+    <div class="warn">⚠️ <b>Piège n° 2 : les lettres des figures.</b> Sur certaines figures du tricercle, A, B et C désignent les points σ<sub>I</sub>, σ<sub>II</sub> et σ<sub>III</sub> sur l'axe. Ne les confonds pas avec le centre, que ce cours note aussi C.</div>
     <div class="weld"><b>🔥 La triaxialité, enfin sur un dessin</b>
       <p>Au cœur d'une soudure épaisse bridée, les contraintes résiduelles peuvent tirer dans les trois directions, par exemple 180, 150 et 120 MPa. Les trois cercles sont alors tout petits : τ<sub>max</sub> = (180 − 120)/2 = 30 MPa seulement, contre 90 MPa si l'on avait 180 MPa en traction simple. Or la plasticité des métaux est pilotée par le cisaillement (cours 1) : avec si peu de cisaillement, le métal ne peut presque pas se déformer plastiquement, même sous une forte traction. Il perd sa capacité à « prévenir » en se déformant, et le risque de <b>rupture fragile</b> augmente. C'est l'une des raisons des traitements de détensionnement et des exigences de ténacité sur les assemblages épais.</p>
     </div>
@@ -772,7 +772,7 @@ input.r-gam{accent-color:var(--gam)}
     <dt>Diagonaliser</dt><dd>Trouver la base dans laquelle une matrice devient diagonale : ici, chercher les directions principales.</dd>
     <dt>Direction principale</dt><dd>Direction n⃗ telle que [σ]n⃗ soit colinéaire à n⃗ : la facette correspondante ne subit aucun cisaillement.</dd>
     <dt>Équation caractéristique</dt><dd>det([σ] − σ𝕀) = 0, soit σ³ − I<sub>1</sub>σ² + I<sub>2</sub>σ − I<sub>3</sub> = 0 ; ses racines sont les contraintes principales.</dd>
-    <dt>φ, φ<sub>p</sub></dt><dd>« Phi » : angle de rotation de la facette (notation du polycopié) ; φ<sub>p</sub> : angle d'une direction principale.</dd>
+    <dt>φ, φ<sub>p</sub></dt><dd>« Phi » : angle de rotation de la facette ; φ<sub>p</sub> : angle d'une direction principale.</dd>
     <dt>𝕀</dt><dd>Matrice identité : des 1 sur la diagonale, des 0 ailleurs.</dd>
     <dt>Invariants I<sub>1</sub>, I<sub>2</sub>, I<sub>3</sub></dt><dd>Trois nombres calculés à partir de [σ] qui ne dépendent pas du repère choisi.</dd>
     <dt>Racine</dt><dd>Solution d'une équation polynomiale. Racine double : solution qui compte deux fois (deux contraintes principales égales).</dd>
@@ -802,14 +802,14 @@ input.r-gam{accent-color:var(--gam)}
   </div>
   <p class="status" id="checkMsg"></p>
 
-  <div class="meta">🔭 <b>Au prochain épisode, cours 5 : loi de Hooke en 3D et critères de résistance.</b> On relie enfin les deux matrices, [σ] et ℇ, par la loi de Hooke et la loi de Lamé de la page 13 du polycopié. Puis on répond à la question finale de toute la série : « la pièce tient-elle ? », avec les critères de Tresca (qui utilise directement le τ<sub>max</sub> de ce cours) et de von Mises (qui explique le facteur 3 de la formule des cordons de soudure).</div>
+  <div class="meta">🔭 <b>Au prochain épisode, cours 5 : loi de Hooke en 3D et critères de résistance.</b> On relie enfin les deux matrices, [σ] et ℇ, par la loi de Hooke et la loi de Lamé. Puis on répond à la question finale de toute la série : « la pièce tient-elle ? », avec les critères de Tresca (qui utilise directement le τ<sub>max</sub> de ce cours) et de von Mises (qui explique le facteur 3 de la formule des cordons de soudure).</div>
 </div>
 </section>
 </main>
 
 <footer>
 <div class="wrap">
-  <p>Cours 4 sur 5 de la série « Résistance des matériaux, de zéro aux matrices ». Pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 4 sur 5 de la série « Résistance des matériaux, de zéro aux matrices ». Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1152,7 +1152,7 @@ function triDraw(svg,s,o){ // s trié décroissant ; o : {W,H,x0,y0,show:[petits
     {q:"En un point, combien existe-t-il de directions principales (cas général) ?",o:["une","deux","trois, perpendiculaires entre elles","une infinité"],c:2,e:"[σ] est symétrique : le théorème spectral garantit <b>trois directions principales perpendiculaires</b>, et trois contraintes principales réelles."},
     {q:"σ<sub>xx</sub> = 80, σ<sub>yy</sub> = −40, τ<sub>xy</sub> = 30 MPa. La plus grande contrainte principale du plan vaut :",o:["80 MPa","87,1 MPa","67,1 MPa","110 MPa"],c:1,e:"C = 20, R = √(60² + 30²) = 67,1, donc σ<sub>1</sub> = C + R = <b>87,1 MPa</b>."},
     {q:"L'angle d'une direction principale vérifie :",o:["tan 2φ = 2τ<sub>xy</sub>/(σ<sub>xx</sub> − σ<sub>yy</sub>)","tan φ = τ<sub>xy</sub>/σ<sub>xx</sub>","sin 2φ = τ<sub>xy</sub>/R","φ = 45°"],c:0,e:"<b>tan 2φ<sub>p</sub> = 2τ<sub>xy</sub>/(σ<sub>xx</sub> − σ<sub>yy</sub>)</b>, avec deux solutions à 90° l'une de l'autre."},
-    {q:"Avec la convention du polycopié, quand la facette tourne de φ, son point sur le cercle de Mohr :",o:["tourne de φ dans le même sens","tourne de 2φ dans le même sens","tourne de 2φ dans le sens contraire","ne bouge pas"],c:2,e:"Le miroir : <b>2φ, dans l'autre sens</b>. Deux faces à 90° sur la pièce sont diamétralement opposées sur le cercle."},
+    {q:"Avec la convention de la série, quand la facette tourne de φ, son point sur le cercle de Mohr :",o:["tourne de φ dans le même sens","tourne de 2φ dans le même sens","tourne de 2φ dans le sens contraire","ne bouge pas"],c:2,e:"Le miroir : <b>2φ, dans l'autre sens</b>. Deux faces à 90° sur la pièce sont diamétralement opposées sur le cercle."},
     {q:"Sur les facettes du cisaillement maximal dans le plan, la contrainte normale vaut :",o:["0","C, le centre du cercle","R","σ<sub>1</sub>"],c:1,e:"Le sommet du cercle a pour abscisse <b>C</b> : ces facettes portent τ = R et σ<sub>n</sub> = C, qui n'est pas nul en général."},
     {q:"L'invariant I<sub>1</sub> est égal à :",o:["le déterminant de [σ]","la trace, somme des trois contraintes principales","le produit des contraintes principales","τ<sub>max</sub>"],c:1,e:"<b>I<sub>1</sub> = σ<sub>xx</sub> + σ<sub>yy</sub> + σ<sub>zz</sub> = σ<sub>I</sub> + σ<sub>II</sub> + σ<sub>III</sub></b>. Le produit, c'est I<sub>3</sub>."},
     {q:"Les contraintes principales sont les solutions de :",o:["det([σ] − σ𝕀) = 0","[σ] = 0","trace[σ] = 0","[σ]·[σ] = 𝕀"],c:0,e:"<b>det([σ] − σ𝕀) = 0</b>, l'équation caractéristique σ³ − I<sub>1</sub>σ² + I<sub>2</sub>σ − I<sub>3</sub> = 0."},

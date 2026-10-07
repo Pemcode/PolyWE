@@ -316,24 +316,11 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div><div class="f">KV ≠ grandeur de calcul</div>L'énergie Charpy compare et réceptionne les aciers, mais ne dit pas <b>à quelle contrainte</b> casse une pièce qui contient <b>tel défaut</b>. Il faut une grandeur liée à la fissure elle-même : c'est l'objet de ce cours.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> de référence (Partie I : Mécanique de la rupture). Ce cours couvre le § II.C « Un peu de mécanique » et une partie du § II.D, <b>pages 12 à 21 et 24, figures 18 à 23 et 26 à 28</b> :
-    <div class="tbl-wrap"><table class="data">
-      <tr><th>Chapitre du cours</th><th>Polycopié</th></tr>
-      <tr><td>1 La résistance théorique</td><td>p. 12 à 14, § II.C.1, figures 18 et 19</td></tr>
-      <tr><td>2 Le trou et l'ellipse : K<sub>t</sub></td><td>p. 14 et 15, § II.C.2, figure 20</td></tr>
-      <tr><td>3 De l'entaille à la fissure</td><td>p. 15 et 16, § II.C.2, figure 21 ; bilan énergétique de Griffith <span class="hp">hors poly</span></td></tr>
-      <tr><td>4 Le champ en pointe de fissure</td><td>p. 16 à 18, § II.C.3 et II.C.4, figures 22 et 23</td></tr>
-      <tr><td>5 Le facteur K = σY√a</td><td>p. 18, 22 et 24, § II.D.4, figure 28 ; défauts de soudure <span class="hp">hors poly</span></td></tr>
-      <tr><td>6 Les trois modes de rupture</td><td>p. 20 et 21, § II.D.1.b et c, figures 26 et 27</td></tr>
-    </table></div>
-    La ténacité K<sub>IC</sub>, sa mesure et l'utilisation du critère K = K<sub>IC</sub> (p. 19 et 22 à 29) sont l'objet du cours 4.
-  </div>
-
   <div class="def"><b>🔎 Quatre remarques de lecture</b>
-    <p><b>1. Inglis, Orowan ou Griffith ?</b> Le polycopié appelle « fissure de Griffith » la fissure elliptique, dont le facteur K<sub>t</sub> = 1 + 2a/b est dû à l'ingénieur britannique Charles Inglis (1913). Il en déduit σ<sub>r</sub> = √(Eγ<sub>s</sub>/4a) (p. 16), un raisonnement souvent attribué à Egon Orowan. Le résultat d'Alan Arnold Griffith (1920), obtenu par un bilan d'énergie, est σ<sub>r</sub> = √(2Eγ<sub>s</sub>/(πa)). Les deux varient en 1/√a et ne diffèrent que d'un facteur numérique voisin de 1,6 (chapitre 3).</p>
-    <p><b>2. Que vaut a ?</b> Pour une fissure centrale traversante (la fissure « de Griffith »), a est la <b>demi-longueur</b> : la fissure mesure 2a (figure 28, à gauche). Pour une fissure débouchante, a est la <b>profondeur</b> totale (figure 28, à droite). Page 17, le « milieu semi-infini contenant une fissure de longueur a » est associé à des formules établies pour la fissure centrale de longueur 2a : il faut lire a comme une demi-longueur. Page 24, la fissure de Griffith est dite « débouchante dans un milieu infini » : elle est en fait traversante (elle traverse l'épaisseur) mais ne débouche sur aucun bord.</p>
-    <p><b>3. Deux conventions pour Y.</b> Le polycopié écrit K = σY√a, son Y contenant le √π (Y = √π pour la fissure centrale). Beaucoup d'ouvrages et la norme d'évaluation des défauts BS 7910 écrivent K = Yσ√(πa), avec Y = 1 pour la même fissure. Un Y lu ailleurs doit donc être multiplié par √π ≈ 1,77 avant d'être utilisé ici.</p>
-    <p><b>4. Contrainte nominale.</b> Le polycopié (p. 14) rapporte la contrainte nominale à la section brute, loin du trou ; la RDM la rapporte souvent à la section nette, au droit du trou. Les deux conventions donnent des K<sub>t</sub> différents pour la même pièce : il faut toujours préciser laquelle on utilise.</p>
+    <p><b>1. Inglis, Orowan ou Griffith ?</b> On appelle parfois « fissure de Griffith » la fissure elliptique, dont le facteur K<sub>t</sub> = 1 + 2a/b est dû à l'ingénieur britannique Charles Inglis (1913). On en déduit σ<sub>r</sub> = √(Eγ<sub>s</sub>/4a), un raisonnement souvent attribué à Egon Orowan. Le résultat d'Alan Arnold Griffith (1920), obtenu par un bilan d'énergie, est σ<sub>r</sub> = √(2Eγ<sub>s</sub>/(πa)). Les deux varient en 1/√a et ne diffèrent que d'un facteur numérique voisin de 1,6 (chapitre 3).</p>
+    <p><b>2. Que vaut a ?</b> Pour une fissure centrale traversante (la fissure « de Griffith »), a est la <b>demi-longueur</b> : la fissure mesure 2a. Pour une fissure débouchante, a est la <b>profondeur</b> totale. Méfie-toi des énoncés qui parlent d'une « fissure de longueur a » avec des formules établies pour la fissure centrale de longueur 2a : il faut alors lire a comme une demi-longueur. Et une fissure traversante traverse l'épaisseur de la tôle, sans forcément déboucher sur un bord.</p>
+    <p><b>3. Deux conventions pour Y.</b> Cette série écrit K = σY√a, son Y contenant le √π (Y = √π pour la fissure centrale). Beaucoup d'ouvrages et la norme d'évaluation des défauts BS 7910 écrivent K = Yσ√(πa), avec Y = 1 pour la même fissure. Un Y lu ailleurs doit donc être multiplié par √π ≈ 1,77 avant d'être utilisé ici.</p>
+    <p><b>4. Contrainte nominale.</b> Ce cours la rapporte à la section brute, loin du trou ; la RDM la rapporte souvent à la section nette, au droit du trou. Les deux conventions donnent des K<sub>t</sub> différents pour la même pièce : il faut toujours préciser laquelle on utilise.</p>
   </div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
@@ -369,14 +356,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">les mains qui se lâchent</span></div>
     <p>Imagine deux rangées de personnes face à face, chacune tenant la main de celle d'en face. Pour séparer les deux rangées d'un seul coup, il faut tirer assez fort pour que <b>toutes les mains lâchent en même temps</b>. Chaque poignée de main résiste un peu ; des milliards de poignées de main résistent énormément.</p>
-    <p>Dans un cristal, les atomes sont rangés en plans réguliers, liés à leurs voisins par des liaisons qui se comportent comme de petits ressorts (polycopié, p. 12 et 13, figure 18). Tire sur deux plans voisins : les ressorts s'allongent, la force de rappel augmente, passe par un maximum, puis s'effondre quand les liaisons cèdent. Ce maximum, ramené à la surface, est la <b>résistance théorique</b> σ<sub>th</sub> du cristal : la contrainte qu'il faudrait pour séparer deux plans atomiques d'un bloc.</p>
-    <p>Le calcul (niveau 2) donne une valeur énorme : de l'ordre de <b>E/5 à E/10</b>, soit 20 à 40 GPa pour un acier, quarante à cent fois sa résistance réelle. Les matériaux réels cassent en fait vers <b>E/100 à E/1 000</b> (polycopié, p. 14). Quelque chose les affaiblit énormément : les <b>défauts</b>. Une fissure ne sépare pas les plans d'un bloc ; elle les décolle un par un, comme on ouvre une fermeture éclair, en concentrant l'effort sur les quelques liaisons de sa pointe.</p>
+    <p>Dans un cristal, les atomes sont rangés en plans réguliers, liés à leurs voisins par des liaisons qui se comportent comme de petits ressorts. Tire sur deux plans voisins : les ressorts s'allongent, la force de rappel augmente, passe par un maximum, puis s'effondre quand les liaisons cèdent. Ce maximum, ramené à la surface, est la <b>résistance théorique</b> σ<sub>th</sub> du cristal : la contrainte qu'il faudrait pour séparer deux plans atomiques d'un bloc.</p>
+    <p>Le calcul (niveau 2) donne une valeur énorme : de l'ordre de <b>E/5 à E/10</b>, soit 20 à 40 GPa pour un acier, quarante à cent fois sa résistance réelle. Les matériaux réels cassent en fait vers <b>E/100 à E/1 000</b>. Quelque chose les affaiblit énormément : les <b>défauts</b>. Une fissure ne sépare pas les plans d'un bloc ; elle les décolle un par un, comme on ouvre une fermeture éclair, en concentrant l'effort sur les quelques liaisons de sa pointe.</p>
     <p>La preuve expérimentale est ancienne : vers 1920, l'ingénieur britannique Alan Arnold Griffith étire des fibres de verre de plus en plus fines et constate qu'elles sont de plus en plus résistantes. Moins de matière, moins de place pour un défaut dangereux. Les fibres fraîchement étirées et les « trichites » (en anglais <i>whiskers</i>, des cristaux filiformes presque parfaits) approchent la résistance théorique.</p>
   </div>
 
   <div class="lab" id="m1">
     <p class="lab-h">Manipulation 1 : séparer deux plans d'atomes</p>
-    <p class="lab-sub">À gauche, deux plans atomiques qu'on écarte ; à droite, la contrainte σ nécessaire en fonction de l'écartement x − x<sub>0</sub>, approchée par une arche de sinusoïde (polycopié, figure 19). L'aire sous l'arche (bleu-vert) est l'énergie dépensée, égale à 2γ<sub>s</sub> à la séparation. Choisis un matériau et écarte les plans.</p>
+    <p class="lab-sub">À gauche, deux plans atomiques qu'on écarte ; à droite, la contrainte σ nécessaire en fonction de l'écartement x − x<sub>0</sub>, approchée par une arche de sinusoïde. L'aire sous l'arche (bleu-vert) est l'énergie dépensée, égale à 2γ<sub>s</sub> à la séparation. Choisis un matériau et écarte les plans.</p>
     <div class="btns" id="m1mat">
       <button class="btn on" data-k="fer" type="button">Fer (acier)</button>
       <button class="btn" data-k="verre" type="button">Verre de silice</button>
@@ -393,17 +380,17 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">le calcul de σ<sub>th</sub></span></div>
     <dl class="syms">
       <dt class="mat">x<sub>0</sub></dt><dd>paramètre de maille : distance d'équilibre entre deux plans atomiques, en m (environ 0,25 nm pour le fer)</dd>
-      <dt class="mat">U</dt><dd>énergie potentielle d'interaction entre deux atomes, minimale à l'équilibre (x = x<sub>0</sub>) ; la force entre atomes vaut F = dU/dx (polycopié, p. 13)</dd>
+      <dt class="mat">U</dt><dd>énergie potentielle d'interaction entre deux atomes, minimale à l'équilibre (x = x<sub>0</sub>) ; la force entre atomes vaut F = dU/dx</dd>
       <dt class="mat">γ<sub>s</sub></dt><dd>« gamma s » : <b>énergie de surface</b>, l'énergie qu'il faut dépenser pour créer 1 m² de surface nouvelle en rompant les liaisons, en J/m²</dd>
       <dt class="mat">λ</dt><dd>« lambda » : longueur de l'arche de sinusoïde, l'écartement au bout duquel les liaisons sont rompues</dd>
     </dl>
-    <p>La force F sur chaque atome de surface, répartie sur l'aire x<sub>0</sub>² qu'il occupe, donne σ = F/x<sub>0</sub>². On approche la partie utile de la courbe par une arche de sinusoïde (figure 19) :</p>
+    <p>La force F sur chaque atome de surface, répartie sur l'aire x<sub>0</sub>² qu'il occupe, donne σ = F/x<sub>0</sub>². On approche la partie utile de la courbe par une arche de sinusoïde :</p>
     <div class="fx"><div class="big" style="font-size:1.5rem"><span class="sig">σ</span> = <span class="mat">σ<sub>th</sub></span>·sin<span style="font-size:1.2em">[</span>π<span class="frac"><span><span class="eps">x</span> − <span class="mat">x<sub>0</sub></span></span><span><span class="mat">λ</span></span></span><span style="font-size:1.2em">]</span></div><p class="cap">valable entre x<sub>0</sub> (équilibre, σ = 0) et x<sub>0</sub> + λ (séparation)</p></div>
     <p><b>Première équation, l'énergie.</b> Rompre crée deux surfaces : le travail dépensé, l'aire sous l'arche, vaut 2γ<sub>s</sub> :</p>
     <div class="fx"><div class="big" style="font-size:1.4rem">∫<sub>x<sub>0</sub></sub><sup>x<sub>0</sub>+λ</sup> <span class="sig">σ</span> d<span class="eps">x</span> = <span class="frac"><span>2<span class="mat">σ<sub>th</sub></span><span class="mat">λ</span></span><span>π</span></span> = 2<span class="mat">γ<sub>s</sub></span> &nbsp;⟹&nbsp; <span class="mat">γ<sub>s</sub></span> = <span class="frac"><span><span class="mat">σ<sub>th</sub></span><span class="mat">λ</span></span><span>π</span></span></div><p class="cap">∫ : intégrale, l'aire sous la courbe ; ⟹ : « donc »</p></div>
     <p><b>Seconde équation, l'élasticité.</b> Aux petits écartements, sin u ≈ u et la loi de Hooke s'applique, avec la déformation ε = (x − x<sub>0</sub>)/x<sub>0</sub> :</p>
     <div class="fx"><div class="big" style="font-size:1.4rem"><span class="mat">σ<sub>th</sub></span>·π<span class="frac"><span><span class="eps">x</span> − <span class="mat">x<sub>0</sub></span></span><span><span class="mat">λ</span></span></span> = <span class="mat">E</span><span class="frac"><span><span class="eps">x</span> − <span class="mat">x<sub>0</sub></span></span><span><span class="mat">x<sub>0</sub></span></span></span> &nbsp;⟹&nbsp; <span class="mat">λ</span> = <span class="frac"><span>π<span class="mat">x<sub>0</sub></span><span class="mat">σ<sub>th</sub></span></span><span><span class="mat">E</span></span></span></div></div>
-    <p>En reportant λ dans γ<sub>s</sub> = σ<sub>th</sub>λ/π, on obtient γ<sub>s</sub> = σ<sub>th</sub>²x<sub>0</sub>/E, d'où (polycopié, p. 14) :</p>
+    <p>En reportant λ dans γ<sub>s</sub> = σ<sub>th</sub>λ/π, on obtient γ<sub>s</sub> = σ<sub>th</sub>²x<sub>0</sub>/E, d'où :</p>
     <div class="fx"><div class="big"><span class="mat">σ<sub>th</sub></span> = √<span style="font-size:1.1em">(</span><span class="frac"><span><span class="mat">E</span>·<span class="mat">γ<sub>s</sub></span></span><span><span class="mat">x<sub>0</sub></span></span></span><span style="font-size:1.1em">)</span></div><p class="cap">E en Pa, γ<sub>s</sub> en J/m², x<sub>0</sub> en m : σ<sub>th</sub> en Pa</p></div>
     <p><b>Exemple.</b> Fer : E = 210 GPa, γ<sub>s</sub> ≈ 2 J/m², x<sub>0</sub> ≈ 0,25 nm : <span class="m">σ<sub>th</sub> = √(210 × 10⁹ × 2/(0,25 × 10⁻⁹))</span> <span class="m">= √(1,68 × 10²¹) ≈ <b>41 GPa</b></span>, soit <b>E/5</b>. Un acier de construction casse vers 0,5 GPa : quatre-vingts fois moins.</p>
     <div class="warn"><b>⚠️ Piège : σ<sub>th</sub> n'est pas R<sub>e</sub>.</b> σ<sub>th</sub> est la contrainte de séparation d'un cristal parfait. Dans un métal, la plasticité démarre bien avant, grâce aux dislocations (cours 1) : elles jouent pour le glissement le rôle que jouent les fissures pour la rupture. Dans les deux cas, ce sont des <b>défauts</b> qui rendent le matériau réel beaucoup plus faible que le cristal idéal.</div>
@@ -426,7 +413,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">les lignes de force qui se serrent</span></div>
     <p>Imagine la force transmise par une plaque tendue comme un courant d'eau : des <b>lignes de force</b> parallèles qui vont d'un bout à l'autre. Perce un trou : les lignes qui le traversaient doivent le contourner. Elles se <b>serrent</b> sur ses flancs, là où la matière restante doit porter leur part en plus de la sienne. Comme l'eau d'un fleuve qui accélère en contournant une pile de pont.</p>
-    <p>Là où les lignes se serrent, la contrainte monte. Le rapport entre la contrainte maximale locale et la contrainte « normale » de la pièce est le <b>facteur de concentration de contrainte</b> K<sub>t</sub> (polycopié, p. 14, figure 20). Trois résultats à connaître :</p>
+    <p>Là où les lignes se serrent, la contrainte monte. Le rapport entre la contrainte maximale locale et la contrainte « normale » de la pièce est le <b>facteur de concentration de contrainte</b> K<sub>t</sub>. Trois résultats à connaître :</p>
     <ul>
       <li>un <b>trou rond</b> dans une grande plaque triple la contrainte sur ses flancs : <b>K<sub>t</sub> = 3</b>, quelle que soit sa taille ;</li>
       <li>un trou <b>elliptique</b> couché en travers de l'effort concentre d'autant plus qu'il est allongé : K<sub>t</sub> = 1 + 2a/b ;</li>
@@ -450,13 +437,13 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m2svg" role="img" aria-label="Plaque percée d'un trou elliptique, lignes de force et profil de contrainte près du bord"></svg>
     <div class="readout" id="m2rd"></div>
     <p class="status" id="m2msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">Lignes de force schématiques ; profil de contrainte approché <span class="hp">hors poly</span>, exact au bord du trou (σ<sub>max</sub> = K<sub>t</sub>·σ<sub>nom</sub>) et proche des solutions classiques ailleurs.</p>
+    <p class="mut" style="font-size:.85rem;margin:0">Lignes de force schématiques ; profil de contrainte approché, exact au bord du trou (σ<sub>max</sub> = K<sub>t</sub>·σ<sub>nom</sub>) et proche des solutions classiques ailleurs.</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">K<sub>t</sub>, rayon de courbure et contrainte nominale</span></div>
-    <div class="def"><b>📖 Facteur de concentration de contrainte</b> (polycopié, p. 14) : rapport entre la contrainte réelle maximale et la contrainte nominale, celle qui régnerait au point considéré si la discontinuité n'existait pas. Sans dimension, supérieur ou égal à 1.</div>
+    <div class="def"><b>📖 Facteur de concentration de contrainte</b> : rapport entre la contrainte réelle maximale et la contrainte nominale, celle qui régnerait au point considéré si la discontinuité n'existait pas. Sans dimension, supérieur ou égal à 1.</div>
     <div class="fx"><div class="row big" style="font-size:1.5rem"><span><span class="tau">K<sub>t</sub></span> = <span class="frac"><span><span class="sig">σ<sub>max</sub></span></span><span><span class="sig">σ<sub>nom</sub></span></span></span></span><span><span class="tau">K<sub>t</sub></span> = 1 + <span class="frac"><span>2<span class="eps">a</span></span><span><span class="mat">b</span></span></span> = 1 + 2√<span style="font-size:1.1em">(</span><span class="frac"><span><span class="eps">a</span></span><span><span class="mat">ρ</span></span></span><span style="font-size:1.1em">)</span></span></div><p class="cap">ellipse de demi-axes a (perpendiculaire à l'effort) et b, dans une plaque infinie ; ρ = b²/a : rayon de courbure en bout de grand axe</p></div>
-    <p>La seconde forme est la plus parlante : K<sub>t</sub> dépend du rapport entre la <b>taille</b> a du défaut et le <b>rayon de courbure</b> ρ (« rhô ») de sa pointe. Pour un cercle, a = b = ρ et K<sub>t</sub> = 3. K<sub>t</sub> augmente quand a augmente (défaut plus long) et quand ρ diminue (pointe plus fine), et tend vers l'infini quand ρ tend vers zéro (polycopié, p. 15).</p>
+    <p>La seconde forme est la plus parlante : K<sub>t</sub> dépend du rapport entre la <b>taille</b> a du défaut et le <b>rayon de courbure</b> ρ (« rhô ») de sa pointe. Pour un cercle, a = b = ρ et K<sub>t</sub> = 3. K<sub>t</sub> augmente quand a augmente (défaut plus long) et quand ρ diminue (pointe plus fine), et tend vers l'infini quand ρ tend vers zéro.</p>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Défaut</th><th>a</th><th>ρ</th><th>K<sub>t</sub></th></tr>
       <tr><td>Trou rond</td><td colspan="2">a = ρ (quelconque)</td><td class="n">3</td></tr>
@@ -464,13 +451,13 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <tr><td>Rayure usinée</td><td class="n">1 mm</td><td class="n">0,01 mm</td><td class="n">21</td></tr>
       <tr><td>Fissure de clivage</td><td class="n">1 µm</td><td class="n">≈ x<sub>0</sub> = 0,25 nm</td><td class="n">≈ 128</td></tr>
     </table></div>
-    <p><b>Où règne le pic ?</b> <span class="hp">hors poly</span> La surcontrainte est très <b>localisée</b> : elle s'étend sur une distance de l'ordre de ρ autour du bord. Un trou rond « fait sentir » sa présence à une distance de l'ordre de son rayon ; une entaille fine concentre une contrainte très élevée dans un volume minuscule (manipulation 2).</p>
+    <p><b>Où règne le pic ?</b> La surcontrainte est très <b>localisée</b> : elle s'étend sur une distance de l'ordre de ρ autour du bord. Un trou rond « fait sentir » sa présence à une distance de l'ordre de son rayon ; une entaille fine concentre une contrainte très élevée dans un volume minuscule (manipulation 2).</p>
     <h4>Quelle contrainte nominale ?</h4>
-    <p>Le polycopié prend la contrainte <b>loin du trou</b>, rapportée à la section brute : σ<sub>nom</sub> = F/(a·b), où a et b désignent ici la largeur et l'épaisseur de l'éprouvette de la figure 20. La RDM utilise souvent la contrainte dans la <b>section nette</b>, au droit du trou : σ<sub>nom</sub> = F/((a − d)·b) (p. 14). La contrainte maximale est la même ; seul K<sub>t</sub> change.</p>
+    <p>Ce cours prend la contrainte <b>loin du trou</b>, rapportée à la section brute : σ<sub>nom</sub> = F/(a·b), où a et b désignent ici la largeur et l'épaisseur de l'éprouvette. La RDM utilise souvent la contrainte dans la <b>section nette</b>, au droit du trou : σ<sub>nom</sub> = F/((a − d)·b). La contrainte maximale est la même ; seul K<sub>t</sub> change.</p>
     <p><b>Exemple.</b> Plaque de 200 × 10 mm, trou de 10 mm de diamètre, F = 200 kN. Section brute : <span class="m">σ<sub>nom</sub> = 200 000/(200 × 10) = 100 MPa</span>, d'où <span class="m">σ<sub>max</sub> ≈ 3 × 100 = <b>300 MPa</b></span>. Section nette : <span class="m">200 000/(190 × 10) = 105 MPa</span>, et le même σ<sub>max</sub> correspond à <span class="m">K<sub>t</sub> = 300/105 = 2,85</span>.</p>
     <div class="warn"><b>⚠️ Piège : K<sub>t</sub> ne dépend pas de la taille, seulement de la forme.</b> Un trou de 1 mm et un trou de 100 mm ont le même K<sub>t</sub> = 3. Ce qui change, c'est l'étendue de la zone surchargée.</div>
     <div class="warn"><b>⚠️ Piège : a est le demi-axe perpendiculaire à l'effort.</b> La même ellipse tournée de 90° (allongée dans le sens de l'effort) donne K<sub>t</sub> = 1 + 2b/a, à peine plus que 1 : une fente parallèle à l'effort est presque inoffensive. C'est la fente en travers qui est dangereuse.</div>
-    <div class="tip">💡 <b>Ductile ou fragile ?</b> <span class="hp">hors poly</span> Sous charge statique, un métal ductile plastifie en fond d'entaille et redistribue la contrainte : l'effet de K<sub>t</sub> s'atténue avant la rupture. En fatigue (série Fatigue) et en rupture fragile, il agit pleinement. C'est pourquoi le polycopié note (p. 15) que la rupture se produit le plus souvent au niveau des concentrations de contrainte.</div>
+    <div class="tip">💡 <b>Ductile ou fragile ?</b> Sous charge statique, un métal ductile plastifie en fond d'entaille et redistribue la contrainte : l'effet de K<sub>t</sub> s'atténue avant la rupture. En fatigue (série Fatigue) et en rupture fragile, il agit pleinement. C'est pourquoi la rupture se produit le plus souvent au niveau des concentrations de contrainte.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « trois pour le trou rond, l'infini pour la fissure »</b>. Entre les deux, 1 + 2√(a/ρ) : longue et fine, c'est grave.</div>
     <div class="weld"><b>🔥 Les concentrations de contrainte d'une soudure</b>
       <p>Le <b>pied de cordon</b>, où la surface du cordon rejoint la tôle, est une concentration de contrainte géométrique : son K<sub>t</sub> dépend de l'angle de raccordement et du rayon en pied, souvent de l'ordre de 2 à 3. Un <b>caniveau</b> (sillon fondu non comblé) ou une <b>morsure</b> ajoute une petite entaille à faible ρ. Une <b>racine non pénétrée</b> d'une soudure d'angle est une fente en travers de l'effort. D'où les parades qui augmentent ρ : meulage du pied, refusion TIG (soudage à l'électrode de tungstène sous gaz inerte), et l'exigence de profils de cordons sans entaille dans les niveaux de qualité les plus élevés.</p>
@@ -488,10 +475,10 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la rayure du vitrier</span></div>
     <p>Essaie d'arracher d'un coup un morceau de ruban adhésif bien collé, en tirant sur toute sa largeur : c'est très dur. Soulève un coin et tire : il se décolle tout seul. Au coin, l'effort se concentre sur une toute petite longueur de colle, qui cède, puis la suivante, puis la suivante. Une fissure fait exactement cela dans un cristal : sa pointe concentre la contrainte sur quelques liaisons atomiques, qui cèdent une à une.</p>
-    <p>Combine les chapitres 1 et 2. Une fissure de clivage a une pointe d'un rayon de l'ordre d'une distance interatomique : son K<sub>t</sub> est énorme. La rupture se produit dès que la contrainte maximale, K<sub>t</sub>·σ, atteint la résistance théorique σ<sub>th</sub>. Le calcul (niveau 2) conduit à un résultat capital (polycopié, p. 16) :</p>
+    <p>Combine les chapitres 1 et 2. Une fissure de clivage a une pointe d'un rayon de l'ordre d'une distance interatomique : son K<sub>t</sub> est énorme. La rupture se produit dès que la contrainte maximale, K<sub>t</sub>·σ, atteint la résistance théorique σ<sub>th</sub>. Le calcul (niveau 2) conduit à un résultat capital :</p>
     <div class="fx"><div class="big"><span class="sig">σ<sub>r</sub></span> ∝ <span class="frac"><span>1</span><span>√<span class="eps">a</span></span></span></div><p class="cap">∝ : « proportionnel à » ; la contrainte de rupture est inversement proportionnelle à la racine carrée de la taille du défaut</p></div>
     <p>Quadrupler la longueur d'un défaut divise la contrainte de rupture par deux ; la centupler la divise par dix. Le vitrier exploite cette loi : sa roulette crée une rayure de quelques micromètres sur une vitre qui ne contenait que des défauts bien plus petits, et la vitre casse le long du trait sous une simple pression du doigt.</p>
-    <p>Conséquence fondamentale : la résistance d'un matériau fragile <b>n'est pas une propriété du matériau</b>. Elle dépend de la taille du plus grand défaut qu'il contient, donc de sa fabrication (polycopié, p. 22). La propriété du matériau, ce sera sa ténacité (cours 4).</p>
+    <p>Conséquence fondamentale : la résistance d'un matériau fragile <b>n'est pas une propriété du matériau</b>. Elle dépend de la taille du plus grand défaut qu'il contient, donc de sa fabrication. La propriété du matériau, ce sera sa ténacité (cours 4).</p>
   </div>
 
   <div class="lab" id="m3">
@@ -506,7 +493,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div class="ctrl"><label for="m3a">Demi-longueur <span class="eps">a</span></label><input type="range" id="m3a" class="r-eps" min="0" max="1000" step="1" value="375"><output id="m3ao"></output></div>
     <div class="btns" id="m3f">
       <button class="btn on" data-k="g" type="button">Bilan d'énergie (Griffith)</button>
-      <button class="btn" data-k="o" type="button">Concentration de contrainte (polycopié)</button>
+      <button class="btn" data-k="o" type="button">Concentration de contrainte (Orowan)</button>
     </div>
     <div class="btns"><button class="btn play" id="m3play" type="button">▶ Faire grandir la rayure</button></div>
     <svg id="m3svg" role="img" aria-label="Contrainte de rupture en fonction de la longueur de fissure, en échelles logarithmiques"></svg>
@@ -515,16 +502,16 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">deux démonstrations, un même résultat</span></div>
-    <h4>Par la concentration de contrainte (polycopié, p. 15 et 16)</h4>
+    <h4>Par la concentration de contrainte</h4>
     <p>On écrit que la rupture survient quand la contrainte en pointe atteint σ<sub>th</sub> :</p>
     <div class="fx"><div class="big" style="font-size:1.5rem"><span class="sig">σ<sub>r</sub></span>·<span style="font-size:1.1em">(</span>1 + <span class="frac"><span>2<span class="eps">a</span></span><span><span class="mat">b</span></span></span><span style="font-size:1.1em">)</span> = <span class="mat">σ<sub>th</sub></span> = √<span style="font-size:1.1em">(</span><span class="frac"><span><span class="mat">E</span><span class="mat">γ<sub>s</sub></span></span><span><span class="mat">x<sub>0</sub></span></span></span><span style="font-size:1.1em">)</span></div></div>
     <p>Pour un clivage, le rayon en pointe est de l'ordre de la distance interatomique : <span class="m">ρ = b²/a ≈ x<sub>0</sub></span>, donc <span class="m">b = √(x<sub>0</sub>a)</span>. Pour un défaut de quelques µm, a ≫ b (« très grand devant »), et 1 + 2a/b ≈ 2a/b :</p>
     <div class="fx"><div class="big"><span class="sig">σ<sub>r</sub></span>·<span class="frac"><span>2<span class="eps">a</span></span><span>√(<span class="mat">x<sub>0</sub></span><span class="eps">a</span>)</span></span> = √<span style="font-size:1.1em">(</span><span class="frac"><span><span class="mat">E</span><span class="mat">γ<sub>s</sub></span></span><span><span class="mat">x<sub>0</sub></span></span></span><span style="font-size:1.1em">)</span> &nbsp;⟹&nbsp; <span class="sig">σ<sub>r</sub></span> = √<span style="font-size:1.1em">(</span><span class="frac"><span><span class="mat">E</span><span class="mat">γ<sub>s</sub></span></span><span>4<span class="eps">a</span></span></span><span style="font-size:1.1em">)</span></div></div>
-    <h4>Par le bilan d'énergie de Griffith <span class="hp">hors poly</span></h4>
+    <h4>Par le bilan d'énergie de Griffith</h4>
     <p>En 1920, Griffith raisonne autrement. Une fissure de longueur 2a dans une plaque tendue libère de l'énergie élastique : la matière autour d'elle se détend. Pour une plaque d'épaisseur B, cette énergie vaut πσ²a²B/E. En échange, la fissure crée deux surfaces de longueur 2a : elle coûte 4aBγ<sub>s</sub>. La fissure avance dès que l'énergie libérée par un petit allongement dépasse l'énergie de surface consommée :</p>
     <div class="fx"><div class="big" style="font-size:1.45rem"><span class="frac"><span>d</span><span>d<span class="eps">a</span></span></span><span style="font-size:1.1em">(</span><span class="frac"><span>π<span class="sig">σ</span>²<span class="eps">a</span>²<span class="mat">B</span></span><span><span class="mat">E</span></span></span><span style="font-size:1.1em">)</span> = <span class="frac"><span>d</span><span>d<span class="eps">a</span></span></span>(4<span class="eps">a</span><span class="mat">B</span><span class="mat">γ<sub>s</sub></span>) &nbsp;⟹&nbsp; <span class="sig">σ<sub>r</sub></span> = √<span style="font-size:1.1em">(</span><span class="frac"><span>2<span class="mat">E</span><span class="mat">γ<sub>s</sub></span></span><span>π<span class="eps">a</span></span></span><span style="font-size:1.1em">)</span></div><p class="cap">d/da : dérivée par rapport à a, le taux de variation quand la fissure s'allonge un peu</p></div>
     <p>Les deux démonstrations donnent la même loi en 1/√a ; le facteur numérique diffère de √(2/π)/(1/2) ≈ 1,6. Celle de Griffith est la plus rigoureuse : c'est l'ancêtre de l'approche énergétique G du cours 4.</p>
-    <p><b>Exemple.</b> Verre : E = 70 GPa, γ<sub>s</sub> ≈ 1 J/m². Pour une demi-longueur a = 1 µm : Griffith donne <span class="m">σ<sub>r</sub> = √(2 × 70 × 10⁹ × 1/(π × 10⁻⁶)) ≈ <b>211 MPa</b></span>, la formule du polycopié <span class="m">√(70 × 10⁹/(4 × 10⁻⁶)) ≈ 132 MPa</span>. Une vitre ordinaire casse vers 50 MPa : ses défauts de surface mesurent quelques micromètres à une vingtaine de micromètres.</p>
+    <p><b>Exemple.</b> Verre : E = 70 GPa, γ<sub>s</sub> ≈ 1 J/m². Pour une demi-longueur a = 1 µm : Griffith donne <span class="m">σ<sub>r</sub> = √(2 × 70 × 10⁹ × 1/(π × 10⁻⁶)) ≈ <b>211 MPa</b></span>, l'estimation par concentration de contrainte <span class="m">√(70 × 10⁹/(4 × 10⁻⁶)) ≈ 132 MPa</span>. Une vitre ordinaire casse vers 50 MPa : ses défauts de surface mesurent quelques micromètres à une vingtaine de micromètres.</p>
     <div class="warn"><b>⚠️ Piège : ces formules ne valent que pour la rupture parfaitement fragile.</b> Dans un métal, la pointe de fissure plastifie et consomme une énergie mille à cent mille fois supérieure à 2γ<sub>s</sub>. C'est l'idée de George Irwin et d'Egon Orowan, vers 1950 : remplacer 2γ<sub>s</sub> par cette énergie de rupture réelle (le G<sub>C</sub> du cours 4) rend la loi en 1/√a utilisable pour les aciers (manipulation 3, « acier réel »).</div>
     <div class="warn"><b>⚠️ Piège : a est la demi-longueur de la fissure centrale.</b> Une fissure traversante de 2 mm de long a a = 1 mm. Et a s'exprime en <b>mètres</b> dans ces formules.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « quatre fois plus long, deux fois moins fort »</b>. Et cent fois plus long, dix fois moins fort.</div>
@@ -544,7 +531,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">une montagne sans sommet</span></div>
-    <p>Le chapitre 2 a montré que la contrainte grimpe d'autant plus au bord d'un défaut que sa pointe est fine. Pour une vraie fissure, de pointe infiniment aiguë, la théorie de l'élasticité donne un résultat déroutant : devant la pointe, la contrainte d'ouverture varie comme <b>1/√r</b>, où r est la distance à la pointe (polycopié, p. 17, figure 23). À 1 mm de la pointe, elle vaut dix fois ce qu'elle vaut à 100 mm ; à la pointe même, elle devient <b>infinie</b>. On appelle cela une <b>singularité</b>.</p>
+    <p>Le chapitre 2 a montré que la contrainte grimpe d'autant plus au bord d'un défaut que sa pointe est fine. Pour une vraie fissure, de pointe infiniment aiguë, la théorie de l'élasticité donne un résultat déroutant : devant la pointe, la contrainte d'ouverture varie comme <b>1/√r</b>, où r est la distance à la pointe. À 1 mm de la pointe, elle vaut dix fois ce qu'elle vaut à 100 mm ; à la pointe même, elle devient <b>infinie</b>. On appelle cela une <b>singularité</b>.</p>
     <p>Physiquement, aucune contrainte n'est infinie : la matière plastifie ou s'endommage dans une petite zone à la pointe (cours 4). Mais un peu plus loin, la description élastique est excellente. Et elle a une propriété remarquable : <b>autour de toutes les fissures, le champ de contrainte a la même forme</b>. Seule change son intensité, un unique nombre noté <b>K</b>, le facteur d'intensité de contrainte.</p>
     <p>Pense à une chanson diffusée sur deux enceintes : la mélodie est la même, seul le bouton de volume diffère. Deux fissures de même K, l'une dans une petite éprouvette de laboratoire, l'autre dans un pont, font subir exactement la même chose à la matière de leur pointe. C'est ce qui permet de mesurer une ténacité en laboratoire et de l'appliquer à une structure.</p>
   </div>
@@ -565,14 +552,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">le champ asymptotique et le paramètre K</span></div>
-    <p>On place un repère (Oxyz) à la pointe : Ox dans le prolongement de la fissure, Oy perpendiculaire à son plan, Oz le long du front de fissure (la ligne qui borde la fissure dans l'épaisseur). Un point est repéré par ses coordonnées polaires : la distance r à la pointe et l'angle θ (« thêta ») avec Ox (polycopié, p. 16 et 17, figure 22). Pour une fissure ouverte par une traction perpendiculaire à son plan, la théorie de l'élasticité donne, près de la pointe :</p>
-    <div class="fx"><div class="big" style="font-size:1.3rem"><span class="sig">σ<sub>yy</sub></span> = <span class="frac"><span><span class="sig">K</span></span><span>√(2π<span class="mat">r</span>)</span></span>·cos<span class="frac"><span><span class="mat">θ</span></span><span>2</span></span>·<span style="font-size:1.1em">[</span>1 + sin<span class="frac"><span><span class="mat">θ</span></span><span>2</span></span>·sin<span class="frac"><span>3<span class="mat">θ</span></span><span>2</span></span><span style="font-size:1.1em">]</span> + …</div><p class="cap">les « … » désignent des termes qui restent finis à la pointe et deviennent négligeables quand r → 0 ; σ<sub>xx</sub> et τ<sub>xy</sub> ont des expressions de même forme (polycopié, p. 18)</p></div>
+    <p>On place un repère (Oxyz) à la pointe : Ox dans le prolongement de la fissure, Oy perpendiculaire à son plan, Oz le long du front de fissure (la ligne qui borde la fissure dans l'épaisseur). Un point est repéré par ses coordonnées polaires : la distance r à la pointe et l'angle θ (« thêta ») avec Ox. Pour une fissure ouverte par une traction perpendiculaire à son plan, la théorie de l'élasticité donne, près de la pointe :</p>
+    <div class="fx"><div class="big" style="font-size:1.3rem"><span class="sig">σ<sub>yy</sub></span> = <span class="frac"><span><span class="sig">K</span></span><span>√(2π<span class="mat">r</span>)</span></span>·cos<span class="frac"><span><span class="mat">θ</span></span><span>2</span></span>·<span style="font-size:1.1em">[</span>1 + sin<span class="frac"><span><span class="mat">θ</span></span><span>2</span></span>·sin<span class="frac"><span>3<span class="mat">θ</span></span><span>2</span></span><span style="font-size:1.1em">]</span> + …</div><p class="cap">les « … » désignent des termes qui restent finis à la pointe et deviennent négligeables quand r → 0 ; σ<sub>xx</sub> et τ<sub>xy</sub> ont des expressions de même forme</p></div>
     <p>Toutes les composantes s'écrivent <span class="m">σ<sub>ij</sub> = K·f<sub>ij</sub>(θ)/√(2πr)</span> : une fonction de l'angle, identique pour toutes les fissures, multipliée par K et divisée par √(2πr). Dans le plan de la fissure, devant la pointe (θ = 0) :</p>
     <div class="fx"><div class="big"><span class="sig">σ<sub>xx</sub></span> = <span class="sig">σ<sub>yy</sub></span> = <span class="frac"><span><span class="sig">K</span></span><span>√(2π<span class="mat">r</span>)</span></span></div><p class="cap">r en m, K en MPa·√m : σ en MPa</p></div>
-    <div class="def"><b>📖 Facteur d'intensité de contrainte K</b> (polycopié, p. 18) : paramètre du champ de contrainte au voisinage du fond de fissure, défini par <span class="m">K = σ<sub>nom</sub>·Y·√a</span>, avec Y un facteur sans dimension qui dépend de la géométrie (chapitre 5). Il s'exprime en <b>MPa·√m</b> (ou MPa·m<sup>1/2</sup>). On peut aussi le définir par la limite <span class="m">K = lim σ<sub>yy</sub>·√(2πr)</span> quand r tend vers 0, devant la pointe <span class="hp">hors poly</span>.</div>
+    <div class="def"><b>📖 Facteur d'intensité de contrainte K</b> : paramètre du champ de contrainte au voisinage du fond de fissure, défini par <span class="m">K = σ<sub>nom</sub>·Y·√a</span>, avec Y un facteur sans dimension qui dépend de la géométrie (chapitre 5). Il s'exprime en <b>MPa·√m</b> (ou MPa·m<sup>1/2</sup>). On peut aussi le définir par la limite <span class="m">K = lim σ<sub>yy</sub>·√(2πr)</span> quand r tend vers 0, devant la pointe.</div>
     <p><b>Exemple.</b> K = 30 MPa·√m. À r = 1 mm : <span class="m">σ<sub>yy</sub> = 30/√(2π × 0,001) = 30/0,0793 ≈ <b>378 MPa</b></span> ; à 0,1 mm : ≈ 1 197 MPa ; à 10 mm : ≈ 120 MPa. La contrainte égale R<sub>e</sub> = 355 MPa à <span class="m">r = (K/R<sub>e</sub>)²/(2π) = (30/355)²/6,28 ≈ <b>1,1 mm</b></span> : en deçà, l'élasticité est dépassée. C'est l'ordre de grandeur de la zone plastique, détaillée au cours 4.</p>
-    <p><b>Domaine de validité.</b> Ces formules valent au voisinage « non immédiat » de la pointe (polycopié, p. 17 et 21) : assez loin pour sortir de la zone plastique, assez près (typiquement r &lt; a/10) pour que les termes finis restent négligeables. Plus loin, la contrainte retrouve la valeur nominale, alors que la formule tendrait vers zéro.</p>
-    <div class="warn"><b>⚠️ Piège : K n'est pas une contrainte, et ce n'est pas K<sub>t</sub>.</b> K<sub>t</sub> est un rapport sans dimension (σ<sub>max</sub>/σ<sub>nom</sub>), défini pour une entaille de rayon fini. K, en MPa·√m, caractérise une fissure aiguë, pour laquelle K<sub>t</sub> serait infini (polycopié, p. 18).</div>
+    <p><b>Domaine de validité.</b> Ces formules valent au voisinage « non immédiat » de la pointe : assez loin pour sortir de la zone plastique, assez près (typiquement r &lt; a/10) pour que les termes finis restent négligeables. Plus loin, la contrainte retrouve la valeur nominale, alors que la formule tendrait vers zéro.</p>
+    <div class="warn"><b>⚠️ Piège : K n'est pas une contrainte, et ce n'est pas K<sub>t</sub>.</b> K<sub>t</sub> est un rapport sans dimension (σ<sub>max</sub>/σ<sub>nom</sub>), défini pour une entaille de rayon fini. K, en MPa·√m, caractérise une fissure aiguë, pour laquelle K<sub>t</sub> serait infini.</div>
     <div class="warn"><b>⚠️ Piège : la forme ne change jamais, seule la taille change.</b> Les courbes d'égale contrainte ont une forme fixe ; leur taille varie comme K². Doubler K multiplie par 4 la distance à laquelle une contrainte donnée est atteinte.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « un sur racine de r, et K au volume »</b>. La mélodie (la forme en θ) est toujours la même ; K tourne le bouton.</div>
     <div class="weld"><b>🔥 Le principe de similitude</b>
@@ -590,7 +577,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">trois boutons</span></div>
-    <p>Le facteur d'intensité de contrainte se calcule avec une formule d'une simplicité remarquable (polycopié, p. 18) :</p>
+    <p>Le facteur d'intensité de contrainte se calcule avec une formule d'une simplicité remarquable :</p>
     <div class="fx"><div class="big"><span class="sig">K</span> = <span class="sig">σ</span>·<span class="mat">Y</span>·√<span class="eps">a</span></div><p class="cap">σ : contrainte nominale perpendiculaire à la fissure ; Y : facteur de forme ; a : taille de la fissure, en mètres</p></div>
     <p>Trois boutons règlent le volume :</p>
     <ul>
@@ -617,26 +604,26 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m5svg" role="img" aria-label="Schéma du défaut choisi et comparaison des facteurs K des quatre géométries"></svg>
     <div class="readout" id="m5rd"></div>
     <p class="status" id="m5msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">Facteurs Y dans la convention du polycopié (K = σY√a). La fissure demi-circulaire de surface <span class="hp">hors poly</span> est calculée au point le plus profond, dans une tôle épaisse (solution de Newman et Raju).</p>
+    <p class="mut" style="font-size:.85rem;margin:0">Facteurs Y dans la convention de la série (K = σY√a). La fissure demi-circulaire de surface est calculée au point le plus profond, dans une tôle épaisse (solution de Newman et Raju).</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les facteurs Y usuels et les pièges d'unités</span></div>
     <div class="tbl-wrap"><table class="data">
-      <tr><th>Défaut</th><th>a désigne</th><th>Y (convention du polycopié)</th><th>Y (convention K = Yσ√(πa))</th></tr>
+      <tr><th>Défaut</th><th>a désigne</th><th>Y (convention K = σY√a)</th><th>Y (convention K = Yσ√(πa))</th></tr>
       <tr><td>Fissure traversante centrale, plaque infinie (« de Griffith »)</td><td>la demi-longueur</td><td class="n">√π ≈ 1,77</td><td class="n">1</td></tr>
       <tr><td>Fissure traversante débouchante, demi-plan</td><td>la profondeur</td><td class="n">≈ 1,99</td><td class="n">≈ 1,12</td></tr>
       <tr><td>Fissure circulaire noyée (« pièce de monnaie »)</td><td>le rayon</td><td class="n">2/√π ≈ 1,13</td><td class="n">2/π ≈ 0,64</td></tr>
-      <tr><td>Fissure demi-circulaire de surface, point le plus profond <span class="hp">hors poly</span></td><td>le rayon (la profondeur)</td><td class="n">≈ 1,17</td><td class="n">≈ 0,66</td></tr>
+      <tr><td>Fissure demi-circulaire de surface, point le plus profond</td><td>le rayon (la profondeur)</td><td class="n">≈ 1,17</td><td class="n">≈ 0,66</td></tr>
     </table></div>
-    <p>Source : polycopié, p. 18 et 24, figure 28, pour les trois premières. Dans une pièce réelle, finie, Y dépend de toutes les dimensions (épaisseur, largeur, distance aux bords) ; il est donné par des formules ou des abaques, issus du calcul ou de l'expérience (p. 24). Le cours 4 en donnera des exemples pour les éprouvettes de ténacité.</p>
+    <p>Les trois premières valeurs sont les solutions classiques des fissures en milieu infini ou semi-infini. Dans une pièce réelle, finie, Y dépend de toutes les dimensions (épaisseur, largeur, distance aux bords) ; il est donné par des formules ou des abaques, issus du calcul ou de l'expérience. Le cours 4 en donnera des exemples pour les éprouvettes de ténacité.</p>
     <h4>Unités</h4>
     <p>Avec σ en MPa et a en <b>mètres</b>, K sort en MPa·√m. Les documents de soudage utilisent souvent les N·mm<sup>−3/2</sup> (σ en N/mm², a en mm) :</p>
     <div class="fx"><div class="big" style="font-size:1.5rem">1 MPa·√m = 31,62 N·mm<sup>−3/2</sup></div><p class="cap">car 1 MPa = 1 N/mm² et √(1 m) = √(1 000 mm) = 31,62 √mm</p></div>
     <p><b>Exemple.</b> Défaut débouchant de 3 mm de profondeur, σ = 150 MPa : <span class="m">K = 150 × 1,99 × √0,003 = 150 × 1,99 × 0,0548 ≈ <b>16,3 MPa·√m</b></span>. Le même défaut noyé, de 3 mm de rayon : <span class="m">150 × 1,13 × 0,0548 ≈ <b>9,3 MPa·√m</b></span>, presque deux fois moins.</p>
-    <h4>Superposer les contraintes <span class="hp">hors poly</span></h4>
+    <h4>Superposer les contraintes <span class="hp">complément</span></h4>
     <p>En élasticité, les facteurs K d'un même mode s'ajoutent. Une fissure soumise à la fois à la contrainte de service σ et à des contraintes résiduelles de traction σ<sub>res</sub> voit donc <span class="m">K = (σ + σ<sub>res</sub>)·Y·√a</span>. Avec 200 MPa de résiduelles, le défaut débouchant précédent passe de 16,3 à <span class="m">350 × 1,99 × 0,0548 ≈ <b>38,1 MPa·√m</b></span>.</p>
     <div class="warn"><b>⚠️ Piège : les millimètres.</b> Avec a = 3 au lieu de 0,003, on trouve un K 31,6 fois trop grand. En MPa·√m, toujours a en mètres.</div>
-    <div class="warn"><b>⚠️ Piège : la convention de Y.</b> Un Y de 1,12 trouvé dans un abaque est presque toujours celui de la convention K = Yσ√(πa) : dans la formule du polycopié, il faut prendre 1,12 × √π ≈ 1,99. Une erreur de convention fausse K d'un facteur 1,77.</div>
+    <div class="warn"><b>⚠️ Piège : la convention de Y.</b> Un Y de 1,12 trouvé dans un abaque est presque toujours celui de la convention K = Yσ√(πa) : dans la convention de la série (K = σY√a), il faut prendre 1,12 × √π ≈ 1,99. Une erreur de convention fausse K d'un facteur 1,77.</div>
     <div class="warn"><b>⚠️ Piège : quelle contrainte ?</b> σ est la contrainte <b>perpendiculaire au plan de la fissure</b>, calculée comme si la fissure n'existait pas. Une fissure parallèle à l'effort ne voit presque aucune contrainte d'ouverture (chapitre 6).</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « deux fois la charge, deux fois K ; quatre fois la fissure, deux fois K »</b>. Et le bord aggrave : 1,99 au bord, 1,77 au centre, 1,13 au cœur.</div>
     <div class="weld"><b>🔥 Les défauts des soudures, vus par K</b>
@@ -660,13 +647,13 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">trois façons de solliciter une fissure</span></div>
-    <p>Une fissure a deux lèvres. On peut les déplacer l'une par rapport à l'autre de trois façons seulement (polycopié, p. 20, figure 26) :</p>
+    <p>Une fissure a deux lèvres. On peut les déplacer l'une par rapport à l'autre de trois façons seulement :</p>
     <ul>
       <li><b>mode I, ouverture</b> : les lèvres s'écartent, perpendiculairement au plan de la fissure. Comme on ouvre un livre ;</li>
       <li><b>mode II, glissement plan</b> : les lèvres glissent l'une sur l'autre, perpendiculairement au front de fissure. Comme deux pages qu'on fait glisser ;</li>
       <li><b>mode III, glissement antiplan ou déchirement</b> : les lèvres glissent parallèlement au front. Comme on déchire une feuille en tirant ses deux moitiés en sens opposés, hors de son plan.</li>
     </ul>
-    <p>Une sollicitation quelconque est une combinaison des trois, chacun avec son facteur : K<sub>I</sub>, K<sub>II</sub>, K<sub>III</sub>. Le polycopié le souligne : <b>le mode I est le plus dangereux</b>, et c'est presque toujours lui qui rompt les pièces. D'ailleurs, une fissure sollicitée en mode mixte tend à <b>tourner</b> pour se placer perpendiculairement à la plus grande contrainte de traction, en mode I pur (figure 27) : on retrouve l'« ouverture » du cours 1.</p>
+    <p>Une sollicitation quelconque est une combinaison des trois, chacun avec son facteur : K<sub>I</sub>, K<sub>II</sub>, K<sub>III</sub>. Retiens-le : <b>le mode I est le plus dangereux</b>, et c'est presque toujours lui qui rompt les pièces. D'ailleurs, une fissure sollicitée en mode mixte tend à <b>tourner</b> pour se placer perpendiculairement à la plus grande contrainte de traction, en mode I pur : on retrouve l'« ouverture » du cours 1.</p>
   </div>
 
   <div class="lab" id="m6">
@@ -682,18 +669,18 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m6svg" role="img" aria-label="Bloc fissuré sollicité selon les modes I, II ou III, et plaque avec fissure inclinée qui bifurque"></svg>
     <div class="readout" id="m6r"></div>
     <p class="status" id="m6msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">Plaque infinie, σ = 100 MPa, fissure centrale de demi-longueur a = 5 mm (Y = √π). Angle de bifurcation selon le critère de la contrainte tangentielle maximale (Erdogan et Sih, 1963) <span class="hp">hors poly</span>.</p>
+    <p class="mut" style="font-size:.85rem;margin:0">Plaque infinie, σ = 100 MPa, fissure centrale de demi-longueur a = 5 mm (Y = √π). Angle de bifurcation selon le critère de la contrainte tangentielle maximale (Erdogan et Sih, 1963).</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">décomposer, combiner, bifurquer</span></div>
-    <div class="def"><b>📖 Modes de rupture</b> (polycopié, p. 20) : mode I par ouverture ; mode II par cisaillement ou glissement dans le plan ; mode III par déchirement ou glissement antiplan. Chaque mode a son facteur d'intensité (p. 21) :</div>
+    <div class="def"><b>📖 Modes de rupture</b> : mode I par ouverture ; mode II par cisaillement ou glissement dans le plan ; mode III par déchirement ou glissement antiplan. Chaque mode a son facteur d'intensité :</div>
     <div class="fx"><div class="row big" style="font-size:1.35rem"><span><span class="sig">K<sub>I</sub></span> = <span class="sig">σ<sub>nom,I</sub></span>·<span class="mat">Y<sub>I</sub></span>·√<span class="eps">a</span></span><span><span class="tau">K<sub>II</sub></span> = <span class="tau">σ<sub>nom,II</sub></span>·<span class="mat">Y<sub>II</sub></span>·√<span class="eps">a</span></span><span><span class="tau">K<sub>III</sub></span> = <span class="tau">σ<sub>nom,III</sub></span>·<span class="mat">Y<sub>III</sub></span>·√<span class="eps">a</span></span></div><p class="cap">σ<sub>nom,I</sub> : contrainte normale au plan de la fissure ; σ<sub>nom,II</sub> et σ<sub>nom,III</sub> : cisaillements, perpendiculaire et parallèle au front</p></div>
-    <p>Les contraintes locales s'obtiennent en additionnant les contributions des trois modes, chacune de la forme K/√(2πr) × une fonction de θ (p. 21). Dans l'épaisseur, la troisième contrainte normale vaut <span class="m">σ<sub>zz</sub> = ν(σ<sub>xx</sub> + σ<sub>yy</sub>)</span> en déformation plane (pièce épaisse, ν étant le coefficient de Poisson) et 0 en contrainte plane (tôle mince). Le mode III fait apparaître les cisaillements hors plan τ<sub>xz</sub> et τ<sub>yz</sub>.</p>
+    <p>Les contraintes locales s'obtiennent en additionnant les contributions des trois modes, chacune de la forme K/√(2πr) × une fonction de θ. Dans l'épaisseur, la troisième contrainte normale vaut <span class="m">σ<sub>zz</sub> = ν(σ<sub>xx</sub> + σ<sub>yy</sub>)</span> en déformation plane (pièce épaisse, ν étant le coefficient de Poisson) et 0 en contrainte plane (tôle mince). Le mode III fait apparaître les cisaillements hors plan τ<sub>xz</sub> et τ<sub>yz</sub>.</p>
     <h4>La fissure inclinée</h4>
     <p>Une fissure traversante de demi-longueur a, inclinée d'un angle β par rapport au plan perpendiculaire à la traction σ, voit sur son plan la contrainte normale et le cisaillement de la facette inclinée du cours 1 :</p>
     <div class="fx"><div class="row big" style="font-size:1.45rem"><span><span class="sig">K<sub>I</sub></span> = <span class="sig">σ</span>·cos²<span class="mat">β</span>·√(π<span class="eps">a</span>)</span><span><span class="tau">K<sub>II</sub></span> = <span class="sig">σ</span>·sin<span class="mat">β</span>·cos<span class="mat">β</span>·√(π<span class="eps">a</span>)</span></div></div>
     <p><b>Exemple.</b> σ = 100 MPa, a = 5 mm, β = 30° : <span class="m">K<sub>I</sub> = 100 × 0,75 × √(π × 0,005) = <b>9,4 MPa·√m</b></span> et <span class="m">K<sub>II</sub> = 100 × 0,433 × 0,1253 = <b>5,4 MPa·√m</b></span>.</p>
-    <div class="def"><b>📖 Bifurcation</b> <span class="hp">hors poly</span> : en mode mixte, la fissure repart dans la direction où la contrainte tangentielle (la traction perpendiculaire à un petit rayon issu de la pointe) est maximale. Le critère d'Erdogan et Sih donne l'angle de bifurcation θ<sub>c</sub>, mesuré depuis le plan de la fissure :</div>
+    <div class="def"><b>📖 Bifurcation</b> : en mode mixte, la fissure repart dans la direction où la contrainte tangentielle (la traction perpendiculaire à un petit rayon issu de la pointe) est maximale. Le critère d'Erdogan et Sih donne l'angle de bifurcation θ<sub>c</sub>, mesuré depuis le plan de la fissure :</div>
     <div class="fx"><div class="big" style="font-size:1.4rem"><span class="mat">θ<sub>c</sub></span> = 2·arctan<span style="font-size:1.15em">(</span><span class="frac"><span><span class="sig">K<sub>I</sub></span> − √(<span class="sig">K<sub>I</sub></span>² + 8<span class="tau">K<sub>II</sub></span>²)</span><span>4<span class="tau">K<sub>II</sub></span></span></span><span style="font-size:1.15em">)</span></div><p class="cap">arctan : fonction réciproque de la tangente ; pour β = 30°, θ<sub>c</sub> ≈ −43° ; en mode II pur, θ<sub>c</sub> ≈ −70,5°</p></div>
     <p>Après cette bifurcation, la fissure progresse presque perpendiculairement à la traction : elle s'est mise en mode I.</p>
     <div class="warn"><b>⚠️ Piège : K<sub>I</sub>, K<sub>II</sub> et K<sub>III</sub> ne s'additionnent pas entre eux.</b> Ils décrivent des champs de formes différentes. Seuls les K d'un <b>même mode</b> s'additionnent (contraintes appliquées et résiduelles, chapitre 5).</div>
@@ -743,11 +730,11 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   <div class="exo">
     <h4>Exercice 3 : la vitre et la rayure <span class="lvtag">N2 · chapitre 3</span></h4>
     <p>Verre : E = 70 GPa, γ<sub>s</sub> = 1 J/m².</p>
-    <p class="q"><b>a)</b> Calcule la contrainte de rupture pour une fissure de demi-longueur a = 1 µm, puis a = 10 µm, avec la formule de Griffith et avec celle du polycopié.</p>
+    <p class="q"><b>a)</b> Calcule la contrainte de rupture pour une fissure de demi-longueur a = 1 µm, puis a = 10 µm, avec la formule de Griffith et avec l'estimation par concentration de contrainte.</p>
     <p class="q"><b>b)</b> Quelle taille de défaut explique une rupture à 50 MPa (formule de Griffith) ?</p>
     <p class="q"><b>c)</b> Le vitrier trace une rayure de 1 mm de profondeur effective. Que devient la contrainte de rupture ?</p>
     <details><summary>Voir la correction</summary><div class="sol">
-      <p><b>a)</b> Griffith, <span class="m">σ<sub>r</sub> = √(2Eγ<sub>s</sub>/(πa))</span> : pour 1 µm, <span class="m">√(1,4 × 10¹¹/(π × 10⁻⁶)) = <b>211 MPa</b></span> ; pour 10 µm, <span class="m"><b>66,8 MPa</b></span> (dix fois plus long, √10 = 3,16 fois moins fort). Polycopié, <span class="m">σ<sub>r</sub> = √(Eγ<sub>s</sub>/(4a))</span> : <span class="m"><b>132 MPa</b></span> et <span class="m"><b>41,8 MPa</b></span>. Même tendance, facteur 1,6 entre les deux.</p>
+      <p><b>a)</b> Griffith, <span class="m">σ<sub>r</sub> = √(2Eγ<sub>s</sub>/(πa))</span> : pour 1 µm, <span class="m">√(1,4 × 10¹¹/(π × 10⁻⁶)) = <b>211 MPa</b></span> ; pour 10 µm, <span class="m"><b>66,8 MPa</b></span> (dix fois plus long, √10 = 3,16 fois moins fort). Concentration de contrainte, <span class="m">σ<sub>r</sub> = √(Eγ<sub>s</sub>/(4a))</span> : <span class="m"><b>132 MPa</b></span> et <span class="m"><b>41,8 MPa</b></span>. Même tendance, facteur 1,6 entre les deux.</p>
       <p><b>b)</b> <span class="m">a = 2Eγ<sub>s</sub>/(πσ<sub>r</sub>²) = 1,4 × 10¹¹/(π × (50 × 10⁶)²) = 1,78 × 10⁻⁵ m ≈ <b>18 µm</b></span>.</p>
       <p><b>c)</b> <span class="m">σ<sub>r</sub> = √(1,4 × 10¹¹/(π × 10⁻³)) = <b>6,7 MPa</b></span> : sept fois moins qu'avant le trait. Une simple pression du doigt suffit, et la rupture suit la rayure.</p>
     </div></details>
@@ -873,7 +860,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <dt>Bifurcation</dt><dd>Changement brusque de direction d'une fissure en mode mixte, qui la ramène en mode I.</dd>
     <dt>BS 7910</dt><dd>Norme britannique d'évaluation de l'acceptabilité des défauts dans les structures métalliques, notamment soudées.</dd>
     <dt>CND</dt><dd>Contrôles non destructifs : ressuage, magnétoscopie, ultrasons, radiographie, courants de Foucault.</dd>
-    <dt>Contrainte nominale σ<sub>nom</sub></dt><dd>Contrainte qui régnerait sans la discontinuité ; rapportée à la section brute (polycopié) ou nette (RDM).</dd>
+    <dt>Contrainte nominale σ<sub>nom</sub></dt><dd>Contrainte qui régnerait sans la discontinuité ; rapportée à la section brute (ce cours) ou nette (RDM).</dd>
     <dt>Contrainte plane, déformation plane</dt><dd>États d'une tôle mince (σ<sub>zz</sub> = 0) et d'une pièce épaisse (ε<sub>zz</sub> = 0, σ<sub>zz</sub> = ν(σ<sub>xx</sub> + σ<sub>yy</sub>)).</dd>
     <dt>d/da, lim</dt><dd>Dérivée par rapport à a (taux de variation) ; limite (valeur approchée quand une grandeur tend vers une autre).</dd>
     <dt>E</dt><dd>Module d'Young, en Pa ou GPa.</dd>
@@ -882,7 +869,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <dt>Énergie de surface γ<sub>s</sub></dt><dd>Énergie à fournir pour créer 1 m² de surface en rompant les liaisons, en J/m² (≈ 1 à 2 J/m²).</dd>
     <dt>Erdogan et Sih (critère d')</dt><dd>Critère de la contrainte tangentielle maximale, qui donne l'angle de bifurcation d'une fissure en mode mixte (1963).</dd>
     <dt>f<sub>ij</sub>(θ)</dt><dd>Fonction de l'angle θ, propre à chaque composante de contrainte, identique pour toutes les fissures d'un même mode.</dd>
-    <dt>Facteur de forme Y</dt><dd>Nombre sans unité qui traduit la géométrie de la fissure et de la pièce dans K = σY√a ; contient √π dans la convention du polycopié.</dd>
+    <dt>Facteur de forme Y</dt><dd>Nombre sans unité qui traduit la géométrie de la fissure et de la pièce dans K = σY√a ; contient √π dans la convention de la série.</dd>
     <dt>Fissure traversante, débouchante, noyée</dt><dd>Qui traverse l'épaisseur ; qui s'ouvre sur une surface ; entièrement enfermée dans la matière.</dd>
     <dt>Front de fissure</dt><dd>Ligne qui borde la fissure, là où la matière n'est pas encore rompue (axe Oz).</dd>
     <dt>Griffith, Inglis, Irwin, Orowan</dt><dd>Pionniers : bilan d'énergie de la fissure (1920) ; facteur K<sub>t</sub> de l'ellipse (1913) ; facteur K et énergie de rupture des métaux (vers 1950).</dd>
@@ -933,14 +920,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
   <p class="status" id="checkMsg"></p>
 
-  <div class="meta">🔭 <b>Au prochain épisode, cours 4 : ténacité et défauts.</b> Quand K atteint une valeur critique, la fissure se propage brutalement : c'est la <b>ténacité K<sub>IC</sub></b>, une vraie propriété du matériau (polycopié, p. 22). On verra comment l'utiliser à l'envers (quelle contrainte admissible pour un défaut, quelle taille critique pour une contrainte), pourquoi ténacité et résistance s'opposent, comment on la mesure et à quelles conditions (épaisseur, zone plastique r<sub>Y</sub>), puis comment la mécanique de la rupture s'étend aux aciers ductiles avec l'énergie G, le CTOD et l'intégrale J, jusqu'au <b>diagramme d'évaluation des défauts</b> (FAD) utilisé pour juger les soudures.</div>
+  <div class="meta">🔭 <b>Au prochain épisode, cours 4 : ténacité et défauts.</b> Quand K atteint une valeur critique, la fissure se propage brutalement : c'est la <b>ténacité K<sub>IC</sub></b>, une vraie propriété du matériau. On verra comment l'utiliser à l'envers (quelle contrainte admissible pour un défaut, quelle taille critique pour une contrainte), pourquoi ténacité et résistance s'opposent, comment on la mesure et à quelles conditions (épaisseur, zone plastique r<sub>Y</sub>), puis comment la mécanique de la rupture s'étend aux aciers ductiles avec l'énergie G, le CTOD et l'intégrale J, jusqu'au <b>diagramme d'évaluation des défauts</b> (FAD) utilisé pour juger les soudures.</div>
 </div>
 </section>
 </main>
 
 <footer>
 <div class="wrap">
-  <p>Cours 3 sur 4 de la série « Mécanique de la rupture : de la cassure au défaut acceptable ». Notations alignées sur le polycopié de référence (Partie I : Mécanique de la rupture) ; pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 3 sur 4 de la série « Mécanique de la rupture : de la cassure au défaut acceptable ». Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1181,7 +1168,7 @@ function animate(btn,label,dur,onStep,onEnd){/* petite aide : lecture interrompa
       el("path",{d:d,fill:"none",stroke:"var(--sig)","stroke-width":f===form?3:1.4,"stroke-dasharray":f===form?"":"5 4",opacity:f===form?1:.6},svg);});
     el("circle",{cx:X(Math.log10(a)),cy:Y(Math.log10(s)),r:6,fill:"var(--eps)",stroke:"var(--card)","stroke-width":2},svg);
     so.textContent=fmtL(a);
-    ro.innerHTML="<span>a = <b class='eps'>"+fmtL(a)+"</b> (fissure de "+fmtL(2*a)+")</span><span>σ<sub>r</sub> = <b class='sig'>"+fmtS(s)+"</b></span><span>σ<sub>th</sub>/σ<sub>r</sub> = "+nf(st/s,st/s<10?1:0)+"</span><span>"+(form==="g"?"Griffith : √(2Eγ/(πa))":"polycopié : √(Eγ/(4a))")+"</span>";
+    ro.innerHTML="<span>a = <b class='eps'>"+fmtL(a)+"</b> (fissure de "+fmtL(2*a)+")</span><span>σ<sub>r</sub> = <b class='sig'>"+fmtS(s)+"</b></span><span>σ<sub>th</sub>/σ<sub>r</sub> = "+nf(st/s,st/s<10?1:0)+"</span><span>"+(form==="g"?"Griffith : √(2Eγ/(πa))":"concentration : √(Eγ/(4a))")+"</span>";
     let t;
     if(s>=st*0.999)t="Défaut de quelques distances atomiques : on atteint le plafond σ<sub>th</sub>. C'est le cas des trichites et des fibres fraîchement étirées.";
     else if(key==="acier")t=s>m.Re?"Avec l'énergie de rupture réelle d'un acier (≈ 25 000 J/m², due à la plasticité), un défaut de "+fmtL(2*a)+" ne casserait qu'à "+fmtS(s)+" : l'acier plastifie bien avant (R<sub>e</sub> = 355 MPa). La rupture fragile n'est pas à craindre pour ce défaut.":"💥 Défaut de "+fmtL(2*a)+" : σ<sub>r</sub> = "+fmtS(s)+" &lt; R<sub>e</sub>. La pièce casse sans plastifier : c'est le domaine de la mécanique de la rupture (cours 4). Remarque : σ<sub>r</sub>√(πa) ≈ "+nf(s/1e6*Math.sqrt(Math.PI*a),0)+" MPa·√m, l'ordre de grandeur de la ténacité d'un acier.";
@@ -1391,7 +1378,7 @@ function animate(btn,label,dur,onStep,onEnd){/* petite aide : lecture interrompa
     {q:"Si la longueur d'un défaut est multipliée par 4, sa contrainte de rupture est :",o:["divisée par 4","divisée par 2","inchangée","multipliée par 2"],c:1,e:"√4 = 2 : la contrainte de rupture est <b>divisée par 2</b>, et K est multiplié par 2."},
     {q:"Devant la pointe d'une fissure (θ = 0), la contrainte d'ouverture vaut :",o:["K/√(2πr)","K·r","K/r²","une constante"],c:0,e:"<b>σ<sub>yy</sub> = K/√(2πr)</b> : une singularité en 1/√r, infinie à la pointe."},
     {q:"Le facteur d'intensité de contrainte K s'exprime en :",o:["MPa","sans unité, comme K<sub>t</sub>","MPa·√m","J/m²"],c:2,e:"<b>MPa·√m</b> (ou N·mm<sup>−3/2</sup>, avec 1 MPa·√m = 31,62 N·mm<sup>−3/2</sup>). C'est K<sub>t</sub> qui est sans unité."},
-    {q:"Pour une fissure débouchante de profondeur a (convention K = σY√a du polycopié), Y vaut environ :",o:["1","1,13","1,77","1,99"],c:3,e:"<b>Y ≈ 1,99</b>, soit 1,12 × √π. 1,77 = √π correspond à la fissure centrale, 1,13 à la fissure circulaire noyée."},
+    {q:"Pour une fissure débouchante de profondeur a (convention K = σY√a de la série), Y vaut environ :",o:["1","1,13","1,77","1,99"],c:3,e:"<b>Y ≈ 1,99</b>, soit 1,12 × √π. 1,77 = √π correspond à la fissure centrale, 1,13 à la fissure circulaire noyée."},
     {q:"Un défaut débouchant de 4 mm de profondeur sous 100 MPa a un K d'environ :",o:["796 MPa·√m","12,6 MPa·√m","0,4 MPa·√m","126 MPa·√m"],c:1,e:"K = 100 × 1,99 × √0,004 = 100 × 1,99 × 0,0632 ≈ <b>12,6 MPa·√m</b>. Le piège : a en <b>mètres</b> (796 = a pris en mm)."},
     {q:"Le mode II correspond à :",o:["un glissement des lèvres perpendiculaire au front","une ouverture des lèvres","un glissement des lèvres parallèle au front","une compression des lèvres"],c:0,e:"Mode II : <b>glissement plan</b>, perpendiculaire au front. L'ouverture est le mode I, le glissement parallèle au front le mode III."},
     {q:"Pour une fissure de mode I dans une soudure brute, les contraintes résiduelles de traction :",o:["n'ont pas d'effet sur K","diminuent K","s'ajoutent à la contrainte appliquée dans le calcul de K","transforment le mode I en mode III"],c:2,e:"Les K d'un même mode s'additionnent : <b>K = (σ + σ<sub>res</sub>)·Y·√a</b>. À l'état brut de soudage, on suppose souvent σ<sub>res</sub> ≈ R<sub>e</sub>."}

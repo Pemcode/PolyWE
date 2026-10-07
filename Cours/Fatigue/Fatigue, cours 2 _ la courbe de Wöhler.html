@@ -313,25 +313,11 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div><div class="f"><span class="eps">N</span> = <span class="mat">f</span>·<span class="mat">t</span></div>Le nombre de cycles N vaut la fréquence f (en Hz) fois la durée t (en s). Les soudures se calculent en Δσ, et une <b>classe FAT</b> est l'étendue supportée pendant 2 × 10⁶ cycles.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> de référence (Partie II : Fatigue). Ce cours couvre la fin du § A, <b>pages 2 et 3, figure 4</b> :
-    <div class="tbl-wrap"><table class="data">
-      <tr><th>Chapitre du cours</th><th>Polycopié</th></tr>
-      <tr><td>1 L'essai de fatigue</td><td>p. 2 (essais simplifiés, sollicitations sinusoïdales) et p. 3 (nombre de cycles à rupture N<sub>r</sub>)</td></tr>
-      <tr><td>2 Lire une échelle logarithmique</td><td>p. 3, axe des abscisses de la figure 4</td></tr>
-      <tr><td>3 Les trois domaines</td><td>p. 3, les trois tirets et la figure 4</td></tr>
-      <tr><td>4 La limite d'endurance</td><td>p. 3, cubique centré, cubique à faces centrées, limite conventionnelle</td></tr>
-      <tr><td>5 Mettre la courbe en équation</td><td><span class="hp">hors poly</span> loi de Basquin</td></tr>
-      <tr><td>6 La dispersion</td><td><span class="hp">hors poly</span> statistique des essais</td></tr>
-      <tr><td>7 Des éprouvettes aux soudures</td><td>p. 3, éprouvettes entaillées et pièces réelles ; <span class="hp">hors poly</span> K<sub>f</sub> et courbes FAT</td></tr>
-    </table></div>
-    Les compléments de calcul et de soudage portent l'étiquette <span class="hp">hors poly</span>.
-  </div>
-
   <div class="def"><b>🔎 Quatre remarques de lecture</b>
-    <p><b>1. σ<sub>a</sub> ou Δσ en ordonnée ?</b> La figure 4 du polycopié porte l'<b>amplitude</b> σ<sub>a</sub>. Les courbes des soudures (EN 1993-1-9, IIW) portent l'<b>étendue</b> Δσ = 2σ<sub>a</sub>. Avant de lire une valeur, regarde toujours l'étiquette de l'axe.</p>
-    <p><b>2. « La rupture ne se produit jamais »</b> sous σ<sub>D</sub> (p. 3) : c'est vrai dans le domaine des essais classiques (jusqu'à 10⁷ cycles environ). Des essais gigacycliques, menés au-delà de 10⁸ à 10⁹ cycles, ont montré des ruptures sous σ<sub>D</sub> dans certains aciers, à partir d'inclusions internes (chapitre 4).</p>
-    <p><b>3. Cubique centré et limite d'endurance.</b> Le polycopié dit « par exemple » : c'est une règle d'usage, pas une loi. En milieu corrosif, un acier perd sa limite d'endurance ; et certains alliages non cubiques centrés (titane) présentent un palier apparent.</p>
-    <p><b>4. N<sub>r</sub> ou 2N<sub>r</sub> ?</b> Le polycopié compte des <b>cycles</b> N<sub>r</sub>. La loi de Basquin, dans sa forme d'origine, compte des <b>alternances</b> 2N<sub>r</sub> (deux par cycle). Le chapitre 5 montre comment passer de l'une à l'autre.</p>
+    <p><b>1. σ<sub>a</sub> ou Δσ en ordonnée ?</b> Les courbes de Wöhler des matériaux portent en général l'<b>amplitude</b> σ<sub>a</sub>. Les courbes des soudures (EN 1993-1-9, IIW) portent l'<b>étendue</b> Δσ = 2σ<sub>a</sub>. Avant de lire une valeur, regarde toujours l'étiquette de l'axe.</p>
+    <p><b>2. « La rupture ne se produit jamais »</b> sous σ<sub>D</sub> : c'est vrai dans le domaine des essais classiques (jusqu'à 10⁷ cycles environ). Des essais gigacycliques, menés au-delà de 10⁸ à 10⁹ cycles, ont montré des ruptures sous σ<sub>D</sub> dans certains aciers, à partir d'inclusions internes (chapitre 4).</p>
+    <p><b>3. Cubique centré et limite d'endurance.</b> Le lien entre structure cubique centrée et palier d'endurance est une règle d'usage, pas une loi. En milieu corrosif, un acier perd sa limite d'endurance ; et certains alliages non cubiques centrés (titane) présentent un palier apparent.</p>
+    <p><b>4. N<sub>r</sub> ou 2N<sub>r</sub> ?</b> Ce cours compte des <b>cycles</b> N<sub>r</sub>. La loi de Basquin, dans sa forme d'origine, compte des <b>alternances</b> 2N<sub>r</sub> (deux par cycle). Le chapitre 5 montre comment passer de l'une à l'autre.</p>
   </div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
@@ -394,8 +380,8 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">le protocole</span></div>
-    <div class="def"><b>📖 Durée de vie N<sub>r</sub></b> : nombre de cycles à rupture d'une éprouvette sous un chargement cyclique donné. <b>Courbe d'endurance</b>, ou <b>courbe de Wöhler</b>, ou <b>courbe S-N</b> (de l'anglais <i>Stress-Number of cycles</i>) : courbe donnant σ<sub>a</sub> en fonction de N<sub>r</sub>, <b>pour une contrainte moyenne σ<sub>m</sub> donnée</b> (polycopié, p. 3).</div>
-    <p>Le polycopié (p. 2 et 3) décrit la démarche : on <b>simule</b> les conditions réelles par des essais simplifiés (traction-compression, flexion, torsion), le plus souvent avec des sollicitations sinusoïdales, et on compte le nombre de cycles à rupture pour divers niveaux de contrainte, la contrainte maximale restant inférieure à la résistance R<sub>m</sub> du matériau. Un protocole typique :</p>
+    <div class="def"><b>📖 Durée de vie N<sub>r</sub></b> : nombre de cycles à rupture d'une éprouvette sous un chargement cyclique donné. <b>Courbe d'endurance</b>, ou <b>courbe de Wöhler</b>, ou <b>courbe S-N</b> (de l'anglais <i>Stress-Number of cycles</i>) : courbe donnant σ<sub>a</sub> en fonction de N<sub>r</sub>, <b>pour une contrainte moyenne σ<sub>m</sub> donnée</b>.</div>
+    <p>La démarche : on <b>simule</b> les conditions réelles par des essais simplifiés (traction-compression, flexion, torsion), le plus souvent avec des sollicitations sinusoïdales, et on compte le nombre de cycles à rupture pour divers niveaux de contrainte, la contrainte maximale restant inférieure à la résistance R<sub>m</sub> du matériau. Un protocole typique :</p>
     <ul>
       <li>4 à 6 <b>niveaux</b> de contrainte, du plus fort (rupture en quelques milliers de cycles) au plus faible (éprouvettes non rompues) ;</li>
       <li>plusieurs <b>éprouvettes par niveau</b> (3 au minimum, souvent davantage), à cause de la dispersion (chapitre 6) ;</li>
@@ -468,13 +454,13 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le toboggan</span></div>
-    <p>Trace la courbe de Wöhler d'un acier en échelle logarithmique : elle a la forme d'un <b>toboggan</b> (figure 4 du polycopié).</p>
+    <p>Trace la courbe de Wöhler d'un acier en échelle logarithmique : elle a la forme d'un <b>toboggan</b>.</p>
     <ul>
       <li><b>Le palier de départ</b>, en haut à gauche : la <b>fatigue oligocyclique</b> (du grec <i>oligos</i>, « peu »). La contrainte dépasse la limite d'élasticité R<sub>e</sub> : à chaque cycle, toute la section se déforme plastiquement, comme le trombone qu'on plie. La rupture arrive vite, en moins de 10⁴ cycles environ.</li>
       <li><b>La grande descente</b> : l'<b>endurance limitée</b>. La contrainte est sous R<sub>e</sub>, la pièce reste élastique dans son ensemble ; seuls quelques grains plastifient localement (en surface, près des défauts, des inclusions). La durée de vie s'allonge très vite quand la contrainte baisse. C'est le domaine de la plupart des pièces de machines et des structures.</li>
       <li><b>La plage</b> : l'<b>endurance illimitée</b>. Pour certains métaux, comme les aciers, il existe un niveau de contrainte, la <span class="mat"><b>limite d'endurance σ<sub>D</sub></b></span>, en dessous duquel la rupture ne se produit plus. La courbe devient horizontale.</li>
     </ul>
-    <p>Le polycopié appelle les deux derniers domaines la fatigue « vibratoire » (élastique), objet principal de la série ; la fatigue plastique oligocyclique fait l'objet d'un chapitre à part, plus loin dans le polycopié.</p>
+    <p>On appelle les deux derniers domaines la fatigue « vibratoire » (élastique), objet principal de la série ; la fatigue plastique oligocyclique demande une approche à part, en déformation imposée.</p>
   </div>
 
   <div class="lab" id="m3">
@@ -499,10 +485,10 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <tr><td><b>Endurance illimitée</b></td><td>σ<sub>a</sub> &lt; σ<sub>D</sub></td><td class="n">pas de rupture</td><td>trop faible pour amorcer une fissure qui se propage</td></tr>
     </table></div>
     <p class="mut" style="font-size:.9rem">≲ : « inférieur ou de l'ordre de ». Les frontières sont des ordres de grandeur : la transition oligocyclique se situe entre 10³ et 10⁵ cycles selon les matériaux.</p>
-    <p>Sur la figure 4 du polycopié, l'axe vertical porte deux repères : <b>≈ R<sub>m</sub></b> à N<sub>r</sub> ≈ 1 (une contrainte égale à R<sub>m</sub> casse la pièce dès le premier chargement, en un quart de cycle) et <b>≈ R<sub>e</sub></b> vers 10⁴ cycles, à la sortie du domaine oligocyclique.</p>
+    <p>Deux repères aident à lire l'axe vertical : <b>≈ R<sub>m</sub></b> à N<sub>r</sub> ≈ 1 (une contrainte égale à R<sub>m</sub> casse la pièce dès le premier chargement, en un quart de cycle) et <b>≈ R<sub>e</sub></b> vers 10⁴ cycles, à la sortie du domaine oligocyclique.</p>
     <div class="def"><b>📖 Résistance à la fatigue à N cycles</b>, notée σ<sub>D</sub>(N) ou σ<sub>N</sub> : l'amplitude qui conduit à la rupture au bout de N cycles. C'est la lecture « à l'envers » de la courbe : on part de N et on remonte jusqu'à la contrainte.</div>
-    <div class="tip"><b>💡 Ordre de grandeur</b> <span class="hp">hors poly</span> : pour les aciers, la limite d'endurance en flexion rotative vaut souvent 0,4 à 0,5 fois R<sub>m</sub>. Un acier de R<sub>m</sub> = 600 MPa a donc σ<sub>D</sub> ≈ 240 à 300 MPa ; le modèle des manipulations prend 270 MPa.</div>
-    <div class="tip"><b>💡 Contrainte ou déformation imposée ?</b> En endurance, on pilote l'essai en <b>contrainte</b>. En oligocyclique, la matière plastifie et la contrainte n'est plus un bon repère : on pilote l'essai en <b>déformation</b> imposée et on trace l'amplitude de déformation en fonction de N<sub>r</sub> (loi de Manson-Coffin, vue plus loin dans le polycopié).</div>
+    <div class="tip"><b>💡 Ordre de grandeur</b> : pour les aciers, la limite d'endurance en flexion rotative vaut souvent 0,4 à 0,5 fois R<sub>m</sub>. Un acier de R<sub>m</sub> = 600 MPa a donc σ<sub>D</sub> ≈ 240 à 300 MPa ; le modèle des manipulations prend 270 MPa.</div>
+    <div class="tip"><b>💡 Contrainte ou déformation imposée ?</b> En endurance, on pilote l'essai en <b>contrainte</b>. En oligocyclique, la matière plastifie et la contrainte n'est plus un bon repère : on pilote l'essai en <b>déformation</b> imposée et on trace l'amplitude de déformation en fonction de N<sub>r</sub> (loi de Manson-Coffin).</div>
     <div class="warn"><b>⚠️ Piège :</b> « endurance limitée » ne veut pas dire « pièce de mauvaise qualité ». Elle veut dire que la durée de vie est <b>finie</b> et qu'il faut la calculer : c'est le cas normal de la plupart des structures, et de presque toutes les soudures.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique :</b> « <b>palier, pente, plage</b> » : les trois P du toboggan, de gauche à droite.</div>
     <div class="weld"><b>🔥 Et les structures soudées ?</b>
@@ -526,7 +512,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <li><b>cubique centré (CC)</b> : un atome à chaque coin d'un cube et un au centre. C'est le cas du fer à température ambiante, donc des aciers de construction ;</li>
       <li><b>cubique à faces centrées (CFC)</b> : un atome à chaque coin et un au centre de chaque face. C'est le cas de l'aluminium, du cuivre, du nickel et des aciers inoxydables austénitiques.</li>
     </ul>
-    <p>Selon le polycopié, les métaux du premier type, comme les aciers, ont souvent une vraie <b>plage</b> : sous σ<sub>D</sub>, plus de rupture. Ceux du second type, comme l'aluminium, n'en ont pas : la courbe <b>continue de descendre</b>, doucement mais sans fin. Pour eux, on définit une <b>limite d'endurance conventionnelle</b> : la contrainte qui conduit à la rupture au bout d'un nombre de cycles choisi, 10⁶, 10⁷, 10⁸ ou 10⁹, au moins égal au nombre de cycles que la pièce verra en service.</p>
+    <p>Les métaux du premier type, comme les aciers, ont souvent une vraie <b>plage</b> : sous σ<sub>D</sub>, plus de rupture. Ceux du second type, comme l'aluminium, n'en ont pas : la courbe <b>continue de descendre</b>, doucement mais sans fin. Pour eux, on définit une <b>limite d'endurance conventionnelle</b> : la contrainte qui conduit à la rupture au bout d'un nombre de cycles choisi, 10⁶, 10⁷, 10⁸ ou 10⁹, au moins égal au nombre de cycles que la pièce verra en service.</p>
     <p>Image : un forfait téléphonique. L'acier a un forfait <b>illimité</b> sous σ<sub>D</sub>. L'aluminium n'a que des forfaits <b>à N cycles</b> : il faut choisir le bon forfait pour l'usage prévu.</p>
   </div>
 
@@ -542,7 +528,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">σ<sub>D</sub> et ses nuances</span></div>
     <div class="def"><b>📖 Limite d'endurance σ<sub>D</sub></b> : plus grande amplitude de contrainte qu'une éprouvette supporte sans rompre, quel que soit le nombre de cycles. <b>Limite d'endurance conventionnelle σ<sub>D</sub>(N)</b> : amplitude qui conduit à la rupture au bout de N cycles, N étant fixé par convention (10⁶ à 10⁹) et au moins égal au nombre de cycles en service.</div>
-    <p><b>Pourquoi une plage pour les aciers ?</b> <span class="hp">hors poly</span> L'explication la plus citée : dans le fer cubique centré, de petits atomes de carbone et d'azote logés entre les atomes de fer viennent « épingler » les défauts du cristal qui permettent le glissement (les dislocations, cours 3). Sous une contrainte faible, les glissements restent bloqués et aucune fissure ne naît. Dans l'aluminium, rien n'épingle durablement ces défauts : chaque cycle, même petit, fait un peu de dégât.</p>
+    <p><b>Pourquoi une plage pour les aciers ?</b> L'explication la plus citée : dans le fer cubique centré, de petits atomes de carbone et d'azote logés entre les atomes de fer viennent « épingler » les défauts du cristal qui permettent le glissement (les dislocations, cours 3). Sous une contrainte faible, les glissements restent bloqués et aucune fissure ne naît. Dans l'aluminium, rien n'épingle durablement ces défauts : chaque cycle, même petit, fait un peu de dégât.</p>
     <p><b>Trois nuances importantes.</b></p>
     <ul>
       <li><b>Corrosion</b> : en eau de mer ou en atmosphère agressive, l'acier perd sa plage ; sa courbe continue de descendre comme celle de l'aluminium.</li>
@@ -550,7 +536,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <li><b>Chargement variable</b> : quelques grands cycles peuvent amorcer une fissure que les petits cycles, même sous σ<sub>D</sub>, font ensuite grandir. C'est pourquoi l'EN 1993-1-9 prolonge ses courbes sous la limite à amplitude constante (chapitre 7).</li>
     </ul>
 
-    <h4>Et si la contrainte moyenne n'est pas nulle ? <span class="hp">hors poly</span></h4>
+    <h4>Et si la contrainte moyenne n'est pas nulle ? <span class="hp">complément</span></h4>
     <p>σ<sub>D</sub> est d'ordinaire mesurée à σ<sub>m</sub> = 0. Une contrainte moyenne de traction réduit l'amplitude admissible. On le représente sur le <b>diagramme de Haigh</b> : σ<sub>m</sub> en abscisse, σ<sub>a</sub> en ordonnée. Deux critères classiques relient le point (0, σ<sub>D</sub>) au point (R<sub>m</sub>, 0) :</p>
     <div class="fx"><div class="row big" style="font-size:1.4rem">
       <span>Goodman : <span class="sig">σ<sub>a</sub></span> = <span class="mat">σ<sub>D</sub></span>(1 − <span class="tau">σ<sub>m</sub></span>/R<sub>m</sub>)</span>
@@ -584,7 +570,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 <div class="wrap">
   <div class="cartouche">
     <div class="c-num">5</div>
-    <div class="c-title"><h2>Mettre la courbe en équation</h2><p>La loi de Basquin <span class="hp">hors poly</span></p></div>
+    <div class="c-title"><h2>Mettre la courbe en équation</h2><p>La loi de Basquin</p></div>
     <div class="c-img"><span class="ico">📐</span><span><small>Image à retenir</small>La règle posée sur le papier log-log : la descente du toboggan devient une droite</span></div>
   </div>
 
@@ -649,7 +635,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 <div class="wrap">
   <div class="cartouche">
     <div class="c-num">6</div>
-    <div class="c-title"><h2>La dispersion</h2><p>Une courbe de Wöhler est une probabilité <span class="hp">hors poly</span></p></div>
+    <div class="c-title"><h2>La dispersion</h2><p>Une courbe de Wöhler est une probabilité</p></div>
     <div class="c-img"><span class="ico">🎯</span><span><small>Image à retenir</small>La pluie de fléchettes : le même lanceur ne touche jamais deux fois le même point</span></div>
   </div>
 
@@ -704,7 +690,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">du laboratoire à l'atelier</span></div>
-    <p>L'éprouvette de laboratoire est une star de concours : petite, polie, sans entaille, dans un air sec. La pièce réelle est plus rugueuse, plus grosse, percée, filetée, soudée, parfois mouillée. Chaque différence <b>abaisse la courbe</b>. Le polycopié le rappelle (p. 3) : on réalise donc aussi des essais sur éprouvettes à forte concentration de contrainte, entaillées, préfissurées, ou directement sur des pièces réelles.</p>
+    <p>L'éprouvette de laboratoire est une star de concours : petite, polie, sans entaille, dans un air sec. La pièce réelle est plus rugueuse, plus grosse, percée, filetée, soudée, parfois mouillée. Chaque différence <b>abaisse la courbe</b>. On réalise donc aussi des essais sur éprouvettes à forte concentration de contrainte, entaillées, préfissurées, ou directement sur des pièces réelles.</p>
     <p>Pour les assemblages soudés, on est allé jusqu'au bout de cette logique : on a testé chaque <b>type de détail</b> (cordon bout à bout arasé ou non, raidisseur transversal, gousset, attache longitudinale…) tel qu'il sort de l'atelier, puis on a rangé les résultats dans un catalogue de courbes. Chaque détail reçoit une <b>étiquette</b>, sa classe FAT : l'étendue de contrainte, en MPa, qu'il supporte pendant 2 millions de cycles. FAT 160 pour une tôle laminée sans soudure, FAT 36 pour les détails les plus sévères : un rapport de plus de 4 en contrainte, donc de plus de 80 en durée de vie (4,4³ ≈ 88).</p>
     <p>Fait remarquable : la classe FAT ne dépend pas de la nuance d'acier. Un S690 soudé n'a pas une meilleure tenue en fatigue qu'un S235 soudé, parce que la vie d'une soudure est une durée de propagation, et que les fissures se propagent à peu près à la même vitesse dans tous les aciers.</p>
   </div>
@@ -714,11 +700,11 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div class="fx"><div class="row big" style="font-size:1.5rem"><span><span class="tau">K<sub>f</sub></span> = 1 + <span class="mat">q</span>(<span class="tau">K<sub>t</sub></span> − 1)</span><span><span class="mat">σ<sub>D,entaillée</sub></span> = <span class="frac"><span><span class="mat">σ<sub>D</sub></span></span><span><span class="tau">K<sub>f</sub></span></span></span></span></div>
       <p class="cap">q : sensibilité à l'entaille, entre 0 (insensible) et 1 (pleinement sensible)</p></div>
     <p>La sensibilité q est proche de 1 pour les aciers à haute résistance et les grandes entailles, plus faible pour les métaux doux et les entailles très aiguës. <b>Exemple</b> : K<sub>t</sub> = 2,5 et q = 0,8 donnent <span class="m">K<sub>f</sub> = 1 + 0,8 × 1,5 = 2,2</span> ; un acier de σ<sub>D</sub> = 270 MPa n'a plus que <span class="m">270/2,2 ≈ 123 MPa</span> au fond de cette entaille, exprimés en contrainte nominale.</p>
-    <p><b>État de surface et taille</b> <span class="hp">hors poly</span> : on multiplie encore σ<sub>D</sub> par des coefficients inférieurs à 1. Ordres de grandeur du coefficient de surface pour un acier de R<sub>m</sub> ≈ 600 MPa : poli 1 ; rectifié ≈ 0,9 ; usiné ≈ 0,8 ; laminé à chaud ≈ 0,6 ; brut de forge ≈ 0,5. Plus la pièce est grosse, plus elle a de chances de contenir un défaut critique : le coefficient de taille descend de 1 à environ 0,8 pour un diamètre de 50 mm.</p>
+    <p><b>État de surface et taille</b> : on multiplie encore σ<sub>D</sub> par des coefficients inférieurs à 1. Ordres de grandeur du coefficient de surface pour un acier de R<sub>m</sub> ≈ 600 MPa : poli 1 ; rectifié ≈ 0,9 ; usiné ≈ 0,8 ; laminé à chaud ≈ 0,6 ; brut de forge ≈ 0,5. Plus la pièce est grosse, plus elle a de chances de contenir un défaut critique : le coefficient de taille descend de 1 à environ 0,8 pour un diamètre de 50 mm.</p>
     <div class="warn"><b>⚠️ Piège : on ne corrige pas une classe FAT par K<sub>t</sub>.</b> La classe FAT d'un détail soudé contient déjà l'effet de sa géométrie, de son pied de cordon et de ses défauts usuels. On l'applique à la contrainte <b>nominale</b>, sans multiplier par un K<sub>t</sub> de soudure (sauf méthodes particulières, comme la contrainte au point chaud, qui utilisent d'autres courbes).</div>
   </div>
 
-  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les courbes de l'EN 1993-1-9</span> <span class="hp">hors poly</span></div>
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les courbes de l'EN 1993-1-9</span> <span class="hp">complément</span></div>
     <p>Chaque catégorie de détail est repérée par <span class="mat"><b>Δσ<sub>C</sub></b></span> (C comme catégorie), le nombre de la classe FAT : 160, 140, 125, 112, 100, 90, 80, 71, 63, 56, 50, 45, 40 ou 36 MPa. La courbe de résistance Δσ<sub>R</sub>(N) a trois morceaux :</p>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Nombre de cycles et loi</th><th>Repère</th></tr>
@@ -987,14 +973,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
   <p class="status" id="checkMsg"></p>
 
-  <div class="meta">🔭 <b>Au prochain épisode, cours 3 : l'amorçage.</b> On entre dans la matière, grain par grain, pour comprendre ce qui se passe sur la première moitié du toboggan : les microglissements à 45°, les bandes de glissement, les intrusions et les extrusions, la microfissure qui naît puis tourne pour devenir perpendiculaire à l'effort (polycopié, p. 4 à 7). On verra aussi la courbe de Wöhler à l'amorçage, les mystérieuses fissures « dormantes » et les critères d'amorçage.</div>
+  <div class="meta">🔭 <b>Au prochain épisode, cours 3 : l'amorçage.</b> On entre dans la matière, grain par grain, pour comprendre ce qui se passe sur la première moitié du toboggan : les microglissements à 45°, les bandes de glissement, les intrusions et les extrusions, la microfissure qui naît puis tourne pour devenir perpendiculaire à l'effort. On verra aussi la courbe de Wöhler à l'amorçage, les mystérieuses fissures « dormantes » et les critères d'amorçage.</div>
 </div>
 </section>
 </main>
 
 <footer>
 <div class="wrap">
-  <p>Cours 2 sur 4 de la série « Fatigue des métaux : la vie d'une fissure ». Notations alignées sur le polycopié de référence (Partie II : Fatigue) ; pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 2 sur 4 de la série « Fatigue des métaux : la vie d'une fissure ». Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>

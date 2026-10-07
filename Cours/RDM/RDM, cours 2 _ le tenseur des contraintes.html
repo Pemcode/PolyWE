@@ -375,7 +375,7 @@ svg .throat{stroke:var(--weld);stroke-width:3;stroke-dasharray:7 4}
     <div><div class="f"><span class="sig">[σ]</span> : 3 × 3</div>Ligne = la face, colonne = la direction. Diagonale : <span class="sig">σ</span>. Hors diagonale : <span class="tau">τ</span>. Symétrique, donc 6 valeurs indépendantes.</div>
   </div>
 
-  <div class="def"><b>📘 Dans le polycopié</b> (Polytech Nantes, « Notions de base de RDM », IWE1) : ce cours correspond au § 7, parties f à j, <b>pages 11 et 12</b>. Deux différences de notation à connaître. <b>1.</b> Le polycopié écrit les cisaillements <b>σ<sub>xy</sub>, σ<sub>xz</sub>, σ<sub>yz</sub></b> ; ici on les écrit <span class="tau">τ<sub>xy</sub>, τ<sub>xz</sub>, τ<sub>yz</sub></span> pour les voir en violet. Ce sont les mêmes nombres. <b>2.</b> Le polycopié note <b>φ</b> l'angle de la facette ; ici c'est <b>θ</b>. La convention de signe de τ est celle du polycopié (chapitre 4).</div>
+  <div class="def"><b>📘 Deux variantes de notation à connaître.</b> <b>1.</b> Beaucoup d'ouvrages écrivent les cisaillements <b>σ<sub>xy</sub>, σ<sub>xz</sub>, σ<sub>yz</sub></b> ; ici on les écrit <span class="tau">τ<sub>xy</sub>, τ<sub>xz</sub>, τ<sub>yz</sub></span> pour les voir en violet. Ce sont les mêmes nombres. <b>2.</b> L'angle de la facette est souvent noté <b>φ</b> ; ici c'est <b>θ</b>. La convention de signe de τ est fixée au chapitre 4.</div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage (formation IWE)</b>
     <p><b>IWE</b> signifie <i>International Welding Engineer</i> (ingénieur international en soudage), le diplôme délivré selon les règles de l'<b>IIW</b> (<i>International Institute of Welding</i>, l'Institut international de la soudure). Dans son programme de conception et de calcul des assemblages, tu retrouveras exactement ce que tu vas apprendre ici, sous trois formes :</p>
@@ -596,7 +596,7 @@ svg .throat{stroke:var(--weld);stroke-width:3;stroke-dasharray:7 4}
 
   <div class="lab" id="f4">
     <p class="lab-h">Manipulation 4 : la facette qui tourne, version générale</p>
-    <p class="lab-sub">Comme au cours 1, mais avec n'importe quel état de contrainte plan : règle σ<sub>xx</sub>, σ<sub>yy</sub> et τ<sub>xy</sub>. La facette passe par le centre du petit carré ; sa normale n⃗ fait l'angle θ avec l'axe x (le polycopié note cet angle φ). Signe de τ : convention du polycopié, t⃗ = n⃗ tourné de +90°. À droite, chaque orientation donne un point (σₙ ; τ).</p>
+    <p class="lab-sub">Comme au cours 1, mais avec n'importe quel état de contrainte plan : règle σ<sub>xx</sub>, σ<sub>yy</sub> et τ<sub>xy</sub>. La facette passe par le centre du petit carré ; sa normale n⃗ fait l'angle θ avec l'axe x (on le note aussi φ). Signe de τ : convention de la série, t⃗ = n⃗ tourné de +90°. À droite, chaque orientation donne un point (σₙ ; τ).</p>
     <svg id="f4svg" viewBox="0 0 680 340" role="img" aria-label="Carré élémentaire, facette tournante et points sigma n, tau"></svg>
     <div class="ctrl"><label for="f4a">Angle <b>θ</b></label><input id="f4a" class="r-th" type="range" min="-90" max="90" step="1" value="30"><output id="f4av"></output></div>
     <div class="ctrl"><label for="f4sx"><span class="sig">σ</span><sub>xx</sub></label><input id="f4sx" class="r-frc" type="range" min="-100" max="100" step="5" value="80"><output id="f4sxv"></output></div>
@@ -612,7 +612,7 @@ svg .throat{stroke:var(--weld);stroke-width:3;stroke-dasharray:7 4}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les formules en 2D et le retour du cercle</span></div>
-    <p>En état plan, avec <span class="m"><span class="vec">n</span> = (cos θ ; sin θ)</span> et la tangente <span class="m"><span class="vec">t</span> = (−sin θ ; cos θ)</span> (c'est <span class="m"><span class="vec">n</span></span> tourné de 90° dans le <b>sens trigonométrique</b>, la convention du polycopié), la méthode M-P-P donne :</p>
+    <p>En état plan, avec <span class="m"><span class="vec">n</span> = (cos θ ; sin θ)</span> et la tangente <span class="m"><span class="vec">t</span> = (−sin θ ; cos θ)</span> (c'est <span class="m"><span class="vec">n</span></span> tourné de 90° dans le <b>sens trigonométrique</b>, la convention de la série), la méthode M-P-P donne :</p>
     <div class="fx" style="max-width:660px"><div class="big" style="font-size:1.3rem;line-height:1.8">
       <span class="sig">σ<sub>n</sub></span> = <span class="sig">σ<sub>xx</sub></span>cos²θ + <span class="sig">σ<sub>yy</sub></span>sin²θ + 2<span class="tau">τ<sub>xy</sub></span> sin θ cos θ<br>
       <span class="tau">τ</span> = −(<span class="sig">σ<sub>xx</sub></span> − <span class="sig">σ<sub>yy</sub></span>) sin θ cos θ + <span class="tau">τ<sub>xy</sub></span>(cos²θ − sin²θ)
@@ -622,8 +622,8 @@ svg .throat{stroke:var(--weld);stroke-width:3;stroke-dasharray:7 4}
       <span class="sig">σ<sub>n</sub></span> = C + a cos 2θ + <span class="tau">τ<sub>xy</sub></span> sin 2θ<br>
       <span class="tau">τ</span> = −a sin 2θ + <span class="tau">τ<sub>xy</sub></span> cos 2θ
     </div><p class="cap">avec C = (σ<sub>xx</sub> + σ<sub>yy</sub>)/2 et a = (σ<sub>xx</sub> − σ<sub>yy</sub>)/2</p></div>
-    <p>Le point <span class="m">(<span class="sig">σ<sub>n</sub></span> ; <span class="tau">τ</span>)</span> est donc à la distance <span class="m">R = √(a² + <span class="tau">τ<sub>xy</sub></span>²)</span> du point <span class="m">(C ; 0)</span>, quel que soit θ : il décrit un <b>cercle de centre C et de rayon R</b>, en tournant de 2θ <b>dans le sens contraire</b> de la facette. C'est le cercle de Mohr, cette fois pour un état plan quelconque. Ce sont exactement les formules de la page 11 du polycopié, écrites là-bas pour les déformations : remplace σ par ε, τ<sub>xy</sub> par ε<sub>xy</sub> et θ par φ, et tu retrouves ε<sub>n</sub> et ε<sub>nt</sub> mot pour mot. On en tirera tout au cours 4 : contraintes principales <span class="m">C ± R</span>, cisaillement maximal <span class="m">R</span>.</p>
-    <div class="warn">⚠️ <b>La convention de signe de τ, alignée sur le polycopié.</b> Le signe de <span class="tau">τ</span> dépend du sens choisi pour la tangente <span class="m"><span class="vec">t</span></span>. Le polycopié (p. 11) prend <span class="m"><span class="vec">t</span></span> = <span class="m"><span class="vec">n</span></span> tourné de +90° (sens trigonométrique) : c'est la convention de toute la série à partir d'ici. Deux conséquences à retenir. <b>1.</b> En traction seule, <span class="m"><span class="tau">τ</span> = −<span class="sig">σ</span> sin θ cos θ</span> : le cours 1, qui oriente la tangente dans l'autre sens, écrit +σ sin θ cos θ. <b>2.</b> Sur le cercle de Mohr, quand la facette tourne de θ dans un sens, le point tourne de 2θ <b>dans l'autre sens</b>. <b>La valeur absolue |τ|, celle qui compte pour la résistance, ne dépend jamais de la convention.</b></div>
+    <p>Le point <span class="m">(<span class="sig">σ<sub>n</sub></span> ; <span class="tau">τ</span>)</span> est donc à la distance <span class="m">R = √(a² + <span class="tau">τ<sub>xy</sub></span>²)</span> du point <span class="m">(C ; 0)</span>, quel que soit θ : il décrit un <b>cercle de centre C et de rayon R</b>, en tournant de 2θ <b>dans le sens contraire</b> de la facette. C'est le cercle de Mohr, cette fois pour un état plan quelconque. Ce sont exactement les formules que l'on écrit aussi pour les déformations (cours 3) : remplace σ par ε et τ<sub>xy</sub> par ε<sub>xy</sub>, et tu retrouves ε<sub>n</sub> et ε<sub>nt</sub> mot pour mot. On en tirera tout au cours 4 : contraintes principales <span class="m">C ± R</span>, cisaillement maximal <span class="m">R</span>.</p>
+    <div class="warn">⚠️ <b>La convention de signe de τ de la série.</b> Le signe de <span class="tau">τ</span> dépend du sens choisi pour la tangente <span class="m"><span class="vec">t</span></span>. On prend <span class="m"><span class="vec">t</span></span> = <span class="m"><span class="vec">n</span></span> tourné de +90° (sens trigonométrique) : c'est la convention de toute la série à partir d'ici. Deux conséquences à retenir. <b>1.</b> En traction seule, <span class="m"><span class="tau">τ</span> = −<span class="sig">σ</span> sin θ cos θ</span> : le cours 1, qui oriente la tangente dans l'autre sens, écrit +σ sin θ cos θ. <b>2.</b> Sur le cercle de Mohr, quand la facette tourne de θ dans un sens, le point tourne de 2θ <b>dans l'autre sens</b>. <b>La valeur absolue |τ|, celle qui compte pour la résistance, ne dépend jamais de la convention.</b></div>
   </div>
 </div>
 </section>
@@ -796,7 +796,7 @@ svg .throat{stroke:var(--weld);stroke-width:3;stroke-dasharray:7 4}
     <details><summary>Voir la correction</summary><div class="sol">
       <p><b>a)</b> Il suffit de lire les lignes : <span class="m"><span class="vec">T</span>(<span class="vec">e</span><sub>x</sub>) = (80 ; 30)</span> MPa et <span class="m"><span class="vec">T</span>(<span class="vec">e</span><sub>y</sub>) = (30 ; −40)</span> MPa.</p>
       <p><b>b)</b> <span class="m"><span class="vec">n</span> = (cos 45° ; sin 45°) = (0,7071 ; 0,7071)</span>, déjà unitaire. <b>Multiplier :</b> <span class="m">T<sub>x</sub> = 80 × 0,7071 + 30 × 0,7071 = 77,78</span> et <span class="m">T<sub>y</sub> = 30 × 0,7071 − 40 × 0,7071 = −7,07</span>. <b>Projeter :</b> <span class="m"><span class="sig">σ<sub>n</sub></span> = 77,78 × 0,7071 − 7,07 × 0,7071 = <b>50,0 MPa</b></span>. <b>Pythagoriser :</b> <span class="m">|<span class="vec">T</span>|² = 77,78² + 7,07² = 6 100</span>, donc <span class="m">|<span class="tau">τ</span>| = √(6 100 − 2 500) = <b>60,0 MPa</b></span>.</p>
-      <p><b>Vérification par les formules d'angle double :</b> C = (80 − 40)/2 = 20, a = (80 + 40)/2 = 60, 2θ = 90°. <span class="m"><span class="sig">σ<sub>n</sub></span> = 20 + 60 × 0 + 30 × 1 = 50</span> ✅ et <span class="m"><span class="tau">τ</span> = −60 × 1 + 30 × 0 = −60</span>, soit |τ| = 60 ✅. Le signe moins (convention du polycopié) indique seulement que le cisaillement va dans le sens opposé à t⃗.</p>
+      <p><b>Vérification par les formules d'angle double :</b> C = (80 − 40)/2 = 20, a = (80 + 40)/2 = 60, 2θ = 90°. <span class="m"><span class="sig">σ<sub>n</sub></span> = 20 + 60 × 0 + 30 × 1 = 50</span> ✅ et <span class="m"><span class="tau">τ</span> = −60 × 1 + 30 × 0 = −60</span>, soit |τ| = 60 ✅. Le signe moins (convention de la série) indique seulement que le cisaillement va dans le sens opposé à t⃗.</p>
     </div></details>
   </div>
 
@@ -972,7 +972,7 @@ svg .throat{stroke:var(--weld);stroke-width:3;stroke-dasharray:7 4}
 
 <footer>
 <div class="wrap">
-  <p>Cours 2 sur 5 de la série « Résistance des matériaux, de zéro aux matrices ». Les valeurs réglementaires citées (EN 1993-1-8:2005, valeurs recommandées) sont données pour l'apprentissage ; en situation réelle, se référer à la version de la norme et à l'annexe nationale applicables. Pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 2 sur 5 de la série « Résistance des matériaux, de zéro aux matrices ». Les valeurs réglementaires citées (EN 1993-1-8:2005, valeurs recommandées) sont données pour l'apprentissage ; en situation réelle, se référer à la version de la norme et à l'annexe nationale applicables. Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1280,7 +1280,7 @@ const S=(c,t)=>'<span class="'+c+'">'+t+'</span>';
     if(R<0.5)no="💧 R = 0 : le cercle se réduit à un point. Toutes les facettes portent la même contrainte, sans cisaillement (état hydrostatique en 2D).";
     else if(Math.abs(ta)<0.8)no="🎯 <b>τ = 0 : facette principale.</b> Le point est sur l'axe horizontal, à "+(sg>Cc?"l'extrémité droite (C + R, la plus grande contrainte normale)":"l'extrémité gauche (C − R, la plus petite)")+" du cercle.";
     else if(Math.abs(Math.abs(ta)-R)<0.8)no="⚡ Cisaillement maximal : |τ| = R = "+nf(R,1)+" MPa, au sommet du cercle. La facette est à 45° des directions principales.";
-    else no="La facette a tourné de θ = "+nf(th,0)+"° ; le point a tourné de <b>2θ = "+nf(2*th,0)+"° dans le sens contraire</b>, sur un cercle de centre C et de rayon R (convention du polycopié). Cherche avec le curseur les deux facettes où τ = 0 : ce sont les directions principales (cours 4).";
+    else no="La facette a tourné de θ = "+nf(th,0)+"° ; le point a tourné de <b>2θ = "+nf(2*th,0)+"° dans le sens contraire</b>, sur un cercle de centre C et de rayon R (convention de la série). Cherche avec le curseur les deux facettes où τ = 0 : ce sont les directions principales (cours 4).";
     $("#f4note").innerHTML=no;
   }
   function addR(a,b){for(let q=Math.min(a,b);q<=Math.max(a,b);q++)vis.add(q);}

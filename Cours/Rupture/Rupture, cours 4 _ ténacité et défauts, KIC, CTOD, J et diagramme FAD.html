@@ -317,25 +317,13 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <div><div class="f"><span class="sig">K</span> = <span class="sig">σ</span>·<span class="mat">Y</span>·√<span class="eps">a</span></div>Y ≈ 1,77 pour une fissure centrale (a = demi-longueur), 1,99 débouchante, 1,13 noyée circulaire. a en mètres ; les contraintes résiduelles s'ajoutent à la contrainte appliquée.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> de référence (Partie I : Mécanique de la rupture). Ce cours couvre la fin du § II.D, les § II.E et II.F, et l'annexe sur le CTOD, <b>pages 19 à 49, figures 24 à 50</b> :
-    <div class="tbl-wrap"><table class="data">
-      <tr><th>Chapitre du cours</th><th>Polycopié</th></tr>
-      <tr><td>1 Le critère K<sub>IC</sub></td><td>p. 22 à 24, § II.D.2 et II.D.3, diagramme d'Ashby</td></tr>
-      <tr><td>2 Épaisseur et zone plastique</td><td>p. 19 et 20 (figures 24 et 25), p. 26 et 27 (figures 31 et 32)</td></tr>
-      <tr><td>3 Mesurer K<sub>IC</sub></td><td>p. 24 à 29, § II.D.5 et II.D.6, figures 29, 30, 33 et 34</td></tr>
-      <tr><td>4 L'approche énergétique G</td><td>p. 29 à 38, § II.E, figures 35 à 40 (version resserrée)</td></tr>
-      <tr><td>5 CTOD et intégrale J</td><td>p. 38 à 45, § II.F.1 à II.F.3, figures 41 à 47 ; annexe CTOD (2 pages)</td></tr>
-      <tr><td>6 Le diagramme FAD</td><td>p. 45 à 47, § II.F.4, figures 48 à 50 ; application aux soudures <span class="hp">hors poly</span></td></tr>
-    </table></div>
-    Les démonstrations les plus longues du polycopié (fermeture virtuelle d'Irwin, calcul de la correction de Dugdale, définition de J par un contour) ne sont données ici que par leurs résultats : elles ne sont pas nécessaires pour utiliser ces outils.
-  </div>
+  <div class="def"><b>📘 Ce que ce cours résume</b> : les démonstrations les plus longues (fermeture virtuelle d'Irwin, calcul de la correction de Dugdale, définition de J par un contour) ne sont données ici que par leurs résultats ; elles ne sont pas nécessaires pour utiliser ces outils.</div>
 
-  <div class="def"><b>🔎 Cinq remarques de lecture</b>
-    <p><b>1. Condition sur le ligament</b> (p. 27). Le polycopié écrit « condition sur la longueur du ligament à fracturer : a &gt; 50 r<sub>Y</sub> » : il faut lire <b>(w − a) &gt; 50 r<sub>Y</sub></b>, comme la formule qui suit. Avec r<sub>Y</sub> = (1/6π)(K<sub>IC</sub>/R<sub>e</sub>)², 50 r<sub>Y</sub> ≈ 2,65 (K<sub>IC</sub>/R<sub>e</sub>)², arrondi à la valeur normalisée 2,5.</p>
-    <p><b>2. Renvoi de figure</b> (p. 34). « On mesure la complaisance C comme indiqué sur la figure 47 » renvoie en fait à la <b>figure 39</b>.</p>
-    <p><b>3. Le facteur √3</b> (p. 26). Écrire σ<sub>yy</sub> = √3·R<sub>e</sub> à la frontière plastique en déformation plane est une convention d'Irwin, qui donne r<sub>Y</sub> = (1/6π)(K/R<sub>e</sub>)². Le critère de von Mises appliqué au champ du cours 3 donne, devant la pointe et pour ν = 0,3, une zone encore plus petite (manipulation 4 du cours 3). Retiens la valeur conventionnelle, c'est celle des normes.</p>
-    <p><b>4. La grande égalité</b> (p. 45). « résilience K = WOF = 2γ<sub>s</sub> = J<sub>IC</sub> = G<sub>IC</sub> » n'est qu'un ordre d'idées pour les matériaux quasi fragiles. La résilience Charpy est mesurée en choc, sur une entaille émoussée, et inclut la plasticité de toute l'éprouvette ; 2γ<sub>s</sub> ne vaut que pour une rupture parfaitement fragile. Pour un acier, ces grandeurs diffèrent souvent d'un facteur 10 à 1 000. Le symbole K de la résilience (KC, cours 2) n'a rien à voir avec le facteur d'intensité K.</p>
-    <p><b>5. Unités anglo-saxonnes</b> (p. 23). Le second graphique est gradué en ksi√in et ksi : 1 ksi√in = 1,099 MPa·√m et 1 ksi = 6,895 MPa. Ses 145 ksi√in font donc 159 MPa·√m, et ses 250 ksi font 1 724 MPa.</p>
+  <div class="def"><b>🔎 Quatre remarques de lecture</b>
+    <p><b>1. Condition sur le ligament.</b> On lit parfois « condition sur la longueur du ligament à fracturer : a &gt; 50 r<sub>Y</sub> » : il faut lire <b>(w − a) &gt; 50 r<sub>Y</sub></b>, le ligament étant la partie non fissurée, de longueur w − a. Avec r<sub>Y</sub> = (1/6π)(K<sub>IC</sub>/R<sub>e</sub>)², 50 r<sub>Y</sub> ≈ 2,65 (K<sub>IC</sub>/R<sub>e</sub>)², arrondi à la valeur normalisée 2,5.</p>
+    <p><b>2. Le facteur √3.</b> Écrire σ<sub>yy</sub> = √3·R<sub>e</sub> à la frontière plastique en déformation plane est une convention d'Irwin, qui donne r<sub>Y</sub> = (1/6π)(K/R<sub>e</sub>)². Le critère de von Mises appliqué au champ du cours 3 donne, devant la pointe et pour ν = 0,3, une zone encore plus petite (manipulation 4 du cours 3). Retiens la valeur conventionnelle, c'est celle des normes.</p>
+    <p><b>3. La grande égalité.</b> L'égalité parfois écrite « résilience K = WOF = 2γ<sub>s</sub> = J<sub>IC</sub> = G<sub>IC</sub> » n'est qu'un ordre d'idées pour les matériaux quasi fragiles. La résilience Charpy est mesurée en choc, sur une entaille émoussée, et inclut la plasticité de toute l'éprouvette ; 2γ<sub>s</sub> ne vaut que pour une rupture parfaitement fragile. Pour un acier, ces grandeurs diffèrent souvent d'un facteur 10 à 1 000. Le symbole K de la résilience (KC, cours 2) n'a rien à voir avec le facteur d'intensité K.</p>
+    <p><b>4. Unités anglo-saxonnes.</b> Les graphiques américains sont souvent gradués en ksi√in et ksi : 1 ksi√in = 1,099 MPa·√m et 1 ksi = 6,895 MPa. Ainsi, 145 ksi√in font 159 MPa·√m, et 250 ksi font 1 724 MPa.</p>
   </div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
@@ -370,7 +358,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la balance</span></div>
-    <p>Charge progressivement une pièce fissurée : le facteur d'intensité K = σY√a augmente avec la contrainte (cours 3). À un certain moment, la matière de la pointe ne tient plus et la fissure se propage brutalement. La valeur de K à cet instant est une <b>propriété du matériau</b> : le <b>facteur d'intensité de contrainte critique</b>, ou <b>ténacité</b>, noté K<sub>IC</sub> (I pour le mode I d'ouverture, C pour critique ; polycopié, p. 22).</p>
+    <p>Charge progressivement une pièce fissurée : le facteur d'intensité K = σY√a augmente avec la contrainte (cours 3). À un certain moment, la matière de la pointe ne tient plus et la fissure se propage brutalement. La valeur de K à cet instant est une <b>propriété du matériau</b> : le <b>facteur d'intensité de contrainte critique</b>, ou <b>ténacité</b>, noté K<sub>IC</sub> (I pour le mode I d'ouverture, C pour critique).</p>
     <div class="fx"><div class="big"><span class="sig">K</span> = <span class="sig">σ</span>·<span class="mat">Y</span>·√<span class="eps">a</span> &nbsp;≥&nbsp; <span class="mat">K<sub>IC</sub></span> &nbsp;⟹&nbsp; rupture</div><p class="cap">à gauche, la sollicitation (charge et défaut) ; à droite, la résistance du matériau à la propagation des fissures</p></div>
     <p>C'est une balance : sur un plateau, ce que la structure impose à la fissure ; sur l'autre, ce que le matériau peut encaisser. Elle s'utilise dans trois sens :</p>
     <ul>
@@ -387,7 +375,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <tr><td>Aciers</td><td class="n">50 à 150</td></tr>
       <tr><td>Métaux ductiles purs</td><td class="n">150 à 200</td></tr>
     </table></div>
-    <p class="mut" style="font-size:.9rem">Valeurs du polycopié, p. 22.</p>
+    <p class="mut" style="font-size:.9rem">Ordres de grandeur usuels.</p>
   </div>
 
   <div class="lab" id="m1">
@@ -410,13 +398,13 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">utiliser le critère, et ses limites</span></div>
-    <div class="def"><b>📖 Ténacité K<sub>IC</sub></b> (polycopié, p. 22) : valeur critique du facteur d'intensité de contrainte en mode I, à laquelle une fissure se propage brutalement. Propriété du matériau, indépendante de la géométrie de chargement et de l'éprouvette (à condition de respecter les conditions de validité, chapitre 3). Elle caractérise <b>la résistance du matériau à la propagation des fissures</b>. Unité : MPa·√m.</div>
+    <div class="def"><b>📖 Ténacité K<sub>IC</sub></b> : valeur critique du facteur d'intensité de contrainte en mode I, à laquelle une fissure se propage brutalement. Propriété du matériau, indépendante de la géométrie de chargement et de l'éprouvette (à condition de respecter les conditions de validité, chapitre 3). Elle caractérise <b>la résistance du matériau à la propagation des fissures</b>. Unité : MPa·√m.</div>
     <div class="fx"><div class="row big" style="font-size:1.5rem"><span><span class="mat">K<sub>IC</sub></span> = <span class="sig">σ<sub>r</sub></span>·<span class="mat">Y</span>·√<span class="eps">a</span></span><span><span class="sig">σ<sub>r</sub></span> = <span class="frac"><span><span class="mat">K<sub>IC</sub></span></span><span><span class="mat">Y</span>√<span class="eps">a</span></span></span></span><span><span class="eps">a<sub>c</sub></span> = <span style="font-size:1.2em">(</span><span class="frac"><span><span class="mat">K<sub>IC</sub></span></span><span><span class="mat">Y</span><span class="sig">σ</span></span></span><span style="font-size:1.2em">)</span>²</span></div><p class="cap">σ<sub>r</sub> : contrainte nominale de rupture ; a<sub>c</sub> : taille critique de défaut pour la contrainte σ</p></div>
     <p><b>Exemple.</b> Acier de K<sub>IC</sub> = 80 MPa·√m, fissure débouchante (Y = 1,99), σ = 200 MPa : <span class="m">a<sub>c</sub> = (80/(1,99 × 200))² = 0,201² = 0,0404 m ≈ <b>40 mm</b></span>. Avec un défaut de 5 mm : <span class="m">σ<sub>r</sub> = 80/(1,99 × √0,005) ≈ <b>569 MPa</b></span>, au-dessus de R<sub>e</sub> : la pièce plastifierait avant de casser.</p>
-    <p>Conséquence importante (polycopié, p. 22) : la contrainte de rupture d'une pièce fissurée <b>n'est pas une propriété du matériau</b>. Elle dépend de sa ténacité (propriété du matériau) et de la taille des défauts (propriété de la fabrication).</p>
+    <p>Conséquence importante : la contrainte de rupture d'une pièce fissurée <b>n'est pas une propriété du matériau</b>. Elle dépend de sa ténacité (propriété du matériau) et de la taille des défauts (propriété de la fabrication).</p>
     <h4>Résistance et ténacité : le grand compromis</h4>
-    <p>Le diagramme d'Ashby du polycopié (p. 23) place les matériaux selon leur ténacité K<sub>C</sub> et leur limite d'élasticité σ<sub>y</sub>. Des polymères aux aciers, les deux augmentent ensemble ; les céramiques, résistantes mais peu tenaces, font exception. Les droites diagonales du diagramme, notées K<sub>C</sub>²/(πσ<sub>y</sub>²) = 0,1 mm, 1 mm, 10 mm, 100 mm, ont un sens simple <span class="hp">hors poly</span> : c'est la taille de défaut (demi-longueur d'une fissure centrale) pour laquelle rupture et plastification arrivent ensemble. Au-dessous, le matériau plastifie d'abord ; au-dessus, il casse avant de plastifier. Un acier de construction tolère des défauts de plusieurs centimètres, une céramique moins d'un dixième de millimètre.</p>
-    <p>Mais <b>à l'intérieur d'une même famille</b>, résistance et ténacité varient en sens inverse : en durcissant un acier par trempe ou par précipitation, on relève sa limite d'élasticité et l'on abaisse sa ténacité (polycopié, p. 23, second graphique). Ces effets tiennent à l'aptitude du matériau à se déformer plastiquement en fond de fissure, pour en « lisser » l'effet (p. 24).</p>
+    <p>Le diagramme d'Ashby place les matériaux selon leur ténacité K<sub>C</sub> et leur limite d'élasticité σ<sub>y</sub>. Des polymères aux aciers, les deux augmentent ensemble ; les céramiques, résistantes mais peu tenaces, font exception. Les droites diagonales du diagramme, notées K<sub>C</sub>²/(πσ<sub>y</sub>²) = 0,1 mm, 1 mm, 10 mm, 100 mm, ont un sens simple : c'est la taille de défaut (demi-longueur d'une fissure centrale) pour laquelle rupture et plastification arrivent ensemble. Au-dessous, le matériau plastifie d'abord ; au-dessus, il casse avant de plastifier. Un acier de construction tolère des défauts de plusieurs centimètres, une céramique moins d'un dixième de millimètre.</p>
+    <p>Mais <b>à l'intérieur d'une même famille</b>, résistance et ténacité varient en sens inverse : en durcissant un acier par trempe ou par précipitation, on relève sa limite d'élasticité et l'on abaisse sa ténacité. Ces effets tiennent à l'aptitude du matériau à se déformer plastiquement en fond de fissure, pour en « lisser » l'effet.</p>
     <div class="warn"><b>⚠️ Piège : ne pas confondre les trois K.</b> K (cours 3) est la sollicitation de la fissure. K<sub>IC</sub> est la ténacité du matériau. KC ou KCV (cours 2) est la <b>résilience</b> Charpy, une énergie par unité d'aire en J/cm². Seuls les deux premiers se comparent.</div>
     <div class="warn"><b>⚠️ Piège : K<sub>IC</sub> dépend de la température.</b> Comme l'énergie Charpy, la ténacité des aciers ferritiques chute dans la transition ductile-fragile : quelques dizaines de MPa·√m au palier fragile, plus de 150 au palier ductile. Une taille critique calculée à +20 °C ne vaut rien à −30 °C.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « K sollicite, K<sub>IC</sub> résiste »</b>. Et pour la taille critique : « a<sub>c</sub> au carré, comme la ténacité sur la charge ».</div>
@@ -436,10 +424,10 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le sandwich</span></div>
-    <p>La contrainte infinie prévue par l'élasticité à la pointe d'une fissure n'existe pas : dès qu'elle dépasse R<sub>e</sub>, la matière plastifie dans une petite <b>zone plastique</b> de taille r<sub>Y</sub>, qui « émousse » la fissure (polycopié, p. 26, figure 31). Mais cette zone n'a pas la même taille partout le long du front de fissure (figure 32).</p>
+    <p>La contrainte infinie prévue par l'élasticité à la pointe d'une fissure n'existe pas : dès qu'elle dépasse R<sub>e</sub>, la matière plastifie dans une petite <b>zone plastique</b> de taille r<sub>Y</sub>, qui « émousse » la fissure. Mais cette zone n'a pas la même taille partout le long du front de fissure.</p>
     <ul>
-      <li>Près des <b>surfaces libres</b> de la pièce, rien n'empêche la matière de s'amincir : c'est l'état de <b>contrainte plane</b>. Elle glisse facilement, à 45° (cours 1) : la zone plastique est grande, et la cassure y forme des <b>lèvres de cisaillement</b> obliques (figure 24).</li>
-      <li>Au <b>cœur</b> d'une pièce épaisse, la matière ne peut pas s'amincir, retenue par celle qui l'entoure : c'est la <b>déformation plane</b>. L'état est triaxial, le glissement est bridé, la zone plastique est environ trois fois plus petite, et la rupture s'ouvre à plat (figure 25).</li>
+      <li>Près des <b>surfaces libres</b> de la pièce, rien n'empêche la matière de s'amincir : c'est l'état de <b>contrainte plane</b>. Elle glisse facilement, à 45° (cours 1) : la zone plastique est grande, et la cassure y forme des <b>lèvres de cisaillement</b> obliques.</li>
+      <li>Au <b>cœur</b> d'une pièce épaisse, la matière ne peut pas s'amincir, retenue par celle qui l'entoure : c'est la <b>déformation plane</b>. L'état est triaxial, le glissement est bridé, la zone plastique est environ trois fois plus petite, et la rupture s'ouvre à plat.</li>
     </ul>
     <p>Comme dans un sandwich qu'on écrase : les tranches de pain s'écrasent librement, la garniture, coincée, ne peut pas fuir. Plus le sandwich est épais, plus la garniture domine. Une <b>tôle mince</b> est presque entièrement en contrainte plane : elle plastifie beaucoup et paraît très tenace. Une <b>tôle épaisse</b> est surtout en déformation plane : elle résiste moins à la propagation. La ténacité « vraie », la plus faible, est celle de la déformation plane : c'est K<sub>IC</sub>.</p>
   </div>
@@ -457,14 +445,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m2svg" role="img" aria-label="Ténacité apparente en fonction de l'épaisseur, et cassure vue dans l'épaisseur avec ses lèvres de cisaillement"></svg>
     <div class="readout" id="m2r"></div>
     <p class="status" id="m2msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">Courbe K<sub>C</sub>(B) selon la relation empirique d'Irwin (1964) <span class="hp">hors poly</span>, K<sub>C</sub> = K<sub>IC</sub>·√(1 + 1,4β²) avec β = (K<sub>IC</sub>/R<sub>e</sub>)²/B ; schéma de cassure illustratif.</p>
+    <p class="mut" style="font-size:.85rem;margin:0">Courbe K<sub>C</sub>(B) selon la relation empirique d'Irwin (1964), K<sub>C</sub> = K<sub>IC</sub>·√(1 + 1,4β²) avec β = (K<sub>IC</sub>/R<sub>e</sub>)²/B ; schéma de cassure illustratif.</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">r<sub>Y</sub> et la condition d'épaisseur</span></div>
-    <p>Devant la pointe, la contrainte d'ouverture vaut K/√(2πr) (cours 3). On cherche où elle atteint la limite de plasticité : R<sub>e</sub> en contrainte plane, √3·R<sub>e</sub> en déformation plane, où la triaxialité relève le seuil (convention d'Irwin, polycopié p. 26 et 27) :</p>
+    <p>Devant la pointe, la contrainte d'ouverture vaut K/√(2πr) (cours 3). On cherche où elle atteint la limite de plasticité : R<sub>e</sub> en contrainte plane, √3·R<sub>e</sub> en déformation plane, où la triaxialité relève le seuil (convention d'Irwin) :</p>
     <div class="fx"><div class="row big" style="font-size:1.5rem"><span><span class="gam">r<sub>Y</sub></span> = <span class="frac"><span>1</span><span>2π</span></span><span style="font-size:1.15em">(</span><span class="frac"><span><span class="sig">K</span></span><span><span class="mat">R<sub>e</sub></span></span></span><span style="font-size:1.15em">)</span>² <small>contrainte plane</small></span><span><span class="gam">r<sub>Y</sub></span> = <span class="frac"><span>1</span><span>6π</span></span><span style="font-size:1.15em">(</span><span class="frac"><span><span class="sig">K</span></span><span><span class="mat">R<sub>e</sub></span></span></span><span style="font-size:1.15em">)</span>² <small>déformation plane</small></span></div><p class="cap">r<sub>Y</sub> en m avec K en MPa·√m et R<sub>e</sub> en MPa ; la zone est trois fois plus petite au cœur</p></div>
     <p><b>Exemple.</b> K<sub>IC</sub> = 50 MPa·√m, R<sub>e</sub> = 500 MPa : (K/R<sub>e</sub>)² = 0,01 m. En contrainte plane, <span class="m">r<sub>Y</sub> = 0,01/(2π) = <b>1,6 mm</b></span> ; en déformation plane, <span class="m">0,01/(6π) = <b>0,53 mm</b></span>.</p>
-    <p>Pour qu'une éprouvette (ou une pièce) soit majoritairement en déformation plane, sa part en contrainte plane près des faces doit rester négligeable. La condition normalisée s'écrit (polycopié, p. 27) :</p>
+    <p>Pour qu'une éprouvette (ou une pièce) soit majoritairement en déformation plane, sa part en contrainte plane près des faces doit rester négligeable. La condition normalisée s'écrit :</p>
     <div class="fx"><div class="big"><span class="mat">B</span> ≥ 2,5·<span style="font-size:1.15em">(</span><span class="frac"><span><span class="mat">K<sub>IC</sub></span></span><span><span class="mat">R<sub>e</sub></span></span></span><span style="font-size:1.15em">)</span>²</div><p class="cap">B : épaisseur ; cela revient à environ 50 fois la zone plastique de déformation plane</p></div>
     <p>Pour l'exemple : <span class="m">B ≥ 2,5 × 0,01 = 0,025 m = <b>25 mm</b></span>. Pour un acier de construction très tenace (K<sub>IC</sub> = 150 MPa·√m, R<sub>e</sub> = 355 MPa) : <span class="m">2,5 × (150/355)² = <b>0,45 m</b></span>, soit 45 cm d'épaisseur ! On ne mesure pas un tel K<sub>IC</sub> : on passe au CTOD ou à J (chapitre 5).</p>
     <div class="def"><b>📖 K<sub>C</sub> et K<sub>IC</sub></b> : K<sub>C</sub> est la ténacité apparente mesurée pour une épaisseur donnée, plus élevée pour les tôles minces ; elle n'est pas une propriété du seul matériau. K<sub>IC</sub> est sa valeur minimale, atteinte en déformation plane ; c'est la valeur prudente, utilisable pour toutes les épaisseurs.</div>
@@ -486,7 +474,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">l'essai de ténacité</span></div>
-    <p>Le principe est simple (polycopié, p. 24) : on usine dans le matériau une entaille de longueur a connue, dans une éprouvette dont le facteur Y est connu ; on la charge en mode I jusqu'à la rupture ; la force de rupture donne K<sub>IC</sub> = σ<sub>r</sub>Y√a. Trois éprouvettes sont courantes (figure 29) :</p>
+    <p>Le principe est simple : on usine dans le matériau une entaille de longueur a connue, dans une éprouvette dont le facteur Y est connu ; on la charge en mode I jusqu'à la rupture ; la force de rupture donne K<sub>IC</sub> = σ<sub>r</sub>Y√a. Trois éprouvettes sont courantes :</p>
     <ul>
       <li>la <b>SENT</b> (<i>single edge notched tension</i>, entaillée sur un bord et tirée) ;</li>
       <li>la <b>SENB</b> (<i>single edge notched bending</i>, entaillée sur un bord et fléchie), en flexion trois ou quatre points ;</li>
@@ -494,8 +482,8 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     </ul>
     <p>Trois précautions font toute la difficulté :</p>
     <ol>
-      <li><b>Une vraie fissure, pas une entaille.</b> Une entaille usinée a un rayon en fond ρ trop grand : la ténacité « mesurée » serait faussée vers le haut (figure 33). On prolonge donc l'entaille par une <b>préfissure de fatigue</b> : quelques dizaines de milliers de cycles sous faible charge créent une fissure parfaitement aiguë (p. 28).</li>
-      <li><b>Peu de plasticité.</b> La courbe force-ouverture doit rester presque droite jusqu'à la rupture (figures 30 et 34).</li>
+      <li><b>Une vraie fissure, pas une entaille.</b> Une entaille usinée a un rayon en fond ρ trop grand : la ténacité « mesurée » serait faussée vers le haut. On prolonge donc l'entaille par une <b>préfissure de fatigue</b> : quelques dizaines de milliers de cycles sous faible charge créent une fissure parfaitement aiguë.</li>
+      <li><b>Peu de plasticité.</b> La courbe force-ouverture doit rester presque droite jusqu'à la rupture.</li>
       <li><b>Une éprouvette assez grande</b> devant la zone plastique, en particulier assez épaisse pour la déformation plane (chapitre 2).</li>
     </ol>
     <p>Si une seule condition n'est pas remplie, la valeur obtenue n'est qu'une ténacité provisoire, notée <b>K<sub>Q</sub></b>, et non K<sub>IC</sub>.</p>
@@ -515,25 +503,25 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m3svg" role="img" aria-label="Courbe force-ouverture d'un essai de ténacité, droite sécante à 95 % et conditions de validité"></svg>
     <div class="readout" id="m3r"></div>
     <p class="status" id="m3msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">Modèle illustratif <span class="hp">hors poly</span> : la non-linéarité de la courbe croît avec la zone plastique ; la rupture survient quand K atteint la ténacité apparente de l'épaisseur choisie (chapitre 2).</p>
+    <p class="mut" style="font-size:.85rem;margin:0">Modèle illustratif : la non-linéarité de la courbe croît avec la zone plastique ; la rupture survient quand K atteint la ténacité apparente de l'épaisseur choisie (chapitre 2).</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">calcul de K<sub>Q</sub> et validité</span></div>
-    <p>Pour l'éprouvette CT (polycopié, figure 29), avec F la force, b l'épaisseur (notée B dans ce cours), w la largeur mesurée depuis l'axe des goupilles, et α = a/w :</p>
+    <p>Pour l'éprouvette CT, avec F la force, b l'épaisseur (notée B dans ce cours), w la largeur mesurée depuis l'axe des goupilles, et α = a/w :</p>
     <div class="fx"><div class="big" style="font-size:1.25rem"><span class="sig">K</span> = <span class="frac"><span><span class="frc">F</span></span><span><span class="mat">B</span>√<span class="mat">W</span></span></span>·<span class="frac"><span>2 + α</span><span>(1 − α)<sup>3/2</sup></span></span>·[0,886 + 4,64α − 13,32α² + 14,72α³ − 5,6α⁴]</div><p class="cap">valable pour 0,2 ≤ α ≤ 1 environ ; pour α = 0,5, le facteur vaut 9,66</p></div>
-    <p>Pour la SENB en flexion trois points (portée L = 4w), on calcule d'abord la contrainte nominale de flexion σ = 3FL/(2bw²), puis K = σY√a avec Y = 1,93 − 3,07α + 14,53α² − 25,11α³ + 25,80α⁴ (p. 25).</p>
+    <p>Pour la SENB en flexion trois points (portée L = 4w), on calcule d'abord la contrainte nominale de flexion σ = 3FL/(2bw²), puis K = σY√a avec Y = 1,93 − 3,07α + 14,53α² − 25,11α³ + 25,80α⁴.</p>
     <p><b>Exemple.</b> CT de B = 25 mm, W = 50 mm, a = 25 mm, en acier trempé (R<sub>e</sub> = 900 MPa) ; F<sub>Q</sub> = 30 kN. <span class="m">K<sub>Q</sub> = 30 000/(25 × √50) × 9,66 = 169,7 × 9,66 = 1 639 N·mm<sup>−3/2</sup> = <b>51,8 MPa·√m</b></span>. Validité : <span class="m">2,5 × (51,8/900)² = 0,0083 m = 8,3 mm</span>, inférieur à B, a et W − a (25 mm) ✅ ; si F<sub>max</sub> ≤ 1,1 F<sub>Q</sub> ✅, alors <b>K<sub>IC</sub> = 51,8 MPa·√m</b>.</p>
-    <h4>Les conditions de validité (polycopié, p. 27 à 29)</h4>
+    <h4>Les conditions de validité</h4>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Condition</th><th>Pourquoi</th></tr>
       <tr><td class="n">a ≥ 2,5 (K<sub>Q</sub>/R<sub>e</sub>)²</td><td>fissure grande devant la zone plastique (≈ 50 r<sub>Y</sub>)</td></tr>
       <tr><td class="n">W − a ≥ 2,5 (K<sub>Q</sub>/R<sub>e</sub>)²</td><td>ligament (la partie non fissurée) grand devant la zone plastique</td></tr>
       <tr><td class="n">B ≥ 2,5 (K<sub>Q</sub>/R<sub>e</sub>)²</td><td>déformation plane majoritaire</td></tr>
-      <tr><td>préfissure de fatigue, ρ &lt; ρ<sub>c</sub></td><td>une vraie fissure aiguë (figure 33)</td></tr>
-      <tr><td class="n">F<sub>max</sub> ≤ 1,1 F<sub>Q</sub></td><td>courbe presque linéaire : comportement quasi fragile (figure 34)</td></tr>
+      <tr><td>préfissure de fatigue, ρ &lt; ρ<sub>c</sub></td><td>une vraie fissure aiguë</td></tr>
+      <tr><td class="n">F<sub>max</sub> ≤ 1,1 F<sub>Q</sub></td><td>courbe presque linéaire : comportement quasi fragile</td></tr>
     </table></div>
-    <div class="def"><b>📖 F<sub>Q</sub></b> (polycopié, p. 28 et 29) : force à l'intersection de la courbe de chargement et d'une droite issue de l'origine, de pente égale à <b>95 %</b> de la pente initiale. Elle repère la fin du domaine quasi linéaire ; elle correspond à une avancée apparente de la fissure d'environ 2 % de sa longueur. Si la courbe casse avant de l'atteindre, F<sub>Q</sub> = F<sub>max</sub>.</div>
-    <p>Les normes d'essai sont l'ASTM E399 et l'ISO 12135 <span class="hp">hors poly</span>. Pour l'acier très tenace du chapitre 2 (K<sub>IC</sub> ≈ 150 MPa·√m, R<sub>e</sub> = 355 MPa), il faudrait une éprouvette d'environ 45 cm d'épaisseur : en pratique, <b>on ne mesure jamais un K<sub>IC</sub> valide sur un acier de construction à température ambiante</b>. C'est la raison d'être du CTOD et de l'intégrale J (chapitre 5).</p>
+    <div class="def"><b>📖 F<sub>Q</sub></b> : force à l'intersection de la courbe de chargement et d'une droite issue de l'origine, de pente égale à <b>95 %</b> de la pente initiale. Elle repère la fin du domaine quasi linéaire ; elle correspond à une avancée apparente de la fissure d'environ 2 % de sa longueur. Si la courbe casse avant de l'atteindre, F<sub>Q</sub> = F<sub>max</sub>.</div>
+    <p>Les normes d'essai sont l'ASTM E399 et l'ISO 12135. Pour l'acier très tenace du chapitre 2 (K<sub>IC</sub> ≈ 150 MPa·√m, R<sub>e</sub> = 355 MPa), il faudrait une éprouvette d'environ 45 cm d'épaisseur : en pratique, <b>on ne mesure jamais un K<sub>IC</sub> valide sur un acier de construction à température ambiante</b>. C'est la raison d'être du CTOD et de l'intégrale J (chapitre 5).</p>
     <div class="warn"><b>⚠️ Piège : K<sub>Q</sub> n'est pas K<sub>IC</sub>.</b> Tant que toutes les conditions ne sont pas vérifiées, la valeur reste provisoire. Une éprouvette trop petite donne en général un K<sub>Q</sub> <b>supérieur</b> au vrai K<sub>IC</sub> : l'erreur n'est pas prudente.</div>
     <div class="warn"><b>⚠️ Piège : les unités de la formule CT.</b> Avec F en N, B et W en mm, K sort en N·mm<sup>−3/2</sup> : diviser par 31,62 pour obtenir des MPa·√m.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « préfissure, 95 %, 1,1 et 2,5 »</b> : une vraie fissure, la sécante à 95 %, F<sub>max</sub> sous 1,1 F<sub>Q</sub>, et toutes les dimensions au-dessus de 2,5 (K/R<sub>e</sub>)².</div>
@@ -553,14 +541,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">l'arc bandé</span></div>
-    <p>Une pièce chargée stocke de l'énergie élastique, comme un arc bandé ou un ressort comprimé. Quand une fissure s'allonge, la pièce devient plus souple : une partie de cette énergie se libère. Griffith (cours 3) a eu l'idée de faire le bilan : la fissure avance si l'énergie libérée suffit à « payer » la création des nouvelles surfaces (polycopié, p. 29 à 33).</p>
-    <p>L'énergie libérée par mètre carré de fissure nouvelle s'appelle le <b>taux de restitution de l'énergie</b> G (en J/m²). Elle existe pour tout chargement, même avant la rupture : c'est la « force motrice » de la fissure, comme K. Quand G atteint une valeur critique <b>G<sub>IC</sub></b>, l'énergie qu'il faut pour rompre, la fissure se propage. G<sub>IC</sub> est, comme K<sub>IC</sub>, une propriété du matériau (p. 33).</p>
+    <p>Une pièce chargée stocke de l'énergie élastique, comme un arc bandé ou un ressort comprimé. Quand une fissure s'allonge, la pièce devient plus souple : une partie de cette énergie se libère. Griffith (cours 3) a eu l'idée de faire le bilan : la fissure avance si l'énergie libérée suffit à « payer » la création des nouvelles surfaces.</p>
+    <p>L'énergie libérée par mètre carré de fissure nouvelle s'appelle le <b>taux de restitution de l'énergie</b> G (en J/m²). Elle existe pour tout chargement, même avant la rupture : c'est la « force motrice » de la fissure, comme K. Quand G atteint une valeur critique <b>G<sub>IC</sub></b>, l'énergie qu'il faut pour rompre, la fissure se propage. G<sub>IC</sub> est, comme K<sub>IC</sub>, une propriété du matériau.</p>
     <p>Pour un verre, G<sub>IC</sub> vaut à peine plus que l'énergie des deux surfaces créées, quelques J/m². Pour un acier, la pointe plastifie et l'énergie dissipée se compte en <b>dizaines de milliers</b> de J/m² : c'est la plasticité qui fait la ténacité des métaux. Et G et K disent la même chose, d'une autre façon : <b>G = K²/E</b> (à un facteur 1 − ν² près).</p>
   </div>
 
   <div class="lab" id="m4">
     <p class="lab-h">Manipulation 4 : le triangle de l'énergie</p>
-    <p class="lab-sub">En haut, la courbe force-déplacement d'une éprouvette fissurée, avant (pente 1/C<sub>1</sub>) et après (pente 1/C<sub>2</sub>) une petite avancée de la fissure. L'aire du triangle OAB (bleu-vert) est l'énergie disponible pour la rupture, à force imposée comme à déplacement imposé (polycopié, figures 36 et 38). En bas, G<sub>IC</sub> = K<sub>IC</sub>²/E pour cinq matériaux.</p>
+    <p class="lab-sub">En haut, la courbe force-déplacement d'une éprouvette fissurée, avant (pente 1/C<sub>1</sub>) et après (pente 1/C<sub>2</sub>) une petite avancée de la fissure. L'aire du triangle OAB (bleu-vert) est l'énergie disponible pour la rupture, à force imposée comme à déplacement imposé. En bas, G<sub>IC</sub> = K<sub>IC</sub>²/E pour cinq matériaux.</p>
     <div class="btns" id="m4mode">
       <button class="btn on" data-k="F" type="button">Force imposée</button>
       <button class="btn" data-k="u" type="button">Déplacement imposé</button>
@@ -573,20 +561,20 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">G, complaisance et équivalence avec K</span></div>
-    <p><b>Le bilan</b> (polycopié, p. 30) : le travail δW fourni par les forces extérieures pendant que la fissure gagne l'aire δS se partage entre la variation d'énergie élastique stockée δU<sub>e</sub> et l'énergie de rupture δU<sub>r</sub> :</p>
+    <p><b>Le bilan</b> : le travail δW fourni par les forces extérieures pendant que la fissure gagne l'aire δS se partage entre la variation d'énergie élastique stockée δU<sub>e</sub> et l'énergie de rupture δU<sub>r</sub> :</p>
     <div class="fx"><div class="row big" style="font-size:1.45rem"><span>δ<span class="frc">W</span> = δU<sub>e</sub> + δU<sub>r</sub></span><span><span class="sig">G</span> = <span class="frac"><span>δU<sub>r</sub></span><span>δ<span class="eps">S</span></span></span></span></div><p class="cap">δ : « petite variation de » ; à force imposée, δU<sub>r</sub> = +δU<sub>e</sub> ; à déplacement imposé, δU<sub>r</sub> = −δU<sub>e</sub> ; dans les deux cas, δU<sub>r</sub> = aire OAB</p></div>
-    <div class="def"><b>📖 Complaisance C</b> (p. 33) : souplesse de l'éprouvette, inverse de la pente élastique, définie par u = C·F (u : déplacement du point d'application de la force). Plus la fissure est longue, plus l'éprouvette est complaisante. Pour une éprouvette d'épaisseur B (p. 34) :</div>
-    <div class="fx"><div class="big"><span class="sig">G</span> = <span class="frac"><span><span class="frc">F</span>²</span><span>2<span class="mat">B</span></span></span>·<span class="frac"><span>d<span class="mat">C</span></span><span>d<span class="eps">a</span></span></span></div><p class="cap">on mesure la complaisance de plusieurs éprouvettes de fissures différentes, on en déduit la pente dC/da, et la force de rupture donne G<sub>IC</sub> (figure 39)</p></div>
-    <p><b>L'équivalence de G et K</b>, établie par George Irwin en refermant virtuellement la fissure sur une petite longueur (p. 35 à 37) :</p>
+    <div class="def"><b>📖 Complaisance C</b> : souplesse de l'éprouvette, inverse de la pente élastique, définie par u = C·F (u : déplacement du point d'application de la force). Plus la fissure est longue, plus l'éprouvette est complaisante. Pour une éprouvette d'épaisseur B :</div>
+    <div class="fx"><div class="big"><span class="sig">G</span> = <span class="frac"><span><span class="frc">F</span>²</span><span>2<span class="mat">B</span></span></span>·<span class="frac"><span>d<span class="mat">C</span></span><span>d<span class="eps">a</span></span></span></div><p class="cap">on mesure la complaisance de plusieurs éprouvettes de fissures différentes, on en déduit la pente dC/da, et la force de rupture donne G<sub>IC</sub></p></div>
+    <p><b>L'équivalence de G et K</b>, établie par George Irwin en refermant virtuellement la fissure sur une petite longueur :</p>
     <div class="fx"><div class="row big" style="font-size:1.5rem"><span><span class="mat">G<sub>IC</sub></span> = <span class="frac"><span><span class="mat">K<sub>IC</sub></span>²</span><span><span class="mat">E</span></span></span>(1 − <span class="mat">ν</span>²) <small>déformation plane</small></span><span><span class="mat">G<sub>IC</sub></span> = <span class="frac"><span><span class="mat">K<sub>IC</sub></span>²</span><span><span class="mat">E</span></span></span> <small>contrainte plane</small></span></div><p class="cap">K en Pa·√m et E en Pa : G en J/m² ; ν : coefficient de Poisson (0,3 pour l'acier, soit 1 − ν² = 0,91)</p></div>
     <div class="tbl-wrap"><table class="data">
-      <tr><th>Matériau (polycopié, p. 37)</th><th>E</th><th>K<sub>IC</sub></th><th>G<sub>IC</sub> ≈ K<sub>IC</sub>²/E</th></tr>
+      <tr><th>Matériau</th><th>E</th><th>K<sub>IC</sub></th><th>G<sub>IC</sub> ≈ K<sub>IC</sub>²/E</th></tr>
       <tr><td>Céramique</td><td class="n">200 GPa</td><td class="n">3 MPa·√m</td><td class="n">45 J/m²</td></tr>
       <tr><td>Polymère</td><td class="n">1 GPa</td><td class="n">3 MPa·√m</td><td class="n">9 000 J/m²</td></tr>
       <tr><td>Acier</td><td class="n">200 GPa</td><td class="n">100 MPa·√m</td><td class="n">50 000 J/m²</td></tr>
     </table></div>
     <p>La céramique et le polymère ont la même ténacité K<sub>IC</sub> : à défaut et géométrie égaux, ils cassent sous la <b>même force</b>. Mais le polymère, deux cents fois plus souple, absorbe deux cents fois plus d'énergie avant de rompre.</p>
-    <div class="def"><b>📖 Travail de rupture</b> (en anglais WOF, <i>work of fracture</i> ; p. 44) : aire totale sous la courbe force-déplacement d'un essai mené jusqu'à rupture complète, divisée par l'aire du ligament rompu. C'est un G<sub>IC</sub> moyen sur toute la rupture, plus facile à mesurer mais moins précis.</div>
+    <div class="def"><b>📖 Travail de rupture</b> (en anglais WOF, <i>work of fracture</i>) : aire totale sous la courbe force-déplacement d'un essai mené jusqu'à rupture complète, divisée par l'aire du ligament rompu. C'est un G<sub>IC</sub> moyen sur toute la rupture, plus facile à mesurer mais moins précis.</div>
     <div class="warn"><b>⚠️ Piège : G est un taux, en J/m².</b> Ce n'est pas une énergie totale : c'est une énergie par unité d'aire de fissure créée. Ne pas la comparer à des joules Charpy.</div>
     <div class="warn"><b>⚠️ Piège : même K<sub>IC</sub> ne veut pas dire même G<sub>IC</sub>.</b> Le module E intervient : un matériau souple a un G<sub>IC</sub> bien plus grand qu'un matériau rigide de même ténacité.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « G = K² sur E »</b>, la même information en énergie. Et l'aire OAB, le triangle de l'arc qui se détend.</div>
@@ -605,7 +593,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la fissure qui s'émousse</span></div>
-    <p>Le polycopié distingue trois situations (p. 38, figure 41) :</p>
+    <p>On distingue trois situations :</p>
     <ul>
       <li><b>la mécanique linéaire élastique de la rupture</b> (MLER) : zone plastique minuscule, K et K<sub>IC</sub> suffisent ;</li>
       <li><b>la plasticité confinée</b> : zone plastique petite mais non négligeable ; on corrige la MLER en allongeant fictivement la fissure ;</li>
@@ -617,7 +605,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
 
   <div class="lab" id="m5">
     <p class="lab-h">Manipulation 5 : la gueule qui s'ouvre et la courbe J</p>
-    <p class="lab-sub">En haut, le fond de fissure grossi : en augmentant K, il s'émousse ; le CTOD δ se lit à l'intersection des lèvres et de deux droites à 45° issues de la pointe (annexe du polycopié). En bas, la courbe de résistance J(Δa) d'un acier, la droite d'émoussement décalée de 0,2 mm, et la valeur J<sub>IC</sub> à leur intersection.</p>
+    <p class="lab-sub">En haut, le fond de fissure grossi : en augmentant K, il s'émousse ; le CTOD δ se lit à l'intersection des lèvres et de deux droites à 45° issues de la pointe. En bas, la courbe de résistance J(Δa) d'un acier, la droite d'émoussement décalée de 0,2 mm, et la valeur J<sub>IC</sub> à leur intersection.</p>
     <div class="btns" id="m5mat">
       <button class="btn on" data-k="s355" type="button">Acier S355, palier ductile</button>
       <button class="btn" data-k="zat" type="button">ZAT à gros grains</button>
@@ -629,22 +617,22 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m5svg" role="img" aria-label="Fond de fissure émoussé avec la mesure du CTOD, et courbe de résistance J avec la détermination de JIC"></svg>
     <div class="readout" id="m5r"></div>
     <p class="status" id="m5msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">E = 210 GPa, ν = 0,3. Courbes J(Δa) illustratives, de la forme J = C·Δa<sup>0,5</sup> ; droite d'émoussement J = 2R<sub>e</sub>·Δa <span class="hp">hors poly</span>.</p>
+    <p class="mut" style="font-size:.85rem;margin:0">E = 210 GPa, ν = 0,3. Courbes J(Δa) illustratives, de la forme J = C·Δa<sup>0,5</sup> ; droite d'émoussement J = 2R<sub>e</sub>·Δa.</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">corrections, CTOD, J et leurs liens</span></div>
     <h4>Plasticité confinée : allonger la fissure</h4>
-    <p>Irwin plafonne la contrainte à R<sub>e</sub> dans la zone plastique et décale le champ pour conserver l'effort transmis : tout se passe comme si la fissure était plus longue de r<sub>Y</sub> (polycopié, p. 39 et 40). Dugdale et Barenblatt modélisent la zone plastique par une bande de longueur r<sub>p</sub> où règne R<sub>e</sub> ; pour σ ≪ R<sub>e</sub>, r<sub>p</sub> ≈ (a/2)(πσ/(2R<sub>e</sub>))² (p. 41). Les deux corrections donnent des résultats comparables :</p>
+    <p>Irwin plafonne la contrainte à R<sub>e</sub> dans la zone plastique et décale le champ pour conserver l'effort transmis : tout se passe comme si la fissure était plus longue de r<sub>Y</sub>. Dugdale et Barenblatt modélisent la zone plastique par une bande de longueur r<sub>p</sub> où règne R<sub>e</sub> ; pour σ ≪ R<sub>e</sub>, r<sub>p</sub> ≈ (a/2)(πσ/(2R<sub>e</sub>))². Les deux corrections donnent des résultats comparables :</p>
     <div class="fx"><div class="big"><span class="mat">K<sub>IC</sub></span> = <span class="sig">σ<sub>r</sub></span>·<span class="mat">Y</span>·√(<span class="eps">a</span> + <span class="gam">r<sub>Y</sub></span>)</div><p class="cap">comme r<sub>Y</sub> dépend lui-même de K, on obtient une équation du second degré en K<sub>IC</sub></p></div>
-    <h4>Le CTOD (annexe du polycopié)</h4>
+    <h4>Le CTOD</h4>
     <div class="def"><b>📖 CTOD δ</b> : écartement des lèvres de la fissure émoussée, mesuré à l'intersection des lèvres et de deux droites à 45° issues de la pointe (soit un angle droit). Il s'exprime en mm. Une analyse élasto-plastique donne, en déformation plane :</div>
     <div class="fx"><div class="row big" style="font-size:1.45rem"><span><span class="eps">δ</span> = <span class="frac"><span><span class="sig">K</span>²(1 − <span class="mat">ν</span>²)</span><span><span class="mat">m</span>·<span class="mat">R<sub>e</sub></span>·<span class="mat">E</span></span></span></span><span><small>forme simplifiée :</small> <span class="eps">δ</span> ≈ <span class="frac"><span><span class="sig">K</span>²</span><span><span class="mat">R<sub>e</sub></span>·<span class="mat">E</span></span></span></span></div><p class="cap">m : facteur de contrainte, entre 1 et 2, qui dépend de l'éprouvette et du matériau (rapport R<sub>e</sub>/R<sub>m</sub>)</p></div>
     <p><b>Exemple.</b> K = 60 MPa·√m, R<sub>e</sub> = 400 MPa, E = 210 GPa, m = 1,5 : <span class="m">δ = (60 × 10⁶)² × 0,91/(1,5 × 400 × 10⁶ × 210 × 10⁹) = 2,6 × 10⁻⁵ m = <b>0,026 mm</b></span>. Inversement, un CTOD exigé de 0,25 mm correspond à un K équivalent d'environ <b>186 MPa·√m</b> : une valeur qu'aucun essai de K<sub>IC</sub> valide ne pourrait mesurer sur un acier de construction.</p>
     <p>On ne mesure pas δ directement. L'essai CTOD (une éprouvette SENB fléchie en trois points, souvent de pleine épaisseur) mesure l'ouverture à l'embouchure de l'entaille, le <b>CMOD</b> (<i>crack mouth opening displacement</i>), avec un capteur à lames (extensomètre) ; une relation, qui dépend de la géométrie et de l'écrouissage du matériau, en déduit le CTOD (annexe).</p>
-    <div class="def"><b>📖 Trois CTOD</b> <span class="hp">hors poly</span> : les normes (BS 7448, ISO 12135, ISO 15653 pour les soudures) distinguent δ<sub>c</sub>, mesuré à une rupture par clivage sans déchirure ductile préalable ; δ<sub>u</sub>, à un clivage précédé de déchirure ductile ; et δ<sub>m</sub>, au maximum de la force quand l'éprouvette se déchire sans casser. Un δ<sub>c</sub> signale un comportement fragile, et c'est le plus pénalisant.</div>
-    <h4>L'intégrale J (polycopié, p. 41 à 44)</h4>
-    <p>J est une intégrale calculée sur un contour Γ qui entoure la pointe, d'une lèvre à l'autre ; elle a la propriété d'être <b>indépendante du contour choisi</b>. C'est l'énergie qui « s'écoule » vers la pointe quand la fissure avance, par unité d'aire : en élasticité, <b>J = G</b>. Elle se mesure par la différence d'énergie de deux éprouvettes de fissures légèrement différentes (figure 44), et se trace en fonction de l'avancée de fissure Δa : c'est la <b>courbe de résistance J</b> (figure 46). Sa partie initiale correspond à l'émoussement ; on trace une droite parallèle à cette « droite d'émoussement », décalée de 0,2 mm, et son intersection avec la courbe donne <b>J<sub>IC</sub></b>, la valeur d'amorçage de la déchirure.</p>
-    <div class="fx"><div class="row big" style="font-size:1.45rem"><span><span class="mat">K<sub>J</sub></span> = √<span style="font-size:1.1em">(</span><span class="frac"><span><span class="mat">J<sub>IC</sub></span>·<span class="mat">E</span></span><span>1 − <span class="mat">ν</span>²</span></span><span style="font-size:1.1em">)</span></span><span><span class="mat">J</span> ≈ <span class="mat">m</span>·<span class="mat">R<sub>e</sub></span>·<span class="eps">δ</span></span></div><p class="cap">K<sub>J</sub> : ténacité équivalente, utilisable comme un K<sub>IC</sub> (le polycopié écrit K<sub>IJ</sub> = √(J<sub>IC</sub>E), sans le facteur 1 − ν²) ; la seconde relation découle de la formule du CTOD</p></div>
+    <div class="def"><b>📖 Trois CTOD</b> : les normes (BS 7448, ISO 12135, ISO 15653 pour les soudures) distinguent δ<sub>c</sub>, mesuré à une rupture par clivage sans déchirure ductile préalable ; δ<sub>u</sub>, à un clivage précédé de déchirure ductile ; et δ<sub>m</sub>, au maximum de la force quand l'éprouvette se déchire sans casser. Un δ<sub>c</sub> signale un comportement fragile, et c'est le plus pénalisant.</div>
+    <h4>L'intégrale J</h4>
+    <p>J est une intégrale calculée sur un contour Γ qui entoure la pointe, d'une lèvre à l'autre ; elle a la propriété d'être <b>indépendante du contour choisi</b>. C'est l'énergie qui « s'écoule » vers la pointe quand la fissure avance, par unité d'aire : en élasticité, <b>J = G</b>. Elle se mesure par la différence d'énergie de deux éprouvettes de fissures légèrement différentes, et se trace en fonction de l'avancée de fissure Δa : c'est la <b>courbe de résistance J</b>. Sa partie initiale correspond à l'émoussement ; on trace une droite parallèle à cette « droite d'émoussement », décalée de 0,2 mm, et son intersection avec la courbe donne <b>J<sub>IC</sub></b>, la valeur d'amorçage de la déchirure.</p>
+    <div class="fx"><div class="row big" style="font-size:1.45rem"><span><span class="mat">K<sub>J</sub></span> = √<span style="font-size:1.1em">(</span><span class="frac"><span><span class="mat">J<sub>IC</sub></span>·<span class="mat">E</span></span><span>1 − <span class="mat">ν</span>²</span></span><span style="font-size:1.1em">)</span></span><span><span class="mat">J</span> ≈ <span class="mat">m</span>·<span class="mat">R<sub>e</sub></span>·<span class="eps">δ</span></span></div><p class="cap">K<sub>J</sub> : ténacité équivalente, utilisable comme un K<sub>IC</sub> (on trouve aussi K<sub>IJ</sub> = √(J<sub>IC</sub>E), sans le facteur 1 − ν², forme de la contrainte plane) ; la seconde relation découle de la formule du CTOD</p></div>
     <div class="warn"><b>⚠️ Piège : les unités.</b> δ est une longueur (mm), J une énergie par unité d'aire (J/m² ou kJ/m²), K un facteur en MPa·√m. Pour comparer, on les convertit tous en K équivalent.</div>
     <div class="warn"><b>⚠️ Piège : la courbe R n'est pas la rupture.</b> J<sub>IC</sub> marque le début de la déchirure ductile, qui est stable : la fissure n'avance que si l'on augmente la charge. La rupture vient plus tard, ou par un clivage brutal si l'acier est dans sa transition.</div>
     <div class="mnemo">🧠 <b>Mnémotechnique : « δ s'ouvre, J s'écoule, K s'équivaut »</b>. Et le lien des trois : J = mR<sub>e</sub>δ et K = √(JE/(1 − ν²)).</div>
@@ -664,13 +652,13 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">une carte et deux précipices</span></div>
-    <p>Une pièce fissurée peut ruiner de deux façons (polycopié, p. 45) :</p>
+    <p>Une pièce fissurée peut ruiner de deux façons :</p>
     <ul>
       <li>par <b>rupture</b> : la fissure se propage, quand K atteint la ténacité K<sub>mat</sub> du matériau. C'est le domaine de la mécanique de la rupture ;</li>
       <li>par <b>effondrement plastique</b> : la section restante, affaiblie par le défaut, plastifie tout entière. C'est le domaine de la plasticité.</li>
     </ul>
-    <p>Dans un monde idéal, il suffirait de vérifier les deux séparément : K &lt; K<sub>mat</sub> et σ &lt; σ<sub>y</sub> (la limite d'élasticité), soit un rectangle de sécurité (figure 48). Mais les deux mécanismes interagissent : la plasticité en pointe de fissure accélère la rupture, et la fissure affaiblit la section. Le rectangle s'arrondit (figure 50).</p>
-    <p>On trace donc une carte en coordonnées réduites : en ordonnée, <b>K<sub>r</sub> = K/K<sub>mat</sub></b>, la proximité de la rupture ; en abscisse, <b>L<sub>r</sub> = σ<sub>ref</sub>/σ<sub>y</sub></b>, la proximité de l'effondrement. Une courbe, la <b>ligne d'évaluation de la défaillance</b>, délimite la zone sûre (p. 47). Le défaut, avec sa charge, est un point : à l'intérieur, il est acceptable ; dehors, il ne l'est pas. Et si l'on augmente la charge, le point s'éloigne de l'origine sur une droite : un grand défaut atteint la ligne par le haut (rupture), un petit défaut par la droite (effondrement plastique).</p>
+    <p>Dans un monde idéal, il suffirait de vérifier les deux séparément : K &lt; K<sub>mat</sub> et σ &lt; σ<sub>y</sub> (la limite d'élasticité), soit un rectangle de sécurité. Mais les deux mécanismes interagissent : la plasticité en pointe de fissure accélère la rupture, et la fissure affaiblit la section. Le rectangle s'arrondit.</p>
+    <p>On trace donc une carte en coordonnées réduites : en ordonnée, <b>K<sub>r</sub> = K/K<sub>mat</sub></b>, la proximité de la rupture ; en abscisse, <b>L<sub>r</sub> = σ<sub>ref</sub>/σ<sub>y</sub></b>, la proximité de l'effondrement. Une courbe, la <b>ligne d'évaluation de la défaillance</b>, délimite la zone sûre. Le défaut, avec sa charge, est un point : à l'intérieur, il est acceptable ; dehors, il ne l'est pas. Et si l'on augmente la charge, le point s'éloigne de l'origine sur une droite : un grand défaut atteint la ligne par le haut (rupture), un petit défaut par la droite (effondrement plastique).</p>
   </div>
 
   <div class="lab" id="m6">
@@ -694,18 +682,18 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <svg id="m6svg" role="img" aria-label="Diagramme d'évaluation de la défaillance avec la ligne de défaillance, le point du défaut et sa droite de chargement"></svg>
     <div class="readout" id="m6r"></div>
     <p class="status" id="m6msg" aria-live="polite"></p>
-    <p class="mut" style="font-size:.85rem;margin:0">Acier S355 (σ<sub>y</sub> = 355 MPa, σ<sub>u</sub> = 490 MPa). Ligne de défaillance de l'option 1 sous sa forme courante, contrainte de référence en section nette, sans coefficients partiels de sécurité ni correction de plasticité : un modèle d'apprentissage <span class="hp">hors poly</span>, pas un outil de calcul réglementaire.</p>
+    <p class="mut" style="font-size:.85rem;margin:0">Acier S355 (σ<sub>y</sub> = 355 MPa, σ<sub>u</sub> = 490 MPa). Ligne de défaillance de l'option 1 sous sa forme courante, contrainte de référence en section nette, sans coefficients partiels de sécurité ni correction de plasticité : un modèle d'apprentissage, pas un outil de calcul réglementaire.</p>
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">K<sub>r</sub>, L<sub>r</sub> et la ligne de défaillance</span></div>
     <div class="fx"><div class="row big" style="font-size:1.5rem"><span><span class="sig">K<sub>r</sub></span> = <span class="frac"><span><span class="sig">K<sub>I</sub></span></span><span><span class="mat">K<sub>mat</sub></span></span></span></span><span><span class="sig">L<sub>r</sub></span> = <span class="frac"><span><span class="sig">σ<sub>ref</sub></span></span><span><span class="mat">σ<sub>y</sub></span></span></span></span></div><p class="cap">K<sub>mat</sub> : ténacité du matériau (K<sub>IC</sub>, K<sub>J</sub> ou équivalent CTOD) ; σ<sub>ref</sub> : contrainte de référence, qui mesure la proximité de l'effondrement plastique de la section affaiblie</p></div>
-    <p><b>La contrainte de référence.</b> Pour une plaque de largeur w contenant un défaut de taille a, la section portante est réduite à w − a : la contrainte moyenne y est plus forte d'un facteur w/(w − a), et la plastification généralisée arrive dès σ<sub>nom</sub> = σ<sub>y</sub>(w − a)/w (polycopié, p. 46). Pour la fissure centrale 2a de la manipulation, σ<sub>ref</sub> = σ·W/(W − 2a). Dans les cas réels, σ<sub>ref</sub> se calcule par des formules normalisées ou par simulation numérique (p. 47).</p>
-    <div class="def"><b>📖 Ligne d'évaluation de la défaillance</b> <span class="hp">hors poly</span>, sous la forme courante de l'option 1 des méthodes R6 et BS 7910 :</div>
+    <p><b>La contrainte de référence.</b> Pour une plaque de largeur w contenant un défaut de taille a, la section portante est réduite à w − a : la contrainte moyenne y est plus forte d'un facteur w/(w − a), et la plastification généralisée arrive dès σ<sub>nom</sub> = σ<sub>y</sub>(w − a)/w. Pour la fissure centrale 2a de la manipulation, σ<sub>ref</sub> = σ·W/(W − 2a). Dans les cas réels, σ<sub>ref</sub> se calcule par des formules normalisées ou par simulation numérique.</p>
+    <div class="def"><b>📖 Ligne d'évaluation de la défaillance</b>, sous la forme courante de l'option 1 des méthodes R6 et BS 7910 :</div>
     <div class="fx"><div class="big" style="font-size:1.35rem"><span class="sig">K<sub>r</sub></span> = (1 + 0,5 <span class="sig">L<sub>r</sub></span>²)<sup>−1/2</sup>·[0,3 + 0,7·exp(−0,6 <span class="sig">L<sub>r</sub></span>⁶)] &nbsp; pour <span class="sig">L<sub>r</sub></span> ≤ <span class="mat">L<sub>r,max</sub></span> = <span class="frac"><span><span class="mat">σ<sub>y</sub></span> + <span class="mat">σ<sub>u</sub></span></span><span>2<span class="mat">σ<sub>y</sub></span></span></span></div><p class="cap">σ<sub>u</sub> : résistance à la traction ; la coupure à L<sub>r,max</sub> traduit l'effondrement plastique, quand la contrainte de référence atteint la contrainte d'écoulement, moyenne de σ<sub>y</sub> et σ<sub>u</sub></p></div>
     <p><b>Exemple.</b> W = 200 mm, 2a = 20 mm, σ = 150 MPa, K<sub>mat</sub> = 80 MPa·√m, S355. <span class="m">K = 150 × √(π × 0,01) = 26,6 MPa·√m</span> (×1,006 pour la largeur finie) : <span class="m">K<sub>r</sub> = 26,8/80 = <b>0,33</b></span>. <span class="m">σ<sub>ref</sub> = 150 × 200/180 = 167 MPa</span>, <span class="m">L<sub>r</sub> = 167/355 = <b>0,47</b></span>. La ligne vaut 0,94 à cette abscisse : le point est largement à l'intérieur, <b>acceptable</b>.</p>
     <h4>Contraintes primaires et secondaires</h4>
     <p>Les contraintes <b>primaires</b> viennent des charges extérieures ; elles comptent dans K<sub>r</sub> et dans L<sub>r</sub>. Les contraintes <b>secondaires</b>, comme les contraintes résiduelles de soudage ou thermiques, s'autolimitent : elles ne peuvent pas provoquer à elles seules l'effondrement d'une section. Elles comptent donc dans <b>K<sub>r</sub> seulement</b>. À l'état brut de soudage, on suppose souvent des résiduelles égales à la limite d'élasticité ; après détensionnement, une fraction (de l'ordre de 20 à 30 %). Sur l'exemple, les résiduelles brutes de soudage portent K<sub>r</sub> de 0,33 à <span class="m">(150 + 355) × 0,1784/80 = <b>1,13</b></span> : le défaut n'est plus acceptable ; détensionné (0,3 σ<sub>y</sub>), K<sub>r</sub> redescend à 0,57.</p>
-    <h4>Quelle ténacité ? <span class="hp">hors poly</span></h4>
+    <h4>Quelle ténacité ? <span class="hp">complément</span></h4>
     <p>Idéalement, un essai de ténacité (K<sub>IC</sub>, CTOD ou J) à la température de service, dans la zone du défaut. À défaut, les règles d'évaluation admettent des corrélations avec l'essai Charpy, prudentes. La plus utilisée passe par la <b>courbe maîtresse</b> des aciers ferritiques (norme ASTM E1921) : on estime la température de référence T<sub>0</sub> ≈ T<sub>27J</sub> − 18 °C, puis, pour une épaisseur de 25 mm :</p>
     <div class="fx"><div class="row big" style="font-size:1.35rem"><span><span class="mat">K<sub>méd</sub></span> = 30 + 70·exp[0,019(<span class="mat">T</span> − <span class="mat">T<sub>0</sub></span>)]</span><span><span class="mat">K<sub>5 %</sub></span> = 25,4 + 37,8·exp[0,019(<span class="mat">T</span> − <span class="mat">T<sub>0</sub></span>)]</span></div><p class="cap">en MPa·√m, T en °C ; K<sub>méd</sub> : ténacité médiane, K<sub>5 %</sub> : borne inférieure à 5 % de probabilité, celle qu'on retient pour évaluer</p></div>
     <p>Pour T<sub>27J</sub> = −40 °C et un service à −10 °C : T<sub>0</sub> = −58 °C, exp[0,019 × 48] = 2,49, d'où <span class="m">K<sub>5 %</sub> = 25,4 + 37,8 × 2,49 ≈ <b>119 MPa·√m</b></span>.</p>
@@ -912,7 +900,7 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
     <dt>σ<sub>res</sub></dt><dd>Contraintes résiduelles de soudage : ≈ σ<sub>y</sub> à l'état brut, une fraction après détensionnement.</dd>
     <dt>T<sub>0</sub>, T<sub>27J</sub></dt><dd>Température de référence de la courbe maîtresse (≈ T<sub>27J</sub> − 18 °C) ; température de transition Charpy à 27 J (cours 2).</dd>
     <dt>WOF</dt><dd><i>Work of fracture</i>, travail de rupture : énergie totale de rupture divisée par l'aire du ligament.</dd>
-    <dt>Y</dt><dd>Facteur géométrique de K = σY√a (contient √π dans la convention du polycopié).</dd>
+    <dt>Y</dt><dd>Facteur géométrique de K = σY√a (contient √π dans la convention de la série).</dd>
     <dt>ZAT</dt><dd>Zone affectée thermiquement par le soudage.</dd>
   </dl>
 </div>
@@ -949,14 +937,14 @@ hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
       <tr><td>Peut-il rester en service ?</td><td>K<sub>IC</sub>, CTOD, J, diagramme FAD</td><td class="n">4</td><td>calculer plutôt que réparer par principe</td></tr>
     </table></div>
   </div>
-  <div class="meta">🔭 <b>Et après ?</b> La série Fatigue prolonge celle-ci : un défaut accepté aujourd'hui peut grandir sous les cycles de service, à une vitesse fixée par l'étendue ΔK du facteur d'intensité (loi de Paris, Fatigue, cours 4). Le fluage, rupture lente à haute température, fait l'objet d'une autre partie du polycopié.</div>
+  <div class="meta">🔭 <b>Et après ?</b> La série Fatigue prolonge celle-ci : un défaut accepté aujourd'hui peut grandir sous les cycles de service, à une vitesse fixée par l'étendue ΔK du facteur d'intensité (loi de Paris, Fatigue, cours 4). Le fluage, rupture lente à haute température, fait l'objet de la série Fluage.</div>
 </div>
 </section>
 </main>
 
 <footer>
 <div class="wrap">
-  <p>Cours 4 sur 4 de la série « Mécanique de la rupture : de la cassure au défaut acceptable ». Notations alignées sur le polycopié de référence (Partie I : Mécanique de la rupture) ; pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 4 sur 4 de la série « Mécanique de la rupture : de la cassure au défaut acceptable ». Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1387,7 +1375,7 @@ function animate(btn,label,dur,onStep,onEnd){
     {q:"Dans une même famille d'aciers, relever la limite d'élasticité par trempe :",o:["augmente toujours la ténacité","ne change pas la ténacité","rend la ténacité infinie","abaisse en général la ténacité"],c:3,e:"Résistance et ténacité varient <b>en sens inverse</b> dans une même famille : moins de plasticité possible en fond de fissure."},
     {q:"La zone plastique en déformation plane est, par rapport à celle en contrainte plane :",o:["deux fois plus grande","environ trois fois plus petite","identique","dix fois plus grande"],c:1,e:"(1/6π) contre (1/2π) : <b>trois fois plus petite</b>, car la triaxialité bride la plasticité au cœur."},
     {q:"Pour qu'un essai donne un K<sub>IC</sub> valide, il faut notamment :",o:["B ≥ 0,25(K/R<sub>e</sub>)²","une entaille émoussée","B, a et W − a ≥ 2,5(K<sub>Q</sub>/R<sub>e</sub>)²","F<sub>max</sub> ≥ 2 F<sub>Q</sub>"],c:2,e:"Toutes les dimensions doivent dépasser <b>2,5(K<sub>Q</sub>/R<sub>e</sub>)²</b>, avec une préfissure de fatigue et F<sub>max</sub> ≤ 1,1 F<sub>Q</sub>."},
-    {q:"La force F<sub>Q</sub> d'un essai de ténacité se détermine par :",o:["la force maximale","l'intersection de la courbe avec une droite de pente égale à 95 % de la pente initiale","la force à 0,2 % d'allongement","la force de préfissuration"],c:1,e:"C'est la <b>sécante à 95 %</b> (polycopié, figure 34) ; si la rupture survient avant, F<sub>Q</sub> = F<sub>max</sub>."},
+    {q:"La force F<sub>Q</sub> d'un essai de ténacité se détermine par :",o:["la force maximale","l'intersection de la courbe avec une droite de pente égale à 95 % de la pente initiale","la force à 0,2 % d'allongement","la force de préfissuration"],c:1,e:"C'est la <b>sécante à 95 %</b> ; si la rupture survient avant, F<sub>Q</sub> = F<sub>max</sub>."},
     {q:"Une céramique (E = 200 GPa) et un polymère (E = 1 GPa) ont le même K<sub>IC</sub> = 3 MPa·√m. Lequel a le plus grand G<sub>IC</sub> ?",o:["la céramique","les deux ont le même","impossible à dire","le polymère, environ 200 fois plus"],c:3,e:"G<sub>IC</sub> = K<sub>IC</sub>²/E : 45 J/m² contre <b>9 000 J/m²</b>. Même force de rupture, mais bien plus d'énergie absorbée."},
     {q:"Le CTOD est :",o:["l'ouverture du fond de fissure émoussé, en mm","une énergie par unité d'aire","la longueur critique de fissure","l'énergie Charpy"],c:0,e:"<i>Crack tip opening displacement</i> : l'<b>ouverture du fond de fissure</b>, de l'ordre du dixième de millimètre pour un acier tenace."},
     {q:"Sur la courbe de résistance J, on lit J<sub>IC</sub> :",o:["au maximum de la courbe","à Δa = 0","à l'intersection avec la droite d'émoussement décalée de 0,2 mm","à J = 0"],c:2,e:"La droite parallèle à la <b>droite d'émoussement</b>, décalée de 0,2 mm, coupe la courbe en J<sub>IC</sub> : le début de la déchirure."},

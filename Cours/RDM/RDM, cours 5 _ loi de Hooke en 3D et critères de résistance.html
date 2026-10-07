@@ -338,7 +338,7 @@ input.r-gam{accent-color:var(--gam)}
       <div><small>À la fin tu sais</small><b>passer de [σ] à ℇ et retour, et vérifier une pièce avec Tresca et von Mises</b></div>
     </div>
   </div>
-  <p class="lede">Depuis le cours 1, on manipule deux matrices : <span class="sig">[σ]</span>, ce que la matière subit, et <span class="eps">ℇ</span>, comment elle se déforme. Ce dernier cours les relie en 3D, par la loi de Hooke et la loi de Lamé de la page 13 du polycopié. Puis il répond à la question qui justifie tout le reste : <b>la pièce tient-elle ?</b> Pour cela, on transforme un état de contrainte 3D en un seul nombre, comparable à la limite d'élasticité mesurée par l'essai de traction.</p>
+  <p class="lede">Depuis le cours 1, on manipule deux matrices : <span class="sig">[σ]</span>, ce que la matière subit, et <span class="eps">ℇ</span>, comment elle se déforme. Ce dernier cours les relie en 3D, par la loi de Hooke et la loi de Lamé. Puis il répond à la question qui justifie tout le reste : <b>la pièce tient-elle ?</b> Pour cela, on transforme un état de contrainte 3D en un seul nombre, comparable à la limite d'élasticité mesurée par l'essai de traction.</p>
   <div class="cc" role="img" aria-label="Code couleur : cause en couleurs chaudes, matériau en vert, effet en couleurs froides">
     <div class="cc-box cc-cause"><small>La cause</small><div class="cc-syms"><span class="sig">σ</span><span class="tau">τ</span></div><p>les contraintes, en MPa</p></div>
     <div class="cc-arrow">⇄</div>
@@ -377,7 +377,7 @@ input.r-gam{accent-color:var(--gam)}
     <div><div class="f"><span class="tau">τ<sub>max</sub></span> = (σ<sub>I</sub> − σ<sub>III</sub>)/2</div>Le rayon du grand cercle du tricercle. Sans oublier la troisième contrainte principale en contrainte plane.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> « Notions de base de RDM » (Polytech Nantes, IWE1) : la première partie correspond au § 8, <b>page 13</b> (relation de comportement : lois de Lamé et de Hooke, coefficients). La seconde partie correspond aux <b>pages 15 à 17</b> (critères de Tresca et de von Mises, figures 7 à 10), et le chapitre 6 à la <b>page 18</b> (critère de fatigue). Notations du polycopié : ℇ (un ε en écriture ronde) pour le tenseur des déformations, <b>σ</b> en gras pour celui des contraintes, un caractère qui ressemble à « v » pour le coefficient de Poisson ν, <b>σ<sub>Y</sub></b> sur les figures pour la limite d'élasticité Rₑ, et <b>R<sub>pe</sub></b> (résistance pratique à l'extension, R<sub>pe</sub> = Rₑ/s) dans les critères.</div>
+  <div class="def"><b>📘 Notations que tu croiseras</b> : ℇ (un ε en écriture ronde) pour le tenseur des déformations, <b>σ</b> en gras pour celui des contraintes, <b>σ<sub>Y</sub></b> sur certaines figures pour la limite d'élasticité Rₑ, et <b>R<sub>pe</sub></b> (résistance pratique à l'extension, R<sub>pe</sub> = Rₑ/s) dans les critères.</div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage (formation IWE)</b>
     <p>(IWE : <i>International Welding Engineer</i>, ingénieur international en soudage.) Deux résultats de ce cours reviennent partout en soudage. <b>1.</b> Le facteur 3 de la formule de vérification des cordons d'angle, √(σ⊥² + 3(τ⊥² + τ∥²)) (cours 2), vient directement du critère de von Mises. <b>2.</b> La loi de Hooke en 3D, avec la dilatation thermique, est la base de tout calcul de contraintes résiduelles de soudage.</p>
@@ -431,8 +431,8 @@ input.r-gam{accent-color:var(--gam)}
     <p class="status" id="k1note"></p>
   </div>
 
-  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">la forme tensorielle du polycopié</span></div>
-    <p>Les six équations tiennent en une seule ligne, celle de la page 13 du polycopié (loi de Hooke) :</p>
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">la forme tensorielle</span></div>
+    <p>Les six équations tiennent en une seule ligne (loi de Hooke) :</p>
     <div class="fx"><div class="big" style="font-size:1.55rem"><span class="eps">ℇ</span> = <span class="frac"><span>1 + <span class="mat">ν</span></span><span class="mat">E</span></span><span class="sig">σ</span> − <span class="frac"><span class="mat">ν</span><span class="mat">E</span></span> trace(<span class="sig">σ</span>)·𝕀</div><p class="cap">trace(σ) = σ<sub>xx</sub> + σ<sub>yy</sub> + σ<sub>zz</sub> ; 𝕀 : la matrice identité</p></div>
     <p><b>Vérification sur la diagonale :</b> ε<sub>xx</sub> = (1 + ν)σ<sub>xx</sub>/E − ν(σ<sub>xx</sub> + σ<sub>yy</sub> + σ<sub>zz</sub>)/E = [σ<sub>xx</sub> − ν(σ<sub>yy</sub> + σ<sub>zz</sub>)]/E ✅. <b>Hors diagonale :</b> le terme en 𝕀 ne contribue pas, il reste ε<sub>xy</sub> = (1 + ν)τ<sub>xy</sub>/E = τ<sub>xy</sub>/(2G), puisque G = E/(2(1 + ν)) (cours 1).</p>
     <p><b>La variation de volume</b> (la trace de ℇ, cours 1) : en prenant la trace des deux membres, on trouve</p>
@@ -453,12 +453,12 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le chemin retour</span></div>
-    <p>En pratique, on mesure souvent des <b>déformations</b> (avec des jauges, cours 3) et on veut les <b>contraintes</b>. Il faut donc inverser la loi de Hooke. Le résultat s'appelle la <b>loi de Lamé</b> (du nom de Gabriel Lamé, rencontré au cours 2 avec son ellipse), page 13 du polycopié :</p>
+    <p>En pratique, on mesure souvent des <b>déformations</b> (avec des jauges, cours 3) et on veut les <b>contraintes</b>. Il faut donc inverser la loi de Hooke. Le résultat s'appelle la <b>loi de Lamé</b> (du nom de Gabriel Lamé, rencontré au cours 2 avec son ellipse) :</p>
     <div class="fx"><div class="big" style="font-size:1.6rem"><span class="sig">σ</span> = 2<span class="mat">μ</span>·<span class="eps">ℇ</span> + <span class="mat">λ</span>·trace(<span class="eps">ℇ</span>)·𝕀</div><p class="cap">λ (« lambda ») et μ (« mu ») sont les deux coefficients de Lamé du matériau, en MPa</p></div>
     <p>Elle se lit en deux morceaux : <b>2μ·ℇ</b>, une contrainte proportionnelle à la déformation elle-même, direction par direction (μ n'est autre que le module de cisaillement G) ; et <b>λ·trace(ℇ)·𝕀</b>, un supplément identique dans les trois directions, proportionnel au changement de volume trace(ℇ). Attention, la résistance au changement de volume fait intervenir les deux coefficients : c'est le module de compressibilité K = λ + 2μ/3. Deux coefficients suffisent toujours pour décrire un matériau isotrope : (E, ν) ou (λ, μ), c'est le même matériau décrit dans deux langues.</p>
     <div class="fx" style="max-width:680px"><div class="big" style="font-size:1.25rem;line-height:1.9">
       <span class="mat">μ</span> = G = <span class="frac"><span>E</span><span>2(1 + ν)</span></span> &nbsp;&nbsp; <span class="mat">λ</span> = <span class="frac"><span>νE</span><span>(1 + ν)(1 − 2ν)</span></span> &nbsp;&nbsp; E = <span class="frac"><span>μ(2μ + 3λ)</span><span>λ + μ</span></span> &nbsp;&nbsp; ν = <span class="frac"><span>λ</span><span>2(λ + μ)</span></span>
-    </div><p class="cap">les quatre formules de la page 13 du polycopié ; pour l'acier (210 GPa ; 0,3) : μ = 80,8 GPa et λ = 121,2 GPa</p></div>
+    </div><p class="cap">les quatre formules à connaître ; pour l'acier (210 GPa ; 0,3) : μ = 80,8 GPa et λ = 121,2 GPa</p></div>
   </div>
 
   <div class="lab" id="k2">
@@ -568,12 +568,12 @@ input.r-gam{accent-color:var(--gam)}
     <div class="fx" style="max-width:720px"><div class="big" style="font-size:1.2rem;line-height:1.9"><span class="sig">σ<sub>VM</sub></span>² = σ<sub>xx</sub>² + σ<sub>yy</sub>² + σ<sub>zz</sub>² − σ<sub>xx</sub>σ<sub>yy</sub> − σ<sub>yy</sub>σ<sub>zz</sub> − σ<sub>zz</sub>σ<sub>xx</sub> + 3(τ<sub>xy</sub>² + τ<sub>yz</sub>² + τ<sub>xz</sub>²)</div><p class="cap">avec σ<sub>zz</sub> = 0 et un seul cisaillement : σ<sub>VM</sub>² = σ<sub>xx</sub>² + σ<sub>yy</sub>² − σ<sub>xx</sub>σ<sub>yy</sub> + 3τ<sub>xy</sub>²</p></div>
     <p><b>Lien avec le défi du cours 2</b> : σ<sub>VM</sub> = (3/√2)·τ<sub>oct</sub>, où τ<sub>oct</sub> est le cisaillement sur la facette octaédrique. Et comme pour Tresca, une pression hydrostatique ne change rien : seuls les écarts entre contraintes principales interviennent.</p>
     <p><b>Tresca ou von Mises ?</b> On a toujours σ<sub>VM</sub> ≤ σ<sub>Tresca</sub> ≤ 1,155·σ<sub>VM</sub> (1,155 = 2/√3). Tresca est donc <b>plus prudent</b> (sur la figure, l'hexagone est à l'intérieur de l'ellipse), d'au plus 15,5 %. Cet écart maximal est atteint quand la contrainte principale intermédiaire est exactement au milieu des deux autres : en cisaillement pur (τ ; 0 ; −τ), mais aussi pour une paroi de réservoir (σ ; σ/2 ; 0). Les deux coïncident en traction simple et en traction égale dans deux directions.</p>
-    <h4>La forme du polycopié : le déviateur (p. 16)</h4>
-    <p>Le polycopié écrit von Mises avec le <b>déviateur</b> des contraintes, la partie de [σ] qui change la forme :</p>
+    <h4>Une autre écriture : le déviateur</h4>
+    <p>On écrit aussi von Mises avec le <b>déviateur</b> des contraintes, la partie de [σ] qui change la forme :</p>
     <div class="fx" style="max-width:680px"><div class="big" style="font-size:1.3rem;line-height:1.9"><span class="sig">σ<sub>D</sub></span> = <span class="sig">σ</span> − <span class="frac"><span>trace(σ)</span><span>3</span></span>𝕀 &nbsp;&nbsp;&nbsp; <span class="sig">σ<sub>VM</sub></span> = √( <span class="frac"><span>3</span><span>2</span></span> σ<sub>D</sub> : σ<sub>D</sub> ) ≤ R<sub>pe</sub></div><p class="cap">σ<sub>D</sub> : σ<sub>D</sub> (« contraction double ») est la somme des carrés des 9 termes de σ<sub>D</sub> ; on retrouve exactement les formules ci-dessus</p></div>
-    <p>On retire à [σ] sa partie hydrostatique (la contrainte moyenne sur la diagonale) : il ne reste que ce qui déforme sans changer le volume. D'où la propriété déjà vue : une pression uniforme ne compte pas. Et l'énergie de distorsion dont parle le polycopié est proportionnelle à σ<sub>D</sub> : ε<sub>D</sub>.</p>
-    <div class="warn">⚠️ <b>Deux remarques de notation sur le polycopié.</b> <b>1.</b> Il écrit « trace(σ<sub>D</sub> : σ<sub>D</sub>) » : le symbole « : » donne déjà un nombre, la bonne écriture est σ<sub>D</sub> : σ<sub>D</sub>, ou trace(σ<sub>D</sub>·σ<sub>D</sub>), qui vaut la même chose. <b>2.</b> Page 18, le même symbole σ<sub>D</sub> désigne la limite d'endurance en fatigue (chapitre 6) : deux notions sans rapport, attention au contexte.</div>
-    <p><b>Les figures 7 à 10 du polycopié.</b> En contrainte plane, on retrouve l'hexagone de Tresca inscrit dans l'ellipse de von Mises (manipulation 4). En 3D, les deux critères sont des cylindres d'axe σ<sub>1</sub> = σ<sub>2</sub> = σ<sub>3</sub> (l'axe hydrostatique) : un prisme à base hexagonale pour Tresca, un cylindre à base circulaire pour von Mises. Vus dans l'axe (figure 10), l'hexagone est inscrit dans le cercle. Qu'ils soient infinis le long de cet axe traduit encore une fois que la pression uniforme ne fait pas plastifier.</p>
+    <p>On retire à [σ] sa partie hydrostatique (la contrainte moyenne sur la diagonale) : il ne reste que ce qui déforme sans changer le volume. D'où la propriété déjà vue : une pression uniforme ne compte pas. Et l'énergie de distorsion, celle qui justifie ce critère, est proportionnelle à σ<sub>D</sub> : ε<sub>D</sub>.</p>
+    <div class="warn">⚠️ <b>Deux pièges de notation.</b> <b>1.</b> N'écris pas « trace(σ<sub>D</sub> : σ<sub>D</sub>) » : le symbole « : » donne déjà un nombre ; la bonne écriture est σ<sub>D</sub> : σ<sub>D</sub>, ou trace(σ<sub>D</sub>·σ<sub>D</sub>), qui vaut la même chose. <b>2.</b> Le même symbole σ<sub>D</sub> désigne aussi la limite d'endurance en fatigue (chapitre 6) : deux notions sans rapport, attention au contexte.</div>
+    <p><b>Les surfaces de Tresca et de von Mises.</b> En contrainte plane, on retrouve l'hexagone de Tresca inscrit dans l'ellipse de von Mises (manipulation 4). En 3D, les deux critères sont des cylindres d'axe σ<sub>1</sub> = σ<sub>2</sub> = σ<sub>3</sub> (l'axe hydrostatique) : un prisme à base hexagonale pour Tresca, un cylindre à base circulaire pour von Mises. Vus dans l'axe, l'hexagone est inscrit dans le cercle. Qu'ils soient infinis le long de cet axe traduit encore une fois que la pression uniforme ne fait pas plastifier.</p>
     <div class="tip">💡 <b>En examen :</b> utilise le critère demandé ; s'il n'est pas précisé, von Mises est le plus courant pour les métaux, Tresca le plus rapide à calculer une fois les contraintes principales connues. Donner les deux, en commentant l'écart, est souvent apprécié.</div>
   </div>
 </div>
@@ -639,9 +639,9 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le trombone</span></div>
-    <p>Plie un trombone une fois : il tient. Plie-le et déplie-le trente fois : il casse. Pourtant, tu n'as jamais forcé davantage. C'est la <b>fatigue</b> (polycopié, p. 18) : sous une charge <b>variable</b>, répétée un grand nombre de fois, une pièce peut rompre à une contrainte bien inférieure à Rₑ. Une petite fissure naît en un point faible (une rayure, un angle vif, le pied d'un cordon de soudure) et progresse un peu à chaque cycle.</p>
+    <p>Plie un trombone une fois : il tient. Plie-le et déplie-le trente fois : il casse. Pourtant, tu n'as jamais forcé davantage. C'est la <b>fatigue</b> : sous une charge <b>variable</b>, répétée un grand nombre de fois, une pièce peut rompre à une contrainte bien inférieure à Rₑ. Une petite fissure naît en un point faible (une rayure, un angle vif, le pied d'un cordon de soudure) et progresse un peu à chaque cycle.</p>
     <p>L'essai de fatigue consiste à faire subir à des éprouvettes une contrainte alternée d'amplitude σ<sub>a</sub>, et à compter le nombre de cycles N avant rupture. On obtient la <b>courbe de Wöhler</b> (du nom de l'ingénieur allemand August Wöhler, qui étudiait les ruptures d'essieux de train vers 1860) : plus l'amplitude est forte, plus la vie est courte.</p>
-    <p>Pour beaucoup d'aciers, la courbe devient horizontale : en dessous d'une amplitude appelée <b>limite d'endurance</b>, notée σ<sub>D</sub> par le polycopié, la pièce supporte un nombre illimité de cycles. Le polycopié en tire la règle de dimensionnement : <b>on remplace Rₑ par σ<sub>D</sub> dans le critère de résistance</b>.</p>
+    <p>Pour beaucoup d'aciers, la courbe devient horizontale : en dessous d'une amplitude appelée <b>limite d'endurance</b>, notée σ<sub>D</sub>, la pièce supporte un nombre illimité de cycles. D'où une règle de dimensionnement simple : <b>on remplace Rₑ par σ<sub>D</sub> dans le critère de résistance</b>.</p>
   </div>
 
   <div class="lab" id="k6">
@@ -654,7 +654,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les ordres de grandeur, et la fatigue des soudures</span></div>
-    <p><b>Ordres de grandeur pour un acier lisse :</b> la limite d'endurance vaut typiquement 0,4 à 0,5 fois Rₘ (la résistance à la traction, cours 1), et elle est atteinte vers 10⁶ à 10⁷ cycles (la figure du polycopié, graduée jusqu'à 10⁵, est schématique). Elle diminue fortement avec l'état de surface, la taille de la pièce et les concentrations de contrainte.</p>
+    <p><b>Ordres de grandeur pour un acier lisse :</b> la limite d'endurance vaut typiquement 0,4 à 0,5 fois Rₘ (la résistance à la traction, cours 1), et elle est atteinte vers 10⁶ à 10⁷ cycles. Elle diminue fortement avec l'état de surface, la taille de la pièce et les concentrations de contrainte.</p>
     <p><b>La contrainte moyenne compte aussi.</b> Si la contrainte oscille autour d'une valeur moyenne σ<sub>m</sub> non nulle, une moyenne de traction réduit l'amplitude supportable (diagrammes de Haigh, droite de Goodman), une moyenne de compression l'augmente.</p>
     <div class="weld"><b>🔥 Pourquoi la fatigue gouverne souvent les assemblages soudés</b>
       <p><b>1.</b> Le pied du cordon est une <b>entaille</b> géométrique, avec de petits défauts de raccordement : la fissure y démarre très tôt. <b>2.</b> Les <b>contraintes résiduelles</b> y sont proches de Rₑ en traction (cours 3) : quelle que soit la charge appliquée, le métal travaille en réalité autour d'une forte traction moyenne. On caractérise donc la fatigue des soudures par l'<b>étendue</b> de contrainte Δσ = σ<sub>max</sub> − σ<sub>min</sub>, et non par la moyenne. <b>3.</b> Conséquence remarquable : la résistance en fatigue d'un assemblage soudé dépend très peu de la nuance d'acier. Un S690 soudé n'est guère meilleur en fatigue qu'un S235 soudé.</p>
@@ -688,7 +688,7 @@ input.r-gam{accent-color:var(--gam)}
 
   <div class="exo">
     <h4>Exercice 2 : les coefficients de l'acier <span class="lvtag">N1 · chapitre 2</span></h4>
-    <p><b>a)</b> Calcule μ, λ et K pour l'acier.<br><b>b)</b> Retrouve E et ν à partir de λ et μ avec les formules du polycopié.</p>
+    <p><b>a)</b> Calcule μ, λ et K pour l'acier.<br><b>b)</b> Retrouve E et ν à partir de λ et μ avec les formules du chapitre 2.</p>
     <details><summary>Voir la correction</summary><div class="sol">
       <p><b>a)</b> <span class="m">μ = 210 000/2,6 = <b>80 770 MPa</b></span> (c'est G) ; <span class="m">λ = 0,3 × 210 000/(1,3 × 0,4) = <b>121 150 MPa</b></span> ; <span class="m">K = 210 000/(3 × 0,4) = <b>175 000 MPa</b></span>.</p>
       <p><b>b)</b> <span class="m">E = μ(2μ + 3λ)/(λ + μ) = 80 770 × 525 000/201 920 = <b>210 000 MPa</b></span> ✅ et <span class="m">ν = λ/(2(λ + μ)) = 121 150/403 840 = <b>0,30</b></span> ✅.</p>
@@ -812,8 +812,8 @@ input.r-gam{accent-color:var(--gam)}
     <dt>Déviateur σ<sub>D</sub></dt><dd>Partie de [σ] qui change la forme : σ<sub>D</sub> = σ − (trace σ/3)𝕀. Von Mises : σ<sub>VM</sub> = √(3/2 σ<sub>D</sub> : σ<sub>D</sub>).</dd>
     <dt>Étendue de contrainte Δσ</dt><dd>Écart entre la contrainte maximale et la contrainte minimale d'un cycle ; grandeur de référence pour la fatigue des soudures.</dd>
     <dt>Fatigue</dt><dd>Rupture progressive sous une charge variable répétée, à une contrainte inférieure à Rₑ.</dd>
-    <dt>Limite d'endurance σ<sub>D</sub></dt><dd>Amplitude de contrainte en dessous de laquelle la pièce supporte un nombre illimité de cycles (même symbole que le déviateur dans le polycopié).</dd>
-    <dt>R<sub>pe</sub></dt><dd>Résistance pratique à l'extension : Rₑ/s, la contrainte admissible utilisée dans les critères du polycopié.</dd>
+    <dt>Limite d'endurance σ<sub>D</sub></dt><dd>Amplitude de contrainte en dessous de laquelle la pièce supporte un nombre illimité de cycles (même symbole que le déviateur : attention au contexte).</dd>
+    <dt>R<sub>pe</sub></dt><dd>Résistance pratique à l'extension : Rₑ/s, la contrainte admissible utilisée dans les critères.</dd>
     <dt>Taux de triaxialité η</dt><dd>Rapport σ<sub>m</sub>/σ<sub>VM</sub> : 1/3 en traction simple, beaucoup plus au cœur des pièces épaisses bridées.</dd>
     <dt>tr (trace)</dt><dd>Somme des termes diagonaux d'une matrice.</dd>
   </dl>
@@ -822,7 +822,7 @@ input.r-gam{accent-color:var(--gam)}
   <h3>Check-list : ai-je bouclé la série ?</h3>
   <p>Coche seulement ce que tu sais faire <b>de tête</b>. Tes coches restent enregistrées dans ce navigateur.</p>
   <div class="check" id="checklist">
-    <label><input type="checkbox" data-c="1"> Je sais écrire la loi de Hooke en 3D, en composantes et sous la forme du polycopié.</label>
+    <label><input type="checkbox" data-c="1"> Je sais écrire la loi de Hooke en 3D, en composantes et sous forme tensorielle.</label>
     <label><input type="checkbox" data-c="2"> Je sais calculer les trois allongements d'un état triaxial, et ΔV/V.</label>
     <label><input type="checkbox" data-c="3"> Je sais écrire la loi de Lamé et passer de (E, ν) à (λ, μ) et retour.</label>
     <label><input type="checkbox" data-c="4"> Je connais les formules de contrainte plane et de déformation plane.</label>
@@ -842,7 +842,7 @@ input.r-gam{accent-color:var(--gam)}
 
 <footer>
 <div class="wrap">
-  <p>Cours 5 sur 5 de la série « Résistance des matériaux, de zéro aux matrices ». Les valeurs de matériaux sont des ordres de grandeur usuels ; en situation réelle, se référer aux normes et codes applicables. Pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 5 sur 5 de la série « Résistance des matériaux, de zéro aux matrices ». Les valeurs de matériaux sont des ordres de grandeur usuels ; en situation réelle, se référer aux normes et codes applicables. Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>

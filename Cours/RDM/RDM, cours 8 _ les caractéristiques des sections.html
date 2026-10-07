@@ -376,7 +376,7 @@ input.r-gam{accent-color:var(--gam)}
     <div><div class="f"><span class="sig">σ = −Mf<sub>z</sub>·y/I<sub>Gz</sub></span> · <span class="tau">τ = Mt·r/I<sub>G</sub></span></div>Le formulaire des poutres : il manque la forme de la section. C'est l'objet de ce cours.</div>
   </div>
 
-  <div class="def"><b>📘 Correspondance avec le polycopié</b> « Notions de base de RDM » (Polytech Nantes, IWE1) : ce cours correspond au § 5, <b>pages 23 à 25</b> (moment statique, moment quadratique, moment produit, théorème de Huygens, axe quelconque et axes principaux, moment polaire, valeurs usuelles). Deux remarques de lecture. <b>1.</b> Les figures des pages 23 et 24 dessinent y horizontal et z vertical ; celles de la page 25 dessinent Y vertical et Z horizontal (vers la gauche, la poutre venant vers le lecteur). Les formules ne dépendent pas du dessin : I<sub>Oz</sub> utilise toujours les distances y, mesurées perpendiculairement à l'axe Oz. Ce cours suit la page 25 : y vers le haut. <b>2.</b> Le polycopié écrit « Huyghens », ancienne orthographe du nom du physicien Christiaan Huygens.</div>
+  <div class="def"><b>📘 Deux remarques de lecture.</b> <b>1.</b> Selon les figures, y est dessiné horizontal et z vertical, ou l'inverse : Y vertical et Z horizontal (vers la gauche, la poutre venant vers le lecteur). Les formules ne dépendent pas du dessin : I<sub>Oz</sub> utilise toujours les distances y, mesurées perpendiculairement à l'axe Oz. Ce cours dessine y vers le haut et z vers la gauche. <b>2.</b> On rencontre aussi l'orthographe « Huyghens », ancienne graphie du nom du physicien Christiaan Huygens.</div>
 
   <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage (formation IWE)</b>
     <p>(IWE : <i>International Welding Engineer</i>, ingénieur international en soudage.) Pour vérifier un assemblage soudé en flexion ou en torsion, on calcule les caractéristiques de la <b>section des cordons</b> elle-même : on rabat les gorges des cordons dans le plan de l'assemblage, puis on calcule leur centre de gravité et leurs moments quadratique et polaire, exactement comme pour une section de poutre. Et dimensionner une poutre reconstituée soudée (PRS : une poutre fabriquée en soudant des tôles entre elles) demande les mêmes calculs de sections composées.</p>
@@ -402,7 +402,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le point d'équilibre</span></div>
-    <p>Découpe la section dans du carton et pose-la à plat sur la pointe d'un doigt : il existe un seul point où elle tient en équilibre. C'est son <b>centre de gravité</b> G (le polycopié dit « isobarycentre »). C'est par G que passe la ligne moyenne de la poutre (cours 6).</p>
+    <p>Découpe la section dans du carton et pose-la à plat sur la pointe d'un doigt : il existe un seul point où elle tient en équilibre. C'est son <b>centre de gravité</b> G (on dit aussi « isobarycentre »). C'est par G que passe la ligne moyenne de la poutre (cours 6).</p>
     <p>Pour le trouver, on utilise le <b>moment statique</b> : l'aire multipliée par la distance à un axe, un peu comme un moment de force où chaque petit morceau de surface jouerait le rôle d'un poids. Si l'axe passe par G, les morceaux de part et d'autre se compensent exactement : <b>le moment statique par rapport à un axe passant par G est nul</b>. C'est exactement l'équilibre sur le doigt.</p>
     <p><b>Pour une section composée</b> de plusieurs rectangles (un T, un I…), on fait la moyenne des centres de gravité de chaque morceau, pondérée par leurs aires :</p>
     <div class="fx"><div class="big" style="font-size:1.6rem"><span class="mat">y<sub>G</sub></span> = <span class="frac"><span>Σ S<sub>i</sub>·y<sub>i</sub></span><span>Σ S<sub>i</sub></span></span></div><p class="cap">S<sub>i</sub> : aire du morceau i ; y<sub>i</sub> : hauteur de son centre de gravité ; Σ : la somme sur tous les morceaux</p></div>
@@ -421,10 +421,10 @@ input.r-gam{accent-color:var(--gam)}
     <div class="readout" id="s1out"></div>
   </div>
 
-  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les définitions du polycopié</span></div>
-    <p>Section S repérée par (O, y, z), point courant P de coordonnées (y ; z), petit élément de surface dS (p. 23) :</p>
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les définitions</span></div>
+    <p>Section S repérée par (O, y, z), point courant P de coordonnées (y ; z), petit élément de surface dS :</p>
     <div class="fx" style="max-width:640px"><div class="big" style="font-size:1.35rem;line-height:1.9">M<sub>SOz</sub> = ∫<sub>S</sub> y dS = y<sub>G</sub>·S &nbsp;&nbsp;&nbsp;&nbsp; M<sub>SOy</sub> = ∫<sub>S</sub> z dS = z<sub>G</sub>·S</div><p class="cap">∫<sub>S</sub> : somme continue sur toute la surface ; M<sub>SOz</sub> : moment statique par rapport à l'axe Oz, en mm³</p></div>
-    <p><b>Les trois propriétés</b> (p. 23) : <b>a)</b> M<sub>SOy</sub> = z<sub>G</sub>S et M<sub>SOz</sub> = y<sub>G</sub>S, ce qui donne G ; <b>b)</b> le moment statique par rapport à un axe passant par G est nul ; <b>c)</b> il est additif : celui d'une section composée est la somme de ceux de ses morceaux. D'où la formule de y<sub>G</sub> ci-dessus.</p>
+    <p><b>Les trois propriétés</b> : <b>a)</b> M<sub>SOy</sub> = z<sub>G</sub>S et M<sub>SOz</sub> = y<sub>G</sub>S, ce qui donne G ; <b>b)</b> le moment statique par rapport à un axe passant par G est nul ; <b>c)</b> il est additif : celui d'une section composée est la somme de ceux de ses morceaux. D'où la formule de y<sub>G</sub> ci-dessus.</p>
     <p><b>Exemple</b> (valeurs par défaut de la manipulation) : table 120 × 20 mm (S<sub>1</sub> = 2 400 mm², centre à y<sub>1</sub> = 110 mm du bas), âme 20 × 100 mm (S<sub>2</sub> = 2 000 mm², y<sub>2</sub> = 50 mm). <span class="m">y<sub>G</sub> = (2 400 × 110 + 2 000 × 50)/4 400 = <b>82,7 mm</b></span> : G est tiré vers la table, qui a le plus de matière.</p>
     <div class="tip">💡 <b>Symétrie :</b> si la section a un axe de symétrie, G est dessus. Une section en I symétrique a son G au milieu de la hauteur, sans calcul. Choisis toujours l'origine O de façon à simplifier (en bas de la section, ou sur l'axe de symétrie).</div>
   </div>
@@ -458,10 +458,10 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les définitions, les unités et le calcul</span></div>
-    <p><b>Définitions du polycopié</b> (p. 23) : <span class="m">I<sub>Oz</sub> = ∫<sub>S</sub> y² dS</span> et <span class="m">I<sub>Oy</sub> = ∫<sub>S</sub> z² dS</span>. L'indice désigne l'<b>axe</b> par rapport auquel on calcule ; la distance au carré est celle mesurée <b>perpendiculairement</b> à cet axe. Pour l'axe Oz, c'est y ; pour l'axe Oy, c'est z. Piège classique : I<sub>Gz</sub> contient des y², pas des z².</p>
+    <p><b>Définitions</b> : <span class="m">I<sub>Oz</sub> = ∫<sub>S</sub> y² dS</span> et <span class="m">I<sub>Oy</sub> = ∫<sub>S</sub> z² dS</span>. L'indice désigne l'<b>axe</b> par rapport auquel on calcule ; la distance au carré est celle mesurée <b>perpendiculairement</b> à cet axe. Pour l'axe Oz, c'est y ; pour l'axe Oy, c'est z. Piège classique : I<sub>Gz</sub> contient des y², pas des z².</p>
     <p><b>Calcul pour un rectangle</b> (b horizontal, h vertical, G au centre) : découpe-le en bandes horizontales de hauteur dy et de largeur b. <span class="m">I<sub>Gz</sub> = ∫<sub>−h/2</sub><sup>h/2</sup> y²·b dy = b[y³/3]<sub>−h/2</sub><sup>h/2</sup> = <b>bh³/12</b></span>. Par le même calcul avec des bandes verticales : I<sub>Gy</sub> = hb³/12.</p>
     <p><b>Unités et ordres de grandeur :</b> une surface multipliée par une distance au carré donne des mm⁴ (ou des cm⁴ dans les catalogues : 1 cm⁴ = 10 000 mm⁴). Règle de 200 × 20 mm : 1,3 × 10⁵ mm⁴ à plat, 1,3 × 10⁷ mm⁴ sur chant. Poutrelle IPE 300 du commerce : environ 8 360 cm⁴, soit 8,4 × 10⁷ mm⁴.</p>
-    <div class="tip">💡 <b>Analogie du polycopié :</b> en remplaçant dS par dm (un élément de masse), on obtient le moment d'inertie d'une plaque, qui mesure la résistance à la mise en rotation. C'est pourquoi on dit souvent, par abus de langage, « moment d'inertie » pour « moment quadratique ».</div>
+    <div class="tip">💡 <b>Analogie :</b> en remplaçant dS par dm (un élément de masse), on obtient le moment d'inertie d'une plaque, qui mesure la résistance à la mise en rotation. C'est pourquoi on dit souvent, par abus de langage, « moment d'inertie » pour « moment quadratique ».</div>
   </div>
 </div>
 </section>
@@ -475,7 +475,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la matière qu'on éloigne</span></div>
-    <p>Une patineuse qui tourne sur elle-même ralentit quand elle écarte les bras : la même masse, placée plus loin de l'axe, résiste beaucoup plus à la rotation. Pour une section, c'est pareil : un morceau de surface S, dont le centre est à la distance d de l'axe, apporte son propre moment quadratique (autour de son centre) <b>plus S × d²</b>. C'est le <b>théorème de Huygens</b> (p. 23) :</p>
+    <p>Une patineuse qui tourne sur elle-même ralentit quand elle écarte les bras : la même masse, placée plus loin de l'axe, résiste beaucoup plus à la rotation. Pour une section, c'est pareil : un morceau de surface S, dont le centre est à la distance d de l'axe, apporte son propre moment quadratique (autour de son centre) <b>plus S × d²</b>. C'est le <b>théorème de Huygens</b> :</p>
     <div class="fx"><div class="big" style="font-size:1.7rem"><span class="sig">I<sub>Oz</sub></span> = <span class="sig">I<sub>Gz</sub></span> + S·<span class="mat">y<sub>G</sub></span>² &nbsp;&nbsp; <span class="sig">I<sub>Oy</sub></span> = <span class="sig">I<sub>Gy</sub></span> + S·<span class="mat">z<sub>G</sub></span>²</div><p class="cap">y<sub>G</sub>, z<sub>G</sub> : distances entre l'axe par G et l'axe parallèle par O. Le moment quadratique est minimal par rapport à un axe passant par G</p></div>
     <p><b>La poutrelle en I s'explique ainsi :</b> on met presque toute la matière dans deux semelles, loin de l'axe neutre, où le terme S·d² est énorme, et on les relie par une âme mince. À quantité de matière égale, on gagne un facteur 20 sur un barreau carré.</p>
     <p><b>La méthode en tableau</b> pour une section composée : <b>1.</b> découper en rectangles ; <b>2.</b> trouver G (chapitre 1) ; <b>3.</b> pour chaque morceau, calculer son I propre (bh³/12) et son terme S<sub>i</sub>·d<sub>i</sub>², où d<sub>i</sub> est la distance de son centre à G ; <b>4.</b> additionner.</p>
@@ -500,7 +500,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">la démonstration et le piège</span></div>
-    <p><b>Démonstration.</b> Soit y′ la distance d'un point à l'axe Gz, et y = y′ + y<sub>G</sub> sa distance à l'axe Oz parallèle. <span class="m">I<sub>Oz</sub> = ∫(y′ + y<sub>G</sub>)² dS = ∫y′² dS + 2y<sub>G</sub>∫y′ dS + y<sub>G</sub>²∫dS</span>. Le terme du milieu contient le moment statique par rapport à un axe passant par G : il est <b>nul</b> (chapitre 1). Il reste <span class="m">I<sub>Oz</sub> = I<sub>Gz</sub> + S·y<sub>G</sub>²</span>. Même raisonnement pour le moment produit : <span class="m">M<sub>POyz</sub> = M<sub>PGyz</sub> + y<sub>G</sub>·z<sub>G</sub>·S</span> (p. 23).</p>
+    <p><b>Démonstration.</b> Soit y′ la distance d'un point à l'axe Gz, et y = y′ + y<sub>G</sub> sa distance à l'axe Oz parallèle. <span class="m">I<sub>Oz</sub> = ∫(y′ + y<sub>G</sub>)² dS = ∫y′² dS + 2y<sub>G</sub>∫y′ dS + y<sub>G</sub>²∫dS</span>. Le terme du milieu contient le moment statique par rapport à un axe passant par G : il est <b>nul</b> (chapitre 1). Il reste <span class="m">I<sub>Oz</sub> = I<sub>Gz</sub> + S·y<sub>G</sub>²</span>. Même raisonnement pour le moment produit : <span class="m">M<sub>POyz</sub> = M<sub>PGyz</sub> + y<sub>G</sub>·z<sub>G</sub>·S</span>.</p>
     <p><b>Exemple complet</b> (section en T du chapitre 1, y<sub>G</sub> = 82,7 mm) :</p>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Morceau</th><th>S<sub>i</sub> (mm²)</th><th>I propre (mm⁴)</th><th>d<sub>i</sub> (mm)</th><th>S<sub>i</sub>·d<sub>i</sub>² (mm⁴)</th></tr>
@@ -530,7 +530,7 @@ input.r-gam{accent-color:var(--gam)}
 
   <div class="lab" id="s4">
     <p class="lab-h">Manipulation 4 : la cornière et ses axes principaux</p>
-    <p class="lab-sub">Une cornière (dimensions en mm), y vers le haut et z vers la gauche comme page 25 du polycopié. Fais tourner l'axe Δ autour de G : sa courbe I<sub>Δ</sub>(α) se trace à droite. Les axes principaux (en vert) sont aux sommets de la courbe.</p>
+    <p class="lab-sub">Une cornière (dimensions en mm), y vers le haut et z vers la gauche. Fais tourner l'axe Δ autour de G : sa courbe I<sub>Δ</sub>(α) se trace à droite. Les axes principaux (en vert) sont aux sommets de la courbe.</p>
     <div class="btns" id="s4pre">
       <button class="btn on" type="button" data-v="60,60,6">Cornière égale 60 × 60 × 6</button>
       <button class="btn" type="button" data-v="100,50,8">Cornière inégale 100 × 50 × 8</button>
@@ -543,13 +543,13 @@ input.r-gam{accent-color:var(--gam)}
     <div class="readout" id="s4out"></div>
   </div>
 
-  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les formules des pages 24 et 25</span></div>
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">l'axe quelconque et les axes principaux</span></div>
     <p><b>Axe quelconque.</b> Pour un axe Δ passant par O et faisant l'angle α = (y⃗, Δ⃗) :</p>
-    <div class="fx" style="max-width:680px"><div class="big" style="font-size:1.3rem;line-height:1.9">I<sub>Δ</sub> = I<sub>Oy</sub>cos²α + I<sub>Oz</sub>sin²α − 2M<sub>POyz</sub>sin α cos α = (cos α ; sin α)·<span class="inlinemat" style="grid-template-columns:repeat(2,auto)"><span>I<sub>Oy</sub></span><span>−M<sub>POyz</sub></span><span>−M<sub>POyz</sub></span><span>I<sub>Oz</sub></span></span>·(cos α ; sin α)</div><p class="cap">la matrice, notée II<sub>Oyz</sub> dans le polycopié, représente le tenseur 𝔍<sub>O</sub> des moments quadratiques en O</p></div>
-    <p><b>Axes principaux</b> (p. 24) : les directions propres de cette matrice. Les moments quadratiques principaux et l'angle θ = (y⃗, Y⃗) valent :</p>
+    <div class="fx" style="max-width:680px"><div class="big" style="font-size:1.3rem;line-height:1.9">I<sub>Δ</sub> = I<sub>Oy</sub>cos²α + I<sub>Oz</sub>sin²α − 2M<sub>POyz</sub>sin α cos α = (cos α ; sin α)·<span class="inlinemat" style="grid-template-columns:repeat(2,auto)"><span>I<sub>Oy</sub></span><span>−M<sub>POyz</sub></span><span>−M<sub>POyz</sub></span><span>I<sub>Oz</sub></span></span>·(cos α ; sin α)</div><p class="cap">la matrice, notée aussi II<sub>Oyz</sub>, représente le tenseur 𝔍<sub>O</sub> des moments quadratiques en O</p></div>
+    <p><b>Axes principaux</b> : les directions propres de cette matrice. Les moments quadratiques principaux et l'angle θ = (y⃗, Y⃗) valent :</p>
     <div class="fx" style="max-width:680px"><div class="big" style="font-size:1.25rem;line-height:1.9">I<sub>OY, OZ</sub> = ½(I<sub>Oy</sub> + I<sub>Oz</sub>) ± ½√((I<sub>Oy</sub> − I<sub>Oz</sub>)² + 4M<sub>POyz</sub>²) &nbsp;&nbsp; tan 2θ = <span class="frac"><span>2M<sub>POyz</sub></span><span>I<sub>Oz</sub> − I<sub>Oy</sub></span></span></div><p class="cap">centre ½(I<sub>Oy</sub> + I<sub>Oz</sub>) et rayon ½√(…) : c'est le cercle de Mohr des moments quadratiques</p></div>
     <div class="warn">⚠️ <b>Le même piège qu'au cours 4 :</b> tan 2θ a deux solutions à 90° l'une de l'autre. Pour savoir laquelle donne le maximum, remplace dans la formule de I<sub>Δ</sub>. Pour la cornière égale 60 × 60 × 6 : I<sub>Gy</sub> = I<sub>Gz</sub> = 233 000 mm⁴ et M<sub>PGyz</sub> = −138 000 mm⁴, d'où des moments principaux de 371 000 et 95 000 mm⁴ ; le maximum est selon la diagonale de symétrie de la cornière, le minimum perpendiculairement.</div>
-    <div class="tip">💡 <b>Pourquoi le signe moins dans la matrice ?</b> Dans le tenseur des contraintes, on range +τ<sub>xy</sub> hors de la diagonale ; dans le tenseur des moments quadratiques, c'est −M<sub>P</sub>. Ce signe vient du produit vectoriel qui définit la distance à l'axe Δ (p. 24). Il suffit de recopier la matrice du polycopié.</div>
+    <div class="tip">💡 <b>Pourquoi le signe moins dans la matrice ?</b> Dans le tenseur des contraintes, on range +τ<sub>xy</sub> hors de la diagonale ; dans le tenseur des moments quadratiques, c'est −M<sub>P</sub>. Ce signe vient du produit vectoriel qui définit la distance à l'axe Δ. Retiens la matrice telle qu'elle est écrite ci-dessus.</div>
   </div>
 </div>
 </section>
@@ -563,7 +563,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
 
   <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">les faux jumeaux</span></div>
-    <p>En torsion, la section tourne sur elle-même autour de G : chaque point se déplace proportionnellement à sa distance <b>r au centre</b>, et non plus à sa distance à un axe. D'où un autre moment, le <b>moment polaire</b> (p. 24) :</p>
+    <p>En torsion, la section tourne sur elle-même autour de G : chaque point se déplace proportionnellement à sa distance <b>r au centre</b>, et non plus à sa distance à un axe. D'où un autre moment, le <b>moment polaire</b> :</p>
     <div class="fx"><div class="big" style="font-size:1.6rem"><span class="tau">I<sub>O</sub></span> = ∫<sub>S</sub> r² dS = I<sub>Oy</sub> + I<sub>Oz</sub></div><p class="cap">r² = y² + z² (Pythagore) : le polaire est la somme des deux moments quadratiques</p></div>
     <div class="tbl-wrap"><table class="data">
       <tr><th></th><th class="sig">I<sub>Gz</sub> : moment quadratique</th><th class="tau">I<sub>G</sub> : moment polaire</th></tr>
@@ -592,7 +592,7 @@ input.r-gam{accent-color:var(--gam)}
     <p class="status" id="s5note"></p>
   </div>
 
-  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les valeurs usuelles de la page 25</span></div>
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les valeurs usuelles</span></div>
     <div class="tbl-wrap"><table class="data">
       <tr><th>Section</th><th>I<sub>GY</sub></th><th>I<sub>GZ</sub></th><th>I<sub>G</sub> (polaire)</th></tr>
       <tr><td>Rond de diamètre d (rayon R)</td><td colspan="2">πd⁴/64 = πR⁴/4</td><td>πd⁴/32 = πR⁴/2</td></tr>
@@ -734,7 +734,7 @@ input.r-gam{accent-color:var(--gam)}
   <dl class="gloss">
     <dt>Axe neutre</dt><dd>Axe de la section, passant par G, autour duquel elle tourne en flexion ; les fibres qui s'y trouvent ne s'allongent pas.</dd>
     <dt>Axes principaux (de la section)</dt><dd>Les deux axes perpendiculaires passant par G pour lesquels le moment produit est nul ; ils portent les moments quadratiques maximal et minimal.</dd>
-    <dt>Centre de gravité G</dt><dd>Point d'équilibre de la section (le polycopié dit « isobarycentre ») ; la ligne moyenne de la poutre passe par G.</dd>
+    <dt>Centre de gravité G</dt><dd>Point d'équilibre de la section (on dit aussi « isobarycentre ») ; la ligne moyenne de la poutre passe par G.</dd>
     <dt>Cornière</dt><dd>Profilé en forme de L, à ailes égales ou inégales.</dd>
     <dt>dS</dt><dd>Petit élément de surface de la section, autour d'un point P.</dd>
     <dt>∫<sub>S</sub></dt><dd>Intégrale sur la surface : la somme continue d'une grandeur sur toute la section.</dd>
@@ -746,7 +746,7 @@ input.r-gam{accent-color:var(--gam)}
     <dt>Module de flexion W</dt><dd>W = I<sub>Gz</sub>/v, avec v la distance de l'axe neutre à la fibre la plus éloignée ; |σ|<sub>max</sub> = |Mf|/W.</dd>
     <dt>PRS</dt><dd>Poutre reconstituée soudée : poutre fabriquée en soudant des tôles (semelles et âme).</dd>
     <dt>Sur chant, à plat</dt><dd>Une planche est « sur chant » posée sur sa tranche (grande dimension verticale), « à plat » posée sur sa grande face.</dd>
-    <dt>Théorème de Huygens</dt><dd>I<sub>O</sub> = I<sub>G</sub> + S·d² pour deux axes parallèles distants de d, l'un passant par G (le polycopié écrit « Huyghens »).</dd>
+    <dt>Théorème de Huygens</dt><dd>I<sub>O</sub> = I<sub>G</sub> + S·d² pour deux axes parallèles distants de d, l'un passant par G (ancienne orthographe : « Huyghens »).</dd>
     <dt>Tenseur 𝔍<sub>O</sub> des moments quadratiques</dt><dd>Matrice [[I<sub>Oy</sub>, −M<sub>P</sub>], [−M<sub>P</sub>, I<sub>Oz</sub>]] (notée II<sub>Oyz</sub>) qui donne I<sub>Δ</sub> pour tout axe Δ passant par O.</dd>
     <dt>≪</dt><dd>« Très petit devant » : e ≪ R veut dire que e est au moins dix fois plus petit que R.</dd>
   </dl>
@@ -764,7 +764,7 @@ input.r-gam{accent-color:var(--gam)}
     <label><input type="checkbox" data-c="7"> <span>Je sais quand le moment produit est nul, et à quoi servent les axes principaux.</span></label>
     <label><input type="checkbox" data-c="8"> <span>Je sais trouver les axes principaux et vérifier lequel porte le maximum.</span></label>
     <label><input type="checkbox" data-c="9"> <span>Je ne confonds plus I<sub>G</sub> (polaire, torsion) et I<sub>Gz</sub> (quadratique, flexion).</span></label>
-    <label><input type="checkbox" data-c="10"> <span>Je connais les valeurs usuelles de la page 25 et le module de flexion W.</span></label>
+    <label><input type="checkbox" data-c="10"> <span>Je connais les valeurs usuelles du chapitre 5 et le module de flexion W.</span></label>
   </div>
   <p class="status" id="checkMsg"></p>
 
@@ -775,7 +775,7 @@ input.r-gam{accent-color:var(--gam)}
 
 <footer>
 <div class="wrap">
-  <p>Cours 8 de la série « Résistance des matériaux » (série 2 : la théorie des poutres). Pour les notations et les conventions, le cours de référence de chaque formation fait foi.</p>
+  <p>Cours 8 de la série « Résistance des matériaux » (série 2 : la théorie des poutres). Pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
 </div>
 </footer>
 <script>
@@ -1009,7 +1009,7 @@ const f0=v=>nf(v,0),fE=v=>{if(Math.abs(v)<1)return nf(v,0);const e=Math.floor(Ma
     const th=0.5*Math.atan2(2*q.M,q.Iz-q.Iy)*180/Math.PI;
     $("#s4out").innerHTML="S = "+f0(q.S)+" mm² · G : y<sub>G</sub> = "+nf(q.yG,1)+", z<sub>G</sub> = "+nf(q.zG,1)+" mm (depuis le coin) · I<sub>Gy</sub> = "+fE(q.Iy)+" · I<sub>Gz</sub> = "+fE(q.Iz)+" · M<sub>PGyz</sub> = "+fE(q.M)+" mm⁴"+
       "<br>"+S("sig","I<sub>Δ</sub>("+al+"°) = "+fE(Id(al))+" mm⁴")+" · "+S("mat","principaux : I<sub>max</sub> = "+fE(Imax)+" à α = "+nf(amax,1)+"° ; I<sub>min</sub> = "+fE(Imin)+" à α = "+nf(amin,1)+"°")+
-      "<br>formule du polycopié : tan 2θ = 2M<sub>P</sub>/(I<sub>Gz</sub> − I<sub>Gy</sub>) donne θ = "+nf(th,1)+"° (à 90° près) : il faut vérifier lequel des deux axes porte le maximum";
+      "<br>formule : tan 2θ = 2M<sub>P</sub>/(I<sub>Gz</sub> − I<sub>Gy</sub>) donne θ = "+nf(th,1)+"° (à 90° près) : il faut vérifier lequel des deux axes porte le maximum";
   }
   [ia,ib,it,ial].forEach(i=>i.addEventListener("input",()=>{if(i!==ial)$$("#s4pre .btn").forEach(b=>b.classList.remove("on"));draw();}));
   $$("#s4pre .btn").forEach(b=>b.addEventListener("click",()=>{const v=b.dataset.v.split(",").map(Number);ia.value=v[0];ib.value=v[1];it.value=v[2];$$("#s4pre .btn").forEach(o=>o.classList.toggle("on",o===b));draw();}));
@@ -1048,11 +1048,11 @@ const f0=v=>nf(v,0),fE=v=>{if(Math.abs(v)<1)return nf(v,0);const e=Math.floor(Ma
       tx(svg,x+44,base+16,q[0],"lbl",{"text-anchor":"middle",style:"font-weight:700"});tx(svg,x+68,base-hb(q[2])-6,"×"+nf(q[2],2)+(i===1&&!tors?"*":""),"lbl",{"text-anchor":"middle",style:"fill:"+q[3]+";font-weight:700"});});
     tx(svg,bx+110,24,"gris : rond plein de même aire (même poids)","lbl",{"text-anchor":"middle"});
     $("#s5out").innerHTML="S = <b>"+f0(S)+" mm²</b> · "+HS("sig","I<sub>Gz</sub> = "+fE(Iz)+" mm⁴")+(Math.abs(Iy-Iz)>1?" · I<sub>Gy</sub> = "+fE(Iy):"")+" · "+HS("tau","I<sub>G</sub> = "+fE(IG)+" mm⁴")+" · module de flexion W = I<sub>Gz</sub>/v = "+fE(W)+" mm³"+
-      (apx?"<br>formule approchée de la page 25 : "+fE(apx)+" mm⁴, soit "+(apx>=Iz?"+":"")+nf((apx/Iz-1)*100,1)+" % par rapport au calcul exact":"");
+      (apx?"<br>formule approchée : "+fE(apx)+" mm⁴, soit "+(apx>=Iz?"+":"")+nf((apx/Iz-1)*100,1)+" % par rapport au calcul exact":"");
     let n;
     if(type==="rond")n="Référence : le rond plein. « 64 pour plier (I<sub>Gz</sub> = πd⁴/64), 32 pour tordre (I<sub>G</sub> = πd⁴/32) ». Essaie le tube : à même poids, il fait bien mieux.";
     else if(type==="tube")n="🌀 Le tube met toute sa matière loin du centre : à poids égal, il est "+nf(rF,1)+" fois plus rigide qu'un rond plein en flexion, et autant en torsion. D'où les tubes des cadres de vélo et des arbres creux.";
-    else n="* Pour un rectangle ou un caisson, I<sub>G</sub> = I<sub>Gy</sub> + I<sub>Gz</sub> est le moment polaire géométrique de la page 25, mais <b>pas</b> la bonne grandeur pour la torsion (les sections non circulaires se gauchissent) : la barre de torsion est seulement indicative."+(type==="caisson"?" En flexion, le caisson est très efficace : "+nf(rF,1)+" fois un rond plein de même poids.":"");
+    else n="* Pour un rectangle ou un caisson, I<sub>G</sub> = I<sub>Gy</sub> + I<sub>Gz</sub> est le moment polaire géométrique, mais <b>pas</b> la bonne grandeur pour la torsion (les sections non circulaires se gauchissent) : la barre de torsion est seulement indicative."+(type==="caisson"?" En flexion, le caisson est très efficace : "+nf(rF,1)+" fois un rond plein de même poids.":"");
     $("#s5note").innerHTML=n;
   }
   P.forEach(p=>p.addEventListener("input",draw));
