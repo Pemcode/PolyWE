@@ -129,6 +129,8 @@ section.chap{padding:46px 0 10px}
 .warn{margin:1rem 0;padding:.7rem 1rem;border:2px solid var(--bad);border-radius:4px;font-size:.97rem;background:color-mix(in srgb,var(--bad) 7%,transparent)}
 .meta{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--frc);border-radius:4px;background:color-mix(in srgb,var(--frc) 6%,transparent)}
 .mnemo{margin:1rem 0;padding:.7rem 1rem;background:var(--hl);border-radius:4px;font-size:.98rem}
+.fun{margin:1.2rem 0;padding:.8rem 1rem;border:2px dashed var(--muted);border-radius:10px;background:var(--card);font-size:.98rem}
+.fun-h{display:block;margin-bottom:.35rem;font-family:var(--font-head);font-size:1.15rem;font-weight:600;letter-spacing:.02em}
 
 /* labos (animations) */
 .lab{background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:14px 16px 12px;margin:1.4rem 0}
@@ -765,7 +767,7 @@ input.r-gam{accent-color:var(--gam)}
   <div class="cartouche">
     <div class="c-num">★</div>
     <div class="c-title"><h2>Fiche mémoire du cours 5</h2><p>Neuf cases, neuf images : à photographier, puis à redessiner de tête</p></div>
-    <div class="c-img"><span class="ico">📸</span><span><small>Image à retenir</small>Le musée, dernier étage</span></div>
+    <div class="c-img"><span class="ico">✉️</span><span><small>Image à retenir</small>Von Mises, déjà écrit dans une lettre de Maxwell</span></div>
   </div>
   <div class="fiche">
     <div><div class="ic">🧽</div><h4>Hooke 3D</h4><div class="f"><span class="eps">ℇ</span> = <span class="frac"><span>1+ν</span><span>E</span></span><span class="sig">σ</span> − <span class="frac"><span>ν</span><span>E</span></span>tr(<span class="sig">σ</span>)𝕀</div><p>L'éponge : ε<sub>xx</sub> = [σ<sub>xx</sub> − ν(σ<sub>yy</sub> + σ<sub>zz</sub>)]/E ; ε<sub>xy</sub> = τ<sub>xy</sub>/(2G).</p></div>
@@ -778,7 +780,7 @@ input.r-gam{accent-color:var(--gam)}
     <div><div class="ic">🔥</div><h4>Soudure</h4><div class="f">√(σ⊥² + 3(τ⊥² + τ∥²))</div><p>Le facteur 3 vient de von Mises. Cisaillement pur : Rₑ/2 (Tresca) ou Rₑ/√3 (von Mises).</p></div>
     <div><div class="ic">🌊</div><h4>Ce que les critères ignorent</h4><div class="f">σ<sub>m</sub> = tr(σ)/3</div><p>La pression hydrostatique ne fait pas plastifier. Mais la triaxialité favorise la rupture fragile.</p></div>
   </div>
-  <div class="mnemo">🏛 <b>Le musée, dernier étage</b> (2 minutes, les yeux fermés) : une <b>éponge</b> 🧽 pressée dégouline sur un <b>panneau aller-retour</b> 🔁 ; un <b>ballon</b> 🎈 gonfle au-dessus d'une <b>feuille</b> 📄 posée à plat ; à côté, une <b>balance</b> ⚖️ compare deux plateaux ; sur l'un, des <b>ciseaux</b> ✂️, sur l'autre un <b>œuf</b> 🥚 posé dans un nid hexagonal ; derrière, un <b>poste de soudage</b> 🔥 crépite au bord d'une <b>vague</b> 🌊 qui écrase tout de la même façon, sans rien déformer.</div>
+  <div class="fun"><span class="fun-h">✉️ Fun fact : Le critère de von Mises était déjà dans une lettre de Maxwell</span>Le critère du <a href="#c4">chapitre 4</a> porte le nom de Richard von Mises, qui l'a formulé rigoureusement en 1913. Mais l'idée figurait déjà, au XIX<sup>e</sup> siècle, dans une lettre de James Clerk Maxwell, le père des équations de l'électromagnétisme, au physicien William Thomson, le futur Lord Kelvin : la matière plastifie quand l'énergie de distorsion, celle qui change sa forme sans changer son volume, atteint un seuil. Le Polonais Tytus Huber l'a esquissée en 1904, dans un article écrit en polonais, et l'Allemand Heinrich Hencky l'a retrouvée en 1924. D'où le nom complet que tu croiseras dans certains livres : critère de Maxwell-Huber-Hencky-von Mises.</div>
 </div>
 </section>
 
@@ -835,7 +837,7 @@ input.r-gam{accent-color:var(--gam)}
   </div>
   <p class="status" id="checkMsg"></p>
 
-  <div class="meta">🔭 <b>Et maintenant : la révision de la série.</b> Les cinq cours et l'exercice spécial forment un tout : refais les cinq quiz à la suite (vise 10/12 partout), puis les cinq visites du musée, les yeux fermés, dans l'ordre des étages. Termine par les exercices marqués N2 de chaque cours, sans ouvrir les corrections avant d'avoir une réponse complète. Les manipulations « machine à multiplier » (cours 2), « machine à valeurs propres » (cours 4) et « vérificateur de pièce » (cours 5) te permettent de contrôler n'importe quel exercice supplémentaire.</div>
+  <div class="meta">🔭 <b>Et maintenant : la révision de la série.</b> Les cinq cours et l'exercice spécial forment un tout : refais les cinq quiz à la suite (vise 10/12 partout), puis les cinq fiches mémoire, en redessinant de tête leurs neuf images. Termine par les exercices marqués N2 de chaque cours, sans ouvrir les corrections avant d'avoir une réponse complète. Les manipulations « machine à multiplier » (cours 2), « machine à valeurs propres » (cours 4) et « vérificateur de pièce » (cours 5) te permettent de contrôler n'importe quel exercice supplémentaire.</div>
 </div>
 </section>
 </main>
