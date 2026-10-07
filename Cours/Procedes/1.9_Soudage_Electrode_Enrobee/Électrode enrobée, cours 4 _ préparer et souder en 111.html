@@ -1172,6 +1172,7 @@ const Ityp=d=>Math.round(10*(d-1))*5;
 const coreMass=(d,L)=>Math.PI/4*d*d*L*RHO;
 const depE=d=>coreMass(+d,LEN[String(+d)]-STUB)*RD;/* masse déposée par électrode (g) */
 const TAN=deg=>Math.tan(deg*Math.PI/180);
+const nbsp=s=>s.replace(/(\d) (°C|°|mm²|mm\/s|mm|min|kJ\/mm|g\/m|ml\/100 g|s|A|%|m|d)(?=[\s.,;:)<]|$)/g,"$1 $2");/* espace insécable entre nombre et unité */
 const FPOS={PA:1,PB:1,PC:0.95,PD:0.9,PE:0.9,PF:0.9,PG:1};/* réduction d'intensité selon la position (modèle pédagogique) */
 function fitSize(t,maxW,min){/* réduit la police d'un texte SVG trop large (style en ligne, prioritaire sur la feuille de style) */
   let b;try{b=t.getBBox();}catch(e){return t;}let fs=parseFloat(getComputedStyle(t).fontSize)||13;
@@ -1276,7 +1277,7 @@ function passLabel(svg,poly,txt){/* numéro de passe, seulement si la passe est 
       if(G.T!=="I"&&G.c===0&&G.b>=3)tips.push("⚠️ Sans talon et avec un grand écartement, la racine s'effondre.");
       if((G.T==="V"||G.T==="X")&&G.a<50)tips.push("⚠️ Angle fermé : l'électrode atteint mal la racine.");
       tips.push("Pointage : "+G.nt+" pointes de "+G.lt+" mm au moins, au pas de "+nf(G.pitch,0)+" mm.");}
-    msg.innerHTML=tips.join(" ");
+    msg.innerHTML=nbsp(tips.join(" "));
   }
   const A=animate($("#m1play"),"▶ Pointer et remplir",7000,p=>{prog=p;draw();},()=>{prog=null;draw();});
   [st,sa,sb,sc,sL].forEach(e=>e.addEventListener("input",()=>{A.stop();prog=null;draw();}));
@@ -1342,7 +1343,7 @@ function passLabel(svg,poly,txt){/* numéro de passe, seulement si la passe est 
       m+="Séférian, qui ignore l'hydrogène et l'énergie, donne "+(C.TpS<=20?"aucun préchauffage":nf(C.TpS,0)+" °C")+". ";
       if(HD>=10)m+="Avec "+HD+" ml/100 g d'hydrogène, une basique H5 abaisserait la température conseillée. ";}
     if(C.T0>20)m+="Le préchauffage allonge t<sub>8/5</sub> de "+nf(C.c20.t,1)+" à "+nf(C.c0.t,1)+" s : la zone affectée trempe moins.";
-    msg.innerHTML=m;
+    msg.innerHTML=nbsp(m);
   }
   const A=animate($("#m2play"),"▶ Refroidir le joint",6000,p=>{prog=p;draw();},()=>{prog=null;draw();});
   [sC,sM,sd,sQ,sT].forEach(e=>e.addEventListener("input",()=>{A.stop();prog=null;draw();}));
@@ -1407,7 +1408,7 @@ function passLabel(svg,poly,txt){/* numéro de passe, seulement si la passe est 
       if(ch.fi==="net")tips.push("❌ Arc coupé net : cratère creux et fissure de cratère ; remplis le cratère avant d'écarter l'électrode.");
       tips.push("Chaque électrode couvre ≈ "+nf(C.Le,0)+" mm : "+(C.ne-1)+" reprise"+(C.ne>2?"s":"")+" sur "+nf(C.L/1000,1)+" m.");
       if(C.r>=3)tips.push("⚠️ Balayage large : l'énergie passe à "+nf(C.E,2)+" kJ/mm ; un DMOS peut limiter la largeur.");}
-    msg.innerHTML=tips.join(" ");
+    msg.innerHTML=nbsp(tips.join(" "));
   }
   const A=animate($("#m3play"),"▶ Souder le cordon",7000,p=>{prog=p;draw();},()=>{prog=null;draw();});
   [sw,sL].forEach(e=>e.addEventListener("input",()=>{A.stop();prog=null;draw();}));
@@ -1471,7 +1472,7 @@ function passLabel(svg,poly,txt){/* numéro de passe, seulement si la passe est 
     if(ax==="h")m+=inTol?" Rotation à moins de 10° de "+p+" : acceptable pour une éprouvette de qualification.":" Rotation admise en production (tableaux de l'ISO 6947), mais trop loin de "+p+" pour une éprouvette de qualification (± 10°).";
     if(dd>Q.dmax)m+=" ⚠️ ⌀ "+nf(dd,1)+" mm : trop gros pour cette position, le bain devient incontrôlable.";
     else if(FPOS[p]<1)m+=" Intensité de départ réduite de "+nf(100*(1-FPOS[p]),0)+" % par rapport au repère I = 50·(d − 1).";
-    msg.innerHTML=m;
+    msg.innerHTML=nbsp(m);
   }
   let save=null;
   const A=animate($("#m4play"),"▶ Tour des positions",9000,p=>{if(!save)save={R:sR.value,ax:ax};prog=p;
@@ -1549,7 +1550,7 @@ function passLabel(svg,poly,txt){/* numéro de passe, seulement si la passe est 
       m+=({PA:"À plat, de larges passes au gros diamètre remplissent vite.",PF:"En PF, une passe balayée par couche, en triangle, avec un temps d'arrêt sur les bords.",PC:"En corniche, des cordons tirés empilés de bas en haut : nombreux, mais le bain tient.",PE:"Au plafond, de petits cordons tirés en arc très court."})[po]+" ";
       m+=({open:"Racine ouverte : on creuse l'envers jusqu'au métal sain avant la passe envers.",cu:"La latte de cuivre moule le bourrelet envers ; elle ne doit jamais fondre.",cer:"Le support céramique moule l'envers et se retire après soudage.",acier:"⚠️ La latte d'acier reste dans la structure : entaille à la racine et interstice, à valider dès la conception."})[en];
       if(!grind)m+=" ⚠️ Racine non meulée : le laitier de la passe suivante risque de se coincer dans les sillons des bords.";}
-    msg.innerHTML=m;
+    msg.innerHTML=nbsp(m);
   }
   const A=animate($("#m5play"),"▶ Souder le joint",7000,p=>{prog=p;draw();},()=>{prog=null;draw();});
   st.addEventListener("input",()=>{A.stop();prog=null;draw();});
@@ -1606,7 +1607,7 @@ function passLabel(svg,poly,txt){/* numéro de passe, seulement si la passe est 
     if(C.h>=1.5)m+="⚠️ Convexité marquée : "+nf(100*(C.A/(Math.min(C.z1,C.z2)*Math.min(C.z1,C.z2)/2)-1),0)+" % de métal en plus pour la même gorge, et une entaille au raccordement. ";
     else if(C.h<0)m+="La face creuse réduit la gorge : chaque dixième de millimètre compte. ";
     else if(ok)m+="Côté conseillé pour cette gorge : z = a·√2 ≈ "+nf(C.an*Math.SQRT2,1)+" mm.";
-    msg.innerHTML=m;
+    msg.innerHTML=nbsp(m);
   }
   const A=animate($("#m6play"),"▶ Mesurer au calibre",3000,p=>{prog=p;draw();},()=>{prog=null;draw();});
   [s1,s2,sh,sa].forEach(e=>e.addEventListener("input",()=>{A.stop();prog=null;setOn("#m6ex",null);draw();}));
