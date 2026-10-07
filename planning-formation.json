@@ -277,7 +277,20 @@
       "titre": "Soudage à l’électrode enrobée",
       "theme": "procedes",
       "code": "1.9",
-      "supports": []
+      "supports": [
+        {
+          "cours": "electrode-enrobee-01"
+        },
+        {
+          "cours": "electrode-enrobee-02"
+        },
+        {
+          "cours": "electrode-enrobee-03"
+        },
+        {
+          "cours": "electrode-enrobee-04"
+        }
+      ]
     },
     {
       "id": "1-10-arc-submerge",

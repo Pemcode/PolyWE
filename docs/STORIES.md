@@ -284,3 +284,25 @@ Contrôle des deux cours réels sous `/PolyWE/` : 12 manipulations et leurs anim
 Contrôle des légendes SVG : 1 336 états vérifiés après chargement des polices (réglages initiaux, extrêmes individuels et simultanés, boutons de préréglage), aux quatre largeurs et dans les deux thèmes. Aucun texte hors viewBox détecté avec une tolérance de 2 unités. Empreintes SHA-256 des deux sources inchangées ; cette intégration vérifie le fonctionnement sans nouvelle validation scientifique. La modification locale de `AGENTS.md` reste hors du commit.
 
 Validation locale : 86 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (25 cours, 271 sections, 6 matières, 1 application).
+
+
+## S20 — Réviser le soudage à l’électrode enrobée
+
+En tant qu’élève, je retrouve les quatre premiers cours du sujet IWE 1.9 depuis l’accueil, la matière, le planning et la recherche.
+
+- Nouvelle matière « Soudage à l’électrode enrobée », cours `electrode-enrobee-01` à `electrode-enrobee-04` disponibles et ordonnés : poste de soudage, réglages de l’arc, électrodes, préparation et exécution.
+- URL stables sous `ElectrodeEnrobee/`, navigation entre cours, prérequis issus des en-têtes, sections indexées et partageables.
+- Rattachement à `1-9-soudage-a-lelectrode-enrobee`, sans modification des séances ; documentation du planning actualisée.
+- Sources conservées à l’identique, scripts et ancres préservés. Le cinquième cours annoncé n’est pas disponible.
+- Test de parcours RED puis GREEN, tests et build valides, vérification des interactions et de l’affichage, commit et push sur `main`, puis contrôle du déploiement Pages.
+
+Aucune fiche d’intégration séparée présente : les métadonnées sont tirées des en-têtes et sections des quatre HTML. Le sujet est confirmé par `wiki sujets "1.9"`. L’intégration ne constitue pas une nouvelle validation scientifique.
+
+
+Preuve TDD du 7 octobre 2026 : RED exécuté avec `uv run pytest tests/test_content.py -q -k electrode_enrobee` sur l’absence des quatre pages publiées. GREEN après inscription par `wiki ajouter`, renseignement des URL et des prérequis. Le parcours contrôle l’accès depuis l’accueil, la matière, le planning et la recherche des six chapitres de chaque cours, la progression, les prérequis, les scripts et ancres conservés et l’absence de cours 5 disponible. Aucun changement du générateur.
+
+Validation locale : 87 tests Python et 23 parcours Chromium réussis ; catalogue et build valides (29 cours, 319 sections, 7 matières, 1 application). Les séances et les autorisations des PDF restent inchangées.
+
+Contrôle des quatre cours réels sous `/PolyWE/` : 24 manipulations et leurs animations, 48 questions de quiz et remise à zéro, cases mémorisées après rechargement, persistance du thème, partage de section via l’API native simulée, recherche sans accents vers le chapitre de soufflage magnétique, liens de la matière et du planning. Vérification des modes clair et sombre aux largeurs 360, 390, 768 et 1280 px. Les 2 880 états contrôlés (initiaux, extrêmes individuels et simultanés des curseurs, boutons de préréglage) ne présentent aucun débordement horizontal de page ni aucun texte SVG hors viewBox avec une tolérance de 2 unités. Aucune erreur JavaScript ou HTTP locale. Captures des 24 manipulations et des quatre en-têtes mobiles sombres inspectées. Empreintes SHA-256 des quatre sources inchangées depuis la réception.
+
+La mise à jour existante de `AGENTS.md` est versionnée dans un commit de documentation distinct, conformément à la demande de synchroniser toutes les modifications sur `main`. Le cinquième cours annoncé reste à livrer ; aucune nouvelle validation scientifique n’est revendiquée.

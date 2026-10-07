@@ -44,6 +44,8 @@ La série « Mécanique de la rupture » reste une matière unique du wiki, mêm
 
 Les quatre cours de brasage (`brasage-01` à `brasage-04`) sont rattachés au sujet `1-16-brasage`, prévu les 5 et 6 octobre 2026. Le premier couvre le mouillage, la capillarité et la liaison ; le second, les oxydes, flux, atmosphères et apports. Le troisième présente les procédés, les paramètres de chauffe et le mode opératoire ; le quatrième traite la conception, les familles de métaux, les imperfections et le contrôle. Ces quatre supports forment la série de brasage livrée, sans être affectés artificiellement à des heures distinctes. Le premier cours de fluage (`fluage-01`) introduit la courbe et les mécanismes du sujet `2-12-acier-resistant-au-fluage`, prévu le 15 octobre 2026 ; il ne couvre pas encore tout le choix des aciers résistants au fluage. La suite du fluage annoncée dans le HTML n’est pas présentée comme disponible tant qu’elle n’est pas livrée.
 
+Les quatre premiers cours de soudage à l’électrode enrobée (`electrode-enrobee-01` à `electrode-enrobee-04`) sont rattachés au sujet `1-9-soudage-a-lelectrode-enrobee`. Ils couvrent le procédé 111 et le poste, les réglages de l’arc, la fabrication et la conservation des électrodes, puis la préparation et l’exécution des soudures. Les séances existantes proposent la série sans affectation artificielle par heure. Le cinquième cours annoncé dans les sources reste indisponible tant qu’il n’est pas livré.
+
 | Examen indiqué | Date | Horaire |
 | --- | --- | --- |
 | Procédés | 17 décembre 2026 | 10 h 15–12 h |
