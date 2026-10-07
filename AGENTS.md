@@ -1,33 +1,80 @@
 # Instructions pour les agents
 
-Toujours ultra pédagogue
-Deux niveau d'enseignement à chaque fois que je te demande un cours
-Dans chaque cours des animations / graphiques / diagrammes etc... dynamiques et interactifs pour une bonne imprégnation des concepts. Qu'ils soient mathématiques, physiques, métallurgiques ou autres...
+Ce dépôt construit le wiki public de révision de la promo DU Ingénierie du soudage / IWE, publié sur GitHub Pages. De nouveaux cours y arrivent régulièrement, au fil du planning de la formation. Deux activités se succèdent :
 
-Ne pas hésiter à faire des cours longs et complets !
+- **rédiger les cours** : des pages HTML autonomes rangées dans `Cours/<Matière>/` (actuellement confié à Claude Code) ;
+- **intégrer et publier** : catalogue, planning, tests, build, commit et déploiement GitHub Pages (actuellement confié à Codex).
 
-Me poser des questions pour affiner les cours que je demande si et seulement si c'est pertinent avant de les rédiger
+Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du propriétaire :
 
-Les cours doivent aussi être ludique et permettre une bonne mémorisation des concepts.
-Les visualisations seront adapter à ma mémoire photographique.
-Les signes physiques / mathématiques doivent être posés et définie à chaque nouvel usage.
-Les acronymes / abréviations doivent aussi l'être.
-Si tu utilise un terme jugé technique ou issu d'un jargon technique il faut aussi l'expliquer.
+- l'agent qui rédige ne modifie ni le catalogue, ni le planning, ni les tests, et ne committe pas ;
+- l'agent qui intègre ne réécrit pas le contenu d'un cours.
 
-instructions complémentaires :
+## Cycle d'un nouveau cours
 
-# Instructions : présentation des cours
+1. **Partir du planning.**
+   - Chaque cours répond à un ou plusieurs sujets de `planning-formation.json`. Les trouver avec `uv run python -m wiki sujets "<mot ou code IWE>"`.
+   - Retenir l'identifiant du sujet, pas seulement son code : un même code peut recouvrir plusieurs intitulés (2.23, 3.6, 4.12…).
+   - Le titre du cours reprend ou précise l'intitulé du sujet. Un écart important se justifie dans la fiche d'intégration.
+   - Une série peut servir plusieurs sujets : la rupture couvre 2.7 et 3.11. Une matière du wiki ne correspond pas forcément à un thème du planning.
+   - Pour proposer le cours suivant, regarder en priorité les sujets des semaines à venir encore sans support.
+2. **Réunir les sources.**
+   - Les polycopiés reçus sont rangés dans `Polycopies/`, un dossier par polycopié (par exemple `IWE_2.7_3.11_Tancret_Mecanique_de_la_rupture/`). Ce dossier est local et ignoré par Git.
+   - Leur reproduction est interdite. Ne jamais recopier leurs images, scans ou passages : redessiner en SVG, reformuler et renvoyer aux pages.
+   - Les PDF de `Planning/` gardent leur règle propre.
+3. **Proposer un plan.**
+   - Si le sujet est vaste, proposer un plan de série : nombre de cours, périmètre de chacun, pages de la source.
+   - Centrer ce plan sur les attendus du certificat IWE et raboter ce qui en est éloigné.
+   - Attendre sa validation. Rédiger ensuite un cours à la fois, chacun après le feu vert du propriétaire.
+4. **Rédiger et contrôler**, selon les sections « Rédaction des cours » et « Contrôle qualité d'un cours ».
+5. **Livrer.**
+   - Déposer la page dans `Cours/<Matière>/` sous le nom `<Matière>, cours N _ <titre court>.html`.
+   - Terminer par un résumé court du contenu et des priorités de travail.
+   - Ajouter une **fiche d'intégration** pour l'agent qui publie :
+     - l'identifiant proposé : `<matière>-NN`, ou celui d'un cours déjà annoncé ;
+     - le titre aligné sur le planning ;
+     - la matière : existante, ou nouvelle avec une phrase de description ;
+     - les identifiants des sujets ;
+     - les ancres utiles en complément d'autres sujets (`#cN`) ;
+     - les prérequis et les mots-clés ;
+     - l'URL proposée, `<Matière>/NN-slug.html` ;
+     - les limites connues.
+6. **Intégrer et publier**, selon « Stories et TDD » et « Routine de réception des supports ».
+   - Étapes : story, test de parcours RED puis GREEN, `wiki ajouter` avec des métadonnées explicites, liens du planning et `docs/PLANNING.md`, vérifications, commit, push, puis contrôle de GitHub Actions et du site.
+   - L'intégration ne modifie pas la source. Un défaut constaté est consigné dans la story et signalé, pour être corrigé dans la source.
+7. **Corriger ensuite.** Modifier la source en place, en conservant son nom, ses ancres et ses clés de stockage, puis republier.
 
-## Livrable
-- Chaque cours est une page HTML unique et autonome, publiée comme artefact. Le CSS est dans <style>, le JavaScript dans <script>, et les dessins sont en SVG générés par JavaScript. Pas d'images ni de bibliothèques externes ; seule exception, les polices Google Fonts, avec polices de secours. La page doit fonctionner hors ligne.
+## Rédaction des cours
+
+### Esprit
+
+- Toujours ultra pédagogue, bienveillant, au tutoiement, pour un lecteur qui peut partir de zéro.
+- Deux niveaux d'enseignement dans chaque chapitre.
+- Dans chaque chapitre, des animations, graphiques et diagrammes dynamiques et interactifs pour une bonne imprégnation des concepts, qu'ils soient mathématiques, physiques, métallurgiques ou autres.
+- Ne pas hésiter à faire des cours longs et complets.
+- Des cours ludiques, qui favorisent la mémorisation, avec des visualisations adaptées à une mémoire photographique.
+- Poser des questions avant de rédiger si et seulement si c'est pertinent, 3 au maximum : niveau, formation, périmètre, notations attendues.
+
+### Livrable
+
+- Chaque cours est une page HTML unique et autonome.
+  - Le CSS est dans `<style>`, le JavaScript dans `<script>`, et les dessins sont en SVG générés par JavaScript.
+  - Pas d'images ni de bibliothèques externes. Seule exception : les polices Google Fonts, avec polices de secours.
+  - La page doit fonctionner hors ligne.
 - Les cours sont longs et complets : environ 2 h 30 à 3 h de travail chacun, exercices compris.
-- Si le sujet est vaste, proposer une série de cours numérotés, chacun s'appuyant sur le précédent, avec un plan de série.
-- Avant de rédiger, poser des questions de calibrage seulement si c'est pertinent (3 maximum) : niveau, formation, périmètre, notations attendues.
+- Reprendre à l'identique la base CSS et les utilitaires JavaScript (quiz, check-list, sommaire, thème) du cours précédent de la série. Pour une nouvelle série, reprendre ceux de la série la plus récente. Seuls le contenu et les manipulations changent.
+- Contraintes du wiki :
+  - Chaque chapitre est une `<section id="cN">` avec un titre `<h2>`. Les autres blocs gardent les ancres `avant`, `exos`, `quiz-s`, `fiche`, `gloss` et `check`. Le générateur en tire la recherche et les liens du planning : une ancre publiée ne change plus.
+  - Les clés de stockage du navigateur sont préfixées par la matière (`<matière>-coursN-check`, `<matière>-theme`), car toutes les pages du site partagent la même origine.
+  - Pas de lien vers un autre fichier de `Cours/` : la navigation entre cours vient du catalogue. Tout fichier annexe doit être signalé dans la fiche d'intégration.
+  - Le dernier cours d'une série annonce la fin de la série au lieu d'un cours suivant, dans l'encadré final, le quiz et la check-list.
+- Les fichiers de travail (fragments, assemblage, scripts de vérification, captures) restent hors du dépôt.
 - Si un document de référence est fourni (polycopié, annales) :
   - aligner les notations, les conventions de signe et les renvois de pages sur ce document ;
   - signaler de façon neutre ses éventuelles erreurs ou ambiguïtés.
 
-## Direction visuelle (identique pour toute une série)
+### Direction visuelle (identique pour toute une série)
+
 - Esthétique « dessin technique » : fond papier millimétré léger.
 - Polices : Barlow Condensed pour les titres, Atkinson Hyperlegible pour le texte, STIX Two Text pour les formules.
 - Chaque chapitre s'ouvre sur un cartouche de plan en trois cases : numéro | titre et sous-titre | « Image à retenir » (un emoji et une phrase-image).
@@ -41,14 +88,15 @@ instructions complémentaires :
 - Mode clair et mode sombre.
 - Responsive, sans aucun débordement horizontal sur téléphone : les formules passent à la ligne, les tableaux et formules larges défilent dans leur propre cadre.
 
-## Structure de chaque page
+### Structure de chaque page
+
 1. **En-tête.**
    - Un titre-cartouche à 4 cases : numéro du cours, durée conseillée, prérequis, « à la fin tu sais ».
    - Un chapeau d'introduction et le rappel du code couleur.
 2. **Sommaire collant** qui surligne la section en cours de lecture.
 3. **« Avant de commencer ».**
    - Le rappel du cours précédent en 3 cases.
-   - La correspondance avec le document de référence (s'il existe).
+   - La correspondance avec le document de référence (s'il existe) et avec le sujet du planning (code IWE et intitulé).
    - Pourquoi ce cours compte dans la pratique.
    - Le plan du cours.
 4. **5 à 7 chapitres**, chacun avec :
@@ -64,29 +112,31 @@ instructions complémentaires :
 7. **Fiche mémoire** : 9 cases (emoji, titre, formule clé, une phrase), puis une « visite du musée », une courte histoire qui enchaîne les 9 images dans l'ordre.
 8. **Glossaire** de tous les termes, symboles et sigles du cours.
 9. **Check-list** « suis-je prêt pour la suite ? » : 10 points, avec les cases cochées mémorisées dans le navigateur.
-10. **Annonce du cours suivant**, puis pied de page.
+10. **Annonce du cours suivant** (ou de la fin de la série), puis pied de page.
 
-## Règles pédagogiques
-- Ton ultra pédagogue, bienveillant, au tutoiement, pour un lecteur qui peut partir de zéro.
-- Deux niveaux d'enseignement dans chaque chapitre.
-- Définir chaque symbole, sigle, abréviation et terme technique à sa première apparition dans chaque cours, même s'il a été défini dans un cours précédent. Cela inclut les notations mathématiques (∂, Σ, diag, transposée…).
+### Règles pédagogiques
+
+- Définir chaque symbole, sigle, abréviation et terme technique ou de jargon à sa première apparition dans chaque cours, même s'il a été défini dans un cours précédent. Cela inclut les notations mathématiques (∂, Σ, diag, transposée…).
 - Écrire la formule littérale avant les valeurs numériques, avec les unités partout et des ordres de grandeur.
 - Des visualisations pensées pour la mémoire photographique : une image forte par chapitre, des couleurs constantes, des schémas épurés.
 - Un ton ludique : analogies du quotidien, défis, quiz, musée mnémotechnique.
 
-## Neutralité
-- Les cours doivent pouvoir être partagés : aucune référence aux échanges de la conversation, à la situation personnelle de l'utilisateur, à ses délais ou à ses questions.
+### Neutralité
+
+- Le site est public et les cours doivent pouvoir être partagés : aucune référence aux échanges de la conversation, à la situation personnelle de l'utilisateur, à ses délais ou à ses questions.
 - Les références aux documents sources sont formulées de façon neutre (« le polycopié… », « le cours de référence… »).
 
-## Contrôle qualité avant publication
-- Recalculer toutes les valeurs numériques : exercices, quiz, exemples des manipulations.
-- Vérifier les formules, les conventions de signe, et la cohérence avec les cours précédents et le document de référence.
-- Tester la page dans un navigateur :
+### Contrôle qualité d'un cours
+
+- Recalculer toutes les valeurs numériques : exercices, quiz, exemples des manipulations. Le défi doit pouvoir se rejouer dans la manipulation qui lui correspond.
+- Vérifier les formules, les conventions de signe, et la cohérence avec les cours précédents, le document de référence et le sujet du planning.
+- Tester la page dans un navigateur (Playwright via `uv run --group browser`) :
   - aucune erreur JavaScript, et toutes les manipulations fonctionnent ;
   - en mode clair et en mode sombre ;
   - sans débordement aux largeurs 360, 390, 768 et 1280 px ;
-  - contrôle visuel des schémas (étiquettes lisibles, rien ne se chevauche).
-- Publier, puis faire un résumé court dans le chat : contenu du cours et priorités de travail.
+  - aucun texte de SVG ne sort de son cadre ni n'est tronqué, à chaque largeur et pour les réglages extrêmes des manipulations : comparer la boîte de chaque `<text>` au `viewBox` ;
+  - contrôle visuel des schémas : étiquettes lisibles, rien ne se chevauche.
+- Livrer, puis faire le résumé court et la fiche d'intégration (étape 5 du cycle).
 
 ## Objectif et choix actés
 
@@ -106,7 +156,7 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 
 ## Stories et TDD
 
-- Prendre une story de `docs/STORIES.md`, avec critères d'acceptation observables, avant chaque évolution fonctionnelle.
+- Prendre une story de `docs/STORIES.md`, avec critères d'acceptation observables, avant chaque évolution fonctionnelle. La rédaction ou la correction du contenu d'un cours n'en demande pas ; son intégration au wiki en demande une (exemple : S17).
 - RED : écrire un test de comportement qui échoue pour la bonne raison et l'exécuter.
 - GREEN : écrire le minimum pour le faire passer. REFACTOR : clarifier sans ajouter de fonctionnalités.
 - Noter brièvement le résultat RED/GREEN dans la story ; ne pas prétendre avoir exécuté un test non exécuté.
@@ -135,7 +185,7 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 ## Routine de réception des supports
 
 - Procédure utilisateur : `Mettre-a-jour.cmd` ou `uv run python -m wiki gerer`, documentée dans `docs/MISE_A_JOUR.md`.
-- Pour un ajout demandé, préférer `uv run python -m wiki ajouter FICHIER --id ...` avec les métadonnées explicites. Réutiliser l’identifiant d’un cours annoncé ; le rattachement au planning reste un choix éditorial explicite via `--sujet`.
+- Pour un ajout demandé, préférer `uv run python -m wiki ajouter FICHIER --id ...` avec les métadonnées explicites, en partant de la fiche d'intégration du cours. Réutiliser l’identifiant d’un cours annoncé ; le rattachement au planning reste un choix éditorial explicite via `--sujet`.
 - Pour une correction, modifier seulement la source demandée, préserver URL et ancres, puis vérifier. Les documents PDF/Office utilisent une page HTML d’accès et `fichiers_associes`, sans nouveau stockage.
 - `preparer` lance tests et build ; `apercu` ouvre le site local ; `publier` est réservé aux contenus. Les évolutions de code et documentation suivent les commits de développement habituels, avec les vérifications utiles avant le push.
 - Ne pas contourner une exclusion Git ni inscrire automatiquement les fichiers déposés. La routine ne modifie pas l’autorisation propre aux PDF sources de Planning.
