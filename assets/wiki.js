@@ -75,8 +75,9 @@
     if (query.value || subject.value) search();
   }
 
-  const navigation = document.querySelector(".wiki-nav");
-  if (!navigation) return;
+  const panel = document.getElementById("wiki-panel");
+  if (!panel) return;
+  const root = document.documentElement;
   const status = document.getElementById("wiki-share-status");
   const title = document.querySelector('meta[name="wiki-course-title"]')?.content || document.title;
   const targetFor = hash => {
@@ -85,17 +86,131 @@
   };
   const headingFor = target => target?.matches("h2,h3") ? target : target?.querySelector("h2,h3");
 
-  // Ces boutons sont ajoutés au document affiché, jamais aux sources pédagogiques.
-  for (const anchor of navigation.querySelectorAll('.wiki-course-menu a[href^="#"]')) {
-    const target = targetFor(anchor.hash);
-    const heading = headingFor(target);
+  // Panneau : ouvert, replié en rail (écran large) ou tiroir (écran étroit). La largeur décide, comme dans la feuille de style.
+  const docked = matchMedia("(min-width: 1000px)");
+  const opener = document.querySelector('[data-wiki-panel="open"]');
+  const backdrop = document.querySelector(".wiki-backdrop");
+  const fold = panel.querySelector('[data-wiki-panel="fold"]');
+  const query = document.getElementById("wiki-panel-query");
+  if (query && form) query.value = new URL(location.href).searchParams.get("q") || "";
+  const syncFold = () => fold?.setAttribute("aria-expanded", String(!root.classList.contains("wiki-replie")));
+  syncFold();
+
+  function openDrawer() {
+    root.classList.add("wiki-tiroir");
+    opener?.setAttribute("aria-expanded", "true");
+    if (backdrop) backdrop.hidden = false;
+    (panel.querySelector('[data-wiki-panel="close"]') || panel).focus();
+  }
+  function closeDrawer(restoreFocus = true) {
+    if (!root.classList.contains("wiki-tiroir")) return;
+    root.classList.remove("wiki-tiroir");
+    opener?.setAttribute("aria-expanded", "false");
+    if (backdrop) backdrop.hidden = true;
+    if (restoreFocus) opener?.focus();
+  }
+  const drawerOpen = () => !docked.matches && root.classList.contains("wiki-tiroir");
+
+  document.addEventListener("click", event => {
+    const control = event.target.closest("[data-wiki-panel]");
+    if (control) {
+      const action = control.dataset.wikiPanel;
+      if (action === "open") openDrawer();
+      else if (action === "close") closeDrawer();
+      else if (action === "fold") {
+        root.classList.toggle("wiki-replie");
+        syncFold();
+        try { localStorage.setItem("wiki-panneau", root.classList.contains("wiki-replie") ? "replie" : "deplie"); } catch {}
+      }
+      return;
+    }
+    // Suivre un lien du tiroir le referme, y compris vers une section de la même page.
+    if (drawerOpen() && event.target.closest("#wiki-panel a[href]")) closeDrawer(false);
+  });
+  document.addEventListener("keydown", event => {
+    if (!drawerOpen()) return;
+    if (event.key === "Escape") { event.preventDefault(); closeDrawer(); return; }
+    if (event.key !== "Tab") return;
+    const focusable = [...panel.querySelectorAll("a[href], button, input, summary")].filter(item => item.offsetParent !== null);
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === panel)) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+  docked.addEventListener("change", () => closeDrawer(false));
+
+  // Sommaire du cours : surligner la section en cours de lecture et la garder visible dans le panneau.
+  const scroller = panel.querySelector(".wiki-panel-scroll");
+  const sections = [...panel.querySelectorAll('.wiki-toc a[href^="#"]')]
+    .map(link => ({link, target: targetFor(link.hash)})).filter(item => item.target)
+    .sort((a, b) => a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1);
+  let active = null, pending = false;
+  function spy() {
+    pending = false;
+    if (!sections.length) return;
+    const line = innerHeight * 0.3;
+    let current = sections[0];
+    for (const item of sections) {
+      if (item.target.getBoundingClientRect().top <= line) current = item; else break;
+    }
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) current = sections[sections.length - 1];
+    if (current.link === active) return;
+    active?.removeAttribute("aria-current");
+    active = current.link;
+    active.setAttribute("aria-current", "location");
+    if (scroller && getComputedStyle(scroller).display !== "none") {
+      const box = active.getBoundingClientRect(), view = scroller.getBoundingClientRect();
+      if (box.top < view.top + 24 || box.bottom > view.bottom - 24) scroller.scrollTop += box.top - view.top - view.height / 3;
+    }
+  }
+  const requestSpy = () => { if (!pending) { pending = true; requestAnimationFrame(spy); } };
+  addEventListener("scroll", requestSpy, {passive: true});
+  addEventListener("resize", requestSpy);
+  addEventListener("hashchange", requestSpy);
+  addEventListener("load", requestSpy);
+  spy();
+
+  // Manipulations sur écran paysage : lectures et commentaire sous le schéma, réglages à droite.
+  // La grille de la feuille de style a déjà donné au schéma sa largeur avant le premier dessin du cours ;
+  // le regroupement ne la change pas. En dessous du seuil, l'ordre d'origine des éléments est rétabli.
+  const landscape = matchMedia("(min-width: 1280px) and (orientation: landscape)");
+  const labs = [...document.querySelectorAll(".lab")].filter(lab => lab.querySelectorAll(":scope > svg").length === 1);
+  function splitLab(lab) {
+    if (lab.classList.contains("wiki-lab-split")) return;
+    const children = [...lab.children];
+    const figure = document.createElement("div");
+    const side = document.createElement("div");
+    figure.className = "wiki-lab-fig";
+    side.className = "wiki-lab-side";
+    for (const child of children) {
+      if (child.matches(".lab-h") || (child.matches(".lab-sub") && child === children[1])) continue;
+      (child.matches("svg, .readout, .status") ? figure : side).append(child);
+    }
+    lab.wikiChildren = children;
+    lab.append(figure, side);
+    lab.classList.add("wiki-lab-split");
+  }
+  function joinLab(lab) {
+    if (!lab.classList.contains("wiki-lab-split")) return;
+    const wrappers = lab.querySelectorAll(":scope > .wiki-lab-fig, :scope > .wiki-lab-side");
+    lab.append(...lab.wikiChildren);
+    wrappers.forEach(wrapper => wrapper.remove());
+    lab.classList.remove("wiki-lab-split");
+  }
+  const arrangeLabs = () => labs.forEach(landscape.matches ? splitLab : joinLab);
+  arrangeLabs();
+  landscape.addEventListener("change", arrangeLabs);
+
+  // Boutons « Partager cette section » : ajoutés au document affiché, jamais aux sources pédagogiques.
+  for (const {link} of sections) {
+    const heading = headingFor(targetFor(link.hash));
     if (!heading) continue;
     const button = document.createElement("button");
     button.type = "button";
     button.className = "wiki-section-share";
     button.textContent = "Partager cette section";
     button.dataset.wikiShare = "native";
-    button.dataset.wikiAnchor = anchor.hash;
+    button.dataset.wikiAnchor = link.hash;
     heading.insertAdjacentElement("afterend", button);
   }
 
@@ -105,7 +220,9 @@
       await navigator.clipboard.writeText(url);
       status.textContent = "Lien copié.";
     } catch {
-      const fallback = navigation.querySelector(".wiki-copy-fallback");
+      if (!docked.matches && !root.classList.contains("wiki-tiroir")) openDrawer();
+      if (docked.matches && root.classList.contains("wiki-replie")) { root.classList.remove("wiki-replie"); syncFold(); }
+      const fallback = panel.querySelector(".wiki-copy-fallback");
       fallback.hidden = false;
       const input = fallback.querySelector("input");
       input.value = url;

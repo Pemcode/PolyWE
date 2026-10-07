@@ -30,6 +30,7 @@ def test_document_from_planning_download_and_share(site, tmp_path):
     target = tmp_path / "download.pdf"
     download.save_as(target)
     assert target.read_bytes() == b"%PDF-1.4\nSupport fictif"
+    page.get_by_role("button", name="Menu", exact=True).click()
     page.get_by_role("button", name="Copier le lien", exact=True).click()
     expect(page.locator("#wiki-share-status")).to_have_text("Lien copié.")
     assert page.evaluate("window.copied") == base + "Supports/th-fiche.html"

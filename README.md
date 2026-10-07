@@ -102,7 +102,7 @@ Un jeu ou un simulateur complète une matière sans occuper l’accueil. Son cod
 
 - Seuls les `fichiers` listés sont publiés, dans le dossier `publication` : tests, documentation et scripts de l’application restent hors du site. Déclarer chaque nouveau fichier nécessaire au jeu.
 - L’application apparaît dans la section « S’entraîner » de sa matière, en pied des `cours_lies` et dans la recherche ; l’accueil ne mentionne que leur nombre dans la carte de la matière.
-- La copie publiée reçoit la barre du wiki (retour à la matière, partage) ; la source reste jouable seule, par exemple avec `applications/mohr-forge/Jouer.cmd`.
+- La copie publiée reçoit le panneau latéral du wiki, replié au départ pour laisser la place au jeu (retour à la matière, partage) ; la source reste jouable seule, par exemple avec `applications/mohr-forge/Jouer.cmd`.
 - Les états `disponible`, `a_venir` et `brouillon` suivent les règles des cours. Une application est du code : la routine **Publier** ne l’embarque pas, ses évolutions passent par les commits de développement.
 
 ## Planning de formation
@@ -147,6 +147,8 @@ Les liens relatifs fonctionnent sous `/PolyWE/` et sur un domaine à la racine. 
 
 Placer **https://pemcode.github.io/PolyWE/** dans la description du groupe et épingler le message d'annonce. Chacun peut naviguer par matière, rechercher une notion ou suivre un parcours reliant plusieurs cours.
 
-Dans un cours, **Partager** ouvre le menu de partage de l'appareil ; **Copier le lien** permet de coller l'adresse dans WhatsApp. **Partager cette section** cible directement le passage concerné. Le partage natif et la copie proposent un repli si le navigateur ne fournit pas l'API attendue. Les adresses restent valables quand le contenu d'un cours est mis à jour, à condition de conserver son `url` et ses ancres.
+Toutes les pages s'organisent autour d'un panneau latéral : recherche, accueil, planning, matières et cours, parcours ; sur un cours, son sommaire avec la section en cours de lecture. Sur ordinateur, il se replie en rail d'icônes (état mémorisé) ; sur téléphone, le bouton **Menu** l'ouvre en tiroir. Sur un écran paysage assez large, les cours s'élargissent et chaque manipulation affiche son schéma à gauche, ses réglages à droite.
+
+Dans le panneau d'un cours, **Partager** ouvre le menu de partage de l'appareil ; **Copier le lien** permet de coller l'adresse dans WhatsApp. **Partager cette section** cible directement le passage concerné. Le partage natif et la copie proposent un repli si le navigateur ne fournit pas l'API attendue. Les adresses restent valables quand le contenu d'un cours est mis à jour, à condition de conserver son `url` et ses ancres.
 
 Références de configuration : [uv](https://docs.astral.sh/uv/guides/projects/), [uv dans GitHub Actions](https://docs.astral.sh/uv/guides/integration/github/), [workflow GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
