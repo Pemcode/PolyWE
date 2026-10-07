@@ -20,7 +20,8 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
    - Pour proposer le cours suivant, regarder en priorité les sujets des semaines à venir encore sans support.
 2. **Réunir les sources.**
    - Les polycopiés reçus sont rangés dans `Polycopies/`, un dossier par polycopié (par exemple `IWE_2.7_3.11_Tancret_Mecanique_de_la_rupture/`). Ce dossier est local et ignoré par Git.
-   - Leur reproduction est interdite. Ne jamais recopier leurs images, scans ou passages : redessiner en SVG, reformuler et renvoyer aux pages.
+   - Leur reproduction est interdite. Ne jamais recopier leurs images, scans ou passages : redessiner en SVG et reformuler.
+   - Les pages publiées ne citent pas les polycopiés : ni renvoi de page, de paragraphe ou de figure, ni « le polycopié… » (voir « Neutralité »).
    - Les PDF de `Planning/` gardent leur règle propre.
 3. **Proposer un plan.**
    - Si le sujet est vaste, proposer un plan de série : nombre de cours, périmètre de chacun, pages de la source.
@@ -38,7 +39,8 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
      - les ancres utiles en complément d'autres sujets (`#cN`) ;
      - les prérequis et les mots-clés ;
      - l'URL proposée, `<Matière>/NN-slug.html` ;
-     - les limites connues.
+     - les limites connues ;
+     - les erreurs ou ambiguïtés relevées dans la source, qui ne sont pas signalées dans la page.
 6. **Intégrer et publier**, selon « Stories et TDD » et « Routine de réception des supports ».
    - Étapes : story, test de parcours RED puis GREEN, `wiki ajouter` avec des métadonnées explicites, liens du planning et `docs/PLANNING.md`, vérifications, commit, push, puis contrôle de GitHub Actions et du site.
    - L'intégration ne modifie pas la source. Un défaut constaté est consigné dans la story et signalé, pour être corrigé dans la source.
@@ -70,8 +72,9 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
   - Le dernier cours d'une série annonce la fin de la série au lieu d'un cours suivant, dans l'encadré final, le quiz et la check-list.
 - Les fichiers de travail (fragments, assemblage, scripts de vérification, captures) restent hors du dépôt.
 - Si un document de référence est fourni (polycopié, annales) :
-  - aligner les notations, les conventions de signe et les renvois de pages sur ce document ;
-  - signaler de façon neutre ses éventuelles erreurs ou ambiguïtés.
+  - aligner les notations et les conventions de signe sur ce document, sans le citer dans la page ;
+  - présenter une notation différente rencontrée ailleurs comme une « autre notation courante » ;
+  - consigner ses éventuelles erreurs ou ambiguïtés dans la fiche d'intégration, et donner dans le cours l'énoncé correct.
 
 ### Direction visuelle (identique pour toute une série)
 
@@ -96,7 +99,7 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
 2. **Sommaire collant** qui surligne la section en cours de lecture.
 3. **« Avant de commencer ».**
    - Le rappel du cours précédent en 3 cases.
-   - La correspondance avec le document de référence (s'il existe) et avec le sujet du planning (code IWE et intitulé).
+   - La correspondance avec le sujet du planning (code IWE et intitulé) et, si utile, avec le référentiel de l'IIW.
    - Pourquoi ce cours compte dans la pratique.
    - Le plan du cours.
 4. **5 à 7 chapitres**, chacun avec :
@@ -109,7 +112,9 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
    - Chaque sous-question a), b), c) est sur sa propre ligne.
    - La correction est masquée derrière « Voir la correction » et détaillée pas à pas, avec les unités.
 6. **Quiz interactif** de 12 questions à choix multiples, avec une explication pour chaque réponse et un score.
-7. **Fiche mémoire** : 9 cases (emoji, titre, formule clé, une phrase), puis une « visite du musée », une courte histoire qui enchaîne les 9 images dans l'ordre.
+7. **Fiche mémoire** : 9 cases (emoji, titre, formule clé, une phrase), puis une **fun fact** (encadré `fun`).
+   - Une anecdote vraie et vérifiée (histoire d'une découverte, expérience ou réaction surprenante) sur un mécanisme, un principe ou une notion du cours, avec un lien vers le chapitre concerné.
+   - Elle ne reprend pas une anecdote déjà racontée dans le cours ; son emoji et son titre forment l'« image à retenir » du cartouche de la fiche.
 8. **Glossaire** de tous les termes, symboles et sigles du cours.
 9. **Check-list** « suis-je prêt pour la suite ? » : 10 points, avec les cases cochées mémorisées dans le navigateur.
 10. **Annonce du cours suivant** (ou de la fin de la série), puis pied de page.
@@ -119,17 +124,18 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
 - Définir chaque symbole, sigle, abréviation et terme technique ou de jargon à sa première apparition dans chaque cours, même s'il a été défini dans un cours précédent. Cela inclut les notations mathématiques (∂, Σ, diag, transposée…).
 - Écrire la formule littérale avant les valeurs numériques, avec les unités partout et des ordres de grandeur.
 - Des visualisations pensées pour la mémoire photographique : une image forte par chapitre, des couleurs constantes, des schémas épurés.
-- Un ton ludique : analogies du quotidien, défis, quiz, musée mnémotechnique.
+- Un ton ludique : analogies du quotidien, défis, quiz, fun facts.
 
 ### Neutralité
 
 - Le site est public et les cours doivent pouvoir être partagés : aucune référence aux échanges de la conversation, à la situation personnelle de l'utilisateur, à ses délais ou à ses questions.
-- Les références aux documents sources sont formulées de façon neutre (« le polycopié… », « le cours de référence… »).
+- Aucune référence aux polycopiés ni aux supports de cours sources dans les pages publiées : texte, tableaux, quiz, glossaire, scripts et pied de page compris. Les normes, le référentiel de l'IIW et les ouvrages publiés peuvent être cités.
 
 ### Contrôle qualité d'un cours
 
 - Recalculer toutes les valeurs numériques : exercices, quiz, exemples des manipulations. Le défi doit pouvoir se rejouer dans la manipulation qui lui correspond.
 - Vérifier les formules, les conventions de signe, et la cohérence avec les cours précédents, le document de référence et le sujet du planning.
+- Vérifier qu'aucune mention des polycopiés ne subsiste, et que les dates, chiffres et noms de la fun fact sont confirmés par des sources fiables.
 - Tester la page dans un navigateur (Playwright via `uv run --group browser`) :
   - aucune erreur JavaScript, et toutes les manipulations fonctionnent ;
   - en mode clair et en mode sombre ;
