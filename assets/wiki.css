@@ -95,6 +95,19 @@ html.wiki-tiroir .wiki-panel { transform:none; visibility:visible; box-shadow:va
 .wiki-panel-search input { display:block; width:100%; min-height:38px; margin:0; padding:8px 10px 8px 35px; border:1px solid var(--wiki-rule); border-radius:9px; background:var(--wiki-surface); color:var(--wiki-ink); font:inherit; -webkit-appearance:none; appearance:none; }
 .wiki-panel-search input::placeholder { color:var(--wiki-muted); opacity:1; }
 .wiki-panel-search input:focus { border-color:var(--wiki-field); }
+/* Suggestions superposées à la navigation, défilables même avec le clavier mobile ouvert. */
+.wiki-suggestions { position:absolute; top:calc(100% + 6px); left:0; right:0; z-index:5; max-height:min(440px,60vh); max-height:min(440px,60dvh);
+  overflow-y:auto; overscroll-behavior:contain; scroll-padding-bottom:46px; border:1px solid var(--wiki-field); border-radius:10px; background:var(--wiki-surface); box-shadow:var(--wiki-shadow); }
+.wiki-panel-search .wiki-suggest-status { margin:0; padding:10px; color:var(--wiki-muted); font:12px/1.4 var(--wiki-font); }
+.wiki-panel-search .wiki-suggestions ul { list-style:none; padding:0; margin:0; }
+.wiki-panel-search .wiki-suggestions li { margin:0; padding:0; border-top:1px solid var(--wiki-rule); }
+.wiki-panel-search .wiki-suggest-link { display:block; padding:10px; color:var(--wiki-ink); text-decoration:none; overflow-wrap:anywhere; font:600 13px/1.4 var(--wiki-font); }
+.wiki-panel-search .wiki-suggest-link small { display:block; margin-top:4px; color:var(--wiki-muted); font:400 11px/1.45 var(--wiki-font); }
+.wiki-panel-search .wiki-suggest-link:hover, .wiki-panel-search .wiki-suggest-link[aria-selected="true"] { background:var(--wiki-active); box-shadow:inset 3px 0 var(--wiki-accent); }
+.wiki-panel-search .wiki-suggest-more { display:block; position:sticky; bottom:0; padding:12px 10px; border-top:1px solid var(--wiki-rule); background:var(--wiki-surface); color:var(--wiki-accent); font:650 12px/1.4 var(--wiki-font); text-decoration:none; }
+.wiki-panel-search .wiki-suggest-more:hover { text-decoration:underline; }
+.wiki-panel-search .wiki-suggest-more:focus-visible { outline-offset:-4px; }
+
 .wiki-panel-nav a { display:flex; align-items:center; gap:10px; padding:7px 10px; border-radius:8px; color:var(--wiki-ink); }
 .wiki-panel-nav a:hover { background:var(--wiki-hover); }
 .wiki-panel-nav a[aria-current="page"] { background:var(--wiki-active); font-weight:650; }

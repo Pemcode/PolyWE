@@ -324,3 +324,20 @@ Preuve TDD du 7 octobre 2026 : RED de `uv run --group browser pytest tests/brows
 Mesure sur les 153 manipulations des cours réels, nombre plus hautes que la fenêtre avant → après : 86 → 18 à 1280×800, 98 → 13 à 1366×768, 38 → 2 à 1440×900, 1 → 1 à 1920×1080 (hauteur médiane : 1,09 → 0,83 écran à 1366×768). Les dessins mesurés par les cours restent à l’échelle 1 après regroupement. Balayage des 43 pages publiées à 360, 390, 768, 1280 et 1440 px, en clair et en sombre : aucun débordement horizontal ni erreur JavaScript. Captures du panneau ouvert, du rail, du tiroir sur téléphone, de l’accueil, d’une matière, du planning et du jeu inspectées.
 
 Limites : la série Métallurgie garde sa largeur d’origine, ses figures s’allongeant avec la largeur ; les manipulations à deux schémas ou à matrices restent empilées ; quelques manipulations très riches en réglages dépassent encore un écran de 768 px de haut.
+
+## S22 — Suggestions de recherche pendant la saisie
+
+En tant qu’élève, je saisis le début d’une notion dans le panneau latéral et j’accède directement au cours ou au chapitre pertinent, sans devoir valider une recherche complète.
+
+- Dès le premier caractère, une liste propose au plus huit cours, sections ou applications publiés, avec leur contexte. Les titres et débuts de mots priment sur les mots-clés ; accents et casse sont ignorés, les fragments et recherches à plusieurs mots fonctionnent.
+- Un clic mène directement au cours ou à son ancre, depuis toute page, à la racine et sous un sous-chemin GitHub Pages. Un lien permet de voir tous les résultats ; Entrée sans sélection conserve la recherche complète.
+- Flèches haut/bas et Entrée permettent de choisir au clavier ; Échap ferme d’abord les suggestions, sans fermer le tiroir mobile. Effacement, sortie du champ et clic extérieur ferment la liste. Les états sont annoncés aux lecteurs d’écran.
+- Une réponse lente ne remplace pas une saisie plus récente ou effacée ; l’index est partagé avec la recherche complète et une erreur permet une nouvelle tentative à la saisie suivante.
+- Liste lisible en clair et sombre, sur téléphone et ordinateur, panneau ouvert ou replié ; aucun débordement horizontal. Soumission classique conservée sans JavaScript. Sources pédagogiques intactes.
+- Tests de parcours RED puis GREEN, suites utiles et build valides, contrôle visuel des pages réelles avant publication.
+
+Preuve TDD du 8 octobre 2026 : RED exécuté avec `uv run --group browser pytest tests/browser/test_search_suggestions.py -q -x` sur l’absence de liste de suggestions. GREEN après implémentation, puis ajout d’une régression repérée au contrôle visuel : une nouvelle saisie conservait le défilement précédent sur écran bas (RED : 2 échecs ; GREEN après remise en haut de la liste). Les 16 nouveaux parcours passent, à la racine et sous `/promo/` : fragments, accents, mots-clés, plusieurs termes, clavier, mobile, liens directs, recherche complète, cache partagé, panne de l’index et réponses tardives.
+
+Validation : 87 tests Python, 49 parcours Chromium du wiki, 25 tests Node et 34 parcours Chromium des applications ; catalogue et build valides (29 cours, 319 sections, 7 matières, 1 application). Le classement et le chargement de l’index sont partagés avec la recherche complète ; aucune dépendance ni service externe ajouté.
+
+QA du site réel sous `/PolyWE/` : 84 configurations sur six pages représentatives (accueil, planning, matière Brasage, cours Brasage 1, cours RDM 2, Mohr Forge), en clair et sombre, à 360, 390, 768, 1280, 1366 et 1440 px, plus un écran de 390 × 420 px. Saisie `bra`, recherche sans accents `capillarite`, huit propositions au maximum, parcours clavier complet, visibilité de l’option sélectionnée au-dessus du lien collant, fermeture, repli et réouverture du panneau vérifiés. Aucun débordement horizontal ni erreur JavaScript ou HTTP locale. Six captures inspectées ; les captures mobiles finales attendent la fin de l’animation du tiroir. Sources des cours, catalogue et planning inchangés ; le dossier local non suivi de soudage sous flux reste hors publication.

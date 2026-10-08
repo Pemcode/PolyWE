@@ -149,6 +149,8 @@ Placer **https://pemcode.github.io/PolyWE/** dans la description du groupe et é
 
 Toutes les pages s'organisent autour d'un panneau latéral : recherche, accueil, planning, matières et cours, parcours ; sur un cours, son sommaire avec la section en cours de lecture. Sur ordinateur, il se replie en rail d'icônes (état mémorisé) ; sur téléphone, le bouton **Menu** l'ouvre en tiroir. Sur un écran paysage assez large, les cours s'élargissent et chaque manipulation affiche son schéma à gauche, ses réglages à droite.
 
+La recherche du panneau propose dès la saisie jusqu’à huit cours, chapitres ou applications, avec des liens directs. Elle ignore les accents et la casse, accepte les débuts de mots et les fragments, et privilégie les titres pertinents. Utiliser les flèches puis **Entrée** pour choisir, **Échap** pour fermer les suggestions, ou **Voir tous les résultats** pour afficher la recherche complète.
+
 Dans le panneau d'un cours, **Partager** ouvre le menu de partage de l'appareil ; **Copier le lien** permet de coller l'adresse dans WhatsApp. **Partager cette section** cible directement le passage concerné. Le partage natif et la copie proposent un repli si le navigateur ne fournit pas l'API attendue. Les adresses restent valables quand le contenu d'un cours est mis à jour, à condition de conserver son `url` et ses ancres.
 
 Références de configuration : [uv](https://docs.astral.sh/uv/guides/projects/), [uv dans GitHub Actions](https://docs.astral.sh/uv/guides/integration/github/), [workflow GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).

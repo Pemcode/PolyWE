@@ -97,7 +97,7 @@ def test_subject_pages_open_courses_from_the_panel(site):
     nav.get_by_text("Thermique", exact=True).click()
     nav.get_by_role("link", name="Préchauffage", exact=True).click()
     expect(page).to_have_url(base + "Thermique/introduction.html")
-    search = page.locator("#wiki-panel").get_by_role("searchbox")
+    search = page.get_by_label("Rechercher dans le wiki", exact=True)
     search.fill("HAZ")
     search.press("Enter")
     expect(page.locator("#wiki-results li").first).to_be_visible()

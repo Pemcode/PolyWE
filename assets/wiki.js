@@ -8,6 +8,26 @@
     .replace(/t\s*8\s*\/?\s*5/g, "t85")
     .replace(/[σετγν]/g, char => ({"σ":" sigma ","ε":" epsilon ","τ":" tau ","γ":" gamma ","ν":" nu "})[char]);
 
+  // Un seul index par page, partagé entre suggestions et recherche complète.
+  let rowsPromise;
+  const getRows = () => rowsPromise ||= fetch(new URL("recherche.json", runtime.src))
+    .then(response => {
+      if (!response.ok) throw new Error("Index indisponible");
+      return response.json();
+    }).catch(error => { rowsPromise = null; throw error; });
+  const searchTerms = value => normalize(value).trim().split(/\s+/).filter(Boolean);
+  function findMatches(rows, terms, selected = "") {
+    return rows.filter(row => !selected || row.matiere === selected).map(row => {
+      const title = normalize(row.titre), course = normalize(row.cours);
+      const words = title.split(/[^\p{L}\p{N}]+/u);
+      const all = normalize([row.titre, row.cours, row.matiere_titre, ...row.mots_cles, ...row.ressources].join(" "));
+      if (!terms.every(term => all.includes(term))) return null;
+      const score = terms.reduce((sum, term) => sum + (title === term ? 60 : title.startsWith(term) ? 30
+        : words.some(word => word.startsWith(term)) ? 20 : title.includes(term) ? 12 : course.includes(term) ? 3 : 1), row.type === "cours" ? 1 : 0);
+      return {row, score};
+    }).filter(Boolean).sort((a, b) => b.score - a.score || a.row.titre.localeCompare(b.row.titre, "fr", {numeric: true}));
+  }
+
   if (form && runtime) {
     const query = document.getElementById("wiki-query");
     const subject = document.getElementById("wiki-subject-filter");
@@ -17,18 +37,12 @@
     query.value = params.get("q") || "";
     subject.value = params.get("matiere") || "";
     if (subject.selectedIndex < 0) subject.value = "";
-    let rowsPromise;
     let revision = 0;
     let debounce;
-    const getRows = () => rowsPromise ||= fetch(new URL("recherche.json", runtime.src))
-      .then(response => {
-        if (!response.ok) throw new Error("Index indisponible");
-        return response.json();
-      }).catch(error => { rowsPromise = null; throw error; });
 
     async function search() {
       const call = ++revision;
-      const terms = normalize(query.value).trim().split(/\s+/).filter(Boolean);
+      const terms = searchTerms(query.value);
       const selected = subject.value;
       const url = new URL(location.href);
       query.value.trim() ? url.searchParams.set("q", query.value.trim()) : url.searchParams.delete("q");
@@ -43,15 +57,7 @@
       try {
         const rows = await getRows();
         if (call !== revision) return;
-        const matches = rows.filter(row => !selected || row.matiere === selected)
-          .map(row => {
-            const title = normalize(row.titre);
-            const course = normalize(row.cours);
-            const all = normalize([row.titre, row.cours, row.matiere_titre, ...row.mots_cles, ...row.ressources].join(" "));
-            if (!terms.every(term => all.includes(term))) return null;
-            const score = terms.reduce((sum, term) => sum + (title.includes(term) ? 10 : course.includes(term) ? 3 : 1), 0);
-            return {row, score};
-          }).filter(Boolean).sort((a, b) => b.score - a.score || a.row.titre.localeCompare(b.row.titre, "fr"));
+        const matches = findMatches(rows, terms, selected);
         status.textContent = matches.length ? `${matches.length} résultat${matches.length > 1 ? "s" : ""}.` : "Aucun résultat. Essayez un autre mot ou une autre matière.";
         const fragment = document.createDocumentFragment();
         for (const {row} of matches) {
@@ -93,6 +99,124 @@
   const fold = panel.querySelector('[data-wiki-panel="fold"]');
   const query = document.getElementById("wiki-panel-query");
   if (query && form) query.value = new URL(location.href).searchParams.get("q") || "";
+  if (query && runtime) {
+    const searchForm = query.form;
+    const popup = document.createElement("div");
+    popup.className = "wiki-suggestions";
+    popup.hidden = true;
+    const hint = document.createElement("p");
+    hint.id = "wiki-suggest-status";
+    hint.className = "wiki-suggest-status";
+    hint.setAttribute("role", "status");
+    const list = document.createElement("ul");
+    list.id = "wiki-suggest-list";
+    list.setAttribute("role", "listbox");
+    list.setAttribute("aria-label", "Suggestions de recherche");
+    const more = document.createElement("a");
+    more.className = "wiki-suggest-more";
+    more.textContent = "Voir tous les résultats →";
+    popup.append(hint, list, more);
+    searchForm.append(popup);
+    query.setAttribute("role", "combobox");
+    query.setAttribute("aria-autocomplete", "list");
+    query.setAttribute("aria-controls", list.id);
+    query.setAttribute("aria-expanded", "false");
+    query.setAttribute("aria-busy", "false");
+    let revision = 0, active = -1, options = [];
+
+    function closeSuggestions() {
+      ++revision;
+      popup.hidden = true;
+      query.setAttribute("aria-expanded", "false");
+      query.setAttribute("aria-busy", "false");
+      query.removeAttribute("aria-activedescendant");
+      active = -1;
+    }
+    function choose(index) {
+      active = index;
+      options.forEach((option, i) => option.setAttribute("aria-selected", String(i === active)));
+      query.setAttribute("aria-activedescendant", options[active].id);
+      options[active].scrollIntoView({block: "nearest"});
+    }
+    async function suggest() {
+      const terms = searchTerms(query.value);
+      if (!terms.length) { closeSuggestions(); return; }
+      const call = ++revision;
+      active = -1;
+      options = [];
+      list.replaceChildren();
+      query.removeAttribute("aria-activedescendant");
+      const url = new URL(searchForm.action);
+      url.searchParams.set("q", query.value.trim());
+      more.href = url.href;
+      popup.hidden = false;
+      query.setAttribute("aria-expanded", "true");
+      query.setAttribute("aria-busy", "true");
+      hint.textContent = "Recherche…";
+      try {
+        const matches = findMatches(await getRows(), terms);
+        if (call !== revision) return;
+        // Éviter qu’un seul cours et ses nombreux chapitres occupent toute la liste.
+        const perCourse = new Map();
+        const suggestions = matches.filter(({row}) => {
+          if (row.type !== "section") return true;
+          const count = perCourse.get(row.cours_id) || 0;
+          perCourse.set(row.cours_id, count + 1);
+          return count < 2;
+        }).slice(0, 8);
+        for (const {row} of suggestions) {
+          const item = document.createElement("li");
+          item.setAttribute("role", "presentation");
+          const link = document.createElement("a");
+          link.className = "wiki-suggest-link";
+          link.id = `wiki-suggestion-${options.length}`;
+          link.href = new URL(row.url, new URL("../", runtime.src)).href;
+          link.setAttribute("role", "option");
+          link.setAttribute("aria-selected", "false");
+          link.tabIndex = -1;
+          const label = document.createElement("span");
+          label.textContent = row.titre;
+          const context = document.createElement("small");
+          const type = row.type === "section" ? "Chapitre / section" : row.type === "application" ? "Application" : "Cours complet";
+          context.textContent = ` · ${type} · ${row.type === "section" ? row.cours : row.matiere_titre}`;
+          link.append(label, context);
+          item.append(link);
+          list.append(item);
+          options.push(link);
+        }
+        popup.scrollTop = 0;
+        hint.textContent = suggestions.length ? `${suggestions.length} suggestion${suggestions.length > 1 ? "s" : ""} · ↑ ↓ pour choisir`
+          : "Aucun résultat. Essayez un autre mot.";
+      } catch {
+        if (call === revision) hint.textContent = "Recherche indisponible. Réessayez ou parcourez les matières.";
+      } finally {
+        if (call === revision) query.setAttribute("aria-busy", "false");
+      }
+    }
+    query.addEventListener("input", suggest);
+    query.addEventListener("focus", suggest);
+    query.addEventListener("keydown", event => {
+      if (event.isComposing) return;
+      if (event.key === "Escape" && !popup.hidden) {
+        event.preventDefault(); event.stopPropagation(); closeSuggestions();
+      } else if ((event.key === "ArrowDown" || event.key === "ArrowUp") && options.length && !popup.hidden) {
+        event.preventDefault();
+        choose(active < 0 ? (event.key === "ArrowDown" ? 0 : options.length - 1)
+          : (active + (event.key === "ArrowDown" ? 1 : -1) + options.length) % options.length);
+      } else if (event.key === "Enter" && active >= 0 && !popup.hidden) {
+        event.preventDefault(); options[active].click();
+      }
+    });
+    searchForm.addEventListener("focusout", event => {
+      if (!searchForm.contains(event.relatedTarget)) closeSuggestions();
+    });
+    document.addEventListener("pointerdown", event => {
+      if (!searchForm.contains(event.target)) closeSuggestions();
+    });
+    list.addEventListener("click", closeSuggestions);
+    docked.addEventListener("change", closeSuggestions);
+  }
+
   const syncFold = () => fold?.setAttribute("aria-expanded", String(!root.classList.contains("wiki-replie")));
   syncFold();
 
