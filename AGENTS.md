@@ -44,6 +44,7 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
 6. **Intégrer et publier**, selon « Stories et TDD » et « Routine de réception des supports ».
    - Étapes : story, test de parcours RED puis GREEN, `wiki ajouter` avec des métadonnées explicites, liens du planning et `docs/PLANNING.md`, vérifications, commit, push, puis contrôle de GitHub Actions et du site.
    - L'intégration ne modifie pas la source. Un défaut constaté est consigné dans la story et signalé, pour être corrigé dans la source.
+   - Vérifier au navigateur la page construite dans `_site` : panneau latéral ouvert et replié, tiroir « Menu » sur téléphone, lecture paysage à 1366 × 768 (chaque manipulation tient sur la hauteur de l'écran).
 7. **Corriger ensuite.** Modifier la source en place, en conservant son nom, ses ancres et ses clés de stockage, puis republier.
 
 ## Rédaction des cours
@@ -70,6 +71,9 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
   - Les clés de stockage du navigateur sont préfixées par la matière (`<matière>-coursN-check`, `<matière>-theme`), car toutes les pages du site partagent la même origine.
   - Pas de lien vers un autre fichier de `Cours/` : la navigation entre cours vient du catalogue. Tout fichier annexe doit être signalé dans la fiche d'intégration.
   - Le dernier cours d'une série annonce la fin de la série au lieu d'un cours suivant, dans l'encadré final, le quiz et la check-list.
+  - Le générateur entoure chaque cours publié du panneau latéral du wiki (recherche, matières, cours voisins, sommaire du cours). La page n'ajoute ni bandeau fixe en haut ni navigation entre cours. Son sommaire collant reste un `<nav class="toc">` : le wiki le masque quand son panneau est ouvert, et il sert sur téléphone et hors ligne.
+  - Les manipulations suivent la structure qui permet la lecture paysage (écran d'au moins 1280 px, plus large que haut) : un `<div class="lab">` contenant, dans l'ordre, le titre `.lab-h`, la consigne `.lab-sub`, puis les boutons `.btns`, les réglages `.ctrl`, **un seul** `<svg>` enfant direct, les lectures `.readout` et le commentaire `.status`. Le wiki place alors le schéma, les lectures et le commentaire à gauche, les boutons et réglages à droite. Une manipulation à plusieurs schémas reste empilée.
+  - Le script d'une manipulation ne dépend pas de la place de ses éléments dans le `.lab`, que le wiki regroupe : il les sélectionne par `id`. Le dessin se calcule sur la largeur mesurée du SVG, reste lisible dès 600 px de large et se redessine au redimensionnement.
 - Les fichiers de travail (fragments, assemblage, scripts de vérification, captures) restent hors du dépôt.
 - Si un document de référence est fourni (polycopié, annales) :
   - aligner les notations et les conventions de signe sur ce document, sans le citer dans la page ;
@@ -90,6 +94,7 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
   - les encadrés « métier » en bronze.
 - Mode clair et mode sombre.
 - Responsive, sans aucun débordement horizontal sur téléphone : les formules passent à la ligne, les tableaux et formules larges défilent dans leur propre cadre.
+- Sur ordinateur portable en paysage (1366 × 768), une manipulation tient sur un écran : schéma et réglages visibles ensemble, sans défiler. Viser des schémas plus larges que hauts.
 
 ### Structure de chaque page
 
@@ -139,7 +144,8 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
 - Tester la page dans un navigateur (Playwright via `uv run --group browser`) :
   - aucune erreur JavaScript, et toutes les manipulations fonctionnent ;
   - en mode clair et en mode sombre ;
-  - sans débordement aux largeurs 360, 390, 768 et 1280 px ;
+  - sans débordement aux largeurs 360, 390, 768, 1280 et 1440 px ;
+  - pour un cours déjà au catalogue, aussi dans le site construit : panneau ouvert et replié, et lecture paysage à 1366 × 768 ;
   - aucun texte de SVG ne sort de son cadre ni n'est tronqué, à chaque largeur et pour les réglages extrêmes des manipulations : comparer la boîte de chaque `<text>` au `viewBox` ;
   - contrôle visuel des schémas : étiquettes lisibles, rien ne se chevauche.
 - Livrer, puis faire le résumé court et la fiche d'intégration (étape 5 du cycle).
