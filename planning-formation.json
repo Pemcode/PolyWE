@@ -297,7 +297,17 @@
       "titre": "Arc submergé",
       "theme": "procedes",
       "code": "1.10",
-      "supports": []
+      "supports": [
+        {
+          "cours": "arc-submerge-01"
+        },
+        {
+          "cours": "arc-submerge-02"
+        },
+        {
+          "cours": "arc-submerge-03"
+        }
+      ]
     },
     {
       "id": "1-2-soudage-chalumeau",

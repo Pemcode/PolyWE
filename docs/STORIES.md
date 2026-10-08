@@ -341,3 +341,23 @@ Preuve TDD du 8 octobre 2026 : RED exécuté avec `uv run --group browser pytest
 Validation : 87 tests Python, 49 parcours Chromium du wiki, 25 tests Node et 34 parcours Chromium des applications ; catalogue et build valides (29 cours, 319 sections, 7 matières, 1 application). Le classement et le chargement de l’index sont partagés avec la recherche complète ; aucune dépendance ni service externe ajouté.
 
 QA du site réel sous `/PolyWE/` : 84 configurations sur six pages représentatives (accueil, planning, matière Brasage, cours Brasage 1, cours RDM 2, Mohr Forge), en clair et sombre, à 360, 390, 768, 1280, 1366 et 1440 px, plus un écran de 390 × 420 px. Saisie `bra`, recherche sans accents `capillarite`, huit propositions au maximum, parcours clavier complet, visibilité de l’option sélectionnée au-dessus du lien collant, fermeture, repli et réouverture du panneau vérifiés. Aucun débordement horizontal ni erreur JavaScript ou HTTP locale. Six captures inspectées ; les captures mobiles finales attendent la fin de l’animation du tiroir. Sources des cours, catalogue et planning inchangés ; le dossier local non suivi de soudage sous flux reste hors publication.
+
+## S23 — Réviser le soudage à l’arc sous flux
+
+En tant qu’élève, je retrouve les trois premiers cours d’arc submergé depuis la matière, le panneau latéral, le planning et la recherche assistée.
+
+- Nouvelle matière « Soudage à l’arc sous flux (arc submergé) », cours `arc-submerge-01` à `arc-submerge-03` : procédé 12 et installation ; flux, fils et métal déposé ; paramètres et forme du cordon.
+- URL stables sous `ArcSubmerge/`, progression 1 ↔ 2 ↔ 3, prérequis conseillés issus des en-têtes, sections indexées et partageables.
+- Rattachement au sujet `1-10-arc-submerge` (IWE 1.10), sans changer les séances ni les autorisations des PDF. Documentation du planning actualisée.
+- Sources livrées conservées à l’identique : ancres, scripts, clés de stockage. Le quatrième cours annoncé n’est pas présenté comme disponible. Les défauts éventuellement constatés sont consignés ici pour correction dans les sources.
+- Parcours RED puis GREEN, tests et build valides ; QA des trois cours en clair et sombre, sur téléphone et en paysage, panneau ouvert et replié ; commit, push, contrôle de GitHub Actions et du site public.
+
+Aucune fiche d’intégration séparée présente : métadonnées tirées des en-têtes et chapitres, sujet confirmé par `wiki sujets "1.10"`. Cette intégration ne constitue pas une nouvelle validation scientifique du contenu.
+
+Preuve TDD du 8 octobre 2026 : RED exécuté avec `uv run pytest tests/test_content.py -q -k arc_submerge` sur l’absence des trois pages publiées. GREEN après inscription par `wiki ajouter` et renseignement des métadonnées. Le parcours vérifie les liens depuis l’accueil, la matière et le planning, les six chapitres de chaque cours dans la recherche, les prérequis, les cours voisins, la conservation des scripts et ancres, et l’absence de quatrième cours disponible. Aucun changement du générateur.
+
+Validation locale : 88 tests Python et 49 parcours Chromium du wiki réussis ; catalogue et build valides (32 cours, 355 sections, 8 matières, 1 application). Les séances et les autorisations des PDF sont inchangées.
+
+QA des trois cours construits sous `/PolyWE/` : 18 animations, 36 questions de quiz et remise à zéro, cases et thème mémorisés après rechargement, copie et partage de section simulés, navigation depuis la matière et la semaine 41, suggestions `SAW` et `basicite` vers les nouveaux supports. Modes clair et sombre aux largeurs 360, 390, 768, 1280, 1366 et 1440 px ; tiroir mobile, panneau ouvert et replié vérifiés. Les 8 904 états contrôlés (réglages initiaux, extrêmes individuels et simultanés des curseurs, préréglages et leurs extrêmes) ne présentent aucun débordement horizontal, aucune valeur indéfinie et aucun texte SVG hors viewBox avec une tolérance de 2 unités. Aucune erreur JavaScript ou HTTP locale. Les 18 manipulations tiennent dans la hauteur de 768 px en paysage à 1366 px de large. Captures des 18 manipulations et des trois en-têtes mobiles sombres inspectées ; empreintes SHA-256 des sources inchangées.
+
+Défaut graphique mineur de la source à corriger par l’auteur : cours 1, manipulation 1, la fin de la légende « aspiration du flux non fondu » est partiellement masquée par le tube contact à 1366 × 768. Le dessin et ses réglages restent utilisables ; la source est conservée à l’identique. Le quatrième cours annoncé dans les pages reste à livrer.

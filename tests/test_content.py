@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 
 from conftest import copy_real_project
-from wiki.build import build
+from wiki.build import build, link
 from wiki.catalogue import CourseHTML
 
 
@@ -337,4 +337,53 @@ def test_electrode_enrobee_series_is_reachable_and_preserves_sources(tmp_path):
         for prerequisite in prerequisites:
             assert Path(urls[prerequisite-1]).name in page(urls[n-1]).links
     assert not any(row["cours_id"] == "electrode-enrobee-05" for row in index)
+    assert not (output / "Cours").exists()
+
+
+def test_arc_submerge_series_is_reachable_and_preserves_sources(tmp_path):
+    data, plan = copy_real_project(tmp_path, planning=True)
+    output = build(tmp_path)
+    urls = ["ArcSubmerge/01-procede-12-installation.html",
+            "ArcSubmerge/02-flux-fils-metal-depose.html",
+            "ArcSubmerge/03-parametres-forme-cordon.html"]
+    assert all((output / url).is_file() for url in urls), "Les trois cours d’arc submergé doivent être publiés."
+
+    def page(path):
+        parsed = CourseHTML()
+        parsed.feed((output / path).read_text(encoding="utf-8"))
+        return parsed
+
+    subject = "matieres/arc-submerge.html"
+    assert subject in page("index.html").links
+    courses = {c["id"]: c for c in data["cours"]}
+    topic = next(t for t in plan["sujets"] if t["id"] == "1-10-arc-submerge")
+    index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    for n, url in enumerate(urls, 1):
+        ident = f"arc-submerge-{n:02}"
+        assert "../" + url in page(subject).links
+        assert url in page("planning.html").links
+        assert {"cours": ident} in topic["supports"]
+        for anchor in ("c1", "c2", "c3", "c4", "c5", "c6"):
+            assert any(row["cours_id"] == ident and row["type"] == "section"
+                       and row["url"] == url + "#" + anchor for row in index)
+        course_rows = [row for row in index if row["cours_id"] == ident]
+        assert all("sous flux" in row["mots_cles"] and "SAW" in row["mots_cles"] for row in course_rows)
+        source_path = courses[ident]["fichier"]
+        source_bytes = (tmp_path / source_path).read_bytes()
+        assert source_bytes == (Path(__file__).resolve().parents[1] / source_path).read_bytes()
+        source = source_bytes.decode("utf-8-sig")
+        parsed = CourseHTML()
+        parsed.feed(source)
+        assert parsed.ids <= page(url).ids
+        scripts = re.findall(r"<script\b[^>]*>.*?</script>", source, flags=re.S)
+        published = (output / url).read_text(encoding="utf-8")
+        assert scripts and all(script in published for script in scripts)
+        for prerequisite in courses[ident]["prerequis_conseilles"]:
+            assert link(url, courses[prerequisite]["url"]) in page(url).links
+    for previous, following in zip(urls, urls[1:]):
+        assert Path(following).name in page(previous).links
+        assert Path(previous).name in page(following).links
+    assert courses["arc-submerge-02"]["prerequis_conseilles"] == ["arc-submerge-01"]
+    assert {"arc-submerge-01", "arc-submerge-02"} <= set(courses["arc-submerge-03"]["prerequis_conseilles"])
+    assert not any(row["cours_id"] == "arc-submerge-04" for row in index)
     assert not (output / "Cours").exists()

@@ -46,6 +46,8 @@ Les quatre cours de brasage (`brasage-01` à `brasage-04`) sont rattachés au su
 
 Les quatre premiers cours de soudage à l’électrode enrobée (`electrode-enrobee-01` à `electrode-enrobee-04`) sont rattachés au sujet `1-9-soudage-a-lelectrode-enrobee`. Ils couvrent le procédé 111 et le poste, les réglages de l’arc, la fabrication et la conservation des électrodes, puis la préparation et l’exécution des soudures. Les séances existantes proposent la série sans affectation artificielle par heure. Le cinquième cours annoncé dans les sources reste indisponible tant qu’il n’est pas livré.
 
+Les trois premiers cours de soudage à l’arc sous flux (`arc-submerge-01` à `arc-submerge-03`) sont rattachés au sujet `1-10-arc-submerge` (IWE 1.10 « Arc submergé »), prévu le 7 octobre 2026. Ils couvrent le procédé 12 et son installation, les flux et fils ainsi que le métal déposé, puis l’influence des paramètres sur la forme du cordon. La séance propose ces trois supports sans répartition artificielle par heure. Le quatrième cours annoncé dans les sources reste indisponible tant qu’il n’est pas livré.
+
 | Examen indiqué | Date | Horaire |
 | --- | --- | --- |
 | Procédés | 17 décembre 2026 | 10 h 15–12 h |

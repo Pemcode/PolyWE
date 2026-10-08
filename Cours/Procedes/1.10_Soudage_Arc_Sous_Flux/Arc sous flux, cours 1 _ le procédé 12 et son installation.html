@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arc sous flux, cours 1 : le procédé 12 et son installation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F6F9; --paper-2:#E6ECF2; --card:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#C5CFD9;
+  --grid:rgba(40,90,160,.075);
+  --sig:#CF2438; --tau:#8A34B6; --eps:#1B5ED3; --gam:#06849A; --frc:#D46A00; --mat:#26844A; --weld:#9A5B12;
+  --ok:#26844A; --warn:#B86E00; --bad:#C62828;
+  --lv2:#E4EBF2; --hl:#FFF3B0;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-head:"Barlow Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+  --font-math:"STIX Two Text","Cambria Math","Cambria","Times New Roman",serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+    --grid:rgba(120,160,220,.07);
+    --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+    --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+  --grid:rgba(120,160,220,.07);
+  --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+  --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+  color-scheme: dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;color:var(--ink);font-family:var(--font-body);font-size:17.5px;line-height:1.62;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;overflow-x:hidden;
+}
+img,svg{max-width:100%}
+.wrap{max-width:800px;margin:0 auto;padding:0 20px}
+.wide{max-width:980px}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.1;margin:0}
+h3{font-size:1.65rem;font-weight:600;margin:2rem 0 .6rem}
+h4{font-size:1.3rem;font-weight:600;margin:1.4rem 0 .4rem}
+p{margin:.7em 0}
+a{color:var(--eps)}
+b,strong{font-weight:700}
+small{font-size:.8em}
+sub{font-size:.72em}
+.m{font-family:var(--font-math);font-size:1.08em;white-space:nowrap}
+.sig{color:var(--sig)} .tau{color:var(--tau)} .eps{color:var(--eps)} .gam{color:var(--gam)} .frc{color:var(--frc)} .mat{color:var(--mat)} .mut{color:var(--muted)} .wcol{color:var(--weld)}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .12em;line-height:1.1}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .2em .08em}
+.frac>span:last-child{padding:.08em .2em 0}
+ul,ol{padding-left:1.4em}
+li{margin:.25em 0}
+
+/* ---------- en-tête ---------- */
+.hero{padding:34px 0 10px}
+.title-block{border:2.5px solid var(--ink);background:var(--card);display:grid;grid-template-columns:1fr 300px}
+.tb-main{padding:22px 24px;border-right:2.5px solid var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.tb-series{margin:0 0 .5rem;color:var(--muted);font-size:.95rem}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:700;letter-spacing:-.01em}
+.tb-cells{display:grid;grid-template-rows:repeat(4,auto)}
+.tb-cells>div{padding:9px 16px;border-bottom:1.5px solid var(--ink);display:flex;flex-direction:column;justify-content:center}
+.tb-cells>div:last-child{border-bottom:0}
+.tb-cells small{color:var(--muted);font-size:.78rem}
+.tb-cells b{font-family:var(--font-head);font-size:1.25rem;font-weight:600;line-height:1.15}
+.lede{font-size:1.13rem;max-width:760px;margin:1.2rem 0}
+.theme-btn{align-self:flex-start;font-family:var(--font-body);font-size:.85rem;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
+@media (max-width:760px){.title-block{grid-template-columns:1fr}.tb-main{border-right:0;border-bottom:2.5px solid var(--ink)}.tb-cells{grid-template-rows:none;grid-template-columns:1fr 1fr}.tb-cells>div:nth-child(odd){border-right:1.5px solid var(--ink)}.tb-cells>div:nth-child(3){border-bottom:0}}
+@media (max-width:420px){.tb-cells{grid-template-columns:1fr}.tb-cells>div:nth-child(odd){border-right:0}.tb-cells>div:nth-child(3){border-bottom:1.5px solid var(--ink)}}
+
+/* code couleur */
+.cc{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin:1rem 0 .4rem}
+.cc-box{background:var(--card);border:2px solid var(--line);padding:12px 14px;border-radius:4px}
+.cc-cause{border-color:var(--sig)} .cc-link{border-color:var(--mat)} .cc-eff{border-color:var(--eps)}
+.cc-box small{display:block;color:var(--muted);font-size:.82rem;line-height:1.3}
+.cc-syms{font-family:var(--font-math);font-size:1.7rem;line-height:1.25;display:flex;flex-wrap:wrap;gap:.1em .45em;margin:.2rem 0}
+.cc-box p{margin:0;font-size:.9rem;line-height:1.35}
+.cc-arrow{align-self:center;font-size:1.8rem;color:var(--muted)}
+@media (max-width:700px){.cc{grid-template-columns:1fr}.cc-arrow{transform:rotate(90deg);justify-self:center;line-height:1}}
+.cc-more{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.5rem 0}
+.cc-more>div{border:2px solid var(--line);background:var(--card);border-radius:4px;padding:6px 10px;font-size:.9rem}
+@media (max-width:640px){.cc-more{grid-template-columns:1fr}}
+
+/* ---------- sommaire ---------- */
+.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1.5px solid var(--line);padding-top:env(safe-area-inset-top,0px);margin-top:18px}
+.toc-in{display:flex;gap:6px;overflow-x:auto;padding:9px 20px;max-width:980px;margin:0 auto;scrollbar-width:thin}
+.toc a{flex:none;text-decoration:none;color:var(--ink);font-size:.88rem;padding:4px 11px;border:1.5px solid var(--line);border-radius:999px;background:var(--card);white-space:nowrap}
+.toc a.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.toc a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--eps);outline-offset:2px}
+
+/* ---------- sections ---------- */
+section.chap{padding:46px 0 10px}
+.cartouche{display:grid;grid-template-columns:86px 1fr 250px;border:2.5px solid var(--ink);background:var(--card);margin-bottom:1.4rem}
+.c-num{font-family:var(--font-head);font-size:3.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;border-right:2.5px solid var(--ink)}
+.c-title{padding:14px 18px;border-right:2.5px solid var(--ink)}
+.c-title h2{font-size:2.1rem;font-weight:700}
+.c-title p{margin:.25rem 0 0;color:var(--muted)}
+.c-img{padding:12px 14px;display:flex;gap:12px;align-items:center;background:var(--paper-2)}
+.c-img .ico{font-size:2.3rem;line-height:1}
+.c-img small{display:block;color:var(--muted);font-size:.78rem}
+.c-img span{font-size:.95rem;line-height:1.3}
+@media (max-width:700px){.cartouche{grid-template-columns:64px 1fr}.c-num{font-size:2.6rem}.c-title{border-right:0}.c-img{grid-column:1/-1;border-top:2px solid var(--ink)}.c-title h2{font-size:1.7rem}}
+
+/* niveaux */
+.lv{margin:1.2rem 0;padding:6px 22px 14px;border-radius:4px}
+.lv1{background:var(--card);border:2px solid var(--ink)}
+.lv2{background:var(--lv2);border-left:6px solid var(--ink)}
+.lv-h{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-family:var(--font-head);font-size:1.35rem;font-weight:600;margin:10px 0 4px}
+.lv-h .tag{font-size:.95rem;font-family:var(--font-body);font-weight:400;color:var(--muted)}
+@media (max-width:520px){.lv{padding:6px 14px 12px}}
+
+/* formules et encadrés */
+.fx{margin:1.1rem auto;background:var(--card);border:2.5px solid var(--ink);padding:14px 18px;max-width:600px;text-align:center;border-radius:3px;overflow-x:auto}
+.fx .big{font-family:var(--font-math);font-size:1.9rem;line-height:1.4}
+.fx .cap{font-size:.85rem;color:var(--muted);margin:.3rem 0 0}
+.fx .row{display:flex;flex-wrap:wrap;justify-content:center;gap:.2em 1.4em}
+.syms{margin:.6rem 0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;align-items:baseline}
+.syms dt{font-family:var(--font-math);font-size:1.25rem;text-align:right;white-space:nowrap}
+.syms dd{margin:0}
+.def{margin:.9rem 0;padding:.5rem .9rem;border-left:3px dotted var(--muted);font-size:.96rem;background:color-mix(in srgb,var(--card) 60%,transparent)}
+.def>b:first-child{font-family:var(--font-head);font-size:1.08rem;font-weight:600}
+.tip{margin:1rem 0;padding:.7rem 1rem;border:1.5px dashed var(--mat);border-radius:4px;font-size:.97rem}
+.warn{margin:1rem 0;padding:.7rem 1rem;border:2px solid var(--bad);border-radius:4px;font-size:.97rem;background:color-mix(in srgb,var(--bad) 7%,transparent)}
+.mnemo{margin:1rem 0;padding:.7rem 1rem;background:var(--hl);border-radius:4px;font-size:.98rem}
+.fun{margin:1.2rem 0;padding:.8rem 1rem;border:2px dashed var(--muted);border-radius:10px;background:var(--card);font-size:.98rem}
+.fun-h{display:block;margin-bottom:.35rem;font-family:var(--font-head);font-size:1.15rem;font-weight:600;letter-spacing:.02em}
+.meta{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--frc);border-radius:4px;background:color-mix(in srgb,var(--frc) 6%,transparent)}
+.weld{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--weld);border-radius:4px;background:color-mix(in srgb,var(--weld) 7%,transparent)}
+.weld>b:first-child{font-family:var(--font-head);font-size:1.15rem;font-weight:600;color:var(--weld)}
+.hp{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:9px;background:var(--weld);color:var(--card);vertical-align:middle;margin-left:4px;white-space:nowrap}
+.recall{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
+.recall>div{background:var(--card);border:1.5px solid var(--line);border-radius:4px;padding:8px 12px;font-size:.92rem}
+.recall .f{font-family:var(--font-math);font-size:1.2rem;margin-bottom:.2rem}
+@media (max-width:640px){.recall{grid-template-columns:1fr}}
+.hist{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1rem 0}
+.hist>div{background:var(--card);border:1.5px solid var(--weld);border-radius:4px;padding:8px 12px;font-size:.93rem}
+.hist .yr{font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--weld);line-height:1}
+@media (max-width:720px){.hist{grid-template-columns:1fr}}
+
+/* manipulations */
+.lab{background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:14px 16px 12px;margin:1.4rem 0}
+.lab-h{font-family:var(--font-head);font-size:1.3rem;font-weight:600;margin:0 0 .2rem}
+.lab-sub{margin:0 0 .6rem;color:var(--muted);font-size:.92rem}
+.lab svg{display:block;width:100%;height:auto;color:var(--ink);font-family:var(--font-body);touch-action:pan-y}
+.ctrl{display:grid;grid-template-columns:minmax(110px,auto) 1fr minmax(92px,auto);gap:4px 12px;align-items:center;margin:.5rem 0}
+.ctrl label{font-size:.95rem}
+.ctrl output{font-family:var(--font-math);font-size:1.08rem;text-align:right;white-space:nowrap}
+@media (max-width:520px){.ctrl{grid-template-columns:1fr auto}.ctrl input[type=range]{grid-column:1/-1;grid-row:2}}
+input[type=range]{width:100%;accent-color:var(--ink);height:28px;margin:0}
+input.r-sig{accent-color:var(--sig)} input.r-tau{accent-color:var(--tau)} input.r-frc{accent-color:var(--frc)} input.r-mat{accent-color:var(--mat)} input.r-eps{accent-color:var(--eps)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0}
+.btn{font-family:var(--font-body);font-size:.9rem;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 13px;cursor:pointer;line-height:1.3}
+.btn:hover{background:var(--paper-2)}
+.btn.on{background:var(--ink);color:var(--paper)}
+.btn.play{border-color:var(--eps);color:var(--eps);font-weight:700}
+.btn:disabled{opacity:.45;cursor:default}
+.readout{font-family:var(--font-math);font-size:1.08rem;background:var(--paper-2);border-radius:4px;padding:.5rem .8rem;margin:.5rem 0;overflow-x:auto;display:flex;flex-wrap:wrap;gap:.2em 1.3em}
+.readout>span{white-space:nowrap}
+.status{font-size:.97rem;margin:.5rem 0;padding:.5rem .8rem;border-left:4px solid var(--eps);background:color-mix(in srgb,var(--eps) 6%,transparent);border-radius:0 4px 4px 0;min-height:2.6em}
+.radios{display:flex;flex-wrap:wrap;gap:6px 14px;margin:.4rem 0;font-size:.95rem}
+.radios label{display:inline-block;cursor:pointer}
+.radios input{margin:0 6px 0 0;vertical-align:middle}
+
+/* svg */
+svg text{fill:currentColor;font-size:13px}
+svg .lbl{font-size:12.5px;fill:var(--muted)}
+svg .mth{font-family:var(--font-math);font-size:16px}
+svg .ttl{font-family:var(--font-head);font-size:15px;font-weight:600}
+svg .axis{stroke:var(--ink);stroke-width:1.4;fill:none}
+svg .tick{stroke:var(--muted);stroke-width:1}
+svg .gridbg{stroke:var(--line);stroke-width:1}
+svg .ref{stroke:var(--muted);stroke-width:1.3;stroke-dasharray:4 3;fill:none}
+.arr line{stroke:currentColor}
+.arr polygon{fill:currentColor}
+
+/* tableaux */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;-webkit-overflow-scrolling:touch}
+table.data{border-collapse:collapse;width:100%;font-size:.94rem;background:var(--card)}
+table.data th,table.data td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:middle}
+table.data th{font-family:var(--font-head);font-weight:600;font-size:1.05rem;background:var(--paper-2)}
+table.data td.n{font-family:var(--font-math);white-space:nowrap}
+table.data tr.now td{background:var(--hl)}
+
+/* parcours */
+.route{list-style:none;padding:0;margin:1rem 0;position:relative}
+.route::before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:4px;background:var(--line);border-radius:2px}
+.route li{position:relative;padding:0 0 14px 52px;margin:0}
+.route li .dot{position:absolute;left:4px;top:0;width:30px;height:30px;border-radius:50%;border:3px solid var(--ink);background:var(--card);font-family:var(--font-head);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+.route li b{font-family:var(--font-head);font-size:1.2rem;font-weight:600}
+.route li p{margin:.1rem 0 0;font-size:.95rem}
+.series{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:.8rem 0}
+.series>div{background:var(--card);border:1.5px solid var(--line);padding:8px 10px;border-radius:4px;font-size:.88rem}
+.series>div.here{border:2.5px solid var(--ink)}
+.series b{display:block;font-family:var(--font-head);font-size:1.05rem}
+@media (max-width:700px){.series{grid-template-columns:1fr 1fr}}
+
+/* exercices et quiz */
+.exo{background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--ink);padding:6px 20px 12px;margin:1.2rem 0;border-radius:4px}
+.exo.defi{border-left-color:var(--weld)}
+.exo h4{margin-top:.8rem}
+.exo .lvtag{font-family:var(--font-body);font-size:.85rem;font-weight:400;color:var(--muted);margin-left:.4rem}
+.exo .q{margin:.25rem 0}
+details{margin:.6rem 0}
+summary{cursor:pointer;font-weight:700;padding:4px 0}
+details .sol{padding:.4rem .9rem;border-left:3px solid var(--mat);margin:.4rem 0}
+details .sol p{margin:.45em 0}
+.qz{background:var(--card);border:1.5px solid var(--line);border-radius:6px;padding:10px 16px;margin:.8rem 0}
+.qz-q{margin:.3rem 0 .6rem}
+.qz-o{display:flex;flex-direction:column;gap:6px}
+.qz-b{text-align:left;font-family:var(--font-body);font-size:.97rem;padding:8px 12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:5px;cursor:pointer}
+.qz-b:hover{border-color:var(--ink)}
+.qz-b.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}
+.qz-b.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.qz-e{font-size:.94rem;margin:.6rem 0 .2rem}
+.score{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);display:inline-block;background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:999px;font-size:.95rem;margin:.6rem 0}
+
+/* fiche mémoire */
+.fiche{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2.5px solid var(--ink);background:var(--card);margin:1rem 0}
+.fiche>div{padding:12px 14px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.fiche>div:nth-child(3n){border-right:0}
+.fiche>div:nth-last-child(-n+3){border-bottom:0}
+.fiche .ic{font-size:1.9rem;line-height:1}
+.fiche h4{margin:.3rem 0 .2rem;font-size:1.15rem}
+.fiche .f{font-family:var(--font-math);font-size:1.1rem;margin:.2rem 0}
+.fiche p{margin:.2rem 0 0;font-size:.88rem;color:var(--muted)}
+@media (max-width:720px){.fiche{grid-template-columns:1fr 1fr}.fiche>div{border-right:1.5px solid var(--ink)!important;border-bottom:1.5px solid var(--ink)!important}.fiche>div:nth-child(2n){border-right:0!important}.fiche>div:last-child{border-bottom:0!important}}
+@media (max-width:440px){.fiche{grid-template-columns:1fr}.fiche>div{border-right:0!important}}
+.gloss{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:0;border-top:1.5px solid var(--line);margin:1rem 0}
+.gloss dt,.gloss dd{border-bottom:1.5px solid var(--line);padding:7px 8px;margin:0}
+.gloss dt{font-weight:700}
+.gloss dd{font-size:.95rem}
+@media (max-width:600px){.gloss{grid-template-columns:1fr}.gloss dt{border-bottom:0;padding-bottom:0}}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.check input{margin-top:.35em;width:18px;height:18px;accent-color:var(--mat);flex:none}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem}
+hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
+@media (max-width:700px){.m{white-space:normal}.fx{padding:12px 10px}.fx .big{font-size:1.4rem}}
+@media (max-width:400px){body{font-size:16.5px}.wrap{padding:0 14px}.lab{padding:12px 10px}}
+
+/* compléments de la série Rupture */
+.btn.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
+.btn.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+.ctrl[hidden]{display:none}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap wide">
+  <div class="title-block">
+    <div class="tb-main">
+      <div>
+        <p class="tb-series">Soudage à l'arc sous flux (arc submergé), série 1.10 : de la poudre au joint épais</p>
+        <h1>Le procédé 12 et son installation : l'arc caché sous la poudre</h1>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Changer de thème">◐ Thème : automatique</button>
+    </div>
+    <div class="tb-cells">
+      <div><small>Cours</small><b>1 sur 4 : le procédé, son générateur et sa machine</b></div>
+      <div><small>Durée conseillée</small><b>≈ 2 h 30 à 3 h avec les exercices</b></div>
+      <div><small>Prérequis</small><b>P = U·I, loi d'Ohm, effet Joule, notion d'arc électrique ; la série « Électrode enrobée » aide, sans être obligatoire</b></div>
+      <div><small>À la fin tu sais</small><b>désigner le procédé et ses variantes, expliquer ce qui se passe sous le flux, citer ses atouts et ses limites, choisir un générateur, expliquer l'autorégulation de l'arc, décrire une installation et régler une soudure circulaire</b></div>
+    </div>
+  </div>
+  <p class="lede">Imagine un fil d'acier de 4 mm qui descend sans s'arrêter dans un tas de poudre, avec 600 ampères dedans. Tu ne vois ni flamme ni éclair : l'arc brûle <b>sous la poudre</b>, dans une petite bulle de gaz, et la poudre qui fond devient un laitier protecteur. Derrière la machine, un cordon lisse, large et profond, déposé trois à cinq fois plus vite qu'à la main. C'est le <b>soudage à l'arc sous flux</b>, qu'on appelle aussi <b>arc submergé</b>. Ce premier cours en montre le principe, les atouts et les limites, puis la machine : le générateur, la façon dont l'arc garde tout seul sa longueur, la tête de soudage, les déplacements et les installations types.</p>
+
+  <h4>Le code couleur de la série</h4>
+  <div class="cc" role="img" aria-label="Code couleur : les causes en rouge et violet, les paramètres en vert, les effets en bleu et bleu-vert">
+    <div class="cc-box cc-cause"><small>Les causes</small><div class="cc-syms"><span class="sig">P</span><span class="sig">E</span><span class="tau">Δh</span><span class="tau">écart</span></div><p><span class="sig">rouge</span> : la chaleur et l'énergie (puissance de l'arc P, énergie de soudage E, échauffement) ; <span class="tau">violet</span> : les ennemis (bosse ou faux-rond Δh, écart du joint, arc qui perce le flux, humidité)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-link"><small>Les paramètres</small><div class="cc-syms"><span class="mat">I</span><span class="mat">U</span><span class="mat">v</span><span class="mat">d</span><span class="mat">L</span></div><p>en <span class="mat">vert</span> : ce que l'on règle et les données (intensité I, tension U, vitesse v, diamètre du fil d, fil sorti L, tension à vide U<sub>0</sub>, facteur de marche X, diamètre de virole D, décalage e)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-eff"><small>Les effets</small><div class="cc-syms"><span class="eps">l</span><span class="eps">MR</span><span class="eps">τ</span><span class="gam">laitier</span></div><p><span class="eps">bleu</span> : ce que l'on obtient (longueur d'arc l, taux de dépôt MR, temps de rattrapage τ, durées, erreur de suivi) ; <span class="gam">bleu-vert</span> : la métallurgie (bain, flux fondu, laitier)</p></div>
+  </div>
+  <div class="cc-more">
+    <div><b class="frc">Orange</b> : les actions et les mouvements (avance du fil, déplacement de la tête, rotation de la virole, corrections du dévidoir).</div>
+    <div><b>Noir</b> : la géométrie dessinée (fil, tube contact, tôles, chanfreins, viroles).</div>
+    <div><b class="wcol">Bronze</b> : les encadrés « métier » 🔥, tournés vers l'atelier.</div>
+  </div>
+</div>
+</header>
+
+<nav class="toc" aria-label="Sommaire">
+  <div class="toc-in">
+    <a href="#avant">Avant de commencer</a>
+    <a href="#c1">1 Sous la poudre</a>
+    <a href="#c2">2 Atouts et limites</a>
+    <a href="#c3">3 Le générateur</a>
+    <a href="#c4">4 L'arc se régule</a>
+    <a href="#c5">5 Tête et suivi de joint</a>
+    <a href="#c6">6 Installations types</a>
+    <a href="#exos">Exercices</a>
+    <a href="#quiz-s">Quiz</a>
+    <a href="#fiche">Fiche mémoire</a>
+    <a href="#gloss">Glossaire</a>
+    <a href="#check">Check-list</a>
+  </div>
+</nav>
+
+<main>
+<section class="chap" id="avant">
+<div class="wrap">
+  <h3 style="margin-top:0">Avant de commencer</h3>
+  <h4>Les prérequis en trois cases</h4>
+  <div class="recall">
+    <div><div class="f">P = U·I</div>La puissance électrique (en watts, W) est le produit de la tension U (en volts, V) par l'intensité I (en ampères, A). Un arc de 33 V et 600 A dégage 19,8 kW : de quoi chauffer une petite maison.</div>
+    <div><div class="f">U = R·I · P = R·I²</div>La loi d'Ohm relie tension, résistance R (en ohms, Ω) et intensité. Un conducteur parcouru par un courant chauffe : c'est l'effet Joule, proportionnel au carré de l'intensité. Le fil qui dépasse du tube contact en profite.</div>
+    <div><div class="f">générateur ∩ arc</div>Un arc s'établit au croisement de deux courbes tension-intensité : celle du générateur et celle de l'arc. C'est le point de fonctionnement, que le chapitre 3 fait bouger.</div>
+  </div>
+
+  <div class="def"><b>📘 Correspondance avec le planning et le référentiel</b>. Ce cours ouvre le sujet <b>1.10 « Arc submergé »</b> du planning de la formation :
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Chapitre du cours</th><th>Ce qu'il apporte à l'IWE</th></tr>
+      <tr><td>1 Le procédé sous la poudre</td><td>principe, désignation normalisée, rôle du flux, historique</td></tr>
+      <tr><td>2 Atouts, limites et applications</td><td>domaine d'emploi, comparaison avec les procédés manuels et semi-automatiques</td></tr>
+      <tr><td>3 Le générateur</td><td>types de sources, caractéristiques, réglages, facteur de marche</td></tr>
+      <tr><td>4 L'arc se régule tout seul</td><td>autorégulation, régulation par la tension, amorçage</td></tr>
+      <tr><td>5 La tête, les déplacements et le suivi de joint</td><td>rôle et principe des composants de l'installation, mécanisation</td></tr>
+      <tr><td>6 Les installations types</td><td>soudures bout à bout et d'angle, viroles et soudures circulaires</td></tr>
+    </table></div>
+    Dans le référentiel de l'IIW (<i>International Institute of Welding</i>, l'Institut international de la soudure) pour la formation IWE (<i>International Welding Engineer</i>, ingénieur international en soudage), ce cours couvre le principe du procédé, l'amorçage, les applications, les avantages et les inconvénients, le matériel et le rôle de ses composants, les réglages du générateur et leurs effets. Il touche aussi les sujets voisins du planning <b>1.5 « Source de courant »</b> (chapitres 3 et 4) et <b>1.15 « Robotisation »</b> (chapitres 5 et 6), qui les traitent à part.
+  </div>
+
+  <div class="def"><b>📖 Les normes et les sigles de ce cours</b>. ISO : Organisation internationale de normalisation ; EN : norme européenne ; IEC : Commission électrotechnique internationale.
+    <ul>
+      <li><b>ISO 4063</b> (édition 2023) : nomenclature des procédés et leurs numéros ; <b>12</b> pour le soudage à l'arc sous flux et ses sous-groupes 121, 122, 124, 125 et 126.</li>
+      <li><b>SAW</b> : <i>submerged arc welding</i>, le nom anglais ; en allemand, <i>UP-Schweißen</i> (soudage « sous poudre »). En français, on dit soudage à l'arc sous flux, soudage sous flux solide ou arc submergé.</li>
+      <li><b>IEC 60974-1</b> : sécurité des sources de courant de soudage à l'arc ; elle définit le facteur de marche sur un cycle de 10 minutes et les grandeurs de la plaque signalétique.</li>
+      <li><b>EN 1011-1</b> et <b>ISO/TR 17671-1</b> : recommandations pour le soudage ; elles donnent le rendement thermique k de chaque procédé (k = 1 pour le 121).</li>
+      <li><b>ISO 14174</b> et <b>ISO 14171</b> : classification des flux et des couples fil-flux, étudiées au cours 2.</li>
+      <li><b>CC+</b>, <b>CC−</b>, <b>CA</b> : courant continu avec le fil au pôle positif, courant continu avec le fil au pôle négatif, courant alternatif.</li>
+    </ul>
+    Les données chiffrées viennent de fiches de fabricants (taux de dépôt, consommation de flux, plaques de générateurs) et d'un guide de TWI (<i>The Welding Institute</i>) pour les soudures circulaires. Les modèles des manipulations (fusion du fil, caractéristiques de l'arc, régulation, suivi de joint) sont pédagogiques : ils donnent les bons ordres de grandeur et les bonnes tendances, pas des valeurs de mode opératoire.
+  </div>
+
+  <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
+    <p>Dès que les tôles s'épaississent et que les cordons s'allongent (appareils à pression, mâts d'éoliennes, tubes de grand diamètre, panneaux de navires, poutres reconstituées), le soudage sous flux devient le procédé de production. Le coordinateur en soudage choisit l'installation, le générateur, le mode de régulation et les déplacements ; il sait pourquoi un cordon circulaire coule, pourquoi un arc « pompe » et pourquoi une tête dévie du joint. Ces choix se font avant le premier mètre soudé.</p>
+  </div>
+
+  <h4>La série en quatre cours</h4>
+  <div class="series">
+    <div class="here"><b>1 Le procédé et son installation</b>Principe, atouts et limites, générateur, régulation de l'arc, tête, déplacements, installations.</div>
+    <div><b>2 Flux, fils et métal déposé</b>Rôle et types de flux, basicité, grain, étuvage, recyclage, fils, désignations, dilution.</div>
+    <div><b>3 Les paramètres et le cordon</b>Intensité, tension, vitesse, énergie, diamètre, fil sorti, polarité, forme du cordon.</div>
+    <div><b>4 Préparer, varier, contrôler</b>Supports envers, chanfreins, twin, tandem, feuillard, défauts, mode opératoire, sécurité.</div>
+  </div>
+
+  <h4>Le plan du cours</h4>
+  <ol class="route">
+    <li><span class="dot">1</span><b>Le procédé sous la poudre</b><p>Un fil, un tube contact, une poudre qui fond : l'arc brûle dans une bulle.</p></li>
+    <li><span class="dot">2</span><b>Atouts, limites et applications</b><p>Densité de courant, pénétration, taux de dépôt : la course contre les autres procédés.</p></li>
+    <li><span class="dot">3</span><b>Le générateur</b><p>Courant continu, alternatif ou carré, caractéristique plate ou tombante, facteur de marche.</p></li>
+    <li><span class="dot">4</span><b>L'arc se régule tout seul</b><p>Le fil fond aussi vite qu'il arrive : autorégulation ou dévidoir asservi.</p></li>
+    <li><span class="dot">5</span><b>La tête, les déplacements et le suivi de joint</b><p>Dévidoir, tube contact, trémie, tracteur, potence, vireur, palpeur.</p></li>
+    <li><span class="dot">6</span><b>Les installations types</b><p>Panneaux, poutres, viroles : où placer le fil sur une pièce qui tourne.</p></li>
+  </ol>
+</div>
+</section>
+
+<section class="chap" id="c1">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">1</div>
+    <div class="c-title"><h2>Le procédé sous la poudre</h2><p>Un fil, un tube contact, une poudre qui fond : l'arc brûle dans une bulle</p></div>
+    <div class="c-img"><span class="ico">🏖️</span><span><small>Image à retenir</small>Le feu sous le sable : l'arc brûle dans une bulle, sous une dune de poudre</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le feu sous le sable</span></div>
+    <p>Pense à une braise enfouie sous le sable d'une plage : tu ne vois plus la lueur, mais le sable autour fond en verre. Sous la poudre du soudage, c'est pareil, en beaucoup plus chaud. Un <b>fil</b> d'acier nu, déroulé sans fin d'une bobine, descend vers la pièce. Il reçoit le courant dans un <b>tube contact</b> en cuivre, quelques centimètres avant son extrémité. Devant lui, une buse verse une poudre minérale, le <b>flux</b>, en un petit cordon de 3 à 5 cm de haut. L'arc jaillit entre le bout du fil et la pièce, <b>sous</b> cette poudre.</p>
+    <ol class="route">
+      <li><span class="dot">1</span><b>Le fil et le tube contact</b><p>Le fil avance à vitesse réglée ; le tube contact lui transmet des centaines d'ampères. La longueur de fil entre le tube et l'arc s'appelle le fil sorti.</p></li>
+      <li><span class="dot">2</span><b>La cavité d'arc</b><p>L'arc brûle dans une bulle de gaz et de vapeurs, coiffée de flux fondu : personne ne le voit, d'où le nom d'arc submergé.</p></li>
+      <li><span class="dot">3</span><b>Le bain et le laitier</b><p>Le fil et les bords fondent dans le bain. Le flux fondu flotte dessus, le protège de l'air, puis se fige en une croûte de verre, le laitier, qui se détache souvent seule.</p></li>
+      <li><span class="dot">4</span><b>Le flux non fondu</b><p>Seule une partie de la poudre fond. Le reste est aspiré derrière la tête, tamisé et réutilisé.</p></li>
+    </ol>
+    <p>Le procédé est presque toujours <b>mécanisé</b> : une machine porte la tête et la déplace le long du joint, ou fait tourner la pièce sous la tête. Le soudeur devient <b>opérateur</b> : il règle, surveille les afficheurs et corrige.</p>
+  </div>
+
+  <div class="lab" id="m1">
+    <p class="lab-h">Manipulation 1 : la coupe sous la poudre</p>
+    <p class="lab-sub">Coupe longitudinale d'une soudure en cours, la tête avançant vers la droite. Clique sur un élément pour l'éclairer et lire son rôle. Règle l'intensité <span class="mat">I</span> (fil de 4 mm, fil sorti 30 mm) et la hauteur de la couche de flux <span class="mat">h<sub>f</sub></span> : trop mince, l'arc perce la poudre ; trop épaisse, elle écrase le cordon. Le bouton ▶ soude pendant 10 secondes à 550 mm/min.</p>
+    <div class="btns" id="m1k">
+      <button class="btn" data-k="fil" type="button">Fil</button>
+      <button class="btn" data-k="tube" type="button">Tube contact</button>
+      <button class="btn" data-k="flux" type="button">Flux en poudre</button>
+      <button class="btn" data-k="cav" type="button">Cavité d'arc</button>
+      <button class="btn" data-k="bain" type="button">Bain</button>
+      <button class="btn" data-k="lait" type="button">Laitier</button>
+      <button class="btn" data-k="cord" type="button">Cordon</button>
+    </div>
+    <div class="ctrl"><label for="m1i">Intensité <span class="mat">I</span></label><input type="range" id="m1i" class="r-mat" min="300" max="1000" step="10" value="600"><output id="m1io"></output></div>
+    <div class="ctrl"><label for="m1h">Couche de flux <span class="mat">h<sub>f</sub></span></label><input type="range" id="m1h" class="r-mat" min="0" max="80" step="1" value="35"><output id="m1ho"></output></div>
+    <div class="btns"><button class="btn play" id="m1play" type="button">▶ Souder 10 secondes</button></div>
+    <svg id="m1svg" role="img" aria-label="Coupe longitudinale du soudage sous flux : fil, tube contact, flux, cavité d'arc, bain, laitier et cordon"></svg>
+    <div class="readout" id="m1r"></div>
+    <p class="status" id="m1msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">ISO 4063, rôle du flux, historique</span></div>
+    <h4>La désignation normalisée</h4>
+    <p>L'ISO 4063 numérote les procédés : le premier chiffre donne la famille (1 : soudage à l'arc), le deuxième le groupe (2 : sous flux), le troisième le sous-groupe. Le soudage à l'arc sous flux porte le numéro <b>12</b> :</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>N°</th><th>Variante (ISO 4063:2023)</th><th>Ce qui fond dans l'arc</th></tr>
+      <tr><td class="n">121</td><td>sous flux avec fil-électrode plein</td><td>un ou plusieurs fils pleins, le cas courant</td></tr>
+      <tr><td class="n">122</td><td>sous flux avec électrode en feuillard</td><td>une bande de métal, pour le rechargement (cours 4)</td></tr>
+      <tr><td class="n">124</td><td>sous flux avec addition de poudre métallique</td><td>le fil, plus une poudre de fer ou d'alliage versée dans le joint</td></tr>
+      <tr><td class="n">125</td><td>sous flux avec fil fourré</td><td>un fil tubulaire rempli de poudre</td></tr>
+      <tr><td class="n">126</td><td>sous flux avec feuillard fourré</td><td>une bande fourrée</td></tr>
+    </table></div>
+    <p>L'édition 2023 ne donne pas de numéro au soudage à plusieurs fils : un tandem de deux fils pleins reste un 121, et le nombre de fils se précise dans le descriptif de mode opératoire. La norme prévoit qu'on complète le numéro quand une variante n'est pas listée.</p>
+    <div class="def"><b>📖 Flux</b> : produit minéral granulaire et fusible, versé sur le joint, qui protège l'arc et le bain, forme le laitier et agit sur la composition du métal fondu (ISO 14174). Il n'est conducteur qu'une fois fondu : froid, c'est un isolant.</div>
+    <p><b>Le rôle du flux, en bref</b> (le cours 2 le détaille) : il <b>protège</b> le bain de l'oxygène et de l'azote de l'air ; il <b>stabilise</b> l'arc grâce à des éléments faciles à ioniser ; il <b>façonne</b> le cordon, car le laitier liquide le lisse et le retient ; il <b>épure</b> le bain (désoxydation) et peut lui <b>apporter</b> du manganèse ou du silicium.</p>
+    <h4>Un peu d'histoire</h4>
+    <div class="hist">
+      <div><div class="yr">1929</div>Brevet américain de B. Robinoff : une poudre d'oxyde de fer remplit le joint devant un fil nu. L'idée de protéger l'arc par une poudre est née, sans encore la maîtriser.</div>
+      <div><div class="yr">1935</div>Brevet de L. T. Jones, H. E. Kennedy et M. A. Rotermund, cédé à la société Linde, qui lance le procédé sous le nom « Unionmelt ». Le flux y est préfondu pour éviter les porosités.</div>
+      <div><div class="yr">1937</div>Premières publications : soudage de longerons de wagons et de coques de pétroliers. Le procédé conquiert ensuite les chantiers navals et la chaudronnerie lourde.</div>
+    </div>
+    <div class="tip">💡 <b>Le numéro se lit tout seul</b> : 1-2-1 = arc, sous flux, fil plein. Le 1 initial est le même que celui du 111 (électrode enrobée) et du 135 (MAG) : tous sont des procédés à l'arc.</div>
+    <div class="warn"><b>⚠️ Piège : « submergé » ne veut pas dire « sous l'eau ».</b> L'arc est submergé sous la poudre. Le soudage sous l'eau est un tout autre domaine, où l'on emploie surtout l'électrode enrobée.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : de haut en bas, « Fil, Tube, Flux, Arc, Bain, Laitier »</b>, soit <b>« Faut-il Toujours Fondre Avant de Boire Le café ? »</b> : chaque initiale donne un élément de la coupe, dans l'ordre où la matière les traverse.</div>
+    <div class="weld"><b>🔥 L'opérateur ne voit pas l'arc</b>
+      <p>Sous la poudre, l'œil ne sert plus à guider le fil. L'opérateur place le fil avant d'amorcer (pointeur laser, repère mécanique), puis il surveille l'ampèremètre, le voltmètre et le bruit de l'arc, et regarde le cordon qui sort sous le laitier. Un éclair visible à travers le flux signale une couche trop mince.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c2">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">2</div>
+    <div class="c-title"><h2>Atouts, limites et applications</h2><p>Densité de courant, pénétration, taux de dépôt : la course contre les autres procédés</p></div>
+    <div class="c-img"><span class="ico">🚄</span><span><small>Image à retenir</small>Le TGV du soudage : imbattable sur ses rails, à plat, mais il ne va pas partout</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le TGV et ses rails</span></div>
+    <p>Un TGV est imbattable entre deux gares, sur une voie droite et bien posée ; il ne passe pas dans les ruelles. Le soudage sous flux est pareil : sur un long joint à plat, rien ne va plus vite ; dans un recoin, au plafond ou sur trois cordons de 10 cm, il perd tout son intérêt. Ses sept particularités :</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Particularité</th><th>Ce qu'elle apporte</th><th>Ce qu'elle impose</th></tr>
+      <tr><td>Arc invisible</td><td>pas de rayonnement direct ni d'éblouissement, peu de fumées</td><td>guider le fil sans le voir</td></tr>
+      <tr><td>Pas de projections</td><td>presque tout le fil fondu finit dans le cordon, pièces propres</td><td>gérer la poudre et le laitier</td></tr>
+      <tr><td>Procédé mécanisé</td><td>paramètres constants, cordons réguliers sur des dizaines de mètres</td><td>une machine, une mise en place, des pièces bien préparées</td></tr>
+      <tr><td>Densité de courant élevée</td><td>fil qui fond vite, arc stable</td><td>gros générateurs</td></tr>
+      <tr><td>Forte pénétration</td><td>talons épais, moins de chanfreins, moins de métal à déposer</td><td>une préparation précise, sinon percement</td></tr>
+      <tr><td>Haute fiabilité</td><td>peu de reprises, donc peu de défauts de reprise</td><td>des consommables secs et bien choisis</td></tr>
+      <tr><td>Rendement élevé</td><td>énergie bien transmise à la pièce, pas de bouts d'électrode perdus</td><td>de fortes énergies, à maîtriser pour la métallurgie</td></tr>
+    </table></div>
+    <p><b>Ses limites</b> : on soude à plat (PA) ou en angle à plat (PB), parfois en corniche (PC) avec un dispositif qui retient la poudre ; il faut une installation, du temps de réglage et des joints accessibles ; la poudre craint l'humidité ; les fortes énergies élargissent la zone affectée thermiquement et peuvent réduire la ténacité. On l'emploie surtout sur les aciers non alliés et faiblement alliés, les aciers inoxydables et les alliages de nickel, en assemblage comme en rechargement.</p>
+    <p><b>Ses terrains de jeu</b> : appareils à pression et réservoirs, mâts d'éoliennes et pieux offshore, tubes soudés en continu, panneaux et raidisseurs de navires, poutres reconstituées de ponts et de bâtiments, wagons, rechargement de rouleaux et de cuves.</p>
+  </div>
+
+  <div class="lab" id="m2">
+    <p class="lab-h">Manipulation 2 : la course des procédés</p>
+    <p class="lab-sub">Un joint bout à bout en V à 60° (talon 2 mm, écartement 2 mm, surépaisseur comprise) d'épaisseur <span class="mat">t</span> et de longueur <span class="mat">L</span>. Quatre équipes le soudent : électrode enrobée (111), MAG (135), sous flux à un fil (121) et sous flux en tandem (deux fils). Les barres donnent le temps d'arc (foncé) et le temps total, qui tient compte du taux d'arc de chaque procédé. Le bouton ▶ lance la course. Taux de dépôt et taux d'arc sont des ordres de grandeur de fabricants.</p>
+    <div class="ctrl"><label for="m2t">Épaisseur <span class="mat">t</span></label><input type="range" id="m2t" class="r-mat" min="8" max="40" step="1" value="20"><output id="m2to"></output></div>
+    <div class="ctrl"><label for="m2l">Longueur <span class="mat">L</span></label><input type="range" id="m2l" class="r-mat" min="1" max="30" step="1" value="10"><output id="m2lo"></output></div>
+    <div class="btns"><button class="btn play" id="m2play" type="button">▶ Lancer la course</button></div>
+    <svg id="m2svg" role="img" aria-label="Comparaison des temps de soudage d'un joint en V par quatre procédés"></svg>
+    <div class="readout" id="m2r"></div>
+    <p class="status" id="m2msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">densité de courant, taux de dépôt, rendement thermique</span></div>
+    <h4>La densité de courant</h4>
+    <p>La densité de courant J est l'intensité rapportée à la section du fil (ou de l'âme de l'électrode) :</p>
+    <div class="fx"><div class="big"><span class="eps">J</span> = <span class="mat">I</span> / S  avec  S = π·<span class="mat">d</span>²/4</div><p class="cap">J en A/mm², I en A, d en mm ; π ≈ 3,1416 est le rapport de la circonférence d'un cercle à son diamètre</p></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Procédé</th><th>Fil ou électrode</th><th>Intensité</th><th>J (A/mm²)</th><th>Taux de dépôt (kg/h)</th></tr>
+      <tr><td>111 électrode enrobée</td><td>âme de 4 mm</td><td class="n">160 A</td><td class="n">12,7</td><td class="n">≈ 1,4</td></tr>
+      <tr><td>135 MAG</td><td>fil de 1,2 mm</td><td class="n">280 A</td><td class="n">248</td><td class="n">≈ 4,5</td></tr>
+      <tr><td>121 sous flux, un fil</td><td>fil de 4 mm</td><td class="n">600 A</td><td class="n">47,7</td><td class="n">≈ 6,5 à 8</td></tr>
+      <tr><td>121 sous flux, un fil</td><td>fil de 2 mm</td><td class="n">500 A</td><td class="n">159</td><td class="n">≈ 6,7 à 7,3</td></tr>
+      <tr><td>121 tandem CC+ et CA</td><td>2 fils de 4 mm</td><td class="n">2 arcs de 600 à 800 A</td><td class="n">48 à 64</td><td class="n">≈ 19</td></tr>
+    </table></div>
+    <p>Les taux de dépôt du sous flux à un fil viennent de tableaux de fabricants (fil sorti d'environ 32 mm) ; le tandem atteint environ 19 kg/h, et les montages à trois fils dépassent 30 kg/h. Le taux de dépôt est la masse de métal déposée par heure d'arc ; comme il n'y a ni projections ni bouts d'électrode perdus, il est presque égal à la masse de fil fondue.</p>
+    <div class="def"><b>📖 Taux d'arc</b> : part du temps de travail pendant laquelle l'arc brûle. Il est faible à la main (changer d'électrode, décrasser, se repositionner : 20 à 30 %) et plus élevé en mécanisé. Ne le confonds pas avec le facteur de marche du générateur (chapitre 3).</div>
+    <h4>L'énergie de soudage et le rendement thermique</h4>
+    <p>L'énergie électrique fournie par millimètre de cordon vaut E = U·I/v. La part réellement reçue par la pièce, l'apport de chaleur Q, s'écrit Q = k·E, où k est le rendement thermique relatif du procédé (EN 1011-1 et ISO/TR 17671-1) : <b>k = 1</b> pour le soudage sous flux à un fil (121), contre 0,8 pour l'électrode enrobée (111) et le MAG (135). L'arc, enfermé sous la poudre, perd très peu de chaleur.</p>
+    <div class="fx"><div class="big"><span class="sig">Q</span> = k·<span class="mat">U</span>·<span class="mat">I</span> / <span class="mat">v</span></div><p class="cap">exemple : 580 A, 30 V, 550 mm/min → E = 30 × 580 / (550/60) = 1 898 J/mm ≈ 1,9 kJ/mm, et Q ≈ 1,9 kJ/mm avec k = 1</p></div>
+    <p>Ces 1,9 kJ/mm sont typiques d'une passe sous flux : environ deux à quatre fois l'apport d'une passe courante à l'électrode enrobée, souvent compris entre 0,5 et 1 kJ/mm. C'est ce qui fait la productivité du procédé, et ce qui oblige à surveiller la métallurgie de la zone affectée thermiquement (cours 3).</p>
+    <div class="tip">💡 <b>Compare des kilogrammes par heure, pas des ampères</b> : un procédé ne se juge pas à son intensité mais au métal qu'il dépose par heure de travail, donc au taux de dépôt multiplié par le taux d'arc.</div>
+    <div class="warn"><b>⚠️ Piège : « densité de courant élevée » est une comparaison.</b> Elle est élevée par rapport à l'électrode enrobée (environ 48 A/mm² contre 13). Un fil MAG de 1,2 mm fait bien plus (près de 250 A/mm²). Ce qui distingue le sous flux, c'est l'intensité totale : des centaines d'ampères dans un gros fil.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : les sept atouts dans l'ordre, « Il Paraît Au Départ Plutôt Facile à Réussir »</b> : Invisible, sans Projections, Automatique, Densité de courant, Pénétration, Fiabilité, Rendement.</div>
+    <div class="weld"><b>🔥 Quand basculer vers le sous flux ?</b>
+      <p>Les questions du coordinateur : les joints sont-ils longs (plusieurs mètres) et nombreux ? Accessibles à plat, ou rendus accessibles par un vireur ou un positionneur ? Les épaisseurs justifient-elles un fort dépôt ? Les matériaux supportent-ils l'énergie ? Si oui, le temps de mise en place est vite rattrapé ; sinon, le MAG ou l'électrode enrobée restent plus souples.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c3">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">3</div>
+    <div class="c-title"><h2>Le générateur</h2><p>Courant continu, alternatif ou carré, caractéristique plate ou tombante, facteur de marche</p></div>
+    <div class="c-img"><span class="ico">🏃</span><span><small>Image à retenir</small>Le marathonien : 1 000 A pendant des heures, sans s'essouffler</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le marathonien</span></div>
+    <p>Un poste d'électrode enrobée est un sprinteur : il soude une minute, puis se repose pendant que le soudeur change d'électrode. Un générateur de soudage sous flux est un <b>marathonien</b> : il débite 600 à 1 000 A pendant tout un cordon de plusieurs mètres, parfois pendant des heures sur une virole qui tourne. Une plaque typique annonce par exemple <b>1 000 A sous 44 V à 100 %</b> de facteur de marche, avec une tension à vide de 71 V.</p>
+    <p>Quatre familles de sources se rencontrent :</p>
+    <ul>
+      <li><b>le transformateur</b>, qui donne un courant alternatif sinusoïdal (CA) à 50 Hz ;</li>
+      <li><b>le transformateur-redresseur</b> à thyristors, qui donne du courant continu (CC) ;</li>
+      <li><b>l'onduleur</b> (source électronique), qui donne du CC ou un CA « carré » dont on règle la forme ;</li>
+      <li>plus rarement, un groupe moteur-générateur sur chantier.</li>
+    </ul>
+    <p>Chaque source a une <b>caractéristique</b>, c'est-à-dire une courbe tension-intensité. Une caractéristique <b>plate</b> garde la tension presque constante (on dit aussi « à tension constante », CV en anglais) ; une caractéristique <b>tombante</b> garde l'intensité presque constante (« à courant constant », CC en anglais, à ne pas confondre avec le courant continu). Beaucoup de sources modernes offrent les deux.</p>
+  </div>
+
+  <div class="lab" id="m3">
+    <p class="lab-h">Manipulation 3 : caractéristique plate ou tombante</p>
+    <p class="lab-sub">Choisis le type de source et son réglage, puis la longueur d'arc <span class="eps">l</span>. Le graphique montre la caractéristique de la source (noir épais) et celles de l'arc (orange) pour l − 2 mm, l et l + 2 mm ; leurs croisements sont les points de fonctionnement. La lecture donne l'intensité, la tension, la variation d'intensité pour 2 mm d'arc en plus et le facteur de marche admis par une source de 1 000 A à 100 %. Modèle d'arc pédagogique : U = 18 + 0,01·I + 1,5·l.</p>
+    <div class="btns" id="m3k">
+      <button class="btn on" data-k="cv" type="button">Source plate</button>
+      <button class="btn" data-k="cc" type="button">Source tombante</button>
+    </div>
+    <div class="ctrl" id="m3cU"><label for="m3u">Tension à vide réglée <span class="mat">U<sub>0</sub></span></label><input type="range" id="m3u" class="r-mat" min="30" max="50" step="0.5" value="39"><output id="m3uo"></output></div>
+    <div class="ctrl" id="m3cP"><label for="m3p">Pente <span class="mat">p</span></label><input type="range" id="m3p" class="r-mat" min="0.5" max="5" step="0.5" value="1"><output id="m3po"></output></div>
+    <div class="ctrl" id="m3cI" hidden><label for="m3s">Intensité réglée <span class="mat">I<sub>r</sub></span></label><input type="range" id="m3s" class="r-mat" min="300" max="1200" step="10" value="600"><output id="m3so"></output></div>
+    <div class="ctrl"><label for="m3l">Longueur d'arc <span class="eps">l</span></label><input type="range" id="m3l" class="r-eps" min="3" max="10" step="0.5" value="6"><output id="m3lo"></output></div>
+    <div class="btns"><button class="btn play" id="m3play" type="button">▶ Faire varier l'arc</button></div>
+    <svg id="m3svg" role="img" aria-label="Caractéristiques tension-intensité de la source et de l'arc, avec les points de fonctionnement"></svg>
+    <div class="readout" id="m3r"></div>
+    <p class="status" id="m3msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">point de fonctionnement, réglages, facteur de marche</span></div>
+    <h4>Le point de fonctionnement</h4>
+    <p>L'arc a sa propre courbe tension-intensité. Pour les fortes intensités du soudage sous flux, on la représente ici par une droite qui monte avec l'intensité et surtout avec la longueur d'arc (modèle pédagogique) :</p>
+    <div class="fx"><div class="big">U<sub>arc</sub> = 18 + 0,01·<span class="mat">I</span> + 1,5·<span class="eps">l</span></div><p class="cap">U en V, I en A, l en mm : 600 A et 6 mm donnent 33 V</p></div>
+    <p>Une source plate s'écrit U = U<sub>0</sub> − p·I, où U<sub>0</sub> est la tension à vide réglée et p la pente (en V par 100 A). Au croisement, I = (U<sub>0</sub> − 18 − 1,5·l)/(p + 0,01). D'où la sensibilité à la longueur d'arc :</p>
+    <div class="fx"><div class="big">Δ<span class="eps">I</span> / Δ<span class="eps">l</span> = − 1,5 / (<span class="mat">p</span> + 0,01)</div><p class="cap">source plate, p = 1 V/100 A = 0,01 V/A : −75 A par mm d'arc ; source tombante, p = 50 V/100 A : environ −3 A par mm</p></div>
+    <p>Avec la source plate réglée à 39 V, un arc de 6 mm donne 600 A et 33 V ; à 8 mm, l'intensité tombe à 450 A. Avec une source tombante réglée à 600 A, le même allongement ne fait perdre qu'environ 6 A. Cette différence est le moteur de la régulation du chapitre 4.</p>
+    <h4>Les réglages et les commutateurs</h4>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Réglage</th><th>Ce qu'il change sur le joint</th></tr>
+      <tr><td>mode plat ou tombant</td><td>la façon dont l'arc garde sa longueur (chapitre 4)</td></tr>
+      <tr><td>consigne de tension (source plate) ou d'intensité (source tombante)</td><td>la largeur du cordon (tension) ; la pénétration et le dépôt (intensité), détaillés au cours 3</td></tr>
+      <tr><td>vitesse de fil</td><td>en source plate, c'est elle qui fixe l'intensité</td></tr>
+      <tr><td>polarité : CC+, CC− ou CA</td><td>CC+ pénètre le plus ; CC− dépose plus vite et pénètre moins ; le CA est un compromis</td></tr>
+      <tr><td>forme du CA carré : fréquence, équilibre (part du temps au pôle positif), décalage des amplitudes</td><td>le partage entre pénétration et dépôt, la stabilité de l'arc</td></tr>
+      <tr><td>rampes de départ et de fin, remplissage du cratère</td><td>la qualité de l'amorçage et de la fin de cordon</td></tr>
+    </table></div>
+    <p><b>Le CA sinusoïdal</b> passe par zéro 100 fois par seconde à 50 Hz : l'arc s'éteint et doit se rallumer à chaque passage, ce qu'aident les éléments ionisants du flux. <b>Le CA carré</b> des onduleurs traverse le zéro presque instantanément : l'arc reste stable, et l'on choisit l'équilibre entre l'alternance positive (pénétration) et l'alternance négative (dépôt). En multi-fil, chaque fil a sa propre source ; un tandem classique associe un fil de tête en CC+ et un fil de queue en CA, pour limiter l'interaction magnétique entre les deux arcs (cours 4).</p>
+    <h4>Le facteur de marche</h4>
+    <div class="def"><b>📖 Facteur de marche X</b> (IEC 60974-1) : rapport, en %, entre la durée de soudage et un cycle de 10 minutes, à une intensité donnée, sans que la source dépasse ses températures admises. Une source à 100 % peut souder sans interruption à l'intensité indiquée.</div>
+    <p>L'échauffement des enroulements et des semi-conducteurs suit l'effet Joule, en R·I². D'où la relation approchée entre deux points de la plaque :</p>
+    <div class="fx"><div class="big"><span class="mat">I</span>²·<span class="mat">X</span> ≈ constante  ⇒  I<sub>X</sub> = I<sub>100</sub>·√(100/X)</div><p class="cap">une source de 1 250 A à 60 % tient environ 1 250 × √0,6 = 968 A à 100 %</p></div>
+    <div class="tip">💡 <b>Lis d'abord la ligne « 100 % »</b> de la plaque : c'est l'intensité que le générateur tient sans fin, celle qui compte pour un long cordon ou une virole qui tourne pendant une heure.</div>
+    <div class="warn"><b>⚠️ Piège : la formule I²·X ne permet pas de dépasser le maximum de la source.</b> Pour une source de 1 000 A à 100 %, la formule donnerait 1 291 A à 60 % ; mais si sa plage de réglage s'arrête à 1 000 A, elle ne les fournira jamais.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « Plate comme la Tension, Tombante comme l'Intensité »</b> : la source plate tient la tension, la source tombante tient l'intensité. Et pour le cycle : « dix minutes, une plaque ».</div>
+    <div class="weld"><b>🔥 Dimensionner l'énergie de l'atelier</b>
+      <p>Un tandem de deux arcs de 700 A sous 35 V consomme près de 50 kW en sortie, sans pause. Le coordinateur vérifie l'alimentation électrique de l'atelier, la section des câbles de soudage (aller et retour), le serrage des prises de masse et la ventilation des sources : une connexion mal serrée à 1 000 A chauffe jusqu'à la brûlure.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c4">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">4</div>
+    <div class="c-title"><h2>L'arc se régule tout seul</h2><p>Le fil fond aussi vite qu'il arrive : autorégulation ou dévidoir asservi</p></div>
+    <div class="c-img"><span class="ico">⚖️</span><span><small>Image à retenir</small>La balance : le fil fond exactement aussi vite qu'il arrive</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la balance du fil</span></div>
+    <p>Imagine une baignoire dont le robinet coule toujours au même débit : c'est le <b>fil</b> qui arrive. La bonde, elle, s'ouvre d'autant plus que l'eau monte : c'est le <b>fil qui fond</b>. Le niveau se stabilise tout seul. Sous la poudre, la longueur d'arc joue le rôle du niveau d'eau : elle reste constante si le fil fond exactement aussi vite qu'il avance.</p>
+    <p>Que se passe-t-il si la tôle présente une <b>bosse</b> de 3 mm, ou si une virole n'est pas parfaitement ronde ? L'arc se raccourcit d'un coup. Deux mécanismes peuvent le ramener :</p>
+    <ol class="route">
+      <li><span class="dot">A</span><b>L'autorégulation (source plate, fil à vitesse constante)</b><p>Arc plus court → tension d'arc plus basse → avec une source plate, l'intensité bondit (environ 75 A par mm) → le fil fond plus vite qu'il n'arrive → l'arc se rallonge. En quelques dixièmes de seconde, tout est rentré dans l'ordre, sans aucun capteur.</p></li>
+      <li><span class="dot">B</span><b>La régulation par la tension d'arc (source tombante, dévidoir asservi)</b><p>Avec une source tombante, l'intensité bouge à peine : l'autorégulation est trop lente. Un circuit mesure alors la tension d'arc et commande le dévidoir : arc trop court → tension trop basse → le dévidoir ralentit → l'arc se rallonge.</p></li>
+    </ol>
+    <p><b>L'amorçage</b> se fait aussi sous la poudre, car le flux froid est isolant : on approche le fil lentement jusqu'au contact puis on le relève (amorçage par contact et retrait), on coupe le bout du fil en pointe, ou l'on glisse une petite pelote de laine d'acier entre le fil et la pièce. Certaines installations utilisent une haute fréquence. Dès que l'arc a fondu un peu de flux, le courant passe par ce flux liquide conducteur.</p>
+  </div>
+
+  <div class="lab" id="m4">
+    <p class="lab-h">Manipulation 4 : la bosse sur la tôle</p>
+    <p class="lab-sub">La tête avance à hauteur constante ; entre 1 s et 3 s, elle passe sur une bosse de hauteur <span class="tau">Δh</span>, qui raccourcit d'autant la distance entre le tube contact et la pièce. Choisis le système de régulation, le diamètre du fil <span class="mat">d</span> et l'intensité <span class="mat">I</span> ; les courbes montrent la longueur d'arc <span class="eps">l</span> (bleu) et l'intensité (rouge) pendant 5 s. Le bouton ▶ joue la scène. Modèle pédagogique : fusion du fil calée sur des données de fabricants, fil sorti initial 30 mm, arc initial 6 mm.</p>
+    <div class="btns" id="m4m">
+      <button class="btn on" data-k="cv" type="button">A : source plate, fil constant</button>
+      <button class="btn" data-k="cc" type="button">Source tombante, fil constant</button>
+      <button class="btn" data-k="avc" type="button">B : source tombante, dévidoir asservi</button>
+    </div>
+    <div class="btns" id="m4d">
+      <button class="btn" data-k="2" type="button">fil 2,0 mm</button>
+      <button class="btn" data-k="3.2" type="button">fil 3,2 mm</button>
+      <button class="btn on" data-k="4" type="button">fil 4,0 mm</button>
+      <button class="btn" data-k="5" type="button">fil 5,0 mm</button>
+    </div>
+    <div class="ctrl"><label for="m4i">Intensité <span class="mat">I</span></label><input type="range" id="m4i" class="r-mat" min="300" max="900" step="10" value="600"><output id="m4io"></output></div>
+    <div class="ctrl"><label for="m4h">Bosse <span class="tau">Δh</span></label><input type="range" id="m4h" class="r-tau" min="1" max="8" step="0.5" value="3"><output id="m4ho"></output></div>
+    <div class="btns"><button class="btn play" id="m4play" type="button">▶ Passer sur la bosse</button></div>
+    <svg id="m4svg" role="img" aria-label="Évolution de la longueur d'arc et de l'intensité au passage d'une bosse, selon le système de régulation"></svg>
+    <div class="readout" id="m4r"></div>
+    <p class="status" id="m4msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">bilan du fil, constante de temps, choix du système</span></div>
+    <h4>Le bilan du fil</h4>
+    <p>Notons H la distance entre le tube contact et la pièce (en anglais <i>contact tip to work distance</i>, CTWD), L le fil sorti et l la longueur d'arc : H = L + l. Le fil avance à la vitesse v<sub>f</sub> et fond à la vitesse v<sub>m</sub>, qui dépend de l'intensité et du fil sorti. Le symbole d/dt désigne une dérivée par rapport au temps, c'est-à-dire une vitesse de variation :</p>
+    <div class="fx"><div class="big">d<span class="eps">l</span>/dt = v<sub>m</sub>(<span class="mat">I</span>, <span class="mat">L</span>) − v<sub>f</sub> + dH/dt</div><p class="cap">l, L, H en mm ; v en mm/s. À l'équilibre, le fil fond aussi vite qu'il arrive : v<sub>m</sub> = v<sub>f</sub></p></div>
+    <p>La vitesse de fusion suit un modèle classique à deux termes : un terme proportionnel à l'intensité (la chaleur de l'arc au bout du fil) et un terme en L·I²/d² (l'effet Joule dans le fil sorti). Calé sur des tableaux de fabricants (à ± 15 % près), il donne en kilogrammes par heure :</p>
+    <div class="fx"><div class="big"><span class="eps">MR</span> ≈ 0,0104·<span class="mat">I</span> + 9,5·10<sup>−7</sup>·<span class="mat">L</span>·<span class="mat">I</span>²/<span class="mat">d</span>²</div><p class="cap">MR en kg/h, I en A, L et d en mm ; fil de 4 mm, 600 A, L = 30 mm : 6,9 kg/h, soit 1,16 m/min de fil</p></div>
+    <p>Si l'arc s'écarte de sa longueur d'équilibre, il y revient de façon exponentielle, avec une <b>constante de temps</b> τ (le temps pour rattraper environ 63 % de l'écart) :</p>
+    <div class="fx"><div class="big">1/<span class="eps">τ</span> ≈ (∂v<sub>m</sub>/∂I)·|ΔI/Δl| + ∂v<sub>m</sub>/∂L (+ gain du dévidoir asservi)</div><p class="cap">∂ se lit « dérivée partielle » : la variation de v<sub>m</sub> quand une seule grandeur bouge, les autres restant fixes</p></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Fil et intensité</th><th>A : source plate, fil constant</th><th>Source tombante, fil constant</th><th>B : source tombante, dévidoir asservi</th></tr>
+      <tr><td>2,0 mm, 400 A</td><td class="n">τ ≈ 0,07 s</td><td class="n">≈ 1,0 s</td><td class="n">≈ 0,26 s</td></tr>
+      <tr><td>3,2 mm, 550 A</td><td class="n">≈ 0,22 s</td><td class="n">≈ 3,4 s</td><td class="n">≈ 0,31 s</td></tr>
+      <tr><td>4,0 mm, 600 A</td><td class="n">≈ 0,37 s</td><td class="n">≈ 6,1 s</td><td class="n">≈ 0,32 s</td></tr>
+      <tr><td>5,0 mm, 750 A</td><td class="n">≈ 0,60 s</td><td class="n">≈ 9,7 s</td><td class="n">≈ 0,33 s</td></tr>
+    </table></div>
+    <p>Lecture : plus le fil est <b>fin</b>, plus sa densité de courant est forte et plus l'autorégulation est rapide. Un gros fil sur source plate se régule encore, plus lentement. Sur source tombante sans asservissement, l'arc met plusieurs secondes à se rattraper : il « pompe », colle ou s'éteint. Le dévidoir asservi, lui, donne un temps de réponse presque indépendant du diamètre.</p>
+    <div class="def"><b>📖 Autorégulation</b> : propriété d'un arc alimenté par une source plate avec un fil à vitesse constante : toute variation de longueur d'arc change fortement l'intensité, donc la vitesse de fusion du fil, ce qui ramène l'arc à sa longueur d'équilibre sans aucun capteur.</div>
+    <p><b>Le choix en pratique</b> : la source plate avec fil à vitesse constante est la plus répandue, surtout pour les fils fins (environ 1,6 à 3,2 mm) et le soudage à grande vitesse ; la source tombante avec dévidoir asservi reste traditionnelle pour les gros fils (4 à 6 mm), les fortes intensités et le CA sinusoïdal. Les onduleurs récents proposent les deux modes.</p>
+    <div class="tip">💡 <b>Sur une source plate, l'intensité se règle avec la vitesse de fil</b> : pour monter de 600 à 700 A, on accélère le dévidoir ; la consigne de la source, elle, fixe la tension. Sur une source tombante asservie, c'est l'inverse : l'intensité sur la source, la tension sur le coffret du dévidoir.</div>
+    <div class="warn"><b>⚠️ Piège : croire que l'autorégulation garde l'intensité constante.</b> Elle garde la longueur d'arc ; l'intensité, elle, varie pour y parvenir. Au passage d'une bosse de 3 mm, un fil de 4 mm sur source plate voit son intensité bondir d'environ 225 A pendant quelques dixièmes de seconde (dans la réalité, l'inductance du circuit adoucit ce pic).</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « Fil fin, source plate ; gros fil, fil guidé »</b> : le fil fin se régule seul sur une source plate, le gros fil a besoin d'un dévidoir qui écoute la tension d'arc.</div>
+    <div class="weld"><b>🔥 Le fil sorti, réglage oublié</b>
+      <p>En source plate, changer la hauteur de la tête change le fil sorti, donc l'effet Joule dans le fil, donc l'intensité à vitesse de fil égale : relever la tête de 10 mm fait baisser l'intensité. Le mode opératoire fixe donc aussi la distance entre le tube contact et la pièce, et l'opérateur la contrôle au réglet avant d'amorcer.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c5">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">5</div>
+    <div class="c-title"><h2>La tête, les déplacements et le suivi de joint</h2><p>Dévidoir, tube contact, trémie, tracteur, potence, vireur, palpeur</p></div>
+    <div class="c-img"><span class="ico">🚜</span><span><small>Image à retenir</small>Le petit tracteur et son chien qui flaire le joint en avant</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le tracteur et son chien</span></div>
+    <p>Une <b>tête de soudage</b> rassemble, de haut en bas :</p>
+    <ol class="route">
+      <li><span class="dot">1</span><b>La réserve de fil</b><p>Bobine de 25 à 100 kg, fût ou couronne de plusieurs centaines de kilogrammes pour les grandes séries.</p></li>
+      <li><span class="dot">2</span><b>Le dévidoir et le redresseur de fil</b><p>Un moteur et des galets entraînent le fil ; des galets en quinconce le redressent, sinon il sortirait courbé et l'arc se décalerait.</p></li>
+      <li><span class="dot">3</span><b>Le tube contact</b><p>Pièce en alliage de cuivre qui transmet le courant au fil. Il s'use : un tube usé donne une prise de courant irrégulière.</p></li>
+      <li><span class="dot">4</span><b>La trémie et la buse de flux</b><p>La poudre descend par gravité (ou sous pression d'air) et se dépose devant l'arc ; un aspirateur récupère derrière l'excédent non fondu.</p></li>
+      <li><span class="dot">5</span><b>Les glissières et le pupitre</b><p>Des glissières croisées placent le fil en hauteur et en travers ; le pupitre affiche I, U et v, lance et arrête le cycle (rampes de départ et de fin).</p></li>
+    </ol>
+    <p>Pour <b>déplacer</b> l'arc le long du joint, trois familles :</p>
+    <ul>
+      <li><b>la tête bouge</b> : tracteur (chariot automoteur) roulant sur la tôle ou sur un rail ; potence, aussi appelée colonne-flèche, qui porte la tête au bout d'un bras ; portique au-dessus d'un banc ;</li>
+      <li><b>la pièce bouge</b> : vireur à galets qui fait tourner une virole, positionneur (tourne-pièce) qui incline et fait tourner une pièce ;</li>
+      <li><b>les deux bougent</b> : potence et vireur ensemble, par exemple pour souder une soudure longitudinale puis circulaire sans démonter.</li>
+    </ul>
+    <p>Comme on ne voit pas l'arc, la tête doit <b>suivre le joint</b> : un palpeur mécanique (roulette ou doigt qui frotte dans le chanfrein), un capteur laser qui mesure le profil du joint, ou le suivi par l'arc lui-même (le fil oscille et l'on mesure la variation d'intensité). Le palpeur est placé <b>en avant</b> du fil, comme un chien qui flaire la piste devant son maître.</p>
+  </div>
+
+  <div class="lab" id="m5">
+    <p class="lab-h">Manipulation 5 : le suivi de joint</p>
+    <p class="lab-sub">Vu de dessus, le joint (noir) ondule d'une amplitude <span class="tau">A</span> sur une longueur d'onde <span class="mat">λ</span> : c'est un défaut d'accostage. Le fil (orange) doit rester à ± 1 mm de l'axe du joint (tolérance de ce modèle). Choisis le mode de suivi et l'avance <span class="mat">a</span> du palpeur devant le fil. Le bouton ▶ fait rouler le tracteur ; la courbe violette trace l'écart entre le fil et le joint.</p>
+    <div class="btns" id="m5m">
+      <button class="btn" data-k="none" type="button">Sans suivi</button>
+      <button class="btn on" data-k="direct" type="button">Palpeur, correction immédiate</button>
+      <button class="btn" data-k="mem" type="button">Capteur avec mémoire</button>
+    </div>
+    <div class="ctrl"><label for="m5a">Amplitude <span class="tau">A</span></label><input type="range" id="m5a" class="r-tau" min="0" max="10" step="0.5" value="4"><output id="m5ao"></output></div>
+    <div class="ctrl"><label for="m5w">Longueur d'onde <span class="mat">λ</span></label><input type="range" id="m5w" class="r-mat" min="300" max="3000" step="50" value="1000"><output id="m5wo"></output></div>
+    <div class="ctrl"><label for="m5p">Avance du palpeur <span class="mat">a</span></label><input type="range" id="m5p" class="r-mat" min="0" max="200" step="5" value="80"><output id="m5po"></output></div>
+    <div class="btns"><button class="btn play" id="m5play" type="button">▶ Faire rouler le tracteur</button></div>
+    <svg id="m5svg" role="img" aria-label="Joint ondulé vu de dessus, trajectoire du fil et écart entre le fil et le joint selon le mode de suivi"></svg>
+    <div class="readout" id="m5r"></div>
+    <p class="status" id="m5msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">composants, déplacements, géométrie du suivi</span></div>
+    <h4>Pourquoi le palpeur doit avoir de la mémoire</h4>
+    <p>Le palpeur mesure le joint à une distance a <b>devant</b> le fil. Si la tête corrige immédiatement d'après cette mesure, le fil suit la position que le joint aura un peu plus loin, pas celle qu'il a sous l'arc. Pour un joint qui ondule en y = A·sin(2π·x/λ) (sin désigne la fonction sinus), l'écart maximal vaut :</p>
+    <div class="fx"><div class="big"><span class="tau">écart</span><sub>max</sub> = 2·<span class="tau">A</span>·|sin(π·<span class="mat">a</span>/<span class="mat">λ</span>)|</div><p class="cap">A = 4 mm, λ = 1 000 mm, a = 80 mm : 2 × 4 × sin(0,251) ≈ 2,0 mm, hors de la tolérance de ± 1 mm</p></div>
+    <p>Deux remèdes : rapprocher le palpeur du fil (ici, a ≤ 40 mm pour rester sous 1 mm), ou <b>mémoriser</b> les mesures et n'appliquer chaque correction qu'au moment où le fil arrive à l'endroit mesuré. C'est ce que font les capteurs laser modernes ; il ne reste alors que le retard du chariot de correction, qui doit pouvoir se déplacer en travers à la vitesse v·2π·A/λ (15 mm/min dans l'exemple, à 600 mm/min de soudage).</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Système</th><th>Ce qu'il déplace</th><th>Emplois typiques</th></tr>
+      <tr><td>Tracteur (chariot automoteur)</td><td>la tête, sur la tôle ou sur un rail</td><td>soudures d'angle de raidisseurs, longs joints droits, chantier</td></tr>
+      <tr><td>Potence (colonne-flèche)</td><td>la tête, au bout d'un bras réglable en hauteur et en portée</td><td>viroles, soudures longitudinales extérieures et intérieures</td></tr>
+      <tr><td>Portique</td><td>une ou plusieurs têtes au-dessus d'un banc</td><td>panneaux plats, poutres, soudures parallèles simultanées</td></tr>
+      <tr><td>Vireur à galets</td><td>la pièce cylindrique, en rotation</td><td>soudures circulaires de viroles et de tubes</td></tr>
+      <tr><td>Positionneur (tourne-pièce)</td><td>la pièce, inclinée et tournée</td><td>brides, pièces compactes, soudures circulaires</td></tr>
+      <tr><td>Banc de clamage</td><td>rien : il serre les tôles sur un support envers</td><td>raboutage de tôles à plat, en une seule face</td></tr>
+    </table></div>
+    <div class="def"><b>📖 Potence (colonne-flèche)</b> : manipulateur formé d'une colonne verticale, souvent pivotante et parfois montée sur rails, le long de laquelle coulisse une flèche horizontale qui porte la tête de soudage. Elle place la tête au-dessus ou à l'intérieur d'une virole.</div>
+    <div class="tip">💡 <b>Place le fil avant d'amorcer</b> : un pointeur laser ou une pointe de centrage montre où tombera l'arc. Une fois le flux versé, plus rien ne se voit ; un fil décalé de 2 mm à l'amorçage le restera sur tout le cordon si rien ne le suit.</div>
+    <div class="warn"><b>⚠️ Piège : le palpeur mesure le joint là où il est, pas là où est l'arc.</b> Sans mémoire, une grande avance du palpeur crée elle-même l'écart qu'elle devait corriger, surtout si le joint ondule sur une courte longueur.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « Tête qui roule, pièce qui tourne »</b> : tracteur, potence et portique font rouler la tête ; vireur et positionneur font tourner la pièce.</div>
+    <div class="weld"><b>🔥 Les pièces d'usure de la tête</b>
+      <p>Tube contact, galets du dévidoir, gaine et buse de flux s'usent. Un tube contact usé ou encrassé fait varier la prise de courant, donc l'intensité ; des galets mal serrés font patiner le fil. Le contrôle de la tête fait partie de la vérification avant soudage, comme la propreté du joint et l'état du flux.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c6">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">6</div>
+    <div class="c-title"><h2>Les installations types</h2><p>Panneaux, poutres, viroles : où placer le fil sur une pièce qui tourne</p></div>
+    <div class="c-img"><span class="ico">🎡</span><span><small>Image à retenir</small>La grande roue : on soude un peu avant le sommet, le bain se fige tout en haut</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la grande roue</span></div>
+    <p><b>Les soudures bout à bout</b> (BW, de l'anglais <i>butt weld</i>) se font sur trois grandes installations :</p>
+    <ul>
+      <li><b>le banc de clamage avec portique</b> : deux tôles serrées à plat sur une latte de cuivre ou un lit de flux, soudées d'un seul côté, par exemple pour les panneaux de navires ;</li>
+      <li><b>la potence et le vireur</b> : la virole roulée est soudée en long (la tête se déplace), puis les viroles sont assemblées par des soudures circulaires (la pièce tourne sous la tête) ;</li>
+      <li><b>les machines à tubes</b> : tubes soudés en long ou en hélice, souvent avec plusieurs fils, à l'intérieur puis à l'extérieur.</li>
+    </ul>
+    <p><b>Les soudures d'angle</b> (FW, de l'anglais <i>fillet weld</i>) se font surtout au tracteur, qui roule le long d'un raidisseur en angle à plat (PB), ou sur des poutres reconstituées qu'un positionneur incline pour souder en gouttière (PA), c'est-à-dire avec le cordon au fond d'un V ouvert vers le haut.</p>
+    <p>Sur une <b>virole qui tourne</b>, le bain et le laitier liquides sont emportés par la rotation. Si l'arc est au sommet, ils redescendent de l'autre côté encore liquides : le cordon coule. On place donc le fil un peu <b>avant le sommet</b>, du côté qui monte, comme une nacelle de grande roue qu'on chargerait juste avant le point haut : le bain se fige quand il passe en haut, à plat.</p>
+  </div>
+
+  <div class="lab" id="m6">
+    <p class="lab-h">Manipulation 6 : la virole qui tourne</p>
+    <p class="lab-sub">Soudure circulaire extérieure d'une virole de diamètre <span class="mat">D</span>, à la vitesse de soudage <span class="mat">v</span>. Règle le décalage <span class="mat">e</span> du fil avant le sommet (négatif : après le sommet). La lecture donne la vitesse de rotation à régler sur le vireur, l'angle et la flèche du décalage, la valeur repère d'un guide de TWI et la forme du cordon obtenue. Le bouton ▶ fait tourner la virole.</p>
+    <div class="ctrl"><label for="m6d">Diamètre <span class="mat">D</span></label><input type="range" id="m6d" class="r-mat" min="100" max="4000" step="50" value="1500"><output id="m6do"></output></div>
+    <div class="ctrl"><label for="m6v">Vitesse de soudage <span class="mat">v</span></label><input type="range" id="m6v" class="r-mat" min="300" max="1200" step="10" value="600"><output id="m6vo"></output></div>
+    <div class="ctrl"><label for="m6e">Décalage <span class="mat">e</span></label><input type="range" id="m6e" class="r-mat" min="-30" max="150" step="1" value="55"><output id="m6eo"></output></div>
+    <div class="btns"><button class="btn play" id="m6play" type="button">▶ Faire tourner la virole</button></div>
+    <svg id="m6svg" role="img" aria-label="Virole en rotation sous la tête de soudage, position du fil par rapport au sommet et forme du cordon"></svg>
+    <div class="readout" id="m6r"></div>
+    <p class="status" id="m6msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">vitesse de rotation, décalage, soudures intérieures</span></div>
+    <h4>La vitesse de rotation</h4>
+    <p>Sur un vireur, la vitesse de soudage est la vitesse de la surface de la virole sous le fil. Un tour fait π·D :</p>
+    <div class="fx"><div class="big"><span class="frc">n</span> = <span class="mat">v</span> / (π·<span class="mat">D</span>)</div><p class="cap">n en tours par minute (tr/min), v en mm/min, D en mm (diamètre là où l'on soude) : D = 1 500 mm et v = 600 mm/min donnent n = 0,127 tr/min, soit un tour en 7,9 min</p></div>
+    <h4>Le décalage avant le sommet</h4>
+    <p>Un guide de TWI donne le décalage du fil par rapport au sommet (en anglais <i>top dead centre</i>) selon le diamètre extérieur, pour une soudure circulaire extérieure. Il précise que la bonne valeur dépend aussi de l'épaisseur, de l'intensité et de la vitesse :</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Diamètre extérieur (mm)</th><td>25–75</td><td>75–450</td><td>450–900</td><td>900–1 050</td><td>1 050–1 200</td><td>1 200–1 800</td><td>&gt; 1 800</td></tr>
+      <tr><th>Décalage avant le sommet (mm)</th><td class="n">12</td><td class="n">22</td><td class="n">34</td><td class="n">40</td><td class="n">50</td><td class="n">55</td><td class="n">75</td></tr>
+    </table></div>
+    <p>Une lecture géométrique aide à le retenir : à une distance e du sommet, la surface d'un cylindre est descendue d'une flèche h ≈ e²/D. Pour toutes les lignes du tableau, cette flèche vaut environ <b>2 mm</b> (de 1,6 à 2,9 mm). Le fil se place donc là où la virole est environ 2 mm plus bas que son sommet.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Position du fil</th><th>Ce que voit le bain</th><th>Cordon</th></tr>
+      <tr><td>au sommet ou après (décalage nul ou négatif)</td><td>il descend le long de la pente : soudage « en montant » par rapport à la pièce</td><td>pénétration la plus forte, cordon étroit et bombé, risque de coulure</td></tr>
+      <tr><td>un peu avant le sommet (valeur du tableau)</td><td>il se fige au sommet, à plat</td><td>meilleur aspect, laitier facile à enlever</td></tr>
+      <tr><td>trop avant le sommet</td><td>soudage « en descendant » : le laitier liquide court devant l'arc</td><td>pénétration la plus faible, cordon plat, risque d'inclusions</td></tr>
+    </table></div>
+    <p><b>Soudure intérieure</b> : le même principe s'applique au point bas. On place le fil en amont du point bas, du côté d'où arrive la surface, pour que le bain se fige au point bas, à plat ; la tête est portée par la flèche de la potence qui entre dans la virole.</p>
+    <div class="def"><b>📖 Vireur</b> : banc de deux paires de galets, dont une au moins est motorisée, sur lequel repose une virole ou un tube ; il la fait tourner à vitesse réglée sous une tête fixe. Sa vitesse de rotation fixe la vitesse de soudage.</div>
+    <div class="tip">💡 <b>Retiens « 2 mm sous le sommet »</b> : sans tableau sous la main, place le fil là où la virole est descendue d'environ 2 mm, soit e ≈ √(2·D) ; pour D = 1 500 mm, cela donne environ 55 mm, la valeur du tableau.</div>
+    <div class="warn"><b>⚠️ Piège : régler la vitesse sur la tête alors que c'est la virole qui tourne.</b> En soudure circulaire, la tête est immobile et la vitesse de soudage se règle sur le vireur ; elle se calcule au diamètre où l'on soude. Une erreur de diamètre (intérieur au lieu d'extérieur) fausse d'autant la vitesse.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « Juste avant le toit »</b> : sur une virole, le fil se pose juste avant le sommet, et le bain se fige sur le toit, à plat.</div>
+    <div class="weld"><b>🔥 Petites viroles et fortes énergies</b>
+      <p>Plus le diamètre est petit, plus la pente change vite sous le bain : les fortes énergies y font couler le bain et le laitier, et le flux glisse de part et d'autre. On réduit alors l'énergie par passe, on retient la poudre par des guides, et l'on vérifie le faux-rond de la virole, qui fait varier la distance entre le tube contact et la pièce à chaque tour.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="exos">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✎</div>
+    <div class="c-title"><h2>Exercices corrigés</h2><p>Six exercices et un défi, de la désignation à la virole qui tourne</p></div>
+    <div class="c-img"><span class="ico">🏋️</span><span><small>Image à retenir</small>La salle de musculation : on ne progresse qu'en soulevant soi-même</span></div>
+  </div>
+  <div class="lv lv1"><div class="lv-h">👁 Mode d'emploi <span class="tag">acier : ρ = 7,85 g/cm³ = 7,85 × 10⁻³ g/mm³</span></div>
+    <p>Cherche chaque question sur papier avant d'ouvrir la correction. Écris la formule littérale, puis les valeurs avec leurs unités. Les manipulations 1 à 6 permettent de vérifier tes résultats ; le défi se rejoue dans les manipulations 4 et 6.</p>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 1 : sous la poudre <span class="lvtag">N1 · chapitre 1</span></h4>
+    <p class="q"><b>a)</b> Donne le numéro ISO 4063 du soudage sous flux avec un fil plein, avec un feuillard, avec un fil fourré, avec addition de poudre métallique.</p>
+    <p class="q"><b>b)</b> Dans quel ordre le fil rencontre-t-il le bain, le tube contact, l'arc et le dévidoir ?</p>
+    <p class="q"><b>c)</b> Pourquoi parle-t-on d'arc « submergé » ?</p>
+    <p class="q"><b>d)</b> Que deviennent le flux non fondu et le flux fondu ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Fil plein : <b>121</b> ; feuillard : <b>122</b> ; fil fourré : <b>125</b> ; addition de poudre métallique : <b>124</b> (le feuillard fourré est le 126).</p>
+      <p><b>b)</b> Dévidoir (qui le pousse), tube contact (qui lui donne le courant), arc (qui le fond), bain (où sa goutte tombe).</p>
+      <p><b>c)</b> Parce que l'arc brûle sous la couche de poudre, dans une cavité de gaz coiffée de flux fondu : il est invisible, comme submergé. Rien à voir avec l'eau.</p>
+      <p><b>d)</b> Le flux non fondu est aspiré, tamisé et réutilisé ; le flux fondu se fige en laitier, qui protège le cordon pendant son refroidissement puis s'enlève. Manipulation 1 : boutons « Flux en poudre » et « Laitier ».</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 2 : densité de courant et énergie <span class="lvtag">N1 · chapitre 2</span></h4>
+    <p class="q"><b>a)</b> Calcule la densité de courant d'une électrode enrobée dont l'âme mesure 4 mm, à 160 A.</p>
+    <p class="q"><b>b)</b> Même calcul pour un fil de soudage sous flux de 4 mm à 600 A, puis pour un fil MAG de 1,2 mm à 280 A.</p>
+    <p class="q"><b>c)</b> Une passe sous flux se fait à 580 A, 30 V et 550 mm/min. Calcule l'énergie de soudage E et l'apport de chaleur Q.</p>
+    <p class="q"><b>d)</b> Quelle aurait été Q avec les mêmes U, I et v pour un procédé de rendement k = 0,8 ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> S = π·d²/4 = π × 4²/4 = 12,57 mm² ; <span class="m">J = I/S = 160/12,57 = 12,7 A/mm²</span>.</p>
+      <p><b>b)</b> Sous flux : <span class="m">J = 600/12,57 = 47,7 A/mm²</span>. MAG : S = π × 1,2²/4 = 1,131 mm², <span class="m">J = 280/1,131 = 248 A/mm²</span>. La densité du sous flux est forte devant celle de l'électrode enrobée, faible devant celle du MAG.</p>
+      <p><b>c)</b> v = 550 mm/min = 9,17 mm/s ; <span class="m">E = U·I/v = 30 × 580/9,17 = 1 898 J/mm ≈ 1,9 kJ/mm</span> ; avec k = 1 (121) : <span class="m">Q ≈ 1,9 kJ/mm</span>.</p>
+      <p><b>d)</b> <span class="m">Q = 0,8 × 1,9 = 1,52 kJ/mm</span> : à réglage égal, la pièce reçoit 20 % de chaleur en moins qu'en sous flux.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 3 : la course des procédés <span class="lvtag">N2 · chapitre 2</span></h4>
+    <p>Joint bout à bout en V à 60°, tôles de 20 mm, talon 2 mm, écartement 2 mm, longueur 10 m. On majore la section de 10 % pour la surépaisseur.</p>
+    <p class="q"><b>a)</b> Calcule la section à remplir A = 1,1 × [(t − c)²·tan 30° + b·t].</p>
+    <p class="q"><b>b)</b> Calcule la masse de métal à déposer.</p>
+    <p class="q"><b>c)</b> Calcule le temps d'arc et le temps total en électrode enrobée (1,44 kg/h, taux d'arc 30 %), en sous flux à un fil (6,9 kg/h, 50 %) et en tandem (18,7 kg/h, 50 %).</p>
+    <p class="q"><b>d)</b> À 30 V, le flux se consomme à raison d'environ 1 kg par kg de fil. Quelle masse de flux faut-il prévoir pour le sous flux ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">A = 1,1 × [(20 − 2)² × 0,5774 + 2 × 20] = 1,1 × (187,1 + 40) = 249,8 mm²</span>.</p>
+      <p><b>b)</b> <span class="m">m = A·L·ρ = 249,8 mm² × 10 000 mm × 7,85 × 10⁻³ g/mm³ = 19 609 g ≈ 19,6 kg</span>.</p>
+      <p><b>c)</b> Électrode enrobée : <span class="m">19,6/1,44 = 13,6 h d'arc</span>, soit <span class="m">13,6/0,30 = 45,3 h</span> de travail. Sous flux à un fil : <span class="m">19,6/6,88 = 2,85 h</span> d'arc, <span class="m">5,7 h</span> au total. Tandem : <span class="m">1,05 h</span> d'arc, <span class="m">2,1 h</span> au total. Le sous flux divise le temps de travail par 8 avec un fil, par plus de 20 en tandem. Manipulation 2 : t = 20 mm, L = 10 m.</p>
+      <p><b>d)</b> Environ <span class="m">19,6 kg</span> de flux fondu, auxquels s'ajoute la poudre recyclée qui circule sans fondre.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 4 : le générateur <span class="lvtag">N2 · chapitre 3</span></h4>
+    <p>Modèle d'arc : U = 18 + 0,01·I + 1,5·l (U en V, I en A, l en mm).</p>
+    <p class="q"><b>a)</b> Source plate réglée à U<sub>0</sub> = 39 V, pente 1 V/100 A. Calcule I et U pour un arc de 6 mm.</p>
+    <p class="q"><b>b)</b> L'arc passe à 8 mm. Nouvelle intensité ? Variation ?</p>
+    <p class="q"><b>c)</b> Source tombante réglée à 600 A (pente 50 V/100 A, passant par 32 V à 600 A). Calcule I pour 6 mm puis 8 mm.</p>
+    <p class="q"><b>d)</b> Une autre plaque annonce 1 250 A à 60 %. Quelle intensité tient-elle à 100 % ? Peut-elle souder une virole en continu à 1 100 A ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> 39 − 0,01·I = 18 + 0,01·I + 9, d'où <span class="m">I = (39 − 27)/0,02 = 600 A</span> et <span class="m">U = 33 V</span>.</p>
+      <p><b>b)</b> <span class="m">I = (39 − 18 − 12)/0,02 = 450 A</span> : −150 A pour 2 mm, soit −75 A/mm.</p>
+      <p><b>c)</b> 32 − 0,5·(I − 600) = 18 + 0,01·I + 1,5·l, d'où I = (32 + 300 − 18 − 1,5·l)/0,51. Pour 6 mm : <span class="m">I = 305/0,51 = 598 A</span> ; pour 8 mm : <span class="m">I = 302/0,51 = 592 A</span>, soit −6 A seulement. Manipulation 3.</p>
+      <p><b>d)</b> <span class="m">I<sub>100</sub> = 1 250 × √0,6 = 968 A</span>. À 1 100 A, le facteur de marche admis vaut <span class="m">60 × (1 250/1 100)² = 77,5 %</span> : moins de 100 %, donc pas de soudage continu à 1 100 A ; la source déclencherait sa protection thermique au cours d'une longue soudure.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 5 : la balance du fil <span class="lvtag">N2 · chapitre 4</span></h4>
+    <p>Modèle : MR = 0,0104·I + 9,5 × 10⁻⁷·L·I²/d² (kg/h ; I en A ; L et d en mm).</p>
+    <p class="q"><b>a)</b> Fil de 4 mm, 600 A, fil sorti 30 mm : calcule le taux de fusion et la vitesse du fil.</p>
+    <p class="q"><b>b)</b> En source plate (−75 A/mm), une bosse de 3 mm raccourcit l'arc d'autant. Quelle intensité juste après ?</p>
+    <p class="q"><b>c)</b> Le modèle donne τ ≈ 0,37 s en source plate, 6,1 s en source tombante avec fil constant, 0,32 s avec dévidoir asservi. Que choisir pour ce fil, et pourquoi ?</p>
+    <p class="q"><b>d)</b> Un fil de 2 mm à 400 A a τ ≈ 0,07 s en source plate. Pourquoi est-il plus rapide ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">MR = 0,0104 × 600 + 9,5 × 10⁻⁷ × 30 × 600²/16 = 6,24 + 0,64 = 6,88 kg/h</span>. Masse linéique du fil : 12,57 mm² × 7,85 g/cm³ = 0,0987 kg/m ; <span class="m">v<sub>f</sub> = 6,88/(0,0987 × 60) = 1,16 m/min</span>.</p>
+      <p><b>b)</b> <span class="m">I ≈ 600 + 75 × 3 = 825 A</span> pendant un instant, avant que l'arc ne se rallonge.</p>
+      <p><b>c)</b> La source plate avec fil constant (autorégulation) ou la source tombante avec dévidoir asservi : toutes deux ramènent l'arc en quelques dixièmes de seconde. Jamais une source tombante avec un fil à vitesse constante : 6 s pour se rattraper, l'arc pompe, colle ou s'éteint.</p>
+      <p><b>d)</b> Sa densité de courant est plus forte (127 A/mm² contre 48) : l'effet Joule dans le fil sorti pèse davantage, et une même variation d'intensité change beaucoup plus sa vitesse de fusion (3,6 m/min de fil à l'équilibre). Manipulation 4 : comparer « fil 2,0 mm » et « fil 4,0 mm ».</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 6 : suivre le joint et souder une virole <span class="lvtag">N1 et N2 · chapitres 5 et 6</span></h4>
+    <p class="q"><b>a)</b> Un joint ondule de ± 4 mm sur 1 000 mm. Le palpeur est 80 mm devant le fil et la tête corrige immédiatement. Quel écart maximal ? Quelle avance maximale pour rester sous 1 mm ?</p>
+    <p class="q"><b>b)</b> Virole de 1 000 mm de diamètre extérieur, soudée à 500 mm/min : vitesse de rotation du vireur et durée d'un tour ?</p>
+    <p class="q"><b>c)</b> Décalage du fil selon le tableau de TWI ; flèche correspondante ?</p>
+    <p class="q"><b>d)</b> L'opérateur place le fil au sommet. Que craindre ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">écart = 2·A·|sin(π·a/λ)| = 8 × sin(0,251) = 2,0 mm</span>. Pour 1 mm : sin(π·a/λ) ≤ 1/8, d'où <span class="m">a ≤ (1 000/π) × arcsin(0,125) = 40 mm</span> (arcsin est la fonction réciproque du sinus). Manipulation 5.</p>
+      <p><b>b)</b> <span class="m">n = v/(π·D) = 500/(π × 1 000) = 0,159 tr/min</span> ; un tour dure <span class="m">π × 1 000/500 = 6,3 min</span>.</p>
+      <p><b>c)</b> Ligne 900–1 050 mm : <span class="m">e = 40 mm</span> avant le sommet ; <span class="m">h = e²/D = 1 600/1 000 = 1,6 mm</span> ; angle <span class="m">40/500 = 0,08 rad ≈ 4,6°</span>. Manipulation 6.</p>
+      <p><b>d)</b> Le bain se fige sur la pente descendante : soudage « en montant » par rapport à la pièce, cordon étroit et bombé, pénétration forte, risque de coulure du bain et du laitier.</p>
+    </div></details>
+  </div>
+
+  <div class="exo defi">
+    <h4>🏆 Défi : la grande virole et son faux-rond <span class="lvtag">N2 · chapitres 4 et 6, à rejouer dans les manipulations 4 et 6</span></h4>
+    <p>Une virole de 2 400 mm de diamètre extérieur reçoit une soudure circulaire extérieure, avec un fil de 4 mm à 650 A sur source plate (fil à vitesse constante), à 650 mm/min. Elle n'est pas parfaitement ronde : à chaque tour, la distance entre le tube contact et la pièce diminue de 3 mm pendant 2 secondes.</p>
+    <p class="q"><b>a)</b> Calcule la vitesse de rotation du vireur et la durée d'un tour.</p>
+    <p class="q"><b>b)</b> Où placer le fil ? Donne la flèche et l'angle correspondants.</p>
+    <p class="q"><b>c)</b> Au passage du faux-rond, quelle intensité maximale l'arc atteint-il, et en combien de temps revient-il à ± 0,5 mm de sa longueur ?</p>
+    <p class="q"><b>d)</b> Que se passerait-il avec une source tombante et un fil à vitesse constante ? Quelle autre solution conviendrait ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">n = 650/(π × 2 400) = 0,0862 tr/min</span> ; un tour dure <span class="m">π × 2 400/650 = 11,6 min</span>.</p>
+      <p><b>b)</b> Diamètre supérieur à 1 800 mm : <span class="m">e = 75 mm</span> avant le sommet, côté qui monte ; <span class="m">h = 75²/2 400 = 2,3 mm</span> ; angle <span class="m">75/1 200 = 0,0625 rad ≈ 3,6°</span>. Manipulation 6 : D = 2 400 mm, v = 650 mm/min, e = 75 mm.</p>
+      <p><b>c)</b> L'arc tombe de 6 à 3 mm : <span class="m">I ≈ 650 + 75 × 3 = 875 A</span> ; il revient à ± 0,5 mm en <span class="m">0,7 s environ</span> (constante de temps τ ≈ 0,36 s). Manipulation 4 : source plate, fil 4,0 mm, I = 650 A, Δh = 3 mm.</p>
+      <p><b>d)</b> Avec une source tombante et un fil constant, τ ≈ 5,7 s : l'arc reste raccourci (environ 3,5 mm au bout de 2 s) pendant tout le faux-rond, risque de collage et de cordon irrégulier. Le dévidoir asservi à la tension d'arc convient aussi (retour en 0,6 s environ).</p>
+    </div></details>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="quiz-s">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">?</div>
+    <div class="c-title"><h2>Quiz : 12 questions éclair</h2><p>Chaque réponse est expliquée, même quand tu as juste</p></div>
+    <div class="c-img"><span class="ico">🎯</span><span><small>Image à retenir</small>La cible : vise 10 sur 12 avant de passer au cours 2</span></div>
+  </div>
+  <div id="quiz"></div>
+  <div class="score" id="qzScore" aria-live="polite">Score : 0 / 12</div>
+  <div class="btns"><button class="btn" id="qzReset" type="button">↺ Recommencer le quiz</button></div>
+</div>
+</section>
+
+<section class="chap" id="fiche">
+<div class="wrap wide">
+  <div class="cartouche">
+    <div class="c-num">★</div>
+    <div class="c-title"><h2>Fiche mémoire du cours 1</h2><p>Neuf cases, neuf images : à photographier, puis à redessiner de tête</p></div>
+    <div class="c-img"><span class="ico">👻</span><span><small>Image à retenir</small>L'arc fantôme : ses inventeurs juraient qu'il n'existait pas</span></div>
+  </div>
+  <div class="fiche">
+    <div><div class="ic">🏖️</div><h4>Le feu sous le sable</h4><div class="f">121 · 122 · 124 · 125 · 126</div><p>Fil, tube contact, flux, cavité d'arc, bain, laitier. Le flux froid est isolant, fondu il conduit.</p></div>
+    <div><div class="ic">🚄</div><h4>Le TGV</h4><div class="f">I · P · A · D · P · F · R</div><p>Invisible, sans projections, automatique, dense, profond, fiable, rentable ; à plat (PA, PB), avec une installation.</p></div>
+    <div><div class="ic">⚡</div><h4>La densité</h4><div class="f"><span class="eps">J</span> = <span class="mat">I</span>/(π·<span class="mat">d</span>²/4)</div><p>4 mm à 600 A : 48 A/mm², contre 13 pour l'électrode enrobée ; 6 à 8 kg/h par fil.</p></div>
+    <div><div class="ic">🔥</div><h4>L'énergie</h4><div class="f"><span class="sig">Q</span> = k·<span class="mat">U</span>·<span class="mat">I</span>/<span class="mat">v</span>, k = 1</div><p>580 A, 30 V, 550 mm/min : 1,9 kJ/mm, typique d'une passe sous flux.</p></div>
+    <div><div class="ic">🏃</div><h4>Le marathonien</h4><div class="f">I<sub>X</sub> = I<sub>100</sub>·√(100/X)</div><p>Facteur de marche sur 10 min (IEC 60974-1) ; lire d'abord la ligne 100 %.</p></div>
+    <div><div class="ic">📐</div><h4>Plate ou tombante</h4><div class="f">ΔI/Δl = −1,5/(p + 0,01)</div><p>Plate : −75 A par mm d'arc ; tombante : −3 A par mm.</p></div>
+    <div><div class="ic">⚖️</div><h4>La balance</h4><div class="f">v<sub>m</sub> = v<sub>f</sub></div><p>Fil fin et source plate : autorégulation (τ de 0,07 à 0,6 s) ; gros fil : dévidoir asservi à la tension.</p></div>
+    <div><div class="ic">🚜</div><h4>Le tracteur et son chien</h4><div class="f">écart = 2A·|sin(π·a/λ)|</div><p>Tête qui roule (tracteur, potence, portique), pièce qui tourne (vireur, positionneur) ; palpeur avec mémoire.</p></div>
+    <div><div class="ic">🎡</div><h4>La grande roue</h4><div class="f"><span class="frc">n</span> = <span class="mat">v</span>/(π·<span class="mat">D</span>) · h ≈ e²/D ≈ 2 mm</div><p>Fil juste avant le sommet, côté qui monte : le bain se fige à plat.</p></div>
+  </div>
+  <div class="fun"><span class="fun-h">👻 Fun fact : l'arc fantôme</span>Le brevet américain déposé en 1935 par Jones, Kennedy et Rotermund affirmait que leur procédé ne reposait pas sur un arc ordinaire : selon eux, la chaleur naissait dans le flux fondu traversé par le courant, comme dans une résistance. La preuve du contraire est venue d'URSS, pendant la Seconde Guerre mondiale. L'Institut de soudage électrique d'Evgueni Paton, évacué de Kiev à Nijni Taguil, dans l'Oural, y mettait le soudage sous flux au service des coques de chars. Boris Paton et A. M. Makara y démontrèrent par l'expérience qu'un véritable arc brûle sous le flux, et V. I. Diatlov y mit en évidence l'autorégulation de la fusion du fil, qui permit de construire des têtes simplifiées à vitesse de fil constante. Fin 1943, le procédé était maîtrisé dans 52 usines. L'autorégulation est au cœur du <a href="#c4">chapitre 4</a>.</div>
+</div>
+</section>
+
+<section class="chap" id="gloss">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">A–Z</div>
+    <div class="c-title"><h2>Glossaire</h2><p>Les mots, symboles et sigles de ce cours</p></div>
+    <div class="c-img"><span class="ico">📖</span><span><small>Image à retenir</small>Le dictionnaire : un mot flou, un clic</span></div>
+  </div>
+  <dl class="gloss">
+    <dt>A, λ, a</dt><dd>Suivi de joint : amplitude de l'ondulation du joint (mm) ; sa longueur d'onde (mm) ; avance du palpeur devant le fil (mm).</dd>
+    <dt>Amorçage par contact et retrait</dt><dd>Le fil approche lentement jusqu'à toucher la pièce, puis se relève pour tirer l'arc. Autres moyens : fil coupé en pointe, pelote de laine d'acier, haute fréquence.</dd>
+    <dt>Autorégulation</dt><dd>Retour spontané de la longueur d'arc à l'équilibre, avec une source plate et un fil à vitesse constante : l'intensité varie fortement avec la longueur d'arc, donc la vitesse de fusion aussi.</dd>
+    <dt>Banc de clamage</dt><dd>Banc qui serre deux tôles à plat sur un support envers (latte de cuivre, lit de flux) pour les souder d'un seul côté.</dd>
+    <dt>BW, FW</dt><dd>Soudure bout à bout (<i>butt weld</i>) ; soudure d'angle (<i>fillet weld</i>).</dd>
+    <dt>CA, CA carré, équilibre</dt><dd>Courant alternatif ; courant alternatif à fronts raides produit par un onduleur ; part du temps passée au pôle positif, réglable.</dd>
+    <dt>Caractéristique plate, tombante</dt><dd>Courbe tension-intensité d'une source : presque horizontale (tension constante, CV en anglais) ou presque verticale (intensité constante, CC en anglais).</dd>
+    <dt>Cavité d'arc</dt><dd>Bulle de gaz et de vapeurs, coiffée de flux fondu, dans laquelle brûle l'arc.</dd>
+    <dt>CC+, CC−</dt><dd>Courant continu, fil au pôle positif ; courant continu, fil au pôle négatif.</dd>
+    <dt>Constante de temps τ</dt><dd>Temps pour rattraper environ 63 % d'un écart de longueur d'arc (s).</dd>
+    <dt>CTWD, H</dt><dd>Distance entre le tube contact et la pièce (<i>contact tip to work distance</i>) : H = L + l.</dd>
+    <dt>Δh</dt><dd>Hauteur d'une bosse ou d'un faux-rond qui raccourcit la distance entre le tube contact et la pièce (mm).</dd>
+    <dt>D, e, h, n</dt><dd>Virole : diamètre extérieur (mm) ; décalage du fil avant le sommet (mm) ; flèche h ≈ e²/D (mm) ; vitesse de rotation (tr/min).</dd>
+    <dt>Densité de courant J</dt><dd>Intensité divisée par la section du fil ou de l'âme de l'électrode (A/mm²).</dd>
+    <dt>Dévidoir, dévidoir asservi</dt><dd>Moteur et galets qui poussent le fil ; dévidoir dont la vitesse suit la tension d'arc (régulation par la tension d'arc).</dd>
+    <dt>E, Q, k</dt><dd>Énergie de soudage U·I/v ; apport de chaleur Q = k·E ; rendement thermique relatif du procédé (k = 1 pour le 121, 0,8 pour le 111 et le 135 selon l'EN 1011-1) (kJ/mm).</dd>
+    <dt>EN 1011-1, ISO/TR 17671-1</dt><dd>Recommandations pour le soudage des matériaux métalliques, partie générale ; elles donnent notamment le rendement thermique k.</dd>
+    <dt>Facteur de marche X</dt><dd>Part (%) d'un cycle de 10 minutes pendant laquelle une source peut souder à une intensité donnée sans surchauffer (IEC 60974-1).</dd>
+    <dt>Fil sorti L</dt><dd>Longueur de fil entre le tube contact et le début de l'arc (en anglais <i>stick-out</i>) ; elle chauffe par effet Joule (mm).</dd>
+    <dt>Flux</dt><dd>Produit minéral granulaire et fusible qui protège l'arc et le bain, forme le laitier et agit sur la composition du métal fondu (ISO 14174).</dd>
+    <dt>h<sub>f</sub></dt><dd>Hauteur de la couche de flux en poudre sur le joint (mm).</dd>
+    <dt>I, U, v, d</dt><dd>Intensité (A) ; tension (V) ; vitesse de soudage (mm/min) ; diamètre du fil (mm).</dd>
+    <dt>IEC 60974-1</dt><dd>Norme de sécurité des sources de courant de soudage à l'arc (facteur de marche, plaque signalétique).</dd>
+    <dt>IIW, IWE, TWI</dt><dd>Institut international de la soudure ; ingénieur international en soudage ; <i>The Welding Institute</i>, centre britannique de recherche sur le soudage.</dd>
+    <dt>ISO 4063 : 12, 121, 122, 124, 125, 126</dt><dd>Numéros du soudage à l'arc sous flux : groupe ; fil plein ; feuillard ; addition de poudre métallique ; fil fourré ; feuillard fourré.</dd>
+    <dt>Laitier</dt><dd>Flux fondu puis figé en croûte vitreuse sur le cordon.</dd>
+    <dt>l</dt><dd>Longueur d'arc, entre le bout du fil et le bain (mm).</dd>
+    <dt>MR, taux de dépôt</dt><dd>Masse de fil fondue par heure d'arc (kg/h) ; masse déposée par heure d'arc, presque égale en sous flux.</dd>
+    <dt>Onduleur</dt><dd>Source électronique qui découpe le courant à haute fréquence ; elle fournit du CC ou un CA carré réglable.</dd>
+    <dt>p, U<sub>0</sub>, I<sub>r</sub></dt><dd>Pente d'une source plate (V/100 A) ; tension à vide réglée (V) ; intensité réglée d'une source tombante (A).</dd>
+    <dt>PA, PB, PC</dt><dd>Positions de soudage (ISO 6947) : à plat ; en angle à plat ; en corniche.</dd>
+    <dt>Palpeur</dt><dd>Capteur, mécanique ou laser, placé devant le fil pour mesurer la position du joint.</dd>
+    <dt>Point de fonctionnement</dt><dd>Croisement de la caractéristique de la source et de celle de l'arc.</dd>
+    <dt>Portique, potence (colonne-flèche)</dt><dd>Manipulateurs portant la tête : pont au-dessus d'un banc ; colonne et bras horizontal réglables.</dd>
+    <dt>Positionneur, vireur</dt><dd>Machines qui déplacent la pièce : tourne-pièce inclinable ; banc à galets qui fait tourner une virole.</dd>
+    <dt>Redresseur de fil</dt><dd>Jeu de galets qui supprime la courbure du fil sorti de la bobine.</dd>
+    <dt>SAW, UP</dt><dd>Sigles anglais et allemand du soudage à l'arc sous flux.</dd>
+    <dt>Sommet</dt><dd>Point haut d'une virole (en anglais <i>top dead centre</i>) ; le fil se place un peu avant lui.</dd>
+    <dt>Taux d'arc</dt><dd>Part du temps de travail pendant laquelle l'arc brûle (%).</dd>
+    <dt>Tracteur (chariot automoteur)</dt><dd>Petit chariot motorisé qui porte la tête et roule sur la tôle ou sur un rail.</dd>
+    <dt>Trémie</dt><dd>Réservoir de flux au-dessus de la tête, qui alimente la buse par gravité ou sous pression d'air.</dd>
+    <dt>Tube contact</dt><dd>Pièce en alliage de cuivre qui transmet le courant au fil ; pièce d'usure.</dd>
+    <dt>v<sub>f</sub>, v<sub>m</sub></dt><dd>Vitesse d'avance du fil ; vitesse de fusion du fil (mm/s ou m/min).</dd>
+    <dt>ZAT</dt><dd>Zone affectée thermiquement : métal de base chauffé sans fondre, dont la structure change.</dd>
+  </dl>
+</div>
+</section>
+
+<section class="chap" id="check">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✓</div>
+    <div class="c-title"><h2>Suis-je prêt pour la suite ?</h2><p>Dix points à cocher de tête</p></div>
+    <div class="c-img"><span class="ico">🚦</span><span><small>Image à retenir</small>Le feu passe au vert quand tout est coché</span></div>
+  </div>
+  <p>Coche seulement ce que tu sais faire <b>sans regarder</b>. Tes coches restent enregistrées dans ce navigateur.</p>
+  <div class="check" id="checklist">
+    <label><input type="checkbox" data-c="1"> <span>Je sais donner les numéros ISO 4063 du soudage sous flux et ce que chacun désigne.</span></label>
+    <label><input type="checkbox" data-c="2"> <span>Je sais dessiner la coupe sous le flux : fil, tube contact, flux, cavité d'arc, bain, laitier.</span></label>
+    <label><input type="checkbox" data-c="3"> <span>Je sais citer les sept particularités du procédé, ses limites et ses applications.</span></label>
+    <label><input type="checkbox" data-c="4"> <span>Je sais calculer une densité de courant, une énergie de soudage et comparer des temps de soudage.</span></label>
+    <label><input type="checkbox" data-c="5"> <span>Je sais distinguer les familles de sources, les caractéristiques plate et tombante, et lire un facteur de marche.</span></label>
+    <label><input type="checkbox" data-c="6"> <span>Je sais expliquer l'autorégulation et la régulation par la tension d'arc, et quand choisir chacune.</span></label>
+    <label><input type="checkbox" data-c="7"> <span>Je sais décrire les moyens d'amorcer l'arc sous la poudre.</span></label>
+    <label><input type="checkbox" data-c="8"> <span>Je sais nommer les éléments d'une tête et les machines qui déplacent la tête ou la pièce.</span></label>
+    <label><input type="checkbox" data-c="9"> <span>Je sais expliquer pourquoi le palpeur doit avoir de la mémoire.</span></label>
+    <label><input type="checkbox" data-c="10"> <span>Je sais régler une soudure circulaire : vitesse de rotation et décalage avant le sommet.</span></label>
+  </div>
+  <p class="status" id="checkMsg"></p>
+
+  <div class="meta">🔭 <b>Au prochain épisode, cours 2 : flux, fils et métal déposé.</b> On ouvrira le sac de poudre : à quoi sert chaque constituant du flux, ce qui distingue un flux fondu d'un flux aggloméré, ce que mesure l'indice de basicité, pourquoi le grain et la couche de flux comptent, comment stocker, étuver et recycler la poudre. Puis viendront les fils, les désignations de l'ISO 14174 et de l'ISO 14171, et le calcul de la composition du métal déposé quand le flux ajoute du manganèse et que la tôle se dilue dans le cordon.</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+  <p>Cours 1 sur 4 de la série « Soudage à l'arc sous flux (arc submergé) : de la poudre au joint épais » (sujet 1.10 du planning). Désignations alignées sur l'ISO 4063:2023 ; facteur de marche selon l'IEC 60974-1 ; rendement thermique selon l'EN 1011-1 ; pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
+</div>
+</footer>
+
+
+<script>
+(function(){
+"use strict";
+const NS="http://www.w3.org/2000/svg";
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function el(tag,attrs,parent){
+  const e=document.createElementNS(NS,tag);
+  if(attrs){for(const k in attrs){const v=attrs[k];if(v===undefined||v===null)continue;
+    if(typeof v==="string"&&v.indexOf("var(")>=0&&k!=="style")e.style.setProperty(k,v);else e.setAttribute(k,v);}}
+  if(parent)parent.appendChild(e);
+  return e;
+}
+function tx(p,x,y,str,attrs){const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);t.textContent=str;return t;}
+function txs(p,x,y,parts,attrs){/* parts: [["σ",""],["max","sub"],[" = 3",""]] */
+  const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);
+  parts.forEach(pt=>{const s=el("tspan",pt[1]==="sub"?{"font-size":"0.72em",dy:"3"}:(pt[2]?{dy:pt[2]}:{}),t);s.textContent=pt[0];
+    if(pt[1]==="sub"){const r=el("tspan",{dy:"-3"},t);r.textContent="\u200b";}});
+  return t;
+}
+function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild);}
+function fitText(t,x0,x1,gap){/* garde un texte SVG entre x0 et x1 : il passe de l'autre côté de son repère (écart gap), sinon il glisse */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const a=t.getAttribute("text-anchor")||"start",x=+t.getAttribute("x");
+  if(gap&&a!=="middle"&&(b.x<x0||b.x+b.width>x1)){t.setAttribute("text-anchor",a==="end"?"start":"end");t.setAttribute("x",a==="end"?x+2*gap:x-2*gap);b=t.getBBox();}
+  const nx=+t.getAttribute("x");
+  if(b.x+b.width>x1)t.setAttribute("x",nx-(b.x+b.width-x1));else if(b.x<x0)t.setAttribute("x",nx+(x0-b.x));
+  return t;}
+function arrow(p,x1,y1,x2,y2,color,w,h){
+  w=w||2.4;h=h||10;
+  const g=el("g",{class:"arr"},p);g.style.color=color||"var(--ink)";
+  const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy);
+  if(L<1)return g;
+  const ux=dx/L,uy=dy/L,hh=Math.min(h,L*0.6),bx=x2-ux*hh,by=y2-uy*hh,hw=hh*0.45+w*0.3;
+  el("line",{x1:x1,y1:y1,x2:bx,y2:by,"stroke-width":w,"stroke-linecap":"round"},g);
+  el("polygon",{points:x2+","+y2+" "+(bx-uy*hw)+","+(by+ux*hw)+" "+(bx+uy*hw)+","+(by-ux*hw)},g);
+  return g;
+}
+function darrow(p,x,y1,y2,color,w){/* double flèche verticale */
+  const g=el("g",{},p);const m=(y1+y2)/2;
+  if(Math.abs(y2-y1)<4){el("line",{x1:x-5,y1:y1,x2:x+5,y2:y1,stroke:color,"stroke-width":2},g);return g;}
+  arrow(g,x,m,x,y1,color,w||2,8);arrow(g,x,m,x,y2,color,w||2,8);return g;
+}
+function nf(v,d){
+  if(d===undefined)d=1;
+  if(Math.abs(v)<0.5*Math.pow(10,-d))v=0;
+  return v.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d}).replace("-","−").replace(/[\u202f\u2009]/g,"\u00a0");
+}
+const SUP={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sci(v,d){
+  if(v===0)return "0";
+  if(!isFinite(v))return "∞";
+  let e=Math.floor(Math.log10(Math.abs(v)));
+  let m=v/Math.pow(10,e);
+  const dd=d===undefined?1:d;
+  if(Math.abs(Number(m.toFixed(dd)))>=10){m/=10;e+=1;}
+  return nf(m,dd)+" × 10"+String(e).split("").map(c=>SUP[c]).join("");
+}
+function bigN(v){/* nombre de cycles lisible */
+  if(!isFinite(v))return "∞";
+  if(v===0)return "0";
+  if(v<10)return nf(v,v<1?2:0);
+  if(v<1e5)return nf(Math.round(v),0);
+  return sci(v,1);
+}
+function dur(s){
+  if(!isFinite(s))return "∞";
+  if(s<60)return nf(s,s<10?1:0)+" s";
+  if(s<3600)return nf(s/60,0)+" min";
+  if(s<86400)return nf(s/3600,1)+" h";
+  if(s<86400*365)return nf(s/86400,1)+" jours";
+  return nf(s/(86400*365),1)+" ans";
+}
+function svgW(svg){const r=svg.getBoundingClientRect();return Math.max(290,Math.round(r.width||(svg.parentNode&&svg.parentNode.clientWidth)||600));}
+function setVB(svg,W,H){svg.setAttribute("viewBox","0 0 "+W+" "+H);}
+const redraws=[];
+let rzT=null,lastWW=window.innerWidth;
+window.addEventListener("resize",()=>{if(window.innerWidth===lastWW)return;lastWW=window.innerWidth;clearTimeout(rzT);rzT=setTimeout(()=>redraws.forEach(f=>{try{f();}catch(e){console.error(e);}}),120);});
+
+function niceStep(range,n){const raw=range/(n||5),p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<1.5?1:m<3?2:m<7?5:10)*p;}
+function setOn(sel,btn){$$(sel+" .btn").forEach(b=>b.classList.toggle("on",b===btn));}
+function fmtmm(mm){return mm<0.1?nf(mm*1000,0)+" µm":mm<10?nf(mm,mm<1?2:1)+" mm":nf(mm,0)+" mm";}
+function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt,yfmt){
+  const X=v=>x0+(x1-x0)*(v-xmin)/(xmax-xmin),Y=v=>y1-(y1-y0)*(v-ymin)/(ymax-ymin);
+  for(let v=Math.ceil(ymin/ystep-1e-9)*ystep;v<=ymax+1e-9;v+=ystep){el("line",{x1:x0,y1:Y(v),x2:x1,y2:Y(v),class:"gridbg"},svg);tx(svg,x0-5,Y(v)+4,yfmt?yfmt(v):nf(v,ystep<1?1:0),{class:"lbl","text-anchor":"end"});}
+  for(let v=Math.ceil(xmin/xstep-1e-9)*xstep;v<=xmax+1e-9;v+=xstep){el("line",{x1:X(v),y1:y1,x2:X(v),y2:y1+4,class:"tick"},svg);tx(svg,X(v),y1+17,xfmt?xfmt(v):nf(v,xstep<1?1:0),{class:"lbl","text-anchor":"middle"});}
+  el("line",{x1:x0,y1:y1,x2:x1,y2:y1,class:"axis"},svg);el("line",{x1:x0,y1:y0-4,x2:x0,y2:y1,class:"axis"},svg);
+  tx(svg,x0+4,y0-10,ylab,{class:"lbl"});tx(svg,x1,y1+32,xlab,{class:"lbl","text-anchor":"end"});
+  return {X:X,Y:Y};
+}
+function animate(btn,label,dur,onStep,onEnd){
+  let raf=null,run=false;
+  function stop(){run=false;if(raf)cancelAnimationFrame(raf);raf=null;btn.textContent=label;}
+  function start(){if(run){stop();return;}if(RM){onStep(1);stop();if(onEnd)onEnd();return;}
+    run=true;btn.textContent="⏸ Pause";const t0=performance.now();
+    const step=now=>{const p=Math.min(1,(now-t0)/dur);onStep(p);if(p>=1){stop();if(onEnd)onEnd();return;}raf=requestAnimationFrame(step);};raf=requestAnimationFrame(step);}
+  btn.addEventListener("click",start);return {stop:stop,running:()=>run};
+}
+
+
+function sig2(v){/* arrondi à deux chiffres significatifs */
+  if(v<=0)return 0;const p=Math.pow(10,Math.floor(Math.log10(v))-1);return Math.round(v/p)*p;}
+function halo(t,svg){/* liseré de fond, puis passage au premier plan */
+  t.setAttribute("paint-order","stroke");t.style.setProperty("stroke","var(--card)");t.setAttribute("stroke-width","4");t.setAttribute("stroke-linejoin","round");if(svg)svg.appendChild(t);return t;}
+function plate(t,svg){/* fond plein derrière une étiquette */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const r=el("rect",{x:b.x-3,y:b.y-1,width:b.width+6,height:b.height+2,fill:"var(--card)",opacity:.92,rx:2});svg.appendChild(r);svg.appendChild(t);return t;}
+function le(n,f){return /^[aeiouyhéèâî]/i.test(n)?"l'"+n:(f?"la ":"le ")+n;}
+function du(n,f){return /^[aeiouyhéèâî]/i.test(n)?"de l'"+n:(f?"de la ":"du ")+n;}
+function fmtG(v){return nf(v,v<0.1?3:2)+" N/m";}
+function fmtPa(p){return p<1000?nf(p,0)+" Pa":p<1e5?nf(p/1000,1)+" kPa":nf(p/1e5,2)+" bar";}
+function fmtLen(m){/* m en mètres */
+  const mm=m*1000;if(mm<1)return nf(mm*1000,0)+" µm";if(mm<10)return nf(mm,1)+" mm";if(mm<1000)return nf(mm,0)+" mm";return nf(m,1)+" m";}
+function fmtT(s){if(!isFinite(s))return "∞";if(s<0.01)return nf(s*1000,1)+" ms";if(s<1)return nf(s,3)+" s";if(s<60)return nf(s,s<10?1:0)+" s";return nf(s/60,s<600?1:0)+" min";}
+
+function spread(items,gap,ymin,ymax){/* écarte verticalement des étiquettes {y} triées */
+  items.sort((a,b)=>a.y-b.y);
+  for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;
+  if(items.length&&items[items.length-1].y>ymax){items[items.length-1].y=ymax;for(let i=items.length-2;i>=0;i--)if(items[i+1].y-items[i].y<gap)items[i].y=items[i+1].y-gap;}
+  if(items.length&&items[0].y<ymin){items[0].y=ymin;for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;}
+  return items;}
+function declutter(ts,ymin,ymax){/* décale verticalement les textes qui se chevauchent */
+  const box=t=>{try{return t.getBBox();}catch(e){return null;}};
+  for(let i=1;i<ts.length;i++){const ti=ts[i];if(!ti)continue;
+    for(let pass=0;pass<6;pass++){const bi=box(ti);if(!bi)break;let moved=false;
+      for(let j=0;j<i;j++){const bj=ts[j]&&box(ts[j]);if(!bj)continue;
+        const ix=Math.min(bi.x+bi.width,bj.x+bj.width)-Math.max(bi.x,bj.x),iy=Math.min(bi.y+bi.height,bj.y+bj.height)-Math.max(bi.y,bj.y);
+        if(ix>1&&iy>1){let dy=(bi.y+bi.height/2>=bj.y+bj.height/2)?(bj.y+bj.height-bi.y+1):-(bi.y+bi.height-bj.y+1);
+          if(bi.y+dy<ymin||bi.y+bi.height+dy>ymax)dy=dy>0?-(bi.y+bi.height-bj.y+1):(bj.y+bj.height-bi.y+1);
+          ti.setAttribute("y",+ti.getAttribute("y")+dy);moved=true;break;}}
+      if(!moved)break;}}
+  return ts;}
+const SUPD={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function p10(e){return "10"+String(e).split("").map(c=>SUPD[c]||c).join("");}
+function fmtP(p){/* pression en Pa, lisible */
+  if(p>=1e5)return nf(p/1e5,1)+" bar";if(p>=1000)return nf(p/1000,p<1e4?1:0)+" kPa";if(p>=1)return nf(p,p<10?1:0)+" Pa";return sci(p,1)+" Pa";}
+
+
+
+function rng(seed){/* générateur pseudo-aléatoire reproductible */
+  let a=seed>>>0;return ()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
+
+
+/* =========================================================
+   Utilitaires communs du cours
+   ========================================================= */
+const RHO=7.85e-3;/* masse volumique de l'acier (g/mm³) */
+const nbsp=s=>s.replace(/(\d) (°C|°|mm²|mm\/min|mm\/s|mm|min|kJ\/mm|kg\/h|kg|m\/min|tr\/min|A\/mm|A|V|%|s|m|h)(?=[\s.,;:)<]|$)/g,"$1 $2");/* espace insécable entre nombre et unité */
+function fitSize(t,maxW,min){/* réduit la police d'un texte SVG trop large (style en ligne, prioritaire sur la feuille de style) */
+  let b;try{b=t.getBBox();}catch(e){return t;}let fs=parseFloat(getComputedStyle(t).fontSize)||13;
+  while(b.width>maxW&&fs>(min||9)){fs-=0.5;t.style.fontSize=fs+"px";b=t.getBBox();}return t;}
+const SEC=d=>Math.PI*d*d/4;/* section d'un fil (mm²) */
+const MR=(I,L,d)=>0.0104*I+9.5e-7*L*I*I/(d*d);/* taux de fusion du fil (kg/h), modèle calé sur des données de fabricants */
+const VF=(I,L,d)=>MR(I,L,d)/(RHO*SEC(d))/60;/* vitesse du fil (m/min) */
+const VM=(I,L,d)=>MR(I,L,d)/3.6/(RHO*SEC(d));/* vitesse de fusion (mm/s) */
+const UARC=(I,l)=>18+0.01*I+1.5*l;/* caractéristique d'arc pédagogique (V) */
+function fmtH(h){if(!isFinite(h))return "∞";const m=Math.round(h*60);if(m<60)return m+" min";const hh=Math.floor(m/60),mm=m%60;return hh+" h "+String(mm).padStart(2,"0");}
+
+/* =========================================================
+   M1 : la coupe sous la poudre
+   ========================================================= */
+(function(){
+  const svg=$("#m1svg");if(!svg)return;
+  const si=$("#m1i"),sh=$("#m1h"),ro=$("#m1r"),msg=$("#m1msg");
+  const INFO={
+    fil:["Fil","fil plein de 4 mm, déroulé sans fin d'une bobine par le dévidoir ; c'est lui qui fond et apporte le métal."],
+    tube:["Tube contact","pièce en alliage de cuivre qui transmet des centaines d'ampères au fil, quelques centimètres au-dessus de l'arc."],
+    flux:["Flux en poudre","poudre minérale versée devant l'arc ; froide, elle isole ; une partie seulement fond, le reste est aspiré et recyclé."],
+    cav:["Cavité d'arc","bulle de gaz et de vapeurs, coiffée de flux fondu, où brûle l'arc : personne ne le voit."],
+    bain:["Bain","métal liquide (fil et bords fondus), protégé de l'air par le flux fondu qui flotte dessus."],
+    lait:["Laitier","flux fondu qui se fige en croûte de verre sur le cordon ; il le protège en refroidissant, puis se détache."],
+    cord:["Cordon","métal solidifié, large et lisse ; sa pénétration sous la surface de la tôle est forte."]};
+  let sel=null,prog=null;
+  function draw(){
+    const W=svgW(svg),n=W<520,H=Math.round(Math.min(390,Math.max(280,W*0.5)));setVB(svg,W,H);clear(svg);
+    const I=+si.value,hf=+sh.value,d=4,Lso=30,la=6;
+    $("#m1io").textContent=nf(I,0)+" A";$("#m1ho").textContent=nf(hf,0)+" mm";
+    const yP=Math.round(H*0.66),k=(yP-46)/80,xA=Math.round(W*(n?0.6:0.62));
+    const hmin=10+0.03*I,hmax=hmin+25,thin=hf<hmin,thick=hf>hmax;
+    const dim=key=>sel&&sel!==key?0.28:1;
+    const t=prog===null?0:prog*10;/* secondes */
+    const vmm=550/60;/* vitesse de soudage, mm/s */
+    /* tôle */
+    el("rect",{x:0,y:yP,width:W,height:H-yP,fill:"var(--paper-2)",stroke:"var(--ink)","stroke-width":1.4},svg);
+    tx(svg,8,H-10,"tôle (coupe dans l'axe du joint)",{class:"lbl"});
+    /* pénétration et bain */
+    const pen=Math.pow(I/100,1.2)*k,Lp=0.06*I*k,rf=3*k;
+    const g1=el("g",{opacity:dim("cord")},svg);
+    const xb0=4,xb1=xA-Lp;
+    el("path",{d:"M"+xb0+","+(yP-rf)+" L"+xb1+","+(yP-rf)+" L"+xb1+","+(yP+pen)+" L"+xb0+","+(yP+pen)+" Z",fill:"color-mix(in srgb,var(--muted) 30%,var(--card))",stroke:"var(--ink)","stroke-width":1.2},g1);
+    /* stries de solidification qui défilent */
+    const sp=Math.max(10,14*k),off=((t*vmm*k)%sp+sp)%sp;
+    for(let x=xb1-off;x>xb0+4;x-=sp)el("path",{d:"M"+x+","+(yP-rf)+" q"+(-sp*0.5)+","+((pen+rf)/2)+" 0,"+(pen+rf),fill:"none",stroke:"var(--muted)","stroke-width":1,opacity:.7},g1);
+    const gB=el("g",{opacity:dim("bain")},svg);
+    el("path",{d:"M"+xb1+","+(yP-rf)+" L"+(xA+6)+","+(yP-2)+" Q"+(xA+4)+","+(yP+pen*1.05)+" "+(xA-Lp*0.45)+","+(yP+pen)+" L"+xb1+","+(yP+pen)+" Z",fill:"color-mix(in srgb,var(--gam) 45%,var(--card))",stroke:"var(--gam)","stroke-width":1.6},gB);
+    /* laitier sur le cordon */
+    const gL=el("g",{opacity:dim("lait")},svg);
+    const ls=Math.max(5,4*k);
+    el("path",{d:"M"+xb0+","+(yP-rf-ls)+" L"+(xA-14)+","+(yP-rf-ls)+" Q"+(xA-4)+","+(yP-rf-ls)+" "+(xA-4)+","+(yP-rf)+" L"+xb0+","+(yP-rf)+" Z",fill:"color-mix(in srgb,var(--gam) 70%,var(--ink))",opacity:.85},gL);
+    /* flux en poudre : devant l'arc et par-dessus le laitier jusqu'à l'aspiration */
+    const xAsp=Math.round(xA-W*(n?0.3:0.27)),yF=yP-hf*k;
+    const gF=el("g",{opacity:dim("flux")},svg);
+    if(hf>0){
+      const pts="M"+xAsp+","+(yP-rf-ls)+" L"+(xAsp+18)+","+yF+" L"+(W-16)+","+yF+" L"+(W-2)+","+yP+" L"+(xA+8)+","+yP+" L"+(xA-10)+","+(yP-rf-ls)+" Z";
+      el("path",{d:pts,fill:"color-mix(in srgb,var(--muted) 18%,var(--card))",stroke:"var(--muted)","stroke-width":1.2,"stroke-dasharray":"3 2"},gF);
+      const R=rng(7),ng=Math.round((W-xAsp)*(yP-yF)/150);for(let i=0;i<ng;i++){const x=xAsp+20+R()*(W-xAsp-40),y=yF+3+R()*(yP-yF-6);if(Math.abs(x-xA)<26&&y>yP-34)continue;el("circle",{cx:x,cy:y,r:1.3,fill:"var(--muted)"},gF);}
+    }
+    /* aspiration */
+    el("rect",{x:xAsp+2,y:yF-34,width:12,height:30,rx:2,fill:"var(--card)",stroke:"var(--ink)","stroke-width":1.4},gF);
+    arrow(gF,xAsp+8,yF-2,xAsp+8,yF-28,"var(--frc)",1.8,6);
+    const LB=[];const ta=tx(svg,xAsp+18,yF-22,n?"aspiration":"aspiration du flux non fondu",{class:"lbl"});ta.setAttribute("opacity",dim("flux"));fitText(ta,4,W-4);LB.push(ta);
+    /* flux fondu autour de la cavité */
+    const gC=el("g",{opacity:dim("cav")},svg);
+    const cr=Math.max(13,7*k);
+    el("ellipse",{cx:xA,cy:yP-cr*0.55,rx:cr*1.55,ry:cr*1.2,fill:"color-mix(in srgb,var(--gam) 35%,var(--card))",stroke:"var(--gam)","stroke-width":1.4},gC);
+    el("ellipse",{cx:xA,cy:yP-cr*0.5,rx:cr*1.05,ry:cr*0.8,fill:"color-mix(in srgb,var(--sig) 22%,var(--card))",stroke:"var(--sig)","stroke-width":1.4},gC);
+    /* fil, tube, arc */
+    const yTip=yP-la*k*1.2,yTube=Math.max(14,yTip-Lso*k);
+    const gW=el("g",{opacity:dim("fil")},svg);
+    el("line",{x1:xA,y1:6,x2:xA,y2:yTip,stroke:"var(--ink)","stroke-width":4},gW);
+    const gT=el("g",{opacity:dim("tube")},svg);
+    el("rect",{x:xA-9,y:4,width:18,height:yTube-4,rx:3,fill:"var(--paper-2)",stroke:"var(--ink)","stroke-width":1.6},gT);
+    /* arc en zigzag */
+    let pa="M"+xA+","+yTip;const nseg=5;for(let i=1;i<=nseg;i++){const yy=yTip+(yP-3-yTip)*i/nseg,xx=xA+(i%2?4:-4)*(i<nseg?1:0);pa+=" L"+xx+","+yy;}
+    el("path",{d:pa,fill:"none",stroke:"var(--sig)","stroke-width":2.4},gC);
+    /* avance du fil et de la tête */
+    arrow(svg,xA+16,yTube-34,xA+16,yTube-8,"var(--frc)",2,7);
+    arrow(svg,xA+26,16,xA+66,16,"var(--frc)",2.2,8);
+    tx(svg,xA+70,20,n?"avance":"sens d'avance",{class:"lbl"});
+    /* éclairs si couche trop mince */
+    if(thin&&!sel){for(let i=0;i<5;i++){const a=-Math.PI/2+(i-2)*0.42;arrow(svg,xA+Math.cos(a)*cr*1.4,yP-cr*0.6+Math.sin(a)*cr*1.1,xA+Math.cos(a)*cr*2.6,yP-cr*0.6+Math.sin(a)*cr*2.2,"var(--tau)",2,7);}
+      const tw=tx(svg,xA,Math.max(28,yF-cr*2.6),"⚡ arc à nu",{"text-anchor":"middle",fill:"var(--tau)","font-weight":"700"});halo(tw,svg);LB.push(tw);}
+    if(thick){const tw=tx(svg,(xA+W)/2,yF-8,"couche trop épaisse",{"text-anchor":"middle",fill:"var(--tau)","font-weight":"700"});halo(tw,svg);fitText(tw,4,W-4);LB.push(tw);}
+    /* cote de la couche */
+    if(hf>0){const xc=W-26;darrow(svg,xc,yF,yP,"var(--mat)",1.6);const tc=tx(svg,xc-6,(yF+yP)/2+4,"h",{"text-anchor":"end",fill:"var(--mat)","font-style":"italic"});halo(tc,svg);}
+    /* étiquette de l'élément choisi */
+    if(sel){const pos={fil:[xA,yTube+(yTip-yTube)*0.5],tube:[xA,yTube*0.5],flux:[(xA+W)/2,(yF+yP)/2],cav:[xA,yP-cr*0.5],bain:[xA-Lp*0.4,yP+pen*0.5],lait:[(xb0+xA)/2,yP-rf-ls/2],cord:[(xb0+xb1)/2,yP+pen*0.5]}[sel];
+      const lx=pos[0]<W/2?pos[0]+60:pos[0]-60,ly=Math.max(24,pos[1]-(sel==="bain"||sel==="cord"?-34:40));
+      el("line",{x1:pos[0],y1:pos[1],x2:lx,y2:ly+4,stroke:"var(--eps)","stroke-width":1.6},svg);
+      const tl=tx(svg,lx,ly,INFO[sel][0],{"text-anchor":lx>pos[0]?"start":"end",fill:"var(--eps)","font-weight":"700"});fitText(tl,4,W-4);LB.unshift(tl);declutter(LB,4,H-4);plate(tl,svg);}
+    else declutter(LB,4,H-4);
+    /* lectures */
+    const mr=MR(I,Lso,d),vf=VF(I,Lso,d);
+    let r="<span>fil : <b class='eps'>"+nf(vf,2)+" m/min</b></span><span>dépôt : <b class='eps'>"+nf(mr,1)+" kg/h</b></span><span>flux fondu ≈ <b class='gam'>"+nf(mr,1)+" kg/h</b></span><span>couche conseillée : "+nf(hmin,0)+" à "+nf(hmax,0)+" mm</span>";
+    if(prog!==null){const lw=vmm*t,lf=vf*1000/60*t,m=mr/3.6*t;r="<span>t = <b>"+nf(t,1)+" s</b></span><span>cordon : <b class='eps'>"+nf(lw,0)+" mm</b></span><span>fil fondu : <b class='eps'>"+nf(lf,0)+" mm</b></span><span>métal déposé : <b class='eps'>"+nf(m,1)+" g</b></span>";}
+    ro.innerHTML=nbsp(r);
+    let m;
+    if(prog!==null)m="La tête avance de 550 mm/min ; le fil descend à "+nf(vf,2)+" m/min pour compenser exactement sa fusion.";
+    else if(sel)m="<b>"+INFO[sel][0]+"</b> : "+INFO[sel][1];
+    else if(thin)m="⚠️ Couche de "+nf(hf,0)+" mm, sous le minimum d'environ "+nf(hmin,0)+" mm à "+nf(I,0)+" A : l'arc perce la poudre, éblouit, et protège mal le bain (porosités, surface rugueuse).";
+    else if(thick)m="⚠️ Couche de "+nf(hf,0)+" mm, trop épaisse : le poids de la poudre écrase le cordon et gêne la sortie des gaz (cordon déformé, piqûres en surface).";
+    else m="✅ Couche de "+nf(hf,0)+" mm : juste assez pour couvrir l'arc, qui ne se devine plus qu'à une lueur là où le fil entre dans la poudre. Clique sur un élément pour lire son rôle.";
+    msg.innerHTML=nbsp(m);
+  }
+  const A=animate($("#m1play"),"▶ Souder 10 secondes",7000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;draw();});
+  $$("#m1k .btn").forEach(b=>b.addEventListener("click",()=>{const k=b.dataset.k;sel=sel===k?null:k;$$("#m1k .btn").forEach(x=>x.classList.toggle("on",x.dataset.k===sel));draw();}));
+  [si,sh].forEach(s=>s.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M2 : la course des procédés
+   ========================================================= */
+(function(){
+  const svg=$("#m2svg");if(!svg)return;
+  const st=$("#m2t"),sl=$("#m2l"),ro=$("#m2r"),msg=$("#m2msg");
+  const P=[{n:"111",s:"électrode Ø 4, 160 A",D:0.95*9.5e-3*160,k:0.30},
+    {n:"135",s:"fil Ø 1,2, 280 A",D:4.5,k:0.40},
+    {n:"121",s:"fil Ø 4, 600 A",D:MR(600,30,4),k:0.50},
+    {n:"121 tandem",s:"2 fils Ø 4",D:18.7,k:0.50}];
+  let prog=null;
+  const secA=t=>1.1*((t-2)*(t-2)*Math.tan(Math.PI/6)+2*t);
+  function draw(){
+    const W=svgW(svg),n=W<520,lw=n?92:150,rh=n?56:60,H=44+P.length*rh+36;setVB(svg,W,H);clear(svg);
+    const t=+st.value,L=+sl.value;$("#m2to").textContent=nf(t,0)+" mm";$("#m2lo").textContent=nf(L,0)+" m";
+    const A=secA(t),m=A*L*1000*RHO/1000;
+    const T=P.map(p=>({arc:m/p.D,tot:m/p.D/p.k}));const tmax=T[0].tot;
+    const x0=lw+8,x1=W-(n?56:80);const X=h=>x0+(x1-x0)*h/tmax;
+    tx(svg,8,18,"Temps pour souder "+nf(L,0)+" m de V à 60° en "+nf(t,0)+" mm",{class:"ttl"});
+    const now=prog===null?null:prog*tmax;
+    /* graduations */
+    const stp=niceStep(tmax,n?3:6);
+    for(let h=0;h<=tmax+1e-9;h+=stp){const x=X(h);el("line",{x1:x,y1:34,x2:x,y2:44+P.length*rh,class:"gridbg"},svg);tx(svg,x,H-14,nf(h,stp<1?1:0),{class:"lbl","text-anchor":"middle"});}
+    tx(svg,W-4,H-14,"h",{class:"lbl","text-anchor":"end"});
+    P.forEach((p,i)=>{const y=44+i*rh,bh=rh*0.42;
+      tx(svg,8,y+bh*0.62,p.n,{"font-weight":"700"});const ts=tx(svg,8,y+bh*0.62+15,p.s,{class:"lbl"});fitSize(ts,lw-4,8.5);
+      const tt=now===null?T[i].tot:Math.min(T[i].tot,now),ta=Math.min(T[i].arc,tt*p.k/1);
+      el("rect",{x:x0,y:y,width:Math.max(0,X(tt)-x0),height:bh,fill:"color-mix(in srgb,var(--eps) 22%,var(--card))",stroke:"var(--eps)","stroke-width":1.2},svg);
+      el("rect",{x:x0,y:y,width:Math.max(0,X(tt*p.k)-x0),height:bh,fill:"var(--eps)",opacity:.85},svg);
+      const done=now===null||now>=T[i].tot;
+      const lab=tx(svg,X(tt)+6,y+bh*0.72,(done?"":"… ")+fmtH(done?T[i].tot:tt)+(done&&now!==null?" 🏁":""),{fill:"var(--eps)","font-weight":"700"});fitText(lab,x0,W-2,6);
+    });
+    tx(svg,x0,H-30,"foncé : temps d'arc ; clair : temps total",{class:"lbl"});
+    const best=T[3].tot,ratio=T[0].tot/T[2].tot;
+    ro.innerHTML=nbsp("<span>section : <b>"+nf(A,1)+" mm²</b></span><span>masse : <b class='eps'>"+nf(m,1)+" kg</b></span><span>flux à 30 V : ≈ <b class='gam'>"+nf(m,1)+" kg</b></span><span>121 : <b class='eps'>"+fmtH(T[2].tot)+"</b></span>");
+    msg.innerHTML=nbsp(prog!==null&&prog<1?"La course est lancée : le temps défile, chaque équipe dépose son métal à son rythme.":"Le sous flux à un fil soude "+nf(ratio,1)+" fois plus vite que l'électrode enrobée ("+fmtH(T[2].tot)+" contre "+fmtH(T[0].tot)+"), le tandem "+nf(T[0].tot/best,1)+" fois plus vite. Le MAG reste entre les deux ("+fmtH(T[1].tot)+").");
+  }
+  const A=animate($("#m2play"),"▶ Lancer la course",6000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;draw();});
+  [st,sl].forEach(s=>s.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M3 : caractéristique plate ou tombante
+   ========================================================= */
+(function(){
+  const svg=$("#m3svg");if(!svg)return;
+  const su=$("#m3u"),sp=$("#m3p"),ss=$("#m3s"),sl=$("#m3l"),ro=$("#m3r"),msg=$("#m3msg");
+  let mode="cv",prog=null;
+  const src=(I)=>mode==="cv"?(+su.value)-(+sp.value)/100*I:32-0.5*(I-(+ss.value));
+  const op=l=>{let I;if(mode==="cv")I=(+su.value-18-1.5*l)/((+sp.value)/100+0.01);else I=(32+0.5*(+ss.value)-18-1.5*l)/0.51;I=Math.max(0,I);return {I:I,U:UARC(I,l)};};
+  function draw(){
+    const W=svgW(svg),n=W<520,H=Math.round(Math.min(380,Math.max(290,W*0.52)));setVB(svg,W,H);clear(svg);
+    $("#m3uo").textContent=nf(+su.value,1)+" V";$("#m3po").textContent=nf(+sp.value,1)+" V/100 A";$("#m3so").textContent=nf(+ss.value,0)+" A";
+    const l0=+sl.value,l=prog===null?l0:l0+2*Math.sin(prog*2*Math.PI*2);$("#m3lo").textContent=nf(l0,1)+" mm";
+    const ax=axes(svg,n?44:52,W-24,30,H-48,0,1400,0,60,"intensité I (A)","tension U (V)",n?400:200,10);const LB=[];
+    /* source */
+    let pts=[];for(let I=0;I<=1400;I+=10){const U=src(I);if(U>=0&&U<=60)pts.push(ax.X(I)+","+ax.Y(U));}
+    if(pts.length)el("polyline",{points:pts.join(" "),fill:"none",stroke:"var(--ink)","stroke-width":3.2},svg);
+    const ls=[l0-2,l0,l0+2];const ops=ls.map(op);
+    ls.forEach((ll,i)=>{const a=[0,1400].map(I=>ax.X(I)+","+ax.Y(UARC(I,ll)));el("polyline",{points:a.join(" "),fill:"none",stroke:"var(--frc)","stroke-width":i===1?2.4:1.4,"stroke-dasharray":i===1?null:"5 4"},svg);
+      const Ix=1380-(2-i)*(n?330:240),t=tx(svg,ax.X(Ix),ax.Y(UARC(Ix,ll))-6,"l = "+nf(ll,1),{"text-anchor":"end",fill:"var(--frc)",class:"lbl"});halo(t,svg);LB.push(t);});
+    ops.forEach((o,i)=>{if(o.I<=1400)el("circle",{cx:ax.X(o.I),cy:ax.Y(o.U),r:i===1?6:4.5,fill:i===1?"var(--eps)":"var(--card)",stroke:"var(--eps)","stroke-width":2},svg);});
+    const cur=op(l);
+    if(prog!==null&&cur.I<=1400){el("circle",{cx:ax.X(cur.I),cy:ax.Y(cur.U),r:7,fill:"var(--sig)",stroke:"var(--card)","stroke-width":2},svg);}
+    const tl=tx(svg,ax.X(Math.min(1300,ops[1].I)),ax.Y(ops[1].U)+30,nf(ops[1].I,0)+" A ; "+nf(ops[1].U,1)+" V",{fill:"var(--eps)","font-weight":"700","text-anchor":"middle"});fitText(tl,50,W-4,8);LB.unshift(tl);
+    const lab=mode==="cv"?tx(svg,ax.X(60),ax.Y(Math.min(58,src(60)))-6,"source plate",{"font-weight":"700"}):tx(svg,ax.X(Math.min(1300,+ss.value))+10,ax.Y(54),"source tombante",{"font-weight":"700"});halo(lab,svg);fitText(lab,56,W-4);LB.push(lab);declutter(LB,30,H-50);plate(tl,svg);
+    const dI=ops[2].I-ops[1].I,I0=ops[1].I,X=Math.min(100,100*Math.pow(1000/Math.max(I0,1),2));
+    ro.innerHTML=nbsp("<span>I = <b class='eps'>"+nf(I0,0)+" A</b></span><span>U = <b class='eps'>"+nf(ops[1].U,1)+" V</b></span><span>ΔI pour +2 mm : <b class='eps'>"+nf(dI,0)+" A</b></span><span>facteur de marche admis : <b>"+(I0>1000?"hors plage":nf(X,0)+" %")+"</b></span>");
+    let m;
+    if(prog!==null)m="L'arc s'allonge et se raccourcit de 2 mm : le point rouge glisse sur la caractéristique de la source. "+(mode==="cv"?"Avec la source plate, l'intensité varie beaucoup.":"Avec la source tombante, l'intensité bouge à peine ; c'est la tension qui varie.");
+    else if(I0>1000)m="⚠️ "+nf(I0,0)+" A : au-delà de la plage d'une source de 1 000 A. Baisse la tension à vide ou allonge l'arc.";
+    else if(mode==="cv")m="Source plate : 2 mm d'arc en plus font varier l'intensité de "+nf(dI,0)+" A ("+nf(dI/2,0)+" A/mm). Cette forte sensibilité permet l'autorégulation (chapitre 4). Plus la pente p est faible, plus l'effet est fort.";
+    else m="Source tombante : 2 mm d'arc en plus ne changent l'intensité que de "+nf(dI,1)+" A ; la tension, elle, monte de "+nf(ops[2].U-ops[1].U,1)+" V. Une mesure de tension peut donc piloter le dévidoir (chapitre 4).";
+    msg.innerHTML=nbsp(m);
+  }
+  function setMode(k){mode=k;$$("#m3k .btn").forEach(b=>b.classList.toggle("on",b.dataset.k===k));$("#m3cU").hidden=k!=="cv";$("#m3cP").hidden=k!=="cv";$("#m3cI").hidden=k==="cv";}
+  const A=animate($("#m3play"),"▶ Faire varier l'arc",5000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;draw();});
+  $$("#m3k .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;setMode(b.dataset.k);draw();}));
+  [su,sp,ss,sl].forEach(s=>s.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  setMode("cv");redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M4 : la bosse sur la tôle (régulation de l'arc)
+   ========================================================= */
+(function(){
+  const svg=$("#m4svg");if(!svg)return;
+  const si=$("#m4i"),sh=$("#m4h"),ro=$("#m4r"),msg=$("#m4msg");
+  let mode="cv",d=4,prog=null;
+  const L0=30,l0=6,G=2,T=5,t1=1,t2=3;
+  function tau(){const I0=+si.value,S=RHO*SEC(d);
+    const dvdI=(0.0104+2*9.5e-7*L0*I0/(d*d))/3.6/S,dvdL=9.5e-7*I0*I0/(d*d)/3.6/S,dIdl=mode==="cv"?-75:-1.5/0.51;
+    let k=dvdI*(-dIdl)+dvdL;if(mode==="avc")k+=G*(1.5+0.01*dIdl);return 1/k;}
+  function sim(){const I0=+si.value,dh=+sh.value,H0=L0+l0,Ua0=UARC(I0,l0),vf0=VM(I0,L0,d),dt=0.001;
+    let L=L0,touch=false;const out=[];
+    for(let i=0;i<=T/dt+0.5;i++){const t=i*dt,H=H0-((t>=t1&&t<t2)?dh:0);let l=H-L;if(l<0.5){l=0.5;touch=true;L=H-l;}
+      let I=mode==="cv"?(27+0.02*I0-18-1.5*l)/0.02:(Ua0+0.5*I0-18-1.5*l)/0.51;I=Math.max(50,I);
+      const U=UARC(I,l),vf=vf0+(mode==="avc"?G*(U-Ua0):0),vm=VM(I,L,d);
+      if(i%10===0)out.push([t,l,I]);L+=(vf-vm)*dt;}
+    return {out:out,touch:touch};}
+  function draw(){
+    const W=svgW(svg),n=W<520,H=Math.round(Math.min(400,Math.max(300,W*0.55)));setVB(svg,W,H);clear(svg);
+    const I0=+si.value,dh=+sh.value;$("#m4io").textContent=nf(I0,0)+" A";$("#m4ho").textContent=nf(dh,1)+" mm";
+    const r=sim(),o=r.out;
+    /* bandeau : la tôle et la bosse */
+    const yS=60,tNow=prog===null?null:prog*T;
+    const xs0=n?40:52,xs1=W-(n?44:56);const Xt=t=>xs0+(xs1-xs0)*t/T;
+    el("line",{x1:xs0,y1:yS,x2:xs1,y2:yS,stroke:"var(--ink)","stroke-width":2},svg);
+    el("path",{d:"M"+Xt(t1)+","+yS+" L"+Xt(t1)+","+(yS-dh*2.4)+" L"+Xt(t2)+","+(yS-dh*2.4)+" L"+Xt(t2)+","+yS,fill:"color-mix(in srgb,var(--tau) 20%,var(--card))",stroke:"var(--tau)","stroke-width":1.6},svg);
+    const tb=tx(svg,(Xt(t1)+Xt(t2))/2,yS+16,"bosse Δh = "+nf(dh,1)+" mm",{"text-anchor":"middle",fill:"var(--tau)",class:"lbl"});fitText(tb,2,W-2);
+    tx(svg,8,16,n?"Longueur d'arc et intensité":"Longueur d'arc (bleu) et intensité (rouge) au passage de la bosse",{class:"ttl"});
+    if(tNow!==null){const k=Math.min(o.length-1,Math.max(0,Math.round(tNow/0.01))),ll=o[k][1],x=Xt(tNow),ysurf=yS-((tNow>=t1&&tNow<t2)?dh*2.4:0);
+      el("line",{x1:x,y1:22,x2:x,y2:ysurf-ll*2.4,stroke:"var(--ink)","stroke-width":3},svg);
+      el("line",{x1:x,y1:ysurf-ll*2.4,x2:x,y2:ysurf,stroke:"var(--sig)","stroke-width":3},svg);}
+    /* graphique */
+    const y0=yS+46,y1=H-38,Imax=1400;
+    const ax=axes(svg,xs0,xs1,y0,y1,0,T,0,12,"temps (s)","l (mm)",1,n?4:2);
+    const YI=I=>y1-(y1-y0)*I/Imax;
+    for(let I=0;I<=Imax;I+=n?700:350){tx(svg,xs1+4,YI(I)+4,nf(I,0),{class:"lbl",fill:"var(--sig)"});}
+    tx(svg,xs1,y0-10,"I (A)",{class:"lbl","text-anchor":"end",fill:"var(--sig)"});
+    el("rect",{x:ax.X(t1),y:y0,width:ax.X(t2)-ax.X(t1),height:y1-y0,fill:"var(--tau)",opacity:.07},svg);
+    el("line",{x1:xs0,y1:ax.Y(l0),x2:xs1,y2:ax.Y(l0),class:"ref"},svg);
+    const lim=tNow===null?T:tNow;
+    const pl=o.filter(p=>p[0]<=lim+1e-9).map(p=>ax.X(p[0])+","+ax.Y(Math.min(12,p[1])));
+    const pi=o.filter(p=>p[0]<=lim+1e-9).map(p=>ax.X(p[0])+","+YI(Math.min(Imax,p[2])));
+    el("polyline",{points:pi.join(" "),fill:"none",stroke:"var(--sig)","stroke-width":2},svg);
+    el("polyline",{points:pl.join(" "),fill:"none",stroke:"var(--eps)","stroke-width":2.6},svg);
+    /* indicateurs */
+    const seg=o.filter(p=>p[0]>=t1&&p[0]<t2);let trec=null;
+    for(let k=seg.length-1;k>=0;k--){if(Math.abs(seg[k][1]-l0)>0.5){trec=k+1<seg.length?seg[k+1][0]-t1:null;break;}if(k===0)trec=0;}
+    const Imx=Math.max(...o.map(p=>p[2])),lmn=Math.min(...o.map(p=>p[1])),lend=seg.length?seg[seg.length-1][1]:l0,ta=tau();
+    ro.innerHTML=nbsp("<span>τ ≈ <b class='eps'>"+(ta<1?nf(ta,2):nf(ta,1))+" s</b></span><span>I max : <b class='sig'>"+nf(Imx,0)+" A</b></span><span>l min : <b class='eps'>"+nf(lmn,1)+" mm</b></span><span>retour à ± 0,5 mm : <b class='eps'>"+(trec===null?"non":nf(trec,2)+" s")+"</b></span><span>fil : "+nf(VF(I0,L0,d),2)+" m/min</span>");
+    let m;
+    if(r.touch)m="⚠️ La bosse est plus haute que l'arc : le fil touche le bain (court-circuit, collage). Diminue Δh ou allonge l'arc.";
+    else if(mode==="cv")m="Autorégulation : l'arc raccourci fait bondir l'intensité jusqu'à "+nf(Imx,0)+" A, le fil fond plus vite et l'arc retrouve sa longueur en "+(trec===null?"plus de 2 s":nf(trec,2)+" s")+". Essaie un fil plus fin : il se rattrape encore plus vite.";
+    else if(mode==="cc")m="⚠️ Source tombante et fil constant : l'intensité ne bouge presque pas, le fil ne fond pas plus vite. Au bout de 2 s, l'arc ne mesure encore que "+nf(lend,1)+" mm au lieu de 6 : il pompe, colle ou s'éteint (τ ≈ "+nf(ta,1)+" s).";
+    else m="Dévidoir asservi : la tension d'arc chute, le dévidoir ralentit, l'arc retrouve sa longueur en "+(trec===null?"plus de 2 s":nf(trec,2)+" s")+", avec une intensité presque constante. Le temps de réponse dépend peu du diamètre.";
+    msg.innerHTML=nbsp(m);
+  }
+  const A=animate($("#m4play"),"▶ Passer sur la bosse",7000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;draw();});
+  $$("#m4m .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;mode=b.dataset.k;setOn("#m4m",b);draw();}));
+  $$("#m4d .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;d=+b.dataset.k;setOn("#m4d",b);draw();}));
+  [si,sh].forEach(s=>s.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M5 : le suivi de joint
+   ========================================================= */
+(function(){
+  const svg=$("#m5svg");if(!svg)return;
+  const sa=$("#m5a"),sw=$("#m5w"),sp=$("#m5p"),ro=$("#m5r"),msg=$("#m5msg");
+  let mode="direct",prog=null;
+  const v=600,Vs=300,tol=1;
+  function traj(A,lam,a,Lv){const N=600,dx=Lv/N,J=x=>A*Math.sin(2*Math.PI*x/lam);const out=[];let yw=0;
+    for(let i=0;i<=N;i++){const x=i*dx;let target;if(mode==="none")target=0;else if(mode==="direct")target=J(x+a);else target=J(x);
+      if(mode==="mem"){const mx=Vs/v*dx;yw+=Math.max(-mx,Math.min(mx,target-yw));}else yw=target;
+      out.push([x,J(x),yw]);}return out;}
+  function draw(){
+    const W=svgW(svg),n=W<520,H=Math.round(Math.min(380,Math.max(300,W*0.5)));setVB(svg,W,H);clear(svg);
+    const A=+sa.value,lam=+sw.value,a=+sp.value;$("#m5ao").textContent="± "+nf(A,1)+" mm";$("#m5wo").textContent=nf(lam,0)+" mm";$("#m5po").textContent=nf(a,0)+" mm";
+    const Lv=1.5*lam,tr=traj(A,lam,a,Lv);
+    const x0=n?36:46,x1=W-24;const X=x=>x0+(x1-x0)*x/Lv;
+    /* vue de dessus */
+    const yc=86,ys=4.2;const Y=y=>yc-y*ys;
+    tx(svg,8,16,"Vue de dessus (écarts latéraux agrandis)",{class:"ttl"});
+    el("line",{x1:x0,y1:yc,x2:x1,y2:yc,class:"ref"},svg);
+    el("polyline",{points:tr.map(p=>X(p[0])+","+Y(p[1])).join(" "),fill:"none",stroke:"var(--ink)","stroke-width":2.6},svg);
+    const lim=prog===null?Lv:prog*Lv;
+    el("polyline",{points:tr.filter(p=>p[0]<=lim+1e-9).map(p=>X(p[0])+","+Y(p[2])).join(" "),fill:"none",stroke:"var(--frc)","stroke-width":2.2},svg);
+    const tw=tx(svg,W-6,34,"— fil",{class:"lbl",fill:"var(--frc)","text-anchor":"end"});const tj=tx(svg,W-56,34,"— joint",{class:"lbl","text-anchor":"end"});
+    if(prog!==null){const k=Math.min(tr.length-1,Math.round(prog*(tr.length-1))),p=tr[k],xp=Math.min(Lv,p[0]+a),J=x=>A*Math.sin(2*Math.PI*x/lam);
+      el("rect",{x:X(p[0])-10,y:Y(p[2])-8,width:20,height:16,rx:3,fill:"var(--frc)",opacity:.85},svg);
+      el("line",{x1:X(p[0]),y1:Y(p[2]),x2:X(xp),y2:Y(J(xp)),stroke:"var(--mat)","stroke-width":1.4,"stroke-dasharray":"3 3"},svg);
+      el("circle",{cx:X(xp),cy:Y(J(xp)),r:5,fill:"var(--mat)"},svg);}
+    /* écart */
+    const ye0=yc+A*ys+30,ye1=H-36,emax=Math.max(3,A*2.2);
+    const ax=axes(svg,x0,x1,ye0,ye1,0,Lv,-emax,emax,"position le long du joint (mm)","écart (mm)",niceStep(Lv,n?3:6),niceStep(2*emax,4));
+    el("rect",{x:x0,y:ax.Y(tol),width:x1-x0,height:ax.Y(-tol)-ax.Y(tol),fill:"var(--ok)",opacity:.12},svg);
+    el("polyline",{points:tr.filter(p=>p[0]<=lim+1e-9).map(p=>ax.X(p[0])+","+ax.Y(Math.max(-emax,Math.min(emax,p[2]-p[1])))).join(" "),fill:"none",stroke:"var(--tau)","stroke-width":2.2},svg);
+    const steady=tr.filter(p=>p[0]>=lam*0.25);const emx=Math.max(...steady.map(p=>Math.abs(p[2]-p[1])));
+    const ok=Math.round(emx*10)/10<=tol;
+    ro.innerHTML=nbsp("<span>écart maximal : <b class='"+(ok?"eps":"tau")+"'>"+(emx<0.1?"< 0,1":nf(emx,1))+" mm</b></span><span>a/λ = <b>"+nf(a/lam,3)+"</b></span><span>verdict : <b>"+(ok?"✅ dans la tolérance":"❌ hors tolérance")+"</b></span>");
+    let m;
+    if(mode==="none")m=A===0?"Joint parfaitement droit : sans suivi, le fil reste dessus.":"Sans suivi, le fil file tout droit et le joint s'en écarte jusqu'à "+nf(emx,1)+" mm : manque de fusion d'un bord assuré.";
+    else if(mode==="direct")m=(ok?"✅ ":"⚠️ ")+"Correction immédiate : le fil suit le joint tel qu'il est "+nf(a,0)+" mm plus loin. Écart théorique 2·A·|sin(π·a/λ)| = "+nf(2*A*Math.abs(Math.sin(Math.PI*a/lam)),1)+" mm."+(ok?"":" Rapproche le palpeur ou ajoute de la mémoire.");
+    else m="✅ Avec mémoire, chaque correction est appliquée quand le fil atteint l'endroit mesuré ; il ne reste que le retard du chariot de correction (vitesse latérale nécessaire : "+nf(v*2*Math.PI*A/lam,0)+" mm/min, possible : "+Vs+" mm/min).";
+    msg.innerHTML=nbsp(m);
+  }
+  const An=animate($("#m5play"),"▶ Faire rouler le tracteur",7000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;draw();});
+  $$("#m5m .btn").forEach(b=>b.addEventListener("click",()=>{An.stop();prog=null;mode=b.dataset.k;setOn("#m5m",b);draw();}));
+  [sa,sw,sp].forEach(s=>s.addEventListener("input",()=>{An.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M6 : la virole qui tourne
+   ========================================================= */
+(function(){
+  const svg=$("#m6svg");if(!svg)return;
+  const sd=$("#m6d"),sv=$("#m6v"),se=$("#m6e"),ro=$("#m6r"),msg=$("#m6msg");
+  const TWI=[[75,12],[450,22],[900,34],[1050,40],[1200,50],[1800,55],[1e9,75]];
+  const eref=D=>{for(const r of TWI)if(D<=r[0])return r[1];return 75;};
+  let prog=null;
+  function bead(g,x,y,w,kind){/* petite coupe de cordon selon la position */
+    el("rect",{x:x-w/2,y:y,width:w,height:w*0.32,fill:"var(--paper-2)",stroke:"var(--ink)","stroke-width":1.2},g);
+    let p;if(kind==="up")p="M"+(x-w*0.17)+","+y+" Q"+x+","+(y-w*0.3)+" "+(x+w*0.17)+","+y+" Q"+(x+w*0.12)+","+(y+w*0.27)+" "+x+","+(y+w*0.28)+" Q"+(x-w*0.12)+","+(y+w*0.27)+" "+(x-w*0.17)+","+y+" Z";
+    else if(kind==="down")p="M"+(x-w*0.3)+","+y+" Q"+x+","+(y-w*0.07)+" "+(x+w*0.3)+","+y+" Q"+x+","+(y+w*0.12)+" "+(x-w*0.3)+","+y+" Z";
+    else p="M"+(x-w*0.24)+","+y+" Q"+x+","+(y-w*0.12)+" "+(x+w*0.24)+","+y+" Q"+x+","+(y+w*0.2)+" "+(x-w*0.24)+","+y+" Z";
+    el("path",{d:p,fill:"color-mix(in srgb,var(--eps) 35%,var(--card))",stroke:"var(--eps)","stroke-width":1.6},g);}
+  function draw(){
+    const W=svgW(svg),n=W<520,H=Math.round(Math.min(390,Math.max(300,W*0.5)));setVB(svg,W,H);clear(svg);
+    const D=+sd.value,v=+sv.value,e=+se.value,R=D/2;$("#m6do").textContent=nf(D,0)+" mm";$("#m6vo").textContent=nf(v,0)+" mm/min";$("#m6eo").textContent=nf(e,0)+" mm";
+    const er=eref(D),ratio=e/er,kind=ratio<0.5?"up":ratio>1.6?"down":"flat";
+    const nrot=v/(Math.PI*D),ttour=Math.PI*D/v,ang=e/R*180/Math.PI,h=e*e/D;
+    /* zoom sur le sommet, à l'échelle */
+    const zx0=n?8:150,zx1=W-8,zy=n?96:84;
+    const span=Math.max(160,1.25*Math.max(Math.abs(e),er)+30);/* demi-largeur montrée (mm) */
+    const sc=(zx1-zx0)/(2*span),ve=D>=600?4:1,xc=(zx0+zx1)/2;
+    const Xs=x=>xc+x*sc,Ys=y=>zy+y*sc*ve;/* y : descente sous le sommet (mm) */
+    const drop=x=>Math.abs(x)>=R?R:R-Math.sqrt(R*R-x*x);
+    tx(svg,zx0,18,n?"Zoom sur le sommet":"Zoom sur le sommet de la virole"+(ve>1?" (hauteurs × 4)":""),{class:"ttl"});
+    /* surface et épaisseur */
+    let ps=[],pin=[];const thp=n?22:28;
+    for(let i=0;i<=120;i++){const x=-span+2*span*i/120;if(Math.abs(x)>R)continue;ps.push(Xs(x)+","+Ys(drop(x)));pin.push([x,drop(x)]);}
+    if(ps.length){const pin2=pin.slice().reverse().map(p=>Xs(p[0])+","+(Ys(p[1])+thp));el("polygon",{points:ps.join(" ")+" "+pin2.join(" "),fill:"var(--paper-2)",stroke:"none"},svg);
+      el("polyline",{points:ps.join(" "),fill:"none",stroke:"var(--ink)","stroke-width":2.6},svg);}
+    /* sommet */
+    el("line",{x1:Xs(0),y1:zy-40,x2:Xs(0),y2:Ys(drop(0))+thp*0.6,class:"ref"},svg);
+    const tS=tx(svg,Xs(0)+4,zy-44,"sommet",{class:"lbl"});
+    /* sens de rotation de la surface : de gauche à droite au sommet */
+    arrow(svg,Xs(-span*0.9),Ys(drop(span*0.9))+thp+14,Xs(-span*0.55),Ys(drop(span*0.55))+thp+14,"var(--frc)",2.2,8);
+    const tR=tx(svg,Xs(-span*0.9),Ys(drop(span*0.9))+thp+32,"la surface avance",{class:"lbl",fill:"var(--frc)"});fitText(tR,zx0,zx1);
+    /* bain liquide : de l'arc vers l'aval, longueur égale au repère */
+    const xa=-e,Lp=er,bp=[];for(let i=0;i<=30;i++){const x=xa+Lp*i/30;if(Math.abs(x)<R)bp.push([x,drop(x)]);}
+    if(bp.length>1){const top=bp.map(p=>Xs(p[0])+","+(Ys(p[1])-5)),bot=bp.slice().reverse().map(p=>Xs(p[0])+","+(Ys(p[1])+4));
+      el("polygon",{points:top.join(" ")+" "+bot.join(" "),fill:"color-mix(in srgb,var(--gam) 50%,var(--card))",stroke:"var(--gam)","stroke-width":1.4},svg);
+      const fz=bp[bp.length-1];el("circle",{cx:Xs(fz[0]),cy:Ys(fz[1]),r:4.5,fill:"var(--gam)",stroke:"var(--card)","stroke-width":1.5},svg);
+      const tf=tx(svg,Xs(fz[0]),Ys(fz[1])+22,"le bain se fige",{class:"lbl","text-anchor":"middle",fill:"var(--gam)"});halo(tf,svg);fitText(tf,zx0,zx1);}
+    /* fil et repère */
+    if(Math.abs(xa)<R){el("line",{x1:Xs(xa),y1:28,x2:Xs(xa),y2:Ys(drop(xa))-7,stroke:"var(--ink)","stroke-width":3.5},svg);
+      el("line",{x1:Xs(xa),y1:Ys(drop(xa))-7,x2:Xs(xa),y2:Ys(drop(xa)),stroke:"var(--sig)","stroke-width":3},svg);}
+    if(er<R){el("line",{x1:Xs(-er),y1:Ys(drop(er))-20,x2:Xs(-er),y2:Ys(drop(er))-8,stroke:"var(--mat)","stroke-width":2},svg);
+      const tr=tx(svg,Xs(-er)-6,zy-24,"repère "+er+" mm",{class:"lbl","text-anchor":"end",fill:"var(--mat)"});halo(tr,svg);fitText(tr,zx0,zx1);}
+    if(Math.abs(xa)<R&&Math.abs(Xs(xa)-Xs(0))>16){const yd=zy-14;arrow(svg,(Xs(xa)+Xs(0))/2,yd,Xs(xa)+1,yd,"var(--mat)",1.4,6);arrow(svg,(Xs(xa)+Xs(0))/2,yd,Xs(0)-1,yd,"var(--mat)",1.4,6);}
+    if(Math.abs(xa)<R){const de=tx(svg,(Xs(xa)+Xs(0))/2,zy-18,"e",{"text-anchor":"middle",fill:"var(--mat)","font-style":"italic","font-weight":"700"});halo(de,svg);}
+    /* icône de la virole entière (non zoomée) */
+    if(!n){const cx=72,cy=H*0.36,r=48;el("circle",{cx:cx,cy:cy,r:r,fill:"var(--paper-2)",stroke:"var(--ink)","stroke-width":2.4},svg);
+      const turn=prog===null?0:prog;if(turn>0){const a0=-Math.PI/2,a1=a0+turn*2*Math.PI;const lg=turn>0.5?1:0;
+        el("path",{d:"M"+(cx+r*Math.cos(a0))+","+(cy+r*Math.sin(a0))+" A"+r+","+r+" 0 "+lg+" 1 "+(cx+r*Math.cos(a1-1e-4))+","+(cy+r*Math.sin(a1-1e-4)),fill:"none",stroke:"var(--eps)","stroke-width":5},svg);}
+      const aw=-Math.PI/2-e/R;el("line",{x1:cx+(r+18)*Math.cos(aw),y1:cy+(r+18)*Math.sin(aw),x2:cx+(r+3)*Math.cos(aw),y2:cy+(r+3)*Math.sin(aw),stroke:"var(--ink)","stroke-width":3},svg);
+      el("path",{d:"M"+(cx-r*0.55)+","+(cy+r*0.2)+" A"+(r*0.6)+","+(r*0.6)+" 0 0 1 "+(cx+r*0.3)+","+(cy-r*0.48),fill:"none",stroke:"var(--frc)","stroke-width":2},svg);
+      arrow(svg,cx+r*0.22,cy-r*0.52,cx+r*0.34,cy-r*0.44,"var(--frc)",2,7);
+      tx(svg,cx,cy+r+20,"virole (schéma)",{class:"lbl","text-anchor":"middle"});
+      tx(svg,cx,cy+r+36,"Ø "+nf(D,0)+" mm",{class:"lbl","text-anchor":"middle"});}
+    /* coupe du cordon */
+    const gb=el("g",{},svg),bw=n?70:86,bx=n?W-bw/2-10:72,by=H-(n?40:44);
+    bead(gb,bx,by,bw,kind);const lbt=tx(svg,bx,by-bw*0.3-8,kind==="up"?"en montant":kind==="down"?"en descendant":"à plat",{"text-anchor":"middle",fill:"var(--eps)","font-weight":"700",class:"lbl"});halo(lbt,svg);
+    ro.innerHTML=nbsp("<span>vireur : <b class='frc'>"+nf(nrot,3)+" tr/min</b></span><span>un tour : <b>"+nf(ttour,1)+" min</b></span><span>angle : <b>"+nf(ang,1)+" °</b></span><span>flèche h = e²/D : <b class='eps'>"+nf(h,1)+" mm</b></span><span>repère TWI : <b class='mat'>"+er+" mm</b></span>"+(prog!==null?"<span>tour soudé : "+nf(prog*100,0)+" %</span>":""));
+    let m;
+    if(kind==="up")m="⚠️ Fil "+(e<=0?(e<0?"après":"au")+" sommet":"trop près du sommet")+" : le bain se fige sur la pente qui descend. Soudage « en montant » par rapport à la pièce : cordon étroit et bombé, pénétration la plus forte, risque de coulure.";
+    else if(kind==="down")m="⚠️ Fil trop loin avant le sommet : le bain se fige encore sur la pente qui monte. Soudage « en descendant » : le laitier liquide court devant l'arc, cordon plat, pénétration faible, risque d'inclusions.";
+    else m="✅ Décalage de "+nf(e,0)+" mm, proche du repère de "+er+" mm : le bain et le laitier se figent au sommet, à plat. La flèche vaut "+nf(h,1)+" mm : le fil se trouve environ 2 mm sous le point haut.";
+    if(D<450&&kind!=="up")m+=" Petite virole : réduis l'énergie par passe, sinon le bain et le flux glissent.";
+    msg.innerHTML=nbsp(m);
+  }
+  const A=animate($("#m6play"),"▶ Faire tourner la virole",6000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;draw();});
+  [sd,sv,se].forEach(s=>s.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   Quiz, check-list, sommaire, thème
+   ========================================================= */
+(function(){
+  const box=$("#quiz");if(!box)return;
+  const Q=[
+    {q:"Le numéro ISO 4063 du soudage à l'arc sous flux avec un fil plein est :",o:["111","121","131","141"],c:1,e:"<b>121</b> : 1 pour le soudage à l'arc, 2 pour le groupe « sous flux », 1 pour le fil plein. Le 122 est le feuillard, le 125 le fil fourré."},
+    {q:"Froid, le flux en poudre est :",o:["un bon conducteur","un isolant électrique","un aimant","un liquide"],c:1,e:"Froid, le flux est <b>isolant</b> : il faut amorcer l'arc par contact et retrait, fil en pointe ou laine d'acier. Fondu, il devient conducteur."},
+    {q:"Lequel de ces rôles n'est PAS un rôle du flux ?",o:["protéger le bain de l'air","stabiliser l'arc","former le laitier qui façonne le cordon","refroidir le tube contact"],c:3,e:"Le flux <b>protège</b>, <b>stabilise</b>, <b>façonne</b> et agit sur la métallurgie ; le tube contact n'a rien à voir avec lui."},
+    {q:"Les positions habituelles du soudage sous flux sont :",o:["toutes les positions","PA et PB, à plat","PF et PG, en vertical","PE, au plafond"],c:1,e:"Le bain et le flux sont lourds et liquides : on soude <b>à plat (PA)</b> et <b>en angle à plat (PB)</b> ; la corniche (PC) demande un dispositif qui retient la poudre."},
+    {q:"Un fil de 4 mm à 600 A travaille à une densité de courant d'environ :",o:["13 A/mm²","48 A/mm²","150 A/mm²","600 A/mm²"],c:1,e:"S = π × 4²/4 = 12,57 mm² ; J = 600/12,57 ≈ <b>48 A/mm²</b>, près de quatre fois celle d'une électrode enrobée de 4 mm à 160 A."},
+    {q:"Selon l'EN 1011-1, le rendement thermique k du soudage sous flux à un fil (121) vaut :",o:["0,6","0,8","1","1,2"],c:2,e:"<b>k = 1</b> pour le 121, contre 0,8 pour le 111 et le 135 et 0,6 pour le TIG : l'arc enfermé sous la poudre perd très peu de chaleur."},
+    {q:"Le facteur de marche d'un générateur se mesure sur un cycle de :",o:["1 minute","5 minutes","10 minutes","1 heure"],c:2,e:"L'IEC 60974-1 définit le facteur de marche sur un cycle de <b>10 minutes</b>."},
+    {q:"Une plaque annonce 1 250 A à 60 %. À 100 %, la source tient environ :",o:["750 A","970 A","1 250 A","2 080 A"],c:1,e:"I<sub>100</sub> = 1 250 × √0,6 ≈ <b>968 A</b> (relation approchée I²·X ≈ constante)."},
+    {q:"L'autorégulation de la longueur d'arc demande :",o:["une source tombante et un fil à vitesse constante","une source plate et un fil à vitesse constante","une source tombante et un fil arrêté","un palpeur laser"],c:1,e:"Avec une <b>source plate</b>, l'intensité varie fortement avec la longueur d'arc ; avec un <b>fil à vitesse constante</b>, la fusion plus ou moins rapide ramène l'arc seule."},
+    {q:"Pourquoi associe-t-on souvent une source tombante à un dévidoir asservi à la tension d'arc ?",o:["pour économiser du fil","parce que l'autorégulation y serait trop lente","pour souder au plafond","pour réduire la consommation de flux"],c:1,e:"Avec une source tombante, l'intensité bouge à peine : sans asservissement, l'arc mettrait <b>plusieurs secondes</b> à se rattraper. Le dévidoir piloté par la tension le ramène en quelques dixièmes de seconde."},
+    {q:"Un palpeur placé loin devant le fil, avec correction immédiate, sur un joint qui ondule :",o:["supprime tout écart","crée lui-même un écart entre le fil et le joint","ralentit la soudure","n'a aucun effet"],c:1,e:"Le fil suit la position que le joint a <b>plus loin</b> : écart 2·A·|sin(π·a/λ)|. D'où les capteurs avec mémoire."},
+    {q:"Pour une soudure circulaire extérieure sur une virole, on place le fil :",o:["exactement au sommet","un peu avant le sommet, du côté qui monte","un peu après le sommet","au point bas"],c:1,e:"<b>Un peu avant le sommet</b> (par exemple 55 mm pour 1 200 à 1 800 mm de diamètre) : le bain et le laitier se figent au sommet, à plat."}
+  ];
+  let score=0,done=0;const sc=$("#qzScore");
+  function upd(){let t="Score : "+score+" / "+Q.length;if(done===Q.length)t+=score>=10?"  ·  🎉 prêt pour le cours 2":score>=7?"  ·  relis les explications":"  ·  refais un tour des chapitres";sc.textContent=t;}
+  function render(){box.innerHTML="";score=0;done=0;
+    Q.forEach((it,n)=>{const d=document.createElement("div");d.className="qz";
+      d.innerHTML='<p class="qz-q"><b>'+(n+1)+".</b> "+it.q+'</p><div class="qz-o"></div><div class="qz-e" hidden></div>';
+      const o=d.querySelector(".qz-o"),ex=d.querySelector(".qz-e");let answered=false;
+      it.o.forEach((txt,i)=>{const b=document.createElement("button");b.type="button";b.className="qz-b";b.innerHTML=String.fromCharCode(65+i)+". "+txt;
+        b.addEventListener("click",()=>{if(answered)return;answered=true;done++;const ok=i===it.c;if(ok)score++;b.classList.add(ok?"ok":"ko");o.children[it.c].classList.add("ok");ex.hidden=false;ex.innerHTML=(ok?"✅ <b>Bien joué.</b> ":"❌ <b>Pas tout à fait.</b> ")+it.e;upd();});
+        o.appendChild(b);});
+      box.appendChild(d);});
+    upd();}
+  $("#qzReset").addEventListener("click",render);render();
+})();
+(function(){
+  const boxes=$$("#checklist input[type=checkbox]"),msg=$("#checkMsg"),KEY="arc-submerge-cours1-check";
+  if(!boxes.length)return;
+  let saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||"[]")||[];}catch(e){saved=[];}
+  boxes.forEach(b=>{b.checked=saved.indexOf(b.dataset.c)>=0;});
+  function upd(){const on=boxes.filter(b=>b.checked).map(b=>b.dataset.c);try{localStorage.setItem(KEY,JSON.stringify(on));}catch(e){}
+    msg.innerHTML=on.length===boxes.length?"🎉 <b>Tout est coché : en route pour le cours 2, le flux, les fils et le métal déposé !</b>":on.length+" / "+boxes.length+" : reviens sur les points non cochés (les manipulations sont faites pour ça).";}
+  boxes.forEach(b=>b.addEventListener("change",upd));upd();
+})();
+
+(function(){
+  const links=$$(".toc a"),tin=$(".toc-in");
+  if(!links.length||!("IntersectionObserver" in window))return;
+  const map={};links.forEach(a=>{map[a.getAttribute("href").slice(1)]=a;});
+  const obs=new IntersectionObserver(ents=>{ents.forEach(en=>{if(!en.isIntersecting)return;const a=map[en.target.id];if(!a)return;
+    links.forEach(l=>l.classList.toggle("on",l===a));
+    if(tin){const tgt=a.offsetLeft-tin.clientWidth/2+a.offsetWidth/2;try{tin.scrollTo({left:tgt,behavior:RM?"auto":"smooth"});}catch(e){tin.scrollLeft=tgt;}}});},{rootMargin:"-45% 0px -50% 0px"});
+  Object.keys(map).forEach(id=>{const s=document.getElementById(id);if(s)obs.observe(s);});
+})();
+(function(){
+  const b=$("#themeBtn");if(!b)return;const KEY="arc-submerge-theme",root=document.documentElement;
+  const lab={auto:"◐ Thème : automatique",light:"☀️ Thème : clair",dark:"🌙 Thème : sombre"};
+  let t="auto";try{t=localStorage.getItem(KEY)||"auto";}catch(e){}
+  function apply(){if(t==="auto")root.removeAttribute("data-theme");else root.setAttribute("data-theme",t);b.textContent=lab[t];}
+  b.addEventListener("click",()=>{t=t==="auto"?"light":t==="light"?"dark":"auto";try{localStorage.setItem(KEY,t);}catch(e){}apply();});
+  apply();
+})();
+})();
+</script>
+</body>
+</html>
