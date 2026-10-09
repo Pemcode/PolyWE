@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Essais, cours 2 : les essais de dureté, l'empreinte qui raconte le métal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F6F9; --paper-2:#E6ECF2; --card:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#C5CFD9;
+  --grid:rgba(40,90,160,.075);
+  --sig:#CF2438; --tau:#8A34B6; --eps:#1B5ED3; --gam:#06849A; --frc:#D46A00; --mat:#26844A; --weld:#9A5B12;
+  --ok:#26844A; --warn:#B86E00; --bad:#C62828;
+  --lv2:#E4EBF2; --hl:#FFF3B0;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-head:"Barlow Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+  --font-math:"STIX Two Text","Cambria Math","Cambria","Times New Roman",serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+    --grid:rgba(120,160,220,.07);
+    --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+    --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+  --grid:rgba(120,160,220,.07);
+  --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+  --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+  color-scheme: dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;color:var(--ink);font-family:var(--font-body);font-size:17.5px;line-height:1.62;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;overflow-x:hidden;
+}
+img,svg{max-width:100%}
+.wrap{max-width:800px;margin:0 auto;padding:0 20px}
+.wide{max-width:980px}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.1;margin:0}
+h3{font-size:1.65rem;font-weight:600;margin:2rem 0 .6rem}
+h4{font-size:1.3rem;font-weight:600;margin:1.4rem 0 .4rem}
+p{margin:.7em 0}
+a{color:var(--eps)}
+b,strong{font-weight:700}
+small{font-size:.8em}
+sub{font-size:.72em}
+.m{font-family:var(--font-math);font-size:1.08em;white-space:nowrap}
+.sig{color:var(--sig)} .tau{color:var(--tau)} .eps{color:var(--eps)} .gam{color:var(--gam)} .frc{color:var(--frc)} .mat{color:var(--mat)} .mut{color:var(--muted)} .wcol{color:var(--weld)}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .12em;line-height:1.1}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .2em .08em}
+.frac>span:last-child{padding:.08em .2em 0}
+ul,ol{padding-left:1.4em}
+li{margin:.25em 0}
+
+/* ---------- en-tête ---------- */
+.hero{padding:34px 0 10px}
+.title-block{border:2.5px solid var(--ink);background:var(--card);display:grid;grid-template-columns:1fr 300px}
+.tb-main{padding:22px 24px;border-right:2.5px solid var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.tb-series{margin:0 0 .5rem;color:var(--muted);font-size:.95rem}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:700;letter-spacing:-.01em}
+.tb-cells{display:grid;grid-template-rows:repeat(4,auto)}
+.tb-cells>div{padding:9px 16px;border-bottom:1.5px solid var(--ink);display:flex;flex-direction:column;justify-content:center}
+.tb-cells>div:last-child{border-bottom:0}
+.tb-cells small{color:var(--muted);font-size:.78rem}
+.tb-cells b{font-family:var(--font-head);font-size:1.25rem;font-weight:600;line-height:1.15}
+.lede{font-size:1.13rem;max-width:760px;margin:1.2rem 0}
+.theme-btn{align-self:flex-start;font-family:var(--font-body);font-size:.85rem;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
+@media (max-width:760px){.title-block{grid-template-columns:1fr}.tb-main{border-right:0;border-bottom:2.5px solid var(--ink)}.tb-cells{grid-template-rows:none;grid-template-columns:1fr 1fr}.tb-cells>div:nth-child(odd){border-right:1.5px solid var(--ink)}.tb-cells>div:nth-child(3){border-bottom:0}}
+@media (max-width:420px){.tb-cells{grid-template-columns:1fr}.tb-cells>div:nth-child(odd){border-right:0}.tb-cells>div:nth-child(3){border-bottom:1.5px solid var(--ink)}}
+
+/* code couleur */
+.cc{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin:1rem 0 .4rem}
+.cc-box{background:var(--card);border:2px solid var(--line);padding:12px 14px;border-radius:4px}
+.cc-cause{border-color:var(--sig)} .cc-link{border-color:var(--mat)} .cc-eff{border-color:var(--eps)}
+.cc-box small{display:block;color:var(--muted);font-size:.82rem;line-height:1.3}
+.cc-syms{font-family:var(--font-math);font-size:1.7rem;line-height:1.25;display:flex;flex-wrap:wrap;gap:.1em .45em;margin:.2rem 0}
+.cc-box p{margin:0;font-size:.9rem;line-height:1.35}
+.cc-arrow{align-self:center;font-size:1.8rem;color:var(--muted)}
+@media (max-width:700px){.cc{grid-template-columns:1fr}.cc-arrow{transform:rotate(90deg);justify-self:center;line-height:1}}
+.cc-more{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.5rem 0}
+.cc-more>div{border:2px solid var(--line);background:var(--card);border-radius:4px;padding:6px 10px;font-size:.9rem}
+@media (max-width:640px){.cc-more{grid-template-columns:1fr}}
+
+/* ---------- sommaire ---------- */
+.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1.5px solid var(--line);padding-top:env(safe-area-inset-top,0px);margin-top:18px}
+.toc-in{display:flex;gap:6px;overflow-x:auto;padding:9px 20px;max-width:980px;margin:0 auto;scrollbar-width:thin}
+.toc a{flex:none;text-decoration:none;color:var(--ink);font-size:.88rem;padding:4px 11px;border:1.5px solid var(--line);border-radius:999px;background:var(--card);white-space:nowrap}
+.toc a.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.toc a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--eps);outline-offset:2px}
+
+/* ---------- sections ---------- */
+section.chap{padding:46px 0 10px}
+.cartouche{display:grid;grid-template-columns:86px 1fr 250px;border:2.5px solid var(--ink);background:var(--card);margin-bottom:1.4rem}
+.c-num{font-family:var(--font-head);font-size:3.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;border-right:2.5px solid var(--ink)}
+.c-title{padding:14px 18px;border-right:2.5px solid var(--ink)}
+.c-title h2{font-size:2.1rem;font-weight:700}
+.c-title p{margin:.25rem 0 0;color:var(--muted)}
+.c-img{padding:12px 14px;display:flex;gap:12px;align-items:center;background:var(--paper-2)}
+.c-img .ico{font-size:2.3rem;line-height:1}
+.c-img small{display:block;color:var(--muted);font-size:.78rem}
+.c-img span{font-size:.95rem;line-height:1.3}
+@media (max-width:700px){.cartouche{grid-template-columns:64px 1fr}.c-num{font-size:2.6rem}.c-title{border-right:0}.c-img{grid-column:1/-1;border-top:2px solid var(--ink)}.c-title h2{font-size:1.7rem}}
+
+/* niveaux */
+.lv{margin:1.2rem 0;padding:6px 22px 14px;border-radius:4px}
+.lv1{background:var(--card);border:2px solid var(--ink)}
+.lv2{background:var(--lv2);border-left:6px solid var(--ink)}
+.lv-h{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-family:var(--font-head);font-size:1.35rem;font-weight:600;margin:10px 0 4px}
+.lv-h .tag{font-size:.95rem;font-family:var(--font-body);font-weight:400;color:var(--muted)}
+@media (max-width:520px){.lv{padding:6px 14px 12px}}
+
+/* formules et encadrés */
+.fx{margin:1.1rem auto;background:var(--card);border:2.5px solid var(--ink);padding:14px 18px;max-width:600px;text-align:center;border-radius:3px;overflow-x:auto}
+.fx .big{font-family:var(--font-math);font-size:1.9rem;line-height:1.4}
+.fx .cap{font-size:.85rem;color:var(--muted);margin:.3rem 0 0}
+.fx .row{display:flex;flex-wrap:wrap;justify-content:center;gap:.2em 1.4em}
+.syms{margin:.6rem 0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;align-items:baseline}
+.syms dt{font-family:var(--font-math);font-size:1.25rem;text-align:right;white-space:nowrap}
+.syms dd{margin:0}
+.def{margin:.9rem 0;padding:.5rem .9rem;border-left:3px dotted var(--muted);font-size:.96rem;background:color-mix(in srgb,var(--card) 60%,transparent)}
+.def>b:first-child{font-family:var(--font-head);font-size:1.08rem;font-weight:600}
+.tip{margin:1rem 0;padding:.7rem 1rem;border:1.5px dashed var(--mat);border-radius:4px;font-size:.97rem}
+.warn{margin:1rem 0;padding:.7rem 1rem;border:2px solid var(--bad);border-radius:4px;font-size:.97rem;background:color-mix(in srgb,var(--bad) 7%,transparent)}
+.mnemo{margin:1rem 0;padding:.7rem 1rem;background:var(--hl);border-radius:4px;font-size:.98rem}
+.fun{margin:1.2rem 0;padding:.8rem 1rem;border:2px dashed var(--muted);border-radius:10px;background:var(--card);font-size:.98rem}
+.fun-h{display:block;margin-bottom:.35rem;font-family:var(--font-head);font-size:1.15rem;font-weight:600;letter-spacing:.02em}
+.meta{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--frc);border-radius:4px;background:color-mix(in srgb,var(--frc) 6%,transparent)}
+.weld{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--weld);border-radius:4px;background:color-mix(in srgb,var(--weld) 7%,transparent)}
+.weld>b:first-child{font-family:var(--font-head);font-size:1.15rem;font-weight:600;color:var(--weld)}
+.hp{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:9px;background:var(--weld);color:var(--card);vertical-align:middle;margin-left:4px;white-space:nowrap}
+.recall{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
+.recall>div{background:var(--card);border:1.5px solid var(--line);border-radius:4px;padding:8px 12px;font-size:.92rem}
+.recall .f{font-family:var(--font-math);font-size:1.2rem;margin-bottom:.2rem}
+@media (max-width:640px){.recall{grid-template-columns:1fr}}
+.hist{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1rem 0}
+.hist>div{background:var(--card);border:1.5px solid var(--weld);border-radius:4px;padding:8px 12px;font-size:.93rem}
+.hist .yr{font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--weld);line-height:1}
+@media (max-width:720px){.hist{grid-template-columns:1fr}}
+
+/* manipulations */
+.lab{background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:14px 16px 12px;margin:1.4rem 0}
+.lab-h{font-family:var(--font-head);font-size:1.3rem;font-weight:600;margin:0 0 .2rem}
+.lab-sub{margin:0 0 .6rem;color:var(--muted);font-size:.92rem}
+.lab svg{display:block;width:100%;height:auto;color:var(--ink);font-family:var(--font-body);touch-action:pan-y}
+.ctrl{display:grid;grid-template-columns:minmax(110px,auto) 1fr minmax(92px,auto);gap:4px 12px;align-items:center;margin:.5rem 0}
+.ctrl label{font-size:.95rem}
+.ctrl output{font-family:var(--font-math);font-size:1.08rem;text-align:right;white-space:nowrap}
+@media (max-width:520px){.ctrl{grid-template-columns:1fr auto}.ctrl input[type=range]{grid-column:1/-1;grid-row:2}}
+input[type=range]{width:100%;accent-color:var(--ink);height:28px;margin:0}
+input.r-sig{accent-color:var(--sig)} input.r-tau{accent-color:var(--tau)} input.r-frc{accent-color:var(--frc)} input.r-mat{accent-color:var(--mat)} input.r-eps{accent-color:var(--eps)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0}
+.btn{font-family:var(--font-body);font-size:.9rem;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 13px;cursor:pointer;line-height:1.3}
+.btn:hover{background:var(--paper-2)}
+.btn.on{background:var(--ink);color:var(--paper)}
+.btn.play{border-color:var(--eps);color:var(--eps);font-weight:700}
+.btn:disabled{opacity:.45;cursor:default}
+.readout{font-family:var(--font-math);font-size:1.08rem;background:var(--paper-2);border-radius:4px;padding:.5rem .8rem;margin:.5rem 0;overflow-x:auto;display:flex;flex-wrap:wrap;gap:.2em 1.3em}
+.readout>span{white-space:nowrap}
+.status{font-size:.97rem;margin:.5rem 0;padding:.5rem .8rem;border-left:4px solid var(--eps);background:color-mix(in srgb,var(--eps) 6%,transparent);border-radius:0 4px 4px 0;min-height:2.6em}
+.radios{display:flex;flex-wrap:wrap;gap:6px 14px;margin:.4rem 0;font-size:.95rem}
+.radios label{display:inline-block;cursor:pointer}
+.radios input{margin:0 6px 0 0;vertical-align:middle}
+
+/* svg */
+svg text{fill:currentColor;font-size:13px}
+svg .lbl{font-size:12.5px;fill:var(--muted)}
+svg .mth{font-family:var(--font-math);font-size:16px}
+svg .ttl{font-family:var(--font-head);font-size:15px;font-weight:600}
+svg .axis{stroke:var(--ink);stroke-width:1.4;fill:none}
+svg .tick{stroke:var(--muted);stroke-width:1}
+svg .gridbg{stroke:var(--line);stroke-width:1}
+svg .ref{stroke:var(--muted);stroke-width:1.3;stroke-dasharray:4 3;fill:none}
+.arr line{stroke:currentColor}
+.arr polygon{fill:currentColor}
+
+/* tableaux */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;-webkit-overflow-scrolling:touch}
+table.data{border-collapse:collapse;width:100%;font-size:.94rem;background:var(--card)}
+table.data th,table.data td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:middle}
+table.data th{font-family:var(--font-head);font-weight:600;font-size:1.05rem;background:var(--paper-2)}
+table.data td.n{font-family:var(--font-math);white-space:nowrap}
+table.data tr.now td{background:var(--hl)}
+
+/* parcours */
+.route{list-style:none;padding:0;margin:1rem 0;position:relative}
+.route::before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:4px;background:var(--line);border-radius:2px}
+.route li{position:relative;padding:0 0 14px 52px;margin:0}
+.route li .dot{position:absolute;left:4px;top:0;width:30px;height:30px;border-radius:50%;border:3px solid var(--ink);background:var(--card);font-family:var(--font-head);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+.route li b{font-family:var(--font-head);font-size:1.2rem;font-weight:600}
+.route li p{margin:.1rem 0 0;font-size:.95rem}
+.series{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:.8rem 0}
+.series>div{background:var(--card);border:1.5px solid var(--line);padding:8px 10px;border-radius:4px;font-size:.88rem}
+.series>div.here{border:2.5px solid var(--ink)}
+.series b{display:block;font-family:var(--font-head);font-size:1.05rem}
+@media (max-width:700px){.series{grid-template-columns:1fr 1fr}}
+
+/* exercices et quiz */
+.exo{background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--ink);padding:6px 20px 12px;margin:1.2rem 0;border-radius:4px}
+.exo.defi{border-left-color:var(--weld)}
+.exo h4{margin-top:.8rem}
+.exo .lvtag{font-family:var(--font-body);font-size:.85rem;font-weight:400;color:var(--muted);margin-left:.4rem}
+.exo .q{margin:.25rem 0}
+details{margin:.6rem 0}
+summary{cursor:pointer;font-weight:700;padding:4px 0}
+details .sol{padding:.4rem .9rem;border-left:3px solid var(--mat);margin:.4rem 0}
+details .sol p{margin:.45em 0}
+.qz{background:var(--card);border:1.5px solid var(--line);border-radius:6px;padding:10px 16px;margin:.8rem 0}
+.qz-q{margin:.3rem 0 .6rem}
+.qz-o{display:flex;flex-direction:column;gap:6px}
+.qz-b{text-align:left;font-family:var(--font-body);font-size:.97rem;padding:8px 12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:5px;cursor:pointer}
+.qz-b:hover{border-color:var(--ink)}
+.qz-b.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}
+.qz-b.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.qz-e{font-size:.94rem;margin:.6rem 0 .2rem}
+.score{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);display:inline-block;background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:999px;font-size:.95rem;margin:.6rem 0}
+
+/* fiche mémoire */
+.fiche{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2.5px solid var(--ink);background:var(--card);margin:1rem 0}
+.fiche>div{padding:12px 14px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.fiche>div:nth-child(3n){border-right:0}
+.fiche>div:nth-last-child(-n+3){border-bottom:0}
+.fiche .ic{font-size:1.9rem;line-height:1}
+.fiche h4{margin:.3rem 0 .2rem;font-size:1.15rem}
+.fiche .f{font-family:var(--font-math);font-size:1.1rem;margin:.2rem 0}
+.fiche p{margin:.2rem 0 0;font-size:.88rem;color:var(--muted)}
+@media (max-width:720px){.fiche{grid-template-columns:1fr 1fr}.fiche>div{border-right:1.5px solid var(--ink)!important;border-bottom:1.5px solid var(--ink)!important}.fiche>div:nth-child(2n){border-right:0!important}.fiche>div:last-child{border-bottom:0!important}}
+@media (max-width:440px){.fiche{grid-template-columns:1fr}.fiche>div{border-right:0!important}}
+.gloss{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:0;border-top:1.5px solid var(--line);margin:1rem 0}
+.gloss dt,.gloss dd{border-bottom:1.5px solid var(--line);padding:7px 8px;margin:0}
+.gloss dt{font-weight:700}
+.gloss dd{font-size:.95rem}
+@media (max-width:600px){.gloss{grid-template-columns:1fr}.gloss dt{border-bottom:0;padding-bottom:0}}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.check input{margin-top:.35em;width:18px;height:18px;accent-color:var(--mat);flex:none}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem}
+hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
+@media (max-width:700px){.m{white-space:normal}.fx{padding:12px 10px}.fx .big{font-size:1.4rem}}
+@media (max-width:400px){body{font-size:16.5px}.wrap{padding:0 14px}.lab{padding:12px 10px}}
+
+/* compléments de la série Rupture */
+.btn.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
+.btn.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+.ctrl[hidden]{display:none}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap wide">
+  <div class="title-block">
+    <div class="tb-main">
+      <div>
+        <p class="tb-series">Essais destructifs, série 2.23 : mesurer et observer ce que cache un métal</p>
+        <h1>Les essais de dureté : l'empreinte qui raconte le métal</h1>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Changer de thème">◐ Thème : automatique</button>
+    </div>
+    <div class="tb-cells">
+      <div><small>Cours</small><b>2 sur 3 : enfoncer une bille, une pyramide ou un cône, et lire la trace</b></div>
+      <div><small>Durée conseillée</small><b>≈ 2 h 30 à 3 h avec les exercices</b></div>
+      <div><small>Prérequis</small><b>cours 1 de la série (limite d'élasticité, écrouissage, R<sub>m</sub>) ; zone affectée thermiquement et temps de refroidissement t<sub>8/5</sub> (Métallurgie, cours 3)</b></div>
+      <div><small>À la fin tu sais</small><b>expliquer ce que mesure une dureté ; réaliser et calculer un essai Brinell, Vickers ou Rockwell et vérifier sa validité ; convertir une dureté et estimer R<sub>m</sub> avec prudence ; lire une filiation de dureté à travers une soudure et la confronter aux seuils de qualification</b></div>
+    </div>
+  </div>
+  <p class="lede">L'essai de traction demande une éprouvette usinée, une grosse machine, et il détruit un morceau de matière. L'essai de dureté se contente d'enfoncer une petite pointe dans la surface et de mesurer la trace : quelques secondes, une empreinte souvent plus petite qu'une tête d'épingle, et l'on sait si la pièce a bien été traitée, si un acier est trop dur pour être usiné ou si la zone voisine d'une soudure risque de fissurer. Ce cours explique ce que mesure vraiment une empreinte, détaille les trois grands essais, apprend à passer de l'un à l'autre, puis suit une ligne d'empreintes à travers une soudure.</p>
+
+  <h4>Le code couleur de la série</h4>
+  <div class="cc" role="img" aria-label="Code couleur : les causes en rouge et violet, les paramètres en vert, les effets en bleu et bleu-vert">
+    <div class="cc-box cc-cause"><small>Les causes</small><div class="cc-syms"><span class="sig">p</span><span class="sig">σ</span><span class="tau">HV<sub>max</sub></span></div><p><span class="sig">rouge</span> : les contraintes, ce qui charge la matière (pression moyenne p sous le pénétrateur, contrainte d'écoulement σ) ; <span class="tau">violet</span> : ce qui menace (zone trop dure, fissuration, erreurs de lecture)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-link"><small>Les paramètres</small><div class="cc-syms"><span class="mat">D</span><span class="mat">F/D²</span><span class="mat">t<sub>8/5</sub></span><span class="mat">CE</span></div><p>en <span class="mat">vert</span> : le matériau et les conditions d'essai (diamètre de bille D, rapport F/D², charge, échelle, refroidissement t<sub>8/5</sub>, carbone équivalent CE)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-eff"><small>Les effets</small><div class="cc-syms"><span class="eps">d</span><span class="eps">h</span><span class="eps">HV</span><span class="gam">M</span></div><p><span class="eps">bleu</span> : ce qu'on mesure (diamètre ou diagonale d, profondeur h, valeurs de dureté HBW, HV, HRC) ; <span class="gam">bleu-vert</span> : la structure de la matière (martensite M, phases, zone affectée)</p></div>
+  </div>
+  <div class="cc-more">
+    <div><b class="frc">Orange</b> : les forces et les actions (force d'essai F, pénétrateur qui s'enfonce).</div>
+    <div><b>Noir</b> : la géométrie dessinée (pénétrateurs, empreintes, coupes de soudure).</div>
+    <div><b class="wcol">Bronze</b> : les encadrés « métier » 🔥, tournés vers le laboratoire et l'atelier.</div>
+  </div>
+</div>
+</header>
+
+<nav class="toc" aria-label="Sommaire">
+  <div class="toc-in">
+    <a href="#avant">Avant de commencer</a>
+    <a href="#c1">1 L'empreinte</a>
+    <a href="#c2">2 Brinell</a>
+    <a href="#c3">3 Vickers</a>
+    <a href="#c4">4 Rockwell</a>
+    <a href="#c5">5 Conversions</a>
+    <a href="#c6">6 Soudage</a>
+    <a href="#exos">Exercices</a>
+    <a href="#quiz-s">Quiz</a>
+    <a href="#fiche">Fiche mémoire</a>
+    <a href="#gloss">Glossaire</a>
+    <a href="#check">Check-list</a>
+  </div>
+</nav>
+
+<main>
+<section class="chap" id="avant">
+<div class="wrap">
+  <h3 style="margin-top:0">Avant de commencer</h3>
+  <h4>Le cours 1 en trois cases</h4>
+  <div class="recall">
+    <div><div class="f"><span class="sig">R<sub>e</sub></span>, <span class="sig">R<sub>p0,2</sub></span></div>La limite d'élasticité marque le début de la déformation plastique, celle qui reste. R<sub>p0,2</sub> laisse 0,2 % de déformation permanente.</div>
+    <div><div class="f"><span class="sig">σ</span> = <span class="mat">K</span>·<span class="eps">ε</span><sup><span class="mat">n</span></sup></div>En se déformant, le métal durcit : c'est l'écrouissage. Le coefficient n dit à quel point il durcit, et fixe le début de la striction.</div>
+    <div><div class="f"><span class="sig">R<sub>m</sub></span> = <span class="frc">F<sub>m</sub></span>/<span class="mat">S<sub>0</sub></span></div>La résistance à la traction se mesure sur une éprouvette usinée, qu'on casse. Elle demande de la matière, du temps et une grosse machine.</div>
+  </div>
+
+  <div class="def"><b>📘 Correspondance avec le planning et le référentiel</b>. Ce cours poursuit le sujet <b>2.23 « Essais des matériaux »</b> du planning de la formation, et prépare le sujet <b>2.23 « Essais des soudures »</b> (chapitre 6) :
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Chapitre du cours</th><th>Ce qu'il apporte à l'IWE</th></tr>
+      <tr><td>1 Qu'est-ce que la dureté ?</td><td>principe des essais de pénétration, lien avec la plasticité et la limite d'élasticité</td></tr>
+      <tr><td>2 Brinell : la bille</td><td>essai sur produits bruts et matériaux hétérogènes ; calcul, choix de la charge, validité</td></tr>
+      <tr><td>3 Vickers : la pyramide</td><td>l'essai de référence des soudures (HV10, HV5) et de la microdureté ; précision de lecture</td></tr>
+      <tr><td>4 Rockwell : la profondeur</td><td>essai rapide d'atelier, échelles, limites</td></tr>
+      <tr><td>5 Convertir et relier</td><td>passage d'une échelle à l'autre, estimation de R<sub>m</sub>, limites des conversions</td></tr>
+      <tr><td>6 La dureté en soudage</td><td>filiation de dureté (ISO 9015-1), seuils de qualification (ISO 15614-1) et de service en milieu H₂S, remèdes</td></tr>
+    </table></div>
+    Dans le référentiel de l'IIW (<i>International Institute of Welding</i>) pour la formation IWE (<i>International Welding Engineer</i>), ce cours répond aux attendus des essais destructifs : décrire les essais, ce qu'ils mesurent, leurs avantages et leurs limites, et interpréter un procès-verbal.
+  </div>
+
+  <div class="def"><b>📖 Les normes, sources et sigles de ce cours</b>.
+    <ul>
+      <li><b>ISO 6506-1</b> : essai de dureté Brinell ; <b>ISO 6507-1</b> : essai de dureté Vickers ; <b>ISO 6508-1</b> : essai de dureté Rockwell ; <b>ISO 4545-1</b> : essai de dureté Knoop ; <b>ISO 14577-1</b> : essai de pénétration instrumenté ; <b>ISO 16859-1</b> : dureté Leeb (par rebond, portable).</li>
+      <li><b>ISO 18265</b> et <b>ASTM E140</b> : tables de conversion des duretés et estimation de la résistance à la traction.</li>
+      <li><b>ISO 9015-1</b> : essai de dureté des assemblages soudés à l'arc ; <b>ISO 9015-2</b> : microdureté des assemblages soudés ; <b>ISO 15614-1</b> : qualification d'un mode opératoire de soudage (QMOS) des aciers ; <b>ISO/TR 15608</b> : groupes de matériaux ; <b>ISO 15156-2</b> (NACE MR0175) : aciers pour les milieux contenant du sulfure d'hydrogène H₂S ; <b>EN 1011-2</b> : soudage des aciers ferritiques, préchauffage et temps de refroidissement.</li>
+      <li><b>HBW, HV, HRC, HRBW</b> : symboles des duretés Brinell (bille en carbure de tungstène, W), Vickers, Rockwell C et Rockwell B à bille en carbure ; <b>kgf</b> : kilogramme-force, 9,806 65 N ; <b>CE</b> : carbone équivalent de l'IIW ; <b>t<sub>8/5</sub></b> : temps de refroidissement entre 800 et 500 °C ; <b>PWHT</b> (<i>post-weld heat treatment</i>) : traitement thermique après soudage ; <b>ZAT</b> : zone affectée thermiquement.</li>
+    </ul>
+    Les tables de conversion viennent des normes citées ; les valeurs de matériaux sont typiques ; les modèles des manipulations sont pédagogiques et donnent des ordres de grandeur réalistes.
+  </div>
+
+  <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
+    <p>Le soudage chauffe, puis refroidit très vite, une bande de métal de base large de quelques millimètres. Si l'acier est trempant, cette zone affectée peut devenir aussi dure que de l'acier à outils, et fissurer quelques heures plus tard sous l'effet de l'hydrogène. Aucun essai de traction ne le verra : l'éprouvette casse ailleurs, dans le métal le plus faible. La ligne d'empreintes Vickers qui traverse la soudure, elle, trouve le pic de dureté. C'est pourquoi les qualifications de modes opératoires, les codes d'appareils à pression et les spécifications pétrolières fixent une dureté maximale.</p>
+  </div>
+
+  <h4>La série en trois cours</h4>
+  <div class="series">
+    <div><b>1 L'essai de traction</b>Élasticité, plasticité, lecture de la courbe, striction, influences, réalisation pratique.</div>
+    <div class="here"><b>2 Les essais de dureté</b>Brinell, Vickers, Rockwell, conversions, filiations de dureté sur les soudures.</div>
+    <div><b>3 Les examens métallographiques</b>Macro et micro, découpe, polissage, attaque, microscopes, lecture d'une macrographie.</div>
+    <div><b>Déjà traités ailleurs</b>L'essai Charpy (Rupture, cours 2) et la lecture des cassures (Rupture, cours 1).</div>
+  </div>
+
+  <h4>Le plan du cours</h4>
+  <ol class="route">
+    <li><span class="dot">1</span><b>Qu'est-ce que la dureté ?</b><p>Une empreinte permanente, une pression environ trois fois la contrainte d'écoulement.</p></li>
+    <li><span class="dot">2</span><b>Brinell : la bille</b><p>Une grosse empreinte qui fait la moyenne, et la règle du rapport F/D².</p></li>
+    <li><span class="dot">3</span><b>Vickers : la pyramide</b><p>Un losange qu'on mesure au microscope, de la charge de 10 kgf à la microdureté.</p></li>
+    <li><span class="dot">4</span><b>Rockwell : la profondeur</b><p>Un cadran qui lit l'enfoncement, sans microscope.</p></li>
+    <li><span class="dot">5</span><b>Convertir et relier</b><p>Passer de HV à HB, HRC ou R<sub>m</sub>, et savoir quand c'est interdit.</p></li>
+    <li><span class="dot">6</span><b>La dureté en soudage</b><p>La filiation, le pic de la zone affectée, les seuils, les remèdes.</p></li>
+  </ol>
+</div>
+</section>
+
+<section class="chap" id="c1">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">1</div>
+    <div class="c-title"><h2>Qu'est-ce que la dureté ?</h2><p>Une empreinte permanente, une pression environ trois fois la contrainte d'écoulement</p></div>
+    <div class="c-img"><span class="ico">👍</span><span><small>Image à retenir</small>Le pouce dans la pâte à modeler : plus la pâte est ferme, plus la trace est petite</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le pouce dans la pâte à modeler</span></div>
+    <p>Appuie le pouce sur une boule de pâte à modeler : il laisse une trace. Sur une pâte bien froide, la trace est petite ; sur une pâte tiède, elle est grande. Tu viens de faire un essai de dureté : la <b>dureté</b> d'un métal est sa résistance à la pénétration permanente d'un objet plus dur que lui.</p>
+    <p>Tous les essais industriels suivent le même principe. On enfonce un <b>pénétrateur</b> (une bille d'acier ou de carbure, une pyramide ou un cône de diamant) avec une force <span class="frc">F</span> connue, pendant quelques secondes, puis on mesure la trace qu'il laisse : sa largeur (Brinell, Vickers) ou sa profondeur (Rockwell). Plus la trace est petite, plus le métal est dur.</p>
+    <p>Pourquoi la trace reste-t-elle ? Sous la pointe, le métal subit une forte pression : il <b>coule plastiquement</b> (chapitre 2 du cours 1) et s'écarte. Le pénétrateur s'enfonce jusqu'à ce que la pression moyenne qu'il exerce redescende à un niveau que le métal supporte. Or ce métal est retenu de tous côtés par le métal voisin, qui ne cède pas : pour le faire couler, il faut environ <b>trois fois</b> sa contrainte d'écoulement. La dureté est donc une mesure déguisée de la résistance à la déformation plastique, ce qui explique qu'elle suive la limite d'élasticité et la résistance à la traction.</p>
+    <p>Ses atouts sont considérables : l'essai dure quelques secondes, l'empreinte est minuscule (souvent moins d'un millimètre), la pièce reste utilisable dans bien des cas, et l'on peut viser une zone précise, par exemple la zone affectée d'une soudure.</p>
+  </div>
+
+  <div class="lab" id="m1">
+    <p class="lab-h">Manipulation 1 : le pouce dans la pâte</p>
+    <p class="lab-sub">Un pénétrateur s'enfonce dans un métal sous la force <span class="frc">F</span>. Le métal coule sous la pointe jusqu'à ce que la pression moyenne <span class="sig">p</span> (la force divisée par l'aire de l'empreinte vue de dessus) tombe à environ trois fois sa contrainte d'écoulement. Choisis le métal et le pénétrateur, puis augmente la force (échelle logarithmique). À gauche, la coupe : l'empreinte et, en bleu-vert, la zone plastique ; à droite, la pression moyenne selon la force. Modèle de Tabor, pédagogique.</p>
+    <div class="btns" id="m1m">
+      <button class="btn" data-k="Al" type="button">Aluminium pur</button>
+      <button class="btn" data-k="Cu" type="button">Cuivre recuit</button>
+      <button class="btn on" data-k="S355" type="button">Acier S355</button>
+      <button class="btn" data-k="QT" type="button">Trempé-revenu</button>
+      <button class="btn" data-k="M" type="button">Martensite</button>
+    </div>
+    <div class="btns" id="m1i">
+      <button class="btn on" data-k="V" type="button">Pyramide Vickers</button>
+      <button class="btn" data-k="B" type="button">Bille de 10 mm</button>
+      <button class="btn" data-k="C" type="button">Cône Rockwell</button>
+    </div>
+    <div class="ctrl"><label for="m1f">Force <span class="frc">F</span></label><input type="range" id="m1f" class="r-frc" min="0" max="4.5" step="0.05" value="2"><output id="m1fo"></output></div>
+    <div class="btns"><button class="btn play" id="m1play" type="button">▶ Appuyer</button></div>
+    <svg id="m1svg" role="img" aria-label="Coupe d'une empreinte avec sa zone plastique et pression moyenne en fonction de la force"></svg>
+    <div class="readout" id="m1r"></div>
+    <p class="status" id="m1msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">pression moyenne, relation de Tabor, familles d'essais</span></div>
+    <h4>La pression moyenne et la relation de Tabor</h4>
+    <p>La <b>pression moyenne</b> sous un pénétrateur est la force divisée par l'aire projetée de l'empreinte (l'aire vue de dessus) ; on l'appelle aussi dureté de Meyer. D. Tabor a montré que, une fois l'empreinte pleinement plastique, elle vaut environ trois fois la contrainte d'écoulement du métal, prise à une déformation représentative de l'essai :</p>
+    <div class="fx"><div class="big"><span class="sig">p</span> = <span class="frac"><span><span class="frc">F</span></span><span>A<sub>proj</sub></span></span> ≈ C·<span class="sig">σ</span>(<span class="eps">ε</span><sub>r</sub>)    C ≈ 3    <span class="eps">ε</span><sub>r</sub> ≈ 8 % (pyramide Vickers) ;  ≈ 0,2·<span class="eps">d</span>/<span class="mat">D</span> (bille)</div><p class="cap">p : pression moyenne (MPa) ; Aproj : aire projetée de l'empreinte (mm²) ; C : facteur de contrainte, de 2,8 à 3 selon le pénétrateur ; σ(εr) : contrainte d'écoulement à la déformation représentative εr ; d : diamètre de l'empreinte ; D : diamètre de la bille</p></div>
+    <p>Le facteur 3 vient du <b>confinement</b> : le métal sous la pointe ne peut couler qu'en repoussant le métal qui l'entoure, resté élastique. <b>Exemple</b> : pour un acier S355 qui, dans le modèle, coule à 567 MPa à 8 % de déformation, la pression sous une pyramide Vickers vaut <span class="m">p ≈ 3 × 567 ≈ 1 700 MPa</span>, soit environ 161 HV (chapitre 3).</p>
+    <p><b>La similitude géométrique.</b> Une pyramide ou un cône s'enfonce en gardant la même forme d'empreinte : la déformation représentative ne change pas avec la force, et la dureté non plus. Une bille, au contraire, fait une empreinte d'autant plus « profonde » relativement que d/D est grand : la déformation représentative grandit avec la force, et la dureté d'un métal qui s'écrouit avec. C'est pourquoi l'essai Brinell impose de garder le même rapport F/D² (chapitre 2).</p>
+
+    <h4>Les familles d'essais</h4>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Famille</th><th>Principe</th><th>Exemples</th></tr>
+      <tr><td>Pénétration statique, mesure optique</td><td>on mesure la taille de l'empreinte après retrait de la charge</td><td>Brinell, Vickers, Knoop</td></tr>
+      <tr><td>Pénétration statique, mesure de profondeur</td><td>on lit l'enfoncement entre deux niveaux de charge</td><td>Rockwell</td></tr>
+      <tr><td>Pénétration instrumentée</td><td>on enregistre la force et la profondeur pendant tout le cycle</td><td>dureté Martens, module d'élasticité local (ISO 14577)</td></tr>
+      <tr><td>Dynamique, par rebond</td><td>une masse frappe la surface ; on mesure sa vitesse de rebond</td><td>Leeb (appareils portables)</td></tr>
+      <tr><td>Rayure</td><td>un matériau raye ceux qui sont moins durs que lui</td><td>échelle de Mohs des minéralogistes</td></tr>
+    </table></div>
+    <p>On parle de <b>macrodureté</b> pour des charges de quelques kilogrammes-force et plus (empreintes de quelques dixièmes de millimètre et plus), de <b>microdureté</b> pour des charges de moins de 200 grammes-force (empreintes de quelques dizaines de micromètres, qui visent une phase ou un grain), de <b>nanodureté</b> en dessous. Le kilogramme-force (kgf) vaut 9,806 65 N ; les symboles des essais gardent sa trace (HV10 : 10 kgf, soit 98,07 N).</p>
+    <div class="def"><b>📖 Dureté</b> : résistance d'un matériau à la pénétration permanente d'un corps plus dur. Ce n'est pas une grandeur physique unique : sa valeur dépend du pénétrateur, de la charge et de la méthode de mesure, et n'a de sens qu'avec le nom de l'essai.</div>
+    <div class="tip">💡 <b>Diviser par trois</b> : une pression moyenne de 1 700 MPa sous la pointe signifie un métal qui coule vers 570 MPa. C'est le pont entre la dureté et la traction, et l'origine des formules du type R<sub>m</sub> ≈ 3,2·HV (chapitre 5).</div>
+    <div class="warn"><b>⚠️ Piège : comparer des duretés de méthodes différentes.</b> « 200 » ne veut rien dire tout seul : 200 HV, 200 HBW et 20 HRC sont trois duretés différentes. Une valeur de dureté s'écrit toujours avec son symbole complet, charge comprise.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « Bille, Vitre, Règle »</b> : la Bille du Brinell, le losange de diamant du Vickers qu'on lit comme à travers une vitre, au microscope, et la règle de profondeur du Rockwell.</div>
+    <div class="weld"><b>🔥 Le témoin du traitement thermique</b>
+      <p>La dureté réagit à tout ce qui change la microstructure : trempe, revenu, écrouissage, soudage. C'est le contrôle le plus rapide de l'efficacité d'un traitement thermique après soudage : quelques empreintes avant et après le four disent si la zone affectée a bien été revenue. Sur chantier, des appareils portables (par rebond ou par impédance ultrasonore) le font sans découpe, avec une précision moindre qu'au laboratoire.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c2">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">2</div>
+    <div class="c-title"><h2>Brinell : la bille</h2><p>Une grosse empreinte qui fait la moyenne, et la règle du rapport F/D²</p></div>
+    <div class="c-img"><span class="ico">⚪</span><span><small>Image à retenir</small>La bille posée dans le sable mouillé : on mesure le diamètre du cratère, pas sa profondeur</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la bille dans le sable</span></div>
+    <p>L'essai <b>Brinell</b> (du nom de l'ingénieur suédois Johan August Brinell, qui le présenta en 1900) enfonce une <b>bille</b> de carbure de tungstène, de diamètre <span class="mat">D</span> (10 mm, 5 mm, 2,5 mm ou 1 mm), sous une force <span class="frc">F</span> qui peut atteindre 29,42 kN (3 000 kgf), maintenue 10 à 15 secondes. On mesure ensuite le diamètre <span class="eps">d</span> du cratère, dans deux directions perpendiculaires, à l'aide d'une loupe graduée ou d'une caméra.</p>
+    <p>La dureté Brinell est la force divisée par la surface du cratère, une calotte sphérique. Grosse empreinte, gros avantage : elle fait la <b>moyenne</b> sur de nombreux grains et phases. C'est l'essai des pièces brutes, des pièces moulées, des fontes au graphite grossier, des grosses pièces forgées.</p>
+    <p>Grosse empreinte, gros défaut aussi : impossible de viser une zone de quelques millimètres comme la zone affectée d'une soudure, ni de tester une tôle mince. Et la bille elle-même se déforme sur les métaux très durs : au-delà de 650 HBW, l'essai n'est plus valable.</p>
+    <p>Enfin, une bille ne s'enfonce pas comme une pyramide : plus elle s'enfonce, plus l'empreinte est « profonde » par rapport à sa taille, et plus le métal sous elle s'est écroui. Pour que deux essais soient comparables, on garde le même rapport entre la force et le carré du diamètre de la bille, <span class="mat">F/D²</span>, choisi selon la famille de métal.</p>
+  </div>
+
+  <div class="lab" id="m2">
+    <p class="lab-h">Manipulation 2 : le cratère de la bille</p>
+    <p class="lab-sub">Choisis le métal, le diamètre de bille <span class="mat">D</span> et le rapport <span class="mat">F/D²</span> (en kgf/mm² : la force vaut F/D² × D² kilogrammes-force), puis l'épaisseur de la pièce. À gauche, le cratère vu de dessus, avec en vert la bande des diamètres valables (de 0,24·D à 0,6·D) ; à droite, la coupe, avec la profondeur h et l'épaisseur minimale de 8·h. Même modèle d'empreinte que la manipulation 1.</p>
+    <div class="btns" id="m2m">
+      <button class="btn" data-k="Al" type="button">Aluminium pur</button>
+      <button class="btn" data-k="Cu" type="button">Cuivre recuit</button>
+      <button class="btn on" data-k="S355" type="button">Acier S355</button>
+      <button class="btn" data-k="QT" type="button">Trempé-revenu</button>
+      <button class="btn" data-k="M" type="button">Martensite</button>
+    </div>
+    <div class="btns" id="m2d">
+      <button class="btn on" data-k="10" type="button">D = 10 mm</button>
+      <button class="btn" data-k="5" type="button">D = 5 mm</button>
+      <button class="btn" data-k="2.5" type="button">D = 2,5 mm</button>
+      <button class="btn" data-k="1" type="button">D = 1 mm</button>
+    </div>
+    <div class="btns" id="m2r">
+      <button class="btn on" data-k="30" type="button">F/D² = 30</button>
+      <button class="btn" data-k="10" type="button">10</button>
+      <button class="btn" data-k="5" type="button">5</button>
+      <button class="btn" data-k="2.5" type="button">2,5</button>
+      <button class="btn" data-k="1" type="button">1</button>
+    </div>
+    <div class="ctrl"><label for="m2e">Épaisseur de la pièce</label><input type="range" id="m2e" class="r-mat" min="0.5" max="12" step="0.1" value="8"><output id="m2eo"></output></div>
+    <svg id="m2svg" role="img" aria-label="Empreinte Brinell vue de dessus avec la bande des diamètres valables, et coupe de la bille dans la pièce"></svg>
+    <div class="readout" id="m2out"></div>
+    <p class="status" id="m2msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">ISO 6506-1 : formule, charges, validité</span></div>
+    <div class="fx"><div class="big"><span class="eps">HBW</span> = 0,102 × <span class="frac"><span>2·<span class="frc">F</span></span><span>π·<span class="mat">D</span>·(<span class="mat">D</span> − √(<span class="mat">D</span>² − <span class="eps">d</span>²))</span></span>    <span class="eps">h</span> = <span class="frac"><span><span class="mat">D</span> − √(<span class="mat">D</span>² − <span class="eps">d</span>²)</span><span>2</span></span></div><p class="cap">F : force (N) ; D : diamètre de la bille (mm) ; d : diamètre moyen de l'empreinte (mm) ; h : profondeur de la calotte (mm). Le facteur 0,102 = 1/9,806 65 convertit les newtons en kilogrammes-force : HBW s'exprime de fait en kgf/mm², sans unité écrite. W rappelle la bille en carbure de tungstène</p></div>
+    <p><b>Exemple</b>. Bille de 10 mm, 29,42 kN (3 000 kgf), diamètres lus 3,95 et 4,05 mm, soit d = 4,00 mm. <span class="m">√(100 − 16) = 9,165</span>, <span class="m">D − 9,165 = 0,835 mm</span>, et <span class="m">HBW = 0,102 × 2 × 29 420/(π × 10 × 0,835) ≈ 229</span>. Désignation : <b>229 HBW 10/3000</b> (bille de 10 mm, 3 000 kgf ; la durée s'ajoute si elle sort de 10 à 15 s, par exemple 229 HBW 10/3000/30).</p>
+    <h4>Choisir la charge : le rapport F/D²</h4>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Métal (repères d'après l'ISO 6506-1)</th><th>F/D² (kgf/mm²)</th></tr>
+      <tr><td>Aciers, alliages de nickel et de titane</td><td class="n">30</td></tr>
+      <tr><td>Fontes</td><td class="n">10 (moins de 140 HBW) ou 30</td></tr>
+      <tr><td>Cuivre et alliages de cuivre</td><td class="n">5, 10 ou 30 selon la dureté</td></tr>
+      <tr><td>Métaux légers et leurs alliages</td><td class="n">2,5 à 15 selon la dureté</td></tr>
+      <tr><td>Plomb, étain</td><td class="n">1</td></tr>
+    </table></div>
+    <p>Avec D = 10 mm, F/D² = 30 donne 3 000 kgf ; avec D = 2,5 mm, 187,5 kgf (1,839 kN). À F/D² égal, une petite bille et une grosse donnent la même dureté sur le même métal : c'est la loi de similitude des empreintes sphériques.</p>
+    <h4>Les conditions de validité</h4>
+    <ul>
+      <li>Le diamètre de l'empreinte doit rester entre <b>0,24·D et 0,6·D</b> : trop petite, elle est mal mesurée et peu représentative ; trop grande, la bille s'enfonce trop et le résultat n'est plus comparable. Sinon, on change de rapport F/D².</li>
+      <li>L'épaisseur de la pièce doit valoir au moins <b>8 fois la profondeur</b> h, et l'envers ne doit pas montrer de trace.</li>
+      <li>Le centre de l'empreinte doit être à au moins <b>2,5·d</b> du bord, et à au moins <b>3·d</b> du centre d'une empreinte voisine.</li>
+      <li>La bille en carbure limite l'essai à <b>650 HBW</b>. Au-delà, on passe au Vickers ou au Rockwell C.</li>
+    </ul>
+    <div class="def"><b>📖 Calotte sphérique</b> : portion de sphère découpée par un plan ; son aire vaut π·D·h, avec D le diamètre de la sphère et h la hauteur de la calotte.</div>
+    <div class="tip">💡 <b>Le bon rapport, c'est d/D ≈ 0,4</b>. Si ton empreinte sort de la bande verte, ne force pas la lecture : change de rapport F/D². Un aluminium mou sous 3 000 kgf laisse un trou presque aussi large que la bille.</div>
+    <div class="warn"><b>⚠️ Piège : mesurer une seule direction.</b> Une pièce laminée ou mal posée donne une empreinte ovale. La norme demande la moyenne de deux diamètres perpendiculaires ; un écart important entre eux signale une surface inclinée ou un métal anisotrope.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « 30 pour l'acier, 10 pour les doux, 1 pour le plomb »</b>, et « entre un quart et trois cinquièmes » pour le diamètre de l'empreinte.</div>
+    <div class="weld"><b>🔥 Brinell en réception de matière</b>
+      <p>Les certificats de pièces forgées, de pièces moulées et de produits épais donnent souvent une dureté Brinell, mesurée sur la surface après enlèvement de la peau décarburée. Pour une soudure, le Brinell ne convient qu'aux zones larges ; la norme des essais de dureté des soudures privilégie le Vickers et n'admet le Brinell qu'avec de petites billes (HBW 2,5/15,625 ou 1/2,5).</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c3">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">3</div>
+    <div class="c-title"><h2>Vickers : la pyramide</h2><p>Un losange qu'on mesure au microscope, de 10 kgf à la microdureté</p></div>
+    <div class="c-img"><span class="ico">💎</span><span><small>Image à retenir</small>Le diamant qui grave son losange : deux diagonales, une seule dureté, quelle que soit la charge</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le losange de diamant</span></div>
+    <p>L'essai <b>Vickers</b> (mis au point dans les années 1920 au sein de la société britannique Vickers) enfonce une <b>pyramide de diamant</b> à base carrée, dont les faces opposées font un angle de 136°. Elle laisse un petit carré creux, qui apparaît au microscope comme un <b>losange</b>. On en mesure les deux diagonales <span class="eps">d₁</span> et <span class="eps">d₂</span>, et la dureté est la force divisée par la surface des quatre faces de l'empreinte.</p>
+    <p>Grâce à la pyramide, l'empreinte garde la même forme quelle que soit la charge : petite charge, petit losange ; grosse charge, grand losange ; même dureté. Une seule échelle couvre ainsi tous les métaux, du plomb au carbure, et toutes les tailles d'empreinte :</p>
+    <ul>
+      <li><b>HV10</b> ou <b>HV5</b> (10 ou 5 kgf) : l'essai de référence des soudures, empreintes de 0,2 à 0,4 mm environ ;</li>
+      <li><b>HV1</b>, <b>HV0,5</b> : faibles charges, pour les couches minces ou les petites zones ;</li>
+      <li><b>HV0,1</b> et moins : la <b>microdureté</b>, qui vise un grain ou une phase précise, avec des losanges de quelques dizaines de micromètres.</li>
+    </ul>
+    <p>Le prix à payer : il faut une surface plane et polie, et un microscope. Et plus le losange est petit, plus une même erreur de lecture pèse lourd sur le résultat.</p>
+  </div>
+
+  <div class="lab" id="m3">
+    <p class="lab-h">Manipulation 3 : le losange au microscope</p>
+    <p class="lab-sub">Une empreinte Vickers vue au microscope. Choisis la charge et la phase visée : le grossissement s'adapte à la taille du losange. Les curseurs déplacent les traits du réticule par rapport aux vrais sommets : c'est ton erreur de pointé sur chaque diagonale, en micromètres (µm). Observe ce qu'une même erreur de 1 µm fait à la dureté d'un grand losange (HV10) et d'un petit (HV0,1).</p>
+    <div class="btns" id="m3c">
+      <button class="btn on" data-k="10" type="button">HV10</button>
+      <button class="btn" data-k="1" type="button">HV1</button>
+      <button class="btn" data-k="0.1" type="button">HV0,1</button>
+    </div>
+    <div class="btns" id="m3p">
+      <button class="btn on" data-k="F" type="button">Ferrite</button>
+      <button class="btn" data-k="P" type="button">Perlite</button>
+      <button class="btn" data-k="B" type="button">Bainite</button>
+      <button class="btn" data-k="M" type="button">Martensite</button>
+    </div>
+    <div class="ctrl"><label for="m3a">Erreur sur <span class="eps">d₁</span></label><input type="range" id="m3a" class="r-eps" min="-5" max="5" step="0.5" value="2"><output id="m3ao"></output></div>
+    <div class="ctrl"><label for="m3b">Erreur sur <span class="eps">d₂</span></label><input type="range" id="m3b" class="r-eps" min="-5" max="5" step="0.5" value="1"><output id="m3bo"></output></div>
+    <div class="btns"><button class="btn play" id="m3play" type="button">▶ Faire la mise au point</button></div>
+    <svg id="m3svg" role="img" aria-label="Empreinte Vickers au microscope avec les traits du réticule sur les deux diagonales"></svg>
+    <div class="readout" id="m3r"></div>
+    <p class="status" id="m3msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">ISO 6507-1 : formule, gammes, règles, Knoop</span></div>
+    <div class="fx"><div class="big"><span class="eps">HV</span> = 0,102 × <span class="frac"><span>2·<span class="frc">F</span>·sin(136°/2)</span><span><span class="eps">d</span>²</span></span> = 0,189 1 × <span class="frac"><span><span class="frc">F</span></span><span><span class="eps">d</span>²</span></span>    <span class="eps">d</span> = <span class="frac"><span><span class="eps">d₁</span> + <span class="eps">d₂</span></span><span>2</span></span></div><p class="cap">F : force (N) ; d : moyenne des deux diagonales (mm). L'aire des quatre faces vaut d²/(2·sin 68°) ; avec F en kgf, on retrouve la forme ancienne HV = 1,854 4·F/d²</p></div>
+    <p><b>Exemple</b>. Essai HV10 (F = 98,07 N) : d₁ = 0,248 mm et d₂ = 0,252 mm, soit d = 0,250 mm. <span class="m">HV = 0,189 1 × 98,07/0,250² = 18,55/0,0625 ≈ 297</span>. Désignation : <b>297 HV10</b> (la durée de maintien s'ajoute si elle sort de 10 à 15 s, par exemple 297 HV10/30).</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Gamme (ISO 6507-1)</th><th>Symboles</th><th>Force</th></tr>
+      <tr><td>Essai Vickers</td><td class="n">HV5 à HV100</td><td class="n">49,03 N à 980,7 N</td></tr>
+      <tr><td>Vickers sous faible charge</td><td class="n">HV0,2 à moins de HV5</td><td class="n">1,961 N à moins de 49,03 N</td></tr>
+      <tr><td>Microdureté Vickers</td><td class="n">HV0,01 à moins de HV0,2</td><td class="n">0,098 07 N à moins de 1,961 N</td></tr>
+    </table></div>
+    <h4>Les règles de l'essai</h4>
+    <ul>
+      <li>Surface plane, polie, sans écrouissage ni échauffement de préparation (cours 3) ; diagonales mesurables entre 0,020 et 1,400 mm.</li>
+      <li>Épaisseur d'au moins <b>1,5·d</b>, sans trace visible à l'envers.</li>
+      <li>Distances : du centre au bord, au moins <b>2,5·d</b> pour l'acier et le cuivre (3·d pour les métaux légers) ; entre centres d'empreintes voisines, au moins <b>3·d</b> pour l'acier et le cuivre (6·d pour les métaux légers). L'empreinte déforme le métal autour d'elle : trop proche, la suivante tomberait dans une zone écrouie.</li>
+    </ul>
+    <p><b>La précision de lecture.</b> HV varie comme 1/d² : une erreur relative sur d compte double sur HV. Une erreur de 1 µm sur un losange de 250 µm (HV10) fausse HV de 0,8 % ; sur un losange de 25 µm (HV0,1, même métal), de 7,5 %. La microdureté sert à comparer des phases, pas à vérifier un seuil au pour cent près. Aux très faibles charges, la dureté mesurée a aussi tendance à augmenter un peu (effet de taille d'empreinte).</p>
+    <p><b>Le Knoop</b> (ISO 4545-1) emploie une pyramide très allongée, qui laisse un losange sept fois plus long que large, peu profond : il convient aux couches minces et aux matériaux fragiles.</p>
+    <div class="def"><b>📖 Diagonale</b> d : distance entre deux sommets opposés du losange, mesurée au microscope. <b>Réticule</b> : traits de visée gravés ou affichés dans l'oculaire ou sur l'écran, qu'on amène sur les sommets.</div>
+    <div class="tip">💡 <b>Ordre de grandeur des diagonales</b> : en HV10, d ≈ 4,3/√HV mm, soit 0,35 mm à 150 HV et 0,19 mm à 500 HV. Un losange de 0,6 mm sur un acier « dur » trahit une erreur de charge ou de lecture.</div>
+    <div class="warn"><b>⚠️ Piège : une empreinte à cheval sur deux zones.</b> En HV10, le losange mesure un quart de millimètre : près de la ligne de fusion, il peut couvrir à la fois la zone affectée et le métal fondu, et donner une moyenne. On le place d'après la micrographie, avec les distances minimales de la norme.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « 136, 0,189 1, d au carré »</b> : l'angle de la pyramide, la constante, et la diagonale qui compte double.</div>
+    <div class="weld"><b>🔥 L'essai des soudures</b>
+      <p>Les qualifications de modes opératoires et les normes d'essais des soudures font leurs filiations en HV10 (parfois HV5). Les empreintes sont assez grandes pour une mesure fiable, et assez petites pour suivre la zone affectée, large de quelques millimètres. La microdureté (ISO 9015-2) sert à l'expertise : dureté d'une bande de martensite, d'une ségrégation, d'une zone de dilution.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c4">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">4</div>
+    <div class="c-title"><h2>Rockwell : la profondeur</h2><p>Un cadran qui lit l'enfoncement, sans microscope</p></div>
+    <div class="c-img"><span class="ico">⏱️</span><span><small>Image à retenir</small>Le comparateur à cadran : remis à zéro sous la précharge, il lit directement de combien la pointe est descendue</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le comparateur à cadran</span></div>
+    <p>Mesurer un losange au microscope prend du temps. L'essai <b>Rockwell</b> mesure autre chose : la <b>profondeur</b> dont le pénétrateur s'enfonce. Plus besoin de microscope, la machine affiche directement le résultat. C'est l'essai rapide de l'atelier de traitement thermique et du contrôle en série.</p>
+    <p>Le cycle se déroule en quatre temps :</p>
+    <ol>
+      <li>une <b>précharge</b> <span class="frc">F₀</span> (98 N, soit 10 kgf) pose le pénétrateur et traverse les petites irrégularités de surface ; le comparateur est remis à zéro ;</li>
+      <li>une <b>charge additionnelle</b> <span class="frc">F₁</span> enfonce la pointe ;</li>
+      <li>on la maintient quelques secondes ;</li>
+      <li>on la retire en gardant la précharge : le métal rend sa part élastique, et l'on lit l'<b>enfoncement rémanent</b> <span class="eps">h</span> par rapport au zéro.</li>
+    </ol>
+    <p>Chaque échelle associe un pénétrateur et une charge : <b>HRC</b> (cône de diamant, 150 kgf au total) pour les aciers trempés, <b>HRBW</b> (bille de 1/16 de pouce, 100 kgf) pour les métaux plus doux. Le chiffre est construit pour croître avec la dureté : un enfoncement plus faible donne un nombre plus grand. Chaque échelle n'est valable que dans sa plage : HRC de 20 à 70, HRBW jusqu'à 100. En dehors, on change d'échelle.</p>
+  </div>
+
+  <div class="lab" id="m4">
+    <p class="lab-h">Manipulation 4 : le comparateur du Rockwell</p>
+    <p class="lab-sub">Un cycle Rockwell complet. Choisis l'échelle et le métal, puis lance le cycle : précharge F₀ (remise à zéro), charge additionnelle F₁, maintien, retrait de F₁. La dureté se lit sur l'enfoncement rémanent <span class="eps">h</span>, sous la précharge. À gauche, la pointe dans le métal (profondeurs très agrandies) ; à droite, l'enfoncement au cours du cycle. Valeurs de dureté tirées des tables de conversion ; part élastique pédagogique.</p>
+    <div class="btns" id="m4s">
+      <button class="btn on" data-k="C" type="button">Échelle C (cône)</button>
+      <button class="btn" data-k="B" type="button">Échelle B (bille)</button>
+    </div>
+    <div class="btns" id="m4m">
+      <button class="btn" data-k="lai" type="button">Laiton recuit</button>
+      <button class="btn" data-k="S355" type="button">Acier S355</button>
+      <button class="btn on" data-k="QT" type="button">Trempé-revenu</button>
+      <button class="btn" data-k="M" type="button">Acier trempé</button>
+    </div>
+    <div class="btns"><button class="btn play" id="m4play" type="button">▶ Lancer le cycle</button></div>
+    <svg id="m4svg" role="img" aria-label="Pénétrateur Rockwell dans le métal et enfoncement en fonction du temps pendant le cycle"></svg>
+    <div class="readout" id="m4r"></div>
+    <p class="status" id="m4msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">ISO 6508-1 : formule, échelles, limites</span></div>
+    <div class="fx"><div class="big"><span class="eps">HR</span> = N − <span class="frac"><span><span class="eps">h</span></span><span>S</span></span>    S = 0,002 mm    N = 100 (cône) ou 130 (bille)</div><p class="cap">h : enfoncement rémanent (mm), mesuré sous la précharge après retrait de la charge additionnelle ; S : valeur d'une unité Rockwell (2 µm) ; N : constante de l'échelle. Échelles superficielles (15N, 30N, 45N…) : N = 100, S = 0,001 mm, précharge 29,42 N</p></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Échelle</th><th>Pénétrateur</th><th>Précharge</th><th>Charge totale</th><th>Usage</th></tr>
+      <tr><td class="n">HRC</td><td>cône de diamant à 120°, pointe arrondie</td><td class="n">98,07 N</td><td class="n">1 471 N (150 kgf)</td><td>aciers trempés, trempés-revenus (20 à 70 HRC)</td></tr>
+      <tr><td class="n">HRA</td><td>cône de diamant</td><td class="n">98,07 N</td><td class="n">588,4 N (60 kgf)</td><td>carbures, aciers minces très durs</td></tr>
+      <tr><td class="n">HRBW</td><td>bille de carbure de 1,587 5 mm (1/16 de pouce)</td><td class="n">98,07 N</td><td class="n">980,7 N (100 kgf)</td><td>aciers doux, laitons, alliages d'aluminium (jusqu'à 100 HRBW)</td></tr>
+    </table></div>
+    <p><b>Exemples</b>. Échelle C, enfoncement rémanent 0,080 mm : <span class="m">HRC = 100 − 0,080/0,002 = 60</span>, noté <b>60 HRC</b>. Échelle B, 0,090 mm : <span class="m">HRBW = 130 − 45 = 85</span>, noté <b>85 HRBW</b>. Un acier S355 testé en C donnerait un enfoncement d'environ 0,196 mm, soit 2 HRC : hors de la plage, le résultat n'a pas de sens ; on passe en B ou en Vickers.</p>
+    <h4>Les limites de l'essai</h4>
+    <ul>
+      <li><b>Épaisseur</b> : au moins 10 fois l'enfoncement avec le cône, 15 fois avec la bille (0,8 mm pour une pièce à 60 HRC).</li>
+      <li><b>Surface</b> : propre et plane ; sur une pièce cylindrique convexe, la norme donne des corrections ; la pièce ne doit pas bouger sous la charge.</li>
+      <li><b>Distances</b> : plusieurs diamètres d'empreinte entre deux mesures et jusqu'au bord, selon les règles de la norme.</li>
+      <li><b>Lecture</b> : la profondeur inclut tout ce qui s'enfonce, y compris un support qui fléchit ou une peau écrouie : l'essai est rapide mais moins discriminant qu'une mesure optique, et inadapté à une zone étroite comme la zone affectée d'une soudure.</li>
+    </ul>
+    <div class="def"><b>📖 Enfoncement rémanent</b> h : augmentation permanente de la profondeur de pénétration entre la mesure sous précharge avant la charge additionnelle et la mesure sous précharge après son retrait.</div>
+    <div class="tip">💡 <b>Une unité Rockwell, c'est 2 µm</b>. Une différence de 1 HRC entre deux pièces correspond à 2 millièmes de millimètre de profondeur : une poussière, un support mal serré ou une surface rugueuse suffisent à fausser la lecture.</div>
+    <div class="warn"><b>⚠️ Piège : écrire « 45 HRB » sur un acier trempé.</b> La bille s'aplatit sur un métal dur, et au-delà de 100 HRBW l'échelle B n'a plus de sens ; inversement, sous 20 HRC, le cône n'est plus fiable. Chaque échelle a sa plage : on choisit l'échelle d'après la dureté attendue, puis on vérifie que le résultat est bien dedans.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « C comme Cône et Costaud, B comme Bille et Bas »</b> : HRC pour les aciers trempés, HRBW pour les métaux plus doux.</div>
+    <div class="weld"><b>🔥 Rockwell à l'atelier, Vickers sur la soudure</b>
+      <p>Le Rockwell contrôle en quelques secondes la dureté d'une pièce traitée, d'un outil, d'une vis. Pour une soudure, il ne suffit pas : sa pointe et sa charge visent mal une bande de deux ou trois millimètres, et l'échelle C n'existe pas en dessous de 20 HRC. Les spécifications de soudage expriment donc leurs limites en HV10, et convertissent parfois en HRC pour le contrôle de produits (248 HV correspond à 22 HRC, chapitre 5).</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c5">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">5</div>
+    <div class="c-title"><h2>Convertir et relier</h2><p>Passer de HV à HB, HRC ou R<sub>m</sub>, et savoir quand c'est interdit</p></div>
+    <div class="c-img"><span class="ico">🗣️</span><span><small>Image à retenir</small>L'interprète : plusieurs langues pour une même dureté, mais une traduction jamais mot à mot</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">l'interprète</span></div>
+    <p>Un certificat donne une dureté Brinell, le plan exige une dureté Rockwell C, la qualification parle en Vickers, et l'on voudrait une idée de R<sub>m</sub>. Il faut traduire. Les <b>tables de conversion</b> (ISO 18265, ASTM E140) ont été établies en mesurant, sur un grand nombre d'échantillons d'une même famille de métaux, plusieurs duretés à la fois. Elles donnent donc des <b>équivalences moyennes</b>, pas des égalités physiques.</p>
+    <p>Comme toute traduction, elles ont leurs limites. Chaque essai déforme le métal différemment (empreinte sphérique, pyramidale ou conique, mesure de taille ou de profondeur) : deux métaux qui ont la même dureté Vickers peuvent ne pas avoir la même dureté Rockwell s'ils s'écrouissent différemment. Une table établie pour les aciers non alliés ne s'applique donc pas à un acier inoxydable austénitique ni à un alliage d'aluminium.</p>
+    <p>Pour les aciers courants, deux repères suffisent souvent : <b>HB ≈ 0,95·HV</b> jusque vers 450 HV, et <b>R<sub>m</sub> ≈ 3,2·HV</b> (en MPa). Ce dernier découle de la relation de Tabor du chapitre 1 : la pression sous la pointe vaut environ trois fois la contrainte d'écoulement. C'est aussi la conversion la moins précise de toutes.</p>
+  </div>
+
+  <div class="lab" id="m5">
+    <p class="lab-h">Manipulation 5 : l'interprète</p>
+    <p class="lab-sub">Règle une dureté Vickers et lis ses équivalents sur les échelles alignées : Brinell (HBW), Rockwell C et B, résistance à la traction R<sub>m</sub>. Valeurs interpolées dans une table de conversion pour les aciers non alliés et faiblement alliés, du type de celles de l'ISO 18265 et de l'ASTM E140. En pointillé, les zones où l'échelle n'est plus valable. Change de famille de métal pour voir quand la table ne s'applique plus.</p>
+    <div class="btns" id="m5f">
+      <button class="btn on" data-k="acier" type="button">Acier non allié ou faiblement allié</button>
+      <button class="btn" data-k="inox" type="button">Inox austénitique</button>
+      <button class="btn" data-k="alu" type="button">Alliage d'aluminium</button>
+    </div>
+    <div class="ctrl"><label for="m5h">Dureté <span class="eps">HV</span></label><input type="range" id="m5h" class="r-eps" min="100" max="900" step="2" value="248"><output id="m5ho"></output></div>
+    <div class="btns"><button class="btn play" id="m5play" type="button">▶ Balayer de 100 à 900 HV</button></div>
+    <svg id="m5svg" role="img" aria-label="Échelles de dureté alignées : Vickers, Brinell, Rockwell C, Rockwell B et résistance à la traction"></svg>
+    <div class="readout" id="m5r"></div>
+    <p class="status" id="m5msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">tables, domaines, repères chiffrés</span></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>HV</th><th>HBW</th><th>HRC</th><th>HRBW</th><th>R<sub>m</sub> (MPa)</th><th>Repère</th></tr>
+      <tr><td class="n">165</td><td class="n">≈ 160</td><td class="n">—</td><td class="n">≈ 83</td><td class="n">≈ 540</td><td>acier S355 de base</td></tr>
+      <tr><td class="n">200</td><td class="n">≈ 193</td><td class="n">—</td><td class="n">≈ 92</td><td class="n">≈ 655</td><td>métal fondu C-Mn courant</td></tr>
+      <tr><td class="n">248</td><td class="n">≈ 234</td><td class="n">22</td><td class="n">≈ 99</td><td class="n">≈ 793</td><td>limite des milieux H₂S</td></tr>
+      <tr><td class="n">302</td><td class="n">≈ 286</td><td class="n">30</td><td class="n">—</td><td class="n">≈ 965</td><td>acier trempé-revenu</td></tr>
+      <tr><td class="n">380</td><td class="n">≈ 360</td><td class="n">≈ 39</td><td class="n">—</td><td class="n">≈ 1 215</td><td>limite de QMOS des aciers des groupes 1 et 2</td></tr>
+      <tr><td class="n">513</td><td class="n">≈ 481</td><td class="n">50</td><td class="n">—</td><td class="n">≈ 1 607</td><td>martensite à environ 0,25 % C</td></tr>
+      <tr><td class="n">697</td><td class="n">(hors domaine)</td><td class="n">60</td><td class="n">—</td><td class="n">≈ 2 206</td><td>acier à outils trempé</td></tr>
+    </table></div>
+    <p>Valeurs tirées d'une table de conversion pour aciers non alliés (du type ASTM E140) ; un tiret marque une échelle hors de sa plage. On écrit une valeur convertie avec son origine, par exemple « 22 HRC (converti de 248 HV10 selon l'ISO 18265) ».</p>
+    <h4>Les règles d'usage</h4>
+    <ul>
+      <li><b>Même famille de métal</b> : l'ISO 18265 donne plusieurs tables (aciers non alliés et faiblement alliés, aciers de traitement thermique, aciers à outils, métaux non ferreux…). On choisit celle du métal testé ; s'il n'y en a pas, on ne convertit pas.</li>
+      <li><b>Pas de conversion à l'aveugle d'une microdureté</b> : une valeur HV0,1 sur une phase isolée ne se convertit pas en HRC de la pièce.</li>
+      <li><b>R<sub>m</sub> n'est qu'une estimation</b> : utile pour trier ou vérifier une cohérence, jamais pour remplacer un essai de traction exigé par une spécification.</li>
+      <li><b>Les seuils se vérifient dans l'échelle où ils sont écrits</b> : une limite en HV10 se contrôle en HV10.</li>
+    </ul>
+    <div class="def"><b>📖 Table de conversion</b> : tableau d'équivalences moyennes entre échelles de dureté, et avec R<sub>m</sub>, établi expérimentalement pour une famille de matériaux donnée.</div>
+    <div class="tip">💡 <b>Le repère 3,2</b> : R<sub>m</sub> (MPa) ≈ 3,2·HV pour un acier. Un S355 à 165 HV donne environ 530 MPa ; la table donne 540 MPa. Assez pour détecter une erreur grossière, pas pour signer un certificat.</div>
+    <div class="warn"><b>⚠️ Piège : convertir une soudure en inox avec la table des aciers au carbone.</b> Un métal fondu austénitique à 220 HV n'a pas la résistance qu'un acier ferritique à 220 HV : il s'écrouit beaucoup plus. Sans table propre à sa famille, on donne la valeur mesurée, sans traduction.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « 0,95, 3,2 et 248 = 22 »</b> : HB ≈ 0,95·HV, R<sub>m</sub> ≈ 3,2·HV, et la limite des milieux H₂S, 248 HV, vaut 22 HRC.</div>
+    <div class="weld"><b>🔥 Les limites qui s'écrivent dans deux langues</b>
+      <p>La limite de dureté pour le service en présence de sulfure d'hydrogène (ISO 15156-2, NACE MR0175) s'écrit 22 HRC pour les produits et 248 HV10 pour les zones affectées des soudures : c'est la même limite, traduite. Les spécifications de pipelines et d'appareils à pression parlent ainsi tantôt en HRC, tantôt en HV10 : le coordinateur vérifie que la conversion a été faite avec la bonne table, et que la mesure a été faite dans l'échelle exigée.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c6">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">6</div>
+    <div class="c-title"><h2>La dureté en soudage</h2><p>La filiation, le pic de la zone affectée, les seuils, les remèdes</p></div>
+    <div class="c-img"><span class="ico">⛰️</span><span><small>Image à retenir</small>Le profil de randonnée : la ligne d'empreintes franchit la soudure, et le col le plus haut est dans la zone affectée</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le profil de randonnée</span></div>
+    <p>Pendant le soudage, le métal de base voisin du cordon est chauffé au-delà de 1 000 °C, puis refroidi en quelques secondes. Si l'acier contient assez de carbone et d'éléments d'alliage (on le mesure par son <b>carbone équivalent</b> CE), et si le refroidissement est rapide (temps <span class="mat">t<sub>8/5</sub></span> court, voir Métallurgie, cours 3), la <b>zone affectée</b> la plus proche de la ligne de fusion se transforme en <b>martensite</b> : très dure, peu ductile. Associée à l'hydrogène apporté par le soudage et aux contraintes de bridage, elle peut fissurer à froid, parfois des heures plus tard.</p>
+    <p>Pour le vérifier, on découpe une coupe transversale de la soudure, on la polit, on l'attaque pour voir les zones, puis on trace une <b>filiation</b> : une ligne d'empreintes Vickers HV10 qui part du métal de base, traverse la zone affectée, le métal fondu, puis l'autre zone affectée, jusqu'au métal de base opposé. Le profil obtenu ressemble à une randonnée : plat dans le métal de base, un col dans chaque zone affectée, un plateau dans le métal fondu. On compare le sommet aux seuils :</p>
+    <ul>
+      <li><b>380 HV10</b> pour les aciers de construction des groupes 1 et 2 bruts de soudage, <b>320 HV10</b> après traitement thermique (qualification de mode opératoire, ISO 15614-1) ;</li>
+      <li><b>248 HV10</b> (22 HRC) pour les installations en présence de sulfure d'hydrogène, très sensibles à la fissuration sous contrainte.</li>
+    </ul>
+    <p>Trop dur ? On ralentit le refroidissement (préchauffage, énergie de soudage plus élevée), on choisit un acier à plus faible carbone équivalent, ou l'on fait un traitement thermique après soudage, qui revient la martensite.</p>
+  </div>
+
+  <div class="lab" id="m6">
+    <p class="lab-h">Manipulation 6 : le profil de randonnée</p>
+    <p class="lab-sub">Coupe d'une soudure bout à bout et filiation HV10 à 2 mm sous la surface : empreintes espacées de 1 mm dans la zone affectée, dont une à 0,4 mm de chaque ligne de fusion, plus espacées ailleurs. Choisis l'acier (teneur en carbone C et carbone équivalent CE), le temps de refroidissement <span class="mat">t<sub>8/5</sub></span>, l'état (brut de soudage ou après traitement thermique) et le seuil à respecter. Les empreintes au-dessus du seuil passent en violet. Modèle pédagogique : dureté de la martensite d'après la formule de Yurioka, part de martensite selon CE et t<sub>8/5</sub>.</p>
+    <div class="btns" id="m6s">
+      <button class="btn" data-k="S235" type="button">S235</button>
+      <button class="btn on" data-k="S355" type="button">S355</button>
+      <button class="btn" data-k="S460" type="button">S460 thermomécanique</button>
+      <button class="btn" data-k="S690" type="button">S690 trempé-revenu</button>
+    </div>
+    <div class="btns" id="m6e">
+      <button class="btn on" data-k="brut" type="button">Brut de soudage</button>
+      <button class="btn" data-k="pwht" type="button">Après traitement thermique</button>
+    </div>
+    <div class="btns" id="m6l">
+      <button class="btn on" data-k="qmos" type="button">Seuil QMOS (groupes 1 et 2)</button>
+      <button class="btn" data-k="h2s" type="button">Seuil milieu H₂S : 248 HV10</button>
+    </div>
+    <div class="ctrl"><label for="m6t">Refroidissement <span class="mat">t<sub>8/5</sub></span></label><input type="range" id="m6t" class="r-mat" min="2" max="40" step="0.5" value="4"><output id="m6to"></output></div>
+    <div class="btns"><button class="btn play" id="m6play" type="button">▶ Ralentir le refroidissement</button></div>
+    <svg id="m6svg" role="img" aria-label="Coupe de soudure avec la ligne d'empreintes et profil de dureté HV10 comparé au seuil"></svg>
+    <div class="readout" id="m6r"></div>
+    <p class="status" id="m6msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">ISO 9015-1, seuils, énergie, remèdes</span></div>
+    <h4>La filiation selon l'ISO 9015-1</h4>
+    <ul>
+      <li>Essai Vickers <b>HV10 ou HV5</b> sur une coupe transversale de l'assemblage, découpée mécaniquement, préparée sans échauffement et, de préférence, attaquée pour repérer les zones ; à (23 ± 5) °C.</li>
+      <li>Mesures en <b>lignes d'empreintes</b> (R) ou en <b>empreintes isolées</b> (E). Pour un acier, les lignes passent près des faces de la soudure (côté endroit et côté racine), avec des positions définies par des figures types selon le joint.</li>
+      <li>Dans la zone affectée, distance recommandée entre centres : <b>1 mm en HV10</b>, 0,7 mm en HV5 (aciers ferritiques) ; jamais moins que la distance minimale de l'ISO 6507-1.</li>
+      <li>Pour un métal qui durcit dans la zone affectée, <b>deux empreintes supplémentaires à 0,5 mm au plus de la ligne de fusion</b> (au moins une pour les empreintes isolées) : c'est là que se trouve le pic.</li>
+      <li>Assez d'empreintes dans le métal de base pour atteindre une zone non affectée ; les valeurs sont reportées en fonction de leur position. La norme ne s'applique pas aux aciers austénitiques.</li>
+    </ul>
+    <h4>D'où vient le pic</h4>
+    <p>La dureté de la martensite dépend surtout de sa teneur en carbone. La formule empirique de Yurioka, déjà rencontrée en Métallurgie, la donne :</p>
+    <div class="fx"><div class="big"><span class="eps">HV<sub>M</sub></span> ≈ 884·<span class="mat">C</span>·(1 − 0,3·<span class="mat">C</span>²) + 294</div><p class="cap">HVM : dureté d'une zone entièrement martensitique ; C : teneur en carbone (% en masse). C = 0,18 % : ≈ 452 HV ; C = 0,10 % : ≈ 382 HV</p></div>
+    <p>La part de martensite dépend, elle, de la trempabilité de l'acier (son carbone équivalent) et de la vitesse de refroidissement (t<sub>8/5</sub>). D'où deux leviers : un acier thermomécanique à bas carbone (S460 de l'exemple, C = 0,10 %) plafonne bas même refroidi vite ; un acier plus allié (S690 trempé-revenu) devient martensitique même refroidi lentement, mais sa zone affectée externe peut s'<b>adoucir</b>, ce que la filiation montre aussi.</p>
+    <h4>Agir sur le refroidissement</h4>
+    <p>Pour une pièce épaisse (écoulement de chaleur en trois dimensions), l'EN 1011-2 donne <span class="m">t<sub>8/5</sub> = (6 700 − 5·T<sub>0</sub>)·Q·[1/(500 − T<sub>0</sub>) − 1/(800 − T<sub>0</sub>)]·F<sub>3</sub></span>, avec T<sub>0</sub> la température initiale (préchauffage, °C), Q l'apport de chaleur (kJ/mm) et F<sub>3</sub> un facteur de forme du joint (1 pour une passe sur tôle). À 20 °C, <span class="m">t<sub>8/5</sub> ≈ 5,3·Q</span> ; préchauffée à 150 °C, la même passe donne <span class="m">t<sub>8/5</sub> ≈ 7,8·Q</span>. Préchauffer allonge le refroidissement sans changer l'énergie.</p>
+    <p>Quand la qualification exige des duretés, l'ISO 15614-1 limite en production l'apport de chaleur à au moins <b>75 % de celui de l'essai</b> (−25 %) : souder plus « froid » que l'essai risquerait de dépasser la dureté qualifiée. Avec exigence de résilience, c'est la borne haute (+25 %) qui s'applique.</p>
+    <div class="def"><b>📖 Filiation de dureté</b> : ligne d'empreintes de dureté, régulièrement espacées, qui traverse une soudure du métal de base au métal de base. <b>Carbone équivalent de l'IIW</b> : CE = C + Mn/6 + (Cr + Mo + V)/5 + (Ni + Cu)/15, en % ; il mesure la trempabilité d'un acier.</div>
+    <div class="tip">💡 <b>Le pic est à 0,5 mm</b>. Une filiation régulière à 2 mm de pas peut enjamber la bande la plus dure, large d'un millimètre à peine. D'où les empreintes obligatoires tout près de la ligne de fusion : sans elles, une soudure non conforme passe pour conforme.</div>
+    <div class="warn"><b>⚠️ Piège : juger la dureté d'une soudure par une passe de remplissage.</b> Les passes suivantes reviennent les précédentes : c'est souvent la dernière passe (côté endroit) ou la passe de racine qui garde la zone affectée la plus dure. Les lignes de filiation passent près des deux faces pour cette raison.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « 380 brut, 320 traité, 248 au soufre »</b> : les seuils HV10 des aciers des groupes 1 et 2 en qualification, et celui des milieux H₂S.</div>
+    <div class="weld"><b>🔥 Une qualification refusée pour 15 HV</b>
+      <p>Une QMOS en S355 soudée sans préchauffage donne 395 HV10 à 0,4 mm de la ligne de fusion côté endroit : refusée. Trois pistes : préchauffer (le t<sub>8/5</sub> s'allonge à énergie égale), augmenter l'apport de chaleur de la dernière passe, ou ajouter une passe de revenu qui ne touche que la zone affectée de la précédente. On re-soude un assemblage d'essai avec le nouveau mode opératoire, puis on refait la filiation : une dureté ne se « corrige » pas par le calcul.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="exos">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✎</div>
+    <div class="c-title"><h2>Exercices corrigés</h2><p>Six exercices et un défi, de l'empreinte à la qualification</p></div>
+    <div class="c-img"><span class="ico">🏋️</span><span><small>Image à retenir</small>La salle de musculation : on ne progresse qu'en soulevant soi-même</span></div>
+  </div>
+  <div class="lv lv1"><div class="lv-h">👁 Mode d'emploi <span class="tag">formule littérale, puis valeurs, puis unités</span></div>
+    <p>Cherche chaque question sur papier avant d'ouvrir la correction. Les conversions viennent de la table de la manipulation 5 (aciers non alliés) ; les duretés de soudure, du modèle de la manipulation 6, où le défi se rejoue.</p>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 1 : de la pression à la contrainte <span class="lvtag">N1 · chapitre 1</span></h4>
+    <p>Un acier S355 donne 161 HV. Pour un essai Vickers, la pression moyenne vaut environ p = HV × 9,807/0,927 MPa (passage des kgf/mm² aux MPa, et de l'aire des faces à l'aire projetée).</p>
+    <p class="q"><b>a)</b> Calcule la pression moyenne sous la pyramide.</p>
+    <p class="q"><b>b)</b> Déduis-en la contrainte d'écoulement du métal. Compare-la à R<sub>e</sub> = 355 MPa et R<sub>m</sub> = 540 MPa.</p>
+    <p class="q"><b>c)</b> Pourquoi la pression vaut-elle environ trois fois la contrainte d'écoulement, et non une fois ?</p>
+    <p class="q"><b>d)</b> Pourquoi la dureté Vickers ne dépend-elle presque pas de la charge, alors que la dureté Brinell en dépend ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">p = 161 × 9,807/0,927 ≈ 1 703 MPa</span>.</p>
+      <p><b>b)</b> <span class="m">σ ≈ p/3 ≈ 568 MPa</span>. C'est la contrainte d'écoulement à environ 8 % de déformation : au-dessus de R<sub>e</sub> (le métal s'est écroui), du même ordre que R<sub>m</sub>. D'où les relations entre dureté et résistance.</p>
+      <p><b>c)</b> Le métal sous la pointe ne peut couler qu'en repoussant le métal qui l'entoure, resté élastique : il est confiné, et il faut une pression bien supérieure à sa contrainte d'écoulement pour le faire couler.</p>
+      <p><b>d)</b> La pyramide laisse des empreintes géométriquement semblables, quelle que soit la charge : même déformation représentative, même dureté. La bille déforme d'autant plus le métal que d/D est grand : la dureté d'un métal qui s'écrouit augmente avec la charge, d'où la règle d'un rapport F/D² constant.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 2 : le certificat Brinell <span class="lvtag">N1 et N2 · chapitre 2 et 5</span></h4>
+    <p>Bille de 10 mm, force 29,42 kN (3 000 kgf), diamètres lus 3,95 mm et 4,05 mm, sur une pièce forgée en acier.</p>
+    <p class="q"><b>a)</b> Calcule la dureté Brinell et écris sa désignation.</p>
+    <p class="q"><b>b)</b> L'essai est-il valable du point de vue du diamètre ?</p>
+    <p class="q"><b>c)</b> Calcule la profondeur de l'empreinte et l'épaisseur minimale de la pièce.</p>
+    <p class="q"><b>d)</b> À quelle distance du bord et d'une empreinte voisine doit-on se tenir ?</p>
+    <p class="q"><b>e)</b> Estime R<sub>m</sub> avec la table de conversion (229 HBW ≈ 244 HV).</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> d = (3,95 + 4,05)/2 = 4,00 mm ; <span class="m">√(100 − 16) = 9,165</span> ; <span class="m">HBW = 0,102 × 2 × 29 420/(π × 10 × 0,835) ≈ 229</span>, soit <b>229 HBW 10/3000</b>.</p>
+      <p><b>b)</b> <span class="m">d/D = 0,40</span>, entre 0,24 et 0,6 : valable.</p>
+      <p><b>c)</b> <span class="m">h = (10 − 9,165)/2 ≈ 0,42 mm</span> ; épaisseur d'au moins <span class="m">8 × 0,42 ≈ 3,3 mm</span>.</p>
+      <p><b>d)</b> Centre de l'empreinte à au moins <span class="m">2,5 × 4,00 = 10 mm</span> du bord, et à au moins <span class="m">3 × 4,00 = 12 mm</span> du centre d'une empreinte voisine.</p>
+      <p><b>e)</b> 244 HV correspondent à environ <b>775 MPa</b> dans la table (3,2 × 244 ≈ 780 MPa) : une estimation, pas une valeur de certificat.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 3 : le losange et sa lecture <span class="lvtag">N2 · chapitre 3</span></h4>
+    <p>Essai HV10 (98,07 N) : d₁ = 0,248 mm, d₂ = 0,252 mm. La manipulation 3 permet de rejouer la question c).</p>
+    <p class="q"><b>a)</b> Calcule la dureté et écris sa désignation.</p>
+    <p class="q"><b>b)</b> Quelle épaisseur minimale, quelle distance au bord et entre empreintes faut-il respecter ?</p>
+    <p class="q"><b>c)</b> On mesure le même métal en HV0,1 (0,980 7 N). Quelle diagonale attend-on ? Que devient la dureté lue si l'on surestime d de 1 µm ? Et en HV10 ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">d = 0,250 mm</span> ; <span class="m">HV = 0,189 1 × 98,07/0,250² ≈ 297</span>, soit <b>297 HV10</b>.</p>
+      <p><b>b)</b> Épaisseur ≥ <span class="m">1,5·d = 0,375 mm</span> ; centre à au moins <span class="m">2,5·d ≈ 0,63 mm</span> du bord ; au moins <span class="m">3·d = 0,75 mm</span> entre centres.</p>
+      <p><b>c)</b> d varie comme √F : <span class="m">d = 0,250 × √(0,1/10) = 0,025 mm = 25 µm</span>. Avec 26 µm : <span class="m">HV = 297 × (25/26)² ≈ 274</span>, soit −7,5 %. En HV10, 251 µm au lieu de 250 µm ne change HV que de −0,8 %.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 4 : le cadran du Rockwell <span class="lvtag">N1 · chapitre 4</span></h4>
+    <p class="q"><b>a)</b> Échelle C, enfoncement rémanent 0,080 mm : dureté ?</p>
+    <p class="q"><b>b)</b> Échelle B, enfoncement rémanent 0,090 mm : dureté ?</p>
+    <p class="q"><b>c)</b> Un acier S355 testé en échelle C donne un enfoncement de 0,196 mm. Quel résultat ? Que faire ?</p>
+    <p class="q"><b>d)</b> Quelle épaisseur minimale pour la pièce du a) ?</p>
+    <p class="q"><b>e)</b> À quoi sert la précharge F₀ ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">HRC = 100 − 0,080/0,002 = 60</span>, soit 60 HRC.</p>
+      <p><b>b)</b> <span class="m">HRBW = 130 − 0,090/0,002 = 85</span>, soit 85 HRBW.</p>
+      <p><b>c)</b> <span class="m">100 − 98 = 2 HRC</span> : hors de la plage 20 à 70, le résultat n'a pas de sens. On mesure en échelle B (environ 83 HRBW) ou en Vickers (environ 165 HV).</p>
+      <p><b>d)</b> <span class="m">10 × 0,080 = 0,8 mm</span> au moins avec le cône.</p>
+      <p><b>e)</b> Elle pose le pénétrateur et traverse les petites irrégularités et la couche superficielle ; le zéro est pris sous précharge, ce qui rend la mesure de profondeur reproductible.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 5 : l'interprète <span class="lvtag">N2 · chapitre 5</span></h4>
+    <p>Utilise la manipulation 5 (aciers non alliés) pour les questions a) et b).</p>
+    <p class="q"><b>a)</b> Convertis 380 HV en HBW, HRC et R<sub>m</sub>. Compare R<sub>m</sub> au repère 3,2·HV.</p>
+    <p class="q"><b>b)</b> Une spécification pétrolière limite les produits à 22 HRC. Quelle dureté Vickers cela représente-t-il ?</p>
+    <p class="q"><b>c)</b> Un certificat d'acier de construction donne R<sub>m</sub> = 540 MPa et 230 HV mesurés en surface. Ces deux valeurs sont-elles cohérentes ? Que soupçonner ?</p>
+    <p class="q"><b>d)</b> Un dépôt d'inox austénitique mesure 220 HV. Peut-on annoncer son R<sub>m</sub> avec la même table ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Environ <b>360 HBW</b>, <b>39 HRC</b> et <b>1 215 MPa</b> ; le repère donne <span class="m">3,2 × 380 = 1 216 MPa</span>, très proche ici.</p>
+      <p><b>b)</b> 22 HRC correspondent à <b>248 HV</b> : c'est la même limite que les 248 HV10 imposés aux zones affectées des soudures en milieu H₂S.</p>
+      <p><b>c)</b> 230 HV correspondent à environ 730 MPa, pas à 540 MPa (qui correspondrait à environ 165 HV). Incohérent : la surface est peut-être écrouie (grenaillage, dressage à froid), l'essai mal fait, ou le certificat erroné. On mesure la dureté à cœur sur une coupe et l'on vérifie les données.</p>
+      <p><b>d)</b> Non : la table vaut pour les aciers non alliés et faiblement alliés. L'austénite s'écrouit beaucoup plus ; sa dureté ne se traduit pas en R<sub>m</sub> avec cette table. On donne la dureté mesurée, et l'on fait un essai de traction si R<sub>m</sub> est exigée.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 6 : la filiation de la QMOS <span class="lvtag">N2 · chapitre 6</span></h4>
+    <p>QMOS d'un joint bout à bout en S355 (groupe 1), brut de soudage. Filiation HV10 côté endroit, de gauche à droite : 168, 166, 171, 352, 391, 290, 232, 224, 219, 226, 238, 301, 385, 344, 170, 165 (les valeurs 391 et 385 sont à 0,4 mm des lignes de fusion). L'essai a été soudé avec un apport de chaleur de 1,2 kJ/mm.</p>
+    <p class="q"><b>a)</b> Repère les zones et la dureté maximale. La filiation est-elle conforme ?</p>
+    <p class="q"><b>b)</b> Pourquoi les deux empreintes à 0,4 mm de la ligne de fusion sont-elles indispensables ?</p>
+    <p class="q"><b>c)</b> Propose trois remèdes.</p>
+    <p class="q"><b>d)</b> Une QMOS conforme a été soudée à 1,2 kJ/mm avec exigence de dureté. Quel apport de chaleur minimal sera autorisé en production ?</p>
+    <p class="q"><b>e)</b> Pour une pièce épaisse (F<sub>3</sub> = 1), calcule t<sub>8/5</sub> à 1,2 kJ/mm sans préchauffage (T<sub>0</sub> = 20 °C), puis avec un préchauffage à 150 °C.</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Métal de base : 165 à 171 HV ; zones affectées : 290 à 391 HV ; métal fondu : 219 à 238 HV. Maximum <b>391 HV10</b> à 0,4 mm de la ligne de fusion gauche, au-dessus des 380 HV10 admis : <b>non conforme</b>.</p>
+      <p><b>b)</b> La bande la plus dure, à gros grains et martensitique, ne fait qu'un millimètre environ : une filiation à pas plus large pourrait l'enjamber et la déclarer conforme. L'ISO 9015-1 impose donc deux empreintes à 0,5 mm au plus de la ligne de fusion.</p>
+      <p><b>c)</b> Préchauffer (le t<sub>8/5</sub> s'allonge à énergie égale) ; augmenter l'apport de chaleur de la passe concernée (dans les limites de la résilience) ; choisir un acier à plus faible carbone équivalent ; ou faire un traitement thermique après soudage (le seuil devient alors 320 HV10).</p>
+      <p><b>d)</b> Avec exigence de dureté, l'apport de chaleur ne doit pas descendre sous 75 % de celui de l'essai : <span class="m">Q ≥ 0,75 × 1,2 = 0,90 kJ/mm</span>.</p>
+      <p><b>e)</b> À 20 °C : <span class="m">t<sub>8/5</sub> = 6 600 × 1,2 × (1/480 − 1/780) ≈ 5,29 × 1,2 ≈ 6,3 s</span>. À 150 °C : <span class="m">(6 700 − 750) × 1,2 × (1/350 − 1/650) ≈ 7,85 × 1,2 ≈ 9,4 s</span>.</p>
+    </div></details>
+  </div>
+
+  <div class="exo defi">
+    <h4>🏆 Défi : la platine qui doit aller en milieu H₂S <span class="lvtag">N2 · chapitre 6, à rejouer dans la manipulation 6</span></h4>
+    <p>Une platine en S355 (C = 0,18 %, CE = 0,43) est soudée en une passe, avec t<sub>8/5</sub> = 4 s. Choisis S355 dans la manipulation 6.</p>
+    <p class="q"><b>a)</b> Brut de soudage, quel pic de dureté lit-on ? Respecte-t-il le seuil de qualification de 380 HV10 ?</p>
+    <p class="q"><b>b)</b> En augmentant t<sub>8/5</sub> par pas de 0,5 s, à partir de quelle valeur passe-t-on sous 380 HV10 ? Quel apport de chaleur cela demande-t-il sans préchauffage (t<sub>8/5</sub> ≈ 5,29·Q) ?</p>
+    <p class="q"><b>c)</b> On garde l'apport de chaleur du départ (t<sub>8/5</sub> = 4 s à 20 °C) mais on préchauffe à 150 °C (t<sub>8/5</sub> ≈ 7,85·Q). Que devient t<sub>8/5</sub>, et la dureté ?</p>
+    <p class="q"><b>d)</b> La pièce part en milieu H₂S (248 HV10). Brut de soudage, quel t<sub>8/5</sub> faudrait-il ? Est-ce réaliste en une passe ?</p>
+    <p class="q"><b>e)</b> Que donne un traitement thermique après soudage, avec t<sub>8/5</sub> = 4 s ? Conclus.</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Environ <b>407 HV10</b> (77 % de martensite dans le modèle) : au-dessus de 380, non conforme.</p>
+      <p><b>b)</b> À 5,0 s, encore 384 HV10 ; à <b>5,5 s</b>, 373 HV10 : conforme. Il faut <span class="m">Q ≈ 5,5/5,29 ≈ 1,04 kJ/mm</span>, contre <span class="m">4/5,29 ≈ 0,76 kJ/mm</span> au départ.</p>
+      <p><b>c)</b> <span class="m">Q = 0,76 kJ/mm</span> ; <span class="m">t<sub>8/5</sub> ≈ 7,85 × 0,76 ≈ 5,9 s</span>, soit environ 6 s dans la manipulation : pic d'environ <b>362 HV10</b>, conforme sans changer l'énergie.</p>
+      <p><b>d)</b> Il faut descendre sous 248 HV10 : à 22 s, on est encore à 248 ; vers <b>22,5 s</b> (247 HV10). Soit <span class="m">Q ≈ 22,5/5,29 ≈ 4,3 kJ/mm</span> sans préchauffage : un apport de chaleur énorme pour une passe, qui dégraderait la ténacité. Irréaliste.</p>
+      <p><b>e)</b> Après traitement thermique, le pic tombe vers <b>238 HV10</b> (la martensite est revenue) : conforme au seuil de 248 HV10. Pour le service en H₂S, le préchauffage règle la qualification, mais c'est le traitement thermique après soudage, ou un acier à plus faible carbone, qui règle la dureté de service.</p>
+    </div></details>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="quiz-s">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">?</div>
+    <div class="c-title"><h2>Quiz : 12 questions éclair</h2><p>Chaque réponse est expliquée, même quand tu as juste</p></div>
+    <div class="c-img"><span class="ico">🎯</span><span><small>Image à retenir</small>La cible : vise 10 sur 12 avant de passer au cours 3</span></div>
+  </div>
+  <div id="quiz"></div>
+  <div class="score" id="qzScore" aria-live="polite">Score : 0 / 12</div>
+  <div class="btns"><button class="btn" id="qzReset" type="button">↺ Recommencer le quiz</button></div>
+</div>
+</section>
+
+<section class="chap" id="fiche">
+<div class="wrap wide">
+  <div class="cartouche">
+    <div class="c-num">★</div>
+    <div class="c-title"><h2>Fiche mémoire du cours 2</h2><p>Neuf cases, neuf images : à photographier, puis à redessiner de tête</p></div>
+    <div class="c-img"><span class="ico">👥</span><span><small>Image à retenir</small>Deux Rockwell : le même nom, la même machine, pas la même famille</span></div>
+  </div>
+  <div class="fiche">
+    <div><div class="ic">👍</div><h4>La pâte</h4><div class="f"><span class="sig">p</span> ≈ 3·<span class="sig">σ</span>(<span class="eps">ε</span><sub>r</sub>)</div><p>La dureté mesure la résistance à la pénétration permanente : une plasticité confinée.</p></div>
+    <div><div class="ic">⚪</div><h4>La bille</h4><div class="f">0,24·<span class="mat">D</span> ≤ <span class="eps">d</span> ≤ 0,6·<span class="mat">D</span></div><p>HBW = 0,102·2F/(πD(D − √(D² − d²))) ; F/D² = 30 pour l'acier ; au plus 650 HBW.</p></div>
+    <div><div class="ic">💎</div><h4>Le losange</h4><div class="f"><span class="eps">HV</span> = 0,189 1·<span class="frc">F</span>/<span class="eps">d</span>²</div><p>Même dureté à toute charge ; HV10 pour les soudures ; l'erreur sur d compte double.</p></div>
+    <div><div class="ic">⏱️</div><h4>Le comparateur</h4><div class="f"><span class="eps">HR</span> = N − <span class="eps">h</span>/0,002</div><p>N = 100 (cône, HRC 20 à 70), 130 (bille, HRBW jusqu'à 100) ; lecture sous précharge.</p></div>
+    <div><div class="ic">🗣️</div><h4>L'interprète</h4><div class="f">HB ≈ 0,95·HV · <span class="sig">R<sub>m</sub></span> ≈ 3,2·HV</div><p>Une table par famille de métal (ISO 18265) ; R<sub>m</sub> converti n'est qu'une estimation.</p></div>
+    <div><div class="ic">📏</div><h4>Les distances</h4><div class="f">1,5·d · 3·d · 2,5·d</div><p>Vickers : épaisseur, entre centres, au bord (acier). Brinell : épaisseur ≥ 8·h.</p></div>
+    <div><div class="ic">⛰️</div><h4>La filiation</h4><div class="f">HV10 · 1 mm · ≤ 0,5 mm</div><p>ISO 9015-1 : pas de 1 mm en zone affectée, deux empreintes à 0,5 mm au plus de la ligne de fusion.</p></div>
+    <div><div class="ic">🚦</div><h4>Les seuils</h4><div class="f">380 / 320 · 248 HV10</div><p>QMOS des groupes 1 et 2, brut ou traité ; milieu H₂S (22 HRC).</p></div>
+    <div><div class="ic">🔥</div><h4>Les remèdes</h4><div class="f"><span class="mat">t<sub>8/5</sub></span> ↗ · <span class="mat">CE</span> ↘ · PWHT</div><p>Préchauffer, augmenter l'énergie, changer d'acier, revenir. Q ≥ 0,75·Q<sub>essai</sub> si dureté exigée.</p></div>
+  </div>
+  <div class="fun"><span class="fun-h">👥 Fun fact : deux Rockwell sans lien de parenté</span>L'idée de mesurer une dureté par la différence de profondeur entre deux charges vient du professeur viennois Paul Ludwik, qui la décrit en 1908 dans son livre « Die Kegelprobe », l'essai au cône. C'est le même Ludwik que la loi d'écrouissage du cours 1. Quelques années plus tard, à Bristol, dans le Connecticut, le fabricant de roulements à billes New Departure veut vérifier vite, et en série, l'effet du traitement thermique sur ses bagues de roulement. Deux de ses employés, Hugh M. Rockwell et Stanley P. Rockwell, mettent au point la machine à mesure de profondeur : leur brevet, déposé le 15 juillet 1914, est accordé le 11 février 1919 sous le numéro US 1 294 171. Même nom, même entreprise, même invention… et aucun lien de parenté. Le principe de leur essai est au <a href="#c4">chapitre 4</a>.</div>
+</div>
+</section>
+
+<section class="chap" id="gloss">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">A–Z</div>
+    <div class="c-title"><h2>Glossaire</h2><p>Les mots, symboles et sigles de ce cours</p></div>
+    <div class="c-img"><span class="ico">📖</span><span><small>Image à retenir</small>Le dictionnaire : un mot flou, un clic</span></div>
+  </div>
+  <dl class="gloss">
+    <dt>A<sub>proj</sub>, p</dt><dd>Aire de l'empreinte vue de dessus (mm²) ; pression moyenne sous le pénétrateur, F/A<sub>proj</sub> (MPa), aussi appelée dureté de Meyer.</dd>
+    <dt>Calotte sphérique</dt><dd>Portion de sphère découpée par un plan ; aire π·D·h.</dd>
+    <dt>CE</dt><dd>Carbone équivalent de l'IIW : C + Mn/6 + (Cr + Mo + V)/5 + (Ni + Cu)/15 (%), mesure de la trempabilité.</dd>
+    <dt>Confinement</dt><dd>Retenue du métal plastifié sous la pointe par le métal voisin resté élastique ; il explique le facteur 3 entre pression et contrainte d'écoulement.</dd>
+    <dt>D, d, d₁, d₂, h</dt><dd>Diamètre de la bille ; diamètre ou diagonale moyenne de l'empreinte ; diagonales mesurées ; profondeur (mm ou µm).</dd>
+    <dt>Dureté</dt><dd>Résistance d'un matériau à la pénétration permanente d'un corps plus dur ; elle n'a de sens qu'avec le nom de l'essai.</dd>
+    <dt>Échelle Rockwell (A, B, C, N, T)</dt><dd>Combinaison d'un pénétrateur et d'une charge ; C : cône de diamant, 1 471 N ; B : bille de 1,587 5 mm, 980,7 N ; N et T : échelles superficielles.</dd>
+    <dt>Enfoncement rémanent h</dt><dd>Augmentation permanente de profondeur, mesurée sous précharge, qui donne la dureté Rockwell.</dd>
+    <dt>ε<sub>r</sub>, σ(ε<sub>r</sub>), C</dt><dd>Déformation représentative d'un essai de pénétration (≈ 8 % pour la pyramide, 0,2·d/D pour la bille) ; contrainte d'écoulement à cette déformation ; facteur de contrainte (2,8 à 3).</dd>
+    <dt>F, F₀, F₁</dt><dd>Force d'essai (N) ; précharge Rockwell (98,07 N) ; charge additionnelle.</dd>
+    <dt>F/D²</dt><dd>Rapport entre la force (kgf) et le carré du diamètre de la bille (mm²), maintenu constant en Brinell pour une même famille de métal.</dd>
+    <dt>Filiation de dureté</dt><dd>Ligne d'empreintes régulièrement espacées qui traverse une soudure du métal de base au métal de base.</dd>
+    <dt>Groupes ISO/TR 15608</dt><dd>Classement des matériaux pour le soudage ; groupe 1 : aciers de limite d'élasticité minimale spécifiée jusqu'à 460 MPa ; groupe 2 : aciers à grains fins traités thermomécaniquement et aciers moulés de limite d'élasticité supérieure à 360 MPa.</dd>
+    <dt>H₂S</dt><dd>Sulfure d'hydrogène, présent dans le pétrole et le gaz « acides » ; il provoque la fissuration sous contrainte des aciers trop durs.</dd>
+    <dt>HBW</dt><dd>Dureté Brinell, bille en carbure de tungstène (W) ; désignation : valeur HBW D/F(kgf), par exemple 229 HBW 10/3000.</dd>
+    <dt>HV, HV10, HV0,1</dt><dd>Dureté Vickers ; sous 10 kgf (98,07 N) ; microdureté sous 0,1 kgf (0,980 7 N).</dd>
+    <dt>HRC, HRBW, HRA</dt><dd>Duretés Rockwell C (cône), B (bille de carbure), A (cône, 60 kgf).</dd>
+    <dt>ISO 6506-1, 6507-1, 6508-1</dt><dd>Normes des essais Brinell, Vickers et Rockwell.</dd>
+    <dt>ISO 4545-1, ISO 14577-1, ISO 16859-1</dt><dd>Essai Knoop ; essai de pénétration instrumenté ; dureté Leeb par rebond.</dd>
+    <dt>ISO 18265, ASTM E140</dt><dd>Tables de conversion des duretés et d'estimation de R<sub>m</sub>.</dd>
+    <dt>ISO 9015-1, ISO 9015-2</dt><dd>Essais de dureté des assemblages soudés à l'arc ; microdureté des assemblages soudés.</dd>
+    <dt>ISO 15614-1, QMOS</dt><dd>Qualification d'un mode opératoire de soudage des aciers par un essai.</dd>
+    <dt>ISO 15156-2, NACE MR0175</dt><dd>Exigences pour les aciers utilisés en présence de H₂S, dont 22 HRC (248 HV10) au plus.</dd>
+    <dt>EN 1011-2, t<sub>8/5</sub>, T<sub>0</sub>, Q, F<sub>3</sub></dt><dd>Norme du soudage des aciers ferritiques ; temps de refroidissement de 800 à 500 °C (s) ; température initiale ou de préchauffage (°C) ; apport de chaleur (kJ/mm) ; facteur de forme du joint.</dd>
+    <dt>kgf</dt><dd>Kilogramme-force, 9,806 65 N ; le facteur 0,102 = 1/9,806 65 convertit les newtons en kgf.</dd>
+    <dt>Knoop</dt><dd>Essai à pyramide très allongée, pour couches minces et matériaux fragiles.</dd>
+    <dt>Leeb</dt><dd>Dureté dynamique par rebond d'une masse, mesurée par appareil portable.</dd>
+    <dt>Macrodureté, microdureté</dt><dd>Essais sous charges de quelques kgf et plus ; essais sous moins de 0,2 kgf, qui visent un grain ou une phase.</dd>
+    <dt>Martensite (M)</dt><dd>Phase dure et peu ductile formée par refroidissement rapide de l'austénite ; sa dureté croît avec le carbone.</dd>
+    <dt>µm</dt><dd>Micromètre, millième de millimètre.</dd>
+    <dt>N, S (Rockwell)</dt><dd>Constante de l'échelle (100 ou 130) ; valeur d'une unité Rockwell (0,002 mm, 0,001 mm en superficiel).</dd>
+    <dt>Pénétrateur</dt><dd>Objet dur qu'on enfonce : bille, pyramide ou cône de diamant.</dd>
+    <dt>PWHT</dt><dd>Traitement thermique après soudage (<i>post-weld heat treatment</i>), qui revient la martensite et relaxe les contraintes.</dd>
+    <dt>Réticule</dt><dd>Traits de visée qu'on amène sur les bords ou les sommets de l'empreinte.</dd>
+    <dt>Revenu</dt><dd>Chauffage sous la température de transformation qui adoucit la martensite.</dd>
+    <dt>Similitude géométrique</dt><dd>Propriété d'une pyramide ou d'un cône : l'empreinte garde la même forme à toute charge, donc la même dureté.</dd>
+    <dt>Tabor (relation de)</dt><dd>p ≈ 3·σ(ε<sub>r</sub>) : la pression moyenne vaut environ trois fois la contrainte d'écoulement.</dd>
+    <dt>Yurioka (formule de)</dt><dd>HV<sub>M</sub> ≈ 884·C·(1 − 0,3·C²) + 294 : dureté d'une zone entièrement martensitique.</dd>
+    <dt>ZAT, métal fondu</dt><dd>Zone affectée thermiquement, métal de base transformé par la chaleur ; métal du cordon, fondu puis solidifié.</dd>
+  </dl>
+</div>
+</section>
+
+<section class="chap" id="check">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✓</div>
+    <div class="c-title"><h2>Suis-je prêt pour la suite ?</h2><p>Dix points à cocher de tête</p></div>
+    <div class="c-img"><span class="ico">🚦</span><span><small>Image à retenir</small>Le feu passe au vert quand tout est coché</span></div>
+  </div>
+  <p>Coche seulement ce que tu sais faire <b>sans regarder</b>. Tes coches restent enregistrées dans ce navigateur.</p>
+  <div class="check" id="checklist">
+    <label><input type="checkbox" data-c="1"> <span>Je sais expliquer ce que mesure une dureté, et pourquoi la pression sous la pointe vaut environ trois fois la contrainte d'écoulement.</span></label>
+    <label><input type="checkbox" data-c="2"> <span>Je sais calculer une dureté Brinell, choisir le rapport F/D² et vérifier le diamètre et l'épaisseur.</span></label>
+    <label><input type="checkbox" data-c="3"> <span>Je sais calculer une dureté Vickers et évaluer l'effet d'une erreur de lecture selon la charge.</span></label>
+    <label><input type="checkbox" data-c="4"> <span>Je sais respecter les épaisseurs et distances minimales des essais.</span></label>
+    <label><input type="checkbox" data-c="5"> <span>Je sais décrire le cycle Rockwell et choisir entre les échelles C et B.</span></label>
+    <label><input type="checkbox" data-c="6"> <span>Je sais convertir une dureté avec la bonne table et estimer R<sub>m</sub>, en connaissant les limites.</span></label>
+    <label><input type="checkbox" data-c="7"> <span>Je sais tracer et lire une filiation de dureté selon l'ISO 9015-1.</span></label>
+    <label><input type="checkbox" data-c="8"> <span>Je sais citer les seuils de 380 et 320 HV10 (groupes 1 et 2) et de 248 HV10 (milieu H₂S).</span></label>
+    <label><input type="checkbox" data-c="9"> <span>Je sais proposer des remèdes à une zone affectée trop dure.</span></label>
+    <label><input type="checkbox" data-c="10"> <span>Je sais écrire une dureté avec son symbole complet et lire un procès-verbal de dureté.</span></label>
+  </div>
+  <p class="status" id="checkMsg"></p>
+
+  <div class="meta">🔭 <b>Au prochain épisode, cours 3, le dernier de la série : les examens métallographiques.</b> Pour placer une filiation, il faut voir les zones de la soudure. On apprendra à choisir entre macrographie et micrographie, à découper et enrober un échantillon sans l'abîmer, à le polir jusqu'au miroir, à l'attaquer pour révéler sa structure, à l'observer à la loupe, au microscope optique et au microscope électronique, puis à lire une macrographie de soudure comme le demande la norme.</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+  <p>Cours 2 sur 3 de la série « Essais destructifs : mesurer et observer ce que cache un métal » (sujet 2.23 du planning). Essais selon l'ISO 6506-1, l'ISO 6507-1 et l'ISO 6508-1 ; conversions d'après des tables du type ISO 18265 et ASTM E140 ; dureté des soudures selon l'ISO 9015-1 et l'ISO 15614-1 ; pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
+</div>
+</footer>
+
+
+<script>
+(function(){
+"use strict";
+const NS="http://www.w3.org/2000/svg";
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function el(tag,attrs,parent){
+  const e=document.createElementNS(NS,tag);
+  if(attrs){for(const k in attrs){const v=attrs[k];if(v===undefined||v===null)continue;
+    if(typeof v==="string"&&v.indexOf("var(")>=0&&k!=="style")e.style.setProperty(k,v);else e.setAttribute(k,v);}}
+  if(parent)parent.appendChild(e);
+  return e;
+}
+function tx(p,x,y,str,attrs){const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);t.textContent=str;return t;}
+function txs(p,x,y,parts,attrs){/* parts: [["σ",""],["max","sub"],[" = 3",""]] */
+  const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);
+  parts.forEach(pt=>{const s=el("tspan",pt[1]==="sub"?{"font-size":"0.72em",dy:"3"}:(pt[2]?{dy:pt[2]}:{}),t);s.textContent=pt[0];
+    if(pt[1]==="sub"){const r=el("tspan",{dy:"-3"},t);r.textContent="\u200b";}});
+  return t;
+}
+function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild);}
+function fitText(t,x0,x1,gap){/* garde un texte SVG entre x0 et x1 : il passe de l'autre côté de son repère (écart gap), sinon il glisse */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const a=t.getAttribute("text-anchor")||"start",x=+t.getAttribute("x");
+  if(gap&&a!=="middle"&&(b.x<x0||b.x+b.width>x1)){t.setAttribute("text-anchor",a==="end"?"start":"end");t.setAttribute("x",a==="end"?x+2*gap:x-2*gap);b=t.getBBox();}
+  const nx=+t.getAttribute("x");
+  if(b.x+b.width>x1)t.setAttribute("x",nx-(b.x+b.width-x1));else if(b.x<x0)t.setAttribute("x",nx+(x0-b.x));
+  return t;}
+function arrow(p,x1,y1,x2,y2,color,w,h){
+  w=w||2.4;h=h||10;
+  const g=el("g",{class:"arr"},p);g.style.color=color||"var(--ink)";
+  const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy);
+  if(L<1)return g;
+  const ux=dx/L,uy=dy/L,hh=Math.min(h,L*0.6),bx=x2-ux*hh,by=y2-uy*hh,hw=hh*0.45+w*0.3;
+  el("line",{x1:x1,y1:y1,x2:bx,y2:by,"stroke-width":w,"stroke-linecap":"round"},g);
+  el("polygon",{points:x2+","+y2+" "+(bx-uy*hw)+","+(by+ux*hw)+" "+(bx+uy*hw)+","+(by-ux*hw)},g);
+  return g;
+}
+function darrow(p,x,y1,y2,color,w){/* double flèche verticale */
+  const g=el("g",{},p);const m=(y1+y2)/2;
+  if(Math.abs(y2-y1)<4){el("line",{x1:x-5,y1:y1,x2:x+5,y2:y1,stroke:color,"stroke-width":2},g);return g;}
+  arrow(g,x,m,x,y1,color,w||2,8);arrow(g,x,m,x,y2,color,w||2,8);return g;
+}
+function nf(v,d){
+  if(d===undefined)d=1;
+  if(Math.abs(v)<0.5*Math.pow(10,-d))v=0;
+  return v.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d}).replace("-","−").replace(/[\u202f\u2009]/g,"\u00a0");
+}
+const SUP={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sci(v,d){
+  if(v===0)return "0";
+  if(!isFinite(v))return "∞";
+  let e=Math.floor(Math.log10(Math.abs(v)));
+  let m=v/Math.pow(10,e);
+  const dd=d===undefined?1:d;
+  if(Math.abs(Number(m.toFixed(dd)))>=10){m/=10;e+=1;}
+  return nf(m,dd)+" × 10"+String(e).split("").map(c=>SUP[c]).join("");
+}
+function bigN(v){/* nombre de cycles lisible */
+  if(!isFinite(v))return "∞";
+  if(v===0)return "0";
+  if(v<10)return nf(v,v<1?2:0);
+  if(v<1e5)return nf(Math.round(v),0);
+  return sci(v,1);
+}
+function dur(s){
+  if(!isFinite(s))return "∞";
+  if(s<60)return nf(s,s<10?1:0)+" s";
+  if(s<3600)return nf(s/60,0)+" min";
+  if(s<86400)return nf(s/3600,1)+" h";
+  if(s<86400*365)return nf(s/86400,1)+" jours";
+  return nf(s/(86400*365),1)+" ans";
+}
+function svgW(svg){const r=svg.getBoundingClientRect();return Math.max(290,Math.round(r.width||(svg.parentNode&&svg.parentNode.clientWidth)||600));}
+function setVB(svg,W,H){svg.setAttribute("viewBox","0 0 "+W+" "+H);}
+const redraws=[];
+let rzT=null,lastWW=window.innerWidth;
+window.addEventListener("resize",()=>{if(window.innerWidth===lastWW)return;lastWW=window.innerWidth;clearTimeout(rzT);rzT=setTimeout(()=>redraws.forEach(f=>{try{f();}catch(e){console.error(e);}}),120);});
+
+function niceStep(range,n){const raw=range/(n||5),p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<1.5?1:m<3?2:m<7?5:10)*p;}
+function setOn(sel,btn){$$(sel+" .btn").forEach(b=>b.classList.toggle("on",b===btn));}
+function fmtmm(mm){return mm<0.1?nf(mm*1000,0)+" µm":mm<10?nf(mm,mm<1?2:1)+" mm":nf(mm,0)+" mm";}
+function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt,yfmt){
+  const X=v=>x0+(x1-x0)*(v-xmin)/(xmax-xmin),Y=v=>y1-(y1-y0)*(v-ymin)/(ymax-ymin);
+  for(let v=Math.ceil(ymin/ystep-1e-9)*ystep;v<=ymax+1e-9;v+=ystep){el("line",{x1:x0,y1:Y(v),x2:x1,y2:Y(v),class:"gridbg"},svg);tx(svg,x0-5,Y(v)+4,yfmt?yfmt(v):nf(v,ystep<1?1:0),{class:"lbl","text-anchor":"end"});}
+  for(let v=Math.ceil(xmin/xstep-1e-9)*xstep;v<=xmax+1e-9;v+=xstep){el("line",{x1:X(v),y1:y1,x2:X(v),y2:y1+4,class:"tick"},svg);tx(svg,X(v),y1+17,xfmt?xfmt(v):nf(v,xstep<1?1:0),{class:"lbl","text-anchor":"middle"});}
+  el("line",{x1:x0,y1:y1,x2:x1,y2:y1,class:"axis"},svg);el("line",{x1:x0,y1:y0-4,x2:x0,y2:y1,class:"axis"},svg);
+  tx(svg,x0+4,y0-10,ylab,{class:"lbl"});tx(svg,x1,y1+32,xlab,{class:"lbl","text-anchor":"end"});
+  return {X:X,Y:Y};
+}
+function animate(btn,label,dur,onStep,onEnd){
+  let raf=null,run=false;
+  function stop(){run=false;if(raf)cancelAnimationFrame(raf);raf=null;btn.textContent=label;}
+  function start(){if(run){stop();return;}if(RM){onStep(1);stop();if(onEnd)onEnd();return;}
+    run=true;btn.textContent="⏸ Pause";const t0=performance.now();
+    const step=now=>{const p=Math.min(1,(now-t0)/dur);onStep(p);if(p>=1){stop();if(onEnd)onEnd();return;}raf=requestAnimationFrame(step);};raf=requestAnimationFrame(step);}
+  btn.addEventListener("click",start);return {stop:stop,running:()=>run};
+}
+
+
+function sig2(v){/* arrondi à deux chiffres significatifs */
+  if(v<=0)return 0;const p=Math.pow(10,Math.floor(Math.log10(v))-1);return Math.round(v/p)*p;}
+function halo(t,svg){/* liseré de fond, puis passage au premier plan */
+  t.setAttribute("paint-order","stroke");t.style.setProperty("stroke","var(--card)");t.setAttribute("stroke-width","4");t.setAttribute("stroke-linejoin","round");if(svg)svg.appendChild(t);return t;}
+function plate(t,svg){/* fond plein derrière une étiquette */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const r=el("rect",{x:b.x-3,y:b.y-1,width:b.width+6,height:b.height+2,fill:"var(--card)",opacity:.92,rx:2});svg.appendChild(r);svg.appendChild(t);return t;}
+function le(n,f){return /^[aeiouyhéèâî]/i.test(n)?"l'"+n:(f?"la ":"le ")+n;}
+function du(n,f){return /^[aeiouyhéèâî]/i.test(n)?"de l'"+n:(f?"de la ":"du ")+n;}
+function fmtG(v){return nf(v,v<0.1?3:2)+" N/m";}
+function fmtPa(p){return p<1000?nf(p,0)+" Pa":p<1e5?nf(p/1000,1)+" kPa":nf(p/1e5,2)+" bar";}
+function fmtLen(m){/* m en mètres */
+  const mm=m*1000;if(mm<1)return nf(mm*1000,0)+" µm";if(mm<10)return nf(mm,1)+" mm";if(mm<1000)return nf(mm,0)+" mm";return nf(m,1)+" m";}
+function fmtT(s){if(!isFinite(s))return "∞";if(s<0.01)return nf(s*1000,1)+" ms";if(s<1)return nf(s,3)+" s";if(s<60)return nf(s,s<10?1:0)+" s";return nf(s/60,s<600?1:0)+" min";}
+
+function spread(items,gap,ymin,ymax){/* écarte verticalement des étiquettes {y} triées */
+  items.sort((a,b)=>a.y-b.y);
+  for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;
+  if(items.length&&items[items.length-1].y>ymax){items[items.length-1].y=ymax;for(let i=items.length-2;i>=0;i--)if(items[i+1].y-items[i].y<gap)items[i].y=items[i+1].y-gap;}
+  if(items.length&&items[0].y<ymin){items[0].y=ymin;for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;}
+  return items;}
+function declutter(ts,ymin,ymax){/* décale verticalement les textes qui se chevauchent */
+  const box=t=>{try{return t.getBBox();}catch(e){return null;}};
+  for(let i=1;i<ts.length;i++){const ti=ts[i];if(!ti)continue;
+    for(let pass=0;pass<6;pass++){const bi=box(ti);if(!bi)break;let moved=false;
+      for(let j=0;j<i;j++){const bj=ts[j]&&box(ts[j]);if(!bj)continue;
+        const ix=Math.min(bi.x+bi.width,bj.x+bj.width)-Math.max(bi.x,bj.x),iy=Math.min(bi.y+bi.height,bj.y+bj.height)-Math.max(bi.y,bj.y);
+        if(ix>1&&iy>1){let dy=(bi.y+bi.height/2>=bj.y+bj.height/2)?(bj.y+bj.height-bi.y+1):-(bi.y+bi.height-bj.y+1);
+          if(bi.y+dy<ymin||bi.y+bi.height+dy>ymax)dy=dy>0?-(bi.y+bi.height-bj.y+1):(bj.y+bj.height-bi.y+1);
+          ti.setAttribute("y",+ti.getAttribute("y")+dy);moved=true;break;}}
+      if(!moved)break;}}
+  return ts;}
+const SUPD={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function p10(e){return "10"+String(e).split("").map(c=>SUPD[c]||c).join("");}
+function fmtP(p){/* pression en Pa, lisible */
+  if(p>=1e5)return nf(p/1e5,1)+" bar";if(p>=1000)return nf(p/1000,p<1e4?1:0)+" kPa";if(p>=1)return nf(p,p<10?1:0)+" Pa";return sci(p,1)+" Pa";}
+
+
+
+function rng(seed){/* générateur pseudo-aléatoire reproductible */
+  let a=seed>>>0;return ()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
+
+
+
+/* =========================================================
+   Utilitaires communs du cours : unités, empreintes, table de conversion
+   ========================================================= */
+const nbsp=s=>s.replace(/(\d) (MPa|GPa|kN\/mm|kN|kgf|kJ\/mm|N|mm²|mm|µm|%|°C|s|HV10|HV|HBW|HRC|HRBW)(?=[\s.,;:)<·/]|$)/g,"$1 $2");
+function fitSize(t,maxW,min){let b;try{b=t.getBBox();}catch(e){return t;}let fs=parseFloat(getComputedStyle(t).fontSize)||13;
+  while(b.width>maxW&&fs>(min||9)){fs-=0.5;t.style.fontSize=fs+"px";b=t.getBBox();}return t;}
+const G0=9.80665;
+const pc=(v,d)=>nf(v*100,d===undefined?1:d)+" %";
+const fmtF=F=>F>=1000?nf(F/1000,F>=10000?1:2)+" kN":nf(F,F<10?2:F<100?1:0)+" N";
+const fmtL=mm=>mm<1?nf(mm*1000,mm<0.1?1:0)+" µm":nf(mm,mm<10?2:1)+" mm";
+/* Métaux du modèle d'empreinte (loi d'écrouissage σ = K·εⁿ) */
+const HMAT={Al:{n:"l'aluminium pur recuit",K:180,nh:0.25},Cu:{n:"le cuivre recuit",K:530,nh:0.44},S355:{n:"l'acier S355",K:850,nh:0.16},
+  QT:{n:"l'acier trempé-revenu",K:1100,nh:0.07},M:{n:"la martensite",K:2100,nh:0.05}};
+function indent(mt,ind,F,D){/* F en N, D en mm : empreinte selon Tabor (pression ≈ C·σ(εr)) */
+  const K=mt.K,n=mt.nh;
+  if(ind==="V"){const er=0.08,p=3*K*Math.pow(er,n),A=F/p,d=Math.sqrt(2*A);return {p:p,C:3,er:er,A:A,d:d,a:d/2,h:d/7,HV:0.1891*F/(d*d)};}
+  if(ind==="C"){const er=0.115,p=3*K*Math.pow(er,n),A=F/p,a=Math.sqrt(A/Math.PI);return {p:p,C:3,er:er,A:A,d:2*a,a:a,h:a/Math.sqrt(3)};}
+  const R=(D||10)/2;let lo=1e-7,hi=R*0.9999;
+  for(let i=0;i<80;i++){const a=(lo+hi)/2,p=2.8*K*Math.pow(0.2*a/R,n);if(p*Math.PI*a*a<F)lo=a;else hi=a;}
+  const a=(lo+hi)/2,p=2.8*K*Math.pow(0.2*a/R,n),d=2*a,h=R-Math.sqrt(Math.max(0,R*R-a*a));
+  return {p:p,C:2.8,er:0.2*a/R,A:Math.PI*a*a,d:d,a:a,h:h,sink:a>0.995*R,HB:0.102*2*F/(Math.PI*2*R*(2*R-Math.sqrt(Math.max(0,4*R*R-d*d))))};}
+/* Table de conversion pour aciers non alliés et faiblement alliés : [HV, HB, HRC, HRB, Rm (MPa)] */
+const CONV=[[100, null, null, 51, null], [101, null, null, 52, null], [102, null, null, 53, null], [103, null, null, 54, null], [104, 99, null, 55, null], [105, 101, null, 56, null], [106, 102, null, 57, null], [107, 104, null, 58, null], [108, 106, null, 59, null], [110, 107, null, 60, null], [111, 108, null, 61, null], [112, 110, null, 62, null], [113, 112, null, 63, null], [114, 114, null, 64, null], [115, 116, null, 65, null], [116, 117, null, 66, null], [118, 119, null, 67, null], [120, 121, null, 68, null], [123, 123, null, 69, null], [125, 125, null, 70, null], [127, 127, null, 71, null], [130, 130, null, 72, null], [132, 132, null, 73, null], [135, 135, null, 74, null], [137, 137, null, 75, null], [139, 139, null, 76, null], [141, 141, null, 77, null], [144, 144, null, 78, null], [148, 147, null, 79, null], [152, 150, null, 80, 503], [156, 153, 0, 81, 517], [160, 156, 1, 82, 524], [164, 159, 2, 83, 538], [168, 162, 3, 84, 545], [172, 165, 4, 85, 558], [176, 169, 5, 86, 572], [180, 172, 6, 87, 579], [184, 176, 7, 88, 593], [188, 180, 8, 89, 607], [192, 185, 9, 90, 627], [196, 190, 10, 91, 641], [200, 193, 11, 92, 655], [204, 195, 12, 92, 662], [208, 200, 13, 93, 676], [213, 203, 14, 94, 683], [217, 205, 15, 95, 690], [222, 208, 16, 95, 703], [226, 210, 17, 96, 717], [230, 214, 18, 96, 731], [234, 218, 19, 97, 738], [238, 222, 20, 97, 752], [243, 228, 21, 98, 772], [248, 234, 22, 99, 793], [254, 240, 23, 100, 814], [260, 247, 24, 101, 834], [266, 253, 25, 102, 855], [272, 258, 26, 103, 869], [279, 264, 27, 103, 889], [286, 271, 28, 104, 917], [294, 279, 29, 104, 945], [302, 286, 30, 105, 965], [310, 294, 31, 106, 993], [318, 301, 32, 107, 1014], [327, 311, 33, 108, 1048], [336, 319, 34, 108, 1076], [345, 327, 35, 109, 1103], [354, 336, 36, 109, 1138], [363, 344, 37, 110, 1165], [372, 353, 38, 110, 1193], [382, 362, 39, 111, 1220], [392, 371, 40, 112, 1255], [402, 381, 41, 112, 1289], [412, 390, 42, 113, 1317], [423, 400, 43, 113, 1351], [434, 409, 44, 114, 1379], [446, 421, 45, 115, 1420], [458, 432, 46, 115, 1462], [471, 443, 47, 116, 1496], [484, 455, 48, 116, 1524], [498, 469, 49, 117, 1565], [513, 481, 50, 117, 1607], [528, 496, 51, 118, 1648], [544, 512, 52, 119, 1689], [560, 523, 53, 119, 1772], [577, 543, 54, 120, 1834], [595, 560, 55, 120, 1889], [613, 577, 56, null, 1944], [633, 595, 57, null, 2000], [653, 615, 58, null, 2069], [674, 634, 59, null, 2137], [697, 654, 60, null, 2206], [720, 670, 61, null, null], [746, 688, 62, null, null], [772, 705, 63, null, null], [800, 722, 64, null, null], [832, 739, 65, null, null], [865, null, 66, null, null], [900, null, 67, null, null], [940, null, 68, null, null]];
+function conv(hv,col){/* interpolation linéaire ; null hors de la table */
+  const T=CONV.filter(r=>r[col]!==null);if(!T.length||hv<T[0][0]||hv>T[T.length-1][0])return null;
+  for(let i=1;i<T.length;i++)if(T[i][0]>=hv){const a=T[i-1],b=T[i],t=(hv-a[0])/((b[0]-a[0])||1);return a[col]+t*(b[col]-a[col]);}
+  return T[T.length-1][col];}
+function convInv(v,col){/* HV pour une valeur de la colonne col (colonne croissante) */
+  const T=CONV.filter(r=>r[col]!==null);if(v<T[0][col]||v>T[T.length-1][col])return null;
+  for(let i=1;i<T.length;i++)if(T[i][col]>=v){const a=T[i-1],b=T[i],t=(v-a[col])/((b[col]-a[col])||1);return a[0]+t*(b[0]-a[0]);}
+  return T[T.length-1][0];}
+function cross(svg,x,y,col,r){r=r||6;el("path",{d:"M"+(x-r)+","+(y-r)+"L"+(x+r)+","+(y+r)+"M"+(x-r)+","+(y+r)+"L"+(x+r)+","+(y-r),stroke:col,"stroke-width":2.6},svg);}
+
+/* =========================================================
+   M1 : le pouce dans la pâte (Tabor)
+   ========================================================= */
+(function(){
+  const svg=$("#m1svg");if(!svg)return;
+  const sf=$("#m1f"),ro=$("#m1r"),msg=$("#m1msg");
+  let mk="S355",ik="V",prog=null;
+  const IN={V:"pyramide Vickers",B:"bille de 10 mm",C:"cône Rockwell"};
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?560:330;setVB(svg,W,H);clear(svg);
+    const lf=prog===null?+sf.value:4.5*Math.max(0,prog),F=Math.pow(10,lf),mt=HMAT[mk],r=indent(mt,ik,F,10);
+    $("#m1fo").textContent=fmtF(F);
+    /* coupe */
+    const pw=n?W-16:W*0.46,px0=8,ys=n?96:104,cx=px0+pw/2;
+    tx(svg,8,18,"La coupe sous la pointe",{class:"ttl"});
+    const half=Math.max(r.a*2.6,1e-9),s=(pw*0.5)/half;/* px par mm : la zone plastique occupe la moitié de la largeur */
+    const bot=n?(ys+150):(H-46);
+    el("rect",{x:px0,y:ys,width:pw,height:bot-ys,fill:"var(--paper-2)",stroke:"var(--line)"},svg);
+    const rc=Math.min(2.4*r.a*s,pw/2-4,bot-ys-6);
+    el("path",{d:"M"+(cx-rc)+","+ys+" A"+rc+","+rc+" 0 0 0 "+(cx+rc)+","+ys+" Z",fill:"var(--gam)",opacity:.22},svg);
+    const ha=r.a*s,hh=Math.max(2,r.h*s);
+    let prof;
+    if(ik==="B"){const R=5*s,k2=[];for(let i=0;i<=30;i++){const x=-ha+2*ha*i/30;k2.push((cx+x).toFixed(1)+","+(ys+hh-(R-Math.sqrt(Math.max(0,R*R-x*x)))).toFixed(1));}prof=k2.join(" ");}
+    else prof=(cx-ha)+","+ys+" "+cx+","+(ys+hh)+" "+(cx+ha)+","+ys;
+    el("polygon",{points:(cx-ha)+","+ys+" "+prof+" "+(cx+ha)+","+ys,fill:"var(--card)",stroke:"none"},svg);
+    const pu=mt.nh<0.2?(0.2-mt.nh)*0.6*ha:0,si=mt.nh>0.3?(mt.nh-0.3)*0.5*ha:0;
+    el("polyline",{points:px0+","+ys+" "+(cx-ha-2*ha)+","+ys+" "+(cx-ha-0.5*ha)+","+(ys-pu+si*0.6)+" "+prof+" "+(cx+ha+0.5*ha)+","+(ys-pu+si*0.6)+" "+(cx+ha+2*ha)+","+ys+" "+(px0+pw)+","+ys,fill:"none",stroke:"var(--ink)","stroke-width":1.6},svg);
+    /* pénétrateur */
+    const top=ys-Math.min(60,ys-30);
+    if(ik==="B"){const R=5*s,cyB=ys+hh-R;el("circle",{cx:cx,cy:cyB,r:R,fill:"none",stroke:"var(--ink)","stroke-width":1.4,"stroke-dasharray":"5 3"},svg);}
+    else{const ang=ik==="V"?68:60,dx=(ys+hh-top)*Math.tan(ang*Math.PI/180);el("polygon",{points:cx+","+(ys+hh)+" "+(cx-dx)+","+top+" "+(cx+dx)+","+top,fill:"var(--muted)",opacity:.35,stroke:"var(--ink)"},svg);}
+    arrow(svg,cx,top-26,cx,top-2,"var(--frc)",2.6,9);
+    const tF=tx(svg,cx+8,top-14,"F = "+fmtF(F),{fill:"var(--frc)","font-weight":"700"});halo(tF,svg);fitText(tF,px0,px0+pw);
+    /* barre d'échelle */
+    const cand=[0.0001,0.0002,0.0005,0.001,0.002,0.005,0.01,0.02,0.05,0.1,0.2,0.5,1,2,5,10,20];let L=cand[0];cand.forEach(c=>{if(c*s<=pw*0.3)L=c;});
+    el("line",{x1:px0+10,y1:bot-12,x2:px0+10+L*s,y2:bot-12,stroke:"var(--ink)","stroke-width":3},svg);
+    const tl=tx(svg,px0+14+L*s,bot-8,fmtL(L),{class:"lbl"});halo(tl,svg);
+    const tz=tx(svg,cx,Math.min(bot-26,ys+rc*0.7),"zone plastique",{class:"lbl","text-anchor":"middle",fill:"var(--gam)"});halo(tz,svg);fitText(tz,px0,px0+pw);
+    /* pression selon la force */
+    const gx0=n?52:W*0.46+52,gx1=W-12,gy0=n?300:44,gy1=n?H-44:H-44;
+    tx(svg,n?8:W*0.46+8,n?278:18,"Pression moyenne p",{class:"ttl"});
+    const curves={};let pmax=0;["V","C","B"].forEach(q=>{const P=[];for(let i=0;i<=45;i++){const l=i/10,rr=indent(mt,q,Math.pow(10,l),10);if(!(q==="B"&&rr.sink))P.push([l,rr.p]);pmax=Math.max(pmax,rr.p);}curves[q]=P;});
+    const ax=axes(svg,gx0,gx1,gy0,gy1,0,4.5,0,pmax*1.15,"force F","p (MPa)",1,niceStep(pmax*1.15,4),v=>["1 N","10 N","100 N","1 kN","10 kN"][Math.round(v)]||"");
+    ["V","C","B"].forEach(q=>{el("polyline",{points:curves[q].map(p=>ax.X(p[0]).toFixed(1)+","+ax.Y(p[1]).toFixed(1)).join(" "),fill:"none",stroke:"var(--sig)","stroke-width":q===ik?2.6:1.3,opacity:q===ik?1:.35,"stroke-dasharray":q==="B"?null:(q==="C"?"6 3":null)},svg);});
+    const lb=[];["V","C","B"].forEach(q=>{const P=curves[q];if(!P.length)return;const last=P[P.length-1];const t=tx(svg,ax.X(last[0])-4,ax.Y(last[1])-6,{V:"pyramide",C:"cône",B:"bille"}[q],{class:"lbl","text-anchor":"end",fill:"var(--sig)",opacity:q===ik?1:.6});halo(t,svg);lb.push(t);});
+    declutter(lb,gy0,gy1);
+    if(!(ik==="B"&&r.sink))el("circle",{cx:ax.X(lf),cy:ax.Y(r.p),r:6.5,fill:"var(--eps)",stroke:"var(--card)","stroke-width":2},svg);
+    ro.innerHTML=nbsp("<span>p = <b class='sig'>"+nf(r.p,0)+" MPa</b></span><span>σ(ε<sub>r</sub>) = p/"+nf(r.C,1)+" = "+nf(r.p/r.C,0)+" MPa</span><span>ε<sub>r</sub> = "+pc(r.er,1)+"</span><span>"+(ik==="V"?"diagonale":"diamètre")+" d = <b class='eps'>"+fmtL(r.d)+"</b></span><span>profondeur h = "+fmtL(r.h)+"</span>"+(ik==="V"?"<span>≈ <b class='eps'>"+nf(r.HV,0)+" HV</b></span>":ik==="B"&&!r.sink?"<span>≈ <b class='eps'>"+nf(r.HB,0)+" HBW</b> ; d/D = "+nf(r.d/10,2)+"</span>":""));
+    let t;
+    if(prog!==null&&prog<1)t="La force augmente : l'empreinte grandit, et la pression moyenne se stabilise.";
+    else if(ik==="B"&&r.sink)t="❌ La bille s'est enfoncée presque entièrement : force beaucoup trop grande pour "+mt.n+". On choisit un rapport F/D² plus faible (chapitre 2).";
+    else if(ik==="B")t="La bille : la déformation représentative vaut 0,2·d/D = "+pc(r.er,1)+" et grandit avec la force ; la pression aussi, d'autant plus que le métal s'écrouit (n = "+nf(mt.nh,2)+"). D'où la règle d'un rapport F/D² fixe."+(r.d/10<0.24||r.d/10>0.6?" Ici, d/D = "+nf(r.d/10,2)+" sort de la plage 0,24 à 0,6.":"");
+    else t="✅ "+(ik==="V"?"La pyramide":"Le cône")+" garde la même forme d'empreinte : la pression moyenne reste "+nf(r.p,0)+" MPa quelle que soit la force, environ trois fois la contrainte d'écoulement de "+mt.n+" ("+nf(r.p/3,0)+" MPa). C'est la similitude géométrique.";
+    msg.innerHTML=nbsp(t);
+  }
+  const A=animate($("#m1play"),"▶ Appuyer",6000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;sf.value=4.5;draw();});
+  $$("#m1m .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;mk=b.dataset.k;setOn("#m1m",b);draw();}));
+  $$("#m1i .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;ik=b.dataset.k;setOn("#m1i",b);draw();}));
+  sf.addEventListener("input",()=>{A.stop();prog=null;draw();});
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M2 : le cratère de la bille (Brinell)
+   ========================================================= */
+(function(){
+  const svg=$("#m2svg");if(!svg)return;
+  const se=$("#m2e"),ro=$("#m2out"),msg=$("#m2msg");
+  let mk="S355",D=10,rt=30;
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?600:320;setVB(svg,W,H);clear(svg);
+    const e=+se.value,mt=HMAT[mk],F=rt*D*D*G0,r=indent(mt,"B",F,D),dD=r.d/D;
+    $("#m2eo").textContent=nf(e,1)+" mm";
+    const okd=dD>=0.24&&dD<=0.6&&!r.sink,oke=e>=8*r.h,okh=r.HB<=650;
+    /* vue de dessus */
+    const pw=n?W-16:W*0.44,cx=8+pw/2,cy=n?160:H/2+8,Rf=Math.min(pw/2-12,(n?120:H/2-34));
+    tx(svg,8,18,"Le cratère vu de dessus",{class:"ttl"});
+    const k=Rf/(D/2);
+    el("circle",{cx:cx,cy:cy,r:0.6*D/2*k,fill:"var(--ok)",opacity:.16},svg);
+    el("circle",{cx:cx,cy:cy,r:0.24*D/2*k,fill:"var(--card)"},svg);
+    el("circle",{cx:cx,cy:cy,r:Rf,fill:"none",stroke:"var(--muted)","stroke-dasharray":"5 4"},svg);
+    el("circle",{cx:cx,cy:cy,r:Math.min(Rf,r.d/2*k),fill:"var(--paper-2)",stroke:okd?"var(--eps)":"var(--tau)","stroke-width":2.4},svg);
+    el("line",{x1:cx-r.d/2*k,y1:cy,x2:cx+r.d/2*k,y2:cy,stroke:"var(--eps)","stroke-width":1.4},svg);
+    const td=tx(svg,cx,cy-6,"d = "+nf(r.d,3)+" mm",{"text-anchor":"middle",fill:"var(--eps)","font-weight":"700"});halo(td,svg);fitText(td,8,8+pw);
+    const tb=tx(svg,cx,cy+Rf+16,"bille D = "+nf(D,1).replace(",0","")+" mm ; bande verte : 0,24·D à 0,6·D",{class:"lbl","text-anchor":"middle"});halo(tb,svg);fitSize(tb,pw-4,9);
+    /* coupe */
+    const qx0=n?8:W*0.48,qw=n?W-16:W*0.52-8,qy0=n?356:44;
+    tx(svg,qx0,n?332:18,"La coupe",{class:"ttl"});
+    const sc=Math.min(qw/(1.3*D),(H-qy0-12)/(1.04*D+e)),ys=qy0+1.02*D*sc,xc=qx0+qw/2;
+    el("rect",{x:qx0,y:ys,width:qw,height:e*sc,fill:"var(--paper-2)",stroke:"var(--ink)"},svg);
+    const R=D/2*sc,cyB=ys+r.h*sc-R;
+    el("circle",{cx:xc,cy:cyB,r:R,fill:"var(--card)",stroke:"var(--ink)","stroke-width":1.4},svg);
+    const h8=ys+8*r.h*sc;if(h8<ys+e*sc+40)el("line",{x1:qx0+4,y1:Math.min(h8,H-8),x2:qx0+qw-4,y2:Math.min(h8,H-8),stroke:oke?"var(--mat)":"var(--tau)","stroke-dasharray":"5 4","stroke-width":1.6},svg);
+    const t8=tx(svg,qx0+6,Math.min(h8,H-8)-5,"8·h",{class:"lbl",fill:oke?"var(--mat)":"var(--tau)"});halo(t8,svg);
+    arrow(svg,xc+R*0.75,qy0+4,xc+R*0.75,qy0+30,"var(--frc)",2.6,9);
+    const tF=tx(svg,xc+R*0.75+12,qy0+20,"F = "+fmtF(F)+" ("+nf(rt*D*D,rt*D*D<10?2:0)+" kgf)",{fill:"var(--frc)","font-weight":"700"});halo(tF,svg);fitText(tF,qx0,qx0+qw);fitSize(tF,qw-10,9);
+    const te=tx(svg,qx0+qw-6,ys+e*sc-6,"pièce de "+nf(e,1)+" mm",{class:"lbl","text-anchor":"end"});halo(te,svg);
+    const desig=nf(r.HB,0)+" HBW "+String(D).replace(".",",")+"/"+String(Math.round(rt*D*D*1000)/1000).replace(".",",");
+    ro.innerHTML=nbsp("<span>F = <b class='frc'>"+fmtF(F)+"</b></span><span>d = <b class='eps'>"+nf(r.d,3)+" mm</b></span><span>d/D = "+nf(dD,2)+"</span><span>h = "+nf(r.h,3)+" mm</span><span>8·h = "+nf(8*r.h,2)+" mm</span><span><b class='eps'>"+(r.sink?"bille enfoncée":desig)+"</b></span>");
+    let m;
+    if(r.sink)m="❌ La bille s'enfonce entièrement dans "+mt.n+" : F/D² bien trop grand. Essaie un rapport plus faible.";
+    else if(!okh)m="❌ "+nf(r.HB,0)+" HBW dépasse 650 HBW : la bille de carbure se déformerait. On passe au Vickers ou au Rockwell C.";
+    else if(!okd)m="⚠️ d/D = "+nf(dD,2)+" sort de la plage 0,24 à 0,6 : "+(dD<0.24?"empreinte trop petite, change pour un rapport F/D² plus grand.":"empreinte trop grande, change pour un rapport F/D² plus petit.");
+    else if(!oke)m="⚠️ Pièce trop mince : il faut au moins 8·h = "+nf(8*r.h,2)+" mm d'épaisseur, sinon l'enclume sous la pièce fausse la mesure.";
+    else m="✅ Essai valable : "+desig+". d/D = "+nf(dD,2)+" dans la bande verte, épaisseur suffisante (8·h = "+nf(8*r.h,2)+" mm).";
+    if(!r.sink&&okd&&rt!==30&&(mk==="S355"||mk==="QT"))m+=" Pour un acier, la norme recommande F/D² = 30.";
+    msg.innerHTML=nbsp(m);
+  }
+  $$("#m2m .btn").forEach(b=>b.addEventListener("click",()=>{mk=b.dataset.k;setOn("#m2m",b);draw();}));
+  $$("#m2d .btn").forEach(b=>b.addEventListener("click",()=>{D=+b.dataset.k;setOn("#m2d",b);draw();}));
+  $$("#m2r .btn").forEach(b=>b.addEventListener("click",()=>{rt=+b.dataset.k;setOn("#m2r",b);draw();}));
+  se.addEventListener("input",draw);
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M3 : le losange au microscope (Vickers)
+   ========================================================= */
+(function(){
+  const svg=$("#m3svg");if(!svg)return;
+  const sa=$("#m3a"),sb=$("#m3b"),ro=$("#m3r"),msg=$("#m3msg");
+  const PH={F:{n:"ferrite",hv:150},P:{n:"perlite",hv:250},B:{n:"bainite",hv:350},M:{n:"martensite",hv:500}};
+  let ch=10,pk="F",prog=null,e0=[0,0];
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?520:320;setVB(svg,W,H);clear(svg);
+    let ea=+sa.value,eb=+sb.value;if(prog!==null){ea=e0[0]*(1-prog);eb=e0[1]*(1-prog);}
+    $("#m3ao").textContent=(ea>0?"+":"")+nf(ea,1)+" µm";$("#m3bo").textContent=(eb>0?"+":"")+nf(eb,1)+" µm";
+    const F=ch*G0,HVt=PH[pk].hv,dt=Math.sqrt(0.1891*F/HVt)*1000,d1=dt+ea,d2=dt+eb,dm=(d1+d2)/2,HVm=0.1891*F/Math.pow(dm/1000,2),err=(HVm/HVt-1)*100;
+    /* champ du microscope */
+    const fr=n?Math.min(W/2-14,150):Math.min(H/2-26,W*0.27),cx=n?W/2:fr+16,cy=n?fr+34:H/2+10;
+    tx(svg,8,18,"Au microscope : "+PH[pk].n+", "+(ch===0.1?"HV0,1":"HV"+ch),{class:"ttl"});
+    const cp=el("clipPath",{id:"m3clip"},svg);el("circle",{cx:cx,cy:cy,r:fr},cp);
+    const g=el("g",{"clip-path":"url(#m3clip)"},svg);
+    el("rect",{x:cx-fr,y:cy-fr,width:2*fr,height:2*fr,fill:"var(--paper-2)"},g);
+    const R=rng(pk.charCodeAt(0)*7+Math.round(ch*10));
+    const s=(fr*1.1)/dt;/* px par µm : la diagonale occupe 1,1 rayon */
+    /* texture de la phase (taille réelle relative) */
+    const feat={F:40,P:6,B:3,M:1.5}[pk],nl=Math.min(90,Math.round(2*fr/Math.max(4,feat*s)));
+    for(let i=0;i<nl;i++){const x=cx-fr+R()*2*fr,y=cy-fr+R()*2*fr,a=pk==="P"?0.6:R()*Math.PI,L=pk==="F"?feat*s*0.8:Math.max(8,feat*s*3);
+      el("line",{x1:x-Math.cos(a)*L/2,y1:y-Math.sin(a)*L/2,x2:x+Math.cos(a)*L/2,y2:y+Math.sin(a)*L/2,stroke:"var(--muted)","stroke-width":pk==="P"?1.4:1,opacity:.45},g);}
+    const hd=dt/2*s;
+    el("polygon",{points:cx+","+(cy-hd)+" "+(cx+hd)+","+cy+" "+cx+","+(cy+hd)+" "+(cx-hd)+","+cy,fill:"var(--card)",stroke:"var(--ink)","stroke-width":1.4},g);
+    el("line",{x1:cx-hd,y1:cy,x2:cx+hd,y2:cy,stroke:"var(--line)"},g);el("line",{x1:cx,y1:cy-hd,x2:cx,y2:cy+hd,stroke:"var(--line)"},g);
+    /* réticule : trait gauche et haut sur les vrais sommets, trait droit et bas décalés de l'erreur */
+    const xr=cx-hd+d1*s,yb=cy-hd+d2*s;
+    [[cx-hd,cy-fr,cx-hd,cy+fr],[xr,cy-fr,xr,cy+fr]].forEach(L=>el("line",{x1:L[0],y1:L[1],x2:L[2],y2:L[3],stroke:"var(--eps)","stroke-width":1.6},g));
+    [[cx-fr,cy-hd,cx+fr,cy-hd],[cx-fr,yb,cx+fr,yb]].forEach(L=>el("line",{x1:L[0],y1:L[1],x2:L[2],y2:L[3],stroke:"var(--eps)","stroke-width":1.6,"stroke-dasharray":"6 3"},g));
+    el("circle",{cx:cx,cy:cy,r:fr,fill:"none",stroke:"var(--ink)","stroke-width":2},svg);
+    const cand=[1,2,5,10,20,50,100,200,500];let L=1;cand.forEach(c=>{if(c*s<=fr*0.6)L=c;});
+    el("line",{x1:cx-L*s/2,y1:cy+fr-14,x2:cx+L*s/2,y2:cy+fr-14,stroke:"var(--ink)","stroke-width":3},svg);
+    const tl=tx(svg,cx,cy+fr-20,L+" µm",{class:"lbl","text-anchor":"middle"});halo(tl,svg);
+    /* sensibilité selon la charge */
+    const bx0=n?8:cx+fr+30,by0=n?cy+fr+44:56,bw=n?W-16:W-bx0-10;
+    tx(svg,bx0,by0-20,"Erreur sur HV pour 1 µm",{class:"ttl"});
+    const rows=[10,1,0.1].map(c=>{const d=Math.sqrt(0.1891*c*G0/HVt)*1000,e2=(Math.pow(d/(d+1),2)-1)*100;return {lab:c===0.1?"HV0,1":"HV"+c,val:Math.abs(e2),txt:nf(e2,1)+" % (d = "+nf(d,0)+" µm)",on:c===ch};});
+    const mx=Math.max.apply(null,rows.map(r=>r.val));
+    rows.forEach((r,i)=>{const y=by0+i*(n?34:42),lw=50,bwid=Math.max(20,bw-lw-140);
+      tx(svg,bx0+lw-6,y+11,r.lab,{class:"lbl","text-anchor":"end","font-weight":r.on?"700":"400"});
+      el("rect",{x:bx0+lw,y:y,width:bwid,height:14,rx:3,fill:"var(--paper-2)",stroke:"var(--line)"},svg);
+      el("rect",{x:bx0+lw,y:y,width:Math.max(2,bwid*r.val/mx),height:14,rx:3,fill:"var(--tau)",opacity:r.on?.9:.45},svg);
+      const tt=tx(svg,bx0+lw+bwid+6,y+11,r.txt,{class:"lbl","font-weight":r.on?"700":"400"});fitSize(tt,bw-lw-bwid-8,8.5);});
+    const tn=tx(svg,bx0,by0+3*(n?34:42)+6,"HV varie comme 1/d² : l'erreur relative compte double",{class:"lbl"});fitSize(tn,bw,8.5);
+    ro.innerHTML=nbsp("<span>d vraie = "+nf(dt,1)+" µm</span><span>d₁ lue = "+nf(d1,1)+" µm</span><span>d₂ lue = "+nf(d2,1)+" µm</span><span>HV lue = <b class='eps'>"+nf(HVm,0)+"</b></span><span>HV vraie = "+nf(HVt,0)+"</span><span>écart = <b class='"+(Math.abs(err)>3?"tau":"eps")+"'>"+(err>0?"+":"")+nf(err,1)+" %</b></span>");
+    let m;
+    if(prog!==null&&prog<1)m="Mise au point : les traits du réticule rejoignent les sommets du losange.";
+    else if(Math.abs(ea)<1e-9&&Math.abs(eb)<1e-9)m="✅ Traits sur les sommets : d = "+nf(dt,1)+" µm et HV = 0,189 1 × "+fmtF(F)+"/d² = "+nf(HVt,0)+". Décale un trait de 1 µm pour voir l'effet sur la dureté.";
+    else m=(Math.abs(err)>3?"⚠️ ":"")+"Une erreur moyenne de "+nf((ea+eb)/2,1)+" µm sur un losange de "+nf(dt,0)+" µm change HV de "+(err>0?"+":"")+nf(err,1)+" %."+(ch===0.1?" En microdureté, le losange est minuscule : chaque micromètre compte.":ch===10?" En HV10, le losange est grand : l'erreur reste faible.":"");
+    msg.innerHTML=nbsp(m);
+  }
+  const A=animate($("#m3play"),"▶ Faire la mise au point",3000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;sa.value=0;sb.value=0;draw();});
+  $("#m3play").addEventListener("click",()=>{e0=[+sa.value,+sb.value];},true);
+  $$("#m3c .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;ch=+b.dataset.k;setOn("#m3c",b);draw();}));
+  $$("#m3p .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;pk=b.dataset.k;setOn("#m3p",b);draw();}));
+  [sa,sb].forEach(x=>x.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M4 : le comparateur du Rockwell
+   ========================================================= */
+(function(){
+  const svg=$("#m4svg");if(!svg)return;
+  const ro=$("#m4r"),msg=$("#m4msg");
+  const MT={lai:{n:"le laiton recuit",hv:100},S355:{n:"l'acier S355",hv:165},QT:{n:"l'acier trempé-revenu",hv:302},M:{n:"l'acier trempé",hv:697}};
+  let sk="C",mk="QT",prog=null;
+  function hrOf(hv,s){if(s==="C"){let v=conv(hv,2);if(v===null)v=hv<156?(hv-156)*0.25:68+(hv-940)*0.02;return v;}
+    let v=conv(hv,3);if(v===null)v=hv<100?51-(100-hv)*0.5:120+(hv-595)*0.02;return v;}
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?600:330;setVB(svg,W,H);clear(svg);
+    const N=sk==="C"?100:130,S=0.002,hv=MT[mk].hv,HR=Math.round(hrOf(hv,sk)),h=Math.max(0.004,(N-HR)*S),he=sk==="C"?0.010:0.016;
+    const inR=sk==="C"?(HR>=20&&HR<=70):(HR>=10&&HR<=100),t=prog===null?10:10*Math.max(0,prog);
+    const dep=x=>{if(x<=1)return 0;if(x<=3){const u=(x-1)/2;return (0.97*h+he)*(1-Math.pow(1-u,2));}if(x<=6)return 0.97*h+he+0.03*h*(x-3)/3;if(x<=7)return h+he*(7-x);return h;};
+    const dn=dep(t);
+    /* cadran */
+    const pw=n?W-16:W*0.42,dcx=n?W*0.3:8+pw*0.3,dcy=n?84:84,dr=n?50:48;
+    tx(svg,8,18,"Le comparateur et la pointe",{class:"ttl"});
+    el("circle",{cx:dcx,cy:dcy,r:dr,fill:"var(--card)",stroke:"var(--ink)","stroke-width":2},svg);
+    for(let i=0;i<100;i+=5){const a=-Math.PI/2+2*Math.PI*i/100,r1=i%10?dr-5:dr-9;el("line",{x1:dcx+Math.cos(a)*r1,y1:dcy+Math.sin(a)*r1,x2:dcx+Math.cos(a)*dr,y2:dcy+Math.sin(a)*dr,stroke:"var(--ink)","stroke-width":i%10?1:1.6},svg);}
+    const an=-Math.PI/2+2*Math.PI*(dn/0.2);arrow(svg,dcx,dcy,dcx+Math.cos(an)*(dr-8),dcy+Math.sin(an)*(dr-8),"var(--eps)",2.4,8);
+    el("circle",{cx:dcx,cy:dcy,r:3.5,fill:"var(--ink)"},svg);
+    const td=tx(svg,dcx+dr+12,dcy-6,t<1?"zéro sous F₀":"enfoncement",{class:"lbl"});halo(td,svg);fitText(td,8,8+pw);
+    const tv=tx(svg,dcx+dr+12,dcy+14,nf(dn*1000,0)+" µm",{fill:"var(--eps)","font-weight":"700"});halo(tv,svg);
+    if(t>=7){const tr=tx(svg,dcx+dr+12,dcy+34,(sk==="C"?"HRC":"HRBW")+" = "+nf(HR,0),{fill:inR?"var(--eps)":"var(--tau)","font-weight":"700"});halo(tr,svg);}
+    /* pointe dans le métal */
+    const ys=n?190:186,sd=n?300:300,cx=8+pw/2,bot=n?320:H-12;
+    el("rect",{x:8,y:ys,width:pw,height:bot-ys,fill:"var(--paper-2)",stroke:"var(--line)"},svg);
+    const yb=ys+dn*sd,yr=ys+h*sd;
+    el("line",{x1:8,y1:yr,x2:8+pw,y2:yr,stroke:"var(--eps)","stroke-dasharray":"4 3",opacity:t>=7?1:.35},svg);
+    if(sk==="C"){const hw=Math.min(pw/2-6,(yb-ys+40)*Math.tan(Math.PI/3));
+      el("polygon",{points:cx+","+yb+" "+(cx-hw)+","+(yb-hw/Math.tan(Math.PI/3))+" "+(cx+hw)+","+(yb-hw/Math.tan(Math.PI/3)),fill:"var(--muted)",opacity:.35,stroke:"var(--ink)"},svg);}
+    else{const Rb=0.79375*sd;el("circle",{cx:cx,cy:yb-Rb,r:Rb,fill:"var(--muted)",opacity:.3,stroke:"var(--ink)"},svg);}
+    if(t>1){arrow(svg,cx+pw*0.32,ys-40,cx+pw*0.32,ys-10,"var(--frc)",2.4,9);const tf=tx(svg,cx+pw*0.32+6,ys-26,t<6?(t<=3?"F₀ + F₁":"maintien"):"F₀",{fill:"var(--frc)","font-weight":"700"});halo(tf,svg);fitText(tf,8,8+pw);}
+    const th=tx(svg,12,yr-5,"h rémanent",{class:"lbl",fill:"var(--eps)",opacity:t>=7?1:.4});halo(th,svg);
+    /* courbe enfoncement-temps */
+    const gx0=n?52:W*0.46+44,gx1=W-12,gy0=n?388:48,gy1=H-44,Dm=(h+he)*1.25;
+    tx(svg,n?8:W*0.46+8,n?352:18,"L'enfoncement au cours du cycle",{class:"ttl"});
+    const ax=axes(svg,gx0,gx1,gy0,gy1,0,10,-Dm,0,"temps (s)","enfoncement (µm)",2,niceStep(Dm,4),null,v=>nf(-v*1000,0));
+    [[0,1,"F₀"],[1,6,"F₀ + F₁"],[6,10,"F₀"]].forEach(p=>{el("rect",{x:ax.X(p[0]),y:gy0,width:ax.X(p[1])-ax.X(p[0]),height:gy1-gy0,fill:p[2]==="F₀"?"var(--paper-2)":"var(--frc)",opacity:p[2]==="F₀"?.5:.08},svg);
+      const tp=tx(svg,(ax.X(p[0])+ax.X(p[1]))/2,gy0+14,p[2],{class:"lbl","text-anchor":"middle",fill:"var(--frc)"});halo(tp,svg);});
+    const P=[];for(let i=0;i<=200;i++){const x=10*i/200;if(x<=t)P.push(ax.X(x).toFixed(1)+","+ax.Y(-dep(x)).toFixed(1));}
+    if(P.length>1)el("polyline",{points:P.join(" "),fill:"none",stroke:"var(--eps)","stroke-width":2.6},svg);
+    if(t>=7){el("line",{x1:ax.X(7),y1:ax.Y(-h),x2:gx1,y2:ax.Y(-h),stroke:"var(--eps)","stroke-dasharray":"4 3"},svg);
+      const tq=tx(svg,gx1-4,ax.Y(-h)-7,"h = "+nf(h,3)+" mm",{"text-anchor":"end",fill:"var(--eps)","font-weight":"700"});halo(tq,svg);
+      const te=tx(svg,ax.X(6.1),ax.Y(-h)+18,"retour élastique",{class:"lbl"});halo(te,svg);fitText(te,gx0,gx1);}
+    ro.innerHTML=nbsp("<span>"+(sk==="C"?"cône, F = 1 471 N":"bille 1,587 5 mm, F = 980,7 N")+"</span><span>F₀ = 98,07 N</span><span>h = <b class='eps'>"+nf(h,3)+" mm</b></span><span>"+(sk==="C"?"HRC":"HRBW")+" = "+N+" − h/0,002 = <b class='eps'>"+nf(HR,0)+"</b></span><span>épaisseur mini : "+nf((sk==="C"?10:15)*h,2)+" mm</span>");
+    let m;
+    if(prog!==null&&prog<1)m=t<1?"Précharge F₀ : la pointe se pose, le comparateur est remis à zéro.":t<6?"Charge additionnelle F₁ : la pointe s'enfonce, élastiquement et plastiquement.":"Retrait de F₁ : le métal rend sa part élastique ; on lit l'enfoncement rémanent sous F₀.";
+    else if(inR)m="✅ "+nf(HR,0)+" "+(sk==="C"?"HRC":"HRBW")+" pour "+MT[mk].n+" : h = "+nf(h,3)+" mm, dans la plage de l'échelle "+sk+(sk==="C"?" (20 à 70 HRC)":" (jusqu'à 100 HRBW)")+". Pièce d'au moins "+nf((sk==="C"?10:15)*h,2)+" mm d'épaisseur.";
+    else if(sk==="C")m="❌ "+nf(HR,0)+" HRC : hors de la plage de l'échelle C (20 à 70). Le cône s'enfonce trop dans "+MT[mk].n+" : on passe à l'échelle B ou au Vickers.";
+    else m="❌ "+nf(HR,0)+" HRBW : hors de la plage de l'échelle B (jusqu'à 100). Sur "+MT[mk].n+", la bille s'aplatit et ne s'enfonce presque plus : on passe à l'échelle C.";
+    msg.innerHTML=nbsp(m);
+  }
+  const A=animate($("#m4play"),"▶ Lancer le cycle",6000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;draw();});
+  $$("#m4s .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;sk=b.dataset.k;setOn("#m4s",b);draw();}));
+  $$("#m4m .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;mk=b.dataset.k;setOn("#m4m",b);draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M5 : l'interprète (échelles de dureté alignées)
+   ========================================================= */
+(function(){
+  const svg=$("#m5svg");if(!svg)return;
+  const sh=$("#m5h"),ro=$("#m5r"),msg=$("#m5msg");
+  let fam="acier",prog=null;
+  const SC=[{k:0,n:"HV",lo:100,hi:900,st:100,tk:[100,200,300,400,500,600,700,800,900]},{k:1,n:"HBW",lo:100,hi:739,st:100,vmax:650,tk:[100,200,300,400,500,600]},{k:2,n:"HRC",lo:0,hi:68,st:10,vmin:20,vmax:70,tk:[20,30,40,50,60]},{k:3,n:"HRBW",lo:60,hi:120,st:10,vmax:100,tk:[80,100]},{k:4,n:"Rm (MPa)",lo:503,hi:2206,st:250,tk:[500,750,1000,1250,1500,1750,2000]}];
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?400:330;setVB(svg,W,H);clear(svg);
+    const hv=prog===null?+sh.value:100+800*Math.max(0,prog),ok=fam==="acier";
+    $("#m5ho").textContent=nf(hv,0)+" HV";
+    const y0=44,y1=H-22,HV0=90,HV1=930,Y=v=>y1-(y1-y0)*(v-HV0)/(HV1-HV0);
+    const x0=n?34:50,x1=W-(n?44:70),dx=(x1-x0)/(SC.length-1);
+    tx(svg,8,18,ok?"Une même dureté, cinq langues":"Table non applicable à cette famille",{class:"ttl",fill:ok?"var(--ink)":"var(--tau)"});
+    const vals=[];
+    SC.forEach((sc,i)=>{const x=x0+i*dx;
+      const tt=tx(svg,x,y0-12,sc.n,{"text-anchor":"middle","font-weight":"700",fill:i===0?"var(--eps)":"var(--ink)"});if(n)tt.style.fontSize="11px";
+      const hvLo=i===0?sc.lo:convInv(sc.lo,sc.k),hvHi=i===0?sc.hi:convInv(sc.hi,sc.k),c1=sc.vmin!==undefined?convInv(sc.vmin,sc.k):null,c2=sc.vmax!==undefined?convInv(sc.vmax,sc.k):null,vLo=c1===null?hvLo:c1,vHi=c2===null?hvHi:c2;
+      const op=ok||i===0?1:.25;
+      el("line",{x1:x,y1:Y(hvLo),x2:x,y2:Y(hvHi),stroke:"var(--muted)","stroke-width":2,"stroke-dasharray":"4 4",opacity:op},svg);
+      el("line",{x1:x,y1:Y(Math.max(hvLo,vLo)),x2:x,y2:Y(Math.min(hvHi,vHi)),stroke:i===0?"var(--eps)":"var(--ink)","stroke-width":3,opacity:op},svg);
+      for(const v of sc.tk){const h=i===0?v:convInv(v,sc.k);if(h===null)continue;
+        el("line",{x1:x-4,y1:Y(h),x2:x,y2:Y(h),stroke:"var(--ink)",opacity:op},svg);
+        const tl=tx(svg,x-7,Y(h)+4,nf(v,0),{class:"lbl","text-anchor":"end",opacity:op});if(n)tl.style.fontSize="10px";}
+      const v=i===0?hv:conv(hv,sc.k),valid=v!==null&&(sc.vmin===undefined||v>=sc.vmin)&&(sc.vmax===undefined||v<=sc.vmax);
+      vals.push({n:sc.n,v:v,valid:valid});
+      if(v!==null&&(ok||i===0)){el("circle",{cx:x,cy:Y(hv),r:6,fill:valid?"var(--eps)":"var(--card)",stroke:valid?"var(--card)":"var(--tau)","stroke-width":2},svg);
+        const tv=tx(svg,x+9,Y(hv)-8,nf(v,0),{fill:valid?"var(--eps)":"var(--tau)","font-weight":"700"});halo(tv,svg);if(n)tv.style.fontSize="11px";fitText(tv,0,W);}});
+    el("line",{x1:x0-8,y1:Y(hv),x2:x1+8,y2:Y(hv),stroke:"var(--eps)","stroke-width":1.4,opacity:.6},svg);
+    const f=(i,u)=>vals[i].v===null?"—":nf(vals[i].v,0)+(u||"")+(vals[i].valid?"":" (hors plage)");
+    ro.innerHTML=nbsp(ok?"<span>"+nf(hv,0)+" HV</span><span>≈ <b class='eps'>"+f(1)+"</b> HBW</span><span>≈ <b class='eps'>"+f(2)+"</b> HRC</span><span>≈ <b class='eps'>"+f(3)+"</b> HRBW</span><span>R<sub>m</sub> ≈ <b class='sig'>"+f(4," MPa")+"</b></span><span>3,2 × HV = "+nf(3.2*hv,0)+" MPa</span>":"<span>"+nf(hv,0)+" HV</span><span>conversion : <b class='tau'>non applicable</b></span>");
+    let m;
+    if(prog!==null&&prog<1)m="La dureté monte : regarde chaque échelle entrer puis sortir de son domaine de validité.";
+    else if(!ok)m="❌ Cette table vaut pour les aciers non alliés et faiblement alliés. Un "+(fam==="inox"?"inox austénitique s'écrouit beaucoup plus":"alliage d'aluminium n'a ni la même élasticité ni le même écrouissage")+" : à même HV, ses autres duretés et sa résistance diffèrent. On donne la valeur mesurée, ou l'on utilise une table propre à la famille quand elle existe.";
+    else{const bad=vals.filter((v,i)=>i>0&&(v.v===null||!v.valid)).map(v=>v.n);
+      m="✅ "+nf(hv,0)+" HV se traduit, pour un acier non allié, par les valeurs du cadran."+(bad.length?" Hors plage ou hors table : "+bad.join(", ")+".":"")+(vals[4].v!==null?" Le repère 3,2 × HV donne "+nf(3.2*hv,0)+" MPa, contre "+nf(vals[4].v,0)+" MPa dans la table.":"");}
+    msg.innerHTML=nbsp(m);
+  }
+  const A=animate($("#m5play"),"▶ Balayer de 100 à 900 HV",7000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;sh.value=900;draw();});
+  $$("#m5f .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;fam=b.dataset.k;setOn("#m5f",b);draw();}));
+  sh.addEventListener("input",()=>{A.stop();prog=null;draw();});
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M6 : le profil de randonnée (filiation HV10)
+   ========================================================= */
+const FST={S235:{n:"S235",C:0.15,CE:0.33,MB:130,WM:200},S355:{n:"S355",C:0.18,CE:0.43,MB:165,WM:220},S460:{n:"S460 thermomécanique",C:0.10,CE:0.39,MB:190,WM:240},
+  S690:{n:"S690 trempé-revenu",C:0.16,CE:0.55,MB:270,WM:280,soft:true}};
+function fhvM(C){return 884*C*(1-0.3*C*C)+294;}
+function fpeak(st,t){const tc=Math.exp(1.0+11*(st.CE-0.35)),f=1/(1+Math.pow(t/tc,2.5)),rest=st.MB+60+200*(st.CE-0.30)-20*Math.log10(t/5);return {hv:f*fhvM(st.C)+(1-f)*rest,f:f};}
+function fprofile(st,t,pw){/* renvoie une fonction HV(x), x en mm depuis l'axe */
+  const w=6,L=3,pk0=fpeak(st,t).hv,pk=pw?st.MB+0.3*(pk0-st.MB):pk0,wm=pw?st.WM-15:st.WM;
+  return x=>{const ax=Math.abs(x);if(ax<=w)return wm;const u=(ax-w)/L,dip=st.soft?0.18*st.MB*Math.exp(-Math.pow((u-0.95)/0.15,2)):0;
+    if(u<=1){const g=u<=0.3?1:0.5*(1+Math.cos(Math.PI*(u-0.3)/0.7));return st.MB+(pk-st.MB)*g-dip;}return st.MB-dip;};}
+const FPTS=(()=>{const w=6,P=[0,2,4,w+0.4,w+1.4,w+2.4,w+3.4,w+5.5,w+8.5,w+11.5,w+14];const o=[];P.forEach(x=>{o.push(x);if(x>0)o.push(-x);});return o.sort((a,b)=>a-b);})();
+(function(){
+  const svg=$("#m6svg");if(!svg)return;
+  const st6=$("#m6t"),ro=$("#m6r"),msg=$("#m6msg");
+  let sk="S355",pw=false,lim="qmos",prog=null;
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?520:340;setVB(svg,W,H);clear(svg);
+    const t=prog===null?+st6.value:2+38*Math.max(0,prog),st=FST[sk],hvf=fprofile(st,t,pw),thr=lim==="h2s"?248:(pw?320:380);
+    $("#m6to").textContent=nf(t,1)+" s";
+    /* coupe */
+    const X0=-21,X1=21,gl=46,sx=(W-gl-12)/(X1-X0),cx=gl+(0-X0)*sx,ys=n?48:44,Z=6,sz=Math.min(sx,(n?150:110)/Z);
+    tx(svg,8,18,"Coupe de la soudure ("+st.n+")",{class:"ttl"});
+    const X=x=>gl+(x-X0)*sx,Yz=z=>ys+z*sz;
+    el("rect",{x:X(X0),y:ys,width:(X1-X0)*sx,height:Z*sz,fill:"var(--paper-2)",stroke:"var(--line)"},svg);
+    const half=z=>7-0.577*z;/* demi-largeur du métal fondu à la profondeur z */
+    const zP=[];for(let z=0;z<=Z;z+=0.5)zP.push(z);
+    const haz=zP.map(z=>[X(-(half(z)+3)),Yz(z)]).concat(zP.slice().reverse().map(z=>[X(half(z)+3),Yz(z)]));
+    el("polygon",{points:haz.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" "),fill:"var(--gam)",opacity:.25},svg);
+    const wm=zP.map(z=>[X(-half(z)),Yz(z)]).concat(zP.slice().reverse().map(z=>[X(half(z)),Yz(z)]));
+    el("polygon",{points:wm.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" "),fill:"var(--card)",stroke:"var(--ink)","stroke-width":1.2},svg);
+    el("path",{d:"M"+X(-7.3)+","+ys+" Q"+cx+","+(ys-12)+" "+X(7.3)+","+ys,fill:"var(--card)",stroke:"var(--ink)","stroke-width":1.2},svg);
+    const tz=tx(svg,X(-(half(0.9)+1.5)),Yz(0.9)+4,"ZAT",{class:"lbl",fill:"var(--gam)","text-anchor":"middle","font-weight":"700"});halo(tz,svg);
+    const tw=tx(svg,cx,Yz(4.2),"métal fondu",{class:"lbl","text-anchor":"middle"});halo(tw,svg);fitSize(tw,X(half(4.2))-X(-half(4.2))-4,8.5);
+    const tm=tx(svg,X(16),Yz(4.6),"métal de base",{class:"lbl","text-anchor":"middle"});halo(tm,svg);fitText(tm,gl,W-4);
+    const pts=FPTS.map(x=>({x:x,hv:hvf(x)}));
+    pts.forEach(p=>{const bad=p.hv>thr;el("polygon",{points:X(p.x)+","+(Yz(2)-3.5)+" "+(X(p.x)+3.5)+","+Yz(2)+" "+X(p.x)+","+(Yz(2)+3.5)+" "+(X(p.x)-3.5)+","+Yz(2),fill:bad?"var(--tau)":"var(--eps)"},svg);});
+    const t2=tx(svg,X(X1)-4,Yz(2)-6,"ligne à 2 mm",{class:"lbl","text-anchor":"end"});halo(t2,svg);
+    /* profil */
+    const gy0=n?ys+Z*sz+52:ys+Z*sz+30,gy1=H-40,ymx=Math.max(450,fpeak(st,2).hv+30);
+    const ax=axes(svg,X(X0),X(X1),gy0,gy1,X0,X1,100,ymx,"position (mm)","HV10",niceStep(X1-X0,n?4:8),100);
+    el("line",{x1:X(X0),y1:ax.Y(thr),x2:X(X1),y2:ax.Y(thr),stroke:"var(--tau)","stroke-width":1.6,"stroke-dasharray":"6 4"},svg);
+    const tl=tx(svg,X(X1)-4,ax.Y(thr)-6,"seuil "+thr+" HV10",{class:"lbl","text-anchor":"end",fill:"var(--tau)"});halo(tl,svg);
+    const P=[];for(let i=0;i<=400;i++){const x=X0+(X1-X0)*i/400;P.push(X(x).toFixed(1)+","+ax.Y(hvf(x)).toFixed(1));}
+    el("polyline",{points:P.join(" "),fill:"none",stroke:"var(--muted)","stroke-width":1.4},svg);
+    pts.forEach(p=>el("circle",{cx:X(p.x),cy:ax.Y(p.hv),r:4.5,fill:p.hv>thr?"var(--tau)":"var(--eps)",stroke:"var(--card)","stroke-width":1.2},svg));
+    const mx=pts.reduce((a,b)=>b.hv>a.hv?b:a),pk=fpeak(st,t);
+    const tp=tx(svg,X(mx.x)+(mx.x<0?-8:8),ax.Y(mx.hv)-8,nf(mx.hv,0),{"text-anchor":mx.x<0?"end":"start",fill:mx.hv>thr?"var(--tau)":"var(--eps)","font-weight":"700"});halo(tp,svg);
+    const minMB=Math.min.apply(null,pts.filter(p=>Math.abs(p.x)>6).map(p=>p.hv));
+    ro.innerHTML=nbsp("<span>HV max = <b class='"+(mx.hv>thr?"tau":"eps")+"'>"+nf(mx.hv,0)+" HV10</b></span><span>"+(Math.abs(mx.x)<=6?"dans le métal fondu":"à "+nf(Math.abs(mx.x)-6,1)+" mm de la ligne de fusion")+"</span><span>métal de base "+nf(st.MB,0)+"</span><span>métal fondu "+nf(hvf(0),0)+"</span><span>martensite ≈ "+nf(pk.f*100,0)+" %</span><span>seuil "+thr+" HV10</span>");
+    let m;
+    if(prog!==null&&prog<1)m="Le refroidissement ralentit : la part de martensite de la zone affectée baisse, et le pic avec elle.";
+    else if(mx.hv>thr)m="❌ "+nf(mx.hv,0)+" HV10 "+(Math.abs(mx.x)<=6?"dans le métal fondu":"à "+nf(Math.abs(mx.x)-6,1)+" mm de la ligne de fusion")+" : au-dessus du seuil de "+thr+" HV10."+(pw?"":" Remèdes : préchauffer ou augmenter l'apport de chaleur (t8/5 plus long), choisir un acier à plus faible carbone équivalent, ou traiter thermiquement après soudage.");
+    else m="✅ Dureté maximale de "+nf(mx.hv,0)+" HV10 ("+(Math.abs(mx.x)<=6?"dans le métal fondu":"dans la zone affectée")+"), sous le seuil de "+thr+" HV10 (marge "+nf(thr-mx.hv,0)+" HV).";
+    if(!(prog!==null&&prog<1)){
+      if(st.soft)m+=" Remarque la zone adoucie à la limite externe de la zone affectée ("+nf(minMB,0)+" HV au lieu de "+nf(st.MB,0)+") : un acier trempé-revenu y perd une partie de son revenu. Cet acier relève d'un autre groupe de l'ISO/TR 15608, qui a son propre seuil.";
+      if(pw)m+=" Après traitement thermique, la martensite est revenue : le pic s'effondre.";}
+    msg.innerHTML=nbsp(m.replace("t8/5","t<sub>8/5</sub>"));
+  }
+  const A=animate($("#m6play"),"▶ Ralentir le refroidissement",7000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;st6.value=40;draw();});
+  $$("#m6s .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;sk=b.dataset.k;setOn("#m6s",b);draw();}));
+  $$("#m6e .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;pw=b.dataset.k==="pwht";setOn("#m6e",b);draw();}));
+  $$("#m6l .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;lim=b.dataset.k;setOn("#m6l",b);draw();}));
+  st6.addEventListener("input",()=>{A.stop();prog=null;draw();});
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   Quiz, check-list, sommaire, thème
+   ========================================================= */
+(function(){
+  const box=$("#quiz");if(!box)return;
+  const Q=[
+    {q:"La dureté d'un métal, c'est sa résistance :",o:["à la rupture fragile","à la pénétration permanente d'un corps plus dur","à la corrosion","au choc"],c:1,e:"La dureté mesure la résistance à une <b>pénétration permanente</b> : c'est la plasticité confinée sous le pénétrateur qui laisse la trace."},
+    {q:"Sous une pyramide Vickers, la pression moyenne vaut environ :",o:["la limite d'élasticité","la moitié de la contrainte d'écoulement","trois fois la contrainte d'écoulement","dix fois la résistance à la traction"],c:2,e:"Relation de Tabor : <b>p ≈ 3·σ</b>. Le métal plastifié sous la pointe est retenu par le métal voisin (confinement)."},
+    {q:"En Brinell, le diamètre de l'empreinte doit rester entre :",o:["0,1·D et 0,9·D","0,24·D et 0,6·D","0,5·D et D","d₁ et d₂"],c:1,e:"Entre <b>0,24·D et 0,6·D</b> ; sinon, on change de rapport F/D²."},
+    {q:"Pour un acier, l'essai Brinell se fait avec F/D² égal à :",o:["1","5","10","30"],c:3,e:"<b>F/D² = 30</b> : 3 000 kgf avec la bille de 10 mm, 187,5 kgf avec celle de 2,5 mm. La même valeur garde les essais comparables."},
+    {q:"HV10 signifie un essai Vickers sous :",o:["10 N","10 kgf, soit 98,07 N","10 secondes","10 µm de diagonale"],c:1,e:"Le chiffre est la charge en kilogrammes-force : <b>10 kgf = 98,07 N</b>. C'est l'essai de référence des filiations de soudures."},
+    {q:"Une erreur de lecture de 1 µm sur la diagonale pèse le plus :",o:["en HV10","en HV1","en HV0,1","pareil pour toutes les charges"],c:2,e:"En <b>HV0,1</b>, le losange ne mesure que quelques dizaines de micromètres : 1 µm d'erreur fausse HV de 5 à 10 %, contre moins de 1 % en HV10."},
+    {q:"Distance minimale entre centres de deux empreintes Vickers sur un acier :",o:["1·d","1,5·d","3·d","10·d"],c:2,e:"<b>3·d</b> pour l'acier et le cuivre (6·d pour les métaux légers) : l'empreinte écrouit le métal autour d'elle."},
+    {q:"Échelle C, enfoncement rémanent 0,100 mm. La dureté vaut :",o:["10 HRC","50 HRC","80 HRC","100 HRC"],c:1,e:"<b>HRC = 100 − 0,100/0,002 = 50</b>. Une unité Rockwell vaut 2 µm de profondeur."},
+    {q:"L'échelle Rockwell C est valable :",o:["de 0 à 100 HRC","de 20 à 70 HRC","au-dessus de 100 HRC","sur tous les métaux"],c:1,e:"De <b>20 à 70 HRC</b>. Pour un acier doux, on passe en échelle B ou en Vickers."},
+    {q:"La limite de 248 HV10 des milieux H₂S correspond à :",o:["22 HRC","35 HRC","50 HRC","100 HRBW"],c:0,e:"<b>248 HV ≈ 22 HRC</b> : c'est la même limite, écrite en Vickers pour les soudures et en Rockwell C pour les produits."},
+    {q:"Dans une filiation selon l'ISO 9015-1, près de la ligne de fusion d'un acier qui durcit, on place :",o:["aucune empreinte","deux empreintes à 0,5 mm au plus de la ligne de fusion","une empreinte au centre du cordon","des empreintes tous les 5 mm"],c:1,e:"<b>Deux empreintes supplémentaires à 0,5 mm au plus</b> de la ligne de fusion : c'est là que se trouve le pic de dureté."},
+    {q:"Une QMOS en S355 donne 395 HV10 dans la zone affectée. Le remède le plus direct :",o:["refroidir la pièce à l'eau","souder plus vite avec moins d'énergie","préchauffer pour allonger le t8/5","prendre un métal d'apport plus chargé en carbone"],c:2,e:"<b>Préchauffer</b> allonge le refroidissement à énergie égale : moins de martensite, pic plus bas. Refroidir plus vite ferait l'inverse."}
+  ];
+  let score=0,done=0;const sc=$("#qzScore");
+  function upd(){let t="Score : "+score+" / "+Q.length;if(done===Q.length)t+=score>=10?"  ·  🎉 prêt pour le cours 3":score>=7?"  ·  relis les explications":"  ·  refais un tour des chapitres";sc.textContent=t;}
+  function render(){box.innerHTML="";score=0;done=0;
+    Q.forEach((it,n)=>{const d=document.createElement("div");d.className="qz";
+      d.innerHTML='<p class="qz-q"><b>'+(n+1)+".</b> "+it.q+'</p><div class="qz-o"></div><div class="qz-e" hidden></div>';
+      const o=d.querySelector(".qz-o"),ex=d.querySelector(".qz-e");let answered=false;
+      it.o.forEach((txt,i)=>{const b=document.createElement("button");b.type="button";b.className="qz-b";b.innerHTML=String.fromCharCode(65+i)+". "+txt;
+        b.addEventListener("click",()=>{if(answered)return;answered=true;done++;const ok=i===it.c;if(ok)score++;b.classList.add(ok?"ok":"ko");o.children[it.c].classList.add("ok");ex.hidden=false;ex.innerHTML=(ok?"✅ <b>Bien joué.</b> ":"❌ <b>Pas tout à fait.</b> ")+it.e;upd();});
+        o.appendChild(b);});
+      box.appendChild(d);});
+    upd();}
+  $("#qzReset").addEventListener("click",render);render();
+})();
+(function(){
+  const boxes=$$("#checklist input[type=checkbox]"),msg=$("#checkMsg"),KEY="essais-cours2-check";
+  if(!boxes.length)return;
+  let saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||"[]")||[];}catch(e){saved=[];}
+  boxes.forEach(b=>{b.checked=saved.indexOf(b.dataset.c)>=0;});
+  function upd(){const on=boxes.filter(b=>b.checked).map(b=>b.dataset.c);try{localStorage.setItem(KEY,JSON.stringify(on));}catch(e){}
+    msg.innerHTML=on.length===boxes.length?"🎉 <b>Tout est coché : tu es prêt pour le cours 3, les examens métallographiques !</b>":on.length+" / "+boxes.length+" : reviens sur les points non cochés (les manipulations sont faites pour ça).";}
+  boxes.forEach(b=>b.addEventListener("change",upd));upd();
+})();
+
+(function(){
+  const links=$$(".toc a"),tin=$(".toc-in");
+  if(!links.length||!("IntersectionObserver" in window))return;
+  const map={};links.forEach(a=>{map[a.getAttribute("href").slice(1)]=a;});
+  const obs=new IntersectionObserver(ents=>{ents.forEach(en=>{if(!en.isIntersecting)return;const a=map[en.target.id];if(!a)return;
+    links.forEach(l=>l.classList.toggle("on",l===a));
+    if(tin){const tgt=a.offsetLeft-tin.clientWidth/2+a.offsetWidth/2;try{tin.scrollTo({left:tgt,behavior:RM?"auto":"smooth"});}catch(e){tin.scrollLeft=tgt;}}});},{rootMargin:"-45% 0px -50% 0px"});
+  Object.keys(map).forEach(id=>{const s=document.getElementById(id);if(s)obs.observe(s);});
+})();
+(function(){
+  const b=$("#themeBtn");if(!b)return;const KEY="essais-theme",root=document.documentElement;
+  const lab={auto:"◐ Thème : automatique",light:"☀️ Thème : clair",dark:"🌙 Thème : sombre"};
+  let t="auto";try{t=localStorage.getItem(KEY)||"auto";}catch(e){}
+  function apply(){if(t==="auto")root.removeAttribute("data-theme");else root.setAttribute("data-theme",t);b.textContent=lab[t];}
+  b.addEventListener("click",()=>{t=t==="auto"?"light":t==="light"?"dark":"auto";try{localStorage.setItem(KEY,t);}catch(e){}apply();});
+  apply();
+})();
+})();
+</script>
+</body>
+</html>

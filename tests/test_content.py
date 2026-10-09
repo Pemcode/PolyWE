@@ -299,8 +299,9 @@ def test_electrode_enrobee_series_is_reachable_and_preserves_sources(tmp_path):
     urls = ["ElectrodeEnrobee/01-procede-111-poste-soudage.html",
             "ElectrodeEnrobee/02-arc-reglages.html",
             "ElectrodeEnrobee/03-electrodes-enrobages-etuvage.html",
-            "ElectrodeEnrobee/04-preparer-souder-111.html"]
-    assert all((output / url).is_file() for url in urls), "Les quatre cours d’électrode enrobée doivent être publiés."
+            "ElectrodeEnrobee/04-preparer-souder-111.html",
+            "ElectrodeEnrobee/05-qualite-defauts-securite.html"]
+    assert all((output / url).is_file() for url in urls), "Les cinq cours d’électrode enrobée doivent être publiés."
 
     def page(path):
         parsed = CourseHTML()
@@ -333,10 +334,10 @@ def test_electrode_enrobee_series_is_reachable_and_preserves_sources(tmp_path):
     for previous, following in zip(urls, urls[1:]):
         assert Path(following).name in page(previous).links
         assert Path(previous).name in page(following).links
-    for n, prerequisites in ((2, [1]), (3, [1, 2]), (4, [2, 3])):
+    for n, prerequisites in ((2, [1]), (3, [1, 2]), (4, [2, 3]), (5, [1, 2, 3, 4])):
         for prerequisite in prerequisites:
             assert Path(urls[prerequisite-1]).name in page(urls[n-1]).links
-    assert not any(row["cours_id"] == "electrode-enrobee-05" for row in index)
+    assert not any(row["cours_id"] == "electrode-enrobee-06" for row in index)
     assert not (output / "Cours").exists()
 
 
@@ -345,8 +346,9 @@ def test_arc_submerge_series_is_reachable_and_preserves_sources(tmp_path):
     output = build(tmp_path)
     urls = ["ArcSubmerge/01-procede-12-installation.html",
             "ArcSubmerge/02-flux-fils-metal-depose.html",
-            "ArcSubmerge/03-parametres-forme-cordon.html"]
-    assert all((output / url).is_file() for url in urls), "Les trois cours d’arc submergé doivent être publiés."
+            "ArcSubmerge/03-parametres-forme-cordon.html",
+            "ArcSubmerge/04-preparer-varier-controler.html"]
+    assert all((output / url).is_file() for url in urls), "Les quatre cours d’arc submergé doivent être publiés."
 
     def page(path):
         parsed = CourseHTML()
@@ -385,5 +387,52 @@ def test_arc_submerge_series_is_reachable_and_preserves_sources(tmp_path):
         assert Path(previous).name in page(following).links
     assert courses["arc-submerge-02"]["prerequis_conseilles"] == ["arc-submerge-01"]
     assert {"arc-submerge-01", "arc-submerge-02"} <= set(courses["arc-submerge-03"]["prerequis_conseilles"])
-    assert not any(row["cours_id"] == "arc-submerge-04" for row in index)
+    assert not any(row["cours_id"] == "arc-submerge-05" for row in index)
+    assert not (output / "Cours").exists()
+
+
+def test_essais_series_links_materials_and_weld_testing_without_losing_existing_supports(tmp_path):
+    data, plan = copy_real_project(tmp_path, planning=True)
+    output = build(tmp_path)
+    urls = ["Essais/01-traction-courbe-grandeurs.html",
+            "Essais/02-durete-empreinte-metal.html",
+            "Essais/03-examens-metallographiques.html"]
+    assert all((output / url).is_file() for url in urls), "Les trois cours d’essais doivent être publiés."
+
+    def page(path):
+        parsed = CourseHTML()
+        parsed.feed((output / path).read_text(encoding="utf-8"))
+        return parsed
+
+    subject = "matieres/essais.html"
+    assert subject in page("index.html").links
+    courses = {c["id"]: c for c in data["cours"]}
+    topics = {t["id"]: t for t in plan["sujets"]}
+    materials = topics["2-23-essais-des-materiaux"]["supports"]
+    welds = topics["2-23-essais-des-soudures"]["supports"]
+    assert {"cours": "rupture-02"} in materials
+    assert {"cours": "rupture-02", "ancre": "c6"} in welds
+    index = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    for n, url in enumerate(urls, 1):
+        ident = f"essais-{n:02}"
+        assert "../" + url in page(subject).links
+        assert url in page("planning.html").links
+        assert url + "#c6" in page("planning.html").links
+        assert {"cours": ident} in materials
+        assert {"cours": ident, "ancre": "c6"} in welds
+        for anchor in ("c1", "c2", "c3", "c4", "c5", "c6"):
+            assert any(row["cours_id"] == ident and row["url"] == url + "#" + anchor for row in index)
+        source = (tmp_path / courses[ident]["fichier"]).read_text(encoding="utf-8-sig")
+        parsed = CourseHTML()
+        parsed.feed(source)
+        assert parsed.ids <= page(url).ids
+        scripts = re.findall(r"<script\b[^>]*>.*?</script>", source, flags=re.S)
+        published = (output / url).read_text(encoding="utf-8")
+        assert scripts and all(script in published for script in scripts)
+        for prerequisite in courses[ident]["prerequis_conseilles"]:
+            assert link(url, courses[prerequisite]["url"]) in page(url).links
+    for previous, following in zip(urls, urls[1:]):
+        assert Path(following).name in page(previous).links
+        assert Path(previous).name in page(following).links
+    assert "electrode-enrobee-05" in courses["essais-03"]["prerequis_conseilles"]
     assert not (output / "Cours").exists()

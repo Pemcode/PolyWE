@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Essais, cours 1 : l'essai de traction, de la courbe aux grandeurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F6F9; --paper-2:#E6ECF2; --card:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#C5CFD9;
+  --grid:rgba(40,90,160,.075);
+  --sig:#CF2438; --tau:#8A34B6; --eps:#1B5ED3; --gam:#06849A; --frc:#D46A00; --mat:#26844A; --weld:#9A5B12;
+  --ok:#26844A; --warn:#B86E00; --bad:#C62828;
+  --lv2:#E4EBF2; --hl:#FFF3B0;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-head:"Barlow Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+  --font-math:"STIX Two Text","Cambria Math","Cambria","Times New Roman",serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+    --grid:rgba(120,160,220,.07);
+    --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+    --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+  --grid:rgba(120,160,220,.07);
+  --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+  --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+  color-scheme: dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;color:var(--ink);font-family:var(--font-body);font-size:17.5px;line-height:1.62;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;overflow-x:hidden;
+}
+img,svg{max-width:100%}
+.wrap{max-width:800px;margin:0 auto;padding:0 20px}
+.wide{max-width:980px}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.1;margin:0}
+h3{font-size:1.65rem;font-weight:600;margin:2rem 0 .6rem}
+h4{font-size:1.3rem;font-weight:600;margin:1.4rem 0 .4rem}
+p{margin:.7em 0}
+a{color:var(--eps)}
+b,strong{font-weight:700}
+small{font-size:.8em}
+sub{font-size:.72em}
+.m{font-family:var(--font-math);font-size:1.08em;white-space:nowrap}
+.sig{color:var(--sig)} .tau{color:var(--tau)} .eps{color:var(--eps)} .gam{color:var(--gam)} .frc{color:var(--frc)} .mat{color:var(--mat)} .mut{color:var(--muted)} .wcol{color:var(--weld)}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .12em;line-height:1.1}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .2em .08em}
+.frac>span:last-child{padding:.08em .2em 0}
+ul,ol{padding-left:1.4em}
+li{margin:.25em 0}
+
+/* ---------- en-tête ---------- */
+.hero{padding:34px 0 10px}
+.title-block{border:2.5px solid var(--ink);background:var(--card);display:grid;grid-template-columns:1fr 300px}
+.tb-main{padding:22px 24px;border-right:2.5px solid var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.tb-series{margin:0 0 .5rem;color:var(--muted);font-size:.95rem}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:700;letter-spacing:-.01em}
+.tb-cells{display:grid;grid-template-rows:repeat(4,auto)}
+.tb-cells>div{padding:9px 16px;border-bottom:1.5px solid var(--ink);display:flex;flex-direction:column;justify-content:center}
+.tb-cells>div:last-child{border-bottom:0}
+.tb-cells small{color:var(--muted);font-size:.78rem}
+.tb-cells b{font-family:var(--font-head);font-size:1.25rem;font-weight:600;line-height:1.15}
+.lede{font-size:1.13rem;max-width:760px;margin:1.2rem 0}
+.theme-btn{align-self:flex-start;font-family:var(--font-body);font-size:.85rem;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
+@media (max-width:760px){.title-block{grid-template-columns:1fr}.tb-main{border-right:0;border-bottom:2.5px solid var(--ink)}.tb-cells{grid-template-rows:none;grid-template-columns:1fr 1fr}.tb-cells>div:nth-child(odd){border-right:1.5px solid var(--ink)}.tb-cells>div:nth-child(3){border-bottom:0}}
+@media (max-width:420px){.tb-cells{grid-template-columns:1fr}.tb-cells>div:nth-child(odd){border-right:0}.tb-cells>div:nth-child(3){border-bottom:1.5px solid var(--ink)}}
+
+/* code couleur */
+.cc{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin:1rem 0 .4rem}
+.cc-box{background:var(--card);border:2px solid var(--line);padding:12px 14px;border-radius:4px}
+.cc-cause{border-color:var(--sig)} .cc-link{border-color:var(--mat)} .cc-eff{border-color:var(--eps)}
+.cc-box small{display:block;color:var(--muted);font-size:.82rem;line-height:1.3}
+.cc-syms{font-family:var(--font-math);font-size:1.7rem;line-height:1.25;display:flex;flex-wrap:wrap;gap:.1em .45em;margin:.2rem 0}
+.cc-box p{margin:0;font-size:.9rem;line-height:1.35}
+.cc-arrow{align-self:center;font-size:1.8rem;color:var(--muted)}
+@media (max-width:700px){.cc{grid-template-columns:1fr}.cc-arrow{transform:rotate(90deg);justify-self:center;line-height:1}}
+.cc-more{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.5rem 0}
+.cc-more>div{border:2px solid var(--line);background:var(--card);border-radius:4px;padding:6px 10px;font-size:.9rem}
+@media (max-width:640px){.cc-more{grid-template-columns:1fr}}
+
+/* ---------- sommaire ---------- */
+.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1.5px solid var(--line);padding-top:env(safe-area-inset-top,0px);margin-top:18px}
+.toc-in{display:flex;gap:6px;overflow-x:auto;padding:9px 20px;max-width:980px;margin:0 auto;scrollbar-width:thin}
+.toc a{flex:none;text-decoration:none;color:var(--ink);font-size:.88rem;padding:4px 11px;border:1.5px solid var(--line);border-radius:999px;background:var(--card);white-space:nowrap}
+.toc a.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.toc a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--eps);outline-offset:2px}
+
+/* ---------- sections ---------- */
+section.chap{padding:46px 0 10px}
+.cartouche{display:grid;grid-template-columns:86px 1fr 250px;border:2.5px solid var(--ink);background:var(--card);margin-bottom:1.4rem}
+.c-num{font-family:var(--font-head);font-size:3.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;border-right:2.5px solid var(--ink)}
+.c-title{padding:14px 18px;border-right:2.5px solid var(--ink)}
+.c-title h2{font-size:2.1rem;font-weight:700}
+.c-title p{margin:.25rem 0 0;color:var(--muted)}
+.c-img{padding:12px 14px;display:flex;gap:12px;align-items:center;background:var(--paper-2)}
+.c-img .ico{font-size:2.3rem;line-height:1}
+.c-img small{display:block;color:var(--muted);font-size:.78rem}
+.c-img span{font-size:.95rem;line-height:1.3}
+@media (max-width:700px){.cartouche{grid-template-columns:64px 1fr}.c-num{font-size:2.6rem}.c-title{border-right:0}.c-img{grid-column:1/-1;border-top:2px solid var(--ink)}.c-title h2{font-size:1.7rem}}
+
+/* niveaux */
+.lv{margin:1.2rem 0;padding:6px 22px 14px;border-radius:4px}
+.lv1{background:var(--card);border:2px solid var(--ink)}
+.lv2{background:var(--lv2);border-left:6px solid var(--ink)}
+.lv-h{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-family:var(--font-head);font-size:1.35rem;font-weight:600;margin:10px 0 4px}
+.lv-h .tag{font-size:.95rem;font-family:var(--font-body);font-weight:400;color:var(--muted)}
+@media (max-width:520px){.lv{padding:6px 14px 12px}}
+
+/* formules et encadrés */
+.fx{margin:1.1rem auto;background:var(--card);border:2.5px solid var(--ink);padding:14px 18px;max-width:600px;text-align:center;border-radius:3px;overflow-x:auto}
+.fx .big{font-family:var(--font-math);font-size:1.9rem;line-height:1.4}
+.fx .cap{font-size:.85rem;color:var(--muted);margin:.3rem 0 0}
+.fx .row{display:flex;flex-wrap:wrap;justify-content:center;gap:.2em 1.4em}
+.syms{margin:.6rem 0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;align-items:baseline}
+.syms dt{font-family:var(--font-math);font-size:1.25rem;text-align:right;white-space:nowrap}
+.syms dd{margin:0}
+.def{margin:.9rem 0;padding:.5rem .9rem;border-left:3px dotted var(--muted);font-size:.96rem;background:color-mix(in srgb,var(--card) 60%,transparent)}
+.def>b:first-child{font-family:var(--font-head);font-size:1.08rem;font-weight:600}
+.tip{margin:1rem 0;padding:.7rem 1rem;border:1.5px dashed var(--mat);border-radius:4px;font-size:.97rem}
+.warn{margin:1rem 0;padding:.7rem 1rem;border:2px solid var(--bad);border-radius:4px;font-size:.97rem;background:color-mix(in srgb,var(--bad) 7%,transparent)}
+.mnemo{margin:1rem 0;padding:.7rem 1rem;background:var(--hl);border-radius:4px;font-size:.98rem}
+.fun{margin:1.2rem 0;padding:.8rem 1rem;border:2px dashed var(--muted);border-radius:10px;background:var(--card);font-size:.98rem}
+.fun-h{display:block;margin-bottom:.35rem;font-family:var(--font-head);font-size:1.15rem;font-weight:600;letter-spacing:.02em}
+.meta{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--frc);border-radius:4px;background:color-mix(in srgb,var(--frc) 6%,transparent)}
+.weld{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--weld);border-radius:4px;background:color-mix(in srgb,var(--weld) 7%,transparent)}
+.weld>b:first-child{font-family:var(--font-head);font-size:1.15rem;font-weight:600;color:var(--weld)}
+.hp{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:9px;background:var(--weld);color:var(--card);vertical-align:middle;margin-left:4px;white-space:nowrap}
+.recall{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
+.recall>div{background:var(--card);border:1.5px solid var(--line);border-radius:4px;padding:8px 12px;font-size:.92rem}
+.recall .f{font-family:var(--font-math);font-size:1.2rem;margin-bottom:.2rem}
+@media (max-width:640px){.recall{grid-template-columns:1fr}}
+.hist{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1rem 0}
+.hist>div{background:var(--card);border:1.5px solid var(--weld);border-radius:4px;padding:8px 12px;font-size:.93rem}
+.hist .yr{font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--weld);line-height:1}
+@media (max-width:720px){.hist{grid-template-columns:1fr}}
+
+/* manipulations */
+.lab{background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:14px 16px 12px;margin:1.4rem 0}
+.lab-h{font-family:var(--font-head);font-size:1.3rem;font-weight:600;margin:0 0 .2rem}
+.lab-sub{margin:0 0 .6rem;color:var(--muted);font-size:.92rem}
+.lab svg{display:block;width:100%;height:auto;color:var(--ink);font-family:var(--font-body);touch-action:pan-y}
+.ctrl{display:grid;grid-template-columns:minmax(110px,auto) 1fr minmax(92px,auto);gap:4px 12px;align-items:center;margin:.5rem 0}
+.ctrl label{font-size:.95rem}
+.ctrl output{font-family:var(--font-math);font-size:1.08rem;text-align:right;white-space:nowrap}
+@media (max-width:520px){.ctrl{grid-template-columns:1fr auto}.ctrl input[type=range]{grid-column:1/-1;grid-row:2}}
+input[type=range]{width:100%;accent-color:var(--ink);height:28px;margin:0}
+input.r-sig{accent-color:var(--sig)} input.r-tau{accent-color:var(--tau)} input.r-frc{accent-color:var(--frc)} input.r-mat{accent-color:var(--mat)} input.r-eps{accent-color:var(--eps)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0}
+.btn{font-family:var(--font-body);font-size:.9rem;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 13px;cursor:pointer;line-height:1.3}
+.btn:hover{background:var(--paper-2)}
+.btn.on{background:var(--ink);color:var(--paper)}
+.btn.play{border-color:var(--eps);color:var(--eps);font-weight:700}
+.btn:disabled{opacity:.45;cursor:default}
+.readout{font-family:var(--font-math);font-size:1.08rem;background:var(--paper-2);border-radius:4px;padding:.5rem .8rem;margin:.5rem 0;overflow-x:auto;display:flex;flex-wrap:wrap;gap:.2em 1.3em}
+.readout>span{white-space:nowrap}
+.status{font-size:.97rem;margin:.5rem 0;padding:.5rem .8rem;border-left:4px solid var(--eps);background:color-mix(in srgb,var(--eps) 6%,transparent);border-radius:0 4px 4px 0;min-height:2.6em}
+.radios{display:flex;flex-wrap:wrap;gap:6px 14px;margin:.4rem 0;font-size:.95rem}
+.radios label{display:inline-block;cursor:pointer}
+.radios input{margin:0 6px 0 0;vertical-align:middle}
+
+/* svg */
+svg text{fill:currentColor;font-size:13px}
+svg .lbl{font-size:12.5px;fill:var(--muted)}
+svg .mth{font-family:var(--font-math);font-size:16px}
+svg .ttl{font-family:var(--font-head);font-size:15px;font-weight:600}
+svg .axis{stroke:var(--ink);stroke-width:1.4;fill:none}
+svg .tick{stroke:var(--muted);stroke-width:1}
+svg .gridbg{stroke:var(--line);stroke-width:1}
+svg .ref{stroke:var(--muted);stroke-width:1.3;stroke-dasharray:4 3;fill:none}
+.arr line{stroke:currentColor}
+.arr polygon{fill:currentColor}
+
+/* tableaux */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;-webkit-overflow-scrolling:touch}
+table.data{border-collapse:collapse;width:100%;font-size:.94rem;background:var(--card)}
+table.data th,table.data td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:middle}
+table.data th{font-family:var(--font-head);font-weight:600;font-size:1.05rem;background:var(--paper-2)}
+table.data td.n{font-family:var(--font-math);white-space:nowrap}
+table.data tr.now td{background:var(--hl)}
+
+/* parcours */
+.route{list-style:none;padding:0;margin:1rem 0;position:relative}
+.route::before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:4px;background:var(--line);border-radius:2px}
+.route li{position:relative;padding:0 0 14px 52px;margin:0}
+.route li .dot{position:absolute;left:4px;top:0;width:30px;height:30px;border-radius:50%;border:3px solid var(--ink);background:var(--card);font-family:var(--font-head);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+.route li b{font-family:var(--font-head);font-size:1.2rem;font-weight:600}
+.route li p{margin:.1rem 0 0;font-size:.95rem}
+.series{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:.8rem 0}
+.series>div{background:var(--card);border:1.5px solid var(--line);padding:8px 10px;border-radius:4px;font-size:.88rem}
+.series>div.here{border:2.5px solid var(--ink)}
+.series b{display:block;font-family:var(--font-head);font-size:1.05rem}
+@media (max-width:700px){.series{grid-template-columns:1fr 1fr}}
+
+/* exercices et quiz */
+.exo{background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--ink);padding:6px 20px 12px;margin:1.2rem 0;border-radius:4px}
+.exo.defi{border-left-color:var(--weld)}
+.exo h4{margin-top:.8rem}
+.exo .lvtag{font-family:var(--font-body);font-size:.85rem;font-weight:400;color:var(--muted);margin-left:.4rem}
+.exo .q{margin:.25rem 0}
+details{margin:.6rem 0}
+summary{cursor:pointer;font-weight:700;padding:4px 0}
+details .sol{padding:.4rem .9rem;border-left:3px solid var(--mat);margin:.4rem 0}
+details .sol p{margin:.45em 0}
+.qz{background:var(--card);border:1.5px solid var(--line);border-radius:6px;padding:10px 16px;margin:.8rem 0}
+.qz-q{margin:.3rem 0 .6rem}
+.qz-o{display:flex;flex-direction:column;gap:6px}
+.qz-b{text-align:left;font-family:var(--font-body);font-size:.97rem;padding:8px 12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:5px;cursor:pointer}
+.qz-b:hover{border-color:var(--ink)}
+.qz-b.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}
+.qz-b.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.qz-e{font-size:.94rem;margin:.6rem 0 .2rem}
+.score{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);display:inline-block;background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:999px;font-size:.95rem;margin:.6rem 0}
+
+/* fiche mémoire */
+.fiche{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2.5px solid var(--ink);background:var(--card);margin:1rem 0}
+.fiche>div{padding:12px 14px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.fiche>div:nth-child(3n){border-right:0}
+.fiche>div:nth-last-child(-n+3){border-bottom:0}
+.fiche .ic{font-size:1.9rem;line-height:1}
+.fiche h4{margin:.3rem 0 .2rem;font-size:1.15rem}
+.fiche .f{font-family:var(--font-math);font-size:1.1rem;margin:.2rem 0}
+.fiche p{margin:.2rem 0 0;font-size:.88rem;color:var(--muted)}
+@media (max-width:720px){.fiche{grid-template-columns:1fr 1fr}.fiche>div{border-right:1.5px solid var(--ink)!important;border-bottom:1.5px solid var(--ink)!important}.fiche>div:nth-child(2n){border-right:0!important}.fiche>div:last-child{border-bottom:0!important}}
+@media (max-width:440px){.fiche{grid-template-columns:1fr}.fiche>div{border-right:0!important}}
+.gloss{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:0;border-top:1.5px solid var(--line);margin:1rem 0}
+.gloss dt,.gloss dd{border-bottom:1.5px solid var(--line);padding:7px 8px;margin:0}
+.gloss dt{font-weight:700}
+.gloss dd{font-size:.95rem}
+@media (max-width:600px){.gloss{grid-template-columns:1fr}.gloss dt{border-bottom:0;padding-bottom:0}}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.check input{margin-top:.35em;width:18px;height:18px;accent-color:var(--mat);flex:none}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem}
+hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
+@media (max-width:700px){.m{white-space:normal}.fx{padding:12px 10px}.fx .big{font-size:1.4rem}}
+@media (max-width:400px){body{font-size:16.5px}.wrap{padding:0 14px}.lab{padding:12px 10px}}
+
+/* compléments de la série Rupture */
+.btn.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
+.btn.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+.ctrl[hidden]{display:none}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap wide">
+  <div class="title-block">
+    <div class="tb-main">
+      <div>
+        <p class="tb-series">Essais destructifs, série 2.23 : mesurer et observer ce que cache un métal</p>
+        <h1>L'essai de traction : de la courbe aux grandeurs</h1>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Changer de thème">◐ Thème : automatique</button>
+    </div>
+    <div class="tb-cells">
+      <div><small>Cours</small><b>1 sur 3 : tirer sur une éprouvette et tout comprendre de sa courbe</b></div>
+      <div><small>Durée conseillée</small><b>≈ 2 h 30 à 3 h avec les exercices</b></div>
+      <div><small>Prérequis</small><b>contrainte, déformation et loi de Hooke (RDM, cours 1) ; ferrite, perlite et martensite des aciers (Métallurgie, cours 1 à 3) ; le logarithme népérien</b></div>
+      <div><small>À la fin tu sais</small><b>expliquer d'où viennent l'élasticité et la plasticité ; lire E, ReH, ReL, Rp0,2, Rm, Ag, A et Z sur une courbe ; passer à la courbe rationnelle et mesurer l'écrouissage n ; prévoir l'effet de la température, de la vitesse, de la microstructure et du sens de prélèvement ; critiquer un essai et son procès-verbal</b></div>
+    </div>
+  </div>
+  <p class="lede">On serre un barreau de métal entre deux mâchoires et on tire jusqu'à ce qu'il casse. Cela paraît brutal, et pourtant c'est l'essai le plus riche de la métallurgie : en quelques minutes, une seule courbe donne la raideur du métal, la contrainte qu'il supporte sans se déformer pour toujours, sa résistance maximale, sa capacité à s'allonger et à s'amincir avant de rompre. Ce cours remonte jusqu'aux atomes pour comprendre la courbe, apprend à la lire selon la norme, puis entre au laboratoire pour savoir quand un résultat est digne de confiance.</p>
+
+  <h4>Le code couleur de la série</h4>
+  <div class="cc" role="img" aria-label="Code couleur : les causes en rouge et violet, les paramètres en vert, les effets en bleu et bleu-vert">
+    <div class="cc-box cc-cause"><small>Les causes</small><div class="cc-syms"><span class="sig">σ</span><span class="sig">R<sub>e</sub></span><span class="sig">R<sub>m</sub></span><span class="tau">τ</span></div><p><span class="sig">rouge</span> : les contraintes, ce qui charge la matière (contrainte σ, limite d'élasticité R<sub>e</sub>, résistance R<sub>m</sub>) ; <span class="tau">violet</span> : le cisaillement τ et ce qui menace (fragilité, défauts, erreurs de mesure)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-link"><small>Les paramètres</small><div class="cc-syms"><span class="mat">E</span><span class="mat">n</span><span class="mat">L<sub>0</sub></span><span class="mat">T</span></div><p>en <span class="mat">vert</span> : le matériau et les conditions d'essai (module E, coefficient d'écrouissage n, longueur L<sub>0</sub>, section S<sub>0</sub>, température T, vitesse, sens de prélèvement)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-eff"><small>Les effets</small><div class="cc-syms"><span class="eps">ε</span><span class="eps">A</span><span class="eps">Z</span><span class="gam">γ</span></div><p><span class="eps">bleu</span> : ce qu'on mesure en réponse (déformation ε, allongements A et A<sub>g</sub>, striction Z) ; <span class="gam">bleu-vert</span> : la structure de la matière (glissement γ, grains, phases)</p></div>
+  </div>
+  <div class="cc-more">
+    <div><b class="frc">Orange</b> : les forces et les actions (force F, traverse, mors, outils).</div>
+    <div><b>Noir</b> : la géométrie dessinée (éprouvettes, plans, cotes).</div>
+    <div><b class="wcol">Bronze</b> : les encadrés « métier » 🔥, tournés vers le laboratoire et l'atelier.</div>
+  </div>
+</div>
+</header>
+
+<nav class="toc" aria-label="Sommaire">
+  <div class="toc-in">
+    <a href="#avant">Avant de commencer</a>
+    <a href="#c1">1 Élasticité</a>
+    <a href="#c2">2 Plasticité</a>
+    <a href="#c3">3 Lire la courbe</a>
+    <a href="#c4">4 Striction</a>
+    <a href="#c5">5 Influences</a>
+    <a href="#c6">6 En pratique</a>
+    <a href="#exos">Exercices</a>
+    <a href="#quiz-s">Quiz</a>
+    <a href="#fiche">Fiche mémoire</a>
+    <a href="#gloss">Glossaire</a>
+    <a href="#check">Check-list</a>
+  </div>
+</nav>
+
+<main>
+<section class="chap" id="avant">
+<div class="wrap">
+  <h3 style="margin-top:0">Avant de commencer</h3>
+  <h4>Ce que tu sais déjà, en trois cases</h4>
+  <div class="recall">
+    <div><div class="f"><span class="sig">σ</span> = <span class="frc">F</span>/S</div>Une contrainte est une force rapportée à la surface qui la porte. Unité : le mégapascal, 1 MPa = 1 N/mm². C'est elle qui permet de comparer un fil et une poutre (RDM, cours 1).</div>
+    <div><div class="f"><span class="sig">σ</span> = <span class="mat">E</span>·<span class="eps">ε</span></div>La loi de Hooke : en élasticité, la contrainte est proportionnelle à la déformation ε (allongement relatif, sans unité). E est le module d'Young ; ν, le coefficient de Poisson, vaut environ 0,3 pour l'acier.</div>
+    <div><div class="f">ferrite · perlite · martensite</div>Selon sa composition et sa vitesse de refroidissement, un acier est doux et ductile (ferrite et perlite) ou dur et fragile (martensite). Le soudage fabrique justement ces structures (Métallurgie, cours 1 à 3).</div>
+  </div>
+
+  <div class="def"><b>📘 Correspondance avec le planning et le référentiel</b>. Ce cours ouvre le sujet <b>2.23 « Essais des matériaux »</b> du planning de la formation, et prépare le sujet <b>2.23 « Essais des soudures »</b> (chapitre 6) :
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Chapitre du cours</th><th>Ce qu'il apporte à l'IWE</th></tr>
+      <tr><td>1 Tirer sur la matière : l'élasticité</td><td>principe de l'essai ; module d'Young E et module de cisaillement G</td></tr>
+      <tr><td>2 Glisser plutôt que casser : la plasticité</td><td>origine de la déformation permanente ; comportements ductile, fragile, non linéaire</td></tr>
+      <tr><td>3 Lire la courbe</td><td>les grandeurs mesurées (ReH, ReL, Rp0,2, Rm, Ag, A, Z) et leur définition normalisée</td></tr>
+      <tr><td>4 La striction et la courbe rationnelle</td><td>contrainte et déformation vraies, écrouissage n, critère de striction</td></tr>
+      <tr><td>5 Ce qui change la courbe</td><td>effets de la température, de la vitesse, de la microstructure et du sens de prélèvement</td></tr>
+      <tr><td>6 L'essai en pratique</td><td>machine, éprouvettes, mesures, limites ; procès-verbal ; traction des soudures</td></tr>
+    </table></div>
+    Dans le référentiel de l'IIW (<i>International Institute of Welding</i>) pour la formation IWE (<i>International Welding Engineer</i>), les essais destructifs relèvent de l'unité « Essais pour le contrôle qualité des assemblages soudés » : décrire les principaux essais, leur but et ce qu'ils mesurent, leurs objectifs et leurs limites, et savoir interpréter un procès-verbal d'essai. L'essai Charpy et la lecture des cassures ont déjà leurs cours dans la série <b>Rupture</b> (cours 1 et 2) : ce cours y renvoie au lieu de les refaire.
+  </div>
+
+  <div class="def"><b>📖 Les normes, sources et sigles de ce cours</b>.
+    <ul>
+      <li><b>ISO 6892-1</b> : essai de traction des matériaux métalliques à température ambiante (vocabulaire, éprouvettes, vitesses, calculs) ; <b>ISO 6892-2</b> à température élevée ; <b>ISO 6892-3</b> à basse température.</li>
+      <li><b>ISO 7500-1</b> : étalonnage de la mesure de force des machines ; <b>ISO 9513</b> : étalonnage des extensomètres ; <b>ISO 10275</b> : mesure du coefficient d'écrouissage n des tôles.</li>
+      <li><b>ISO 4136</b> : essai de traction transversale d'un joint soudé ; <b>ISO 5178</b> : essai de traction longitudinale du métal fondu ; <b>ISO 15614-1</b> : qualification d'un mode opératoire de soudage (QMOS) des aciers.</li>
+      <li><b>EN 10025-2</b> : aciers de construction non alliés (S235, S355 : le nombre est la limite d'élasticité minimale en MPa) ; <b>EN 10164</b> : aciers à caractéristiques garanties dans l'épaisseur (classes Z15, Z25, Z35) ; <b>EN 10204</b> : documents de contrôle, dont le certificat de réception 3.1.</li>
+      <li><b>MPa, GPa</b> : mégapascal (10⁶ Pa = 1 N/mm²), gigapascal (1 000 MPa) ; <b>CC, CFC</b> : structures cristallines cubique centrée et cubique à faces centrées ; <b>ZAT</b> : zone affectée thermiquement d'une soudure ; <b>PV</b> : procès-verbal d'essai.</li>
+    </ul>
+    Les valeurs de matériaux sont des valeurs typiques tirées de la littérature, pas des minimums garantis. Les modèles des manipulations sont pédagogiques : ils donnent des ordres de grandeur réalistes et les bonnes tendances.
+  </div>
+
+  <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
+    <p>Chaque tôle arrive à l'atelier avec un certificat de réception (EN 10204, type 3.1) qui donne sa limite d'élasticité, sa résistance et son allongement mesurés en traction. Chaque qualification de mode opératoire (ISO 15614-1) casse des éprouvettes en travers du joint. Chaque métal d'apport est classé d'après la traction de son métal fondu : « E 42 » veut dire au moins 420 MPa de limite d'élasticité. Le coordinateur en soudage doit savoir lire ces chiffres, repérer un essai douteux et comprendre ce qu'ils promettent pour la structure.</p>
+  </div>
+
+  <h4>La série en trois cours</h4>
+  <div class="series">
+    <div class="here"><b>1 L'essai de traction</b>Élasticité, plasticité, lecture de la courbe, striction, influences, réalisation pratique.</div>
+    <div><b>2 Les essais de dureté</b>Brinell, Vickers, Rockwell, conversions, filiations de dureté sur les soudures.</div>
+    <div><b>3 Les examens métallographiques</b>Macro et micro, découpe, polissage, attaque, microscopes, lecture d'une macrographie.</div>
+    <div><b>Déjà traités ailleurs</b>L'essai Charpy (Rupture, cours 2) et la lecture des cassures (Rupture, cours 1).</div>
+  </div>
+
+  <h4>Le plan du cours</h4>
+  <ol class="route">
+    <li><span class="dot">1</span><b>Tirer sur la matière : l'élasticité</b><p>Contrainte, déformation, ressorts entre atomes, module d'Young.</p></li>
+    <li><span class="dot">2</span><b>Glisser plutôt que casser : la plasticité</b><p>Plans qui glissent, cission critique, dislocations, écrouissage.</p></li>
+    <li><span class="dot">3</span><b>Lire la courbe</b><p>ReH, ReL, Rp0,2, Rm, Ag, A, Z : six stations sur une même ligne.</p></li>
+    <li><span class="dot">4</span><b>La striction et la courbe rationnelle</b><p>Pourquoi la force baisse alors que le métal durcit encore.</p></li>
+    <li><span class="dot">5</span><b>Ce qui change la courbe</b><p>Froid, vitesse, trempe, sens de laminage : le même acier, quatre visages.</p></li>
+    <li><span class="dot">6</span><b>L'essai en pratique</b><p>Machine, éprouvette, extensomètre, procès-verbal, soudures.</p></li>
+  </ol>
+</div>
+</section>
+
+<section class="chap" id="c1">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">1</div>
+    <div class="c-title"><h2>Tirer sur la matière : l'élasticité</h2><p>Contrainte, déformation, ressorts entre atomes et module d'Young</p></div>
+    <div class="c-img"><span class="ico">🛏️</span><span><small>Image à retenir</small>Le sommier à ressorts : chaque atome est tenu par ses voisins, et la raideur des ressorts fait le module d'Young</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le sommier à ressorts</span></div>
+    <p>L'essai de traction tient en une phrase : on serre une <b>éprouvette</b> (un barreau aux dimensions soignées) entre deux mâchoires, les <b>mors</b>, et on l'étire avec une force <span class="frc">F</span> croissante, en newtons (N), en mesurant l'allongement ΔL d'une longueur repérée sur l'éprouvette, la longueur initiale entre repères <span class="mat">L<sub>0</sub></span>.</p>
+    <p>Une grosse éprouvette demande plus de force qu'une petite pour s'allonger autant. Pour que le résultat ne dépende que du métal, on divise :</p>
+    <ul>
+      <li>la force par la section initiale <span class="mat">S<sub>0</sub></span> : c'est la <b>contrainte</b> <span class="sig">σ</span> (« sigma »), en MPa ;</li>
+      <li>l'allongement par la longueur initiale : c'est la <b>déformation</b> <span class="eps">ε</span> (« epsilon »), sans unité, souvent donnée en %.</li>
+    </ul>
+    <p>Au tout début, la courbe <span class="sig">σ</span>(<span class="eps">ε</span>) est une droite, et si l'on relâche, l'éprouvette retrouve exactement sa longueur : c'est le <b>domaine élastique</b>. Pour le comprendre, imagine un sommier à ressorts : les atomes du métal sont rangés en réseau, et chacun est retenu à ses voisins par des liaisons qui se comportent comme de petits ressorts. Tirer écarte un peu les atomes ; les ressorts les rappellent dès qu'on lâche.</p>
+    <p>La pente de cette droite s'appelle le <b>module d'Young</b> <span class="mat">E</span>. Il traduit la raideur des ressorts, donc la nature des liaisons : environ 1 000 GPa pour le diamant, 210 GPa pour l'acier, 70 GPa pour l'aluminium (1 GPa = 1 000 MPa). Sous la même contrainte, l'aluminium s'allonge donc trois fois plus que l'acier.</p>
+    <p>Les ressorts ont pourtant une limite : tirés trop loin, ils lâchent. Le calcul donne une <b>résistance théorique</b> d'environ E/10, soit 21 000 MPa pour l'acier. Or un acier de construction se déforme pour toujours dès 300 MPa environ, soixante-dix fois moins. Il se passe autre chose, bien avant que les liaisons cèdent : c'est le chapitre 2.</p>
+  </div>
+
+  <div class="lab" id="m1">
+    <p class="lab-h">Manipulation 1 : le sommier à ressorts</p>
+    <p class="lab-sub">Deux atomes voisins dans un métal qu'on étire. Choisis un matériau et écarte les atomes avec le curseur <span class="eps">ε</span>, l'allongement relatif de la liaison (les valeurs négatives les rapprochent). En haut à droite, l'énergie de liaison U : un puits au fond duquel les atomes s'installent, à la distance d'équilibre r<sub>0</sub>. En bas, la force de rappel convertie en contrainte <span class="sig">σ</span>, avec en vert la droite de Hooke, de pente <span class="mat">E</span>. « Chauffer » fait vibrer les atomes au fond du puits. Modèle de Morse (un potentiel classique de liaison), pédagogique.</p>
+    <div class="btns" id="m1s">
+      <button class="btn" data-k="dia" type="button">Diamant</button>
+      <button class="btn" data-k="w" type="button">Tungstène</button>
+      <button class="btn on" data-k="fe" type="button">Acier</button>
+      <button class="btn" data-k="cu" type="button">Cuivre</button>
+      <button class="btn" data-k="al" type="button">Aluminium</button>
+      <button class="btn" data-k="mg" type="button">Magnésium</button>
+      <button class="btn" data-k="pa" type="button">Polyamide</button>
+    </div>
+    <div class="ctrl"><label for="m1e">Allongement de la liaison <span class="eps">ε</span></label><input type="range" id="m1e" class="r-eps" min="-0.1" max="0.45" step="0.005" value="0.01"><output id="m1eo"></output></div>
+    <div class="btns"><button class="btn play" id="m1play" type="button">▶ Écarter les atomes</button><button class="btn" id="m1hot" type="button">🔥 Chauffer</button></div>
+    <svg id="m1svg" role="img" aria-label="Deux atomes liés par un ressort, puits d'énergie de liaison et courbe contrainte-déformation de la liaison"></svg>
+    <div class="readout" id="m1r"></div>
+    <p class="status" id="m1msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">définitions, origine de E, cisaillement</span></div>
+    <h4>Contrainte et déformation conventionnelles</h4>
+    <div class="fx"><div class="big"><span class="sig">σ</span> = <span class="frac"><span><span class="frc">F</span></span><span><span class="mat">S<sub>0</sub></span></span></span>    <span class="eps">ε</span> = <span class="frac"><span>ΔL</span><span><span class="mat">L<sub>0</sub></span></span></span> = <span class="frac"><span>L − <span class="mat">L<sub>0</sub></span></span><span><span class="mat">L<sub>0</sub></span></span></span>    <span class="sig">σ</span> = <span class="mat">E</span>·<span class="eps">ε</span></div><p class="cap">σ : contrainte conventionnelle (MPa = N/mm²) ; F : force (N) ; S0 : section initiale (mm²) ; ε : déformation conventionnelle (sans unité) ; L : longueur entre repères sous charge ; E : module d'Young (MPa). La dernière relation, la loi de Hooke, ne vaut que dans le domaine élastique.</p></div>
+    <p>Ces grandeurs sont dites <b>conventionnelles</b> (ou nominales) : on divise toujours par les dimensions <i>initiales</i>, même quand l'éprouvette s'est amincie. Le chapitre 4 corrigera ce choix. Pendant l'allongement, la section se contracte : la déformation transversale vaut <span class="m">−ν·<span class="eps">ε</span></span>, où ν (« nu »), le coefficient de Poisson, vaut environ 0,3 pour les métaux.</p>
+    <p><b>Exemple</b>. Une tige d'acier de 10 mm de diamètre et 2 m de long porte 15 kN. Section : <span class="m">S<sub>0</sub> = π × 10²/4 = 78,5 mm²</span>. Contrainte : <span class="m">σ = 15 000/78,5 = 191 MPa</span>. Déformation : <span class="m">ε = 191/210 000 = 9,1·10⁻⁴</span> (0,091 %). Allongement : <span class="m">ΔL = 9,1·10⁻⁴ × 2 000 = 1,8 mm</span>. La même tige en aluminium (70 GPa) s'allongerait de 5,5 mm.</p>
+
+    <h4>D'où vient le module d'Young ?</h4>
+    <p>L'énergie de liaison entre deux atomes, U, dépend de leur distance r. Elle additionne une attraction, qui les rapproche, et une répulsion, qui empêche leurs nuages d'électrons de s'interpénétrer : <span class="m">U = U<sub>attractive</sub> + U<sub>répulsive</sub></span>. La somme forme un puits : son fond fixe la distance d'équilibre r<sub>0</sub>, quelques dixièmes de nanomètre. La force qu'il faut exercer pour maintenir les atomes à la distance r est la dérivée de l'énergie (sa pente) :</p>
+    <div class="fx"><div class="big"><span class="frc">F</span>(r) = <span class="frac"><span>dU</span><span>dr</span></span>    <span class="mat">E</span> ≈ <span class="frac"><span>1</span><span>r<sub>0</sub></span></span>·<span class="frac"><span>d<span class="frc">F</span></span><span>dr</span></span>|<sub>r<sub>0</sub></sub>    <span class="sig">σ</span><sub>th</sub> ≈ <span class="frac"><span><span class="mat">E</span></span><span>10</span></span></div><p class="cap">dU/dr : dérivée de U par rapport à r, la pente du puits ; dF/dr en r0 : raideur d'une liaison au repos ; σth : contrainte de rupture théorique, liée au maximum de F(r)</p></div>
+    <p>Au fond du puits, la pente est nulle : aucune force. Autour, la force croît presque proportionnellement à l'écart : c'est la loi de Hooke vue à l'échelle des atomes, et E mesure la courbure du puits. Plus loin, la force passe par un maximum, la résistance théorique de la liaison, puis diminue : la liaison est rompue. Le puits est dissymétrique (la répulsion monte plus vite que l'attraction ne descend) : quand les atomes vibrent sous l'effet de la chaleur, leur distance moyenne augmente. C'est la <b>dilatation thermique</b>, que des ressorts parfaits, symétriques, n'expliqueraient pas.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Matériau</th><th>E (GPa)</th><th>Matériau</th><th>E (GPa)</th></tr>
+      <tr><td>Diamant</td><td class="n">≈ 1 000</td><td>Cuivre</td><td class="n">≈ 125</td></tr>
+      <tr><td>Carbure de tungstène</td><td class="n">≈ 600</td><td>Titane</td><td class="n">≈ 110</td></tr>
+      <tr><td>Tungstène</td><td class="n">≈ 410</td><td>Laiton, bronze</td><td class="n">≈ 100 à 120</td></tr>
+      <tr><td>Alumine (Al₂O₃)</td><td class="n">≈ 380</td><td>Aluminium, verre</td><td class="n">≈ 70</td></tr>
+      <tr><td>Acier (ferritique ou inoxydable)</td><td class="n">≈ 195 à 210</td><td>Magnésium</td><td class="n">≈ 45</td></tr>
+      <tr><td>Fonte à graphite sphéroïdal</td><td class="n">≈ 170</td><td>Polymères</td><td class="n">≈ 0,01 à 4</td></tr>
+    </table></div>
+    <p><b>Mesurer E.</b> C'est la pente de la partie droite de la courbe. Au premier chargement, les mors se mettent en place et la courbe commence souvent en douceur : la mesure est plus précise sur une <b>décharge</b>, qui redescend selon une droite bien nette de même pente. Il faut un extensomètre, un capteur posé sur l'éprouvette elle-même (chapitre 6).</p>
+    <p><b>Une grandeur intrinsèque</b>. E dépend des liaisons, pas de la façon dont les atomes sont arrangés à grande échelle : un acier recuit, trempé ou écroui garde le même module, à quelques pour cent près. Il baisse avec la température, d'environ 70 MPa par degré pour l'acier : environ 182 GPa à 400 °C.</p>
+
+    <h4>Le cisaillement et l'essai de torsion</h4>
+    <p>Tordre un cylindre par un couple C fait glisser chaque tranche sur sa voisine. La contrainte est alors <b>tangentielle</b> (parallèle à la surface qui la porte) : c'est la <span class="tau">cission τ</span> (« tau »), ou contrainte de cisaillement. Un petit carré de matière devient un losange : son angle droit se ferme d'un angle θ, et la <b>déformation de cisaillement</b> vaut <span class="m"><span class="gam">γ</span> = tan θ = dw/L ≈ θ</span> (en radians, aux petites déformations), où dw est le décalage de deux faces distantes de L.</p>
+    <div class="fx"><div class="big"><span class="tau">τ</span> = <span class="mat">G</span>·<span class="gam">γ</span>    <span class="mat">G</span> = <span class="frac"><span><span class="mat">E</span></span><span>2(1 + ν)</span></span></div><p class="cap">G : module de cisaillement ; γ (« gamma ») : déformation de cisaillement (rad). Acier : G ≈ 210/(2 × 1,3) ≈ 81 GPa ; aluminium : ≈ 26 GPa</p></div>
+    <div class="def"><b>📖 Module d'Young</b> (ou module d'élasticité longitudinale) : rapport entre la contrainte et la déformation dans le domaine élastique, E = σ/ε. Il mesure la raideur du matériau, pas sa résistance.</div>
+    <div class="tip">💡 <b>Raideur ou résistance ?</b> Pour savoir de combien une pièce fléchit, regarde E. Pour savoir quand elle se déforme pour toujours, regarde la limite d'élasticité (chapitre 3). Une poutre en aluminium fléchit trois fois plus que la même poutre en acier, même si l'alliage d'aluminium est aussi résistant.</div>
+    <div class="warn"><b>⚠️ Piège : croire qu'un traitement thermique rigidifie l'acier.</b> Tremper un acier multiplie sa limite d'élasticité par trois ou quatre, mais ne change pas E. Sous une charge qui reste élastique, la pièce trempée fléchit exactement comme la pièce recuite.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « 1 000, 210, 70 »</b> : le diamant, l'acier, l'aluminium. Et la résistance théorique, « un dixième de E ».</div>
+    <div class="weld"><b>🔥 Le module ne se soude pas</b>
+      <p>La zone affectée thermiquement d'une soudure peut être plus dure ou plus douce que le métal de base, mais sa raideur est la même : E ne dépend pas de la microstructure. Quand on remplace un acier par un alliage d'aluminium pour alléger une structure soudée, il faut donc épaissir ou raidir les sections : à résistance égale, la rigidité, elle, a été divisée par trois.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c2">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">2</div>
+    <div class="c-title"><h2>Glisser plutôt que casser : la plasticité</h2><p>Plans qui glissent, cission critique, dislocations, écrouissage</p></div>
+    <div class="c-img"><span class="ico">🐛</span><span><small>Image à retenir</small>La chenille : elle avance en faisant courir une bosse le long de son corps, pas en se déplaçant d'un bloc</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la chenille</span></div>
+    <p>Au-delà de la <b>limite d'élasticité</b>, l'éprouvette ne revient plus à sa longueur : une partie de l'allongement est <b>permanente</b>. C'est la <b>déformation plastique</b>. Que se passe-t-il dans le métal ?</p>
+    <p>Tire un <b>monocristal</b> (un métal fait d'un seul grain, comme un gros cristal de cuivre ou de zinc) de plus de 10 % : sa surface se couvre de <b>marches</b> parallèles, en biais. Des tranches entières du cristal ont <b>glissé</b> les unes sur les autres, le long de plans atomiques bien précis et dans des directions bien précises. Ce n'est pas la traction qui fait glisser, mais sa part qui agit le long du plan, la <span class="tau">cission</span> : elle est maximale sur les plans inclinés à 45° de l'effort, et nulle sur un plan perpendiculaire ou parallèle à l'effort.</p>
+    <p>Faire glisser tout un plan d'atomes d'un coup demanderait une contrainte énorme, du même ordre que la résistance théorique du chapitre 1. Le cristal triche : il contient des <b>dislocations</b>, des lignes le long desquelles le plan a déjà glissé d'un côté et pas de l'autre. Pour avancer, une dislocation n'a qu'à décaler une rangée d'atomes à la fois, comme la chenille qui fait courir une bosse le long de son corps, ou comme on déplace un grand tapis en poussant un pli. Il suffit alors d'une contrainte mille fois plus faible.</p>
+    <p>En se déplaçant, les dislocations se multiplient, s'enchevêtrent et se bloquent. Il faut tirer de plus en plus fort pour continuer : c'est l'<b>écrouissage</b>, qui fait monter la courbe après la limite d'élasticité. Les joints entre les grains d'un métal arrêtent aussi les dislocations : plus les grains sont fins, plus le métal est résistant.</p>
+  </div>
+
+  <div class="lab" id="m2">
+    <p class="lab-h">Manipulation 2 : la chenille et le plan incliné</p>
+    <p class="lab-sub">Un monocristal est tiré par une contrainte <span class="sig">σ</span>. Son plan de glissement fait l'angle <span class="mat">φ</span> avec l'axe de traction (angle entre l'axe et la normale au plan) ; dans ce plan, la direction de glissement est tournée de <span class="mat">ψ</span> par rapport à la ligne de plus grande pente. Le cristal glisse quand la cission résolue <span class="tau">τ</span> atteint la cission critique <span class="tau">τ<sub>0</sub></span> = 1 MPa (ordre de grandeur d'un monocristal de cuivre pur). À droite, le facteur de Schmid m selon φ ; la ligne violette marque le m minimal qui fait glisser sous la contrainte choisie.</p>
+    <div class="btns" id="m2p">
+      <button class="btn on" data-k="45" type="button">Plan à 45°</button>
+      <button class="btn" data-k="10" type="button">Plan presque transversal</button>
+      <button class="btn" data-k="80" type="button">Plan presque parallèle</button>
+    </div>
+    <div class="ctrl"><label for="m2s">Contrainte <span class="sig">σ</span></label><input type="range" id="m2s" class="r-sig" min="0" max="8" step="0.05" value="1.5"><output id="m2so"></output></div>
+    <div class="ctrl"><label for="m2f">Angle du plan <span class="mat">φ</span></label><input type="range" id="m2f" class="r-mat" min="5" max="85" step="1" value="45"><output id="m2fo"></output></div>
+    <div class="ctrl"><label for="m2d">Direction <span class="mat">ψ</span></label><input type="range" id="m2d" class="r-mat" min="0" max="80" step="5" value="0"><output id="m2do"></output></div>
+    <div class="btns"><button class="btn play" id="m2play" type="button">▶ Augmenter σ</button></div>
+    <svg id="m2svg" role="img" aria-label="Monocristal tiré avec son plan de glissement incliné, et facteur de Schmid en fonction de l'angle du plan"></svg>
+    <div class="readout" id="m2r"></div>
+    <p class="status" id="m2msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">loi de Schmid, dislocations, écrouissage, grains</span></div>
+    <h4>La loi de Schmid</h4>
+    <p>Une contrainte <span class="sig">σ</span> appliquée sur une section S agit, sur un plan incliné, comme une force qui se décompose en une part normale au plan et une part tangentielle. En la ramenant à l'aire du plan incliné (plus grande que S) et à la direction de glissement, on obtient la <b>cission résolue</b> :</p>
+    <div class="fx"><div class="big"><span class="tau">τ</span> = <span class="sig">σ</span>·cos <span class="mat">φ</span>·cos λ = m·<span class="sig">σ</span>    glissement si <span class="tau">τ</span> ≥ <span class="tau">τ<sub>0</sub></span></div><p class="cap">φ : angle entre l'axe de traction et la normale au plan ; λ (« lambda ») : angle entre l'axe et la direction de glissement ; m = cos φ·cos λ : facteur de Schmid, au plus 0,5 (φ = λ = 45°) ; τ0 : cission critique du système de glissement</p></div>
+    <p><b>Exemple</b> (τ<sub>0</sub> = 1 MPa). Plan à 45°, direction dans la plus grande pente : m = 0,5, le cristal glisse dès <span class="m">σ = 1/0,5 = 2 MPa</span>. Plan à φ = 60° : <span class="m">m = cos 60° × cos 30° = 0,433</span>, il faut 2,31 MPa. Plan à 80° : m = 0,171, il faut 5,85 MPa. Plan à 45° mais direction tournée de ψ = 60° : λ = 69°, m = 0,25, il faut 4 MPa.</p>
+    <p>Les plans et directions de glissement sont les plus denses en atomes. La structure cubique à faces centrées (CFC : cuivre, aluminium, nickel, aciers inoxydables austénitiques) en offre douze, toujours actifs : ces métaux restent ductiles même à très basse température. La structure cubique centrée (CC : fer α, aciers ferritiques) en a davantage, mais leur cission critique grimpe quand la température baisse (chapitre 5). La structure hexagonale compacte (zinc, magnésium, titane α) en a peu de faciles : ces métaux se déforment moins bien.</p>
+
+    <h4>Pourquoi les dislocations</h4>
+    <p>Faire glisser un plan entier d'un bloc demanderait une cission théorique d'environ <span class="m">G/(2π)</span> : pour le cuivre (G ≈ 48 GPa), environ 7 600 MPa. Un monocristal de cuivre pur glisse sous 1 MPa environ, sept mille fois moins. C'est la signature des dislocations : on n'en coupe qu'une rangée de liaisons à la fois. Leur densité ρ, la longueur de lignes par unité de volume, va d'environ 10¹⁰ à 10¹² m⁻² dans un métal recuit à 10¹⁵ ou 10¹⁶ m⁻² dans un métal fortement écroui ; la contrainte d'écoulement croît à peu près comme √ρ.</p>
+
+    <h4>Du monocristal au métal réel</h4>
+    <p>Un métal industriel est un <b>polycristal</b> : des milliers de grains orientés au hasard, qui doivent se déformer ensemble sans s'ouvrir aux joints. Il faut activer plusieurs systèmes dans chaque grain : la limite d'élasticité du polycristal vaut environ trois fois la cission critique. Les joints de grains bloquent les dislocations ; d'où la <b>loi de Hall-Petch</b> :</p>
+    <div class="fx"><div class="big"><span class="sig">R<sub>e</sub></span> = σ<sub>0</sub> + <span class="frac"><span>k</span><span>√<span class="mat">d</span></span></span></div><p class="cap">d : taille de grain (m) ; σ0 et k : constantes du matériau. Fer et aciers doux : σ0 ≈ 70 MPa, k ≈ 0,74 MPa·√m. Grains de 20 µm : Re ≈ 70 + 0,74/√(20·10⁻⁶) ≈ 235 MPa ; grains de 5 µm : ≈ 400 MPa</p></div>
+
+    <h4>Trois comportements</h4>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Comportement</th><th>Courbe</th><th>Exemples</th></tr>
+      <tr><td><b>Ductile</b></td><td>grande déformation plastique, allongement à rupture élevé, rupture progressive après une striction ; limite d'élasticité souvent modeste</td><td>aciers de construction, inox austénitiques, cuivre, aluminium</td></tr>
+      <tr><td><b>Fragile</b></td><td>pas de déformation plastique : rupture brusque dans le domaine élastique, allongement nul ; résistance souvent élevée</td><td>verre, céramiques, fonte grise, martensite non revenue, acier ferritique très froid</td></tr>
+      <tr><td><b>Non linéaire</b></td><td>élastique et plastique difficiles à séparer, courbe en S</td><td>élastomères, alliages à mémoire de forme (cas rares en métallurgie)</td></tr>
+    </table></div>
+    <p>La surface de la cassure confirme le diagnostic : cupules d'une rupture ductile, facettes brillantes d'un clivage fragile. Leur lecture fait l'objet du cours 1 de la série Rupture.</p>
+    <div class="def"><b>📖 Cission critique</b> τ0 : cission résolue minimale qui fait glisser un système de glissement (un plan et une direction) d'un monocristal. <b>Dislocation</b> : défaut linéaire du cristal, frontière entre une partie déjà glissée et une partie qui ne l'est pas encore.</div>
+    <div class="tip">💡 <b>Le cisaillement signe à 45°</b>. Partout où la plasticité commande, les traces penchent d'environ 45° sur l'effort : les marches d'un monocristal, les bandes qui traversent un acier doux au début de la plasticité, les lèvres inclinées d'une cassure ductile.</div>
+    <div class="warn"><b>⚠️ Piège : croire que c'est la traction qui fait glisser.</b> Un plan perpendiculaire à l'effort (φ = 0) subit toute la contrainte normale, mais aucune cission : il ne glisse pas. Un plan parallèle à l'effort non plus. C'est τ, pas σ, qui commande le glissement.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « deux cosinus, un demi au mieux »</b> : τ = σ·cos φ·cos λ, et le facteur de Schmid ne dépasse jamais 0,5.</div>
+    <div class="weld"><b>🔥 Ce que la chaleur du soudage efface</b>
+      <p>Un alliage d'aluminium écroui (état H) ou un acier formé à froid doivent une part de leur résistance à leurs dislocations. La chaleur du soudage les réarrange : la zone affectée thermiquement se recristallise et redevient douce. Le calcul des structures soudées en aluminium tient compte de cette zone adoucie. À l'inverse, les grains qui grossissent près de la ligne de fusion d'un acier abaissent sa limite d'élasticité locale et, surtout, sa ténacité.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c3">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">3</div>
+    <div class="c-title"><h2>Lire la courbe</h2><p>ReH, ReL, Rp0,2, Rm, Ag, A, Z : six stations sur une même ligne</p></div>
+    <div class="c-img"><span class="ico">🚇</span><span><small>Image à retenir</small>La ligne de métro : de la station E au terminus Rupture, chaque grandeur a son arrêt</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la ligne de métro</span></div>
+    <p>Parcours la courbe de traction comme une ligne de métro, station par station :</p>
+    <ol>
+      <li><b>Station E</b> : la droite du départ, de pente E (chapitre 1).</li>
+      <li><b>Station limite d'élasticité</b> : la fin de la droite. Pour un acier de construction, elle se voit : la contrainte fait un petit pic, la <b>limite supérieure d'écoulement</b> <span class="sig">R<sub>eH</sub></span>, puis tombe sur un palier, la <b>limite inférieure</b> <span class="sig">R<sub>eL</sub></span>, où la plasticité envahit l'éprouvette par bandes. Pour l'inox, l'aluminium ou un acier trempé, la courbe s'arrondit doucement et l'on ne sait pas où la droite s'arrête. On adopte alors une convention : la <b>limite conventionnelle d'élasticité</b> <span class="sig">R<sub>p0,2</sub></span>, la contrainte qui laisse 0,2 % de déformation permanente.</li>
+      <li><b>Station Rm</b> : le sommet de la courbe, la <b>résistance à la traction</b> <span class="sig">R<sub>m</sub></span>, atteinte après un <b>allongement réparti</b> <span class="eps">A<sub>g</sub></span> pendant lequel toute l'éprouvette s'est allongée de la même façon.</li>
+      <li><b>Terminus</b> : la striction creuse un col, la courbe descend, l'éprouvette casse. On mesure sur les deux morceaux l'<b>allongement après rupture</b> <span class="eps">A</span> et le <b>coefficient de striction</b> <span class="eps">Z</span>, la réduction de section au col.</li>
+    </ol>
+    <p>Pourquoi une convention pour R<sub>p0,2</sub> ? Parce que l'œil trompe : sur une courbe tracée jusqu'à la rupture, la droite semble se prolonger loin ; en agrandissant le début, on voit qu'elle s'infléchit bien plus tôt. Une même éprouvette donnerait autant de « limites » que d'échelles de lecture. Le décalage de 0,2 % fixe une règle que tous les laboratoires appliquent de la même façon.</p>
+  </div>
+
+  <div class="lab" id="m3">
+    <p class="lab-h">Manipulation 3 : la ligne de métro</p>
+    <p class="lab-sub">Choisis un matériau, puis déplace le curseur le long de l'essai, ou lance la lecture. La courbe est conventionnelle : <span class="sig">σ</span> = F/S<sub>0</sub> en fonction de <span class="eps">ε</span> = ΔL/L<sub>0</sub>. Au curseur, le pointillé bleu montre la décharge : ce que l'éprouvette garderait si on la relâchait là. La droite verte décalée construit la limite conventionnelle (décalage réglable, 0,2 % par défaut). « Zoom » agrandit le début de la courbe : compare ta lecture « à l'œil » de la limite d'élasticité dans les deux vues. Valeurs typiques, modèle pédagogique.</p>
+    <div class="btns" id="m3s">
+      <button class="btn" data-k="S235" type="button">Acier S235</button>
+      <button class="btn on" data-k="S355" type="button">Acier S355</button>
+      <button class="btn" data-k="316L" type="button">Inox 316L</button>
+      <button class="btn" data-k="6061" type="button">Alu 6061-T6</button>
+      <button class="btn" data-k="42CrMo4" type="button">42CrMo4 trempé-revenu</button>
+    </div>
+    <div class="ctrl"><label for="m3p">Avancement de l'essai</label><input type="range" id="m3p" class="r-eps" min="0" max="100" step="0.5" value="40"><output id="m3po"></output></div>
+    <div class="ctrl"><label for="m3o">Décalage de la droite</label><input type="range" id="m3o" class="r-mat" min="0.05" max="1" step="0.05" value="0.2"><output id="m3oo"></output></div>
+    <div class="btns"><button class="btn play" id="m3play" type="button">▶ Tirer jusqu'à la rupture</button><button class="btn" id="m3z" type="button">🔍 Zoom sur le début</button></div>
+    <svg id="m3svg" role="img" aria-label="Courbe de traction conventionnelle avec les grandeurs normalisées et la construction de la limite conventionnelle d'élasticité"></svg>
+    <div class="readout" id="m3r"></div>
+    <p class="status" id="m3msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">les grandeurs de l'ISO 6892-1</span></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Symbole</th><th>Nom</th><th>Définition</th></tr>
+      <tr><td class="n">E</td><td>module d'élasticité</td><td>pente de la partie élastique</td></tr>
+      <tr><td class="n">R<sub>eH</sub></td><td>limite supérieure d'écoulement</td><td>contrainte au premier pic, juste avant la chute de force</td></tr>
+      <tr><td class="n">R<sub>eL</sub></td><td>limite inférieure d'écoulement</td><td>plus basse contrainte du palier, hors effet transitoire initial</td></tr>
+      <tr><td class="n">R<sub>p0,2</sub></td><td>limite conventionnelle d'élasticité</td><td>contrainte pour laquelle l'extension plastique vaut 0,2 % de L<sub>e</sub> (longueur de l'extensomètre)</td></tr>
+      <tr><td class="n">R<sub>t0,5</sub></td><td>limite pour une extension totale</td><td>contrainte pour 0,5 % d'extension totale (élastique et plastique), utilisée par certaines normes de produits</td></tr>
+      <tr><td class="n">R<sub>m</sub></td><td>résistance à la traction</td><td>F<sub>m</sub>/S<sub>0</sub>, avec F<sub>m</sub> la force maximale</td></tr>
+      <tr><td class="n">A<sub>g</sub>, A<sub>gt</sub></td><td>allongement plastique, total, à la force maximale</td><td>allongement réparti, sans ou avec la part élastique</td></tr>
+      <tr><td class="n">A</td><td>allongement après rupture</td><td>(L<sub>u</sub> − L<sub>0</sub>)/L<sub>0</sub> × 100, mesuré sur les morceaux rapprochés</td></tr>
+      <tr><td class="n">A<sub>t</sub></td><td>allongement total à la rupture</td><td>lu sur l'enregistrement à l'instant de la rupture, part élastique comprise</td></tr>
+      <tr><td class="n">Z</td><td>coefficient de striction</td><td>(S<sub>0</sub> − S<sub>u</sub>)/S<sub>0</sub> × 100, avec S<sub>u</sub> la section minimale après rupture</td></tr>
+    </table></div>
+    <p><b>La construction de R<sub>p0,2</sub></b> : on trace une parallèle à la droite élastique, décalée de 0,2 % sur l'axe des déformations ; elle coupe la courbe en R<sub>p0,2</sub>. Si l'on déchargeait l'éprouvette depuis ce point, elle redescendrait le long de cette parallèle et garderait 0,2 % d'allongement permanent. Ce 0,2 % est un compromis : assez petit pour rester près du début de la plasticité, assez grand pour être mesuré sans ambiguïté. On l'emploie dès que la courbe ne présente pas de palier, et il permet de comparer des matériaux de comportements très différents.</p>
+    <div class="fx"><div class="big"><span class="sig">R<sub>m</sub></span> = <span class="frac"><span><span class="frc">F<sub>m</sub></span></span><span><span class="mat">S<sub>0</sub></span></span></span>    <span class="eps">A</span> = <span class="frac"><span>L<sub>u</sub> − <span class="mat">L<sub>0</sub></span></span><span><span class="mat">L<sub>0</sub></span></span></span>    <span class="eps">Z</span> = <span class="frac"><span><span class="mat">S<sub>0</sub></span> − S<sub>u</sub></span><span><span class="mat">S<sub>0</sub></span></span></span></div><p class="cap">Lu : longueur entre repères après rupture (indice u : ultime) ; Su : section minimale au col après rupture. A et Z s'expriment en %</p></div>
+    <p><b>Exemple</b>. Éprouvette ronde de diamètre d<sub>0</sub> = 10 mm : <span class="m">S<sub>0</sub> = 78,54 mm²</span> et <span class="m">L<sub>0</sub> = 5,65·√S<sub>0</sub> = 50 mm</span> (longueur proportionnelle, chapitre 6). Pic de force à 30,6 kN : <span class="m">R<sub>eH</sub> = 30 600/78,54 = 390 MPa</span>. Palier à 29,2 kN : <span class="m">R<sub>eL</sub> = 372 MPa</span>. Force maximale 42,4 kN : <span class="m">R<sub>m</sub> = 540 MPa</span>. Après rupture : L<sub>u</sub> = 63,0 mm, soit <span class="m">A = 13/50 = 26,0 %</span> ; diamètre au col 6,3 mm, soit <span class="m">Z = 1 − (6,3/10)² = 60,3 %</span>.</p>
+    <p><b>Le retour élastique</b>. Au moment de la rupture, l'éprouvette est encore tendue : en se séparant, chaque morceau se raccourcit de sa part élastique. Les mesures sur les morceaux donnent donc directement l'allongement permanent A. Sur l'enregistrement, il faut retrancher cette part : <span class="m">A = A<sub>t</sub> − σ<sub>rupture</sub>/E</span>.</p>
+    <p><b>L'énergie sous la courbe</b>. L'aire sous la courbe conventionnelle est l'énergie absorbée par unité de volume avant la rupture : <span class="m">W = ∫ σ dε ≈ (R<sub>e</sub> + R<sub>m</sub>)/2 × A</span> pour un métal ductile (∫ : intégrale, la somme des petites bandes σ·dε). Des MPa multipliés par une déformation sans unité donnent des MJ/m³, c'est-à-dire des J/cm³ : environ 119 J/cm³ pour l'éprouvette de l'exemple. Cette énergie est parfois appelée ténacité en traction : ne la confonds ni avec l'énergie de rupture Charpy, mesurée en joules sur une éprouvette entaillée (Rupture, cours 2), ni avec la ténacité K<sub>IC</sub> d'un matériau fissuré (Rupture, cours 4). Après la striction, elle n'est plus qu'une moyenne : l'énergie se concentre dans le col.</p>
+    <div class="def"><b>📖 Autres notations courantes</b> : R<sub>e0,2</sub> pour R<sub>p0,2</sub> ; e pour la déformation conventionnelle (réservant ε à la déformation vraie, chapitre 4) ; RA (<i>reduction of area</i>) pour Z ; en anglais, <i>yield strength</i> pour la limite d'élasticité, <i>tensile strength</i> (ou UTS) pour R<sub>m</sub>, <i>elongation</i> pour A.</div>
+    <div class="tip">💡 <b>Lis les forces, pas la courbe</b>. Sur un procès-verbal, les contraintes sont des forces divisées par S<sub>0</sub> : recalcule toujours une valeur à la main (F<sub>m</sub>/S<sub>0</sub>) pour vérifier les dimensions saisies. Une erreur de 0,1 mm sur l'épaisseur d'une tôle de 5 mm fausse R<sub>m</sub> de 2 %.</div>
+    <div class="warn"><b>⚠️ Piège : prendre R<sub>m</sub> pour la contrainte de rupture.</b> R<sub>m</sub> est le sommet de la courbe conventionnelle. Un métal ductile casse plus bas, après la striction, et l'aire de son col a tellement diminué que la contrainte vraie y est bien plus élevée que R<sub>m</sub> (chapitre 4).</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « deux pour mille, et ça reste »</b> : R<sub>p0,2</sub> est la contrainte qui laisse deux millièmes de déformation permanente. Et « R<sub>m</sub> est le sommet, pas le terminus ».</div>
+    <div class="weld"><b>🔥 Lire un certificat 3.1 et un métal d'apport</b>
+      <p>Une tôle S355J2 de 12 mm doit garantir, selon l'EN 10025-2 : R<sub>eH</sub> ≥ 355 MPa (345 MPa entre 16 et 40 mm, 335 MPa entre 40 et 63 mm), R<sub>m</sub> entre 470 et 630 MPa, A ≥ 22 % en long (20 % en travers) sur éprouvette proportionnelle. Le certificat de réception donne les valeurs mesurées sur la coulée : on vérifie chacune. Côté soudage, un métal d'apport désigné « 42 » (électrode E 42…, fil G 42…) garantit sur son métal fondu R<sub>e</sub> ≥ 420 MPa, R<sub>m</sub> de 500 à 640 MPa et A ≥ 20 %. Choisir un apport dont la résistance égale ou dépasse un peu celle du métal de base, c'est le principe de l'appariement (<i>matching</i>).</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c4">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">4</div>
+    <div class="c-title"><h2>La striction et la courbe rationnelle</h2><p>Pourquoi la force baisse alors que le métal durcit encore</p></div>
+    <div class="c-img"><span class="ico">🍬</span><span><small>Image à retenir</small>Le caramel étiré : là où il s'amincit, il s'amincit encore plus, jusqu'à casser</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le caramel étiré</span></div>
+    <p>Après <span class="sig">R<sub>m</sub></span>, la courbe conventionnelle descend. Le métal se met-il à mollir ? Non : deux effets s'affrontent depuis le début de la plasticité.</p>
+    <ul>
+      <li>L'<b>écrouissage</b> durcit le métal : il faut une contrainte de plus en plus forte pour le déformer.</li>
+      <li>L'<b>amincissement</b> réduit la section qui porte la force : à contrainte égale, il faut de moins en moins de force.</li>
+    </ul>
+    <p>Tant que l'écrouissage gagne, si un endroit de l'éprouvette s'amincit un peu plus, il durcit aussi un peu plus et la déformation va voir ailleurs : l'éprouvette s'allonge partout pareil. Puis vient le moment où l'amincissement l'emporte : l'endroit le plus mince porte la plus forte contrainte, se déforme le plus, s'amincit encore… C'est le cercle vicieux de la <b>striction</b>, comme un caramel qu'on étire. La force passe par son maximum et ne fait plus que baisser, parce que la section du col fond plus vite que le métal ne durcit.</p>
+    <p>Si l'on divise la force par la section <i>réelle</i> du col au lieu de S<sub>0</sub>, la contrainte continue de monter jusqu'à la rupture : c'est la <b>courbe rationnelle</b> (en anglais <i>true stress-strain curve</i>), la plus réaliste. La courbe <b>conventionnelle</b> (<i>engineering curve</i>) reste la plus utilisée, parce qu'elle se calcule sans mesurer la section en cours d'essai.</p>
+    <p>La capacité d'un métal à durcir en se déformant se résume par un nombre, le <b>coefficient d'écrouissage</b> <span class="mat">n</span>. Plus il est grand, plus la striction arrive tard : un inox austénitique (n ≈ 0,45) s'allonge régulièrement de plus de 50 %, ce qui en fait le roi de l'emboutissage des éviers, alors qu'un acier trempé-revenu (n ≈ 0,07) fait son col après quelques pour cent.</p>
+  </div>
+
+  <div class="lab" id="m4">
+    <p class="lab-h">Manipulation 4 : le caramel étiré</p>
+    <p class="lab-sub">Le métal suit la loi d'écrouissage de Hollomon, <span class="sig">σ</span><sub>rat</sub> = <span class="mat">K</span>·<span class="eps">ε</span><sub>rat</sub><sup><span class="mat">n</span></sup>. Choisis un matériau, ou règle toi-même le coefficient d'écrouissage <span class="mat">n</span> et la consistance <span class="mat">K</span>, puis tire. En haut, l'éprouvette, où le col se creuse après la force maximale. À gauche, la courbe conventionnelle (F/S<sub>0</sub> en fonction de l'allongement de l'éprouvette) ; à droite, la courbe rationnelle au col, avec en pointillé sa pente dσ/dε : la striction démarre là où la pente rattrape la courbe. « Bridgman » corrige la contrainte du col de l'effet de sa forme. Modèle pédagogique.</p>
+    <div class="btns" id="m4s">
+      <button class="btn" data-k="S235" type="button">S235</button>
+      <button class="btn on" data-k="S355" type="button">S355</button>
+      <button class="btn" data-k="304L" type="button">Inox 304L</button>
+      <button class="btn" data-k="Cu" type="button">Cuivre recuit</button>
+      <button class="btn" data-k="S690" type="button">S690 trempé-revenu</button>
+    </div>
+    <div class="ctrl"><label for="m4n">Écrouissage <span class="mat">n</span></label><input type="range" id="m4n" class="r-mat" min="0.05" max="0.55" step="0.01" value="0.16"><output id="m4no"></output></div>
+    <div class="ctrl"><label for="m4k">Consistance <span class="mat">K</span></label><input type="range" id="m4k" class="r-mat" min="300" max="1500" step="10" value="850"><output id="m4ko"></output></div>
+    <div class="ctrl"><label for="m4t">Avancement de l'essai</label><input type="range" id="m4t" class="r-eps" min="0" max="100" step="0.5" value="100"><output id="m4to"></output></div>
+    <div class="btns"><button class="btn play" id="m4play" type="button">▶ Tirer</button><button class="btn" id="m4b" type="button">Bridgman : non</button></div>
+    <svg id="m4svg" role="img" aria-label="Éprouvette qui se strictionne, courbe conventionnelle et courbe rationnelle avec le critère de Considère"></svg>
+    <div class="readout" id="m4r"></div>
+    <p class="status" id="m4msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">grandeurs rationnelles, Considère, Hollomon, Bridgman</span></div>
+    <h4>Les grandeurs rationnelles</h4>
+    <p>La déformation plastique conserve le volume : <span class="m">S·L = S<sub>0</sub>·L<sub>0</sub></span>. Tant que l'éprouvette s'allonge uniformément, on peut donc calculer la section courante sans la mesurer. La déformation rationnelle additionne les petits allongements relatifs dL/L, chacun rapporté à la longueur du moment :</p>
+    <div class="fx"><div class="big"><span class="sig">σ</span><sub>rat</sub> = <span class="frac"><span><span class="frc">F</span></span><span>S</span></span> = <span class="sig">σ</span>·(1 + <span class="eps">ε</span>)    <span class="eps">ε</span><sub>rat</sub> = ∫<sub><span class="mat">L<sub>0</sub></span></sub><sup>L</sup> <span class="frac"><span>dL</span><span>L</span></span> = ln<span class="frac"><span>L</span><span><span class="mat">L<sub>0</sub></span></span></span> = ln(1 + <span class="eps">ε</span>) = ln<span class="frac"><span><span class="mat">S<sub>0</sub></span></span><span>S</span></span></div><p class="cap">σrat, εrat : contrainte et déformation rationnelles (dites aussi vraies ; indice « rat ») ; σ, ε : grandeurs conventionnelles ; ln : logarithme népérien. Les égalités avec σ et ε ne valent que jusqu'au début de la striction</p></div>
+    <p>Comme S &lt; S<sub>0</sub>, la contrainte rationnelle dépasse la conventionnelle ; comme L &gt; L<sub>0</sub>, la déformation rationnelle est un peu plus petite. <b>Exemple</b> : à <span class="m">ε = 10 %</span> et <span class="m">σ = 480 MPa</span>, on a <span class="m">σ<sub>rat</sub> = 480 × 1,10 = 528 MPa</span> et <span class="m">ε<sub>rat</sub> = ln 1,10 = 9,53 %</span>. Après le début de la striction, il faut mesurer la section du col : la formule σ(1 + ε) n'est plus valable, l'allongement n'étant plus uniforme.</p>
+
+    <h4>Le critère de Considère</h4>
+    <p>La force vaut <span class="m">F = σ<sub>rat</sub>·S</span>. Au maximum de force, sa variation s'annule : <span class="m">dF = dσ<sub>rat</sub>·S + σ<sub>rat</sub>·dS = 0</span>. Or le volume constant donne <span class="m">−dS/S = dε<sub>rat</sub></span>. D'où :</p>
+    <div class="fx"><div class="big"><span class="frac"><span>d<span class="sig">σ</span><sub>rat</sub></span><span>d<span class="eps">ε</span><sub>rat</sub></span></span> = <span class="sig">σ</span><sub>rat</sub>    et, avec Hollomon <span class="sig">σ</span><sub>rat</sub> = <span class="mat">K</span>·<span class="eps">ε</span><sub>rat</sub><sup><span class="mat">n</span></sup> :    <span class="eps">ε</span><sub>rat</sub>(F<sub>m</sub>) = <span class="mat">n</span></div><p class="cap">La striction démarre quand la pente de la courbe rationnelle (le durcissement) tombe au niveau de la contrainte elle-même. n : coefficient d'écrouissage ; K : consistance (MPa), contrainte rationnelle extrapolée à εrat = 1</p></div>
+    <p>En effet, avec Hollomon, <span class="m">dσ<sub>rat</sub>/dε<sub>rat</sub> = n·K·ε<sub>rat</sub><sup>n−1</sup></span>, qui égale <span class="m">K·ε<sub>rat</sub><sup>n</sup></span> pour <span class="m">ε<sub>rat</sub> = n</span>. On en tire trois résultats utiles :</p>
+    <div class="fx"><div class="big"><span class="eps">A<sub>g</sub></span> = e<sup><span class="mat">n</span></sup> − 1    <span class="sig">σ</span><sub>rat</sub>(F<sub>m</sub>) = <span class="mat">K</span>·<span class="mat">n</span><sup><span class="mat">n</span></sup>    <span class="sig">R<sub>m</sub></span> = <span class="mat">K</span>·<span class="mat">n</span><sup><span class="mat">n</span></sup>·e<sup>−<span class="mat">n</span></sup></div><p class="cap">e : base des logarithmes népériens (e ≈ 2,718) ; Ag : allongement réparti, en valeur décimale. S355 (K = 850 MPa, n = 0,16) : Ag ≈ 17,4 %, Rm ≈ 540 MPa</p></div>
+
+    <h4>Mesurer n</h4>
+    <ul>
+      <li><b>Méthode 1, la droite logarithmique</b> : <span class="m">ln σ<sub>rat</sub> = ln K + n·ln ε<sub>rat</sub></span>. En coordonnées logarithmiques, la courbe rationnelle devient une droite de pente n, qui coupe l'axe ε<sub>rat</sub> = 1 à la hauteur ln K. L'ISO 10275 fixe ainsi n pour les tôles, entre deux déformations choisies dans le domaine réparti (souvent 10 et 20 %).</li>
+      <li><b>Méthode 2, la striction</b> : <span class="m">n = ε<sub>rat</sub>(F<sub>m</sub>) = ln(1 + A<sub>g</sub>)</span>.</li>
+    </ul>
+    <p><b>Exemple</b>. Deux points rationnels : 520 MPa à 5 % et 610 MPa à 15 %. <span class="m">n = ln(610/520)/ln(0,15/0,05) = 0,1596/1,0986 = 0,145</span>, puis <span class="m">K = 520/0,05<sup>0,145</sup> ≈ 804 MPa</span>. Prévision : <span class="m">A<sub>g</sub> = e<sup>0,145</sup> − 1 ≈ 15,6 %</span> et <span class="m">R<sub>m</sub> ≈ 525 MPa</span>.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Matériau</th><th>n (typique)</th><th>Conséquence</th></tr>
+      <tr><td>Inox austénitiques, cuivre recuit, laiton</td><td class="n">0,35 à 0,5</td><td>grands allongements répartis, emboutissage profond</td></tr>
+      <tr><td>Aciers doux (S235)</td><td class="n">0,2 à 0,25</td><td>bonne aptitude au formage</td></tr>
+      <tr><td>Aciers de construction (S355)</td><td class="n">0,15 à 0,2</td><td>réserve plastique confortable</td></tr>
+      <tr><td>Alliages d'aluminium</td><td class="n">0,05 à 0,3</td><td>faible à l'état durci (T6), plus fort à l'état recuit</td></tr>
+      <tr><td>Aciers trempés-revenus (S690)</td><td class="n">0,05 à 0,1</td><td>striction précoce, R<sub>m</sub> proche de R<sub>e</sub></td></tr>
+    </table></div>
+    <p><b>Ludwik ou Hollomon ?</b> La loi de Ludwik, <span class="m">σ = σ<sub>0</sub> + k·ε<sub>p</sub><sup>n</sup></span>, part de la limite d'élasticité σ<sub>0</sub> et décrit bien le début de la plasticité (ε<sub>p</sub> : déformation plastique ; k : constante). La loi de Hollomon, <span class="m">σ = K·ε<sup>n</sup></span>, néglige σ<sub>0</sub> : elle est simple et suffisante aux grandes déformations, et c'est elle qui donne le résultat élégant ε<sub>rat</sub> = n à la striction.</p>
+
+    <h4>Dans le col : la correction de Bridgman</h4>
+    <p>Une fois le col formé, le métal plus large qui l'entoure le retient : il ne peut pas se contracter librement. Le col subit alors un état de contrainte <b>triaxial</b> (des tractions radiales s'ajoutent à la traction axiale). La contrainte moyenne F/S surestime la contrainte qui fait vraiment couler le métal. P. W. Bridgman a proposé la correction :</p>
+    <div class="fx"><div class="big"><span class="sig">σ</span><sub>éq</sub> = <span class="frac"><span><span class="frc">F</span>/S</span><span>(1 + 2R/a)·ln(1 + a/(2R))</span></span></div><p class="cap">σéq : contrainte d'écoulement corrigée ; S : section du col ; a : rayon de la section minimale ; R : rayon de courbure du profil du col. Pour a/R = 0,5 : le dénominateur vaut 5 × ln 1,25 = 1,116, la correction est de −10 %</p></div>
+    <p>Cette triaxialité a une autre conséquence : elle fait grossir les cavités qui naissent sur les inclusions, ce qui conduit à la rupture ductile à cupules au centre du col (Rupture, cours 1).</p>
+    <div class="def"><b>📖 Striction</b> : localisation de la déformation plastique dans une zone qui s'amincit (le col), qui commence au maximum de force. <b>Allongement réparti</b> A<sub>g</sub> : allongement plastique atteint à la force maximale, avant la striction, réparti sur toute la longueur utile.</div>
+    <div class="tip">💡 <b>Lis n sur le procès-verbal</b> : si l'essai donne A<sub>g</sub>, alors <span class="m">n ≈ ln(1 + A<sub>g</sub>)</span>. A<sub>g</sub> = 20 % donne n ≈ 0,18. Pas besoin de tracer la droite logarithmique pour avoir un ordre de grandeur.</div>
+    <div class="warn"><b>⚠️ Piège : convertir après la striction.</b> Les formules σ(1 + ε) et ln(1 + ε) supposent un allongement uniforme. Au-delà de F<sub>m</sub>, elles sous-estiment la contrainte du col : il faut mesurer le diamètre minimal, puis appliquer la correction de Bridgman. Et pour une simulation de mise en forme ou de crash, on fournit la courbe rationnelle, jamais la conventionnelle.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « quand la pente rattrape la hauteur, le col se forme »</b> : dσ/dε = σ. Avec Hollomon, la réponse tient en une lettre : ε = n.</div>
+    <div class="weld"><b>🔥 La réserve plastique d'une structure soudée</b>
+      <p>Plus n est grand, plus R<sub>m</sub> dépasse R<sub>e</sub> et plus le rapport R<sub>e</sub>/R<sub>m</sub> est bas : le métal peut s'allonger plastiquement de façon répartie avant de faire un col. Les cahiers des charges de conduites enterrées ou de structures sismiques limitent ce rapport et exigent un allongement réparti minimal. Pour la même raison, on choisit un métal fondu un peu plus résistant que le métal de base (surappariement, <i>overmatching</i>) : si la structure se déforme, la plasticité reste dans le métal de base, au lieu de se concentrer dans le cordon.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c5">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">5</div>
+    <div class="c-title"><h2>Ce qui change la courbe</h2><p>Température, vitesse, microstructure, sens de prélèvement : le même acier, quatre visages</p></div>
+    <div class="c-img"><span class="ico">🍯</span><span><small>Image à retenir</small>Le miel : froid ou brusqué, il casse net ; tiède et tiré lentement, il file</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le miel</span></div>
+    <p>Une courbe de traction n'est pas une constante du métal : c'est sa réponse <b>dans des conditions données</b>. Quatre réglages la transforment.</p>
+    <ul>
+      <li><b>La température.</b> Un acier ordinaire tiré à 20 °C donne la courbe habituelle ; à 400 °C, elle est plus basse et plus longue ; à −196 °C (dans l'azote liquide), elle monte presque droite et casse net, sans s'allonger. Les aciers ferritiques (structure cubique centrée) deviennent fragiles à froid ; les aciers inoxydables austénitiques, l'aluminium, le cuivre et le nickel (cubiques à faces centrées) restent ductiles jusqu'aux températures cryogéniques : on en fait les réservoirs de gaz liquéfiés.</li>
+      <li><b>La vitesse.</b> Tirer vite élève la limite d'élasticité d'un acier ferritique et le rapproche du comportement fragile, comme un froid supplémentaire. Le choc de l'essai Charpy est un essai très rapide. Les normes fixent donc les vitesses d'essai.</li>
+      <li><b>La microstructure.</b> Un même acier à 0,2 % de carbone, normalisé (ferrite et perlite), résiste à environ 530 MPa et s'allonge de 28 % ; trempé (martensite), il dépasse 1 500 MPa mais casse presque sans s'allonger ; trempé puis revenu, il retrouve un compromis. Des grains plus fins le renforcent sans le fragiliser (chapitre 2).</li>
+      <li><b>Le sens de prélèvement.</b> Le laminage étire les grains et aplatit les inclusions de sulfure de manganèse en galettes parallèles à la surface. Tirée dans son épaisseur, une tôle peut perdre plus de la moitié de sa striction : c'est la cause de l'arrachement lamellaire sous les soudures en T.</li>
+    </ul>
+  </div>
+
+  <div class="lab" id="m5">
+    <p class="lab-h">Manipulation 5 : le miel et le thermostat</p>
+    <p class="lab-sub">Le même essai dans d'autres conditions. Choisis l'état du métal et le sens de prélèvement, puis règle la température <span class="mat">T</span> et la vitesse de déformation <span class="mat">ε̇</span> (en s⁻¹, sur une échelle logarithmique : chaque graduation entière multiplie par dix). En gris, la courbe de référence : même métal, 20 °C, essai lent, sens long. La rupture devient fragile quand la contrainte atteint la contrainte de clivage du métal (900 MPa pour l'acier normalisé à grains de 20 µm) ; l'acier austénitique ne clive pas. Modèle pédagogique, calé comme celui de la série Rupture.</p>
+    <div class="btns" id="m5m">
+      <button class="btn on" data-k="N" type="button">Acier 0,2 % C normalisé</button>
+      <button class="btn" data-k="Q" type="button">Trempé</button>
+      <button class="btn" data-k="QT" type="button">Trempé-revenu</button>
+      <button class="btn" data-k="AUS" type="button">Inox austénitique</button>
+    </div>
+    <div class="btns" id="m5d">
+      <button class="btn on" data-k="L" type="button">Sens long</button>
+      <button class="btn" data-k="T" type="button">Sens travers</button>
+      <button class="btn" data-k="Z" type="button">Épaisseur (Z)</button>
+    </div>
+    <div class="ctrl"><label for="m5t">Température <span class="mat">T</span></label><input type="range" id="m5t" class="r-mat" min="-196" max="400" step="2" value="20"><output id="m5to"></output></div>
+    <div class="ctrl"><label for="m5v">Vitesse <span class="mat">ε̇</span></label><input type="range" id="m5v" class="r-mat" min="-4" max="2" step="0.1" value="-3.6"><output id="m5vo"></output></div>
+    <div class="btns"><button class="btn play" id="m5play" type="button">▶ Refroidir de 400 à −196 °C</button></div>
+    <svg id="m5svg" role="img" aria-label="Courbe de traction selon la température, la vitesse, l'état métallurgique et le sens de prélèvement"></svg>
+    <div class="readout" id="m5r"></div>
+    <p class="status" id="m5msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">structure cristalline, vitesse, états, anisotropie</span></div>
+    <h4>Température et structure cristalline</h4>
+    <p>Dans un métal cubique centré, les dislocations doivent franchir une forte résistance de frottement du réseau, que l'agitation thermique aide à vaincre : leur limite d'élasticité grimpe très vite quand la température baisse (dans le modèle : 350 MPa à 20 °C, 550 MPa à −100 °C, 950 MPa à −196 °C). La contrainte de clivage, elle, ne dépend presque pas de la température. Quand la limite d'élasticité la rattrape, le métal clive avant de couler : il devient fragile. Dans un métal cubique à faces centrées, cette résistance de réseau est faible et ne dépend guère de la température : pas de transition. La transition ductile-fragile, son lien avec l'entaille et sa mesure par l'essai Charpy font l'objet du cours 2 de la série Rupture.</p>
+    <p>À chaud, R<sub>e</sub>, R<sub>m</sub> et E baissent (environ 182 GPa à 400 °C pour l'acier). Les aciers au carbone-manganèse présentent vers 200 à 300 °C un <b>vieillissement dynamique</b> : les atomes de carbone et d'azote rattrapent les dislocations et les épinglent pendant l'essai ; R<sub>m</sub> remonte un peu et l'allongement baisse. On l'appelle aussi fragilité au bleu, d'après la couleur d'oxydation de l'acier à ces températures. Les essais à chaud et à froid ont leurs normes : ISO 6892-2 et ISO 6892-3.</p>
+
+    <h4>La vitesse de déformation</h4>
+    <p>La <b>vitesse de déformation</b> <span class="m"><span class="mat">ε̇</span> = dε/dt</span> (« epsilon point », en s⁻¹) mesure la rapidité de l'essai. Un essai normalisé lent tourne autour de 10⁻⁴ à 10⁻² s⁻¹, un choc Charpy autour de 10² à 10³ s⁻¹. La limite d'élasticité d'un acier ferritique croît à peu près comme le logarithme de la vitesse ; dans le modèle, une décade de vitesse (×10) agit comme une dizaine de degrés de froid. C'est l'équivalence vitesse-température : un essai rapide ressemble à un essai lent fait à plus basse température. D'où les plages de vitesse imposées par l'ISO 6892-1 (chapitre 6).</p>
+
+    <h4>Les états métallurgiques</h4>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>État (acier à 0,2 % C, modèle)</th><th>Microstructure</th><th class="n">R<sub>e</sub></th><th class="n">R<sub>m</sub></th><th class="n">A</th><th>Rupture à 20 °C</th></tr>
+      <tr><td>Normalisé</td><td>ferrite et perlite fines</td><td class="n">≈ 350 MPa</td><td class="n">≈ 530 MPa</td><td class="n">≈ 28 %</td><td>ductile</td></tr>
+      <tr><td>Trempé</td><td>martensite non revenue</td><td class="n">≈ 1 300 MPa</td><td class="n">≈ 1 580 MPa</td><td class="n">≈ 4 %</td><td>quasi fragile</td></tr>
+      <tr><td>Trempé-revenu</td><td>martensite revenue</td><td class="n">≈ 850 MPa</td><td class="n">≈ 970 MPa</td><td class="n">≈ 14 %</td><td>ductile</td></tr>
+    </table></div>
+    <p>La trempe bloque le carbone dans une martensite très résistante mais pauvre en réserve plastique ; le revenu précipite des carbures et restaure la ductilité. La taille de grain joue en plus, selon la loi de Hall-Petch du chapitre 2.</p>
+
+    <h4>L'anisotropie et le sens de prélèvement</h4>
+    <p>On repère les directions d'une tôle laminée par trois axes : le <b>sens long</b> (direction de laminage, DL), le <b>sens travers</b> (DT) et l'<b>épaisseur</b> (direction normale, DN, aussi appelée direction Z). La limite d'élasticité et la résistance varient peu d'un sens à l'autre ; l'allongement et surtout la striction varient beaucoup, parce que les inclusions allongées s'ouvrent plus facilement quand on tire en travers de leur plat. Typiquement, la striction d'un acier de construction passe d'environ 60 % en long à 25 ou 30 % dans l'épaisseur. Les aciers garantis dans l'épaisseur (EN 10164, classes Z15, Z25 et Z35, d'après la striction minimale en %) et l'arrachement lamellaire sont détaillés dans le cours 1 de la série Rupture. Le procès-verbal doit toujours préciser le sens de prélèvement.</p>
+    <div class="def"><b>📖 Anisotropie</b> : variation des propriétés selon la direction de sollicitation. <b>Vitesse de déformation</b> ε̇ : variation de la déformation par unité de temps (s⁻¹).</div>
+    <div class="tip">💡 <b>Trois questions avant de comparer deux essais</b> : à quelle température ? à quelle vitesse ? dans quel sens ? Deux résultats qui diffèrent sur l'une d'elles ne se comparent pas.</div>
+    <div class="warn"><b>⚠️ Piège : croire qu'un bon allongement à 20 °C protège à −40 °C.</b> L'essai de traction lisse et lent est le plus indulgent qui soit : un acier ferritique peut s'y montrer ductile à des températures où il casse fragile sous une entaille et un choc. Pour le service à froid, c'est l'essai Charpy (ou un essai de ténacité) qui tranche, pas la traction.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « Froid, Fort, Fragile »</b> pour l'acier cubique centré : quand T baisse, R<sub>e</sub> monte, et l'allongement s'effondre au passage de la contrainte de clivage. Les cubiques à faces centrées échappent à la règle.</div>
+    <div class="weld"><b>🔥 Une soudure, c'est tous les états à la fois</b>
+      <p>Entre le métal fondu et le métal de base, la zone affectée thermiquement d'un acier traverse toute la table des états : trempée et dure près de la ligne de fusion si le refroidissement est rapide, revenue ou recristallisée plus loin, parfois adoucie. Une éprouvette de traction en travers du joint mélange ces zones : elle casse en général dans la partie la plus faible, et sa résistance ne dit rien de la fragilité d'une zone dure étroite. C'est pourquoi la qualification d'un mode opératoire ajoute des filiations de dureté (cours 2) et des essais Charpy dans la zone affectée.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c6">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">6</div>
+    <div class="c-title"><h2>L'essai en pratique</h2><p>Machine, éprouvette, extensomètre, procès-verbal, soudures</p></div>
+    <div class="c-img"><span class="ico">🎣</span><span><small>Image à retenir</small>La canne à pêche : au moulinet, on mesure la ligne et la canne qui plie ; seul un repère posé sur la ligne mesure la ligne</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la canne à pêche</span></div>
+    <p><b>La machine.</b> Une machine électromécanique a un bâti rigide, une <b>traverse</b> mobile entraînée par des vis que font tourner des moteurs, et deux mors qui serrent l'éprouvette. Un <b>capteur d'effort</b> mesure la force : c'est un corps d'épreuve en acier sur lequel sont collées des <b>jauges de déformation</b>, de fines pistes métalliques dont la résistance électrique varie quand elles s'allongent ; l'électronique convertit cette variation en force. Les grosses forces et les essais de fatigue emploient des machines servo-hydrauliques, où un vérin remplace les vis.</p>
+    <p><b>Le pilotage.</b> En pilotant le <b>déplacement</b> (la traverse avance à vitesse constante), la machine suit toute la courbe, descente comprise : c'est le mode des essais de traction. En pilotant la <b>force</b> (elle augmente régulièrement), la machine ne peut pas suivre la descente : passé R<sub>m</sub>, elle continue d'exiger plus de force que l'éprouvette ne peut en porter, et tout s'emballe jusqu'à la rupture. Ce mode sert aux essais de fluage et de fatigue.</p>
+    <p><b>L'éprouvette.</b> Des têtes larges, serrées dans les mors, qui ne doivent pas se déformer ; des <b>congés</b> de raccordement à grand rayon, pour éviter une concentration de contrainte ; une <b>partie calibrée</b> de section constante, où l'on trace les repères L<sub>0</sub>. L'essai n'est valable que si l'éprouvette casse dans la partie calibrée, loin des congés.</p>
+    <p><b>La mesure de l'allongement.</b> Le déplacement de la traverse est facile à lire, mais il additionne l'allongement de l'éprouvette, la déformation du bâti, des mors et des têtes, et les jeux qui se rattrapent au début : la courbe commence par un pied arrondi et sa pente est bien trop faible. C'est la canne à pêche : au moulinet, on mesure la ligne et la canne qui plie. L'<b>extensomètre</b>, posé sur l'éprouvette entre deux repères (à couteaux, ou optique par caméra ou laser qui suit des marques peintes), mesure seulement ce qui se passe entre ces repères. Il est indispensable pour mesurer E et R<sub>p0,2</sub>.</p>
+  </div>
+
+  <div class="lab" id="m6">
+    <p class="lab-h">Manipulation 6 : la canne à pêche</p>
+    <p class="lab-sub">Une éprouvette ronde en acier S355, de 10 mm de diamètre (L<sub>0</sub> = 50 mm, partie calibrée L<sub>c</sub> = 60 mm). Choisis ce qui mesure l'allongement et le mode de pilotage, puis règle la raideur de la machine (bâti, mors et têtes, en kN/mm, kilonewtons par millimètre) et le jeu à rattraper au départ. La courbe colorée est ce que le logiciel enregistre ; la grise, la vraie courbe du matériau. Avec la traverse, la déformation affichée est le déplacement divisé par L<sub>c</sub>. Modèle pédagogique.</p>
+    <div class="btns" id="m6m">
+      <button class="btn on" data-k="trav" type="button">Déplacement de la traverse</button>
+      <button class="btn" data-k="ext" type="button">Extensomètre</button>
+    </div>
+    <div class="btns" id="m6a">
+      <button class="btn on" data-k="dep" type="button">Pilotage en déplacement</button>
+      <button class="btn" data-k="force" type="button">Pilotage en force</button>
+    </div>
+    <div class="ctrl"><label for="m6k">Raideur de la machine</label><input type="range" id="m6k" class="r-mat" min="20" max="500" step="10" value="100"><output id="m6ko"></output></div>
+    <div class="ctrl"><label for="m6j">Jeu au départ</label><input type="range" id="m6j" class="r-mat" min="0" max="0.4" step="0.02" value="0.16"><output id="m6jo"></output></div>
+    <div class="btns"><button class="btn play" id="m6play" type="button">▶ Lancer l'essai</button><button class="btn" id="m6c" type="button">Correction du pied de courbe : non</button></div>
+    <svg id="m6svg" role="img" aria-label="Courbe enregistrée par la traverse ou par l'extensomètre, comparée à la vraie courbe du matériau"></svg>
+    <div class="readout" id="m6r"></div>
+    <p class="status" id="m6msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">ISO 6892-1, éprouvettes, validité, soudures</span></div>
+    <h4>Les vitesses de l'ISO 6892-1</h4>
+    <p>Puisque la vitesse change le résultat (chapitre 5), la norme l'encadre. La <b>méthode A</b> pilote la vitesse de déformation : de préférence 0,000 25 s⁻¹ (± 20 %) jusqu'à la limite d'élasticité, puis 0,006 7 s⁻¹ (± 20 %) pour R<sub>m</sub> et l'allongement. En variante A1, la boucle d'asservissement lit l'extensomètre ; en variante A2, on règle une vitesse de traverse équivalente. La <b>méthode B</b>, plus ancienne, pilote la vitesse de mise en contrainte dans le domaine élastique : 6 à 60 MPa/s pour les métaux de module E ≥ 150 GPa (aciers), 2 à 20 MPa/s en dessous (aluminium, titane, cuivre). L'essai se fait entre 10 et 35 °C, ou à 23 ± 5 °C quand la température doit être maîtrisée.</p>
+
+    <h4>Les éprouvettes proportionnelles</h4>
+    <p>L'allongement après rupture additionne une part répartie, proportionnelle à L<sub>0</sub>, et la part du col, qui dépend de la taille de la section et non de L<sub>0</sub> (loi de Barba). Une éprouvette courte donne donc un A plus grand qu'une longue. Pour comparer, on garde la même proportion entre longueur et section :</p>
+    <div class="fx"><div class="big"><span class="mat">L<sub>0</sub></span> = k·√<span class="mat">S<sub>0</sub></span>    k = 5,65    (soit <span class="mat">L<sub>0</sub></span> = 5·d<sub>0</sub> pour une éprouvette ronde)</div><p class="cap">k : coefficient de proportionnalité ; L0 ≥ 15 mm. Si 5,65 donne une longueur trop courte, on prend k = 11,3 (noté A11,3) ou une longueur fixe (A50mm, A80mm pour les tôles minces). A sans indice sous-entend k = 5,65</p></div>
+    <p><b>Exemples</b> : plat de 20 × 6 mm, S<sub>0</sub> = 120 mm², <span class="m">L<sub>0</sub> = 5,65 × √120 = 61,9 mm</span> ; tôle de 12,5 × 2 mm, <span class="m">L<sub>0</sub> = 28,2 mm</span>.</p>
+    <p><b>Validité de A.</b> En principe, l'allongement après rupture n'est valable que si la rupture se trouve à au moins L<sub>0</sub>/3 du repère le plus proche (16,7 mm pour L<sub>0</sub> = 50 mm). Sinon, la norme propose une méthode de report à partir de repères intermédiaires ; et la mesure reste acceptée si A atteint quand même la valeur exigée.</p>
+
+    <h4>La chaîne de mesure</h4>
+    <ul>
+      <li><b>Force</b> : capteur étalonné selon l'ISO 7500-1 ; la classe 1 garantit une erreur relative d'au plus 1 %.</li>
+      <li><b>Allongement</b> : extensomètre étalonné selon l'ISO 9513 ; classe 1 pour mesurer R<sub>p</sub>, classe 2 admise pour les grands allongements. On le retire souvent avant la rupture pour le protéger, puis on mesure A sur les deux morceaux rapprochés.</li>
+      <li><b>Raideur</b> : avec la traverse, la pente apparente vaut <span class="m">E<sub>app</sub> = E/(1 + E·S<sub>0</sub>/(K<sub>m</sub>·L<sub>c</sub>))</span>, où K<sub>m</sub> est la raideur de la machine. Pour K<sub>m</sub> = 100 kN/mm, sans jeu, et l'éprouvette de la manipulation 6 (S<sub>0</sub> = 78,5 mm², L<sub>c</sub> = 60 mm) : E<sub>app</sub> = 210 000/(1 + 210 000 × 78,5/(100 000 × 60)) ≈ 56 GPa au lieu de 210 GPa.</li>
+      <li><b>Alignement</b> : des mors mal alignés ajoutent de la flexion, qui fausse surtout le début de la courbe et R<sub>eH</sub>.</li>
+    </ul>
+
+    <h4>Le procès-verbal</h4>
+    <p>Il cite la norme et la méthode d'essai, identifie le matériau (nuance, coulée, état), le type d'éprouvette, son emplacement et son sens de prélèvement (L, T ou Z), ses dimensions, la température, puis donne les résultats : R<sub>eH</sub> et R<sub>eL</sub>, ou R<sub>p0,2</sub>, R<sub>m</sub>, A (avec son indice si k ≠ 5,65), Z, et l'emplacement de la rupture. Un résultat sans sens de prélèvement ni type d'éprouvette ne peut pas être comparé à une spécification.</p>
+
+    <h4>La traction des soudures</h4>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Essai</th><th>Éprouvette</th><th>Ce qu'on en tire</th></tr>
+      <tr><td><b>Traction transversale</b> (ISO 4136)</td><td>prélevée en travers du joint, le cordon au milieu de la partie calibrée, surépaisseurs arasées</td><td>R<sub>m</sub> de l'assemblage et lieu de la rupture (métal de base, zone affectée, métal fondu) ; pas d'allongement significatif, la déformation étant hétérogène</td></tr>
+      <tr><td><b>Traction longitudinale du métal fondu</b> (ISO 5178)</td><td>ronde, usinée entièrement dans le métal fondu, dans l'axe du cordon</td><td>R<sub>p0,2</sub> (ou R<sub>eL</sub>), R<sub>m</sub>, A, Z du métal fondu : classement des métaux d'apport</td></tr>
+    </table></div>
+    <p>Pour la qualification d'un mode opératoire de soudage bout à bout (ISO 15614-1), les éprouvettes transversales doivent atteindre au moins la résistance minimale spécifiée du métal de base, et le procès-verbal note où elles ont cassé. Une rupture dans le métal de base, loin du cordon, est le cas le plus rassurant ; une rupture dans le cordon ou la zone affectée, même au-dessus du minimum, invite à regarder la macrographie et les duretés (cours 2 et 3).</p>
+    <div class="def"><b>📖 Jauge de déformation</b> : résistance électrique en piste mince, collée sur une pièce, dont la variation de résistance suit la déformation de la pièce. <b>Extensomètre</b> : capteur qui mesure l'allongement entre deux points de l'éprouvette elle-même.</div>
+    <div class="tip">💡 <b>Le test du module</b> : si un procès-verbal affiche E ≈ 60 GPa pour un acier, la déformation a été lue sur la traverse. Toute grandeur qui dépend de la pente (E, R<sub>p0,2</sub>) est alors suspecte ; les forces (R<sub>eH</sub>, R<sub>m</sub>) restent justes.</div>
+    <div class="warn"><b>⚠️ Piège : une rupture dans le congé ou dans les mors.</b> L'éprouvette a cassé là où la contrainte était concentrée, pas là où le métal était le plus faible : R<sub>m</sub> est sous-estimée et A n'a pas de sens. L'essai est à refaire, et l'usinage des congés à vérifier.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « 5,65, c'est 5 diamètres »</b> : L<sub>0</sub> = 5,65·√S<sub>0</sub> = 5·d<sub>0</sub> pour une éprouvette ronde. Et « au tiers de la longueur » pour la validité de A.</div>
+    <div class="weld"><b>🔥 Préparer les éprouvettes d'une QMOS</b>
+      <p>Le coordinateur fait repérer les éprouvettes avant découpe (sens, position dans l'assemblage, numéro de l'essai), vérifie qu'elles sont prélevées hors des zones d'amorçage et d'arrêt, et que l'usinage n'a pas chauffé le métal. Il lit ensuite le procès-verbal comme un contrôleur : sections recalculées, sens et type d'éprouvette, lieu de rupture, cohérence avec le certificat 3.1 du métal de base et avec la classe du métal d'apport.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="exos">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✎</div>
+    <div class="c-title"><h2>Exercices corrigés</h2><p>Six exercices et un défi, de la tige qui s'allonge à la tôle à emboutir</p></div>
+    <div class="c-img"><span class="ico">🏋️</span><span><small>Image à retenir</small>La salle de musculation : on ne progresse qu'en soulevant soi-même</span></div>
+  </div>
+  <div class="lv lv1"><div class="lv-h">👁 Mode d'emploi <span class="tag">formule littérale, puis valeurs, puis unités</span></div>
+    <p>Cherche chaque question sur papier avant d'ouvrir la correction. Écris toujours la formule avant les nombres, et garde les unités jusqu'au bout. Les valeurs des exercices 2, 5 et 6 se retrouvent dans les manipulations ; le défi se rejoue dans la manipulation 4.</p>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 1 : la tige qui s'allonge <span class="lvtag">N1 · chapitre 1</span></h4>
+    <p>Une tige d'acier de diamètre 10 mm et de longueur 2 m porte une charge de 15 kN. E<sub>acier</sub> = 210 GPa, ν = 0,3 ; E<sub>alu</sub> = 70 GPa.</p>
+    <p class="q"><b>a)</b> Calcule la contrainte dans la tige.</p>
+    <p class="q"><b>b)</b> Calcule sa déformation et son allongement.</p>
+    <p class="q"><b>c)</b> Même tige en alliage d'aluminium : allongement ?</p>
+    <p class="q"><b>d)</b> La tige est maintenant en acier trempé (R<sub>e</sub> = 1 200 MPa). Son allongement change-t-il ?</p>
+    <p class="q"><b>e)</b> Calcule le module de cisaillement G de l'acier.</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">S<sub>0</sub> = π·d²/4 = π × 10²/4 = 78,5 mm²</span>, puis <span class="m">σ = F/S<sub>0</sub> = 15 000 N/78,5 mm² = 191 MPa</span>.</p>
+      <p><b>b)</b> <span class="m">ε = σ/E = 191/210 000 = 9,1·10⁻⁴</span> (0,091 %) ; <span class="m">ΔL = ε·L<sub>0</sub> = 9,1·10⁻⁴ × 2 000 mm = 1,82 mm</span>.</p>
+      <p><b>c)</b> <span class="m">ΔL = 191/70 000 × 2 000 = 5,46 mm</span> : trois fois plus, car E est trois fois plus petit.</p>
+      <p><b>d)</b> Non : 191 MPa reste sous R<sub>e</sub>, la tige est élastique, et la trempe ne change pas E. L'allongement reste 1,82 mm. La trempe repousse la limite d'élasticité, pas la raideur.</p>
+      <p><b>e)</b> <span class="m">G = E/(2(1 + ν)) = 210/(2 × 1,3) ≈ 80,8 GPa</span>.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 2 : le cristal de cuivre <span class="lvtag">N1 et N2 · chapitre 2</span></h4>
+    <p>Un monocristal de cuivre a une cission critique τ<sub>0</sub> = 1 MPa et un module de cisaillement G = 48 GPa. Les questions a) à c) se rejouent dans la manipulation 2.</p>
+    <p class="q"><b>a)</b> Plan à φ = 45°, direction de glissement dans la ligne de plus grande pente (ψ = 0) : à quelle contrainte le glissement démarre-t-il ?</p>
+    <p class="q"><b>b)</b> Même question pour φ = 60° (ψ = 0) : que valent λ et m ?</p>
+    <p class="q"><b>c)</b> Plan à 45°, mais direction tournée de ψ = 60° : sachant que cos λ = sin φ·cos ψ, calcule λ, m et la contrainte de glissement.</p>
+    <p class="q"><b>d)</b> Calcule la cission théorique G/(2π). Combien de fois dépasse-t-elle τ<sub>0</sub> ? Qu'en conclure ?</p>
+    <p class="q"><b>e)</b> Pour un acier doux, R<sub>e</sub> = 70 + 0,74/√d (d en m). Que gagne-t-on en passant de grains de 20 µm à 5 µm ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">m = cos 45° × cos 45° = 0,5</span>, donc <span class="m">σ = τ<sub>0</sub>/m = 1/0,5 = 2,00 MPa</span>.</p>
+      <p><b>b)</b> Dans la ligne de plus grande pente, λ = 90° − φ = 30°. <span class="m">m = cos 60° × cos 30° = 0,5 × 0,866 = 0,433</span> ; <span class="m">σ = 1/0,433 = 2,31 MPa</span>.</p>
+      <p><b>c)</b> <span class="m">cos λ = sin 45° × cos 60° = 0,707 × 0,5 = 0,354</span>, soit λ ≈ 69,3° ; <span class="m">m = cos 45° × 0,354 = 0,250</span> ; <span class="m">σ = 4,00 MPa</span>. Le plan est bien orienté, mais la direction de glissement l'est mal.</p>
+      <p><b>d)</b> <span class="m">G/(2π) = 48 000/6,28 ≈ 7 640 MPa</span>, environ 7 600 fois τ<sub>0</sub>. Le cristal ne glisse pas d'un bloc : des dislocations se déplacent en ne rompant qu'une rangée de liaisons à la fois.</p>
+      <p><b>e)</b> À 20 µm : <span class="m">70 + 0,74/√(20·10⁻⁶) = 70 + 165 ≈ 235 MPa</span> ; à 5 µm : <span class="m">70 + 331 ≈ 401 MPa</span>. Diviser la taille de grain par 4 multiplie ici R<sub>e</sub> par 1,7.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 3 : le procès-verbal de la tôle S355J2 <span class="lvtag">N2 · chapitre 3 et 6</span></h4>
+    <p>Éprouvette plate prélevée en long dans une tôle S355J2 de 12 mm : largeur 25,0 mm, épaisseur 12,0 mm. Pic de force 117,6 kN, palier 112,2 kN, force maximale 161,4 kN. Après rupture : longueur entre repères L<sub>u</sub> = 117,5 mm, section du col 17,0 × 7,5 mm. Exigences de l'EN 10025-2 pour cette épaisseur : R<sub>eH</sub> ≥ 355 MPa, R<sub>m</sub> de 470 à 630 MPa, A ≥ 22 % en long.</p>
+    <p class="q"><b>a)</b> Calcule S<sub>0</sub> et la longueur proportionnelle L<sub>0</sub>, arrondie au millimètre.</p>
+    <p class="q"><b>b)</b> Calcule R<sub>eH</sub>, R<sub>eL</sub> et R<sub>m</sub>.</p>
+    <p class="q"><b>c)</b> Calcule A et Z.</p>
+    <p class="q"><b>d)</b> La tôle est-elle conforme ?</p>
+    <p class="q"><b>e)</b> La rupture s'est produite à 20 mm d'un repère. Que conclure ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">S<sub>0</sub> = 25,0 × 12,0 = 300 mm²</span> ; <span class="m">L<sub>0</sub> = 5,65 × √300 = 97,9 ≈ 98 mm</span>.</p>
+      <p><b>b)</b> <span class="m">R<sub>eH</sub> = 117 600/300 = 392 MPa</span> ; <span class="m">R<sub>eL</sub> = 112 200/300 = 374 MPa</span> ; <span class="m">R<sub>m</sub> = 161 400/300 = 538 MPa</span>.</p>
+      <p><b>c)</b> <span class="m">A = (117,5 − 98)/98 = 19,9 %</span> ; <span class="m">S<sub>u</sub> = 17,0 × 7,5 = 127,5 mm²</span>, d'où <span class="m">Z = (300 − 127,5)/300 = 57,5 %</span>.</p>
+      <p><b>d)</b> R<sub>eH</sub> et R<sub>m</sub> sont conformes ; A = 19,9 % est sous les 22 % exigés.</p>
+      <p><b>e)</b> <span class="m">L<sub>0</sub>/3 = 98/3 = 32,7 mm</span> : la rupture est trop près du repère (20 mm). Comme A n'atteint pas la valeur exigée, la mesure n'est pas valable : on ne peut ni accepter ni rejeter sur A. On applique la méthode de report de l'ISO 6892-1 si des repères intermédiaires ont été tracés, ou l'on refait l'essai sur une nouvelle éprouvette. R<sub>eH</sub> et R<sub>m</sub> restent valables.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 4 : de la courbe conventionnelle à n <span class="lvtag">N2 · chapitre 4</span></h4>
+    <p>Deux points de la courbe conventionnelle d'un acier, avant la striction : 495,2 MPa à 5,13 %, et 530,4 MPa à 16,18 %.</p>
+    <p class="q"><b>a)</b> Convertis ces deux points en grandeurs rationnelles.</p>
+    <p class="q"><b>b)</b> Déduis-en n et K de la loi de Hollomon.</p>
+    <p class="q"><b>c)</b> Prévois A<sub>g</sub>, la contrainte rationnelle à la force maximale et R<sub>m</sub>.</p>
+    <p class="q"><b>d)</b> Plus tard, le col mesure 7,0 mm de diamètre (d<sub>0</sub> = 10 mm), son profil a un rayon de courbure de 8 mm, et la force vaut 30,2 kN. Calcule la contrainte moyenne au col, la déformation rationnelle du col, puis la contrainte corrigée de Bridgman.</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">σ<sub>rat</sub> = 495,2 × 1,0513 = 520,6 MPa</span>, <span class="m">ε<sub>rat</sub> = ln 1,0513 = 0,050</span> ; <span class="m">σ<sub>rat</sub> = 530,4 × 1,1618 = 616,2 MPa</span>, <span class="m">ε<sub>rat</sub> = ln 1,1618 = 0,150</span>.</p>
+      <p><b>b)</b> <span class="m">n = ln(616,2/520,6)/ln(0,150/0,050) = 0,1686/1,0986 = 0,153</span> ; <span class="m">K = 520,6/0,050<sup>0,153</sup> ≈ 825 MPa</span>.</p>
+      <p><b>c)</b> <span class="m">A<sub>g</sub> = e<sup>0,153</sup> − 1 ≈ 16,6 %</span> ; <span class="m">σ<sub>rat</sub>(F<sub>m</sub>) = K·n<sup>n</sup> ≈ 618 MPa</span> ; <span class="m">R<sub>m</sub> = 618 × e<sup>−0,153</sup> ≈ 530 MPa</span>. Le second point était déjà presque au sommet.</p>
+      <p><b>d)</b> <span class="m">S = π × 7,0²/4 = 38,5 mm²</span>, <span class="m">F/S = 30 200/38,5 = 785 MPa</span> ; <span class="m">ε<sub>rat</sub> = ln(S<sub>0</sub>/S) = 2·ln(10/7) = 0,713</span> (Hollomon donne K·0,713<sup>n</sup> ≈ 783 MPa : cohérent). Avec a = 3,5 mm et R = 8 mm : <span class="m">a/R = 0,4375</span>, dénominateur <span class="m">(1 + 2 × 8/3,5) × ln(1 + 3,5/16) = 5,571 × 0,1978 = 1,102</span>, d'où <span class="m">σ<sub>éq</sub> = 785/1,102 ≈ 712 MPa</span> : 9 % de moins que la contrainte moyenne.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 5 : froid, vite et dans l'épaisseur <span class="lvtag">N1 et N2 · chapitre 5</span></h4>
+    <p>On prend le modèle de la manipulation 5 : pour l'acier normalisé, <span class="m">R<sub>e</sub> = 240 + 1 383·exp(−0,008 65·T<sub>K</sub>)</span> (T<sub>K</sub> : température en kelvins, T(°C) + 273,15), et contrainte de clivage σ<sub>c</sub> = 900 MPa.</p>
+    <p class="q"><b>a)</b> Calcule R<sub>e</sub> à 20 °C, à −100 °C et à −196 °C. À laquelle de ces températures l'acier casse-t-il dans le domaine élastique ?</p>
+    <p class="q"><b>b)</b> Pourquoi un inox austénitique reste-t-il ductile à −196 °C ?</p>
+    <p class="q"><b>c)</b> Dans le modèle, un essai à la vitesse ε̇ se comporte comme un essai lent à la température T<sub>K</sub>·(1 − 0,035·log<sub>10</sub>(ε̇/2,5·10⁻⁴)). À quelle température lente équivaut un essai à 100 s⁻¹ fait à 20 °C ? Que vaut alors R<sub>e</sub> ?</p>
+    <p class="q"><b>d)</b> Prélevée dans l'épaisseur, la tôle donne Z = 26 % au lieu de 62 % en long. Pourquoi ? Quelle classe de l'EN 10164 une moyenne de 26 % atteindrait-elle ?</p>
+    <p class="q"><b>e)</b> Un acier donne A = 28 % en traction à 20 °C. Peut-on en déduire qu'il est sûr à −40 °C ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> 20 °C : <span class="m">240 + 1 383·e<sup>−2,536</sup> ≈ 350 MPa</span> ; −100 °C : <span class="m">240 + 1 383·e<sup>−1,498</sup> ≈ 549 MPa</span> ; −196 °C : <span class="m">240 + 1 383·e<sup>−0,667</sup> ≈ 950 MPa</span>. Seule la dernière dépasse σ<sub>c</sub> = 900 MPa : l'acier clive avant de couler, sans allongement.</p>
+      <p><b>b)</b> Sa structure cubique à faces centrées a des systèmes de glissement faciles dont la cission ne grimpe pas au froid : sa limite d'élasticité monte modérément (≈ 500 MPa dans le modèle) et n'atteint jamais une contrainte de clivage. Il durcit même davantage en se déformant.</p>
+      <p><b>c)</b> <span class="m">log<sub>10</sub>(100/2,5·10⁻⁴) = 5,60</span>, d'où <span class="m">T<sub>K</sub> = 293,15 × (1 − 0,035 × 5,60) ≈ 236 K ≈ −37 °C</span> ; <span class="m">R<sub>e</sub> ≈ 420 MPa</span>. Un essai rapide « refroidit » l'acier d'une soixantaine de degrés.</p>
+      <p><b>d)</b> Le laminage a aplati les inclusions de sulfure de manganèse en galettes parallèles à la surface : tirée dans l'épaisseur, l'éprouvette les ouvre comme des fentes, et sa striction s'effondre. Une moyenne de 26 % atteint la classe Z25 (moyenne d'au moins 25 %), pas Z35.</p>
+      <p><b>e)</b> Non. La traction lente sur éprouvette lisse est l'essai le plus indulgent : sans entaille ni choc, un acier ferritique peut y rester ductile à des températures où il casse fragile en service. Pour −40 °C, il faut un résultat Charpy (ou de ténacité) à cette température.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 6 : le banc d'essai <span class="lvtag">N2 · chapitre 6</span></h4>
+    <p class="q"><b>a)</b> Calcule la longueur proportionnelle L<sub>0</sub> (k = 5,65) d'une éprouvette ronde de 8 mm, d'un plat de 30 × 10 mm et d'une tôle de 20 × 1,5 mm.</p>
+    <p class="q"><b>b)</b> Éprouvette ronde de 10 mm, partie calibrée L<sub>c</sub> = 60 mm, acier E = 210 GPa : calcule la pente apparente lue sur la traverse pour une machine de raideur 100 kN/mm, puis 500 kN/mm (sans jeu).</p>
+    <p class="q"><b>c)</b> Un procès-verbal donne E = 58 GPa pour un acier. Quelles grandeurs restent fiables ?</p>
+    <p class="q"><b>d)</b> Pourquoi ne pilote-t-on pas un essai de traction en force ?</p>
+    <p class="q"><b>e)</b> QMOS sur un joint en S355 (R<sub>m</sub> minimale 470 MPa) : l'éprouvette transversale 1 casse dans le métal de base à 538 MPa, la 2 dans le métal fondu à 489 MPa. Conforme ? Que regarder de plus ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Rond de 8 mm : <span class="m">S<sub>0</sub> = 50,3 mm²</span>, <span class="m">L<sub>0</sub> = 5,65 × √50,3 = 40,1 mm</span> (soit 5·d<sub>0</sub> = 40 mm). Plat de 30 × 10 : <span class="m">L<sub>0</sub> = 5,65 × √300 = 97,9 mm</span>. Tôle de 20 × 1,5 : <span class="m">L<sub>0</sub> = 5,65 × √30 = 30,9 mm</span>, au-dessus du minimum de 15 mm.</p>
+      <p><b>b)</b> <span class="m">E<sub>app</sub> = E/(1 + E·S<sub>0</sub>/(K<sub>m</sub>·L<sub>c</sub>))</span>. Avec K<sub>m</sub> = 100 kN/mm = 100 000 N/mm : <span class="m">E·S<sub>0</sub>/(K<sub>m</sub>·L<sub>c</sub>) = 210 000 × 78,5/(100 000 × 60) = 2,75</span>, d'où <span class="m">E<sub>app</sub> ≈ 56 GPa</span>. Avec 500 kN/mm : rapport 0,55, <span class="m">E<sub>app</sub> ≈ 136 GPa</span>. Même une machine raide fausse la pente : seul l'extensomètre la mesure.</p>
+      <p><b>c)</b> La déformation a été lue sur la traverse. Les grandeurs calculées à partir des forces (R<sub>eH</sub>, R<sub>eL</sub>, R<sub>m</sub>) restent justes ; E et R<sub>p0,2</sub> sont faux ; A doit être mesuré sur les morceaux, entre repères.</p>
+      <p><b>d)</b> Passé R<sub>m</sub>, l'éprouvette ne peut plus porter une force croissante : la machine s'emballe, le col se forme en un instant et la rupture est brutale. On perd la descente de la courbe (et donc la mesure fiable de A et de l'énergie), et le choc peut abîmer la machine.</p>
+      <p><b>e)</b> Les deux résultats dépassent 470 MPa : le critère de résistance de l'ISO 15614-1 est satisfait. Mais la rupture de l'éprouvette 2 dans le métal fondu signale un cordon moins résistant que le métal de base (sous-appariement ou défaut) : on examine sa cassure, la macrographie (défauts, collages) et les duretés, et l'on vérifie que le métal d'apport a la bonne classe.</p>
+    </div></details>
+  </div>
+
+  <div class="exo defi">
+    <h4>🏆 Défi : la tôle à emboutir <span class="lvtag">N2 · chapitre 4, à rejouer dans la manipulation 4</span></h4>
+    <p>Un fabricant d'éviers en acier cherche une tôle qui s'allonge régulièrement d'au moins 20 % avant la striction (A<sub>g</sub> ≥ 20 %) et qui résiste à au moins 450 MPa. Trois tôles suivent la loi de Hollomon : A (K = 760 MPa, n = 0,24), B (K = 900 MPa, n = 0,14), C (K = 820 MPa, n = 0,20). Dans la manipulation 4, clique d'abord sur « S355 » (striction finale Z = 60 %), puis règle n et K.</p>
+    <p class="q"><b>a)</b> Calcule R<sub>m</sub> et A<sub>g</sub> pour chaque tôle.</p>
+    <p class="q"><b>b)</b> Laquelle remplit le cahier des charges ?</p>
+    <p class="q"><b>c)</b> Pour cette tôle, quelle contrainte vraie règne au début de la striction ?</p>
+    <p class="q"><b>d)</b> Plus loin, au col, ε<sub>rat</sub> = 0,60 (avancement 65,5 % dans la manipulation). Avec a/R ≈ 1,1·(ε<sub>rat</sub> − n), calcule la contrainte moyenne au col et la contrainte corrigée de Bridgman.</p>
+    <p class="q"><b>e)</b> Pourquoi la tôle B, la plus résistante, est-elle la moins adaptée ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">R<sub>m</sub> = K·n<sup>n</sup>·e<sup>−n</sup></span> et <span class="m">A<sub>g</sub> = e<sup>n</sup> − 1</span>. A : R<sub>m</sub> ≈ 424 MPa, A<sub>g</sub> ≈ 27,1 % ; B : R<sub>m</sub> ≈ 594 MPa, A<sub>g</sub> ≈ 15,0 % ; C : R<sub>m</sub> ≈ 487 MPa, A<sub>g</sub> ≈ 22,1 %.</p>
+      <p><b>b)</b> A s'allonge assez mais résiste trop peu ; B résiste mais fait son col trop tôt ; seule <b>C</b> remplit les deux conditions.</p>
+      <p><b>c)</b> <span class="m">σ<sub>rat</sub>(F<sub>m</sub>) = K·n<sup>n</sup> = 820 × 0,20<sup>0,20</sup> ≈ 594 MPa</span>, à ε<sub>rat</sub> = n = 0,20.</p>
+      <p><b>d)</b> Contrainte moyenne : <span class="m">820 × 0,60<sup>0,20</sup> ≈ 740 MPa</span>. <span class="m">a/R = 1,1 × (0,60 − 0,20) = 0,44</span> ; dénominateur <span class="m">(1 + 2/0,44) × ln(1 + 0,22) = 5,545 × 0,199 = 1,103</span> ; <span class="m">σ<sub>éq</sub> ≈ 671 MPa</span>, lu aussi dans la manipulation avec « Bridgman : oui ».</p>
+      <p><b>e)</b> Son faible coefficient d'écrouissage (n = 0,14) fait démarrer la striction à 15 % d'allongement : pendant l'emboutissage, la déformation se concentrerait dans un col et la tôle se déchirerait. Pour former, c'est n qui compte, pas R<sub>m</sub>.</p>
+    </div></details>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="quiz-s">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">?</div>
+    <div class="c-title"><h2>Quiz : 12 questions éclair</h2><p>Chaque réponse est expliquée, même quand tu as juste</p></div>
+    <div class="c-img"><span class="ico">🎯</span><span><small>Image à retenir</small>La cible : vise 10 sur 12 avant de passer au cours 2</span></div>
+  </div>
+  <div id="quiz"></div>
+  <div class="score" id="qzScore" aria-live="polite">Score : 0 / 12</div>
+  <div class="btns"><button class="btn" id="qzReset" type="button">↺ Recommencer le quiz</button></div>
+</div>
+</section>
+
+<section class="chap" id="fiche">
+<div class="wrap wide">
+  <div class="cartouche">
+    <div class="c-num">★</div>
+    <div class="c-title"><h2>Fiche mémoire du cours 1</h2><p>Neuf cases, neuf images : à photographier, puis à redessiner de tête</p></div>
+    <div class="c-img"><span class="ico">🏛️</span><span><small>Image à retenir</small>« Des faits, pas des opinions » : la devise gravée au-dessus d'un laboratoire d'essais</span></div>
+  </div>
+  <div class="fiche">
+    <div><div class="ic">🛏️</div><h4>Le sommier</h4><div class="f"><span class="sig">σ</span> = <span class="mat">E</span>·<span class="eps">ε</span></div><p>E mesure la raideur des liaisons : 210 GPa pour l'acier, 70 pour l'aluminium ; insensible aux traitements.</p></div>
+    <div><div class="ic">🐛</div><h4>La chenille</h4><div class="f"><span class="tau">τ</span> = <span class="sig">σ</span>·cos φ·cos λ</div><p>Le cristal glisse quand τ atteint τ0 ; m ≤ 0,5. Les dislocations rendent le glissement mille fois plus facile.</p></div>
+    <div><div class="ic">🧱</div><h4>Les grains</h4><div class="f"><span class="sig">R<sub>e</sub></span> = σ<sub>0</sub> + k/√<span class="mat">d</span></div><p>Des grains plus fins arrêtent plus de dislocations : le métal se renforce sans se fragiliser.</p></div>
+    <div><div class="ic">🚇</div><h4>La ligne de métro</h4><div class="f">E → R<sub>eH</sub>, R<sub>eL</sub> ou R<sub>p0,2</sub> → R<sub>m</sub> → A, Z</div><p>R<sub>p0,2</sub> laisse 0,2 % de déformation permanente ; R<sub>m</sub> est le sommet, pas la rupture.</p></div>
+    <div><div class="ic">📏</div><h4>La règle</h4><div class="f"><span class="eps">A</span> = (L<sub>u</sub> − <span class="mat">L<sub>0</sub></span>)/<span class="mat">L<sub>0</sub></span>  ·  <span class="mat">L<sub>0</sub></span> = 5,65·√<span class="mat">S<sub>0</sub></span></div><p>Z = (S<sub>0</sub> − S<sub>u</sub>)/S<sub>0</sub>. A n'est valable que si la rupture est à plus de L<sub>0</sub>/3 d'un repère.</p></div>
+    <div><div class="ic">🍬</div><h4>Le caramel</h4><div class="f">d<span class="sig">σ</span>/d<span class="eps">ε</span> = <span class="sig">σ</span>  ⇒  <span class="eps">ε</span><sub>rat</sub> = <span class="mat">n</span></div><p>σ<sub>rat</sub> = σ(1 + ε), ε<sub>rat</sub> = ln(1 + ε) ; A<sub>g</sub> = eⁿ − 1 ; R<sub>m</sub> = K·nⁿ·e⁻ⁿ.</p></div>
+    <div><div class="ic">🍯</div><h4>Le miel</h4><div class="f"><span class="sig">R<sub>e</sub></span>(froid, vite) ≥ σ<sub>c</sub> ⇒ fragile</div><p>Froid et vitesse durcissent l'acier cubique centré jusqu'au clivage ; l'austénite reste ductile. Toujours noter T, vitesse et sens.</p></div>
+    <div><div class="ic">🎣</div><h4>La canne à pêche</h4><div class="f">E<sub>app</sub> = E/(1 + E·S<sub>0</sub>/(K<sub>m</sub>·L<sub>c</sub>))</div><p>La traverse mesure aussi la machine : extensomètre obligatoire pour E et R<sub>p0,2</sub> ; pilotage en déplacement.</p></div>
+    <div><div class="ic">🔩</div><h4>La soudure</h4><div class="f">ISO 4136 · ISO 5178</div><p>Traction en travers du joint : R<sub>m</sub> ≥ R<sub>m</sub> minimale du métal de base, et lieu de rupture. Métal fondu seul : classe de l'apport.</p></div>
+  </div>
+  <div class="fun"><span class="fun-h">🏛️ Fun fact : « Facts not opinions »</span>En juin 1864, l'ingénieur écossais David Kirkaldy commence à Londres la construction d'une machine d'essai géante : près de 14,5 m de long, une presse hydraulique capable de tirer environ un million de livres-force, soit près de 4,5 MN. Elle est achevée en septembre 1865, et son laboratoire ouvre ses essais au public le 1<sup>er</sup> janvier 1866. En 1874, il s'installe au 99 Southwark Street, sous une devise gravée au-dessus de la porte : « Facts not opinions », des faits, pas des opinions. Kirkaldy livrait des mesures, pas d'avis sur l'usage des matériaux. En 1880, on lui confie l'essai de pièces du pont sur la Tay, effondré l'année précédente. La machine est toujours là, en état de marche, dans le musée qui porte son nom. Un essai bien conduit, puis un procès-verbal qui se lit sans interprétation : c'est l'objet du <a href="#c6">chapitre 6</a>.</div>
+</div>
+</section>
+
+<section class="chap" id="gloss">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">A–Z</div>
+    <div class="c-title"><h2>Glossaire</h2><p>Les mots, symboles et sigles de ce cours</p></div>
+    <div class="c-img"><span class="ico">📖</span><span><small>Image à retenir</small>Le dictionnaire : un mot flou, un clic</span></div>
+  </div>
+  <dl class="gloss">
+    <dt>A, A<sub>t</sub>, A<sub>11,3</sub></dt><dd>Allongement après rupture, permanent, mesuré sur les morceaux rapprochés (%) ; allongement total à la rupture, part élastique comprise ; allongement mesuré sur une éprouvette de coefficient k = 11,3.</dd>
+    <dt>A<sub>g</sub>, A<sub>gt</sub></dt><dd>Allongement réparti, plastique, à la force maximale ; le même, part élastique comprise.</dd>
+    <dt>a, R (Bridgman)</dt><dd>Rayon de la section minimale du col ; rayon de courbure du profil du col (mm).</dd>
+    <dt>Anisotropie</dt><dd>Variation des propriétés selon la direction de sollicitation (sens long, travers, épaisseur).</dd>
+    <dt>Asservissement, pilotage</dt><dd>Grandeur que la machine maintient selon une consigne : déplacement de la traverse, force ou déformation.</dd>
+    <dt>CC, CFC</dt><dd>Structures cristallines cubique centrée (fer α, aciers ferritiques) et cubique à faces centrées (aciers austénitiques, aluminium, cuivre, nickel).</dd>
+    <dt>Cission τ, cission critique τ<sub>0</sub></dt><dd>Contrainte tangentielle, parallèle à la surface qui la porte (MPa) ; cission résolue minimale qui fait glisser un système de glissement.</dd>
+    <dt>Clivage, σ<sub>c</sub></dt><dd>Rupture fragile par séparation de plans cristallins ; contrainte de clivage, contrainte vraie qui la déclenche.</dd>
+    <dt>Congé</dt><dd>Raccordement arrondi entre la tête et la partie calibrée d'une éprouvette.</dd>
+    <dt>Considère (critère de)</dt><dd>La striction commence quand dσ<sub>rat</sub>/dε<sub>rat</sub> = σ<sub>rat</sub>, c'est-à-dire au maximum de force.</dd>
+    <dt>Courbe conventionnelle, rationnelle</dt><dd>Force rapportée à la section initiale en fonction de l'allongement relatif ; contrainte et déformation vraies, calculées sur la section et la longueur courantes.</dd>
+    <dt>d (taille de grain)</dt><dd>Dimension moyenne des grains d'un polycristal (µm ou m).</dd>
+    <dt>Dérivée d/dr, ∫, ln, e</dt><dd>Pente d'une courbe en un point ; intégrale, somme de petites tranches ; logarithme népérien ; base de ce logarithme, e ≈ 2,718.</dd>
+    <dt>Dislocation</dt><dd>Défaut linéaire du cristal, frontière entre une zone déjà glissée et une zone qui ne l'est pas.</dd>
+    <dt>E, E<sub>app</sub>, G</dt><dd>Module d'Young (GPa) ; pente apparente lue sur la traverse ; module de cisaillement, G = E/(2(1 + ν)).</dd>
+    <dt>Écrouissage</dt><dd>Durcissement d'un métal qui se déforme plastiquement, par multiplication et blocage des dislocations.</dd>
+    <dt>Éprouvette proportionnelle, k</dt><dd>Éprouvette dont la longueur entre repères vaut L<sub>0</sub> = k·√S<sub>0</sub> ; k = 5,65 par défaut (5 diamètres pour une ronde).</dd>
+    <dt>ε, ε<sub>rat</sub>, ε<sub>p</sub>, ε̇</dt><dd>Déformation conventionnelle ΔL/L<sub>0</sub> ; déformation rationnelle ln(L/L<sub>0</sub>) ; déformation plastique ; vitesse de déformation (s⁻¹).</dd>
+    <dt>Extensomètre</dt><dd>Capteur qui mesure l'allongement entre deux points de l'éprouvette elle-même (à couteaux, optique, vidéo, laser).</dd>
+    <dt>F, F<sub>m</sub></dt><dd>Force appliquée (N) ; force maximale de l'essai.</dd>
+    <dt>γ (gamma), θ</dt><dd>Déformation de cisaillement, γ = tan θ ≈ θ ; angle dont un angle droit se ferme (rad).</dd>
+    <dt>Hall-Petch (loi de)</dt><dd>R<sub>e</sub> = σ<sub>0</sub> + k/√d : la limite d'élasticité croît quand les grains s'affinent.</dd>
+    <dt>Hollomon, Ludwik (lois de)</dt><dd>σ = K·εⁿ ; σ = σ<sub>0</sub> + k·ε<sub>p</sub>ⁿ : lois d'écrouissage.</dd>
+    <dt>ISO 6892-1, -2, -3</dt><dd>Essai de traction à température ambiante, élevée, basse.</dd>
+    <dt>ISO 4136, ISO 5178</dt><dd>Traction transversale d'un joint soudé ; traction longitudinale du métal fondu.</dd>
+    <dt>ISO 7500-1, ISO 9513, ISO 10275</dt><dd>Étalonnage de la force des machines ; étalonnage des extensomètres ; mesure du coefficient n des tôles.</dd>
+    <dt>ISO 15614-1, QMOS</dt><dd>Qualification d'un mode opératoire de soudage par un essai, pour les aciers.</dd>
+    <dt>EN 10025-2, EN 10164, EN 10204</dt><dd>Aciers de construction (S235, S355) ; aciers garantis dans l'épaisseur (Z15, Z25, Z35) ; documents de contrôle (certificat 3.1).</dd>
+    <dt>Jauge de déformation</dt><dd>Piste résistive collée sur une pièce, dont la résistance varie avec sa déformation ; base des capteurs d'effort.</dd>
+    <dt>K, n</dt><dd>Consistance (MPa) et coefficient d'écrouissage de la loi de Hollomon.</dd>
+    <dt>K<sub>m</sub></dt><dd>Raideur de la machine, mors et têtes compris (kN/mm).</dd>
+    <dt>L<sub>0</sub>, L<sub>c</sub>, L<sub>e</sub>, L<sub>u</sub></dt><dd>Longueur initiale entre repères ; longueur de la partie calibrée ; longueur de base de l'extensomètre ; longueur entre repères après rupture.</dd>
+    <dt>Lüders (bandes de), palier d'écoulement</dt><dd>Bandes de déformation plastique qui traversent un acier doux à force presque constante, juste après R<sub>eH</sub>.</dd>
+    <dt>m, φ, λ, ψ</dt><dd>Facteur de Schmid m = cos φ·cos λ ; angle entre l'axe et la normale au plan ; angle entre l'axe et la direction de glissement ; rotation de la direction dans le plan.</dd>
+    <dt>Monocristal, polycristal</dt><dd>Métal fait d'un seul grain ; métal fait de nombreux grains d'orientations différentes.</dd>
+    <dt>Mors, traverse</dt><dd>Mâchoires qui serrent l'éprouvette ; partie mobile de la machine qui la tire.</dd>
+    <dt>MPa, GPa, kN, MN</dt><dd>Mégapascal (1 N/mm²), gigapascal (1 000 MPa), kilonewton (1 000 N), méganewton (10⁶ N).</dd>
+    <dt>ν (nu)</dt><dd>Coefficient de Poisson : rapport entre contraction transversale et allongement, ≈ 0,3 pour les métaux.</dd>
+    <dt>Pied de courbe</dt><dd>Début arrondi d'une courbe lue sur la traverse, dû aux jeux et à la mise en place.</dd>
+    <dt>PV</dt><dd>Procès-verbal d'essai.</dd>
+    <dt>R<sub>eH</sub>, R<sub>eL</sub></dt><dd>Limites supérieure et inférieure d'écoulement (MPa).</dd>
+    <dt>R<sub>p0,2</sub>, R<sub>t0,5</sub></dt><dd>Limite conventionnelle d'élasticité à 0,2 % d'extension plastique ; limite à 0,5 % d'extension totale. Autre notation courante : R<sub>e0,2</sub>.</dd>
+    <dt>R<sub>m</sub></dt><dd>Résistance à la traction, F<sub>m</sub>/S<sub>0</sub> (MPa) ; en anglais <i>tensile strength</i>.</dd>
+    <dt>r, r<sub>0</sub>, U</dt><dd>Distance entre deux atomes ; distance d'équilibre ; énergie de liaison.</dd>
+    <dt>S<sub>0</sub>, S, S<sub>u</sub></dt><dd>Section initiale ; section courante ; section minimale après rupture (mm²).</dd>
+    <dt>σ, σ<sub>rat</sub>, σ<sub>éq</sub>, σ<sub>th</sub></dt><dd>Contrainte conventionnelle ; contrainte rationnelle (vraie) ; contrainte corrigée de Bridgman ; résistance théorique d'une liaison (≈ E/10).</dd>
+    <dt>Striction</dt><dd>Localisation de la déformation dans un col qui s'amincit, à partir de la force maximale.</dd>
+    <dt>Surappariement (<i>overmatching</i>)</dt><dd>Choix d'un métal fondu un peu plus résistant que le métal de base.</dd>
+    <dt>T, T<sub>K</sub></dt><dd>Température (°C) ; température absolue en kelvins (T + 273,15).</dd>
+    <dt>Triaxialité</dt><dd>État de contrainte où des tractions agissent dans plusieurs directions à la fois, comme au centre d'un col.</dd>
+    <dt>Vieillissement dynamique</dt><dd>Épinglage des dislocations par le carbone et l'azote pendant l'essai, vers 200 à 300 °C dans les aciers C-Mn ; dit aussi fragilité au bleu.</dd>
+    <dt>W</dt><dd>Énergie absorbée par unité de volume jusqu'à la rupture, aire sous la courbe (J/cm³).</dd>
+    <dt>Z</dt><dd>Coefficient de striction, (S<sub>0</sub> − S<sub>u</sub>)/S<sub>0</sub> (%) ; autre notation courante : RA.</dd>
+    <dt>ZAT</dt><dd>Zone affectée thermiquement : métal de base dont la structure a été modifiée par la chaleur du soudage.</dd>
+  </dl>
+</div>
+</section>
+
+<section class="chap" id="check">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✓</div>
+    <div class="c-title"><h2>Suis-je prêt pour la suite ?</h2><p>Dix points à cocher de tête</p></div>
+    <div class="c-img"><span class="ico">🚦</span><span><small>Image à retenir</small>Le feu passe au vert quand tout est coché</span></div>
+  </div>
+  <p>Coche seulement ce que tu sais faire <b>sans regarder</b>. Tes coches restent enregistrées dans ce navigateur.</p>
+  <div class="check" id="checklist">
+    <label><input type="checkbox" data-c="1"> <span>Je sais définir la contrainte et la déformation conventionnelles, et expliquer d'où vient le module d'Young.</span></label>
+    <label><input type="checkbox" data-c="2"> <span>Je sais expliquer le glissement, appliquer la loi de Schmid et dire à quoi servent les dislocations.</span></label>
+    <label><input type="checkbox" data-c="3"> <span>Je sais placer R<sub>eH</sub>, R<sub>eL</sub>, R<sub>p0,2</sub>, R<sub>m</sub>, A<sub>g</sub>, A et Z sur une courbe, et les calculer à partir de forces et de cotes.</span></label>
+    <label><input type="checkbox" data-c="4"> <span>Je sais construire R<sub>p0,2</sub> et expliquer pourquoi on en a besoin.</span></label>
+    <label><input type="checkbox" data-c="5"> <span>Je sais passer aux grandeurs rationnelles et énoncer le critère de Considère.</span></label>
+    <label><input type="checkbox" data-c="6"> <span>Je sais mesurer n et prévoir A<sub>g</sub> et R<sub>m</sub> avec la loi de Hollomon.</span></label>
+    <label><input type="checkbox" data-c="7"> <span>Je sais prévoir l'effet de la température, de la vitesse, de l'état métallurgique et du sens de prélèvement.</span></label>
+    <label><input type="checkbox" data-c="8"> <span>Je sais choisir une éprouvette proportionnelle et vérifier la validité d'un allongement après rupture.</span></label>
+    <label><input type="checkbox" data-c="9"> <span>Je sais repérer un essai douteux sur un procès-verbal : pente trop faible, rupture hors zone, sens de prélèvement absent.</span></label>
+    <label><input type="checkbox" data-c="10"> <span>Je sais à quoi servent la traction transversale d'un joint (ISO 4136) et la traction du métal fondu (ISO 5178).</span></label>
+  </div>
+  <p class="status" id="checkMsg"></p>
+
+  <div class="meta">🔭 <b>Au prochain épisode, cours 2 : les essais de dureté.</b> Une bille, une pyramide de diamant ou un cône qu'on enfonce dans le métal : on verra ce que mesure vraiment une empreinte, comment se pratiquent les essais Brinell, Vickers et Rockwell, comment passer d'une échelle à l'autre et estimer R<sub>m</sub> à partir d'une dureté, puis comment une filiation de dureté à travers une soudure révèle une zone affectée trop dure, avec les seuils que fixe la qualification des modes opératoires.</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+  <p>Cours 1 sur 3 de la série « Essais destructifs : mesurer et observer ce que cache un métal » (sujet 2.23 du planning). Vocabulaire et symboles alignés sur l'ISO 6892-1 ; essais des soudures selon l'ISO 4136, l'ISO 5178 et l'ISO 15614-1 ; pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
+</div>
+</footer>
+
+
+<script>
+(function(){
+"use strict";
+const NS="http://www.w3.org/2000/svg";
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function el(tag,attrs,parent){
+  const e=document.createElementNS(NS,tag);
+  if(attrs){for(const k in attrs){const v=attrs[k];if(v===undefined||v===null)continue;
+    if(typeof v==="string"&&v.indexOf("var(")>=0&&k!=="style")e.style.setProperty(k,v);else e.setAttribute(k,v);}}
+  if(parent)parent.appendChild(e);
+  return e;
+}
+function tx(p,x,y,str,attrs){const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);t.textContent=str;return t;}
+function txs(p,x,y,parts,attrs){/* parts: [["σ",""],["max","sub"],[" = 3",""]] */
+  const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);
+  parts.forEach(pt=>{const s=el("tspan",pt[1]==="sub"?{"font-size":"0.72em",dy:"3"}:(pt[2]?{dy:pt[2]}:{}),t);s.textContent=pt[0];
+    if(pt[1]==="sub"){const r=el("tspan",{dy:"-3"},t);r.textContent="\u200b";}});
+  return t;
+}
+function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild);}
+function fitText(t,x0,x1,gap){/* garde un texte SVG entre x0 et x1 : il passe de l'autre côté de son repère (écart gap), sinon il glisse */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const a=t.getAttribute("text-anchor")||"start",x=+t.getAttribute("x");
+  if(gap&&a!=="middle"&&(b.x<x0||b.x+b.width>x1)){t.setAttribute("text-anchor",a==="end"?"start":"end");t.setAttribute("x",a==="end"?x+2*gap:x-2*gap);b=t.getBBox();}
+  const nx=+t.getAttribute("x");
+  if(b.x+b.width>x1)t.setAttribute("x",nx-(b.x+b.width-x1));else if(b.x<x0)t.setAttribute("x",nx+(x0-b.x));
+  return t;}
+function arrow(p,x1,y1,x2,y2,color,w,h){
+  w=w||2.4;h=h||10;
+  const g=el("g",{class:"arr"},p);g.style.color=color||"var(--ink)";
+  const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy);
+  if(L<1)return g;
+  const ux=dx/L,uy=dy/L,hh=Math.min(h,L*0.6),bx=x2-ux*hh,by=y2-uy*hh,hw=hh*0.45+w*0.3;
+  el("line",{x1:x1,y1:y1,x2:bx,y2:by,"stroke-width":w,"stroke-linecap":"round"},g);
+  el("polygon",{points:x2+","+y2+" "+(bx-uy*hw)+","+(by+ux*hw)+" "+(bx+uy*hw)+","+(by-ux*hw)},g);
+  return g;
+}
+function darrow(p,x,y1,y2,color,w){/* double flèche verticale */
+  const g=el("g",{},p);const m=(y1+y2)/2;
+  if(Math.abs(y2-y1)<4){el("line",{x1:x-5,y1:y1,x2:x+5,y2:y1,stroke:color,"stroke-width":2},g);return g;}
+  arrow(g,x,m,x,y1,color,w||2,8);arrow(g,x,m,x,y2,color,w||2,8);return g;
+}
+function nf(v,d){
+  if(d===undefined)d=1;
+  if(Math.abs(v)<0.5*Math.pow(10,-d))v=0;
+  return v.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d}).replace("-","−").replace(/[\u202f\u2009]/g,"\u00a0");
+}
+const SUP={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sci(v,d){
+  if(v===0)return "0";
+  if(!isFinite(v))return "∞";
+  let e=Math.floor(Math.log10(Math.abs(v)));
+  let m=v/Math.pow(10,e);
+  const dd=d===undefined?1:d;
+  if(Math.abs(Number(m.toFixed(dd)))>=10){m/=10;e+=1;}
+  return nf(m,dd)+" × 10"+String(e).split("").map(c=>SUP[c]).join("");
+}
+function bigN(v){/* nombre de cycles lisible */
+  if(!isFinite(v))return "∞";
+  if(v===0)return "0";
+  if(v<10)return nf(v,v<1?2:0);
+  if(v<1e5)return nf(Math.round(v),0);
+  return sci(v,1);
+}
+function dur(s){
+  if(!isFinite(s))return "∞";
+  if(s<60)return nf(s,s<10?1:0)+" s";
+  if(s<3600)return nf(s/60,0)+" min";
+  if(s<86400)return nf(s/3600,1)+" h";
+  if(s<86400*365)return nf(s/86400,1)+" jours";
+  return nf(s/(86400*365),1)+" ans";
+}
+function svgW(svg){const r=svg.getBoundingClientRect();return Math.max(290,Math.round(r.width||(svg.parentNode&&svg.parentNode.clientWidth)||600));}
+function setVB(svg,W,H){svg.setAttribute("viewBox","0 0 "+W+" "+H);}
+const redraws=[];
+let rzT=null,lastWW=window.innerWidth;
+window.addEventListener("resize",()=>{if(window.innerWidth===lastWW)return;lastWW=window.innerWidth;clearTimeout(rzT);rzT=setTimeout(()=>redraws.forEach(f=>{try{f();}catch(e){console.error(e);}}),120);});
+
+function niceStep(range,n){const raw=range/(n||5),p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<1.5?1:m<3?2:m<7?5:10)*p;}
+function setOn(sel,btn){$$(sel+" .btn").forEach(b=>b.classList.toggle("on",b===btn));}
+function fmtmm(mm){return mm<0.1?nf(mm*1000,0)+" µm":mm<10?nf(mm,mm<1?2:1)+" mm":nf(mm,0)+" mm";}
+function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt,yfmt){
+  const X=v=>x0+(x1-x0)*(v-xmin)/(xmax-xmin),Y=v=>y1-(y1-y0)*(v-ymin)/(ymax-ymin);
+  for(let v=Math.ceil(ymin/ystep-1e-9)*ystep;v<=ymax+1e-9;v+=ystep){el("line",{x1:x0,y1:Y(v),x2:x1,y2:Y(v),class:"gridbg"},svg);tx(svg,x0-5,Y(v)+4,yfmt?yfmt(v):nf(v,ystep<1?1:0),{class:"lbl","text-anchor":"end"});}
+  for(let v=Math.ceil(xmin/xstep-1e-9)*xstep;v<=xmax+1e-9;v+=xstep){el("line",{x1:X(v),y1:y1,x2:X(v),y2:y1+4,class:"tick"},svg);tx(svg,X(v),y1+17,xfmt?xfmt(v):nf(v,xstep<1?1:0),{class:"lbl","text-anchor":"middle"});}
+  el("line",{x1:x0,y1:y1,x2:x1,y2:y1,class:"axis"},svg);el("line",{x1:x0,y1:y0-4,x2:x0,y2:y1,class:"axis"},svg);
+  tx(svg,x0+4,y0-10,ylab,{class:"lbl"});tx(svg,x1,y1+32,xlab,{class:"lbl","text-anchor":"end"});
+  return {X:X,Y:Y};
+}
+function animate(btn,label,dur,onStep,onEnd){
+  let raf=null,run=false;
+  function stop(){run=false;if(raf)cancelAnimationFrame(raf);raf=null;btn.textContent=label;}
+  function start(){if(run){stop();return;}if(RM){onStep(1);stop();if(onEnd)onEnd();return;}
+    run=true;btn.textContent="⏸ Pause";const t0=performance.now();
+    const step=now=>{const p=Math.min(1,(now-t0)/dur);onStep(p);if(p>=1){stop();if(onEnd)onEnd();return;}raf=requestAnimationFrame(step);};raf=requestAnimationFrame(step);}
+  btn.addEventListener("click",start);return {stop:stop,running:()=>run};
+}
+
+
+function sig2(v){/* arrondi à deux chiffres significatifs */
+  if(v<=0)return 0;const p=Math.pow(10,Math.floor(Math.log10(v))-1);return Math.round(v/p)*p;}
+function halo(t,svg){/* liseré de fond, puis passage au premier plan */
+  t.setAttribute("paint-order","stroke");t.style.setProperty("stroke","var(--card)");t.setAttribute("stroke-width","4");t.setAttribute("stroke-linejoin","round");if(svg)svg.appendChild(t);return t;}
+function plate(t,svg){/* fond plein derrière une étiquette */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const r=el("rect",{x:b.x-3,y:b.y-1,width:b.width+6,height:b.height+2,fill:"var(--card)",opacity:.92,rx:2});svg.appendChild(r);svg.appendChild(t);return t;}
+function le(n,f){return /^[aeiouyhéèâî]/i.test(n)?"l'"+n:(f?"la ":"le ")+n;}
+function du(n,f){return /^[aeiouyhéèâî]/i.test(n)?"de l'"+n:(f?"de la ":"du ")+n;}
+function fmtG(v){return nf(v,v<0.1?3:2)+" N/m";}
+function fmtPa(p){return p<1000?nf(p,0)+" Pa":p<1e5?nf(p/1000,1)+" kPa":nf(p/1e5,2)+" bar";}
+function fmtLen(m){/* m en mètres */
+  const mm=m*1000;if(mm<1)return nf(mm*1000,0)+" µm";if(mm<10)return nf(mm,1)+" mm";if(mm<1000)return nf(mm,0)+" mm";return nf(m,1)+" m";}
+function fmtT(s){if(!isFinite(s))return "∞";if(s<0.01)return nf(s*1000,1)+" ms";if(s<1)return nf(s,3)+" s";if(s<60)return nf(s,s<10?1:0)+" s";return nf(s/60,s<600?1:0)+" min";}
+
+function spread(items,gap,ymin,ymax){/* écarte verticalement des étiquettes {y} triées */
+  items.sort((a,b)=>a.y-b.y);
+  for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;
+  if(items.length&&items[items.length-1].y>ymax){items[items.length-1].y=ymax;for(let i=items.length-2;i>=0;i--)if(items[i+1].y-items[i].y<gap)items[i].y=items[i+1].y-gap;}
+  if(items.length&&items[0].y<ymin){items[0].y=ymin;for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;}
+  return items;}
+function declutter(ts,ymin,ymax){/* décale verticalement les textes qui se chevauchent */
+  const box=t=>{try{return t.getBBox();}catch(e){return null;}};
+  for(let i=1;i<ts.length;i++){const ti=ts[i];if(!ti)continue;
+    for(let pass=0;pass<6;pass++){const bi=box(ti);if(!bi)break;let moved=false;
+      for(let j=0;j<i;j++){const bj=ts[j]&&box(ts[j]);if(!bj)continue;
+        const ix=Math.min(bi.x+bi.width,bj.x+bj.width)-Math.max(bi.x,bj.x),iy=Math.min(bi.y+bi.height,bj.y+bj.height)-Math.max(bi.y,bj.y);
+        if(ix>1&&iy>1){let dy=(bi.y+bi.height/2>=bj.y+bj.height/2)?(bj.y+bj.height-bi.y+1):-(bi.y+bi.height-bj.y+1);
+          if(bi.y+dy<ymin||bi.y+bi.height+dy>ymax)dy=dy>0?-(bi.y+bi.height-bj.y+1):(bj.y+bj.height-bi.y+1);
+          ti.setAttribute("y",+ti.getAttribute("y")+dy);moved=true;break;}}
+      if(!moved)break;}}
+  return ts;}
+const SUPD={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function p10(e){return "10"+String(e).split("").map(c=>SUPD[c]||c).join("");}
+function fmtP(p){/* pression en Pa, lisible */
+  if(p>=1e5)return nf(p/1e5,1)+" bar";if(p>=1000)return nf(p/1000,p<1e4?1:0)+" kPa";if(p>=1)return nf(p,p<10?1:0)+" Pa";return sci(p,1)+" Pa";}
+
+
+
+function rng(seed){/* générateur pseudo-aléatoire reproductible */
+  let a=seed>>>0;return ()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
+
+
+
+/* =========================================================
+   Utilitaires communs du cours : unités, courbes de traction
+   ========================================================= */
+const nbsp=s=>s.replace(/(\d) (MPa|GPa|kN\/mm|kN|mm²|mm|µm|%|°C|s⁻¹|J\/cm³)(?=[\s.,;:)<·]|$)/g,"$1 $2");
+function fitSize(t,maxW,min){let b;try{b=t.getBBox();}catch(e){return t;}let fs=parseFloat(getComputedStyle(t).fontSize)||13;
+  while(b.width>maxW&&fs>(min||9)){fs-=0.5;t.style.fontSize=fs+"px";b=t.getBBox();}return t;}
+const pc=(v,d)=>nf(v*100,d===undefined?1:d)+" %";
+function clipSeg(pts,x0,x1,y0,y1){/* garde les points dans le cadre (polyligne coupée) */
+  return pts.filter(p=>p[0]>=x0-0.5&&p[0]<=x1+0.5&&p[1]>=y0-0.5&&p[1]<=y1+0.5).map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" ");}
+/* Courbes conventionnelles typiques (modèle pédagogique) */
+const TMAT={
+  S235:{n:"acier S235",E:210000,pal:true,ReH:300,ReL:285,eL:0.018,Rm:430,Ag:0.20,A:0.32,Z:0.65,ff:0.74,q:2.2},
+  S355:{n:"acier S355",E:210000,pal:true,ReH:390,ReL:372,eL:0.015,Rm:540,Ag:0.16,A:0.26,Z:0.60,ff:0.78,q:2.2},
+  "316L":{n:"inox 316L",E:200000,pal:false,Rp:280,Rm:590,Ag:0.50,A:0.56,Z:0.75,ff:0.80,q:2.4,p:4},
+  "6061":{n:"alliage d'aluminium 6061-T6",E:69000,pal:false,Rp:275,Rm:310,Ag:0.08,A:0.12,Z:0.40,ff:0.85,q:2.5,p:20},
+  "42CrMo4":{n:"acier 42CrMo4 trempé-revenu",E:210000,pal:false,Rp:900,Rm:1050,Ag:0.06,A:0.14,Z:0.55,ff:0.80,q:2.5,p:12}
+};
+function tsig(m,e){/* contrainte conventionnelle (MPa) pour la déformation conventionnelle e */
+  const E=m.E,Ag=m.Ag,sf=m.ff*m.Rm,ef=m.A+sf/E;
+  if(e<=0)return 0;
+  if(e>Ag){const u=Math.min(1,(e-Ag)/(ef-Ag));return m.Rm-(m.Rm-sf)*u*u;}
+  if(m.pal){if(E*e<=m.ReH)return E*e;if(e<=m.eL)return m.ReL;const u=(e-m.eL)/(Ag-m.eL);return m.ReL+(m.Rm-m.ReL)*(1-Math.pow(1-u,m.q));}
+  const u=Math.min(1,e/Ag),h=m.sy0+(m.Rm-m.sy0)*(1-Math.pow(1-u,m.q));
+  return Math.pow(Math.pow(E*e,-m.p)+Math.pow(h,-m.p),-1/m.p);}
+const tef=m=>m.A+m.ff*m.Rm/m.E;
+function tRp(m,off){let lo=0,hi=m.Ag;const f=e=>tsig(m,e)-m.E*(e-off);
+  for(let i=0;i<70;i++){const mid=(lo+hi)/2;if(f(mid)>0)lo=mid;else hi=mid;}return {s:tsig(m,lo),e:lo};}
+Object.keys(TMAT).forEach(k=>{const m=TMAT[k];if(m.pal)return;let lo=0.3*m.Rp,hi=1.2*m.Rp;
+  for(let i=0;i<50;i++){m.sy0=(lo+hi)/2;if(tRp(m,0.002).s<m.Rp)lo=m.sy0;else hi=m.sy0;}m.sy0=(lo+hi)/2;});
+function eyeRe(m,tol){/* contrainte où l'écart à la droite élastique devient visible (tol : déformation) */
+  const st=Math.max(2e-6,tol/6);for(let e=st;e<m.Ag;e+=st){const s=tsig(m,e);if(e-s/m.E>tol)return s;}return m.Rm;}
+
+/* =========================================================
+   M1 : le sommier à ressorts (potentiel de Morse)
+   ========================================================= */
+(function(){
+  const svg=$("#m1svg");if(!svg)return;
+  const se=$("#m1e"),ro=$("#m1r"),msg=$("#m1msg"),hb=$("#m1hot");
+  const B=2.5,FH=0.1;
+  const M={dia:{n:"le diamant",E:1000},w:{n:"le tungstène",E:410},fe:{n:"l'acier",E:210,re:355,ren:"un acier S355"},cu:{n:"le cuivre",E:125,re:70,ren:"un cuivre recuit"},
+    al:{n:"l'aluminium",E:70,re:30,ren:"un aluminium pur recuit"},mg:{n:"le magnésium",E:45},pa:{n:"le polyamide",E:3}};
+  let k="fe",hot=false,prog=null;
+  const sg=(E,e)=>E/B*(Math.exp(-B*e)-Math.exp(-2*B*e));
+  const U=e=>Math.pow(1-Math.exp(-B*e),2)-1;
+  const XP=-Math.log(1-Math.sqrt(FH))/B,XM=-Math.log(1+Math.sqrt(FH))/B,XC=(XP+XM)/2,EST=Math.log(2)/B;
+  function spring(x1,x2,y,amp,col,dash){const N=7,pts=[[x1,y]],L=x2-x1;
+    for(let i=0;i<N;i++){pts.push([x1+L*(i+0.25)/N,y-amp]);pts.push([x1+L*(i+0.75)/N,y+amp]);}pts.push([x2,y]);
+    el("polyline",{points:pts.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" "),fill:"none",stroke:col,"stroke-width":1.8,"stroke-dasharray":dash||null},svg);}
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?590:330;setVB(svg,W,H);clear(svg);
+    const m=M[k],E=m.E,e=prog===null?+se.value:-0.1+0.55*Math.max(0,prog),br=e>EST+1e-9;
+    $("#m1eo").textContent=pc(e,1);
+    /* chaîne d'atomes */
+    const cw=n?W-16:W*0.40,cx=8+cw/2,cy=n?100:150,r0=Math.min(46,(cw-56)/4.6),ee=e+(hot?XC*3:0),r=r0*(1+ee),R=Math.min(10,r0*0.24);
+    tx(svg,8,18,"Quatre atomes d'une rangée",{class:"ttl"});
+    const xs=[-1.5,-0.5,0.5,1.5].map(i=>cx+i*r+(br&&i>0?r0*0.25:0)-(br&&i<0?r0*0.25:0));
+    for(let i=0;i<3;i++){const brk=br&&i===1;
+      if(brk){spring(xs[i]+R,(xs[i]+xs[i+1])/2-4,cy,4,"var(--tau)","3 2");spring((xs[i]+xs[i+1])/2+4,xs[i+1]-R,cy,4,"var(--tau)","3 2");}
+      else spring(xs[i]+R,xs[i+1]-R,cy,Math.max(2.5,6-4*Math.max(0,e)),"var(--muted)");}
+    xs.forEach(x=>{if(hot){el("circle",{cx:x-6,cy:cy,r:R,fill:"var(--gam)",opacity:.18},svg);el("circle",{cx:x+7,cy:cy,r:R,fill:"var(--gam)",opacity:.18},svg);}
+      el("circle",{cx:x,cy:cy,r:R,fill:"var(--gam)",stroke:"var(--ink)","stroke-width":1.2},svg);});
+    const s=sg(E,e),L=Math.min(40,8+36*Math.abs(s)/(E/10));
+    if(Math.abs(e)>0.002){if(e>0){arrow(svg,xs[0]-R-2,cy,xs[0]-R-2-L,cy,"var(--frc)",2.4,9);arrow(svg,xs[3]+R+2,cy,xs[3]+R+2+L,cy,"var(--frc)",2.4,9);}
+      else{arrow(svg,xs[0]-R-4-L,cy,xs[0]-R-4,cy,"var(--frc)",2.4,9);arrow(svg,xs[3]+R+4+L,cy,xs[3]+R+4,cy,"var(--frc)",2.4,9);}}
+    const yd=cy+R+20;el("line",{x1:xs[1],y1:yd,x2:xs[2],y2:yd,stroke:"var(--ink)","stroke-width":1},svg);
+    [xs[1],xs[2]].forEach(x=>el("line",{x1:x,y1:yd-5,x2:x,y2:yd+5,stroke:"var(--ink)"},svg));
+    const tr=tx(svg,cx,yd+18,br?"liaison rompue":"r = r₀·(1 + ε)",{"text-anchor":"middle",fill:br?"var(--tau)":"var(--ink)","font-weight":br?"700":"400"});halo(tr,svg);
+    if(hot){const th=tx(svg,cx,cy-R-12,"agitation thermique (exagérée)",{class:"lbl","text-anchor":"middle"});halo(th,svg);}
+    /* graphes */
+    const gx0=n?52:W*0.40+44,gx1=W-12,EMN=-0.3,EMX=0.5;
+    const uy0=n?220:40,uy1=n?346:136,sy0=n?410:190,sy1=n?538:292;
+    const ua=axes(svg,gx0,gx1,uy0,uy1,EMN,EMX,-1.1,0.3,"ε (%)","énergie de liaison U",0.1,0.5,v=>nf(v*100,0),v=>"");
+    const up=[];for(let i=0;i<=160;i++){const x=EMN+(EMX-EMN)*i/160,u=U(x);if(u<=0.3)up.push([ua.X(x),ua.Y(u)]);}
+    el("polyline",{points:up.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" "),fill:"none",stroke:"var(--gam)","stroke-width":2.4},svg);
+    el("line",{x1:ua.X(0),y1:uy0,x2:ua.X(0),y2:uy1,class:"ref"},svg);
+    const tf=tx(svg,ua.X(0)+5,uy0+12,"fond du puits : r₀",{class:"lbl"});halo(tf,svg);
+    if(hot){const yv=ua.Y(-1+FH);el("line",{x1:ua.X(XM),y1:yv,x2:ua.X(XP),y2:yv,stroke:"var(--sig)","stroke-width":2,"stroke-dasharray":"5 3"},svg);
+      el("circle",{cx:ua.X(XC),cy:yv,r:4.5,fill:"var(--sig)"},svg);
+      const tm=tx(svg,ua.X(XP)+6,yv+4,"milieu décalé",{class:"lbl",fill:"var(--sig)"});halo(tm,svg);fitText(tm,gx0,gx1,6);}
+    el("circle",{cx:ua.X(e),cy:ua.Y(U(e)),r:6.5,fill:"var(--ink)",stroke:"var(--card)","stroke-width":2},svg);
+    const ym=E*0.13,sa=axes(svg,gx0,gx1,sy0,sy1,EMN,EMX,-ym,ym,"ε (%)","contrainte σ (GPa)",0.1,niceStep(2*ym,4),v=>nf(v*100,0),v=>nf(v,E<10?1:0));
+    el("line",{x1:gx0,y1:sa.Y(0),x2:gx1,y2:sa.Y(0),stroke:"var(--muted)"},svg);
+    const hk=[];for(let i=0;i<=80;i++){const x=EMN+(EMX-EMN)*i/80;hk.push([sa.X(x),sa.Y(E*x)]);}
+    el("polyline",{points:clipSeg(hk,gx0,gx1,sy0,sy1),fill:"none",stroke:"var(--mat)","stroke-width":1.8,"stroke-dasharray":"6 4"},svg);
+    const sp=[];for(let i=0;i<=200;i++){const x=EMN+(EMX-EMN)*i/200;sp.push([sa.X(x),sa.Y(sg(E,x))]);}
+    el("polyline",{points:clipSeg(sp,gx0,gx1,sy0,sy1),fill:"none",stroke:"var(--sig)","stroke-width":2.4},svg);
+    el("circle",{cx:sa.X(EST),cy:sa.Y(E/10),r:4.5,fill:"var(--sig)"},svg);
+    const tt=tx(svg,sa.X(EST)+8,sa.Y(E/10)-6,"σth ≈ E/10",{fill:"var(--sig)","font-weight":"700"});halo(tt,svg);fitText(tt,gx0,gx1,8);
+    const th=tx(svg,sa.X(0.06)+4,sy1-8,"Hooke : σ = E·ε",{class:"lbl",fill:"var(--mat)"});halo(th,svg);
+    if(s>=-ym&&s<=ym)el("circle",{cx:sa.X(e),cy:sa.Y(s),r:6.5,fill:"var(--ink)",stroke:"var(--card)","stroke-width":2},svg);
+    /* lectures */
+    const fG=v=>nf(v,Math.abs(v)<10?2:1)+" GPa",dev=Math.abs(e)>1e-4?(E*e-s)/s*100:0;
+    ro.innerHTML=nbsp("<span>E = <b class='mat'>"+nf(E,0)+" GPa</b></span><span>ε = <b class='eps'>"+pc(e,1)+"</b></span><span>σ de la liaison = <b class='sig'>"+fG(s)+"</b></span><span>Hooke : "+fG(E*e)+(Math.abs(e)>1e-4?" (écart "+nf(Math.abs(dev),0)+" %)":"")+"</span><span>σth ≈ <b class='sig'>"+fG(E/10)+"</b> à ε ≈ 27,7 %</span>"+(m.re?"<span>R<sub>e</sub> réel ≈ "+nf(m.re,0)+" MPa</span>":""));
+    let t;
+    if(prog!==null&&prog<1)t="Les atomes s'écartent : la force suit d'abord la droite de Hooke, puis s'infléchit, passe par un maximum et retombe.";
+    else if(e<-0.002)t="Compression : les atomes se rapprochent et la répulsion monte très vite, plus raide que la droite de Hooke. Le puits n'est pas symétrique.";
+    else if(Math.abs(e)<=0.012)t="✅ Domaine de Hooke : la contrainte suit la droite de pente E à "+nf(Math.abs(dev),0)+" % près. Pour "+m.n+", E = "+nf(E,0)+" GPa : c'est la courbure du fond du puits.";
+    else if(!br)t="La liaison mollit : la contrainte croît de moins en moins vite et quitte la droite de Hooke de "+nf(dev,0)+" %. Dans un vrai métal, on n'arrive jamais jusqu'ici en restant élastique.";
+    else t="❌ Sommet dépassé : la force de rappel diminue, la liaison cède. La résistance théorique vaut σth ≈ E/10 = "+fG(E/10)+"."+(m.re?" Or "+m.ren+" se déforme pour toujours dès "+nf(m.re,0)+" MPa, "+nf(E*100/m.re,0)+" fois moins : un autre mécanisme agit bien avant, le glissement des dislocations (chapitre 2).":"");
+    if(hot&&!(prog!==null&&prog<1))t+=" 🔥 Chauffé : les atomes vibrent entre deux positions extrêmes, et le milieu de leur oscillation se décale vers les grandes distances, du côté où le puits est le plus doux : c'est la dilatation thermique.";
+    msg.innerHTML=nbsp(t);
+  }
+  const A=animate($("#m1play"),"▶ Écarter les atomes",6000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;se.value=0.45;draw();});
+  $$("#m1s .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;k=b.dataset.k;setOn("#m1s",b);draw();}));
+  hb.addEventListener("click",()=>{hot=!hot;hb.classList.toggle("on",hot);hb.textContent=hot?"❄️ Refroidir":"🔥 Chauffer";draw();});
+  se.addEventListener("input",()=>{A.stop();prog=null;draw();});
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M2 : la chenille et le plan incliné (loi de Schmid)
+   ========================================================= */
+(function(){
+  const svg=$("#m2svg");if(!svg)return;
+  const ss=$("#m2s"),sf=$("#m2f"),sd=$("#m2d"),ro=$("#m2r"),msg=$("#m2msg");
+  const T0=1;let prog=null;
+  function clipPoly(P,nx,ny,c){const out=[];for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length],da=nx*a[0]+ny*a[1]-c,db=nx*b[0]+ny*b[1]-c;
+    if(da>=0)out.push(a);if((da>=0)!==(db>=0)){const t=da/(da-db);out.push([a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1])]);}}return out;}
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?600:340;setVB(svg,W,H);clear(svg);
+    const s=prog===null?+ss.value:8*Math.max(0,prog),phi=+sf.value,psi=+sd.value;
+    $("#m2so").textContent=nf(s,2)+" MPa";$("#m2fo").textContent=nf(phi,0)+" °";$("#m2do").textContent=nf(psi,0)+" °";
+    const pr=phi*Math.PI/180,qr=psi*Math.PI/180,mS=Math.cos(pr)*Math.sin(pr)*Math.cos(qr),lam=Math.acos(Math.sin(pr)*Math.cos(qr))*180/Math.PI,tau=mS*s,slip=tau>=T0-1e-9;
+    /* cristal */
+    const cx=n?W/2:W*0.22,cy=n?180:178,bw=n?96:100,bh=200;
+    tx(svg,8,18,"Le monocristal tiré",{class:"ttl"});
+    const nv=[Math.sin(pr),-Math.cos(pr)],u=[Math.cos(pr),Math.sin(pr)];
+    const Rr=[[cx-bw/2,cy-bh/2],[cx+bw/2,cy-bh/2],[cx+bw/2,cy+bh/2],[cx-bw/2,cy+bh/2]];
+    const sv=Rr.map(p=>nv[0]*(p[0]-cx)+nv[1]*(p[1]-cy)),g=22,i0=Math.floor(Math.min.apply(null,sv)/g),i1=Math.ceil(Math.max.apply(null,sv)/g);
+    const dl=slip?Math.min(11,1.5+2.5*(tau/T0-1)):0;
+    for(let i=i0;i<i1;i++){let P=clipPoly(Rr,nv[0],nv[1],nv[0]*cx+nv[1]*cy+i*g);P=clipPoly(P,-nv[0],-nv[1],-(nv[0]*cx+nv[1]*cy+(i+1)*g));
+      if(P.length<3)continue;const sh=i*dl;
+      el("polygon",{points:P.map(p=>(p[0]+sh*u[0]).toFixed(1)+","+(p[1]+sh*u[1]).toFixed(1)).join(" "),fill:"var(--paper-2)",stroke:slip?"var(--gam)":"var(--line)","stroke-width":slip?1.3:1},svg);}
+    el("rect",{x:cx-bw/2,y:cy-bh/2,width:bw,height:bh,fill:"none",stroke:"var(--ink)","stroke-width":slip?0.6:1.6,opacity:slip?.35:1},svg);
+    /* plan central */
+    let ta=-1e9,tb=1e9;[[0,cx-bw/2,cx+bw/2],[1,cy-bh/2,cy+bh/2]].forEach(q=>{const d=u[q[0]],c0=q[0]?cy:cx;if(Math.abs(d)<1e-9)return;let a=(q[1]-c0)/d,b=(q[2]-c0)/d;if(a>b){const t=a;a=b;b=t;}ta=Math.max(ta,a);tb=Math.min(tb,b);});
+    el("line",{x1:cx+ta*u[0],y1:cy+ta*u[1],x2:cx+tb*u[0],y2:cy+tb*u[1],stroke:"var(--tau)","stroke-width":2.6},svg);
+    /* efforts */
+    const Ls=10+40*s/8;
+    arrow(svg,cx,cy-bh/2-3,cx,cy-bh/2-3-Ls,"var(--sig)",2.6,10);arrow(svg,cx,cy+bh/2+3,cx,cy+bh/2+3+Ls,"var(--sig)",2.6,10);
+    const t1=tx(svg,cx+10,cy-bh/2-10,"σ = "+nf(s,2)+" MPa",{fill:"var(--sig)","font-weight":"700"});halo(t1,svg);
+    const kk=7.5,ln=s*Math.cos(pr)*Math.cos(pr)*kk,lt=tau*kk*2.2;
+    if(ln>2)arrow(svg,cx,cy,cx+nv[0]*ln,cy+nv[1]*ln,"var(--sig)",2,8);
+    if(lt>2)arrow(svg,cx,cy,cx+u[0]*lt,cy+u[1]*lt,"var(--tau)",2.6,9);
+    if(lt>2){const tt=tx(svg,cx+u[0]*lt+6,cy+u[1]*lt+12,"τ",{fill:"var(--tau)","font-weight":"700","font-style":"italic"});halo(tt,svg);}
+    if(slip){const tg=tx(svg,cx,cy+bh/2+(n?58:56),"glissement !",{"text-anchor":"middle",fill:"var(--gam)","font-weight":"700"});halo(tg,svg);}
+    /* facteur de Schmid */
+    const gx0=n?52:W*0.44+40,gx1=W-14,gy0=n?400:46,gy1=n?552:290;
+    tx(svg,n?8:W*0.44,n?378:18,"Facteur de Schmid m",{class:"ttl"});
+    const ax=axes(svg,gx0,gx1,gy0,gy1,0,90,0,0.55,"angle du plan φ (°)","m = cos φ·cos λ",15,0.1);
+    const mr=T0/Math.max(1e-9,s),pts=[],hi=[];
+    for(let a=0;a<=90;a+=1){const r=a*Math.PI/180,mm=Math.cos(r)*Math.sin(r)*Math.cos(qr);pts.push(ax.X(a)+","+ax.Y(mm));if(mm>=mr)hi.push(ax.X(a)+","+ax.Y(mm));}
+    el("polyline",{points:pts.join(" "),fill:"none",stroke:"var(--tau)","stroke-width":2.2},svg);
+    if(hi.length>1)el("polyline",{points:hi.join(" "),fill:"none",stroke:"var(--ok)","stroke-width":5,opacity:.5},svg);
+    if(mr<=0.55){el("line",{x1:gx0,y1:ax.Y(mr),x2:gx1,y2:ax.Y(mr),stroke:"var(--tau)","stroke-dasharray":"5 4"},svg);
+      const tq=tx(svg,gx1-4,ax.Y(mr)-6,"m minimal = τ₀/σ",{class:"lbl","text-anchor":"end",fill:"var(--tau)"});halo(tq,svg);}
+    else{const tq=tx(svg,(gx0+gx1)/2,gy1-14,"σ trop faible : aucun plan ne glisse",{class:"lbl","text-anchor":"middle",fill:"var(--tau)"});halo(tq,svg);fitText(tq,gx0,gx1);}
+    el("circle",{cx:ax.X(phi),cy:ax.Y(mS),r:6.5,fill:slip?"var(--ok)":"var(--ink)",stroke:"var(--card)","stroke-width":2},svg);
+    ro.innerHTML=nbsp("<span>m = <b>"+nf(mS,3)+"</b></span><span>λ = "+nf(lam,1)+" °</span><span>τ = m·σ = <b class='tau'>"+nf(tau,2)+" MPa</b></span><span>σ pour glisser = <b class='sig'>"+(mS>1e-6?nf(T0/mS,2)+" MPa":"∞")+"</b></span><span>"+(slip?"<b class='ok'>le cristal glisse</b>":"élastique")+"</span>");
+    let t;
+    if(prog!==null&&prog<1)t="La contrainte monte : rien ne se passe tant que la cission résolue reste sous τ₀ = 1 MPa.";
+    else if(slip)t="✅ τ = "+nf(tau,2)+" MPa ≥ τ₀ : le cristal glisse le long du plan violet, tranche par tranche, et des marches apparaissent sur ses faces. Le glissement a démarré à σ = τ₀/m = "+nf(T0/mS,2)+" MPa.";
+    else if(phi<=15||phi>=75)t="Plan presque "+(phi<=15?"perpendiculaire":"parallèle")+" à l'effort : m = "+nf(mS,3)+", la cission reste faible. Il faudrait σ = "+nf(T0/mS,2)+" MPa pour faire glisser ce plan, alors qu'un plan à 45° glisserait dès 2 MPa.";
+    else t="τ = "+nf(tau,2)+" MPa < τ₀ = 1 MPa : déformation élastique seulement. Il faut σ ≥ τ₀/m = "+nf(T0/mS,2)+" MPa.";
+    if(!(prog!==null&&prog<1)&&psi>0)t+=" La direction tournée de ψ = "+nf(psi,0)+" ° multiplie m par cos ψ = "+nf(Math.cos(qr),2)+".";
+    else if(!(prog!==null&&prog<1)&&Math.abs(phi-45)<=1)t+=" C'est l'orientation la plus favorable : m = 0,5.";
+    msg.innerHTML=nbsp(t);
+  }
+  const A=animate($("#m2play"),"▶ Augmenter σ",6000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;ss.value=8;draw();});
+  $$("#m2p .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;sf.value=b.dataset.k;sd.value=0;setOn("#m2p",b);draw();}));
+  [ss,sf,sd].forEach(x=>x.addEventListener("input",()=>{A.stop();prog=null;if(x!==ss)setOn("#m2p",null);draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M3 : la ligne de métro (lecture d'une courbe de traction)
+   ========================================================= */
+(function(){
+  const svg=$("#m3svg");if(!svg)return;
+  const sp=$("#m3p"),so=$("#m3o"),ro=$("#m3r"),msg=$("#m3msg"),bz=$("#m3z");
+  let k="S355",zoom=false,prog=null;
+  function offLab(o){const v=o*100,s=nf(v,Math.abs(v*10-Math.round(v*10))<1e-6?1:2);return v>=1-1e-9?s.replace(/,0+$/,""):s;}
+  function specimen(x,y,w,e,m,broken){/* petite éprouvette : têtes, partie calibrée, col */
+    const L=w*0.5*(1+Math.min(e,0.6)),hw=7*Math.exp(-Math.min(e,m.Ag)/2),hd=12,xc=x+w/2,neck=e>m.Ag?(e-m.Ag)/(tef(m)-m.Ag):0,rn=hw*(1-0.55*neck);
+    const top=[],bot=[];for(let i=0;i<=30;i++){const xx=xc-L/2+L*i/30,d=(xx-xc)/(L*0.12),rr=hw-(hw-rn)*Math.exp(-d*d);top.push([xx,y-rr]);bot.unshift([xx,y+rr]);}
+    const head=(x0)=>el("rect",{x:x0,y:y-hd,width:16,height:2*hd,fill:"var(--paper-2)",stroke:"var(--ink)"},svg);
+    head(xc-L/2-16);head(xc+L/2);
+    if(broken){const lt=top.filter(p=>p[0]<xc-1),lb=bot.filter(p=>p[0]<xc-1),rt=top.filter(p=>p[0]>xc+1),rb=bot.filter(p=>p[0]>xc+1);
+      el("polygon",{points:lt.concat(lb).map(p=>(p[0]-3).toFixed(1)+","+p[1].toFixed(1)).join(" "),fill:"var(--paper-2)",stroke:"var(--ink)"},svg);
+      el("polygon",{points:rt.concat(rb).map(p=>(p[0]+3).toFixed(1)+","+p[1].toFixed(1)).join(" "),fill:"var(--paper-2)",stroke:"var(--ink)"},svg);}
+    else el("polygon",{points:top.concat(bot).map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" "),fill:"var(--paper-2)",stroke:"var(--ink)"},svg);}
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?390:320;setVB(svg,W,H);clear(svg);
+    const m=TMAT[k],E=m.E,ef=tef(m),p=prog===null?+sp.value:100*Math.max(0,prog),off=+so.value/100;
+    $("#m3po").textContent=nf(p,0)+" %";$("#m3oo").textContent=nf(off*100,2)+" %";
+    const ec=p/100*ef,sc=tsig(m,ec),rp=tRp(m,off),broken=p>=99.99;
+    const yld=m.pal?m.ReH:m.Rp;
+    const xmax=zoom?(m.pal?0.03:Math.max(0.012,rp.e*2.2)):ef*1.06,ymax=zoom?yld*1.3:m.Rm*1.16;
+    const x0=n?50:58,x1=W-14,y0=40,y1=H-44;
+    tx(svg,8,18,(zoom?"Zoom sur le début : ":"Courbe conventionnelle : ")+m.n,{class:"ttl"});
+    const ax=axes(svg,x0,x1,y0,y1,0,xmax,0,ymax,"ε (%)","σ (MPa)",niceStep(xmax,n?4:6),niceStep(ymax,5),v=>nf(v*100,xmax<0.05?1:0));
+    const inb=(x,y)=>x>=0&&x<=xmax&&y>=0&&y<=ymax;
+    /* courbe */
+    const pts=[],N=500;for(let i=0;i<=N;i++){const e=Math.min(ef,xmax)*i/N;pts.push([ax.X(e),ax.Y(tsig(m,e))]);}
+    el("polyline",{points:clipSeg(pts,x0,x1,y0,y1),fill:"none",stroke:"var(--sig)","stroke-width":2.4},svg);
+    /* droite décalée */
+    const ytop=Math.min(ymax,(xmax-off)*E);el("line",{x1:ax.X(off),y1:ax.Y(0),x2:ax.X(off+ytop/E),y2:ax.Y(ytop),stroke:"var(--mat)","stroke-width":1.8,"stroke-dasharray":"6 4"},svg);
+    const labs=[];
+    const lab=(x,y,s,a,col)=>{const t=tx(svg,x,y,s,{"text-anchor":a||"start",fill:col||"var(--ink)","font-weight":"700"});halo(t,svg);fitText(t,x0+2,x1-2);labs.push(t);return t;};
+    if(inb(rp.e,rp.s)){el("circle",{cx:ax.X(rp.e),cy:ax.Y(rp.s),r:5,fill:"var(--mat)",stroke:"var(--card)","stroke-width":1.5},svg);
+      lab(ax.X(rp.e)+9,ax.Y(rp.s)+(m.pal?18:16),"Rp"+offLab(off),"start","var(--mat)");}
+    if(m.pal&&inb(m.ReH/E,m.ReH)){el("circle",{cx:ax.X(m.ReH/E),cy:ax.Y(m.ReH),r:4.5,fill:"var(--sig)"},svg);lab(ax.X(m.ReH/E)+(zoom?8:6),ax.Y(m.ReH)-9,"ReH","start","var(--sig)");
+      if(zoom)lab(ax.X(m.eL)-4,ax.Y(m.ReL)-9,"ReL (palier)","end","var(--sig)");}
+    if(!zoom){el("circle",{cx:ax.X(m.Ag),cy:ax.Y(m.Rm),r:5,fill:"var(--sig)"},svg);
+      el("line",{x1:ax.X(m.Ag),y1:ax.Y(m.Rm),x2:ax.X(m.Ag),y2:y1,class:"ref"},svg);
+      lab(ax.X(m.Ag),ax.Y(m.Rm)-10,"Rm","middle","var(--sig)");lab(ax.X(m.Ag)+4,y1-6,"Ag","start","var(--eps)");
+      const sf=m.ff*m.Rm;el("line",{x1:ax.X(ef),y1:ax.Y(sf),x2:ax.X(m.A),y2:y1,stroke:"var(--eps)","stroke-dasharray":"3 3"},svg);
+      lab(ax.X(m.A)-4,y1-6,"A","end","var(--eps)");
+      const tE=lab(ax.X(Math.min(xmax*0.02,yld*0.5/E))+8,ax.Y(yld*0.45),"E","start","var(--mat)");}
+    else{const eE=yld*0.5/E;lab(ax.X(eE)+10,ax.Y(yld*0.5)+4,"pente E","start","var(--mat)");}
+    /* curseur et décharge */
+    if(inb(ec,sc)){const ep=Math.max(0,ec-sc/E);
+      if(ec>0&&sc>0)el("line",{x1:ax.X(ec),y1:ax.Y(sc),x2:ax.X(ep),y2:y1,stroke:"var(--eps)","stroke-width":1.6,"stroke-dasharray":"4 3"},svg);
+      el("circle",{cx:ax.X(ec),cy:ax.Y(sc),r:6.5,fill:"var(--eps)",stroke:"var(--card)","stroke-width":2},svg);}
+    if(broken&&!zoom){const xf=ax.X(ef),yf=ax.Y(m.ff*m.Rm);el("path",{d:"M"+(xf-6)+","+(yf-6)+"L"+(xf+6)+","+(yf+6)+"M"+(xf-6)+","+(yf+6)+"L"+(xf+6)+","+(yf-6),stroke:"var(--tau)","stroke-width":2.6},svg);}
+    declutter(labs,y0,y1);
+    /* éprouvette */
+    const gw=n?110:130;specimen(x1-gw-6,y1-26,gw,ec,m,broken);
+    /* lectures */
+    const tol=2/(x1-x0)*xmax,eye=eyeRe(m,tol);
+    const rpName="R<sub>p"+offLab(off)+"</sub>";
+    ro.innerHTML=nbsp((m.pal?"<span>R<sub>eH</sub> = <b class='sig'>"+nf(m.ReH,0)+" MPa</b></span><span>R<sub>eL</sub> = <b class='sig'>"+nf(m.ReL,0)+" MPa</b></span>":"")+
+      "<span>"+rpName+" = <b class='sig'>"+nf(rp.s,0)+" MPa</b></span><span>R<sub>m</sub> = <b class='sig'>"+nf(m.Rm,0)+" MPa</b></span><span>A<sub>g</sub> = <b class='eps'>"+pc(m.Ag,1)+"</b></span><span>A = <b class='eps'>"+pc(m.A,1)+"</b></span><span>Z = <b class='eps'>"+pc(m.Z,0)+"</b></span>"+
+      "<span>curseur : σ = "+nf(sc,0)+" MPa</span><span>ε = "+pc(ec,2)+"</span><span>permanent : "+pc(Math.max(0,ec-sc/E),2)+"</span><span>lu à l'œil ≈ <b>"+nf(eye,0)+" MPa</b></span>");
+    let t;
+    const ep=ec-sc/E;
+    if(prog!==null&&prog<1)t="L'essai avance : suis le curseur bleu et regarde ce que l'éprouvette garderait si on la relâchait (pointillé).";
+    else if(broken)t="Rupture : l'éprouvette casse à "+pc(ef,1)+" d'allongement total, puis chaque morceau rend sa part élastique ("+pc(m.ff*m.Rm/E,2)+"). Reste A = "+pc(m.A,1)+" ; au col, la section a perdu Z = "+pc(m.Z,0)+".";
+    else if(ep<2e-5)t="Domaine élastique : en relâchant ici, l'éprouvette retrouverait exactement sa longueur. La pente vaut E = "+nf(E/1000,0)+" GPa.";
+    else if(m.pal&&ec<=m.eL)t="Palier d'écoulement : après le pic R<sub>eH</sub> = "+nf(m.ReH,0)+" MPa, la force retombe à R<sub>eL</sub> = "+nf(m.ReL,0)+" MPa pendant que des bandes de déformation plastique (bandes de Lüders) traversent l'éprouvette.";
+    else if(ec<=m.Ag)t="Écrouissage : la contrainte monte encore. Relâchée ici, l'éprouvette garderait "+pc(ep,2)+" d'allongement permanent.";
+    else t="Striction : le col se creuse et la force baisse. R<sub>m</sub> = "+nf(m.Rm,0)+" MPa a été atteinte à A<sub>g</sub> = "+pc(m.Ag,1)+".";
+    if(!(prog!==null&&prog<1)){
+      if(zoom)t+=" 🔍 Zoom : la courbe quitte visiblement la droite vers "+nf(eye,0)+" MPa, contre "+nf(eyeRe(m,2/(x1-x0)*ef*1.06),0)+" MPa en pleine échelle"+(m.pal?" : avec un palier, la lecture ne change guère.":" : la lecture à l'œil dépend de l'échelle, d'où la convention R<sub>p0,2</sub>.");
+      else if(Math.abs(off-0.002)>1e-6)t+=" Avec un décalage de "+pc(off,2)+", la limite conventionnelle vaut "+nf(rp.s,0)+" MPa : seul le décalage normalisé de 0,2 % se compare d'un laboratoire à l'autre.";}
+    msg.innerHTML=nbsp(t);
+  }
+  const A=animate($("#m3play"),"▶ Tirer jusqu'à la rupture",7000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;sp.value=100;draw();});
+  $$("#m3s .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;k=b.dataset.k;setOn("#m3s",b);draw();}));
+  bz.addEventListener("click",()=>{zoom=!zoom;bz.classList.toggle("on",zoom);bz.textContent=zoom?"🔍 Vue complète":"🔍 Zoom sur le début";draw();});
+  [sp,so].forEach(x=>x.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M4 : le caramel étiré (Hollomon, Considère, Bridgman)
+   ========================================================= */
+(function(){
+  const svg=$("#m4svg");if(!svg)return;
+  const sn=$("#m4n"),sk=$("#m4k"),st=$("#m4t"),ro=$("#m4r"),msg=$("#m4msg"),bb=$("#m4b");
+  const MT={S235:{K:690,n:0.22,Z:0.65,nm:"le S235"},S355:{K:850,n:0.16,Z:0.60,nm:"le S355"},"304L":{K:1280,n:0.45,Z:0.75,nm:"l'inox 304L"},
+    Cu:{K:530,n:0.44,Z:0.80,nm:"le cuivre recuit"},S690:{K:1000,n:0.07,Z:0.55,nm:"le S690 trempé-revenu"}};
+  let Z=0.60,brid=false,prog=null,nm="le S355";
+  const E=200000,C=0.12;
+  const bf=aR=>aR<=1e-6?1:1/((1+2/aR)*Math.log(1+aR/2));
+  function st0(K,n,ek){const sr=Math.min(E*ek,K*Math.pow(Math.max(ek,1e-9),n)),ag=Math.exp(n)-1;
+    const ec=ek<=n?Math.exp(ek)-1:ag+C*(ek-n),aR=ek>n?1.1*(ek-n):0;return {ec:ec,sc:sr*Math.exp(-ek),sr:sr,aR:aR,B:bf(aR)};}
+  function bar(x0,x1,yc,ec,ek,n,ecf,broken,fr){/* éprouvette avec col */
+    const W0=(x1-x0)*0.62,Lb=W0*(1+ec)/(1+ecf),xc=(x0+x1)/2,r0=13,ru=r0*Math.exp(-Math.min(ek,n)/2),rn=r0*Math.exp(-ek/2),wd=Lb*0.07;
+    const top=[],bot=[];for(let i=0;i<=40;i++){const x=xc-Lb/2+Lb*i/40,d=(x-xc)/wd,r=ru-(ru-rn)*Math.exp(-d*d);top.push([x,yc-r]);bot.unshift([x,yc+r]);}
+    const hd=r0+6;[xc-Lb/2-18,xc+Lb/2].forEach(x=>el2("rect",{x:x,y:yc-hd,width:18,height:2*hd,fill:"var(--paper-2)",stroke:"var(--ink)"}));
+    const poly=(P,dx)=>el2("polygon",{points:P.map(p=>(p[0]+dx).toFixed(1)+","+p[1].toFixed(1)).join(" "),fill:"var(--paper-2)",stroke:"var(--ink)","stroke-width":1.3});
+    if(broken){poly(top.filter(p=>p[0]<xc).concat(bot.filter(p=>p[0]<xc)),-4);poly(top.filter(p=>p[0]>xc).concat(bot.filter(p=>p[0]>xc)),4);}
+    else poly(top.concat(bot),0);
+    const L=8+26*fr;arrow(svg,xc-Lb/2-20,yc,xc-Lb/2-20-L,yc,"var(--frc)",2.4,9);arrow(svg,xc+Lb/2+20,yc,xc+Lb/2+20+L,yc,"var(--frc)",2.4,9);
+    if(ek>n&&!broken){const t=tx(svg,xc,yc+r0+18,"col",{class:"lbl","text-anchor":"middle"});halo(t,svg);}}
+  function el2(tag,a){return el(tag,a,svg);}
+  function draw(){
+    const W=svgW(svg),nar=W<560,H=nar?620:360;setVB(svg,W,H);clear(svg);
+    const n=+sn.value,K=+sk.value,t=prog===null?+st.value/100:Math.max(0,prog);
+    $("#m4no").textContent=nf(n,2);$("#m4ko").textContent=nf(K,0)+" MPa";$("#m4to").textContent=nf(t*100,0)+" %";
+    const ef=-Math.log(1-Z),ek=t*ef,S=st0(K,n,ek),Rm=K*Math.pow(n,n)*Math.exp(-n),Ag=Math.exp(n)-1,ecf=st0(K,n,ef).ec,broken=t>=0.9999;
+    tx(svg,8,18,"L'éprouvette ("+nm+")",{class:"ttl"});
+    bar(8,W-8,58,S.ec,ek,n,ecf,broken,S.sc/Rm);
+    /* courbe conventionnelle */
+    const cx0=nar?50:54,cx1=nar?W-12:W/2-12,cy0=nar?126:122,cy1=nar?306:H-44;
+    const a1=axes(svg,cx0,cx1,cy0,cy1,0,ecf*1.08,0,Rm*1.22,"ε (%)","σ = F/S₀ (MPa)",niceStep(ecf*1.08,4),niceStep(Rm*1.22,4),v=>nf(v*100,0));
+    const P1=[],Q1=[];for(let i=0;i<=200;i++){const e2=ef*i/200,s2=st0(K,n,e2);P1.push([a1.X(s2.ec),a1.Y(s2.sc)]);if(e2<=ek)Q1.push([a1.X(s2.ec),a1.Y(s2.sc)]);}
+    el("polyline",{points:clipSeg(P1,cx0,cx1,cy0,cy1),fill:"none",stroke:"var(--sig)","stroke-width":1.4,opacity:.3},svg);
+    if(Q1.length>1)el("polyline",{points:clipSeg(Q1,cx0,cx1,cy0,cy1),fill:"none",stroke:"var(--sig)","stroke-width":2.6},svg);
+    el("line",{x1:a1.X(Ag),y1:a1.Y(Rm),x2:a1.X(Ag),y2:cy1,class:"ref"},svg);
+    const tR=tx(svg,a1.X(Ag),a1.Y(Rm)-9,"Rm",{"text-anchor":"middle",fill:"var(--sig)","font-weight":"700"});halo(tR,svg);fitText(tR,cx0,cx1);
+    const tA=tx(svg,a1.X(Ag)+4,cy1-6,"Ag",{fill:"var(--eps)","font-weight":"700"});halo(tA,svg);
+    el("circle",{cx:a1.X(S.ec),cy:a1.Y(S.sc),r:6,fill:"var(--eps)",stroke:"var(--card)","stroke-width":2},svg);
+    /* courbe rationnelle */
+    const rx0=nar?50:W/2+46,rx1=W-12,ry0=nar?386:122,ry1=H-44,ymx=Math.max(K*Math.pow(ef,n),K*Math.pow(n,n))*1.15;
+    const a2=axes(svg,rx0,rx1,ry0,ry1,0,ef*1.05,0,ymx,"ε rationnelle au col","σ rationnelle (MPa)",niceStep(ef*1.05,4),niceStep(ymx,4),v=>nf(v,v<1?1:0).replace(/,0$/,""));
+    const P2=[],D2=[],B2=[];for(let i=1;i<=240;i++){const e2=ef*1.05*i/240,s2=Math.min(E*e2,K*Math.pow(e2,n));P2.push([a2.X(e2),a2.Y(s2)]);
+      D2.push([a2.X(e2),a2.Y(n*K*Math.pow(e2,n-1))]);if(brid&&e2>n&&e2<=ef)B2.push([a2.X(e2),a2.Y(s2*bf(1.1*(e2-n)))]);}
+    el("polyline",{points:clipSeg(D2,rx0,rx1,ry0,ry1),fill:"none",stroke:"var(--muted)","stroke-width":1.6,"stroke-dasharray":"5 4"},svg);
+    el("polyline",{points:clipSeg(P2,rx0,rx1,ry0,ry1),fill:"none",stroke:"var(--sig)","stroke-width":2.4},svg);
+    if(B2.length>1)el("polyline",{points:clipSeg(B2,rx0,rx1,ry0,ry1),fill:"none",stroke:"var(--sig)","stroke-width":2,"stroke-dasharray":"7 4"},svg);
+    el("line",{x1:a2.X(n),y1:ry0,x2:a2.X(n),y2:ry1,stroke:"var(--mat)","stroke-dasharray":"4 3"},svg);
+    el("circle",{cx:a2.X(n),cy:a2.Y(K*Math.pow(n,n)),r:5,fill:"var(--mat)"},svg);
+    const tn=tx(svg,a2.X(n)+5,ry0+14,"ε = n : striction",{class:"lbl",fill:"var(--mat)"});halo(tn,svg);fitText(tn,rx0,rx1,5);
+    const yd=a2.Y(Math.min(ymx,n*K*Math.pow(ef*1.05,n-1)))-8,td=tx(svg,rx1-4,Math.max(ry0+28,yd),"pente dσ/dε",{class:"lbl","text-anchor":"end"});halo(td,svg);
+    if(ek>1e-6){const yy=brid&&ek>n?S.sr*S.B:S.sr;el("circle",{cx:a2.X(ek),cy:a2.Y(Math.min(ymx,yy)),r:6,fill:"var(--eps)",stroke:"var(--card)","stroke-width":2},svg);}
+    ro.innerHTML=nbsp("<span>R<sub>m</sub> = K·nⁿ·e⁻ⁿ = <b class='sig'>"+nf(Rm,0)+" MPa</b></span><span>A<sub>g</sub> = eⁿ − 1 = <b class='eps'>"+pc(Ag,1)+"</b></span><span>σ<sub>rat</sub>(F<sub>m</sub>) = "+nf(K*Math.pow(n,n),0)+" MPa</span>"+
+      "<span>ε = "+pc(S.ec,1)+"</span><span>F/S₀ = "+nf(S.sc,0)+" MPa</span><span>col : ε<sub>rat</sub> = "+nf(ek,3)+"</span><span>σ<sub>rat</sub> = <b class='sig'>"+nf(S.sr,0)+" MPa</b></span>"+(brid&&ek>n?"<span>a/R ≈ "+nf(S.aR,2)+"</span><span>σ<sub>éq</sub> = <b class='sig'>"+nf(S.sr*S.B,0)+" MPa</b></span>":""));
+    let m;
+    if(prog!==null&&prog<1)m=ek<=n?"Allongement réparti : l'écrouissage l'emporte, toute l'éprouvette s'allonge de la même façon.":"Striction : la force baisse, alors que la contrainte vraie au col monte encore.";
+    else if(broken)m="Rupture au col : la section a perdu Z = "+pc(Z,0)+". La contrainte vraie y a atteint "+nf(S.sr,0)+" MPa, contre R<sub>m</sub> = "+nf(Rm,0)+" MPa sur la courbe conventionnelle.";
+    else if(ek<n-1e-3)m="Allongement réparti : la pente de la courbe rationnelle ("+nf(n*K*Math.pow(Math.max(ek,1e-6),n-1),0)+" MPa) dépasse encore la contrainte ("+nf(S.sr,0)+" MPa) : le métal durcit plus vite que sa section ne diminue.";
+    else if(ek<=n+1e-3)m="✅ Critère de Considère : à ε<sub>rat</sub> = n = "+nf(n,2)+", la pente rattrape la contrainte. La force est maximale : R<sub>m</sub> = "+nf(Rm,0)+" MPa, après A<sub>g</sub> = "+pc(Ag,1)+" d'allongement réparti.";
+    else m="Striction : le col se creuse et F/S₀ baisse ("+nf(S.sc,0)+" MPa), mais la contrainte vraie au col continue de monter ("+nf(S.sr,0)+" MPa).";
+    if(!(prog!==null&&prog<1)&&brid&&ek>n)m+=" Correction de Bridgman : le col retenu par le métal voisin est en traction triaxiale ; la contrainte d'écoulement vraie vaut "+nf(S.B*100,0)+" % de F/S.";
+    msg.innerHTML=nbsp(m);
+  }
+  const A=animate($("#m4play"),"▶ Tirer",7000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;st.value=100;draw();});
+  $$("#m4s .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;const q=MT[b.dataset.k];sn.value=q.n;sk.value=q.K;Z=q.Z;nm=q.nm;setOn("#m4s",b);draw();}));
+  bb.addEventListener("click",()=>{brid=!brid;bb.classList.toggle("on",brid);bb.textContent="Bridgman : "+(brid?"oui":"non");draw();});
+  [sn,sk].forEach(x=>x.addEventListener("input",()=>{A.stop();prog=null;setOn("#m4s",null);nm="réglage libre";draw();}));
+  st.addEventListener("input",()=>{A.stop();prog=null;draw();});
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M5 : le miel et le thermostat (température, vitesse, état, sens)
+   ========================================================= */
+const M5ST={N:{n:"acier à 0,2 % C normalisé",cc:true,ath:240,th:1,k:525,nl:0.34,sc:900,ZL:0.62,lud:true},
+  Q:{n:"acier à 0,2 % C trempé",cc:true,ath:1250,th:0.6,k:900,nl:0.30,sc:1650,ZL:0.45},
+  QT:{n:"acier à 0,2 % C trempé-revenu",cc:true,ath:800,th:0.45,k:420,nl:0.30,sc:1500,ZL:0.55},
+  AUS:{n:"inox austénitique",cc:false,k:1100,nl:0.6,sc:Infinity,ZL:0.70}};
+const M5DF={L:{n:"sens long",cc:1,aus:1},T:{n:"sens travers",cc:0.9,aus:0.96},Z:{n:"épaisseur (Z)",cc:0.42,aus:0.85}};
+function m5model(s,T,lr,d){
+  const TK=T+273.15,LR0=Math.log10(2.5e-4),C=0.12;let Re,k=s.k,E;
+  if(s.cc){const Ts=TK*(1-0.035*(lr-LR0)),ath=T<=20?s.ath:s.ath*(1-0.0005*(T-20));Re=ath+s.th*1383*Math.exp(-0.00865*Ts);if(T>20)k*=1-0.0008*(T-20);E=210000-70*T;}
+  else{Re=(150+350*Math.exp(-(TK-77)/150))*(1+0.01*(lr-LR0));k*=T<=20?1+0.6*Math.exp(-(TK-77)/80):1-0.0008*(T-20);E=200000-80*T;}
+  const ZL=s.ZL*(s.cc?M5DF[d].cc:M5DF[d].aus),efd=-Math.log(1-ZL),eL=s.lud?0.015:0,ReH=s.lud?1.04*Re:Re;
+  const o={Re:Re,ReH:ReH,E:E,pts:[[0,0]],mode:"ductile"};
+  if(ReH>=s.sc){o.pts.push([s.sc/E,s.sc]);o.Rm=s.sc;o.A=0;o.Z=0;o.Ag=0;o.mode="fragile";o.sf=s.sc;o.ef=s.sc/E;return o;}
+  o.pts.push([ReH/E,ReH]);if(s.lud){o.pts.push([ReH/E+0.0008,Re]);o.pts.push([eL,Re]);}
+  const sr=ep=>Re+k*Math.pow(Math.max(0,ep),s.nl);
+  let ep=0,eu=null,cl=false;const dep=4e-4;
+  while(ep<3){const g=sr(ep),sl=k*s.nl*Math.pow(Math.max(ep,1e-6),s.nl-1);
+    if(g>=s.sc){cl=true;break;}
+    if(ep>0&&sl<=g){eu=ep;break;}
+    const et=eL+ep+g/E;o.pts.push([Math.exp(et)-1,g*Math.exp(-et)]);ep+=dep;}
+  if(cl){const et=eL+ep+s.sc/E;o.pts.push([Math.exp(et)-1,s.sc*Math.exp(-et)]);o.mode="quasi fragile";o.Ag=Math.exp(eL+ep)-1;o.A=o.Ag;o.Z=1-Math.exp(-(eL+ep));}
+  else{const elu=eL+eu,gu=sr(eu),ecu=Math.exp(elu+gu/E)-1;o.Ag=Math.exp(elu)-1;let e2=elu,last=null;
+    while(e2<efd){const g=sr(e2-eL);if(g>=s.sc){o.mode="mixte";break;}last=[ecu+C*(e2-elu),g*Math.exp(-e2)];o.pts.push(last);e2+=2e-3;}
+    if(e2>efd)e2=efd;o.Z=1-Math.exp(-e2);const g=Math.min(sr(e2-eL),s.sc);last=[ecu+C*(e2-elu),g*Math.exp(-e2)];o.pts.push(last);o.A=last[0]-last[1]/E;}
+  o.Rm=Math.max.apply(null,o.pts.map(p=>p[1]));const lp=o.pts[o.pts.length-1];o.ef=lp[0];o.sf=lp[1];return o;}
+(function(){
+  const svg=$("#m5svg");if(!svg)return;
+  const sT=$("#m5t"),sv=$("#m5v"),ro=$("#m5r"),msg=$("#m5msg");
+  let mk="N",dk="L",prog=null;
+  const MODE={ductile:"ductile","mixte":"ductile puis clivage","quasi fragile":"quasi fragile","fragile":"fragile"};
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?420:350;setVB(svg,W,H);clear(svg);
+    const s=M5ST[mk],T=prog===null?+sT.value:Math.round(400-596*Math.max(0,prog)),lr=+sv.value;
+    $("#m5to").textContent=nf(T,0)+" °C";$("#m5vo").textContent=sci(Math.pow(10,lr),1)+" s⁻¹";
+    const o=m5model(s,T,lr,dk),r=m5model(s,20,-3.6,"L");
+    const xmax=Math.max(0.1,o.ef,r.ef)*1.08,ymax=Math.max(o.Rm,r.Rm,o.ReH,r.ReH,s.cc?s.sc:0)*1.12;
+    const x0=n?52:58,x1=W-14,y0=40,y1=H-44;
+    tx(svg,8,18,s.n+", "+M5DF[dk].n,{class:"ttl"});
+    const ax=axes(svg,x0,x1,y0,y1,0,xmax,0,ymax,"ε (%)","σ = F/S₀ (MPa)",niceStep(xmax,n?4:6),niceStep(ymax,5),v=>nf(v*100,0));
+    const labs=[];
+    if(s.cc&&s.sc<=ymax){el("line",{x1:x0,y1:ax.Y(s.sc),x2:x1,y2:ax.Y(s.sc),stroke:"var(--tau)","stroke-width":1.4,"stroke-dasharray":"6 4"},svg);
+      const tc=tx(svg,x1-4,ax.Y(s.sc)-6,"contrainte de clivage σc = "+nf(s.sc,0)+" MPa (contrainte vraie)",{class:"lbl","text-anchor":"end",fill:"var(--tau)"});halo(tc,svg);fitSize(tc,x1-x0-8,9);labs.push(tc);}
+    const pl=(pts,col,w,op)=>el("polyline",{points:pts.map(p=>ax.X(p[0]).toFixed(1)+","+ax.Y(p[1]).toFixed(1)).join(" "),fill:"none",stroke:col,"stroke-width":w,opacity:op},svg);
+    pl(r.pts,"var(--muted)",2,.55);pl(o.pts,"var(--sig)",2.6,1);
+    const xf=ax.X(o.ef),yf=ax.Y(o.sf),cb=o.mode==="ductile"?"var(--ink)":"var(--tau)";
+    el("path",{d:"M"+(xf-6)+","+(yf-6)+"L"+(xf+6)+","+(yf+6)+"M"+(xf-6)+","+(yf+6)+"L"+(xf+6)+","+(yf-6),stroke:cb,"stroke-width":2.6},svg);
+    const tg=tx(svg,ax.X(r.ef)-4,ax.Y(r.sf)+18,"référence 20 °C",{class:"lbl","text-anchor":"end"});halo(tg,svg);fitText(tg,x0,x1);
+    const tm=tx(svg,Math.min(xf+8,x1-4),Math.max(y0+12,yf-10),MODE[o.mode],{fill:cb,"font-weight":"700","text-anchor":xf+8>x1-120?"end":"start"});halo(tm,svg);fitText(tm,x0,x1);
+    labs.push(tg,tm);declutter(labs,y0,y1);
+    ro.innerHTML=nbsp((s.lud?"<span>R<sub>eH</sub> = <b class='sig'>"+nf(o.ReH,0)+" MPa</b></span><span>R<sub>eL</sub> = <b class='sig'>"+nf(o.Re,0)+" MPa</b></span>":"<span>R<sub>p0,2</sub> ≈ <b class='sig'>"+nf(o.Re,0)+" MPa</b></span>")+"<span>R<sub>m</sub> = <b class='sig'>"+nf(o.Rm,0)+" MPa</b></span><span>A = <b class='eps'>"+pc(Math.max(0,o.A),1)+"</b></span><span>Z = <b class='eps'>"+pc(Math.max(0,o.Z),0)+"</b></span><span>rupture : <b>"+MODE[o.mode]+"</b></span><span>E = "+nf(o.E/1000,0)+" GPa</span>");
+    let t;
+    if(prog!==null&&prog<1)t="Refroidissement : surveille la limite d'élasticité qui monte vers la contrainte de clivage (pointillé violet).";
+    else if(o.mode==="fragile")t="❌ Fragile : la limite d'élasticité ("+nf(o.ReH,0)+" MPa) atteint la contrainte de clivage avant toute plasticité. L'éprouvette casse net dans le domaine élastique, sans allongement ni striction.";
+    else if(o.mode==="quasi fragile")t="⚠️ Quasi fragile : le métal commence à couler, mais la contrainte vraie atteint la contrainte de clivage après seulement "+pc(o.A,1)+" d'allongement, avant toute striction.";
+    else if(o.mode==="mixte")t="⚠️ L'éprouvette fait son col, puis clive au centre du col avant d'avoir épuisé sa ductilité : Z tombe à "+pc(o.Z,0)+".";
+    else t="✅ Rupture ductile : R<sub>m</sub> = "+nf(o.Rm,0)+" MPa, A = "+pc(o.A,1)+", Z = "+pc(o.Z,0)+".";
+    if(!(prog!==null&&prog<1)){
+      if(!s.cc&&T<-100)t+=" L'austénite (cubique à faces centrées) ne clive pas : elle durcit même davantage à froid et reste ductile. C'est le métal des réservoirs cryogéniques.";
+      if(s.cc&&lr>-1)t+=" Essai rapide : la vitesse élève R<sub>e</sub> comme un froid supplémentaire (une décade ≈ 10 °C dans ce modèle).";
+      if(dk==="Z")t+=" Tirée dans l'épaisseur, la tôle ouvre ses inclusions aplaties : la striction chute (arrachement lamellaire).";
+      if(s.cc&&T>150)t+=" À chaud, R<sub>e</sub> et E baissent, et la courbe s'allonge.";}
+    msg.innerHTML=nbsp(t);
+  }
+  const A=animate($("#m5play"),"▶ Refroidir de 400 à −196 °C",8000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;sT.value=-196;draw();});
+  $$("#m5m .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;mk=b.dataset.k;setOn("#m5m",b);draw();}));
+  $$("#m5d .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;dk=b.dataset.k;setOn("#m5d",b);draw();}));
+  [sT,sv].forEach(x=>x.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M6 : la canne à pêche (traverse ou extensomètre, pilotage)
+   ========================================================= */
+(function(){
+  const svg=$("#m6svg");if(!svg)return;
+  const sk=$("#m6k"),sj=$("#m6j"),ro=$("#m6r"),msg=$("#m6msg"),bc=$("#m6c");
+  const m=TMAT.S355,S0=Math.PI*25,L0=50,Lc=60,FJ=1500;
+  let meas="trav",pil="dep",toe=false,prog=null;
+  function rec(Km,j){const ef=tef(m),N=700,o=[];
+    for(let i=0;i<=N;i++){const e=ef*i/N,s=tsig(m,e),F=s*S0,eLc=e<=m.Ag?e:m.Ag+(e-m.Ag)*L0/Lc,d=eLc*Lc+F/(Km*1000)+j*(1-Math.exp(-F/FJ));
+      o.push({e:e,s:s,x:meas==="ext"?e:d/Lc});}
+    return o;}
+  function xAt(R,sv){for(let i=1;i<R.length;i++)if(R[i].s>=sv){const a=R[i-1],b=R[i],t=(sv-a.s)/(b.s-a.s||1);return a.x+t*(b.x-a.x);}return R[R.length-1].x;}
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?390:320;setVB(svg,W,H);clear(svg);
+    const Km=+sk.value,j=+sj.value,t=prog===null?1:Math.max(0,prog);
+    $("#m6ko").textContent=nf(Km,0)+" kN/mm";$("#m6jo").textContent=nf(j,2)+" mm";
+    const R=rec(Km,j);
+    /* pente lue (corde entre 20 % et 50 % de ReH) et pied de courbe */
+    const x1s=xAt(R,0.2*m.ReH),x2s=xAt(R,0.5*m.ReH),Em=0.3*m.ReH/Math.max(1e-9,x2s-x1s);
+    let shift=0;if(toe&&meas==="trav")shift=x2s-0.5*m.ReH/Em;
+    R.forEach(p=>p.x-=shift);
+    let iM=0;R.forEach((p,i)=>{if(p.s>R[iM].s)iM=i;});
+    const last=R[R.length-1],Ameas=meas==="ext"?m.A:last.x-last.s/Em;
+    const xmax=Math.max(last.x,tef(m))*1.06,ymax=m.Rm*1.16;
+    const x0=n?50:58,x1=W-14,y0=40,y1=H-44;
+    tx(svg,8,18,meas==="ext"?"Enregistrement par l'extensomètre":"Enregistrement par la traverse",{class:"ttl"});
+    const ax=axes(svg,x0,x1,y0,y1,0,xmax,0,ymax,meas==="ext"?"ε = ΔL/L₀ (%)":"déplacement / Lc (%)","F/S₀ (MPa)",niceStep(xmax,n?4:6),niceStep(ymax,5),v=>nf(v*100,0));
+    el("polyline",{points:R.map(p=>ax.X(p.e).toFixed(1)+","+ax.Y(p.s).toFixed(1)).join(" "),fill:"none",stroke:"var(--muted)","stroke-width":2,opacity:.6},svg);
+    const nR=Math.max(2,Math.round(t*R.length)),show=pil==="force"?R.slice(0,Math.min(nR,iM+1)):R.slice(0,nR);
+    el("polyline",{points:show.filter(p=>p.x>=0).map(p=>ax.X(p.x).toFixed(1)+","+ax.Y(p.s).toFixed(1)).join(" "),fill:"none",stroke:"var(--eps)","stroke-width":2.6},svg);
+    if(toe&&meas==="trav"){const xa=ax.X(0),xb=ax.X(x2s-shift);el("line",{x1:xa,y1:ax.Y(0),x2:xb,y2:ax.Y(0.5*m.ReH),stroke:"var(--mat)","stroke-width":1.6,"stroke-dasharray":"4 3"},svg);}
+    const tg=tx(svg,ax.X(tef(m)*0.62),ax.Y(tsig(m,tef(m)*0.62))+20,"vraie courbe",{class:"lbl","text-anchor":"middle"});halo(tg,svg);
+    if(pil==="force"&&nR>iM){const pM=R[iM],xe=last.x;arrow(svg,ax.X(pM.x),ax.Y(pM.s),ax.X(xe),ax.Y(pM.s),"var(--frc)",2.2,9);
+      const te=tx(svg,(ax.X(pM.x)+ax.X(xe))/2,ax.Y(pM.s)-8,"emballement",{"text-anchor":"middle",fill:"var(--frc)","font-weight":"700"});halo(te,svg);fitText(te,x0,x1);
+      const xf=ax.X(xe),yf=ax.Y(pM.s);el("path",{d:"M"+(xf-6)+","+(yf-6)+"L"+(xf+6)+","+(yf+6)+"M"+(xf-6)+","+(yf+6)+"L"+(xf+6)+","+(yf-6),stroke:"var(--tau)","stroke-width":2.6},svg);}
+    else if(nR>=R.length){const xf=ax.X(last.x),yf=ax.Y(last.s);el("path",{d:"M"+(xf-6)+","+(yf-6)+"L"+(xf+6)+","+(yf+6)+"M"+(xf-6)+","+(yf+6)+"L"+(xf+6)+","+(yf-6),stroke:"var(--tau)","stroke-width":2.6},svg);}
+    const tp=tx(svg,ax.X(x2s-shift)+8,ax.Y(0.5*m.ReH),"pente lue "+nf(Em/1000,0)+" GPa",{fill:"var(--mat)","font-weight":"700"});halo(tp,svg);fitText(tp,x0,x1,8);
+    const toeW=meas==="trav"&&!toe?x1s-0.2*m.ReH/Em:0,FmN=m.Rm*S0,dM=(m.Ag*Lc+FmN/(Km*1000)+j*(1-Math.exp(-FmN/FJ)));
+    ro.innerHTML=nbsp("<span>pente lue : <b class='mat'>"+nf(Em/1000,0)+" GPa</b></span><span>vraie : 210 GPa</span><span>R<sub>eH</sub> = <b class='sig'>"+nf(m.ReH,0)+" MPa</b></span><span>R<sub>m</sub> = <b class='sig'>"+nf(m.Rm,0)+" MPa</b></span><span>A lu : <b class='eps'>"+(pil==="force"?"non mesurable":pc(Ameas,1))+"</b></span><span>A vrai : "+pc(m.A,1)+" (L₀)</span>"+(meas==="trav"?"<span>pied : "+(toe?"corrigé":pc(toeW,2))+"</span>":"")+"<span>course de la traverse à F<sub>m</sub> : "+nf(dM,1)+" mm</span>");
+    let tt;
+    if(prog!==null&&prog<1)tt="L'essai se déroule : compare la courbe enregistrée (bleue) à la vraie courbe du matériau (grise).";
+    else if(meas==="ext")tt="✅ L'extensomètre ne voit que l'éprouvette entre ses repères : la pente vaut bien E = 210 GPa, et R<sub>p0,2</sub> se construirait sans erreur. On le retire souvent avant la rupture pour le protéger, et l'on mesure A sur les morceaux.";
+    else tt="⚠️ La traverse mesure aussi le bâti, les mors et les jeux : la pente lue ne vaut que "+nf(Em/1000,0)+" GPa au lieu de 210 GPa"+(j>0.01&&!toe?", et la courbe commence par un pied arrondi":"")+". Les forces (R<sub>eH</sub>, R<sub>m</sub>) restent justes.";
+    if(!(prog!==null&&prog<1)){
+      if(meas==="trav"&&pil!=="force")tt+=" L'allongement final, rapporté à L<sub>c</sub> = 60 mm au lieu de L<sub>0</sub> = 50 mm, vaut "+pc(Ameas,1)+" : le col pèse moins sur une longueur plus grande.";
+      if(meas==="trav"&&toe)tt+=" La correction du pied de courbe prolonge la partie droite jusqu'à l'axe et décale l'origine de "+pc(shift,2)+".";
+      if(meas==="ext"&&toe)tt+=" La correction du pied de courbe ne sert qu'avec la traverse : l'extensomètre n'a pas de jeu à rattraper.";
+      if(meas==="ext")tt+=" La traverse, elle, a parcouru "+nf(dM,1)+" mm pour atteindre F<sub>m</sub> : raideur et jeu de la machine n'entrent pas dans la mesure.";
+      if(pil==="force")tt+=" 💥 Pilotage en force : passé F<sub>m</sub> = "+nf(m.Rm*S0/1000,1)+" kN, la machine réclame plus que ce que l'éprouvette peut porter ; le col se forme en une fraction de seconde et l'éprouvette casse. La descente de la courbe n'est pas enregistrée.";}
+    msg.innerHTML=nbsp(tt);
+  }
+  const A=animate($("#m6play"),"▶ Lancer l'essai",6000,p=>{prog=Math.max(0,p);draw();},()=>{prog=null;draw();});
+  $$("#m6m .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;meas=b.dataset.k;setOn("#m6m",b);draw();}));
+  $$("#m6a .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;pil=b.dataset.k;setOn("#m6a",b);draw();}));
+  bc.addEventListener("click",()=>{toe=!toe;bc.classList.toggle("on",toe);bc.textContent="Correction du pied de courbe : "+(toe?"oui":"non");draw();});
+  [sk,sj].forEach(x=>x.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   Quiz, check-list, sommaire, thème
+   ========================================================= */
+(function(){
+  const box=$("#quiz");if(!box)return;
+  const Q=[
+    {q:"La pente de la partie droite d'une courbe de traction donne :",o:["la limite d'élasticité","le module d'Young E","la résistance à la traction","le coefficient d'écrouissage"],c:1,e:"En élasticité, <b>σ = E·ε</b> : la pente de la droite est le module d'Young, la raideur du métal (≈ 210 GPa pour l'acier)."},
+    {q:"On trempe un acier : sa limite d'élasticité triple. Son module d'Young :",o:["triple aussi","double","ne change presque pas","diminue de moitié"],c:2,e:"E dépend des liaisons entre atomes, pas de la microstructure : un acier trempé et un acier recuit ont <b>le même module</b>, à quelques pour cent près."},
+    {q:"La résistance théorique d'une liaison atomique vaut environ :",o:["E/1 000","E/100","E/10","E"],c:2,e:"Le maximum de la force de rappel donne <b>σth ≈ E/10</b> : 21 000 MPa pour l'acier, soixante fois plus que sa limite d'élasticité réelle."},
+    {q:"Ce qui fait glisser un plan cristallin, c'est :",o:["la contrainte normale à ce plan","la cission résolue sur ce plan","la pression hydrostatique","la température seule"],c:1,e:"Le glissement démarre quand la <b>cission résolue τ = σ·cos φ·cos λ</b> atteint la cission critique τ₀. Un plan perpendiculaire à l'effort ne glisse pas."},
+    {q:"Le facteur de Schmid est maximal :",o:["pour un plan perpendiculaire à l'effort","pour un plan parallèle à l'effort","pour un plan et une direction à 45° de l'effort","il est toujours égal à 1"],c:2,e:"<b>m = cos 45° × cos 45° = 0,5</b> : c'est sa valeur maximale. D'où les marques de glissement et les lèvres de rupture inclinées à environ 45°."},
+    {q:"R<sub>p0,2</sub> est :",o:["la contrainte au sommet de la courbe","la contrainte qui laisse 0,2 % de déformation permanente","la contrainte à 0,2 % d'allongement total","la contrainte à la rupture"],c:1,e:"On trace une parallèle à la droite élastique décalée de 0,2 % : elle coupe la courbe en <b>R<sub>p0,2</sub></b>, la contrainte qui laisse 0,2 % d'allongement permanent."},
+    {q:"Longueur entre repères proportionnelle (k = 5,65) d'une éprouvette ronde de 10 mm :",o:["10 mm","25 mm","50 mm","100 mm"],c:2,e:"<b>L₀ = 5,65·√S₀ = 5,65 × √78,5 ≈ 50 mm</b>, soit 5 diamètres. Avec k = 11,3, on aurait 100 mm."},
+    {q:"Avec la loi de Hollomon σ = K·εⁿ, la striction commence quand la déformation rationnelle vaut :",o:["n","K","1/n","0,2 %"],c:0,e:"Critère de Considère : dσ/dε = σ, soit n·K·εⁿ⁻¹ = K·εⁿ, d'où <b>ε<sub>rat</sub> = n</b> et A<sub>g</sub> = eⁿ − 1."},
+    {q:"Après R<sub>m</sub>, la contrainte vraie dans le col :",o:["baisse comme la courbe conventionnelle","reste constante","continue d'augmenter","tombe à zéro"],c:2,e:"La force baisse parce que la section du col fond plus vite que le métal ne durcit, mais <b>la contrainte vraie au col continue de monter</b> jusqu'à la rupture."},
+    {q:"Tirées à −196 °C, lequel de ces métaux reste ductile ?",o:["un acier S355","un acier trempé non revenu","un inox austénitique 304L","tous cassent fragiles"],c:2,e:"L'austénite, cubique à faces centrées, ne présente pas de transition : <b>elle reste ductile</b> à −196 °C. Les aciers ferritiques, cubiques centrés, y deviennent fragiles."},
+    {q:"Un procès-verbal donne E = 58 GPa pour un acier. Le plus probable :",o:["l'acier est très allié","la déformation a été lue sur la traverse","l'essai a été fait à 400 °C","l'éprouvette était trop longue"],c:1,e:"La traverse additionne la déformation de la machine, des mors et des jeux : la <b>pente apparente</b> est trois ou quatre fois trop faible. E et R<sub>p0,2</sub> sont faux, les forces restent justes."},
+    {q:"L'essai de traction transversale d'un joint soudé (ISO 4136) sert surtout à vérifier :",o:["l'allongement du métal fondu","que R<sub>m</sub> atteint le minimum du métal de base, et où l'éprouvette casse","la dureté de la zone affectée","la ténacité à froid"],c:1,e:"On compare <b>R<sub>m</sub> au minimum spécifié du métal de base</b> et l'on note le lieu de rupture. L'allongement n'y a pas de sens (déformation hétérogène) ; le métal fondu seul se teste selon l'ISO 5178."}
+  ];
+  let score=0,done=0;const sc=$("#qzScore");
+  function upd(){let t="Score : "+score+" / "+Q.length;if(done===Q.length)t+=score>=10?"  ·  🎉 prêt pour le cours 2":score>=7?"  ·  relis les explications":"  ·  refais un tour des chapitres";sc.textContent=t;}
+  function render(){box.innerHTML="";score=0;done=0;
+    Q.forEach((it,n)=>{const d=document.createElement("div");d.className="qz";
+      d.innerHTML='<p class="qz-q"><b>'+(n+1)+".</b> "+it.q+'</p><div class="qz-o"></div><div class="qz-e" hidden></div>';
+      const o=d.querySelector(".qz-o"),ex=d.querySelector(".qz-e");let answered=false;
+      it.o.forEach((txt,i)=>{const b=document.createElement("button");b.type="button";b.className="qz-b";b.innerHTML=String.fromCharCode(65+i)+". "+txt;
+        b.addEventListener("click",()=>{if(answered)return;answered=true;done++;const ok=i===it.c;if(ok)score++;b.classList.add(ok?"ok":"ko");o.children[it.c].classList.add("ok");ex.hidden=false;ex.innerHTML=(ok?"✅ <b>Bien joué.</b> ":"❌ <b>Pas tout à fait.</b> ")+it.e;upd();});
+        o.appendChild(b);});
+      box.appendChild(d);});
+    upd();}
+  $("#qzReset").addEventListener("click",render);render();
+})();
+(function(){
+  const boxes=$$("#checklist input[type=checkbox]"),msg=$("#checkMsg"),KEY="essais-cours1-check";
+  if(!boxes.length)return;
+  let saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||"[]")||[];}catch(e){saved=[];}
+  boxes.forEach(b=>{b.checked=saved.indexOf(b.dataset.c)>=0;});
+  function upd(){const on=boxes.filter(b=>b.checked).map(b=>b.dataset.c);try{localStorage.setItem(KEY,JSON.stringify(on));}catch(e){}
+    msg.innerHTML=on.length===boxes.length?"🎉 <b>Tout est coché : tu es prêt pour le cours 2, les essais de dureté !</b>":on.length+" / "+boxes.length+" : reviens sur les points non cochés (les manipulations sont faites pour ça).";}
+  boxes.forEach(b=>b.addEventListener("change",upd));upd();
+})();
+
+(function(){
+  const links=$$(".toc a"),tin=$(".toc-in");
+  if(!links.length||!("IntersectionObserver" in window))return;
+  const map={};links.forEach(a=>{map[a.getAttribute("href").slice(1)]=a;});
+  const obs=new IntersectionObserver(ents=>{ents.forEach(en=>{if(!en.isIntersecting)return;const a=map[en.target.id];if(!a)return;
+    links.forEach(l=>l.classList.toggle("on",l===a));
+    if(tin){const tgt=a.offsetLeft-tin.clientWidth/2+a.offsetWidth/2;try{tin.scrollTo({left:tgt,behavior:RM?"auto":"smooth"});}catch(e){tin.scrollLeft=tgt;}}});},{rootMargin:"-45% 0px -50% 0px"});
+  Object.keys(map).forEach(id=>{const s=document.getElementById(id);if(s)obs.observe(s);});
+})();
+(function(){
+  const b=$("#themeBtn");if(!b)return;const KEY="essais-theme",root=document.documentElement;
+  const lab={auto:"◐ Thème : automatique",light:"☀️ Thème : clair",dark:"🌙 Thème : sombre"};
+  let t="auto";try{t=localStorage.getItem(KEY)||"auto";}catch(e){}
+  function apply(){if(t==="auto")root.removeAttribute("data-theme");else root.setAttribute("data-theme",t);b.textContent=lab[t];}
+  b.addEventListener("click",()=>{t=t==="auto"?"light":t==="light"?"dark":"auto";try{localStorage.setItem(KEY,t);}catch(e){}apply();});
+  apply();
+})();
+})();
+</script>
+</body>
+</html>

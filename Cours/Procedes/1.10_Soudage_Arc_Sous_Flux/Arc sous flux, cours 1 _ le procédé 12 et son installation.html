@@ -1217,7 +1217,7 @@ function fmtH(h){if(!isFinite(h))return "∞";const m=Math.round(h*60);if(m<60)r
     /* aspiration */
     el("rect",{x:xAsp+2,y:yF-34,width:12,height:30,rx:2,fill:"var(--card)",stroke:"var(--ink)","stroke-width":1.4},gF);
     arrow(gF,xAsp+8,yF-2,xAsp+8,yF-28,"var(--frc)",1.8,6);
-    const LB=[];const ta=tx(svg,xAsp+18,yF-22,n?"aspiration":"aspiration du flux non fondu",{class:"lbl"});ta.setAttribute("opacity",dim("flux"));fitText(ta,4,W-4);LB.push(ta);
+    const LB=[];const ta=tx(svg,xAsp-4,yF-22,n?"aspiration":"aspiration du flux non fondu",{class:"lbl","text-anchor":"end"});ta.setAttribute("opacity",dim("flux"));fitText(ta,4,W-4);LB.push(ta);
     /* flux fondu autour de la cavité */
     const gC=el("g",{opacity:dim("cav")},svg);
     const cr=Math.max(13,7*k);

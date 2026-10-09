@@ -242,6 +242,15 @@
         {
           "cours": "rupture-04",
           "ancre": "c3"
+        },
+        {
+          "cours": "essais-01"
+        },
+        {
+          "cours": "essais-02"
+        },
+        {
+          "cours": "essais-03"
         }
       ]
     },
@@ -289,6 +298,9 @@
         },
         {
           "cours": "electrode-enrobee-04"
+        },
+        {
+          "cours": "electrode-enrobee-05"
         }
       ]
     },
@@ -306,6 +318,9 @@
         },
         {
           "cours": "arc-submerge-03"
+        },
+        {
+          "cours": "arc-submerge-04"
         }
       ]
     },
@@ -638,6 +653,18 @@
         {
           "cours": "rupture-04",
           "ancre": "c3"
+        },
+        {
+          "cours": "essais-01",
+          "ancre": "c6"
+        },
+        {
+          "cours": "essais-02",
+          "ancre": "c6"
+        },
+        {
+          "cours": "essais-03",
+          "ancre": "c6"
         }
       ]
     },

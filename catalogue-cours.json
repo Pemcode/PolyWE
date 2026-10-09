@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "date_inventaire": "2026-10-08",
+  "date_inventaire": "2026-10-09",
   "description": "Catalogue éditorial du wiki de révision DU Ingénierie du soudage / IWE. Identifiants internes stables ; sections extraites automatiquement des HTML.",
   "cours": [
     {
@@ -1187,6 +1187,205 @@
       "fichier": "Cours/Procedes/1.10_Soudage_Arc_Sous_Flux/Arc sous flux, cours 3 _ les paramètres et la forme du cordon.html",
       "url": "ArcSubmerge/03-parametres-forme-cordon.html",
       "statut": "disponible"
+    },
+    {
+      "id": "essais-01",
+      "titre": "Essai de traction : de la courbe aux grandeurs",
+      "matiere": "essais",
+      "ordre": 1,
+      "repere": "Cours 01",
+      "prerequis_conseilles": [
+        "rdm-01",
+        "met-01",
+        "met-02",
+        "met-03"
+      ],
+      "mots_cles": [
+        "traction",
+        "essais destructifs",
+        "2.23",
+        "élasticité",
+        "plasticité",
+        "écrouissage",
+        "striction",
+        "ReH",
+        "Rp0,2",
+        "Rm",
+        "ISO 6892-1"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Essais/Essais, cours 1 _ l'essai de traction, de la courbe aux grandeurs.html",
+      "url": "Essais/01-traction-courbe-grandeurs.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "essais-02",
+      "titre": "Essais de dureté : l’empreinte qui raconte le métal",
+      "matiere": "essais",
+      "ordre": 2,
+      "repere": "Cours 02",
+      "prerequis_conseilles": [
+        "essais-01",
+        "met-03"
+      ],
+      "mots_cles": [
+        "dureté",
+        "essais destructifs",
+        "2.23",
+        "Brinell",
+        "Vickers",
+        "Rockwell",
+        "HBW",
+        "HV10",
+        "HRC",
+        "filiation",
+        "ISO 9015"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Essais/Essais, cours 2 _ les essais de dureté, l'empreinte qui raconte le métal.html",
+      "url": "Essais/02-durete-empreinte-metal.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "essais-03",
+      "titre": "Examens métallographiques : voir l’intérieur d’une soudure",
+      "matiere": "essais",
+      "ordre": 3,
+      "repere": "Cours 03",
+      "prerequis_conseilles": [
+        "essais-01",
+        "essais-02",
+        "met-01",
+        "met-02",
+        "met-03",
+        "electrode-enrobee-05"
+      ],
+      "mots_cles": [
+        "métallographie",
+        "essais destructifs",
+        "2.23",
+        "macrographie",
+        "micrographie",
+        "polissage",
+        "attaque",
+        "microscope",
+        "taille de grain",
+        "ISO 17639"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Essais/Essais, cours 3 _ les examens métallographiques, voir l'intérieur d'une soudure.html",
+      "url": "Essais/03-examens-metallographiques.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "arc-submerge-04",
+      "titre": "Arc submergé : préparer, varier, contrôler",
+      "matiere": "arc-submerge",
+      "ordre": 4,
+      "repere": "Cours 04",
+      "prerequis_conseilles": [
+        "arc-submerge-01",
+        "arc-submerge-02",
+        "arc-submerge-03"
+      ],
+      "mots_cles": [
+        "arc submergé",
+        "arc sous flux",
+        "sous flux",
+        "SAW",
+        "1.10",
+        "supports envers",
+        "chanfrein",
+        "twin",
+        "tandem",
+        "multi-fil",
+        "feuillard",
+        "rechargement",
+        "DMOS",
+        "défauts",
+        "sécurité"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Procedes/1.10_Soudage_Arc_Sous_Flux/Arc sous flux, cours 4 _ préparer, varier, contrôler.html",
+      "url": "ArcSubmerge/04-preparer-varier-controler.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "electrode-enrobee-05",
+      "titre": "Électrode enrobée : qualité, défauts, cas particuliers et sécurité",
+      "matiere": "electrode-enrobee",
+      "ordre": 5,
+      "repere": "Cours 05",
+      "prerequis_conseilles": [
+        "electrode-enrobee-01",
+        "electrode-enrobee-02",
+        "electrode-enrobee-03",
+        "electrode-enrobee-04"
+      ],
+      "mots_cles": [
+        "électrode enrobée",
+        "111",
+        "MMA",
+        "SMAW",
+        "1.9",
+        "qualité",
+        "défauts",
+        "ISO 5817",
+        "ISO 6520-1",
+        "aluminium",
+        "fontes",
+        "gougeage arc-air",
+        "sécurité"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "fiche de révision",
+        "quiz",
+        "glossaire",
+        "auto-évaluation"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Procedes/1.9_Soudage_Electrode_Enrobee/Électrode enrobée, cours 5 _ qualité, défauts, cas particuliers et sécurité.html",
+      "url": "ElectrodeEnrobee/05-qualite-defauts-securite.html",
+      "statut": "disponible"
     }
   ],
   "matieres": [
@@ -1229,6 +1428,11 @@
       "id": "arc-submerge",
       "titre": "Soudage à l’arc sous flux (arc submergé)",
       "description": "Comprendre le procédé sous flux et son installation, choisir le couple fil-flux et relier les réglages à la forme et à la métallurgie du cordon."
+    },
+    {
+      "id": "essais",
+      "titre": "Essais destructifs et métallographiques",
+      "description": "Lire un essai de traction, choisir et interpréter une mesure de dureté, puis préparer et observer un échantillon métallographique de métal ou de soudure."
     }
   ],
   "parcours": [
