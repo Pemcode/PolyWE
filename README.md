@@ -111,6 +111,7 @@ Un bouton **Chat**, en bas à droite de chaque page, ouvre un assistant qui rép
 
 - Les questions, le texte sélectionné et jusqu’à trois extraits des cours partent chez OpenRouter et chez le fournisseur du modèle choisi. La clé du visiteur reste dans son navigateur (`localStorage`, clés `polywe_chat_…`) ; la conversation n’est gardée que le temps de l’onglet.
 - Le build publie `assets/chat-extraits.json` : le texte des sections des cours disponibles, identifiées par `COURS-ANCRE`. Les quiz et check-lists n’y figurent pas.
+- Le [guide pas à pas](https://pemcode.github.io/PolyWE/assistant.html) (`assistant.html`, rédigé dans `wiki/guide.py`) accompagne l’élève de la création du compte OpenRouter à la première question ; il est accessible depuis l’accueil, l’entrée « Assistant IA » du panneau et l’écran de connexion du chat.
 - Réglages en tête de `assets/chat-widget.js` : `ALLOWED_DOMAINS` (domaines de la recherche web) et `MODEL_CANDIDATES` (modèles proposés ; seuls ceux qu’OpenRouter publie avec la prise en charge des outils apparaissent).
 
 ## Planning de formation

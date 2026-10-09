@@ -82,6 +82,8 @@ La CI teste les moteurs des applications avec Node 24, sans npm, puis leurs parc
 - Requête : `chat/completions` en streaming, prompt système fixe, trois derniers échanges sans leurs anciens extraits, outil `openrouter:web_search` limité à une recherche Exa sur `ALLOWED_DOMAINS`. La liste des modèles est vérifiée auprès de `GET /models` (présence et prise en charge des outils), mise en cache un jour.
 - Rendu : la réponse est analysée en un petit arbre (paragraphes, gras, italique, listes, code, liens http(s)) puis construite avec `textContent` ; aucune sortie du modèle ne passe par `innerHTML`. Une citation absente des extraits envoyés est marquée « source non vérifiée ».
 
+Le guide `assistant.html` (S26) est préconstruit comme le planning : son texte vit dans `wiki/guide.py`, sa feuille `assets/assistant.css` n’est chargée que sur cette page. L’accueil, le panneau de chaque page et l’écran de connexion du chat y mènent. Le widget expose l’état de l’appareil par `data-polywe-chat` sur l’élément racine et ouvre le panneau depuis tout élément `[data-chat-open]`, dont la valeur préremplit la question sans l’envoyer.
+
 Les tests Node couvrent le cœur sans navigateur ; les parcours Chromium simulent OpenRouter avec `page.route`. Le flux réel (compte, crédits, recherche web) relève d’une vérification manuelle.
 
 ## Planning

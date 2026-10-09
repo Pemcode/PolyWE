@@ -24,7 +24,8 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S18 | Intégrer le fluage et le brasage, republier les corrections de rupture | Intégré et vérifié |
 | S19 | Compléter la série brasage avec les cours 3 et 4 | Intégré et vérifié |
 | S21 | Naviguer avec un panneau latéral repliable et lire les cours en paysage | Intégré et vérifié |
-| S25 | Poser une question à un assistant IA connecté avec son propre compte OpenRouter | Intégré sur branche — test réel OpenRouter à faire |
+| S25 | Poser une question à un assistant IA connecté avec son propre compte OpenRouter | Publié — test réel OpenRouter à faire |
+| S26 | Suivre un guide pas à pas, du compte OpenRouter à la première question | Intégré et vérifié sur branche |
 
 ## S01 — Catalogue extensible
 
@@ -405,4 +406,21 @@ Validation locale : 91 tests Python, 71 parcours Chromium du wiki, 25 tests Node
 QA du site réel sous `/PolyWE/`, OpenRouter simulé : 144 configurations (accueil, planning, matière RDM, cours RDM 4, cours Brasage 1, Mohr Forge ; 360, 390, 768, 1280, 1366 et 1440 px ; clair et sombre ; connecté ou non). Bouton dans l’écran, jamais sur le bouton « Menu » ni sur la barre de quête de Mohr Forge, panneau dans l’écran, aucun débordement horizontal, Échap ferme, aucune erreur JavaScript. Captures du panneau de connexion et d’une réponse citée (téléphone et 1366 px, clair et sombre) et de Mohr Forge inspectées. Pertinence vérifiée sur douze questions types (préchauffage, loi de Paris, Mohr, brasage, étuvage, carbone équivalent, Charpy, basicité, Vickers, t8/5, martensite, question hors sujet).
 
 Limites : le conteneur de développement n’accède pas à `openrouter.ai`. Les identifiants des modèles viennent de sources secondaires et sont vérifiés par le widget au chargement ; Gemini 4 Argon n’était pas publié par OpenRouter début octobre 2026 et reste masqué tant qu’il est absent. La forme exacte des annotations `url_citation` dans le flux de l’outil web est gérée dans les deux emplacements connus et reste à confirmer. Connexion, crédits, recherche web et facturation réelles relèvent d’un test manuel avec un compte.
+
+## S26 — Guide pas à pas de l’assistant de révision
+
+En tant qu’élève qui découvre le bouton « Chat », je trouve facilement un guide qui m’accompagne de la création de mon compte OpenRouter jusqu’à ma première question, puis m’aide à lire la réponse et à régler un problème.
+
+- Une page `assistant.html`, construite par le générateur avec le panneau du wiki et l’assistant : six étapes numérotées et ancrées (`#etape-1` à `#etape-6`) — créer le compte, ajouter des crédits, se connecter depuis le wiki, protéger sa clé, poser une question, lire la réponse — puis ce qui est envoyé et gardé, et les solutions aux messages d’erreur.
+- Accès bien placés : un encadré sur l’accueil à côté du planning ; une entrée « Assistant IA » dans le panneau de toutes les pages, y compris en rail ; un lien vers le guide dans le chat, au moment de se connecter et en pied du panneau.
+- Sur la page, l’état de l’appareil (connecté ou non) s’affiche ; un bouton ouvre l’assistant et des questions d’exemple le préremplissent sans rien envoyer.
+- Aucune donnée inventée sur OpenRouter : étapes décrites sans libellé d’écran non vérifié, coût donné en ordre de grandeur, montant exact renvoyé à l’affichage d’OpenRouter et à la ligne de coût sous chaque réponse.
+- Liens valides à la racine et sous un sous-chemin ; clair et sombre ; aucun débordement horizontal à 360, 390, 768, 1280 et 1440 px.
+- Tests RED puis GREEN, build valide, contrôle visuel.
+
+Preuve TDD du 9 octobre 2026 : RED exécuté avec `uv run pytest tests/test_guide.py` (2 échecs : page `assistant.html` et encadré d’accueil absents) et `uv run --group browser pytest tests/browser/test_assistant_guide.py` (10 échecs). GREEN après implémentation : 2 tests Python et 10 parcours Chromium, à la racine et sous `/promo/` (accès depuis l’accueil, le panneau d’un cours et l’écran de connexion du chat ; état de l’appareil ; ouverture de l’assistant ; question d’exemple placée dans le champ sans aucune requête).
+
+Validation locale : 93 tests Python, 81 parcours Chromium du wiki, 37 tests Node, 34 parcours Chromium des applications ; build et liens valides. QA sous `/PolyWE/` : accueil, guide et cours RDM 4 à 360, 390, 768, 1280, 1366 et 1440 px, clair et sombre, connecté ou non (72 configurations) : aucun débordement horizontal ni erreur JavaScript, état de l’appareil exact. Captures de l’accueil (encadrés côte à côte sur ordinateur, empilés sur téléphone) et du guide inspectées ; corrigés au passage : titre trop grand qui isolait « IA », identifiant coupé en fin de ligne, guillemets séparés de leur texte.
+
+Sources des faits OpenRouter : inscription par Google, GitHub ou e-mail, crédits prépayés par carte ou cryptomonnaie avec frais d’achat, d’après plusieurs guides publics concordants ; les libellés d’écran et l’éventuelle limite de crédit à l’autorisation n’ont pas pu être vérifiés et ne sont pas décrits. Coût par question estimé d’après les paramètres de l’assistant et le tarif public du modèle par défaut, présenté comme ordre de grandeur.
 

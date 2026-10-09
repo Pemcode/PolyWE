@@ -9,6 +9,7 @@ from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit
 
 from .catalogue import CatalogueError, CourseHTML, load_catalogue
+from .guide import TITLE as GUIDE_TITLE, render_guide
 from .planning import load_planning, render_planning
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
@@ -36,6 +37,7 @@ ICONS = {
     "fold": '<path d="m14.5 6-6 6 6 6"/><path d="M19 5v14"/>',
     "close": '<path d="m6 6 12 12M18 6 6 18"/>',
     "menu": '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    "chat": '<path d="M5 5.5h14a1.5 1.5 0 0 1 1.5 1.5v8.5A1.5 1.5 0 0 1 19 17h-8l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z"/><path d="M8 10h8M8 13h5"/>',
 }
 
 
@@ -142,6 +144,7 @@ def panel(current, site, here=None):
     quick = [(home, "home", "Accueil", mark("index.html"), "")]
     if site["planning"]:
         quick.append((link(current, "planning.html"), "calendar", "Planning", mark("planning.html"), ""))
+    quick.append((link(current, "assistant.html"), "chat", "Assistant IA", mark("assistant.html"), ""))
     quick += [(link(current, "index.html", "rechercher"), "search", "Rechercher", "", " wiki-rail-only"),
               (link(current, "index.html", "matieres"), "subjects", "Matières", "", " wiki-rail-only")]
     if site["routes"]:
@@ -297,7 +300,7 @@ def build(root):
     output.mkdir(exist_ok=True)
     write(output, ".wiki-generated", MARKER)
     write(output, ".nojekyll", "")
-    for asset in ("wiki.css", "wiki.js", "chat-widget.js", "chat-widget.css") + (("planning.css", "planning.js") if plan else ()):
+    for asset in ("wiki.css", "wiki.js", "chat-widget.js", "chat-widget.css", "assistant.css") + (("planning.css", "planning.js") if plan else ()):
         write(output, "assets/" + asset, (ASSETS / asset).read_text(encoding="utf-8"))
     courses = sorted((c for c in data["cours"] if c["statut"] != "brouillon"), key=lambda c: (c["ordre"], c["id"]))
     available = [c for c in courses if c["statut"] == "disponible"]
@@ -337,18 +340,23 @@ def build(root):
         route_cards.append(f'<article class="wiki-card"><span class="wiki-eyebrow">{len(steps)} étapes</span><h3><a href="{current}">{h(route["titre"])}</a></h3><p>{h(route.get("description", ""))}</p></article>')
     options = ''.join(f'<option value="{s["id"]}">{h(s["titre"])}</option>' for s in subjects)
     planning_teaser = '<a class="wiki-planning-teaser" href="planning.html"><span><strong>Suivre le fil de la formation</strong><small>Pré-rentrée, semaines de cours et examens : les supports au bon moment.</small></span><span aria-hidden="true">Explorer le planning →</span></a>' if plan else ""
+    assistant_teaser = ('<a class="wiki-planning-teaser wiki-assistant-teaser" href="assistant.html"><span><strong>Réviser avec l’assistant IA</strong>'
+                        '<small>Des réponses citées à partir des cours. Guide pas à pas : compte OpenRouter, connexion, première question.</small></span>'
+                        '<span aria-hidden="true">Suivre le guide →</span></a>')
     total_sections = sum(len(c["sections"]) for c in available)
     body = f"""<section class="wiki-hero"><p class="wiki-eyebrow">Polytech Nantes · DU Ingénierie du soudage</p>
 <h1>Comprendre.<br>Relier. <em>Réviser.</em></h1>
 <p class="wiki-lead">Les cours interactifs de la promo, réunis pour préparer l’IWE. Suivez une matière ou retrouvez directement la notion qui vous intéresse.</p>
 <p class="wiki-stats"><strong>{len(available)}</strong> cours <span> / </span><strong>{len(subjects)}</strong> matières <span> / </span><strong>{total_sections}</strong> sections</p></section>
-{planning_teaser}<section id="rechercher" class="wiki-search"><h2>Une notion en tête ?</h2><form id="wiki-search-form" role="search">
+<div class="wiki-teasers">{planning_teaser}{assistant_teaser}</div><section id="rechercher" class="wiki-search"><h2>Une notion en tête ?</h2><form id="wiki-search-form" role="search">
 <label for="wiki-query">Rechercher une notion, un cours ou une section</label><div class="wiki-search-row"><input id="wiki-query" type="search" placeholder="Préchauffage, Mohr, règle du levier…" autocomplete="off">
 <label class="wiki-sr" for="wiki-subject-filter">Filtrer par matière</label><select id="wiki-subject-filter"><option value="">Toutes les matières</option>{options}</select><button type="submit">Rechercher</button></div></form>
 <p id="wiki-search-status" role="status">Explorez les matières ci-dessous ou recherchez un sujet précis.</p><ul id="wiki-results" class="wiki-results"></ul><noscript>La recherche nécessite JavaScript. Les matières et les cours restent accessibles ci-dessous.</noscript></section>
 <section id="matieres"><div class="wiki-section-title"><h2>Avancer par matière</h2><span>Les bases, dans l’ordre</span></div><div class="wiki-grid">{''.join(subject_cards)}</div></section>
 <section id="parcours"><div class="wiki-section-title"><h2>Faire le lien avec le soudage</h2><span>Des parcours entre les cours</span></div><div class="wiki-grid">{''.join(route_cards)}</div></section>"""
     write(output, "index.html", shell("index.html", "Accueil", body, site))
+    write(output, "assistant.html", shell("assistant.html", GUIDE_TITLE, render_guide(), site,
+                                          extra_head='<link rel="stylesheet" href="assets/assistant.css">'))
     if plan:
         for source in plan['sources']:
             if not source.get('publier', False):

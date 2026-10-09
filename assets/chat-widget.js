@@ -450,10 +450,12 @@
   const logoutButton = el("button", {type: "button", className: "link-button"}, "Se déconnecter");
   const bar = el("div", {className: "bar"}, el("label", {for: "pwc-model"}, "Modèle"), select, newButton, logoutButton);
   const log = el("div", {className: "log", role: "log", "aria-live": "polite", "aria-label": "Conversation", tabindex: "0"});
+  const guide = new URL("assistant.html", siteRoot).href; // guide pas à pas (S26)
   const loginButton = el("button", {type: "button", className: "primary"}, "Se connecter avec OpenRouter");
   const login = el("div", {className: "login"},
     el("p", {}, "Posez vos questions sur les cours : l’assistant répond à partir des sections du wiki et cite ses sources."),
     el("p", {}, "Il utilise ", el("strong", {}, "votre propre compte OpenRouter"), " : chaque question est facturée sur votre compte, selon le modèle choisi."),
+    el("p", {}, "Première fois ? Suivez le ", el("a", {href: guide}, "guide pas à pas"), " : compte, crédits, connexion et première question."),
     loginButton,
     el("p", {className: "small"}, "La clé créée reste dans ce navigateur. Conseil : fixez-lui une limite de crédit dans les réglages de votre compte OpenRouter."));
   const status = el("p", {className: "status", role: "status"});
@@ -468,7 +470,8 @@
   const panel = el("section", {id: "pwc-panel", className: "panel", role: "dialog", "aria-labelledby": "pwc-title", hidden: true},
     el("header", {className: "head"}, el("div", {}, el("h2", {id: "pwc-title"}, "Assistant de révision"), el("p", {className: "sub"}, "IA · avec votre compte OpenRouter")), closeButton),
     bar, log, login, status, chip, composer,
-    el("p", {className: "notice"}, "Vos questions, le texte sélectionné et des extraits des cours sont envoyés à OpenRouter et au fournisseur du modèle, et facturés sur votre compte OpenRouter."));
+    el("p", {className: "notice"}, "Vos questions, le texte sélectionné et des extraits des cours sont envoyés à OpenRouter et au fournisseur du modèle, et facturés sur votre compte OpenRouter. ",
+      el("a", {href: guide}, "Guide de l’assistant")));
   shadow.append(styles, launcher, panel);
   document.body.append(host);
 
@@ -715,6 +718,7 @@
   }
 
   function render() {
+    document.documentElement.dataset.polyweChat = key ? "connecte" : "deconnecte"; // lu par la page du guide
     login.hidden = Boolean(key);
     bar.hidden = composer.hidden = !key;
     log.hidden = !key && !conversation.length; // après un 401, le message reste lisible au-dessus de la reconnexion
@@ -806,6 +810,15 @@
     save();
     render();
     question.focus();
+  });
+  // Un élément [data-chat-open] de la page ouvre l’assistant ; sa valeur place une question dans le champ, sans l’envoyer.
+  document.addEventListener("click", event => {
+    const trigger = event.target instanceof Element && event.target.closest("[data-chat-open]");
+    if (!trigger) return;
+    event.preventDefault();
+    const text = trigger.getAttribute("data-chat-open");
+    open();
+    if (text && key) { question.value = text; question.focus(); }
   });
   // Suivre une citation vers un autre cours rouvre le panneau là-bas (sur grand écran), avec la conversation.
   log.addEventListener("click", event => {
