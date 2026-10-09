@@ -36,6 +36,8 @@ jobs:
           node-version: "24"
       - name: Tester les moteurs des applications
         run: node --test applications/*/tests/*.test.cjs
+      - name: Tester le cœur de l’assistant de révision
+        run: node --test tests/js/*.test.cjs
       - name: Installer Chromium
         run: uv run --group browser playwright install --with-deps chromium
       - name: Tester les parcours navigateur

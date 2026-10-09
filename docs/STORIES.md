@@ -24,6 +24,7 @@ Petites tranches livrables. Une story est terminée après ses critères d'accep
 | S18 | Intégrer le fluage et le brasage, republier les corrections de rupture | Intégré et vérifié |
 | S19 | Compléter la série brasage avec les cours 3 et 4 | Intégré et vérifié |
 | S21 | Naviguer avec un panneau latéral repliable et lire les cours en paysage | Intégré et vérifié |
+| S25 | Poser une question à un assistant IA connecté avec son propre compte OpenRouter | Intégré sur branche — test réel OpenRouter à faire |
 
 ## S01 — Catalogue extensible
 
@@ -383,3 +384,25 @@ QA des cinq cours construits sous `/PolyWE/` : 30 manipulations, leurs 27 animat
 Limites des sources signalées à l’auteur : Brinell (`essais-02#c2`), découpe et lecture de macrographie (`essais-03#c2`, `essais-03#c6`) disposent de curseurs et préréglages fonctionnels mais pas de lecture automatique ; le repère d’épaisseur sur le film du négatoscope (`electrode-enrobee-05#c3`) est peu contrasté en thème clair. Ces limites n’empêchent pas l’utilisation des cours ; les sources restent inchangées.
 
 La correction livrée de la légende « aspiration du flux non fondu » (`arc-submerge-01#c1`) est contrôlée à 390 et 1366 px : elle est désormais placée à gauche du tube d’aspiration et reste lisible. Empreintes SHA-256 des cinq nouveaux cours et de cette source corrigée inchangées depuis leur réception pour l’intégration.
+
+## S25 — Assistant de révision IA avec le compte OpenRouter du visiteur
+
+En tant qu’élève, je pose une question depuis n’importe quelle page du wiki et j’obtiens une réponse courte, appuyée sur les sections des cours et citée, en payant ma propre consommation avec mon compte OpenRouter.
+
+- Un bouton discret « Chat » en bas à droite de toutes les pages publiées (accueil, matières, parcours, planning, cours, documents, applications) ouvre un panneau ; sur téléphone, il se place au-dessus du bouton « Menu » et le panneau occupe l’écran. Thème clair ou sombre suivi, aucun débordement horizontal, panneau accessible (dialogue nommé, Échap ferme et rend le focus). Les sources des cours restent intactes.
+- Connexion par OAuth PKCE (S256) : le visiteur part sur OpenRouter et revient sur la même page ; le code n’est échangé que si une connexion a été lancée depuis ce navigateur, puis il disparaît de l’adresse. Clé conservée dans le navigateur sous `polywe_chat_key` ; déconnexion possible. Aucune clé dans le code ni dans le dépôt. Le panneau indique que les questions partent chez OpenRouter et chez le fournisseur du modèle, facturées au visiteur.
+- Le build publie `assets/chat-extraits.json` : texte des sections des seuls cours disponibles, sans scripts, styles ni dessins, avec un identifiant stable `COURS-ANCRE` (`RDM-04-C3`). À chaque question, le texte sélectionné à l’ouverture passe en premier, puis les trois sections les plus pertinentes du site entier, chacune réduite à son meilleur passage.
+- Requête en streaming vers `chat/completions` : prompt système imposé, modèle choisi parmi les candidats vérifiés au chargement (présents chez OpenRouter et compatibles avec les outils, GPT-6.1 Sol par défaut), `reasoning.effort` bas, 1 500 tokens au plus, trois derniers échanges, outil `openrouter:web_search` limité à une recherche Exa sur `ALLOWED_DOMAINS`.
+- Rendu sans HTML issu du modèle : gras, italique, listes, code et liens http(s) seulement. Les `[ID]` deviennent des liens vers la section ; un identifiant absent des extraits envoyés est signalé « source non vérifiée ». Sources web listées, badge « Hors cours » avec un bouton « Vérifier sur le web » qui relance la question, tokens et coût affichés discrètement. Messages clairs pour 401 (reconnexion), 402, 429, réponse tronquée et panne réseau.
+- Tests RED puis GREEN : build (extraits, brouillons exclus, widget sur chaque type de page), cœur du widget sous Node sans dépendance (PKCE, requête, citations, rendu sûr, flux), parcours Chromium avec OpenRouter simulé, à la racine et sous un sous-chemin.
+
+Décision du propriétaire : ce service externe, facultatif et payé par chaque visiteur, lève pour l’assistant l’exclusion « pas de service externe » de la première version. Le site reste statique, sans serveur ni secret.
+
+Preuve TDD du 9 octobre 2026 : RED exécuté avant implémentation avec `uv run pytest tests/test_chat.py` (3 échecs : `chat-extraits.json` absent, widget non inclus) et `node --test tests/js/*.test.cjs` (module absent). Les parcours `tests/browser/test_chat_widget.py`, écrits avec le widget, ont été exécutés contre un `chat-widget.js` vide : 20 échecs sur l’absence du bouton « Chat ». GREEN après implémentation : 3 tests Python, 12 tests Node et 22 parcours Chromium (11 à la racine et sous `/promo/`). Une seconde boucle RED/GREEN a corrigé le classement mesuré sur le site réel : quiz et check-lists exclus des extraits, titre du cours réservé au départage, au moins deux mots de la question exigés (une question hors sujet n’envoie plus d’extrait), « avant » et « après » ignorés.
+
+Validation locale : 91 tests Python, 71 parcours Chromium du wiki, 25 tests Node des applications et 12 de l’assistant, 34 parcours Chromium des applications ; catalogue et build valides (37 cours, 415 sections, 357 extraits pour l’assistant, 1,99 Mo, 643 Ko compressés, chargés seulement quand le visiteur connecté utilise le champ de question).
+
+QA du site réel sous `/PolyWE/`, OpenRouter simulé : 144 configurations (accueil, planning, matière RDM, cours RDM 4, cours Brasage 1, Mohr Forge ; 360, 390, 768, 1280, 1366 et 1440 px ; clair et sombre ; connecté ou non). Bouton dans l’écran, jamais sur le bouton « Menu » ni sur la barre de quête de Mohr Forge, panneau dans l’écran, aucun débordement horizontal, Échap ferme, aucune erreur JavaScript. Captures du panneau de connexion et d’une réponse citée (téléphone et 1366 px, clair et sombre) et de Mohr Forge inspectées. Pertinence vérifiée sur douze questions types (préchauffage, loi de Paris, Mohr, brasage, étuvage, carbone équivalent, Charpy, basicité, Vickers, t8/5, martensite, question hors sujet).
+
+Limites : le conteneur de développement n’accède pas à `openrouter.ai`. Les identifiants des modèles viennent de sources secondaires et sont vérifiés par le widget au chargement ; Gemini 4 Argon n’était pas publié par OpenRouter début octobre 2026 et reste masqué tant qu’il est absent. La forme exacte des annotations `url_citation` dans le flux de l’outil web est gérée dans les deux emplacements connus et reste à confirmer. Connexion, crédits, recherche web et facturation réelles relèvent d’un test manuel avec un compte.
+

@@ -4,6 +4,7 @@ import posixpath
 import re
 import shutil
 from html import escape as h
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit
 
@@ -41,6 +42,75 @@ ICONS = {
 def icon(name):
     return (f'<svg class="wiki-ico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" '
             f'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">{ICONS[name]}</svg>')
+
+
+def runtime(current):
+    """Feuille et scripts communs à toutes les pages publiées : interface du wiki et assistant de révision (S25)."""
+    return (f'<link rel="stylesheet" href="{link(current, "assets/wiki.css")}"><script id="wiki-runtime" defer src="{link(current, "assets/wiki.js")}"></script>'
+            f'<script id="wiki-chat" defer src="{link(current, "assets/chat-widget.js")}"></script>')
+
+
+# Texte lisible des sections pour l’assistant : sans code, dessins ni commandes ; un bloc par ligne.
+TEXT_HIDDEN = {"script", "style", "svg", "noscript", "template", "button", "select", "textarea"}
+TEXT_BLOCKS = {"address", "article", "aside", "blockquote", "br", "caption", "dd", "details", "div", "dl", "dt", "figcaption", "figure",
+               "footer", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr", "li", "main", "nav", "ol", "p", "pre", "section", "summary",
+               "table", "td", "th", "tr", "ul"}
+# Le quiz est généré par le script du cours et la check-list n’énonce que des objectifs : rien à citer.
+CHAT_SKIPPED = {"quiz-s", "check"}
+
+
+class SectionText(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.pieces = {}
+        self._sections = []
+        self._hidden = 0
+
+    def _add(self, text):
+        current = next((x for x in reversed(self._sections) if x), None)
+        if current and not self._hidden:
+            self.pieces.setdefault(current, []).append(text)
+
+    def handle_starttag(self, tag, attrs):
+        if tag in TEXT_HIDDEN:
+            self._hidden += 1
+        elif tag in TEXT_BLOCKS:
+            self._add("\n")
+        if tag == "section":
+            self._sections.append(dict(attrs).get("id"))
+
+    def handle_startendtag(self, tag, attrs):
+        if tag in TEXT_BLOCKS:
+            self._add("\n")
+
+    def handle_endtag(self, tag):
+        if tag in TEXT_HIDDEN:
+            self._hidden = max(0, self._hidden - 1)
+        elif tag in TEXT_BLOCKS:
+            self._add("\n")
+        if tag == "section" and self._sections:
+            self._sections.pop()
+
+    def handle_data(self, data):
+        self._add(data)
+
+    def texts(self):
+        return {ident: "\n".join(line for line in (" ".join(raw.split()) for raw in "".join(pieces).split("\n")) if line)
+                for ident, pieces in self.pieces.items()}
+
+
+def chat_rows(course, subject):
+    """Extraits envoyés par l’assistant : une ligne par section, identifiant stable COURS-ANCRE (RDM-04-C3)."""
+    parser = SectionText()
+    parser.feed(course["_source"])
+    texts = parser.texts()
+    rows = []
+    for section in course["sections"]:
+        if texts.get(section["ancre"]) and section["ancre"] not in CHAT_SKIPPED:
+            rows.append({"id": f'{course["id"]}-{section["ancre"]}'.upper(), "cours": course["titre"], "matiere": subject["titre"],
+                         "mots_cles": course["mots_cles"], "titre": section["titre"],
+                         "url": link("index.html", course["url"], section["ancre"]), "texte": texts[section["ancre"]]})
+    return rows
 
 
 def short_title(course, subject):
@@ -134,14 +204,12 @@ def panel(current, site, here=None):
 
 
 def shell(current, title, body, site, extra_head=""):
-    css = link(current, "assets/wiki.css")
-    js = link(current, "assets/wiki.js")
     return f"""<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{h(title)} · Révisions IWE</title>
 <meta name="description" content="Cours interactifs et parcours de révision de la promo DU Ingénierie du soudage / IWE.">
 <meta property="og:title" content="{h(title)} · Révisions IWE"><meta property="og:type" content="website">
-<link rel="stylesheet" href="{css}"><script id="wiki-runtime" defer src="{js}"></script>{extra_head}</head>
+{runtime(current)}{extra_head}</head>
 <body class="wiki-shell">{panel_start()}
 <main id="contenu" class="wiki-main">{body}</main>
 <footer class="wiki-bottom">Supports de révision de la promo · DU Ingénierie du soudage · Polytech Nantes<br>Un complément aux cours et aux TD de la formation.</footer>
@@ -171,8 +239,7 @@ def app_card(app, current):
 def app_page(app, subject, site):
     """Copie publiée d'une application : panneau du wiki ajouté (replié au départ), source et routes internes intactes."""
     current = app["url"]
-    head = (f'<link rel="stylesheet" href="{link(current, "assets/wiki.css")}"><script id="wiki-runtime" defer src="{link(current, "assets/wiki.js")}"></script>'
-            f'<meta name="wiki-application" content="{h(app["id"])}"><meta name="wiki-course-title" content="{h(app["titre"])}">')
+    head = (f'{runtime(current)}<meta name="wiki-application" content="{h(app["id"])}"><meta name="wiki-course-title" content="{h(app["titre"])}">')
     here = {"subject": subject, "repere": app.get("genre", "Application interactive"), "titre": app["titre"]}
     html = re.sub(r"</head\s*>", lambda _: head + '\n</head>', app["_source"], count=1, flags=re.I)
     html = re.sub(r"(<body\b[^>]*>)", lambda m: m.group(1) + '\n' + panel_start(folded=True), html, count=1, flags=re.I)
@@ -230,7 +297,7 @@ def build(root):
     output.mkdir(exist_ok=True)
     write(output, ".wiki-generated", MARKER)
     write(output, ".nojekyll", "")
-    for asset in ("wiki.css", "wiki.js") + (("planning.css", "planning.js") if plan else ()):
+    for asset in ("wiki.css", "wiki.js", "chat-widget.js", "chat-widget.css") + (("planning.css", "planning.js") if plan else ()):
         write(output, "assets/" + asset, (ASSETS / asset).read_text(encoding="utf-8"))
     courses = sorted((c for c in data["cours"] if c["statut"] != "brouillon"), key=lambda c: (c["ordre"], c["id"]))
     available = [c for c in courses if c["statut"] == "disponible"]
@@ -292,6 +359,7 @@ def build(root):
         extra = '<link rel="stylesheet" href="assets/planning.css"><script defer src="assets/planning.js"></script>'
         write(output, 'planning.html', shell('planning.html', 'Planning de formation', render_planning(plan, data, link), site, extra_head=extra))
     search_rows = []
+    extracts = []
     for course in available:
         current = course["url"]
         subject = subject_by_id[course["matiere"]]
@@ -317,7 +385,7 @@ def build(root):
         if related:
             footer += '<p class="wiki-training-link">S’entraîner : ' + ' · '.join(f'<a href="{link(current, a["url"])}">{h(a["titre"])}</a> <span>({h(a.get("genre", "Application interactive")).lower()})</span>' for a in related) + '</p>'
         footer += '<nav aria-label="Cours voisins">' + ''.join(previous_next) + '</nav></footer>'
-        head = f'<link rel="stylesheet" href="{link(current, "assets/wiki.css")}"><script id="wiki-runtime" defer src="{link(current, "assets/wiki.js")}"></script><meta property="og:title" content="{h(course["titre"])}"><meta name="wiki-course-title" content="{h(course["titre"])}">'
+        head = f'{runtime(current)}<meta property="og:title" content="{h(course["titre"])}"><meta name="wiki-course-title" content="{h(course["titre"])}">'
         html = re.sub(r"<title\b[^>]*>.*?</title>", lambda _: '<title>'+h(subject['titre']+' — '+course.get('repere','Cours')+' — '+course['titre'])+'</title>', course["_source"], count=1, flags=re.I | re.S)
         html = re.sub(r"</head\s*>", lambda _: head+'\n</head>', html, count=1, flags=re.I)
         html = re.sub(r"(<body\b[^>]*>)", lambda m: m.group(1)+'\n'+panel_start(), html, count=1, flags=re.I)
@@ -331,6 +399,7 @@ def build(root):
         search_rows.append({**common, 'titre': course['titre'], 'url': link('index.html', current), 'type': 'cours'})
         for section in course['sections']:
             search_rows.append({**common, 'titre': section['titre'], 'url': link('index.html', current, section['ancre']), 'type': 'section'})
+        extracts += chat_rows(course, subject)
     for app in live_apps:
         subject = subject_by_id[app["matiere"]]
         for source, target in app["_files"]:
@@ -342,5 +411,6 @@ def build(root):
                             'mots_cles': app['mots_cles'], 'ressources': app['ressources'], 'titre': app['titre'],
                             'url': link('index.html', app['url']), 'type': 'application'})
     write(output, 'assets/recherche.json', json.dumps(search_rows, ensure_ascii=False, indent=2)+'\n')
+    write(output, 'assets/chat-extraits.json', json.dumps(extracts, ensure_ascii=False, separators=(',', ':'))+'\n')
     validate_site(output)
     return output

@@ -7,6 +7,7 @@
 - Base de contenus : catalogue JSON versionné. Suffisant pour un ensemble croissant de cours statiques ; aucune base SQL n'est requise.
 - Génération : Python standard ; dépendances d'exécution absentes. `uv` gère Python, pytest et l'outillage navigateur.
 - Interface : HTML/CSS/JavaScript natifs, avec navigation disponible sans JavaScript. La recherche et le partage sont des améliorations progressives.
+- Assistant de révision (S25) : seul service externe, facultatif. Chaque visiteur le branche sur son propre compte OpenRouter ; le site reste statique, sans serveur ni secret.
 
 ```mermaid
 flowchart LR
@@ -38,9 +39,10 @@ wiki/routine.py            assistant et aperçu local
 wiki/__main__.py           commandes du site et de maintenance
 Mettre-a-jour.cmd           entrée Windows vers le menu uv
 docs/MISE_A_JOUR.md         routine de réception et publication
-assets/                    interface commune, recherche et partage
+assets/                    interface commune, recherche, partage et assistant de révision
 tests/                    tests de comportement du catalogue et du build
 tests/browser/            quelques parcours de bout en bout
+tests/js/                 cœur de l’assistant, sous Node sans dépendance
 docs/STORIES.md            critères d'acceptation et état des stories
 .github/workflows/         tests et publication GitHub Pages
 pyproject.toml / uv.lock   environnement reproductible
@@ -71,6 +73,17 @@ Place volontairement secondaire : section « S’entraîner » de la matière, l
 
 La CI teste les moteurs des applications avec Node 24, sans npm, puis leurs parcours Chromium avant de publier.
 
+## Assistant de révision
+
+`assets/chat-widget.js` est un script natif, inclus par le générateur sur toutes les pages publiées comme `wiki.js`. Il dessine son bouton et son panneau dans une racine fantôme (shadow DOM) : les styles des cours ne l’atteignent pas, les siens ne débordent pas, et les jetons `--wiki-*` lui transmettent le thème. Sur téléphone, il se place au-dessus du bouton « Menu ».
+
+- Connexion : OAuth PKCE (S256) vers OpenRouter, retour sur la page de départ. Le vérificateur attend dans `localStorage` au plus quinze minutes ; un `?code=` n’est échangé que si la connexion a été lancée depuis ce navigateur. La clé reçue est gardée sous `polywe_chat_key` : l’origine `pemcode.github.io` étant partagée par tous les dépôts du compte, le préfixe évite les collisions mais n’isole pas la clé ; le panneau conseille une limite de crédit.
+- Contexte : `assets/chat-extraits.json`, produit par le build, contient le texte des sections des cours disponibles (sans scripts, styles, SVG, commandes, quiz ni check-list), avec un identifiant stable `COURS-ANCRE`. Chargé seulement quand le visiteur connecté utilise le champ de question, il est classé dans le navigateur (BM25 avec les normalisations de la recherche). Le texte sélectionné passe en premier, puis jusqu’à trois sections du site entier, réduites à leur meilleur passage d’environ 1 500 caractères.
+- Requête : `chat/completions` en streaming, prompt système fixe, trois derniers échanges sans leurs anciens extraits, outil `openrouter:web_search` limité à une recherche Exa sur `ALLOWED_DOMAINS`. La liste des modèles est vérifiée auprès de `GET /models` (présence et prise en charge des outils), mise en cache un jour.
+- Rendu : la réponse est analysée en un petit arbre (paragraphes, gras, italique, listes, code, liens http(s)) puis construite avec `textContent` ; aucune sortie du modèle ne passe par `innerHTML`. Une citation absente des extraits envoyés est marquée « source non vérifiée ».
+
+Les tests Node couvrent le cœur sans navigateur ; les parcours Chromium simulent OpenRouter avec `page.route`. Le flux réel (compte, crédits, recherche web) relève d’une vérification manuelle.
+
 ## Planning
 
 La frise est préconstruite à partir de `planning-formation.json` ; son analyse et ses rapprochements éditoriaux sont documentés dans [PLANNING.md](PLANNING.md). Les sources sont référencées mais leurs PDF restent locaux (`publier: false`, comportement par défaut). Le build n'exige alors pas ces fichiers en CI. Une publication ultérieure demanderait l'autorisation explicite du propriétaire puis `publier: true` pour chaque PDF autorisé ; seuls ces fichiers seraient copiés. Les dépendances d'analyse PDF utilisées ponctuellement via uv ne sont pas nécessaires à la génération ni à la CI.
@@ -79,7 +92,7 @@ Les semaines ISO sont calculées en Python ; dans le navigateur, les filtres mas
 
 ## Harness proportionné
 
-Une seule suite pytest rapide et quelques parcours Chromium. Aucun framework frontend, conteneur Docker, serveur API, authentification, collecte de données ou métrique de couverture imposée. Les commandes CI sont les mêmes que celles de la documentation locale. Les tests protègent les invariants qui coûtent cher à perdre : adresses stables, sources intactes, absence de contenu non déclaré et navigation utilisable.
+Une seule suite pytest rapide et quelques parcours Chromium. Aucun framework frontend, conteneur Docker, serveur API, authentification propre au site, collecte de données ou métrique de couverture imposée. Les commandes CI sont les mêmes que celles de la documentation locale. Les tests protègent les invariants qui coûtent cher à perdre : adresses stables, sources intactes, absence de contenu non déclaré et navigation utilisable.
 
 Le dépôt public est Pemcode/PolyWE ; le site est publié à https://pemcode.github.io/PolyWE/. GitHub Pages utilise GitHub Actions, avec `PAGES_ENABLED=true`. Chaque push sur `main` déclenche les contrôles puis le déploiement ; les pull requests exécutent seulement les contrôles et la construction. Les comptes, synchronisation de progression, statistiques collectives et mode hors connexion sont hors du premier lot ; ils restent des stories distinctes si un besoin apparaît.
 

@@ -105,6 +105,14 @@ Un jeu ou un simulateur complète une matière sans occuper l’accueil. Son cod
 - La copie publiée reçoit le panneau latéral du wiki, replié au départ pour laisser la place au jeu (retour à la matière, partage) ; la source reste jouable seule, par exemple avec `applications/mohr-forge/Jouer.cmd`.
 - Les états `disponible`, `a_venir` et `brouillon` suivent les règles des cours. Une application est du code : la routine **Publier** ne l’embarque pas, ses évolutions passent par les commits de développement.
 
+## Assistant de révision (IA)
+
+Un bouton **Chat**, en bas à droite de chaque page, ouvre un assistant qui répond à partir des sections du wiki et cite ses sources (`[RDM-04-C3]`, lien direct vers la section). Chaque visiteur se connecte avec **son propre compte [OpenRouter](https://openrouter.ai)** (OAuth PKCE) et paie sa consommation ; le dépôt ne contient aucune clé et le site reste statique.
+
+- Les questions, le texte sélectionné et jusqu’à trois extraits des cours partent chez OpenRouter et chez le fournisseur du modèle choisi. La clé du visiteur reste dans son navigateur (`localStorage`, clés `polywe_chat_…`) ; la conversation n’est gardée que le temps de l’onglet.
+- Le build publie `assets/chat-extraits.json` : le texte des sections des cours disponibles, identifiées par `COURS-ANCRE`. Les quiz et check-lists n’y figurent pas.
+- Réglages en tête de `assets/chat-widget.js` : `ALLOWED_DOMAINS` (domaines de la recherche web) et `MODEL_CANDIDATES` (modèles proposés ; seuls ceux qu’OpenRouter publie avec la prise en charge des outils apparaissent).
+
 ## Planning de formation
 
 La [frise de formation](https://pemcode.github.io/PolyWE/planning.html) relie les séances aux supports disponibles. Elle propose la semaine actuelle, les filtres de période/matière et les examens, avec les références des deux plannings sources. L'affichage reste consultable sans JavaScript. Les PDF sources sont conservés localement, hors du dépôt et du site publics.
@@ -122,14 +130,14 @@ uv run pytest
 uv sync --locked --group browser
 uv run --group browser playwright install chromium
 uv run --group browser pytest tests/browser
-node --test applications/mohr-forge/tests/*.test.cjs
+node --test applications/mohr-forge/tests/*.test.cjs tests/js/*.test.cjs
 uv run --group browser pytest applications
 uv run python -m wiki build
 ```
 
-Les moteurs des applications sont testés avec Node 24 seul, sans npm ni dépendance ; leurs parcours Chromium utilisent l’environnement uv du wiki. Le contrôle visuel du jeu publié s’obtient avec `uv run --group browser python applications/mohr-forge/scripts/visual_check.py`.
+Les moteurs des applications et le cœur de l’assistant (PKCE, requête, citations, rendu sûr) sont testés avec Node 24 seul, sans npm ni dépendance ; leurs parcours Chromium utilisent l’environnement uv du wiki. Le contrôle visuel du jeu publié s’obtient avec `uv run --group browser python applications/mohr-forge/scripts/visual_check.py`.
 
-Les tests rapides utilisent des cours fictifs pour vérifier l'ajout de matières, les états, les liens, les ressources et la conservation des sources. Les tests navigateur lancent leur propre serveur local et vérifient les parcours à la racine et sous `/promo/`, avec une largeur de téléphone. Les groupes de dépendances et leurs versions sont verrouillés dans `uv.lock`.
+Les tests rapides utilisent des cours fictifs pour vérifier l'ajout de matières, les états, les liens, les ressources et la conservation des sources. Les tests navigateur lancent leur propre serveur local et vérifient les parcours à la racine et sous `/promo/`, avec une largeur de téléphone ; ceux de l’assistant simulent OpenRouter et ne demandent aucun compte. Les groupes de dépendances et leurs versions sont verrouillés dans `uv.lock`.
 
 ## Publier les mises à jour avec GitHub Pages
 

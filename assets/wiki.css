@@ -2,16 +2,16 @@
 :root { --wiki-ink:#172c37; --wiki-muted:#536774; --wiki-paper:#f7f7f2; --wiki-surface:#fff; --wiki-rule:#d8e0df; --wiki-accent:#a93a15;
   --wiki-tint:#eaf0ec; --wiki-tint-line:#c9d6cf; --wiki-field:#8fa49c; --wiki-green:#316d61; --wiki-focus:#d86632; --wiki-planned:#e9ede9;
   --wiki-panel-bg:#fbfbf8; --wiki-hover:rgba(23,44,55,.065); --wiki-active:rgba(169,58,21,.1); --wiki-shadow:0 12px 32px rgba(15,30,40,.2);
-  --wiki-panel-w:272px; --wiki-rail-w:60px; --wiki-font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  --wiki-panel-w:272px; --wiki-rail-w:60px; --wiki-font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --wiki-scheme:light; }
 @media (prefers-color-scheme:dark) {
   :root:not([data-theme="light"]) { --wiki-ink:#e4ebf2; --wiki-muted:#9fb0bd; --wiki-paper:#10161d; --wiki-surface:#161e27; --wiki-rule:#2c3946; --wiki-accent:#ff9466;
     --wiki-tint:#16212a; --wiki-tint-line:#2c3a45; --wiki-field:#4f6271; --wiki-green:#6cc3a7; --wiki-focus:#ff9b6b; --wiki-planned:#1d2832;
-    --wiki-panel-bg:#0c1217; --wiki-hover:rgba(228,235,242,.07); --wiki-active:rgba(255,148,102,.15); --wiki-shadow:0 12px 32px rgba(0,0,0,.55); }
+    --wiki-panel-bg:#0c1217; --wiki-hover:rgba(228,235,242,.07); --wiki-active:rgba(255,148,102,.15); --wiki-shadow:0 12px 32px rgba(0,0,0,.55); --wiki-scheme:dark; }
   :root:not([data-theme="light"]) .wiki-shell { color-scheme:dark; }
 }
 :root[data-theme="dark"] { --wiki-ink:#e4ebf2; --wiki-muted:#9fb0bd; --wiki-paper:#10161d; --wiki-surface:#161e27; --wiki-rule:#2c3946; --wiki-accent:#ff9466;
   --wiki-tint:#16212a; --wiki-tint-line:#2c3a45; --wiki-field:#4f6271; --wiki-green:#6cc3a7; --wiki-focus:#ff9b6b; --wiki-planned:#1d2832;
-  --wiki-panel-bg:#0c1217; --wiki-hover:rgba(228,235,242,.07); --wiki-active:rgba(255,148,102,.15); --wiki-shadow:0 12px 32px rgba(0,0,0,.55); }
+  --wiki-panel-bg:#0c1217; --wiki-hover:rgba(228,235,242,.07); --wiki-active:rgba(255,148,102,.15); --wiki-shadow:0 12px 32px rgba(0,0,0,.55); --wiki-scheme:dark; }
 
 /* ---------- Pages du wiki ---------- */
 .wiki-shell { margin:0; background:var(--wiki-paper); color:var(--wiki-ink); font:16px/1.65 var(--wiki-font); }

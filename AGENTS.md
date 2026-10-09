@@ -165,6 +165,7 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 - Ne publier que les cours disponibles explicitement inscrits au catalogue et leurs ressources déclarées. Ne jamais copier tout le dossier de travail dans le site.
 - Les applications interactives (jeux, simulateurs) sont du code versionné dans `applications/<id>/` et déclaré dans la liste `applications` du catalogue : seuls leurs `fichiers` sont publiés sous `publication`. Elles complètent une matière (section « S’entraîner », pied des cours liés, recherche) sans place centrale sur l’accueil. `publier` ne les embarque jamais ; leurs évolutions suivent le circuit de développement.
 - Tous les liens doivent fonctionner sous `https://compte.github.io/depot/` et sur un domaine à la racine.
+- L’assistant de révision (`assets/chat-widget.js` et `.css`) est inclus par le générateur sur toutes les pages, dans une racine fantôme qui l’isole des styles des cours. Il cite les sections par `COURS-ANCRE` (`RDM-04-C3`) d’après `assets/chat-extraits.json`, construit à chaque build : la stabilité des ancres garde ces citations valides. Ne jamais insérer de texte venu du modèle comme HTML ; préfixer ses clés de stockage par `polywe_chat_`.
 
 ## Stories et TDD
 
@@ -182,6 +183,7 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 - Installation : `uv sync --locked`. Tests : `uv run pytest`. Construction : `uv run python -m wiki build`. Contrôle du catalogue : `uv run python -m wiki check`.
 - Tests navigateur : `uv sync --locked --group browser`, `uv run --group browser playwright install chromium`, puis `uv run --group browser pytest tests/browser`.
 - Applications : `node --test applications/*/tests/*.test.cjs` (Node 24 seul, sans npm ni dépendance), puis `uv run --group browser pytest applications`.
+- Assistant de révision : `node --test tests/js/*.test.cjs` ; ses parcours Chromium sont dans `tests/browser`.
 - Prévisualisation : `uv run python -m http.server 8000 --directory _site --bind 127.0.0.1`.
 - Versionner le lockfile ; ignorer environnement virtuel, caches, captures et fichiers générés.
 
@@ -190,7 +192,7 @@ Construire le wiki de révision de la promo DU Ingénierie du soudage / IWE, pou
 - Lire l'état courant avant de modifier un fichier ; préserver les changements concurrents de l'utilisateur.
 - Pas de délégation à des sous-agents sauf demande explicite de l'utilisateur.
 - Ne pas corriger le fond scientifique sans tâche dédiée. Ne pas inventer de validation officielle, de sources ou de cours disponibles.
-- Pas de compte élève, suivi collectif, service externe ou publication automatique des brouillons dans la première version.
+- Pas de compte élève, suivi collectif, service externe ou publication automatique des brouillons dans la première version. Seule exception, décidée par le propriétaire : l’assistant de révision (S25), facultatif, branché sur le compte OpenRouter de chaque visiteur, sans serveur ni secret dans le dépôt.
 - Garder les sauvegardes historiques locales hors du dépôt et de l'artefact publié.
 - Le dépôt `https://github.com/Pemcode/PolyWE` a été rendu public par le propriétaire. GitHub Pages est activé via GitHub Actions à l’adresse `https://pemcode.github.io/PolyWE/`. La variable de dépôt `PAGES_ENABLED=true` autorise la publication après les contrôles sur `main` ; les pull requests ne déploient pas. Ne pas changer la visibilité sans instruction du propriétaire.
 
