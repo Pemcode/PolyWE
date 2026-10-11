@@ -424,3 +424,9 @@ Validation locale : 93 tests Python, 81 parcours Chromium du wiki, 37 tests Node
 
 Sources des faits OpenRouter : inscription par Google, GitHub ou e-mail, crédits prépayés par carte ou cryptomonnaie avec frais d’achat, d’après plusieurs guides publics concordants ; les libellés d’écran et l’éventuelle limite de crédit à l’autorisation n’ont pas pu être vérifiés et ne sont pas décrits. Coût par question estimé d’après les paramètres de l’assistant et le tarif public du modèle par défaut, présenté comme ordre de grandeur.
 
+
+## S27 — Mesurer les visites avec Cloudflare Web Analytics
+
+À la demande du propriétaire, le snippet fourni pour `pemcode.github.io` est inséré une seule fois avant `</body>` dans toutes les pages générées : accueil, matières, parcours, planning, guide, cours et applications. Le script utilise `type="module"` et le jeton public fourni. Les sources éditoriales et les fichiers JSON ne sont pas modifiés par cette insertion ; une reconstruction ne duplique pas le snippet. Test RED puis GREEN, build et publication vérifiés.
+
+Preuve TDD du 11 octobre 2026 : RED exécuté avec `uv run pytest tests/test_build.py -q -k cloudflare` (absence du snippet) ; GREEN après insertion au point commun d’écriture HTML. Les 14 tests de génération passent, dont deux constructions consécutives vérifiant le snippet unique, le module et son jeton, les pages de cours et d’application, le planning et les sources intactes. Build réel et liens validés ; toutes les pages HTML construites contiennent exactement un snippet. Aucun changement aux sources pédagogiques.

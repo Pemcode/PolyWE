@@ -14,6 +14,8 @@ from .planning import load_planning, render_planning
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
 MARKER = "wiki-iwe-generated\n"
+# Jeton public du site pemcode.github.io, fourni par le propriétaire.
+CLOUDFLARE_BEACON = """<!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "265001f8626c4f3e82d7f823d55a1c33"}'></script><!-- End Cloudflare Web Analytics -->"""
 
 
 def link(current, target, anchor=""):
@@ -24,6 +26,8 @@ def link(current, target, anchor=""):
 def write(output, name, text):
     target = output / name
     target.parent.mkdir(parents=True, exist_ok=True)
+    if target.suffix.lower() == ".html":
+        text = re.sub(r"</body\s*>", lambda m: CLOUDFLARE_BEACON + "\n" + m.group(0), text, count=1, flags=re.I)
     target.write_text(text, encoding="utf-8")
 
 

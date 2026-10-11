@@ -163,3 +163,5 @@ La recherche du panneau propose dès la saisie jusqu’à huit cours, chapitres 
 Dans le panneau d'un cours, **Partager** ouvre le menu de partage de l'appareil ; **Copier le lien** permet de coller l'adresse dans WhatsApp. **Partager cette section** cible directement le passage concerné. Le partage natif et la copie proposent un repli si le navigateur ne fournit pas l'API attendue. Les adresses restent valables quand le contenu d'un cours est mis à jour, à condition de conserver son `url` et ses ancres.
 
 Références de configuration : [uv](https://docs.astral.sh/uv/guides/projects/), [uv dans GitHub Actions](https://docs.astral.sh/uv/guides/integration/github/), [workflow GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+Le générateur ajoute le snippet Cloudflare Web Analytics du domaine `pemcode.github.io` avant la fermeture du corps des pages publiées. Le jeton public est défini dans `wiki/build.py` ; les HTML sources des cours restent autonomes et sans ce snippet.

@@ -164,3 +164,24 @@ def test_draft_and_planned_applications_are_never_linked(project):
     assert "Brouillon secret" not in subject and not (output / "Thermique/secret").exists()
     assert "Jeu futur" in subject and "À venir" in subject and not (output / "Thermique/futur").exists()
     assert "futur/index.html" not in subject
+
+
+def test_cloudflare_beacon_on_generated_pages_without_changing_sources(planning_project):
+    root, data, _ = planning_project
+    add_application(root, data)
+    sources = {p: p.read_bytes() for p in root.rglob("*.html")}
+    for _ in range(2):
+        output = build(root)
+        pages = list(output.rglob("*.html"))
+        assert (output / "planning.html") in pages
+        assert (output / "Thermique/quiz/index.html") in pages
+        for page in pages:
+            html = page.read_text(encoding="utf-8")
+            scripts = re.findall(r"<script\b[^>]*data-cf-beacon[^>]*></script>", html)
+            assert len(scripts) == 1, page
+            assert 'type="module"' in scripts[0]
+            assert 'src="https://static.cloudflareinsights.com/beacon.min.js"' in scripts[0]
+            assert '265001f8626c4f3e82d7f823d55a1c33' in scripts[0]
+            assert html.index(scripts[0]) < html.lower().rindex("</body>")
+        assert all(p.read_bytes() == before for p, before in sources.items())
+        assert 'data-cf-beacon' not in (output / "assets/recherche.json").read_text(encoding="utf-8")
