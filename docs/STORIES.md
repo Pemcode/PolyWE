@@ -430,3 +430,33 @@ Sources des faits OpenRouter : inscription par Google, GitHub ou e-mail, crédit
 À la demande du propriétaire, le snippet fourni pour `pemcode.github.io` est inséré une seule fois avant `</body>` dans toutes les pages générées : accueil, matières, parcours, planning, guide, cours et applications. Le script utilise `type="module"` et le jeton public fourni. Les sources éditoriales et les fichiers JSON ne sont pas modifiés par cette insertion ; une reconstruction ne duplique pas le snippet. Test RED puis GREEN, build et publication vérifiés.
 
 Preuve TDD du 11 octobre 2026 : RED exécuté avec `uv run pytest tests/test_build.py -q -k cloudflare` (absence du snippet) ; GREEN après insertion au point commun d’écriture HTML. Les 14 tests de génération passent, dont deux constructions consécutives vérifiant le snippet unique, le module et son jeton, les pages de cours et d’application, le planning et les sources intactes. Build réel et liens validés ; toutes les pages HTML construites contiennent exactement un snippet. Aucun changement aux sources pédagogiques.
+
+## S28 — Réviser les aciers inoxydables et découvrir les fontes
+
+En tant qu’élève, je retrouve les deux cours sur les inox et le premier cours sur les fontes depuis leur matière, le planning, le panneau latéral et la recherche.
+
+- Nouvelles matières « Aciers inoxydables » et « Fontes et soudage des fontes » ; cours `inox-01`, `inox-02` et `fontes-01`, avec URL stables sous `Inox/` et `Fontes/`, prérequis conseillés, sections indexées et progression des deux cours inox.
+- Rattachement aux sujets `2-15-aciers-inoxydables` et `2-17-fontes`. Les chapitres complémentaires annoncés dans les en-têtes inox sont liés aux sujets de fissuration, soudage hétérogène, structure du joint, corrosion et traitements thermiques, en conservant les supports existants, les séances et les autorisations des PDF.
+- Sources, scripts, ancres et clés de stockage conservés ; les cours Fontes 2 à 4 annoncés mais non livrés ne sont pas présentés comme disponibles.
+- Parcours RED puis GREEN, catalogue et build valides ; contrôle des trois pages construites en clair et sombre, sur téléphone et en paysage à 1366 × 768, panneau ouvert et replié ; commit, push et vérification de GitHub Actions et du site public.
+
+Aucune fiche d’intégration séparée présente : métadonnées tirées des en-têtes et correspondances au planning des sources, identifiants confirmés par `wiki sujets`. Le cours Fontes 1 couvre les bases métallurgiques ; les nuances, la soudabilité, les procédés et les aciers moulés sont annoncés pour la suite. Cette intégration ne constitue pas une nouvelle validation scientifique du contenu. Les éventuels défauts de présentation sont consignés ci-dessous pour correction dans les sources.
+
+Preuve TDD du 13 octobre 2026 : RED exécuté avec `uv run pytest tests/test_content.py -q -k inox_and_fontes` (les trois pages sont absentes), puis GREEN après inscription par `wiki ajouter` et complément des métadonnées. Le parcours vérifie l’accès depuis l’accueil, les matières et le planning, les 19 chapitres dans la recherche, les prérequis, la progression inox, les liens complémentaires, la conservation des supports précédents, des scripts et des ancres, ainsi que l’absence des suites non livrées.
+
+Validation locale finale : 96 tests Python, 81 parcours Chromium du wiki, 37 tests Node et 34 parcours Chromium des applications réussis ; catalogue et build valides (40 cours, 452 sections, 11 matières, 1 application). Les séances, dates, sources PDF et supports antérieurs sont conservés. Le contrôle complet a révélé un défaut de copie de ressources sur Windows, corrigé séparément en S29.
+
+QA des trois cours construits sous `/PolyWE/` : 19 manipulations, leurs 15 animations disponibles, 36 questions de quiz et remise à zéro ; cases et thème mémorisés après rechargement ; copie et partage de section simulés ; accès depuis les matières et suggestions `Schaeffler`, `rochage` et `graphite`. Les 36 configurations (360, 390, 768, 1280, 1366 et 1440 px ; clair et sombre) et 5 748 états (valeurs initiales, extrêmes individuels et simultanés, préréglages et leurs extrêmes simultanés) ne présentent aucun débordement horizontal, aucune valeur indéfinie ni texte SVG hors viewBox avec une tolérance de 2 unités. Aucune erreur JavaScript ni HTTP locale. Tiroirs mobiles et navigation par ancre fonctionnels ; panneaux ouverts et repliés contrôlés en paysage. Les 19 manipulations mesurent au plus 735 px de haut à 1366 × 768. Captures de leurs schémas et des trois en-têtes mobiles sombres inspectées. Empreintes SHA-256 des trois sources inchangées depuis leur réception.
+
+Limites des sources à signaler à l’auteur : quatre manipulations disposent de réglages et préréglages fonctionnels mais pas de lecture automatique — carte des dangers (`inox-01#c1`), forme du cordon (`inox-01#c4`), grossissement de grain (`inox-01#c7`) et courbes TTP (`inox-02#c3`). Elles restent utilisables ; aucune réécriture du contenu n’a été effectuée.
+
+## S29 — Copier les ressources du wiki à l’identique sur Windows
+
+En tant que mainteneur, je peux valider et construire le site sur Windows en conservant exactement les fichiers CSS et JavaScript partagés.
+
+- Les ressources copiées dans `_site/assets/` gardent leurs octets et leurs fins de ligne ; les pages générées et les sources éditoriales ne changent pas.
+- Le test existant `test_chat_widget_is_loaded_once_on_every_kind_of_page` doit passer sous Windows, ainsi que les tests de génération.
+
+RED exécuté le 13 octobre 2026 : le test existant échoue sur la comparaison binaire du JavaScript de l’assistant (LF dans la source, CRLF dans la copie). Défaut découvert pendant les contrôles de S28, indépendant des nouveaux cours.
+
+GREEN : copie binaire des ressources partagées avec `shutil.copyfile`, sans conversion de fins de ligne. Les 17 tests ciblés de génération et d’assistant passent, puis les 96 tests Python complets et le build final.

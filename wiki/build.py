@@ -305,7 +305,9 @@ def build(root):
     write(output, ".wiki-generated", MARKER)
     write(output, ".nojekyll", "")
     for asset in ("wiki.css", "wiki.js", "chat-widget.js", "chat-widget.css", "assistant.css") + (("planning.css", "planning.js") if plan else ()):
-        write(output, "assets/" + asset, (ASSETS / asset).read_text(encoding="utf-8"))
+        target = output / "assets" / asset
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ASSETS / asset, target)
     courses = sorted((c for c in data["cours"] if c["statut"] != "brouillon"), key=lambda c: (c["ordre"], c["id"]))
     available = [c for c in courses if c["statut"] == "disponible"]
     by_id = {c["id"]: c for c in courses}

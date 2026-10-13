@@ -436,3 +436,68 @@ def test_essais_series_links_materials_and_weld_testing_without_losing_existing_
         assert Path(previous).name in page(following).links
     assert "electrode-enrobee-05" in courses["essais-03"]["prerequis_conseilles"]
     assert not (output / "Cours").exists()
+
+
+def test_inox_and_fontes_are_reachable_with_targeted_planning_links(tmp_path):
+    data, plan = copy_real_project(tmp_path, planning=True)
+    output = build(tmp_path)
+    expected = {
+        "inox-01": ("Inox/01-carte-dangers-fissurations.html", "inox", 7),
+        "inox-02": ("Inox/02-sigma-sensibilisation-rochage.html", "inox", 6),
+        "fontes-01": ("Fontes/01-graphite-cementite-metallurgie.html", "fontes", 6),
+    }
+    assert all((output / url).is_file() for url, _, _ in expected.values()), (
+        "Les deux cours inox et le premier cours fontes doivent être publiés."
+    )
+
+    def page(path):
+        parsed = CourseHTML()
+        parsed.feed((output / path).read_text(encoding="utf-8"))
+        return parsed
+
+    courses = {c["id"]: c for c in data["cours"]}
+    topics = {t["id"]: t["supports"] for t in plan["sujets"]}
+    search = json.loads((output / "assets/recherche.json").read_text(encoding="utf-8"))
+    for ident, (url, subject, chapters) in expected.items():
+        subject_url = f"matieres/{subject}.html"
+        assert subject_url in page("index.html").links
+        assert "../" + url in page(subject_url).links
+        assert url in page("planning.html").links
+        for n in range(1, chapters + 1):
+            assert any(row["cours_id"] == ident and row["url"] == f"{url}#c{n}" for row in search)
+        source_path = courses[ident]["fichier"]
+        source_bytes = (tmp_path / source_path).read_bytes()
+        assert source_bytes == (Path(__file__).resolve().parents[1] / source_path).read_bytes()
+        source = source_bytes.decode("utf-8-sig")
+        parsed = CourseHTML()
+        parsed.feed(source)
+        assert parsed.ids <= page(url).ids
+        scripts = re.findall(r"<script\b[^>]*>.*?</script>", source, flags=re.S)
+        published = (output / url).read_text(encoding="utf-8")
+        assert scripts and all(script in published for script in scripts)
+        for prerequisite in courses[ident]["prerequis_conseilles"]:
+            assert link(url, courses[prerequisite]["url"]) in page(url).links
+
+    assert {"cours": "inox-01"} in topics["2-15-aciers-inoxydables"]
+    assert {"cours": "inox-02"} in topics["2-15-aciers-inoxydables"]
+    assert {"cours": "fontes-01"} in topics["2-17-fontes"]
+    supplements = {
+        "2-6-fissuration": [("inox-01", f"c{n}") for n in range(3, 7)],
+        "2-22-soudage-hetero": [("inox-01", "c1")],
+        "2-5-structure-du-joint-soude": [("inox-01", "c2")],
+        "2-14-introduction-a-la-corrosion": [("inox-02", "c5"), ("inox-02", "c6")],
+        "2-8-traitements-thermiques-des-materiaux": [("inox-02", "c3")],
+    }
+    for topic, references in supplements.items():
+        for ident, anchor in references:
+            assert {"cours": ident, "ancre": anchor} in topics[topic]
+            assert courses[ident]["url"] + "#" + anchor in page("planning.html").links
+    assert {"cours": "met-03", "ancre": "s6"} in topics["2-6-fissuration"]
+    assert {"cours": "met-03", "ancre": "s4"} in topics["2-5-structure-du-joint-soude"]
+    first, second = (expected[f"inox-{n:02}"][0] for n in (1, 2))
+    assert Path(second).name in page(first).links
+    assert Path(first).name in page(second).links
+    assert "inox-01" in courses["inox-02"]["prerequis_conseilles"]
+    assert not any(row["cours_id"] in {"fontes-02", "fontes-03", "fontes-04", "inox-03"} for row in search)
+    assert not (output / "Cours").exists()
+    assert not any(source.get("publier", False) for source in plan["sources"])

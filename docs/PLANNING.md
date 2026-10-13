@@ -22,10 +22,10 @@ Les codes ci-dessous viennent du planning ; les liens avec les fiches du wiki so
 | 2.2 | Diagrammes de phases et alliages | Diagramme plomb–étain (`met-base`) |
 | 2.1 | Structures et propriétés des métaux | Structure du fer, section `met-01#s1` |
 | 2.3 | Alliages fer–carbone | Cours `met-01` |
-| 2.8 | Traitements thermiques | Cinétique TTT/TRC (`met-02`) et traitements thermiques/soudage (`met-03`) |
+| 2.8 | Traitements thermiques | Cinétique TTT/TRC (`met-02`) et traitements thermiques/soudage (`met-03`) ; complément inox : courbes TTP et cycles de soudage (`inox-02#c3`) |
 | 3.1 | Théorie de base des systèmes de structure | Statique et liaisons (`rdm-06#c2`, `rdm-06#c3`), cas types de poutres (`rdm-07#c5`) |
 | 3.2 | Notions fondamentales de RDM | Série `rdm-01` à `rdm-07`, disponible |
-| 2.14 | Introduction à la corrosion | Pas de support associé pour le moment |
+| 2.14 | Introduction à la corrosion | Sensibilisation et corrosion intergranulaire (`inox-02#c5`), rochage et protection de l’envers (`inox-02#c6`) |
 | 1.1 | Introduction à la technologie du soudage | Pas de support associé pour le moment |
 | 2.7 | Ruptures et différents types de rupture | Mécanismes et faciès (`rupture-01`), Charpy et transition (`rupture-02`). Compléments : le film d’une rupture par fatigue (`fatigue-01#c6`) et la lecture d’une cassure (`fatigue-04#c2`) |
 | 3.11 | Introduction à la mécanique de la rupture | Défauts et facteur K (`rupture-03`), ténacité et FAD (`rupture-04`). Compléments : fissures dormantes (`fatigue-03#c5`) et diagramme de propagation (`fatigue-04#c3`) |
@@ -49,6 +49,10 @@ Les cinq cours de soudage à l’électrode enrobée (`electrode-enrobee-01` à 
 Les quatre cours de soudage à l’arc sous flux (`arc-submerge-01` à `arc-submerge-04`) sont rattachés au sujet `1-10-arc-submerge` (IWE 1.10 « Arc submergé »), prévu le 7 octobre 2026. Ils couvrent le procédé 12 et son installation, les flux et fils ainsi que le métal déposé, puis l’influence des paramètres sur la forme du cordon. Le quatrième clôt la série avec les supports envers, les préparations, les variantes multi-fil, le rechargement au feuillard, les défauts et le mode opératoire. La séance propose ces quatre supports sans répartition artificielle par heure.
 
 Les trois cours de la matière « Essais destructifs et métallographiques » (`essais-01` à `essais-03`) couvrent traction, dureté et examens métallographiques. Ils sont associés à `2-23-essais-des-materiaux` ; leurs chapitres 6 complètent `2-23-essais-des-soudures` par la traction des soudures, les filiations de dureté et la lecture des macrographies. Les supports de rupture existants sont conservés. Les deux sujets partagent le code 2.23 mais gardent leurs identifiants et leurs séances distincts.
+
+Les deux cours « Aciers inoxydables » (`inox-01` et `inox-02`) sont associés au sujet `2-15-aciers-inoxydables`. Le premier couvre la carte des dangers, la solidification, les fissurations et le grossissement de grain ; le second clôt cette série avec la phase sigma, la fragilisation à 475 °C, la sensibilisation et le rochage. Les compléments explicitement indiqués dans les sources sont ciblés : fissuration → `inox-01#c3` à `#c6`, soudage hétérogène → `inox-01#c1`, structure du joint soudé → `inox-01#c2`, corrosion → `inox-02#c5` et `#c6`, traitements thermiques → `inox-02#c3`. Les supports précédents restent proposés.
+
+Le premier cours « Fontes et soudage des fontes » (`fontes-01`) ouvre le sujet `2-17-fontes` : graphite ou cémentite, diagrammes stable et métastable, refroidissement, formes du graphite, matrice et propriétés. Les cours 2 à 4 annoncés dans le support ne sont pas encore livrés ; le catalogue ne les présente pas comme disponibles. Les nuances, la soudabilité, les procédés et les aciers moulés restent à couvrir. Aucun découpage par heure n’est déduit de ces nouveaux liens.
 
 | Examen indiqué | Date | Horaire |
 | --- | --- | --- |
