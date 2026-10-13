@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "date_inventaire": "2026-10-09",
+  "date_inventaire": "2026-10-13",
   "description": "Catalogue éditorial du wiki de révision DU Ingénierie du soudage / IWE. Identifiants internes stables ; sections extraites automatiquement des HTML.",
   "cours": [
     {
@@ -1386,6 +1386,112 @@
       "fichier": "Cours/Procedes/1.9_Soudage_Electrode_Enrobee/Électrode enrobée, cours 5 _ qualité, défauts, cas particuliers et sécurité.html",
       "url": "ElectrodeEnrobee/05-qualite-defauts-securite.html",
       "statut": "disponible"
+    },
+    {
+      "id": "inox-01",
+      "titre": "Aciers inoxydables : la carte des dangers et les fissurations",
+      "matiere": "inox",
+      "ordre": 1,
+      "repere": "Cours 01",
+      "prerequis_conseilles": [
+        "met-base",
+        "met-01",
+        "met-02",
+        "met-03"
+      ],
+      "mots_cles": [
+        "Schaeffler",
+        "Bystram",
+        "dilution",
+        "solidification",
+        "fissuration à chaud",
+        "liquation",
+        "fissuration à froid",
+        "ferrite",
+        "martensite",
+        "grossissement de grain"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "quiz",
+        "fiche de révision"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Inox/Inox, cours 1 _ la carte des dangers et les fissurations.html",
+      "url": "Inox/01-carte-dangers-fissurations.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "inox-02",
+      "titre": "Aciers inoxydables : sigma, 475 °C, sensibilisation et rochage",
+      "matiere": "inox",
+      "ordre": 2,
+      "repere": "Cours 02",
+      "prerequis_conseilles": [
+        "inox-01",
+        "met-base",
+        "met-02"
+      ],
+      "mots_cles": [
+        "phase sigma",
+        "fer-chrome",
+        "TTP",
+        "475 °C",
+        "sensibilisation",
+        "corrosion intergranulaire",
+        "rochage",
+        "purge envers",
+        "hypertrempe"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "quiz",
+        "fiche de révision"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Inox/Inox, cours 2 _ sigma, 475 °C, sensibilisation et rochage.html",
+      "url": "Inox/02-sigma-sensibilisation-rochage.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "fontes-01",
+      "titre": "Fontes : graphite ou cémentite, la métallurgie des fontes",
+      "matiere": "fontes",
+      "ordre": 1,
+      "repere": "Cours 01",
+      "prerequis_conseilles": [
+        "met-base",
+        "met-01",
+        "essais-01",
+        "rupture-03"
+      ],
+      "mots_cles": [
+        "graphite",
+        "cémentite",
+        "fonte grise",
+        "fonte blanche",
+        "inoculation",
+        "graphite lamellaire",
+        "graphite sphéroïdal",
+        "graphite vermiculaire",
+        "carbone équivalent",
+        "matrice"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "quiz",
+        "fiche de révision"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Fontes/Fontes, cours 1 _ graphite ou cémentite, la métallurgie des fontes.html",
+      "url": "Fontes/01-graphite-cementite-metallurgie.html",
+      "statut": "disponible"
     }
   ],
   "matieres": [
@@ -1433,6 +1539,16 @@
       "id": "essais",
       "titre": "Essais destructifs et métallographiques",
       "description": "Lire un essai de traction, choisir et interpréter une mesure de dureté, puis préparer et observer un échantillon métallographique de métal ou de soudure."
+    },
+    {
+      "id": "inox",
+      "titre": "Aciers inoxydables",
+      "description": "Métallurgie du soudage des aciers inoxydables : structure du métal fondu, fissurations, précipitations et prévention de la corrosion."
+    },
+    {
+      "id": "fontes",
+      "titre": "Fontes et soudage des fontes",
+      "description": "Comprendre la métallurgie, les familles et les propriétés des fontes pour aborder leur soudage."
     }
   ],
   "parcours": [

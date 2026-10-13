@@ -129,6 +129,10 @@
         },
         {
           "cours": "met-03"
+        },
+        {
+          "cours": "inox-02",
+          "ancre": "c3"
         }
       ]
     },
@@ -166,7 +170,16 @@
       "titre": "Introduction à la corrosion",
       "theme": "metallurgie",
       "code": "2.14",
-      "supports": []
+      "supports": [
+        {
+          "cours": "inox-02",
+          "ancre": "c5"
+        },
+        {
+          "cours": "inox-02",
+          "ancre": "c6"
+        }
+      ]
     },
     {
       "id": "1-1-introduction-a-la-technologie-du-soudage",
@@ -357,7 +370,11 @@
       "titre": "Fontes",
       "theme": "metallurgie",
       "code": "2.17",
-      "supports": []
+      "supports": [
+        {
+          "cours": "fontes-01"
+        }
+      ]
     },
     {
       "id": "2-21-autres-materiaux",
@@ -378,7 +395,14 @@
       "titre": "Aciers inoxydables",
       "theme": "metallurgie",
       "code": "2.15",
-      "supports": []
+      "supports": [
+        {
+          "cours": "inox-01"
+        },
+        {
+          "cours": "inox-02"
+        }
+      ]
     },
     {
       "id": "2-4-classification-des-aciers",
@@ -396,6 +420,10 @@
         {
           "cours": "met-03",
           "ancre": "s4"
+        },
+        {
+          "cours": "inox-01",
+          "ancre": "c2"
         }
       ]
     },
@@ -408,6 +436,22 @@
         {
           "cours": "met-03",
           "ancre": "s6"
+        },
+        {
+          "cours": "inox-01",
+          "ancre": "c3"
+        },
+        {
+          "cours": "inox-01",
+          "ancre": "c4"
+        },
+        {
+          "cours": "inox-01",
+          "ancre": "c5"
+        },
+        {
+          "cours": "inox-01",
+          "ancre": "c6"
         }
       ]
     },
@@ -595,7 +639,12 @@
       "titre": "Soudage hétéro",
       "theme": "metallurgie",
       "code": "2.22",
-      "supports": []
+      "supports": [
+        {
+          "cours": "inox-01",
+          "ancre": "c1"
+        }
+      ]
     },
     {
       "id": "3-3-conception-des-joints",
