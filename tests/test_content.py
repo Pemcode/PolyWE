@@ -498,6 +498,6 @@ def test_inox_and_fontes_are_reachable_with_targeted_planning_links(tmp_path):
     assert Path(second).name in page(first).links
     assert Path(first).name in page(second).links
     assert "inox-01" in courses["inox-02"]["prerequis_conseilles"]
-    assert not any(row["cours_id"] in {"fontes-02", "fontes-03", "fontes-04", "inox-03"} for row in search)
+    assert not any(row["cours_id"] == "inox-03" for row in search)
     assert not (output / "Cours").exists()
     assert not any(source.get("publier", False) for source in plan["sources"])

@@ -439,7 +439,13 @@
   host.setAttribute("style", "all:initial!important;display:none!important");
   const shadow = host.attachShadow({mode: "open"});
   const styles = el("link", {rel: "stylesheet", href: new URL("chat-widget.css", assets).href});
-  styles.addEventListener("load", () => { host.setAttribute("style", "all:initial!important"); place(); });
+  const stylesReady = new Promise(resolve => {
+    styles.addEventListener("load", () => {
+      host.setAttribute("style", "all:initial!important");
+      place();
+      resolve();
+    }, {once: true});
+  });
 
   const launcher = el("button", {type: "button", className: "launcher", "aria-controls": "pwc-panel", "aria-expanded": "false", "aria-haspopup": "dialog",
     title: "Assistant de révision (IA)"}, icon("M5 5.5h14a1.5 1.5 0 0 1 1.5 1.5v8.5A1.5 1.5 0 0 1 19 17h-8l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z", "M8 10h8M8 13h5"),
@@ -591,7 +597,12 @@
       status.textContent = "La connexion à OpenRouter a échoué. Réessayez.";
     }
     render();
-    (key ? question : loginButton).focus();
+    await stylesReady;
+    // Le navigateur peut encore réinitialiser le focus pendant le retour de navigation.
+    if (document.readyState !== "complete") {
+      await new Promise(resolve => addEventListener("load", resolve, {once: true}));
+    }
+    if (!panel.hidden) (key ? question : loginButton).focus();
   }
   loginButton.addEventListener("click", startLogin);
   logoutButton.addEventListener("click", () => {

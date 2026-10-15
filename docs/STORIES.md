@@ -460,3 +460,33 @@ En tant que mainteneur, je peux valider et construire le site sur Windows en con
 RED exécuté le 13 octobre 2026 : le test existant échoue sur la comparaison binaire du JavaScript de l’assistant (LF dans la source, CRLF dans la copie). Défaut découvert pendant les contrôles de S28, indépendant des nouveaux cours.
 
 GREEN : copie binaire des ressources partagées avec `shutil.copyfile`, sans conversion de fins de ligne. Les 17 tests ciblés de génération et d’assistant passent, puis les 96 tests Python complets et le build final.
+
+## S30 — Compléter la série Fontes et soudage des fontes
+
+En tant qu’élève, je poursuis le cours Fontes 1 avec les nuances et traitements, la métallurgie du joint puis la pratique du soudage, depuis la matière, le planning et la recherche.
+
+- Publier `fontes-02`, `fontes-03` et `fontes-04`, avec URL stables sous `Fontes/`, prérequis et navigation entre les quatre cours.
+- Les rattacher au sujet `2-17-fontes`, en conservant le cours 1, les autres supports, les séances et les autorisations des PDF.
+- Indexer leurs 19 chapitres dans la recherche et les extraits de l’assistant ; conserver les sources, scripts, ancres et clés de stockage.
+- Exécuter le parcours RED puis GREEN, les contrôles du catalogue et du build ; vérifier les manipulations, quiz et mémorisation, les thèmes clair/sombre, le tiroir mobile et le panneau ouvert/replié, notamment à 1366 × 768.
+- Commit, push, puis contrôle du workflow GitHub Actions et des pages publiques.
+
+Aucune fiche d’intégration séparée présente : métadonnées tirées des titres, prérequis et correspondances au planning des sources ; sujet confirmé par `wiki sujets fontes`. Cette intégration ne constitue pas une nouvelle validation scientifique du contenu. Les défauts éventuels des sources sont consignés ici pour leur auteur.
+
+Preuve TDD du 15 octobre 2026 : RED exécuté avec `uv run pytest tests/test_fontes.py -q` (les nouvelles pages sont absentes), puis GREEN après `wiki ajouter` avec métadonnées explicites et complément des URL/prérequis. Le parcours vérifie les accès depuis la matière et le planning, les cours voisins, les prérequis, les 19 chapitres dans la recherche et les extraits de l’assistant, ainsi que la conservation des scripts et ancres. L’ancienne assertion de S28 sur l’absence des suites Fontes livrées depuis a été retirée ; l’absence d’un troisième cours inox reste vérifiée.
+
+Validation locale : 97 tests Python, 83 parcours Chromium du wiki, 37 tests Node et 34 parcours Chromium des applications réussis ; catalogue et build valides (43 cours, 489 sections, 11 matières, 1 application). Les séances, dates, PDF et supports antérieurs sont inchangés. Le contrôle général a révélé un défaut de focus de l’assistant corrigé en S31.
+
+QA des trois cours construits sous `/PolyWE/` : 19 manipulations et leurs 19 animations avec modification effective des SVG/lectures, 36 questions de quiz et remise à zéro ; mémorisation des cases et du thème, copie et partage simulés, accès depuis la matière et suggestions de recherche. Les 36 configurations (360, 390, 768, 1280, 1366 et 1440 px ; clair et sombre) et 4 560 états (réglages initiaux, extrêmes individuels et simultanés, préréglages et extrêmes simultanés) ne présentent aucun débordement horizontal, aucune valeur indéfinie ni texte SVG hors viewBox avec une tolérance de 2 unités. Aucune erreur JavaScript ni HTTP locale. Tiroir mobile et navigation par ancre fonctionnels, panneaux ouverts et repliés vérifiés à 1366 × 768. Les manipulations mesurent au plus 683 px de haut dans cette configuration. Captures des 19 manipulations et des trois en-têtes mobiles sombres inspectées. Les empreintes SHA-256 des quatre sources Fontes sont inchangées depuis la réception ; aucun défaut de présentation relevé.
+
+## S31 — Retrouver le champ de question après une connexion rapide
+
+En tant que visiteur, je peux saisir ma question directement après le retour OpenRouter, même lorsque le style de l’assistant arrive après la réponse de connexion.
+
+- Attendre que le widget soit affiché et que la navigation soit terminée avant de placer le focus après la connexion ; conserver le focus normal lorsque la page est déjà chargée.
+- Ne pas déplacer le focus si le visiteur a fermé le panneau pendant la connexion.
+- Reproduire le chargement tardif du style dans Chromium, à la racine et sous un sous-chemin ; conserver les contrôles PKCE et les sources des cours.
+
+Défaut découvert pendant S30 : le parcours existant de connexion échoue sur le focus, puis échoue de nouveau dans ses deux variantes lors de la relance ciblée. Le widget reste masqué jusqu’au chargement de son CSS ; un focus demandé avant cet événement est sans effet.
+
+Preuve TDD du 15 octobre 2026 : RED du test `test_login_focus_waits_for_the_widget_stylesheet` dans ses deux variantes, avec le CSS retenu jusqu’à la fin de l’échange de code. La trace des événements du parcours OAuth existant révèle également un focus perdu entre `DOMContentLoaded` et `load` lors du retour de navigation. GREEN après attente du style puis de la fin de chargement : les 24 parcours de l’assistant passent, ainsi que ses 12 tests Node, ses trois tests Python et le build. Les contrôles PKCE et les sources des cours restent inchangés.

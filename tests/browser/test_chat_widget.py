@@ -115,6 +115,23 @@ def test_login_with_pkce_returns_to_the_same_section_and_keeps_only_prefixed_key
     expect(panel(page).get_by_role("button", name="Se connecter avec OpenRouter")).to_be_visible()
 
 
+def test_login_focus_waits_for_the_widget_stylesheet(chat):
+    page, base, api = chat
+    pending_styles = []
+    page.route("**/assets/chat-widget.css", lambda route: pending_styles.append(route))
+    page.add_init_script("""localStorage.setItem('polywe_chat_pkce', JSON.stringify({
+        verifier: 'test-verifier', hash: '#calcul', t: Date.now()
+    }));""")
+    page.goto(base + "Thermique/introduction.html?code=code-de-test", wait_until="domcontentloaded")
+    page.wait_for_function("document.documentElement.dataset.polyweChat === 'connecte'")
+    assert len(api.exchanges) == 1
+    expect(page.locator("#polywe-chat")).to_be_hidden()
+    assert len(pending_styles) == 1
+    pending_styles[0].continue_()
+    expect(panel(page)).to_be_visible()
+    expect(page.get_by_label("Votre question")).to_be_focused()
+
+
 def test_a_forged_code_in_a_shared_link_is_never_exchanged(chat):
     page, base, api = chat
     page.goto(base + "?code=vole")
