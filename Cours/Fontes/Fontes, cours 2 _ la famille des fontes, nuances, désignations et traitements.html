@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fontes, cours 2 : la famille des fontes, nuances, désignations et traitements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F6F9; --paper-2:#E6ECF2; --card:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#C5CFD9;
+  --grid:rgba(40,90,160,.075);
+  --sig:#CF2438; --tau:#8A34B6; --eps:#1B5ED3; --gam:#06849A; --frc:#D46A00; --mat:#26844A; --weld:#9A5B12;
+  --ok:#26844A; --warn:#B86E00; --bad:#C62828;
+  --lv2:#E4EBF2; --hl:#FFF3B0;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-head:"Barlow Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+  --font-math:"STIX Two Text","Cambria Math","Cambria","Times New Roman",serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+    --grid:rgba(120,160,220,.07);
+    --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+    --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10161D; --paper-2:#1B242E; --card:#161E27; --ink:#E4EBF2; --muted:#9AA8B6; --line:#2F3B48;
+  --grid:rgba(120,160,220,.07);
+  --sig:#FF5D6E; --tau:#C987F0; --eps:#5E9DFF; --gam:#37C7DB; --frc:#FFA23D; --mat:#5CCB7A; --weld:#E7A95A;
+  --ok:#5CCB7A; --warn:#FFB84D; --bad:#FF6B6B; --lv2:#1C2631; --hl:#4A4214;
+  color-scheme: dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;color:var(--ink);font-family:var(--font-body);font-size:17.5px;line-height:1.62;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;overflow-x:hidden;
+}
+img,svg{max-width:100%}
+.wrap{max-width:800px;margin:0 auto;padding:0 20px}
+.wide{max-width:980px}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.1;margin:0}
+h3{font-size:1.65rem;font-weight:600;margin:2rem 0 .6rem}
+h4{font-size:1.3rem;font-weight:600;margin:1.4rem 0 .4rem}
+p{margin:.7em 0}
+a{color:var(--eps)}
+b,strong{font-weight:700}
+small{font-size:.8em}
+sub{font-size:.72em}
+.m{font-family:var(--font-math);font-size:1.08em;white-space:nowrap}
+.sig{color:var(--sig)} .tau{color:var(--tau)} .eps{color:var(--eps)} .gam{color:var(--gam)} .frc{color:var(--frc)} .mat{color:var(--mat)} .mut{color:var(--muted)} .wcol{color:var(--weld)}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .12em;line-height:1.1}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .2em .08em}
+.frac>span:last-child{padding:.08em .2em 0}
+ul,ol{padding-left:1.4em}
+li{margin:.25em 0}
+
+/* ---------- en-tête ---------- */
+.hero{padding:34px 0 10px}
+.title-block{border:2.5px solid var(--ink);background:var(--card);display:grid;grid-template-columns:1fr 300px}
+.tb-main{padding:22px 24px;border-right:2.5px solid var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.tb-series{margin:0 0 .5rem;color:var(--muted);font-size:.95rem}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:700;letter-spacing:-.01em}
+.tb-cells{display:grid;grid-template-rows:repeat(4,auto)}
+.tb-cells>div{padding:9px 16px;border-bottom:1.5px solid var(--ink);display:flex;flex-direction:column;justify-content:center}
+.tb-cells>div:last-child{border-bottom:0}
+.tb-cells small{color:var(--muted);font-size:.78rem}
+.tb-cells b{font-family:var(--font-head);font-size:1.25rem;font-weight:600;line-height:1.15}
+.lede{font-size:1.13rem;max-width:760px;margin:1.2rem 0}
+.theme-btn{align-self:flex-start;font-family:var(--font-body);font-size:.85rem;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
+@media (max-width:760px){.title-block{grid-template-columns:1fr}.tb-main{border-right:0;border-bottom:2.5px solid var(--ink)}.tb-cells{grid-template-rows:none;grid-template-columns:1fr 1fr}.tb-cells>div:nth-child(odd){border-right:1.5px solid var(--ink)}.tb-cells>div:nth-child(3){border-bottom:0}}
+@media (max-width:420px){.tb-cells{grid-template-columns:1fr}.tb-cells>div:nth-child(odd){border-right:0}.tb-cells>div:nth-child(3){border-bottom:1.5px solid var(--ink)}}
+
+/* code couleur */
+.cc{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin:1rem 0 .4rem}
+.cc-box{background:var(--card);border:2px solid var(--line);padding:12px 14px;border-radius:4px}
+.cc-cause{border-color:var(--sig)} .cc-link{border-color:var(--mat)} .cc-eff{border-color:var(--eps)}
+.cc-box small{display:block;color:var(--muted);font-size:.82rem;line-height:1.3}
+.cc-syms{font-family:var(--font-math);font-size:1.7rem;line-height:1.25;display:flex;flex-wrap:wrap;gap:.1em .45em;margin:.2rem 0}
+.cc-box p{margin:0;font-size:.9rem;line-height:1.35}
+.cc-arrow{align-self:center;font-size:1.8rem;color:var(--muted)}
+@media (max-width:700px){.cc{grid-template-columns:1fr}.cc-arrow{transform:rotate(90deg);justify-self:center;line-height:1}}
+.cc-more{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.5rem 0}
+.cc-more>div{border:2px solid var(--line);background:var(--card);border-radius:4px;padding:6px 10px;font-size:.9rem}
+@media (max-width:640px){.cc-more{grid-template-columns:1fr}}
+
+/* ---------- sommaire ---------- */
+.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1.5px solid var(--line);padding-top:env(safe-area-inset-top,0px);margin-top:18px}
+.toc-in{display:flex;gap:6px;overflow-x:auto;padding:9px 20px;max-width:980px;margin:0 auto;scrollbar-width:thin}
+.toc a{flex:none;text-decoration:none;color:var(--ink);font-size:.88rem;padding:4px 11px;border:1.5px solid var(--line);border-radius:999px;background:var(--card);white-space:nowrap}
+.toc a.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.toc a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--eps);outline-offset:2px}
+
+/* ---------- sections ---------- */
+section.chap{padding:46px 0 10px}
+.cartouche{display:grid;grid-template-columns:86px 1fr 250px;border:2.5px solid var(--ink);background:var(--card);margin-bottom:1.4rem}
+.c-num{font-family:var(--font-head);font-size:3.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;border-right:2.5px solid var(--ink)}
+.c-title{padding:14px 18px;border-right:2.5px solid var(--ink)}
+.c-title h2{font-size:2.1rem;font-weight:700}
+.c-title p{margin:.25rem 0 0;color:var(--muted)}
+.c-img{padding:12px 14px;display:flex;gap:12px;align-items:center;background:var(--paper-2)}
+.c-img .ico{font-size:2.3rem;line-height:1}
+.c-img small{display:block;color:var(--muted);font-size:.78rem}
+.c-img span{font-size:.95rem;line-height:1.3}
+@media (max-width:700px){.cartouche{grid-template-columns:64px 1fr}.c-num{font-size:2.6rem}.c-title{border-right:0}.c-img{grid-column:1/-1;border-top:2px solid var(--ink)}.c-title h2{font-size:1.7rem}}
+
+/* niveaux */
+.lv{margin:1.2rem 0;padding:6px 22px 14px;border-radius:4px}
+.lv1{background:var(--card);border:2px solid var(--ink)}
+.lv2{background:var(--lv2);border-left:6px solid var(--ink)}
+.lv-h{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-family:var(--font-head);font-size:1.35rem;font-weight:600;margin:10px 0 4px}
+.lv-h .tag{font-size:.95rem;font-family:var(--font-body);font-weight:400;color:var(--muted)}
+@media (max-width:520px){.lv{padding:6px 14px 12px}}
+
+/* formules et encadrés */
+.fx{margin:1.1rem auto;background:var(--card);border:2.5px solid var(--ink);padding:14px 18px;max-width:600px;text-align:center;border-radius:3px;overflow-x:auto}
+.fx .big{font-family:var(--font-math);font-size:1.9rem;line-height:1.4}
+.fx .cap{font-size:.85rem;color:var(--muted);margin:.3rem 0 0}
+.fx .row{display:flex;flex-wrap:wrap;justify-content:center;gap:.2em 1.4em}
+.syms{margin:.6rem 0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;align-items:baseline}
+.syms dt{font-family:var(--font-math);font-size:1.25rem;text-align:right;white-space:nowrap}
+.syms dd{margin:0}
+.def{margin:.9rem 0;padding:.5rem .9rem;border-left:3px dotted var(--muted);font-size:.96rem;background:color-mix(in srgb,var(--card) 60%,transparent)}
+.def>b:first-child{font-family:var(--font-head);font-size:1.08rem;font-weight:600}
+.tip{margin:1rem 0;padding:.7rem 1rem;border:1.5px dashed var(--mat);border-radius:4px;font-size:.97rem}
+.warn{margin:1rem 0;padding:.7rem 1rem;border:2px solid var(--bad);border-radius:4px;font-size:.97rem;background:color-mix(in srgb,var(--bad) 7%,transparent)}
+.mnemo{margin:1rem 0;padding:.7rem 1rem;background:var(--hl);border-radius:4px;font-size:.98rem}
+.fun{margin:1.2rem 0;padding:.8rem 1rem;border:2px dashed var(--muted);border-radius:10px;background:var(--card);font-size:.98rem}
+.fun-h{display:block;margin-bottom:.35rem;font-family:var(--font-head);font-size:1.15rem;font-weight:600;letter-spacing:.02em}
+.meta{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--frc);border-radius:4px;background:color-mix(in srgb,var(--frc) 6%,transparent)}
+.weld{margin:1.2rem 0;padding:.8rem 1rem;border:2px solid var(--weld);border-radius:4px;background:color-mix(in srgb,var(--weld) 7%,transparent)}
+.weld>b:first-child{font-family:var(--font-head);font-size:1.15rem;font-weight:600;color:var(--weld)}
+.hp{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:9px;background:var(--weld);color:var(--card);vertical-align:middle;margin-left:4px;white-space:nowrap}
+.recall{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
+.recall>div{background:var(--card);border:1.5px solid var(--line);border-radius:4px;padding:8px 12px;font-size:.92rem}
+.recall .f{font-family:var(--font-math);font-size:1.2rem;margin-bottom:.2rem}
+@media (max-width:640px){.recall{grid-template-columns:1fr}}
+.hist{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1rem 0}
+.hist>div{background:var(--card);border:1.5px solid var(--weld);border-radius:4px;padding:8px 12px;font-size:.93rem}
+.hist .yr{font-family:var(--font-head);font-size:1.6rem;font-weight:700;color:var(--weld);line-height:1}
+@media (max-width:720px){.hist{grid-template-columns:1fr}}
+
+/* manipulations */
+.lab{background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:14px 16px 12px;margin:1.4rem 0}
+.lab-h{font-family:var(--font-head);font-size:1.3rem;font-weight:600;margin:0 0 .2rem}
+.lab-sub{margin:0 0 .6rem;color:var(--muted);font-size:.92rem}
+.lab svg{display:block;width:100%;height:auto;color:var(--ink);font-family:var(--font-body);touch-action:pan-y}
+.ctrl{display:grid;grid-template-columns:minmax(110px,auto) 1fr minmax(92px,auto);gap:4px 12px;align-items:center;margin:.5rem 0}
+.ctrl label{font-size:.95rem}
+.ctrl output{font-family:var(--font-math);font-size:1.08rem;text-align:right;white-space:nowrap}
+@media (max-width:520px){.ctrl{grid-template-columns:1fr auto}.ctrl input[type=range]{grid-column:1/-1;grid-row:2}}
+input[type=range]{width:100%;accent-color:var(--ink);height:28px;margin:0}
+input.r-sig{accent-color:var(--sig)} input.r-tau{accent-color:var(--tau)} input.r-frc{accent-color:var(--frc)} input.r-mat{accent-color:var(--mat)} input.r-eps{accent-color:var(--eps)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0}
+.btn{font-family:var(--font-body);font-size:.9rem;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 13px;cursor:pointer;line-height:1.3}
+.btn:hover{background:var(--paper-2)}
+.btn.on{background:var(--ink);color:var(--paper)}
+.btn.play{border-color:var(--eps);color:var(--eps);font-weight:700}
+.btn:disabled{opacity:.45;cursor:default}
+.readout{font-family:var(--font-math);font-size:1.08rem;background:var(--paper-2);border-radius:4px;padding:.5rem .8rem;margin:.5rem 0;overflow-x:auto;display:flex;flex-wrap:wrap;gap:.2em 1.3em}
+.readout>span{white-space:nowrap}
+.status{font-size:.97rem;margin:.5rem 0;padding:.5rem .8rem;border-left:4px solid var(--eps);background:color-mix(in srgb,var(--eps) 6%,transparent);border-radius:0 4px 4px 0;min-height:2.6em}
+.radios{display:flex;flex-wrap:wrap;gap:6px 14px;margin:.4rem 0;font-size:.95rem}
+.radios label{display:inline-block;cursor:pointer}
+.radios input{margin:0 6px 0 0;vertical-align:middle}
+
+/* svg */
+svg text{fill:currentColor;font-size:13px}
+svg .lbl{font-size:12.5px;fill:var(--muted)}
+svg .mth{font-family:var(--font-math);font-size:16px}
+svg .ttl{font-family:var(--font-head);font-size:15px;font-weight:600}
+svg .axis{stroke:var(--ink);stroke-width:1.4;fill:none}
+svg .tick{stroke:var(--muted);stroke-width:1}
+svg .gridbg{stroke:var(--line);stroke-width:1}
+svg .ref{stroke:var(--muted);stroke-width:1.3;stroke-dasharray:4 3;fill:none}
+.arr line{stroke:currentColor}
+.arr polygon{fill:currentColor}
+
+/* tableaux */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;-webkit-overflow-scrolling:touch}
+table.data{border-collapse:collapse;width:100%;font-size:.94rem;background:var(--card)}
+table.data th,table.data td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:middle}
+table.data th{font-family:var(--font-head);font-weight:600;font-size:1.05rem;background:var(--paper-2)}
+table.data td.n{font-family:var(--font-math);white-space:nowrap}
+table.data tr.now td{background:var(--hl)}
+
+/* parcours */
+.route{list-style:none;padding:0;margin:1rem 0;position:relative}
+.route::before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:4px;background:var(--line);border-radius:2px}
+.route li{position:relative;padding:0 0 14px 52px;margin:0}
+.route li .dot{position:absolute;left:4px;top:0;width:30px;height:30px;border-radius:50%;border:3px solid var(--ink);background:var(--card);font-family:var(--font-head);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+.route li b{font-family:var(--font-head);font-size:1.2rem;font-weight:600}
+.route li p{margin:.1rem 0 0;font-size:.95rem}
+.series{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:.8rem 0}
+.series>div{background:var(--card);border:1.5px solid var(--line);padding:8px 10px;border-radius:4px;font-size:.88rem}
+.series>div.here{border:2.5px solid var(--ink)}
+.series b{display:block;font-family:var(--font-head);font-size:1.05rem}
+@media (max-width:700px){.series{grid-template-columns:1fr 1fr}}
+
+/* exercices et quiz */
+.exo{background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--ink);padding:6px 20px 12px;margin:1.2rem 0;border-radius:4px}
+.exo.defi{border-left-color:var(--weld)}
+.exo h4{margin-top:.8rem}
+.exo .lvtag{font-family:var(--font-body);font-size:.85rem;font-weight:400;color:var(--muted);margin-left:.4rem}
+.exo .q{margin:.25rem 0}
+details{margin:.6rem 0}
+summary{cursor:pointer;font-weight:700;padding:4px 0}
+details .sol{padding:.4rem .9rem;border-left:3px solid var(--mat);margin:.4rem 0}
+details .sol p{margin:.45em 0}
+.qz{background:var(--card);border:1.5px solid var(--line);border-radius:6px;padding:10px 16px;margin:.8rem 0}
+.qz-q{margin:.3rem 0 .6rem}
+.qz-o{display:flex;flex-direction:column;gap:6px}
+.qz-b{text-align:left;font-family:var(--font-body);font-size:.97rem;padding:8px 12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:5px;cursor:pointer}
+.qz-b:hover{border-color:var(--ink)}
+.qz-b.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}
+.qz-b.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card))}
+.qz-e{font-size:.94rem;margin:.6rem 0 .2rem}
+.score{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);display:inline-block;background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:999px;font-size:.95rem;margin:.6rem 0}
+
+/* fiche mémoire */
+.fiche{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2.5px solid var(--ink);background:var(--card);margin:1rem 0}
+.fiche>div{padding:12px 14px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.fiche>div:nth-child(3n){border-right:0}
+.fiche>div:nth-last-child(-n+3){border-bottom:0}
+.fiche .ic{font-size:1.9rem;line-height:1}
+.fiche h4{margin:.3rem 0 .2rem;font-size:1.15rem}
+.fiche .f{font-family:var(--font-math);font-size:1.1rem;margin:.2rem 0}
+.fiche p{margin:.2rem 0 0;font-size:.88rem;color:var(--muted)}
+@media (max-width:720px){.fiche{grid-template-columns:1fr 1fr}.fiche>div{border-right:1.5px solid var(--ink)!important;border-bottom:1.5px solid var(--ink)!important}.fiche>div:nth-child(2n){border-right:0!important}.fiche>div:last-child{border-bottom:0!important}}
+@media (max-width:440px){.fiche{grid-template-columns:1fr}.fiche>div{border-right:0!important}}
+.gloss{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:0;border-top:1.5px solid var(--line);margin:1rem 0}
+.gloss dt,.gloss dd{border-bottom:1.5px solid var(--line);padding:7px 8px;margin:0}
+.gloss dt{font-weight:700}
+.gloss dd{font-size:.95rem}
+@media (max-width:600px){.gloss{grid-template-columns:1fr}.gloss dt{border-bottom:0;padding-bottom:0}}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.check input{margin-top:.35em;width:18px;height:18px;accent-color:var(--mat);flex:none}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem}
+hr.sep{border:0;border-top:1.5px solid var(--line);margin:2rem 0}
+@media (max-width:700px){.m{white-space:normal}.fx{padding:12px 10px}.fx .big{font-size:1.4rem}}
+@media (max-width:400px){body{font-size:16.5px}.wrap{padding:0 14px}.lab{padding:12px 10px}}
+
+/* compléments de la série Rupture */
+.btn.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
+.btn.ko{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+.ctrl[hidden]{display:none}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap wide">
+  <div class="title-block">
+    <div class="tb-main">
+      <div>
+        <p class="tb-series">Fontes et soudage des fontes, série 2.17 : comprendre la fonte pour mieux la souder</p>
+        <h1>La famille des fontes : nuances, désignations et traitements</h1>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Changer de thème">◐ Thème : automatique</button>
+    </div>
+    <div class="tb-cells">
+      <div><small>Cours</small><b>2 sur 4 : identifier, situer et choisir une nuance de fonte</b></div>
+      <div><small>Durée conseillée</small><b>≈ 2 h 30 à 3 h avec les exercices</b></div>
+      <div><small>Prérequis</small><b>cours 1 de la série (graphite, formes, matrice) ; essais de traction et de dureté (Essais, cours 1 et 2) ; résilience Charpy (Rupture, cours 2)</b></div>
+      <div><small>À la fin tu sais</small><b>lire une désignation EN 1560, symbolique ou numérique ; situer les nuances GL, GV, GS, ADI, malléables, blanches et alliées ; prévoir l'effet de l'épaisseur ; choisir un traitement thermique et régler une trempe étagée ; expliquer cœur blanc et cœur noir ; choisir une fonte contre l'usure, la corrosion ou la chaleur ; choisir une nuance d'après un cahier des charges</b></div>
+    </div>
+  </div>
+  <p class="lede">Une pièce en fonte porte souvent sa nuance coulée en relief : EN-GJS-400-15, EN-GJL-250, GGG-40, FGL 250… Derrière ces lettres et ces chiffres, il y a une forme de graphite, une matrice, une résistance garantie, parfois un traitement thermique ou un alliage au nickel ou au chrome. Ce cours apprend à lire ces désignations, puis fait le tour de la famille : les fontes à graphite lamellaire, vermiculaire et sphéroïdal, les fontes ausferritiques, les malléables, les fontes blanches résistantes à l'usure et les fontes austénitiques. Pour le soudeur, c'est la première question d'une réparation : avant de choisir une électrode, savoir ce que l'on soude.</p>
+
+  <h4>Le code couleur de la série</h4>
+  <div class="cc" role="img" aria-label="Code couleur : les causes en rouge et violet, les paramètres en vert, les effets en bleu et bleu-vert">
+    <div class="cc-box cc-cause"><small>Les causes</small><div class="cc-syms"><span class="sig">T</span><span class="sig">t</span><span class="sig">σ</span><span class="tau">Fe₃C</span><span class="tau">M₇C₃</span></div><p><span class="sig">rouge</span> : ce qui chauffe, refroidit ou use (températures et durées de traitement, abrasifs, contraintes) ; <span class="tau">violet</span> : les ennemis (cémentite et carbures, martensite non voulue, corrosion, fragilité)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-link"><small>Les paramètres</small><div class="cc-syms"><span class="mat">e</span><span class="mat">Ni</span><span class="mat">Cr</span><span class="mat">Si</span><span class="mat">f<sub>c</sub></span></div><p>en <span class="mat">vert</span> : les choix (épaisseur e, composition, fraction de carbures f<sub>c</sub>, nuance visée, cahier des charges)</p></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-box cc-eff"><small>Les effets</small><div class="cc-syms"><span class="eps">R<sub>m</sub></span><span class="eps">A</span><span class="eps">HB</span><span class="gam">γ</span><span class="gam">α</span></div><p><span class="eps">bleu</span> : ce qu'on mesure (R<sub>m</sub>, R<sub>p0,2</sub>, A, dureté, usure) ; <span class="gam">bleu-vert</span> : la structure obtenue (graphite, ferrite α, perlite, austénite γ, ausferrite)</p></div>
+  </div>
+  <div class="cc-more">
+    <div><b class="frc">Orange</b> : les actions et les forces (trempe, recuit, abrasif qui raye, coulée).</div>
+    <div><b>Noir</b> : la géométrie dessinée (parois, coupes, cotes).</div>
+    <div><b class="wcol">Bronze</b> : les encadrés « métier » 🔥 et, dans les désignations, les exigences supplémentaires.</div>
+  </div>
+</div>
+</header>
+
+<nav class="toc" aria-label="Sommaire">
+  <div class="toc-in">
+    <a href="#avant">Avant de commencer</a>
+    <a href="#c1">1 Désignations</a>
+    <a href="#c2">2 GL, GV, GS</a>
+    <a href="#c3">3 Traitements, ADI</a>
+    <a href="#c4">4 Malléables</a>
+    <a href="#c5">5 Blanches et alliées</a>
+    <a href="#c6">6 Corrosion et choix</a>
+    <a href="#exos">Exercices</a>
+    <a href="#quiz-s">Quiz</a>
+    <a href="#fiche">Fiche mémoire</a>
+    <a href="#gloss">Glossaire</a>
+    <a href="#check">Check-list</a>
+  </div>
+</nav>
+
+<main>
+<section class="chap" id="avant">
+<div class="wrap">
+  <h3 style="margin-top:0">Avant de commencer</h3>
+  <h4>Le cours 1 en trois cases</h4>
+  <div class="recall">
+    <div><div class="f"><span class="mat">CE</span> = C + (Si + P)/3</div>Le carbone équivalent place la fonte sur le diagramme. Lent, silicium, inoculation : le carbone devient graphite (fonte grise) ; rapide : il devient cémentite (fonte blanche).</div>
+    <div><div class="f">I · III · V-VI</div>Lamelles (GL), vermicules (GV), sphéroïdes (GS) : c'est le magnésium résiduel, 0,03 à 0,05 % pour une GS, qui arrondit le graphite.</div>
+    <div><div class="f"><span class="eps">K<sub>t</sub></span> ≈ 41 contre ≈ 2</div>La lamelle entaille la matrice, le sphéroïde non ; la matrice, ferritique ou perlitique, fixe ensuite résistance et ductilité.</div>
+  </div>
+
+  <div class="def"><b>📘 Correspondance avec le planning et le référentiel</b>. Ce cours poursuit le sujet <b>2.17 « Fontes »</b> du planning de la formation :
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Chapitre du cours</th><th>Ce qu'il apporte à l'IWE</th></tr>
+      <tr><td>1 Lire une désignation</td><td>désignations symbolique et numérique de l'EN 1560 ; autres notations courantes</td></tr>
+      <tr><td>2 GL, GV, GS</td><td>nuances normalisées, propriétés, influence de l'épaisseur</td></tr>
+      <tr><td>3 Traiter une fonte</td><td>recuits, normalisation, trempe et revenu, trempe étagée et fontes ausferritiques (ADI)</td></tr>
+      <tr><td>4 Les malléables</td><td>fontes à cœur blanc et à cœur noir, recuits de décarburation et de graphitisation</td></tr>
+      <tr><td>5 Blanches et alliées</td><td>fontes résistantes à l'abrasion, austénitiques, au silicium, au silicium-molybdène</td></tr>
+      <tr><td>6 Corrosion et choix</td><td>corrosion graphitique, choix d'une nuance d'après un cahier des charges, aperçu de la soudabilité</td></tr>
+    </table></div>
+    Dans le référentiel de l'IIW (<i>International Institute of Welding</i>), le module 2.17 « <i>Cast irons and steels</i> » demande à l'IWE (<i>International Welding Engineer</i>) de classer les différents types de fontes, de comparer leurs principales nuances et propriétés, et d'identifier les conditions de traitement thermique selon les nuances. La soudabilité détaillée est l'objet des cours 3 et 4.
+  </div>
+
+  <div class="def"><b>📖 Les normes, sources et sigles de ce cours</b>.
+    <ul>
+      <li><b>EN 1560</b> : désignation des fontes ; <b>EN 1561</b> : fontes à graphite lamellaire ; <b>EN 16079</b> : fontes à graphite vermiculaire ; <b>EN 1563</b> : fontes à graphite sphéroïdal ; <b>EN 1564</b> : fontes ausferritiques à graphite sphéroïdal ; <b>EN 1562</b> : fontes malléables ; <b>EN 12513</b> : fontes résistantes à l'abrasion ; <b>EN 13835</b> : fontes austénitiques ; <b>EN 16124</b> : fontes à graphite sphéroïdal ferritiques faiblement alliées, pour la tenue à chaud ; <b>EN 545</b> : tuyaux en fonte ductile pour l'eau.</li>
+      <li>Normes internationales voisines : <b>ISO 185</b> (GL), <b>ISO 1083</b> (GS), <b>ISO 16112</b> (GV), <b>ISO 5922</b> (malléables), <b>ISO 17804</b> (ADI), <b>ISO 2892</b> (austénitiques), <b>ISO 21988</b> (résistantes à l'abrasion). Américaines : <b>ASTM A48</b> (GL), <b>ASTM A536</b> (GS).</li>
+      <li><b>GL, GV, GS</b> : fonte à graphite lamellaire, vermiculaire, sphéroïdal ; <b>ADI</b> : fonte GS ausferritique (<i>austempered ductile iron</i>) ; <b>R<sub>m</sub>, R<sub>p0,2</sub>, A</b> : résistance à la traction, limite d'élasticité conventionnelle à 0,2 %, allongement après rupture ; <b>HB, HV, HRC</b> : duretés Brinell, Vickers, Rockwell C ; <b>KV</b> : énergie de rupture Charpy ; <b>RT, LT</b> : résilience garantie à température ambiante (<i>room temperature</i>) ou basse (<i>low temperature</i>) ; <b>γ, α</b> : austénite, ferrite.</li>
+    </ul>
+    Les valeurs de nuances sont des minimums normalisés sur éprouvettes ; les modèles des manipulations 3 à 5 sont pédagogiques et donnent des ordres de grandeur.
+  </div>
+
+  <div class="weld"><b>🔥 Pourquoi ce cours compte en soudage</b>
+    <p>Une réparation sur fonte commence par une identification. La désignation dit presque tout ce dont le soudeur a besoin : la forme du graphite (une GL fissure plus volontiers qu'une GS), la matrice, la résistance à atteindre, un éventuel traitement thermique qu'une soudure détruirait (une fonte ausferritique ne se répare pas comme une GS ordinaire), un alliage au nickel qui change le choix du métal d'apport, ou une fonte blanche qu'il vaut mieux ne pas souder du tout. La norme prévoit même une lettre pour les nuances destinées au soudage.</p>
+  </div>
+
+  <h4>La série en quatre cours</h4>
+  <div class="series">
+    <div><b>1 Graphite ou cémentite</b>Ce qu'est une fonte, diagrammes stable et métastable, grise ou blanche, formes du graphite, matrice, propriétés.</div>
+    <div class="here"><b>2 La famille des fontes</b>Désignations EN 1560, nuances GL, GV, GS, ADI, malléables, blanches et alliées, traitements thermiques, corrosion.</div>
+    <div><b>3 Souder une fonte : le joint</b>Soudabilité, zones de la soudure, dilution, régimes chaud et froid, préchauffage, refroidissement.</div>
+    <div><b>4 Souder une fonte : la pratique</b>Procédés et produits d'apport, beurrage, préparation et réparation, qualification, aciers moulés.</div>
+  </div>
+
+  <h4>Le plan du cours</h4>
+  <ol class="route">
+    <li><span class="dot">1</span><b>Lire une désignation</b><p>La plaque d'immatriculation d'une fonte, case par case.</p></li>
+    <li><span class="dot">2</span><b>GL, GV, GS : les fontes à graphite</b><p>Les nuances normalisées, et pourquoi l'épaisseur change la résistance.</p></li>
+    <li><span class="dot">3</span><b>Traiter une fonte</b><p>Recuits, normalisation, trempe et revenu, et la fenêtre de l'ausferrite.</p></li>
+    <li><span class="dot">4</span><b>Les fontes malléables</b><p>Une fonte blanche adoucie : en lui retirant son carbone, ou en le transformant en graphite.</p></li>
+    <li><span class="dot">5</span><b>Les fontes blanches et alliées</b><p>Contre l'usure, la corrosion et la chaleur : carbures, nickel, silicium.</p></li>
+    <li><span class="dot">6</span><b>Corrosion et choix d'une fonte</b><p>Le tuyau fantôme, et la carte des nuances pour choisir.</p></li>
+  </ol>
+</div>
+</section>
+
+<section class="chap" id="c1">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">1</div>
+    <div class="c-title"><h2>Lire une désignation</h2><p>La plaque d'immatriculation d'une fonte, case par case</p></div>
+    <div class="c-img"><span class="ico">🪪</span><span><small>Image à retenir</small>La plaque d'immatriculation : chaque case a sa place, chaque lettre son sens</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">la plaque d'immatriculation</span></div>
+    <p>Une plaque d'immatriculation se lit toujours dans le même ordre, et chaque case dit quelque chose. La désignation européenne des fontes, fixée par l'<b>EN 1560</b>, fonctionne pareil, avec au plus six cases :</p>
+    <ol>
+      <li><b>EN-</b> : c'est une désignation européenne ;</li>
+      <li><b>GJ</b> : G pour pièce moulée, J pour fonte (de l'anglais <i>iron</i>) ;</li>
+      <li>une lettre pour la <b>forme du graphite</b> : <span class="gam">L</span> lamellaire, <span class="gam">S</span> sphéroïdal, <span class="gam">V</span> vermiculaire, <span class="gam">M</span> graphite de recuit des malléables, <span class="gam">N</span> sans graphite (fonte blanche) ;</li>
+      <li>parfois une lettre pour la <b>structure</b> : <span class="gam">A</span> austénite, <span class="gam">W</span> cœur blanc, <span class="gam">B</span> cœur noir… ;</li>
+      <li>les <b>propriétés</b> garanties, le plus souvent la résistance minimale R<sub>m</sub> en MPa et l'allongement minimal A en %, ou bien la <b>composition</b> pour les fontes fortement alliées ;</li>
+      <li>parfois des <b>exigences supplémentaires</b>, comme la lettre W qui signale une nuance destinée au soudage.</li>
+    </ol>
+    <p>Ainsi <b>EN-GJS-400-15</b> se lit : fonte à graphite sphéroïdal, au moins 400 MPa et 15 % d'allongement. <b>EN-GJL-250</b> : fonte à graphite lamellaire d'au moins 250 MPa. <b>EN-GJSA-XNiCr20-2</b> : fonte à graphite sphéroïdal, à matrice austénitique, fortement alliée à 20 % de nickel et 2 % de chrome.</p>
+    <p>Chaque nuance normalisée a aussi un <b>numéro</b>, plus court, utile dans les bases de données : EN-GJL-250 s'écrit EN-JL1040, EN-GJS-400-15 s'écrit EN-JS1030.</p>
+    <p>Tu croiseras encore d'anciennes désignations nationales, toujours coulées sur des pièces en service : en France FGL 250 et FGS 400-15, en Allemagne GG-25 et GGG-40, aux États-Unis ASTM A48 classe 35 et ASTM A536 60-40-18.</p>
+  </div>
+
+  <div class="lab" id="m1">
+    <p class="lab-h">Manipulation 1 : le décodeur de désignations</p>
+    <p class="lab-sub">Choisis une désignation : elle se découpe en cases, chacune expliquée dessous (noir : préfixe et matériau ; bleu-vert : graphite et structure ; bleu : propriétés ; vert : composition ; bronze : exigences supplémentaires). Le curseur met une case en avant ; ▶ Lire pas à pas parcourt la désignation case par case. La désignation numérique est donnée quand elle est connue.</p>
+    <div class="btns" id="m1e">
+      <button class="btn on" data-k="0" type="button">EN-GJL-250</button>
+      <button class="btn" data-k="1" type="button">EN-GJL-HB195</button>
+      <button class="btn" data-k="2" type="button">EN-GJS-400-15</button>
+      <button class="btn" data-k="3" type="button">EN-GJS-400-18-LT</button>
+      <button class="btn" data-k="4" type="button">EN-GJS-500-7U</button>
+      <button class="btn" data-k="5" type="button">EN-GJS-500-14</button>
+      <button class="btn" data-k="6" type="button">EN-GJV-400</button>
+      <button class="btn" data-k="7" type="button">EN-GJMW-360-12</button>
+      <button class="btn" data-k="8" type="button">EN-GJMB-350-10</button>
+      <button class="btn" data-k="9" type="button">EN-GJS-800-10</button>
+      <button class="btn" data-k="10" type="button">EN-GJN-HV600</button>
+      <button class="btn" data-k="11" type="button">EN-GJSA-XNiCr20-2</button>
+    </div>
+    <div class="ctrl"><label for="m1s">Case lue</label><input type="range" id="m1s" class="r-mat" min="0" max="6" step="1" value="0"><output id="m1so"></output></div>
+    <div class="btns"><button class="btn play" id="m1play" type="button">▶ Lire pas à pas</button></div>
+    <svg id="m1svg" role="img" aria-label="Une désignation de fonte découpée en cases, avec le sens de chaque case"></svg>
+    <div class="readout" id="m1r"></div>
+    <p class="status" id="m1msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">EN 1560 : symboles, chiffres, pièges</span></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Case</th><th>Contenu</th><th>Symboles</th></tr>
+      <tr><td class="n">1</td><td>préfixe (obligatoire)</td><td>EN-</td></tr>
+      <tr><td class="n">2</td><td>matériau (obligatoire)</td><td>GJ : G pièce moulée, J fonte</td></tr>
+      <tr><td class="n">3</td><td>structure du graphite (obligatoire)</td><td>L lamellaire ; S sphéroïdal ; M graphite de recuit (malléables) ; V vermiculaire ; N sans graphite ; Y structure spéciale</td></tr>
+      <tr><td class="n">4</td><td>microstructure ou macrostructure (facultative)</td><td>A austénite ; F ferrite ; P perlite ; M martensite ; L lédéburite ; R ausferrite ; Q trempé ; T trempé et revenu ; B cœur noir ; W cœur blanc</td></tr>
+      <tr><td class="n">5 a</td><td>propriétés mécaniques</td><td>R<sub>m</sub> minimale en MPa ; puis « - » et l'allongement minimal A en % ; éventuellement la lettre de l'échantillon (S coulé à part, U attenant à la pièce, C prélevé dans la pièce) ; « -RT » ou « -LT » pour une résilience garantie à l'ambiante ou à basse température ; ou une dureté : HB, HV ou HR suivi de la valeur</td></tr>
+      <tr><td class="n">5 b</td><td>composition chimique</td><td>X pour une fonte fortement alliée ; la teneur en carbone × 100 si elle est significative ; les symboles des éléments d'alliage, puis leurs teneurs séparées par des tirets</td></tr>
+      <tr><td class="n">6</td><td>exigences supplémentaires (facultative)</td><td>D brut de fonderie ; H traité thermiquement ; W soudabilité pour assemblages ; Z exigence complémentaire de la commande</td></tr>
+    </table></div>
+    <p><b>La désignation numérique</b> suit le principe des numéros d'aciers : EN-J, la lettre du graphite, puis quatre chiffres. Le premier dit la caractéristique principale (1 traction, 2 dureté, 3 composition chimique), les deux suivants numérotent la nuance dans la norme, le dernier code une exigence particulière (0 aucune, 4 résilience à l'ambiante, 5 résilience à basse température ; d'autres chiffres codent par exemple le type d'échantillon).</p>
+    <div class="fx"><div class="row"><div class="big">EN-GJS-400-18-LT</div><div class="big">=</div><div class="big">EN-J<span class="gam">S</span>1<span class="mat">02</span><span class="wcol">5</span></div></div><p class="cap">S : graphite sphéroïdal ; 1 : nuance définie par la traction ; 02 : numéro d'ordre ; 5 : résilience garantie à basse température (−20 °C pour cette nuance). De même EN-GJL-250 = EN-JL1040, EN-GJS-400-15 = EN-JS1030, EN-GJS-500-7 = EN-JS1050, EN-GJMW-360-12 = EN-JM1020.</p></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>EN 1560</th><th>Ancienne française</th><th>Ancienne allemande</th><th>Américaine voisine</th></tr>
+      <tr><td>EN-GJL-250</td><td>FGL 250</td><td>GG-25</td><td>ASTM A48 classe 35 (241 MPa)</td></tr>
+      <tr><td>EN-GJS-400-15</td><td>FGS 400-15</td><td>GGG-40</td><td>ASTM A536 60-40-18 (414 MPa, 276 MPa, 18 %)</td></tr>
+      <tr><td>EN-GJS-700-2</td><td>FGS 700-2</td><td>GGG-70</td><td>ASTM A536 100-70-03</td></tr>
+      <tr><td>EN-GJMB-350-10</td><td>—</td><td>GTS-35-10</td><td>—</td></tr>
+    </table></div>
+    <p>Les classes ASTM sont en ksi (kilolivres par pouce carré) : 1 ksi ≈ 6,895 MPa. Les correspondances sont approximatives : les essais et les éprouvettes diffèrent d'une norme à l'autre. Les normes ISO utilisent leur propre écriture, par exemple ISO 1083/JS/400-15.</p>
+    <div class="def"><b>📖 Nuance</b> : variété normalisée d'un matériau, définie par des exigences (propriétés ou composition). <b>Échantillon coulé à part, attenant, prélevé</b> : éprouvette coulée dans un moule séparé, coulée accrochée à la pièce, ou découpée dans la pièce elle-même ; les deux dernières représentent mieux la paroi réelle.</div>
+    <div class="warn"><b>⚠️ Piège : le nombre est un minimum, pas une valeur typique.</b> EN-GJS-400-15 garantit au moins 400 MPa et 15 %, pas 400 MPa exactement. Pour les GL, l'EN 1561 encadre même la résistance de l'éprouvette entre n et n + 100 MPa : une EN-GJL-250 donne 250 à 350 MPa. Et 400 n'est jamais une dureté : une dureté s'écrit HB, HV ou HR devant la valeur, comme dans EN-GJL-HB195.</div>
+    <div class="tip">💡 <b>Le « A » qui change tout.</b> Dans EN-GJS<b>A</b>-XNiCr20-2, la lettre A en case 4 annonce une matrice austénitique : un alliage au nickel, amagnétique, qui se soude avec des apports à base de nickel. Une lettre facultative peut donc peser lourd dans une réparation.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « Qui, quoi, quelle forme, quelle structure, combien, et les extras »</b> : EN, GJ, graphite, structure, propriétés ou composition, exigences supplémentaires.</div>
+    <div class="weld"><b>🔥 Trouver la nuance d'une pièce</b>
+      <p>Sur une pièce à réparer, cherche la désignation coulée en relief, la référence du plan ou le certificat de contrôle du fondeur. À défaut, identifie la famille par la cassure, la dureté, une micrographie sur une petite zone polie ou une analyse chimique. Une désignation avec W en case 6 désigne une nuance dont le fondeur garantit l'aptitude au soudage d'assemblage.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c2">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">2</div>
+    <div class="c-title"><h2>GL, GV, GS : les fontes à graphite</h2><p>Les nuances normalisées, et pourquoi l'épaisseur change la résistance</p></div>
+    <div class="c-img"><span class="ico">🍰</span><span><small>Image à retenir</small>Le gâteau : les bords minces cuisent vite et durcissent, le cœur épais reste tendre ; la fonte aussi</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le gâteau</span></div>
+    <p>Un gâteau cuit vite sur les bords et lentement au cœur. Une pièce en fonte se solidifie de même : vite dans les parois minces, lentement dans les parties massives. Or la vitesse de refroidissement fixe la finesse du graphite et de la matrice (cours 1). Conséquence : <b>la résistance d'une même fonte dépend de l'épaisseur de la paroi</b>. Plus mince, elle résiste davantage, jusqu'au risque de trempe ; plus épaisse, elle résiste moins.</p>
+    <ul>
+      <li>Les <b>fontes GL</b> (EN 1561) se commandent par leur résistance, de EN-GJL-100 à EN-GJL-350, ou par leur dureté. Bon marché, faciles à couler et à usiner, amortissantes : bâtis, carters, blocs moteurs, disques de frein, corps de pompe. Elles sont très sensibles à l'épaisseur.</li>
+      <li>Les <b>fontes GS</b> (EN 1563) vont de nuances ferritiques ductiles (EN-GJS-350-22, 400-15) à des nuances perlitiques résistantes (700-2, 800-2). Certaines garantissent une résilience à basse température (suffixe LT), d'autres sont durcies par du silicium en solution dans la ferrite (450-18, 500-14, 600-10). Elles sont moins sensibles à l'épaisseur, mais leurs garanties baissent dans les fortes épaisseurs.</li>
+      <li>Les <b>fontes GV</b> (EN 16079), de EN-GJV-300 à 450 environ, se placent entre les deux : la conductivité thermique d'une GL et une résistance proche d'une GS. Elles servent pour les blocs et culasses de moteurs diesel très chargés.</li>
+    </ul>
+  </div>
+
+  <div class="lab" id="m2">
+    <p class="lab-h">Manipulation 2 : l'épaisseur qui change tout</p>
+    <p class="lab-sub">Choisis la famille, puis règle l'épaisseur de paroi e (échelle logarithmique). Pour les GL : la résistance attendue dans une pièce simple d'épaisseur uniforme, valeurs indicatives de l'EN 1561 pour les nuances 200 et 250. Pour les GS : les minimums garantis de l'EN 1563 par classe d'épaisseur, pour trois nuances (lectures : R<sub>m</sub>/R<sub>p0,2</sub> en MPa, puis A). ▶ Parcourir fait varier l'épaisseur de 2,5 à 200 mm.</p>
+    <div class="btns" id="m2f">
+      <button class="btn on" data-k="GL" type="button">Fontes GL (EN 1561)</button>
+      <button class="btn" data-k="GS" type="button">Fontes GS (EN 1563)</button>
+    </div>
+    <div class="ctrl"><label for="m2e">Épaisseur <span class="mat">e</span></label><input type="range" id="m2e" class="r-mat" min="0.4" max="2.3" step="0.01" value="1.18"><output id="m2eo"></output></div>
+    <div class="btns"><button class="btn play" id="m2play" type="button">▶ Parcourir les épaisseurs</button></div>
+    <svg id="m2svg" role="img" aria-label="Résistance à la traction des fontes en fonction de l'épaisseur de paroi"></svg>
+    <div class="readout" id="m2r"></div>
+    <p class="status" id="m2msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">EN 1561, EN 1563, EN 16079 et l'effet d'épaisseur</span></div>
+    <p><b>Les fontes GL (EN 1561).</b> Six nuances par la résistance, EN-GJL-100, 150, 200, 250, 300 et 350, mesurée sur une éprouvette coulée à part de 30 mm de diamètre, représentative d'une paroi d'environ 15 mm ; la valeur doit se situer entre n et n + 100 MPa. Six nuances par la dureté Brinell, de EN-GJL-HB155 à EN-GJL-HB255, utiles quand l'usinabilité ou l'usure comptent plus que la résistance. L'allongement n'est pas garanti : il reste inférieur à 1 %.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Épaisseur de paroi (mm)</th><th>EN-GJL-200 : R<sub>m</sub> attendue (MPa)</th><th>EN-GJL-250 : R<sub>m</sub> attendue (MPa)</th></tr>
+      <tr><td class="n">2,5 à 5</td><td class="n">230</td><td class="n">—</td></tr>
+      <tr><td class="n">5 à 10</td><td class="n">205</td><td class="n">250</td></tr>
+      <tr><td class="n">10 à 20</td><td class="n">180</td><td class="n">225</td></tr>
+      <tr><td class="n">20 à 40</td><td class="n">155</td><td class="n">195</td></tr>
+      <tr><td class="n">40 à 80</td><td class="n">130</td><td class="n">170</td></tr>
+      <tr><td class="n">80 à 150</td><td class="n">115</td><td class="n">155</td></tr>
+    </table></div>
+    <p>Valeurs indicatives de l'EN 1561 pour une pièce de forme simple et d'épaisseur uniforme : elles ne sont pas des exigences. Entre 5 et 80 mm, la résistance d'une GL perd environ 35 % ; une paroi de 50 mm en EN-GJL-250 n'offre qu'environ 170 MPa.</p>
+    <p><b>Les fontes GS (EN 1563)</b>, minimums sur éprouvettes coulées à part, pour une épaisseur relevante jusqu'à 30 mm :</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Nuance</th><th>R<sub>m</sub> min (MPa)</th><th>R<sub>p0,2</sub> min (MPa)</th><th>A min (%)</th><th>Matrice dominante</th></tr>
+      <tr><td>EN-GJS-350-22-LT</td><td class="n">350</td><td class="n">220</td><td class="n">22</td><td>ferrite ; résilience garantie à −40 °C</td></tr>
+      <tr><td>EN-GJS-400-18-LT</td><td class="n">400</td><td class="n">240</td><td class="n">18</td><td>ferrite ; résilience garantie à −20 °C</td></tr>
+      <tr><td>EN-GJS-400-15</td><td class="n">400</td><td class="n">250</td><td class="n">15</td><td>ferrite</td></tr>
+      <tr><td>EN-GJS-450-10</td><td class="n">450</td><td class="n">310</td><td class="n">10</td><td>ferrite</td></tr>
+      <tr><td>EN-GJS-500-7</td><td class="n">500</td><td class="n">320</td><td class="n">7</td><td>ferrite et perlite</td></tr>
+      <tr><td>EN-GJS-600-3</td><td class="n">600</td><td class="n">370</td><td class="n">3</td><td>perlite et ferrite</td></tr>
+      <tr><td>EN-GJS-700-2</td><td class="n">700</td><td class="n">420</td><td class="n">2</td><td>perlite</td></tr>
+      <tr><td>EN-GJS-800-2, 900-2</td><td class="n">800, 900</td><td class="n">480, 600</td><td class="n">2</td><td>perlite ou structure trempée et revenue</td></tr>
+      <tr><td>EN-GJS-450-18, 500-14, 600-10</td><td class="n">450, 500, 600</td><td class="n">350, 400, 470</td><td class="n">18, 14, 10</td><td>ferrite durcie par le silicium en solution</td></tr>
+    </table></div>
+    <p>Au-delà de 30 mm, les minimums baissent : pour EN-GJS-500-7, R<sub>m</sub> ≥ 450 MPa entre 30 et 60 mm, et 420 MPa avec A ≥ 5 % entre 60 et 200 mm. Les nuances au silicium (3 à 4,3 % environ) ont une ferrite plus dure et plus homogène : à résistance égale, plus d'allongement et une dureté régulière, appréciée à l'usinage.</p>
+    <p><b>Les fontes GV (EN 16079)</b> : par exemple EN-GJV-400, R<sub>m</sub> ≥ 400 MPa, R<sub>p0,2</sub> ≥ 280 MPa, A ≥ 1 % ; EN-GJV-450 : 450, 315 et 1 %.</p>
+    <div class="def"><b>📖 Épaisseur relevante</b> : épaisseur de paroi qui détermine la vitesse de refroidissement de la zone considérée, et donc ses propriétés. <b>Sensibilité à l'épaisseur</b> : variation des propriétés d'une même fonte avec l'épaisseur de la pièce.</div>
+    <div class="warn"><b>⚠️ Piège : la nuance n'est garantie que sur l'éprouvette.</b> EN-GJL-250 garantit 250 MPa sur une éprouvette de 30 mm, pas dans une paroi de 60 mm. Pour un calcul de pièce, on part des valeurs attendues à l'épaisseur réelle, ou l'on commande un échantillon attenant (lettre U) ou prélevé (lettre C).</div>
+    <div class="tip">💡 <b>Mince et sûr ?</b> Pour une GL, une paroi trop mince n'est pas plus sûre : sous quelques millimètres, elle risque la trempe (cours 1) et devient dure et fragile. L'EN 1561 ne donne d'ailleurs pas de valeur pour l'EN-GJL-250 sous 5 mm.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « GL Lâche quand ça s'épaissit, GS Stable »</b> : la GL perd beaucoup avec l'épaisseur, la GS beaucoup moins.</div>
+    <div class="weld"><b>🔥 Épaisseur et soudage</b>
+      <p>L'épaisseur pèse deux fois en réparation : une paroi massive de GL est moins résistante, mais elle pompe la chaleur et refroidit vite la soudure ; une paroi mince chauffe vite et peut tremper en zone fondue partielle. Le préchauffage et l'énergie de soudage se choisissent donc aussi d'après l'épaisseur (cours 3).</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c3">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">3</div>
+    <div class="c-title"><h2>Traiter une fonte</h2><p>Recuits, normalisation, trempe et revenu, et la fenêtre de l'ausferrite</p></div>
+    <div class="c-img"><span class="ico">🥚</span><span><small>Image à retenir</small>L'œuf mollet : trop peu de temps, il coule ; trop longtemps, il devient caoutchouteux ; entre les deux, parfait</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">l'œuf mollet</span></div>
+    <p>Un traitement thermique change la <b>matrice</b> d'une fonte, presque jamais la forme de son graphite. Le graphite sert même de réservoir : quand on chauffe dans le domaine de l'austénite, du carbone en sort et s'y dissout ; quand on refroidit lentement, il y retourne. Les grands traitements :</p>
+    <ul>
+      <li><b>le détensionnement</b>, vers 500 à 600 °C : il relâche les contraintes de fonderie ou de soudage sans changer la structure ;</li>
+      <li><b>le recuit de graphitisation</b>, vers 900 à 950 °C : il décompose la cémentite des zones trempées ;</li>
+      <li><b>le recuit de ferritisation</b> : la perlite se décompose en ferrite et graphite ; la fonte devient douce et ductile ;</li>
+      <li><b>la normalisation</b>, chauffage vers 870 à 950 °C puis refroidissement à l'air : une perlite fine, plus résistante ;</li>
+      <li><b>la trempe et le revenu</b>, ou une <b>trempe superficielle</b> par induction ou au chalumeau, pour les pièces d'usure ;</li>
+      <li><b>la trempe étagée</b> d'une fonte GS, qui donne les fontes <b>ADI</b> (EN 1564), deux fois plus résistantes qu'une GS ordinaire à allongement égal.</li>
+    </ul>
+    <p>La trempe étagée est un œuf mollet. On chauffe la pièce vers 850 à 950 °C, on la plonge dans un bain de sels vers 230 à 400 °C, et on l'y laisse le temps juste. De fines aiguilles de ferrite poussent dans l'austénite, qui se charge du carbone qu'elles rejettent et devient stable : c'est l'<b>ausferrite</b>. Trop court, l'austénite pas encore stabilisée devient martensite au refroidissement : dur et fragile. Trop long, des carbures précipitent : la ductilité s'effondre. Entre les deux, une <b>fenêtre</b>, d'autant plus étroite que le bain est chaud.</p>
+  </div>
+
+  <div class="lab" id="m3">
+    <p class="lab-h">Manipulation 3 : la fenêtre de l'ausferrite</p>
+    <p class="lab-sub">Une fonte GS austénitisée à 900 °C est plongée dans un bain de sels. Règle la température du bain T<sub>A</sub> et la durée de maintien t (échelle logarithmique). À gauche, la carte temps-température : la fenêtre (bleu-vert) entre la fin de la première réaction et le début de la précipitation des carbures ; à droite, la structure obtenue. Les boutons rejouent des cas types ; ▶ Maintenir fait défiler le temps. Modèle pédagogique.</p>
+    <div class="btns" id="m3p">
+      <button class="btn" data-k="800" type="button">Viser EN-GJS-800-10</button>
+      <button class="btn on" data-k="1050" type="button">Viser EN-GJS-1050-6</button>
+      <button class="btn" data-k="1400" type="button">Viser EN-GJS-1400-1</button>
+      <button class="btn" data-k="court" type="button">Trop court</button>
+      <button class="btn" data-k="long" type="button">Trop long</button>
+    </div>
+    <div class="ctrl"><label for="m3T">Bain <span class="sig">T<sub>A</sub></span></label><input type="range" id="m3T" class="r-sig" min="230" max="400" step="5" value="335"><output id="m3To"></output></div>
+    <div class="ctrl"><label for="m3t">Durée <span class="sig">t</span></label><input type="range" id="m3t" class="r-sig" min="0" max="3.2" step="0.01" value="2.08"><output id="m3to"></output></div>
+    <div class="btns"><button class="btn play" id="m3play" type="button">▶ Maintenir dans le bain</button></div>
+    <svg id="m3svg" role="img" aria-label="Carte temps-température de la trempe étagée avec la fenêtre de l'ausferrite, et la structure obtenue"></svg>
+    <div class="readout" id="m3r"></div>
+    <p class="status" id="m3msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">cycles, ausferrite, EN 1564</span></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Traitement</th><th>Cycle typique</th><th>Résultat</th></tr>
+      <tr><td>Détensionnement</td><td>≈ 500 à 600 °C, quelques heures, refroidissement lent au four</td><td>contraintes relâchées, structure inchangée</td></tr>
+      <tr><td>Recuit de graphitisation</td><td>≈ 900 à 950 °C, puis refroidissement lent</td><td>cémentite décomposée : plus de zones trempées</td></tr>
+      <tr><td>Recuit de ferritisation</td><td>maintien sous-critique vers 700 à 740 °C, ou austénitisation puis refroidissement très lent dans le domaine critique</td><td>matrice ferritique : GS-400-15 ou 400-18</td></tr>
+      <tr><td>Normalisation</td><td>≈ 870 à 950 °C, refroidissement à l'air (ou à l'air soufflé)</td><td>perlite fine : GS-600-3, 700-2</td></tr>
+      <tr><td>Trempe et revenu</td><td>≈ 850 à 900 °C, trempe à l'huile, revenu ≈ 500 à 650 °C</td><td>martensite revenue : GS-800-2, 900-2</td></tr>
+      <tr><td>Trempe superficielle</td><td>chauffage rapide de la surface par induction ou au chalumeau, puis trempe</td><td>peau martensitique dure, cœur inchangé</td></tr>
+      <tr><td>Trempe étagée (austempering)</td><td>≈ 850 à 950 °C, puis bain ≈ 230 à 400 °C pendant ≈ 0,5 à 4 h, puis air</td><td>ausferrite : fontes ADI de l'EN 1564</td></tr>
+    </table></div>
+    <p><b>Les deux réactions de la trempe étagée.</b> À la température d'austénitisation, l'austénite contient environ 0,7 à 1 % de carbone, fourni par le graphite. Dans le bain :</p>
+    <ul>
+      <li><b>réaction I</b> : γ → α (aiguilles) + γ enrichie, à environ 1,8 à 2,2 % de carbone. Si chargée en carbone, cette austénite reste stable jusqu'à l'ambiante : c'est l'ausferrite ;</li>
+      <li><b>réaction II</b> : γ enrichie → α + carbures. C'est la bainite classique, plus fragile : à éviter.</li>
+    </ul>
+    <p>La fenêtre de traitement s'étend de la fin de la réaction I (t₁) au début de la réaction II (t₂). Le modèle de la manipulation 3 la décrit par :</p>
+    <div class="fx"><div class="row"><div class="big"><span class="sig">t₁</span> ≈ 30·e<sup>0,012·(370 − T<sub>A</sub>)</sup></div><div class="big"><span class="sig">t₂</span> ≈ 240·e<sup>0,025·(370 − T<sub>A</sub>)</sup></div></div><p class="cap">t₁, t₂ en minutes, T<sub>A</sub> en °C ; e : base des exponentielles (≈ 2,718). À 370 °C : fenêtre de 30 min à 4 h ; à 400 °C : de 21 min à 1,9 h seulement ; à 250 °C : de 2,1 h à 80 h.</p></div>
+    <p>Dans la fenêtre, la température du bain fixe la finesse de l'ausferrite et donc la nuance : chaud (350 à 400 °C), une ausferrite grossière riche en austénite, ductile ; froid (230 à 300 °C), une ausferrite fine, résistante et dure. Le modèle prend R<sub>m</sub> ≈ 1 450 − 4·(T<sub>A</sub> − 250) MPa, et un allongement qui décroît avec la résistance, d'environ 11 % à 850 MPa jusqu'à 2 % à 1 450 MPa, en passant au-dessus des minimums de chaque nuance.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Nuance EN 1564</th><th>R<sub>m</sub> min (MPa)</th><th>A min (%)</th><th>Bain dans le modèle</th></tr>
+      <tr><td>EN-GJS-800-10</td><td class="n">800</td><td class="n">10</td><td>≈ 390 à 400 °C</td></tr>
+      <tr><td>EN-GJS-900-8</td><td class="n">900</td><td class="n">8</td><td>≈ 355 à 385 °C</td></tr>
+      <tr><td>EN-GJS-1050-6</td><td class="n">1 050</td><td class="n">6</td><td>≈ 315 à 350 °C</td></tr>
+      <tr><td>EN-GJS-1200-3</td><td class="n">1 200</td><td class="n">3</td><td>≈ 265 à 310 °C</td></tr>
+      <tr><td>EN-GJS-1400-1</td><td class="n">1 400</td><td class="n">1</td><td>≈ 230 à 260 °C</td></tr>
+    </table></div>
+    <p>Pour les pièces épaisses, la trempe dans le bain doit éviter la perlite au cœur : on ajoute du nickel, du molybdène ou du cuivre pour augmenter la trempabilité. Sous charge, l'austénite enrichie peut se transformer localement en martensite : la surface d'une ADI durcit en service, ce qui lui donne une bonne tenue à l'usure, mais complique l'usinage après traitement.</p>
+    <div class="def"><b>📖 Ausferrite</b> : structure de ferrite aciculaire (en aiguilles) et d'austénite stabilisée par le carbone, sans carbures. <b>Trempe étagée</b> (<i>austempering</i>) : trempe interrompue dans un bain chaud, suivie d'un maintien isotherme.</div>
+    <div class="warn"><b>⚠️ Piège : une ADI ne se soude pas comme une GS.</b> Le cycle thermique de la soudure détruit l'ausferrite dans la zone affectée : martensite, carbures, perte de ductilité. Une pièce ADI ne se répare pas par soudage, sauf à refaire tout le traitement après coup ; on soude, si besoin, avant la trempe étagée.</div>
+    <div class="tip">💡 <b>Graphite, réservoir de carbone.</b> Plus la température d'austénitisation est haute, plus l'austénite dissout de carbone venu du graphite : la trempe donne une martensite plus dure. C'est le même mécanisme qui fait durcir la zone affectée d'une soudure sur fonte.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « bain chaud, fonte douce ; bain froid, fonte dure »</b> ; et pour la durée : « ni cru, ni caoutchouc ».</div>
+    <div class="weld"><b>🔥 Les traitements après soudage</b>
+      <p>Les traitements après soudage des fontes sont ceux de ce chapitre : un détensionnement pour relâcher les contraintes de retrait, un recuit de ferritisation ou de graphitisation pour adoucir une zone affectée trempée ou une zone fondue blanchie. Leur choix dépend de la nuance et du métal d'apport, et ils se font souvent directement après le soudage, avant que la pièce refroidisse (cours 3).</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c4">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">4</div>
+    <div class="c-title"><h2>Les fontes malléables</h2><p>Une fonte blanche adoucie : en lui retirant son carbone, ou en le transformant en graphite</p></div>
+    <div class="c-img"><span class="ico">☯️</span><span><small>Image à retenir</small>Le yin et le yang : une même fonte blanche, deux recuits, un cœur blanc et un cœur noir</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le yin et le yang</span></div>
+    <p>Une fonte malléable commence sa vie en <b>fonte blanche</b> : des pièces minces, coulées avec peu de silicium pour que tout le carbone soit en cémentite. Dure et cassante, la pièce brute passe ensuite des jours au four. Deux recettes, deux résultats :</p>
+    <ul>
+      <li><b>à cœur blanc</b> (EN-GJMW, la tradition européenne) : on chauffe vers 950 à 1 050 °C dans une atmosphère qui oxyde le carbone. Le carbone diffuse vers la surface et s'en va en gaz : la pièce se <b>décarbure</b> de l'extérieur vers l'intérieur. Une paroi mince devient presque entièrement ferritique, ductile et même soudable ; une paroi épaisse garde un cœur plus riche en carbone. Le nom vient de la cassure, claire ;</li>
+      <li><b>à cœur noir</b> (EN-GJMB, la tradition américaine) : on chauffe vers 900 à 960 °C en atmosphère neutre. Le carbone reste dans la pièce, mais la cémentite se décompose en amas de <b>graphite de recuit</b> (forme IV), répartis dans toute l'épaisseur. Un refroidissement lent donne une matrice ferritique, un refroidissement plus rapide une matrice perlitique. Le graphite rend la cassure sombre.</li>
+    </ul>
+    <p>Ces fontes ont fait des millions de raccords de tuyauterie galvanisés, de maillons, de pièces de machines agricoles et d'automobiles. La fonte GS, obtenue directement à la coulée, les a remplacées dans beaucoup d'emplois, mais elles restent imbattables pour les petites pièces minces.</p>
+  </div>
+
+  <div class="lab" id="m4">
+    <p class="lab-h">Manipulation 4 : cœur blanc, cœur noir</p>
+    <p class="lab-sub">Une même paroi de fonte blanche, d'épaisseur e, recuite à la température T pendant la durée t. À gauche, le recuit décarburant (cœur blanc) : le front de décarburation avance depuis les deux faces. À droite, le recuit de graphitisation (cœur noir) : la cémentite se décompose en amas de graphite dans toute l'épaisseur. ▶ Recuire fait défiler 120 heures. Modèle pédagogique.</p>
+    <div class="ctrl"><label for="m4T">Recuit <span class="sig">T</span></label><input type="range" id="m4T" class="r-sig" min="900" max="1050" step="5" value="1000"><output id="m4To"></output></div>
+    <div class="ctrl"><label for="m4t">Durée <span class="sig">t</span></label><input type="range" id="m4t" class="r-sig" min="0" max="120" step="1" value="60"><output id="m4to"></output></div>
+    <div class="ctrl"><label for="m4e">Paroi <span class="mat">e</span></label><input type="range" id="m4e" class="r-mat" min="2" max="30" step="0.5" value="8"><output id="m4eo"></output></div>
+    <div class="btns"><button class="btn play" id="m4play" type="button">▶ Recuire 120 heures</button></div>
+    <svg id="m4svg" role="img" aria-label="Coupe d'une paroi recuite : décarburation pour le cœur blanc, graphitisation pour le cœur noir"></svg>
+    <div class="readout" id="m4r"></div>
+    <p class="status" id="m4msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">décarburation, graphitisation, EN 1562</span></div>
+    <p><b>Le cœur blanc : une décarburation.</b> L'atmosphère du four (gaz riche en CO₂ et en vapeur d'eau, ou minerai oxydant dans les procédés anciens) brûle le carbone en surface : C + CO₂ → 2 CO, C + H₂O → CO + H₂. Le carbone de l'intérieur diffuse dans l'austénite vers la surface, et la cémentite se dissout derrière lui. Un front de décarburation avance comme la racine du temps :</p>
+    <div class="fx"><div class="row"><div class="big"><span class="eps">x<sub>f</sub></span> ≈ <span class="mat">k</span>(<span class="sig">T</span>)·√<span class="sig">t</span></div><div class="big">cœur décarburé si 2·<span class="eps">x<sub>f</sub></span> ≥ <span class="mat">e</span></div></div><p class="cap">x<sub>f</sub> : profondeur du front depuis chaque face (mm) ; t : durée du recuit (h) ; k : constante du modèle, ≈ 0,39 mm/√h à 1 000 °C, ≈ 0,29 à 950 °C (elle suit la diffusion du carbone dans l'austénite). En 80 h à 1 000 °C, x<sub>f</sub> ≈ 3,5 mm : une paroi de 7 mm est décarburée à cœur.</p></div>
+    <p>C'est pourquoi le procédé à cœur blanc est réservé aux pièces minces, et pourquoi l'EN 1562 fixe les propriétés des nuances à cœur blanc selon le diamètre de l'éprouvette : la même fonte n'a pas les mêmes propriétés à 6 mm et à 15 mm.</p>
+    <p><b>Le cœur noir : une graphitisation.</b> Premier stade, vers 900 à 960 °C pendant quelques dizaines d'heures : la cémentite eutectique se dissout dans l'austénite et le carbone précipite en amas de graphite de recuit, compacts, sans arêtes. Le modèle décrit la part graphitisée par f = 1 − exp[−(t/τ)<sup>1,5</sup>], avec τ ≈ 15 h à 950 °C et environ deux fois moins à 1 000 °C. Second stade : soit un refroidissement très lent dans le domaine critique (environ 760 à 690 °C, quelques degrés par heure) pour une matrice ferritique, soit un refroidissement à l'air, éventuellement suivi de trempe et revenu, pour une matrice perlitique. L'épaisseur ne limite pas le procédé.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Famille (EN 1562)</th><th>Nuances</th><th>Matrice</th></tr>
+      <tr><td>Cœur blanc, EN-GJMW</td><td>350-4, 360-12, 400-5, 450-7, 550-4</td><td>ferrite en surface, perlite et graphite de recuit au cœur des parois épaisses</td></tr>
+      <tr><td>Cœur noir ferritique, EN-GJMB</td><td>300-6, 350-10</td><td>ferrite et graphite de recuit</td></tr>
+      <tr><td>Cœur noir perlitique, EN-GJMB</td><td>450-6, 500-5, 550-4, 600-3, 650-2, 700-2, 800-1</td><td>perlite (ou martensite revenue) et graphite de recuit</td></tr>
+    </table></div>
+    <p>La nuance <b>EN-GJMW-360-12</b> (numéro EN-JM1020), décarburée presque à cœur dans les faibles épaisseurs, est la plus soudable des malléables : elle sert notamment à des pièces soudées sur des tubes d'acier.</p>
+    <div class="def"><b>📖 Graphite de recuit</b> : amas de graphite irréguliers, de forme IV dans l'ISO 945-1, formés à l'état solide par décomposition de la cémentite. <b>Décarburation</b> : appauvrissement en carbone de la surface d'un métal chauffé dans une atmosphère oxydante.</div>
+    <div class="warn"><b>⚠️ Piège : malléable ne veut pas dire forgeable.</b> Le mot date d'une époque où l'on comparait la fonte au fer forgé : une fonte malléable se déforme un peu avant de rompre, mais ne se forge pas. Et une malléable n'est pas une GS : son graphite naît à l'état solide, celui de la GS dans le liquide.</div>
+    <div class="tip">💡 <b>Cœur blanc épais = cœur encore riche.</b> Au-delà d'une dizaine de millimètres, le centre d'une pièce à cœur blanc garde de la perlite et du graphite de recuit : il est moins ductile et moins soudable que la peau.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « Blanc s'en va, Noir reste »</b> : dans le cœur blanc, le carbone s'en va par la surface ; dans le cœur noir, il reste dans la pièce, en graphite.</div>
+    <div class="weld"><b>🔥 Souder une malléable</b>
+      <p>Le cycle de soudage redissout le graphite de recuit dans la zone affectée et peut y reformer cémentite et martensite : une malléable à cœur noir ou une pièce à cœur blanc épaisse se soude mal, avec des apports au nickel et des précautions de fonte. Une nuance à cœur blanc mince et décarburée se comporte presque comme un acier doux. Attention aussi aux raccords galvanisés : le zinc doit être enlevé avant soudage, ses fumées sont toxiques.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c5">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">5</div>
+    <div class="c-title"><h2>Les fontes blanches et alliées</h2><p>Contre l'usure, la corrosion et la chaleur : carbures, nickel, silicium</p></div>
+    <div class="c-img"><span class="ico">🪨</span><span><small>Image à retenir</small>Le caillou et la lame : un abrasif plus dur que la surface la creuse ; plus tendre, il glisse dessus</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le caillou et la lame</span></div>
+    <p>Fais glisser un caillou sur une lame : si le caillou est plus dur, il la raye ; s'il est plus tendre, il s'use lui-même. L'usure par abrasion obéit à cette règle. Le sable, la roche, le minerai sont faits surtout de quartz, très dur (environ 1 000 à 1 200 HV). Pour lui résister, il faut une surface qui contienne des grains encore plus durs.</p>
+    <ul>
+      <li>Les <b>fontes blanches résistantes à l'abrasion</b> (EN 12513) en sont pleines : des carbures en réseau ou en bâtonnets, tenus par une matrice. Non alliée, la cémentite est à peine plus dure que le quartz. Avec 3,5 à 5 % de nickel et 1,5 à 2,5 % de chrome, les fontes <b>Ni-Hard</b> gardent la cémentite mais ont une matrice martensitique. Avec 12 à 28 % de chrome, les <b>fontes au chrome</b> forment des carbures M₇C₃ plus durs que le quartz. Concasseurs, broyeurs, blindages, pompes à boue : on les désigne souvent par leur dureté, EN-GJN-HV350 à EN-GJN-HV600.</li>
+      <li>Les <b>fontes austénitiques</b> (EN 13835, souvent appelées Ni-Resist) contiennent 13 à 36 % de nickel : matrice austénitique, résistante à la corrosion (pompes d'eau de mer), à la chaleur (carters de turbocompresseurs), amagnétique, tenace jusqu'aux très basses températures selon la nuance. Elles existent à graphite lamellaire (EN-GJLA) ou sphéroïdal (EN-GJSA).</li>
+      <li>Les <b>fontes au silicium</b> : vers 14 à 18 % de silicium, elles résistent aux acides comme l'acide sulfurique, mais sont dures et très fragiles. Vers 4 à 5 % de silicium avec un peu de molybdène, des fontes GS ferritiques (EN 16124) résistent à l'oxydation et à la chaleur : collecteurs d'échappement, carters de turbocompresseurs.</li>
+    </ul>
+  </div>
+
+  <div class="lab" id="m5">
+    <p class="lab-h">Manipulation 5 : l'abrasif et la surface</p>
+    <p class="lab-sub">Choisis une fonte et un abrasif, puis règle la fraction de carbures f<sub>c</sub>. En haut, l'échelle des duretés (logarithmique) : matrice, carbures et abrasif ; la bande bleu-vert marque les duretés qui résistent à cet abrasif (plus de 0,83 fois sa dureté). En bas, une coupe de la surface ; ▶ Frotter fait passer l'abrasif et creuse un sillon proportionnel à l'usure. Indice d'usure : 100 pour une fonte GL perlitique dans le sable siliceux. Modèle pédagogique.</p>
+    <div class="btns" id="m5m">
+      <button class="btn" data-k="GL" type="button">Fonte GL perlitique</button>
+      <button class="btn on" data-k="blanche" type="button">Fonte blanche perlitique</button>
+      <button class="btn" data-k="nihard" type="button">Ni-Hard</button>
+      <button class="btn" data-k="chrome" type="button">Fonte au chrome</button>
+    </div>
+    <div class="btns" id="m5a">
+      <button class="btn" data-k="calcaire" type="button">Calcaire (≈ 200 HV)</button>
+      <button class="btn on" data-k="quartz" type="button">Sable siliceux (≈ 1 100 HV)</button>
+      <button class="btn" data-k="corindon" type="button">Corindon (≈ 2 000 HV)</button>
+    </div>
+    <div class="ctrl"><label for="m5f">Carbures <span class="mat">f<sub>c</sub></span></label><input type="range" id="m5f" class="r-mat" min="0" max="0.45" step="0.01" value="0.4"><output id="m5fo"></output></div>
+    <div class="btns"><button class="btn play" id="m5play" type="button">▶ Frotter</button></div>
+    <svg id="m5svg" role="img" aria-label="Échelle des duretés des phases et de l'abrasif, et coupe de la surface usée"></svg>
+    <div class="readout" id="m5r"></div>
+    <p class="status" id="m5msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">duretés, rapport de dureté, EN 12513, EN 13835</span></div>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Phase ou abrasif</th><th>Dureté (HV, ordre de grandeur)</th></tr>
+      <tr><td>Ferrite</td><td class="n">100 à 200</td></tr>
+      <tr><td>Perlite</td><td class="n">250 à 350</td></tr>
+      <tr><td>Austénite (durcit sous les chocs)</td><td class="n">200 à 300</td></tr>
+      <tr><td>Martensite</td><td class="n">500 à 900</td></tr>
+      <tr><td>Cémentite M₃C (fontes blanches, Ni-Hard)</td><td class="n">800 à 1 100</td></tr>
+      <tr><td>Carbure de chrome M₇C₃</td><td class="n">1 200 à 1 800</td></tr>
+      <tr><td>Carbures MC (vanadium, niobium, titane)</td><td class="n">2 000 à 3 000</td></tr>
+      <tr><td>Calcaire ; quartz ; corindon (alumine)</td><td class="n">≈ 200 ; 1 000 à 1 200 ; ≈ 2 000</td></tr>
+    </table></div>
+    <p><b>La règle du rapport de dureté.</b> Une phase est rayée efficacement quand l'abrasif est nettement plus dur qu'elle ; l'usure chute fortement quand la phase dépasse environ 0,8 fois la dureté de l'abrasif. Dans le modèle :</p>
+    <div class="fx"><div class="row"><div class="big"><span class="sig">r</span> = <span class="frac"><span><span class="sig">H<sub>a</sub></span></span><span><span class="eps">H<sub>phase</sub></span></span></span></div><div class="big">rayure faible si <span class="sig">r</span> &lt; 0,83 ; forte si <span class="sig">r</span> &gt; 1,25</div></div><p class="cap">H<sub>a</sub> : dureté de l'abrasif ; H<sub>phase</sub> : dureté de la matrice ou des carbures. Le modèle combine la rayure de la matrice, freinée par sa dureté et protégée par les carbures qui résistent, et celle des carbures, pondérées par la fraction de carbures f<sub>c</sub>.</p></div>
+    <p>Résultat du modèle dans le sable siliceux : fonte GL perlitique 100, fonte blanche perlitique ≈ 45, Ni-Hard ≈ 21, fonte au chrome ≈ 11. Contre le corindon, plus dur que tous les carbures, l'avantage se réduit (≈ 63, 36, 32). Contre un calcaire tendre, toutes s'usent peu.</p>
+    <p><b>Le compromis usure-ténacité.</b> Plus de carbures, c'est moins d'usure mais plus de fragilité. Les carbures doivent être assez gros pour ne pas partir avec un copeau, et bien répartis. Dans les fontes au chrome, les M₇C₃ forment des bâtonnets discontinus, alors que la cémentite des fontes non alliées et des Ni-Hard forme un réseau continu, une « éponge » de carbure où une fissure court facilement : à usure égale, les fontes au chrome sont plus tenaces.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Famille</th><th>Composition repère</th><th>Structure</th><th>Emplois</th></tr>
+      <tr><td>Fonte blanche non alliée ou trempée</td><td>C 2,5 à 3,5 %, Si bas</td><td>perlite + M₃C</td><td>rouleaux, roues, pièces d'usure peu sollicitées</td></tr>
+      <tr><td>Ni-Hard 1 et 2</td><td>Ni 3,5 à 5 %, Cr 1,5 à 2,5 %, Si et Mn &lt; 0,8 %</td><td>martensite (+ austénite résiduelle) + M₃C</td><td>broyage, pompes à boue ; revenu vers 250 à 275 °C</td></tr>
+      <tr><td>Ni-Hard 4</td><td>Cr ≈ 9 %, Ni ≈ 5 %, Si ≈ 2 %</td><td>martensite + M₇C₃</td><td>outils de broyage, corps de pompes</td></tr>
+      <tr><td>Fontes au chrome</td><td>Cr 12 à 28 %, C 2 à 3,5 %, souvent Mo</td><td>martensite + M₇C₃ (après traitement)</td><td>blindages de broyeurs, battoirs, pièces de concassage</td></tr>
+      <tr><td>Austénitiques (Ni-Resist)</td><td>Ni 13 à 36 %, avec Cu, Cr, Mn ou Si selon la nuance</td><td>austénite + graphite (L ou S)</td><td>eau de mer, chaleur, cryogénie, faible dilatation</td></tr>
+      <tr><td>SiMo ferritiques</td><td>Si ≈ 4 à 5 %, Mo ≈ 0,5 à 1 %</td><td>ferrite + graphite sphéroïdal</td><td>échappements, turbocompresseurs</td></tr>
+    </table></div>
+    <p>Exemples de désignations de l'EN 13835 : EN-GJLA-XNiCuCr15-6-2 (graphite lamellaire, nickel, cuivre, chrome), EN-GJSA-XNiCr20-2 (pompes, vannes), EN-GJSA-XNiMn23-4 (tenace à très basse température), EN-GJSA-XNiSiCr35-5-2 (tenue à chaud), EN-GJSA-XNi35 (très faible dilatation).</p>
+    <div class="def"><b>📖 Abrasion</b> : usure par des particules dures qui rayent ou arrachent la surface. <b>Fraction de carbures f<sub>c</sub></b> : part du volume occupée par les carbures. <b>Ni-Resist, Ni-Hard</b> : noms commerciaux historiques des fontes austénitiques au nickel et des fontes blanches martensitiques au nickel-chrome, passés dans l'usage.</div>
+    <div class="warn"><b>⚠️ Piège : plus dur n'est pas toujours mieux.</b> Si l'abrasif est plus dur que les carbures (corindon, carbure de silicium), une fonte très chargée en carbures perd une grande part de son avantage et garde sa fragilité. On choisit la fonte d'après l'abrasif réel, et d'après les chocs qu'elle subira.</div>
+    <div class="tip">💡 <b>L'austénite qui durcit.</b> Sous les chocs, l'austénite d'une fonte austénitique ou l'austénite résiduelle d'une Ni-Hard se transforme en partie en martensite : la surface durcit en service.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « 0,8 du caillou »</b> : pour ne pas être rayée, une phase doit atteindre environ 0,8 fois la dureté de l'abrasif.</div>
+    <div class="weld"><b>🔥 Rechargement dur</b>
+      <p>On ne soude pas d'assemblage sur une fonte blanche ou au chrome : elle fissure. En revanche, le rechargement dur, qui dépose une couche anti-usure sur une pièce en acier, reproduit leur métallurgie : des apports riches en chrome et en carbone forment des M₇C₃ dans le dépôt, et les fines fissures de retrait en surface y sont normales. Les fontes austénitiques à graphite sphéroïdal se soudent avec des apports à base de nickel ; leurs versions à graphite lamellaire sont plus sensibles à la fissuration.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="c6">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">6</div>
+    <div class="c-title"><h2>Corrosion et choix d'une fonte</h2><p>Le tuyau fantôme, et la carte des nuances pour choisir</p></div>
+    <div class="c-img"><span class="ico">👻</span><span><small>Image à retenir</small>Le tuyau fantôme : rongé de l'intérieur, il garde sa forme… jusqu'au premier coup de pioche</span></div>
+  </div>
+
+  <div class="lv lv1"><div class="lv-h">👁 Niveau 1 : voir <span class="tag">le tuyau fantôme</span></div>
+    <p>La matrice d'une fonte ordinaire ne résiste pas mieux à la corrosion que celle d'un acier : c'est du fer. Mais le graphite change la façon dont elle se corrode. Plus noble que le fer, il forme avec lui une multitude de petites piles : dans l'eau ou dans un sol humide, le fer se dissout autour du graphite. Il reste un squelette de graphite cimenté par des oxydes, qui garde exactement la forme de la pièce. C'est la <b>corrosion graphitique</b>.</p>
+    <p>Une conduite en fonte GL ainsi attaquée paraît intacte : même diamètre, même épaisseur. Mais la couche graphitisée se raye au couteau, sonne mat sous le marteau, et n'a presque plus de résistance. Le paradoxe, c'est que cette couche adhérente freine ensuite la corrosion : après un démarrage plus rapide que celui de l'acier, l'attaque ralentit, et des conduites en fonte posées il y a plusieurs siècles sont encore en service. Dans une GS, le graphite n'est pas interconnecté : la corrosion graphitique pénètre moins. Les tuyaux modernes en fonte ductile sont en plus protégés par un revêtement de zinc à l'extérieur et un mortier de ciment à l'intérieur (EN 545).</p>
+    <svg id="f6svg" role="img" aria-label="Coupes d'une paroi d'acier, de fonte GL et de fonte GS après des années dans un sol humide" style="display:block;width:100%;height:auto"></svg>
+    <p class="mut" style="font-size:.9rem;text-align:center">Schéma qualitatif : l'acier s'amincit, la fonte GL se graphitise en gardant sa forme, la fonte GS se graphitise moins profondément.</p>
+    <p>Pour <b>choisir</b> une fonte, on part de la fonction : amortir et conduire la chaleur (GL), résister et se déformer avant de rompre (GS), supporter la fatigue thermique d'un moteur (GV), porter de fortes charges (ADI), faire de petites pièces minces ductiles (malléables), résister à l'usure (blanches), à la corrosion ou à la chaleur (austénitiques, au silicium). Puis on vérifie les propriétés minimales, l'épaisseur, et, si la pièce doit être soudée ou risque d'être réparée, la soudabilité.</p>
+  </div>
+
+  <div class="lab" id="m6">
+    <p class="lab-h">Manipulation 6 : la carte des nuances</p>
+    <p class="lab-sub">Chaque point est une nuance normalisée, placée selon sa résistance minimale R<sub>m</sub> et son allongement minimal A (échelle logarithmique ; les GL, sans allongement garanti, sont placées à titre indicatif). Règle tes exigences : les nuances qui conviennent s'allument en bleu. Les boutons d'usage chargent un cahier des charges ; « soudage requis » écarte les nuances qui ne se soudent pas. ▶ Durcir le cahier des charges fait monter la résistance exigée.</p>
+    <div class="btns" id="m6u">
+      <button class="btn" data-k="bati" type="button">Bâti de machine</button>
+      <button class="btn on" data-k="vanne" type="button">Corps de vanne</button>
+      <button class="btn" data-k="vilo" type="button">Vilebrequin</button>
+      <button class="btn" data-k="couronne" type="button">Couronne dentée</button>
+      <button class="btn" data-k="raccord" type="button">Raccord soudé sur tube</button>
+    </div>
+    <div class="btns" id="m6w">
+      <button class="btn on" data-k="0" type="button">Soudage non requis</button>
+      <button class="btn" data-k="1" type="button">Soudage requis</button>
+    </div>
+    <div class="ctrl"><label for="m6r">R<sub>m</sub> exigée</label><input type="range" id="m6r" class="r-mat" min="100" max="1400" step="10" value="400"><output id="m6ro"></output></div>
+    <div class="ctrl"><label for="m6a">A exigé</label><input type="range" id="m6a" class="r-mat" min="0" max="20" step="0.5" value="15"><output id="m6ao"></output></div>
+    <div class="btns"><button class="btn play" id="m6play" type="button">▶ Durcir le cahier des charges</button></div>
+    <svg id="m6svg" role="img" aria-label="Carte résistance-allongement des nuances de fontes normalisées, avec les nuances qui satisfont le cahier des charges"></svg>
+    <div class="readout" id="m6rd"></div>
+    <p class="status" id="m6msg" aria-live="polite"></p>
+  </div>
+
+  <div class="lv lv2"><div class="lv-h">🎓 Niveau 2 : maîtriser <span class="tag">corrosion graphitique, choix, soudabilité</span></div>
+    <p><b>Le mécanisme.</b> Dans un électrolyte (eau, sol humide, eau de mer), le graphite joue le rôle de cathode, où l'oxygène dissous est réduit ; la matrice ferreuse voisine joue le rôle d'anode et se dissout : Fe → Fe²⁺ + 2 e⁻. Les produits de corrosion, volumineux, restent pris dans le réseau de graphite. La vitesse d'attaque est d'abord plus forte que sur un acier, puis diminue à mesure que la couche graphitisée s'épaissit et gêne le transport des espèces : sur la durée, une fonte peut donc perdre moins qu'un acier, mais la couche perdue ne porte plus rien.</p>
+    <div class="def"><b>📖 Corrosion graphitique</b> (ou graphitisation, au sens de la corrosion) : dissolution sélective de la matrice ferreuse d'une fonte grise, qui laisse un réseau de graphite et d'oxydes ayant la forme initiale de la pièce. À ne pas confondre avec la graphitisation métallurgique d'un recuit (décomposition de la cémentite).</div>
+    <p><b>Les parades.</b> Revêtements (zinc, peinture, bitume, mortier de ciment), manchons de polyéthylène, protection cathodique ; ou des fontes résistantes : austénitiques au nickel pour l'eau de mer, au silicium pour les acides, SiMo et austénitiques pour l'oxydation à chaud.</p>
+    <div class="tbl-wrap"><table class="data">
+      <tr><th>Famille</th><th>Atout principal</th><th>Soudabilité (aperçu, détaillé aux cours 3 et 4)</th></tr>
+      <tr><td>GL</td><td>prix, coulabilité, amortissement, conductivité</td><td>délicate : fragile, sensible aux contraintes ; préchauffage ou apport au nickel</td></tr>
+      <tr><td>GS ferritiques</td><td>ductilité, résilience</td><td>la meilleure des fontes, avec apports nickel-fer ou fonte appropriée</td></tr>
+      <tr><td>GS perlitiques, GV</td><td>résistance, fatigue thermique (GV)</td><td>délicate : zone affectée plus dure</td></tr>
+      <tr><td>ADI</td><td>très haute résistance et ténacité</td><td>à éviter : la soudure détruit l'ausferrite</td></tr>
+      <tr><td>Malléables</td><td>petites pièces minces ductiles</td><td>EN-GJMW-360-12 soudable ; les autres délicates</td></tr>
+      <tr><td>Blanches, au chrome, au silicium</td><td>usure, acides</td><td>non soudables pour l'assemblage</td></tr>
+      <tr><td>Austénitiques</td><td>corrosion, chaleur, froid</td><td>possible avec apports base nickel, surtout les EN-GJSA</td></tr>
+    </table></div>
+    <p>Pour le soudage, les fontes forment le groupe 7 de l'ISO/TR 15608, subdivisé selon la famille ; la qualification des modes opératoires de soudage des fontes relève de l'ISO 15614-3 et les produits d'apport de l'ISO 1071 (cours 3 et 4).</p>
+    <div class="warn"><b>⚠️ Piège : le tuyau qui paraît sain.</b> Une conduite graphitisée a l'épaisseur, l'aspect et parfois la couleur du métal sain. Avant de souder un piquage ou une réparation sur une vieille conduite, on gratte, on sonde, on mesure : une soudure sur une couche graphitisée ne tient pas.</div>
+    <div class="tip">💡 <b>La bonne question d'abord.</b> « Quelle fonction ? » avant « quelle nuance ? » : un disque de frein n'a pas besoin d'allongement mais de conductivité et d'amortissement ; un bras de suspension a besoin d'allongement et de résilience, pas d'amortissement.</div>
+    <div class="mnemo">🧠 <b>Mnémotechnique : « le fantôme garde la forme, pas la force »</b>.</div>
+    <div class="weld"><b>🔥 Réparer une vieille fonte</b>
+      <p>Pièces anciennes, conduites, éléments d'ouvrages d'art : elles sont souvent en GL, parfois riches en phosphore, et ont pu se corroder ou s'imprégner d'huile. Avant tout soudage : identifier la nuance, dégraisser, chauffer pour brûler les hydrocarbures, enlever la couche graphitisée jusqu'au métal sain, et choisir un procédé à faible apport de chaleur ou un soudobrasage (cours 4).</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="exos">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✎</div>
+    <div class="c-title"><h2>Exercices corrigés</h2><p>Six exercices et un défi, de la désignation au choix de la nuance</p></div>
+    <div class="c-img"><span class="ico">🏋️</span><span><small>Image à retenir</small>La salle de musculation : on ne progresse qu'en soulevant soi-même</span></div>
+  </div>
+  <div class="lv lv1"><div class="lv-h">👁 Mode d'emploi <span class="tag">formule littérale, puis valeurs, puis unités</span></div>
+    <p>Cherche chaque question sur papier avant d'ouvrir la correction. Les valeurs viennent des normes citées et des modèles des manipulations ; le défi se rejoue dans la manipulation 3.</p>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 1 : lire et écrire des désignations <span class="lvtag">N1 · chapitre 1</span></h4>
+    <p class="q"><b>a)</b> Décode EN-GJS-400-18-LT.</p>
+    <p class="q"><b>b)</b> Décode EN-GJMB-350-10.</p>
+    <p class="q"><b>c)</b> Décode EN-GJL-HB195.</p>
+    <p class="q"><b>d)</b> Décode EN-GJSA-XNiMn23-4.</p>
+    <p class="q"><b>e)</b> Écris la désignation symbolique de EN-JL1040.</p>
+    <p class="q"><b>f)</b> Écris la désignation d'une fonte GS d'au moins 500 MPa et 7 % d'allongement, vérifiée sur un échantillon attenant à la pièce.</p>
+    <p class="q"><b>g)</b> Un plan américain demande ASTM A536 60-40-18. Convertis en MPa et propose une nuance EN voisine.</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Fonte (GJ) à graphite sphéroïdal (S), R<sub>m</sub> ≥ 400 MPa, A ≥ 18 %, résilience garantie à basse température (LT, −20 °C pour cette nuance). Numéro : EN-JS1025.</p>
+      <p><b>b)</b> Fonte malléable (graphite de recuit M) à cœur noir (B), R<sub>m</sub> ≥ 350 MPa, A ≥ 10 % : nuance ferritique de l'EN 1562.</p>
+      <p><b>c)</b> Fonte à graphite lamellaire désignée par sa dureté Brinell (repère 195) plutôt que par sa résistance.</p>
+      <p><b>d)</b> Fonte à graphite sphéroïdal (S) à matrice austénitique (A), fortement alliée (X), à environ 23 % de nickel et 4 % de manganèse : la nuance de l'EN 13835 tenace aux très basses températures.</p>
+      <p><b>e)</b> EN-GJL-250 (J, L : fonte à graphite lamellaire ; 1 : nuance par la traction ; 04 : numéro d'ordre ; 0 : pas d'exigence particulière).</p>
+      <p><b>f)</b> EN-GJS-500-7U.</p>
+      <p><b>g)</b> <span class="m">60 ksi × 6,895 ≈ 414 MPa</span>, <span class="m">40 ksi × 6,895 ≈ 276 MPa</span>, 18 % : voisine de EN-GJS-400-18 (400 MPa, 18 %), avec une résistance un peu plus élevée ; on vérifie la limite d'élasticité exigée avant de conclure.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 2 : l'épaisseur <span class="lvtag">N1 et N2 · chapitre 2</span></h4>
+    <p>Utilise les tableaux du chapitre 2 ou la manipulation 2.</p>
+    <p class="q"><b>a)</b> Quelle résistance attendre d'une pièce en EN-GJL-250 dans une paroi de 8 mm ? de 50 mm ?</p>
+    <p class="q"><b>b)</b> Une paroi de 30 mm doit offrir au moins 190 MPa. EN-GJL-200 ou EN-GJL-250 ?</p>
+    <p class="q"><b>c)</b> Pourquoi l'EN 1561 ne donne-t-elle pas de valeur pour l'EN-GJL-250 sous 5 mm ?</p>
+    <p class="q"><b>d)</b> Quels minimums garantit l'EN-GJS-500-7 dans une paroi de 45 mm ? de 100 mm ?</p>
+    <p class="q"><b>e)</b> Compare la perte relative de résistance d'une EN-GJL-250 entre 8 et 50 mm, et d'une EN-GJS-500-7 entre 20 et 100 mm.</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> 8 mm (classe 5 à 10 mm) : ≈ 250 MPa ; 50 mm (classe 40 à 80 mm) : ≈ 170 MPa.</p>
+      <p><b>b)</b> Classe 20 à 40 mm : EN-GJL-200 ≈ 155 MPa, insuffisant ; EN-GJL-250 ≈ 195 MPa : on choisit l'EN-GJL-250.</p>
+      <p><b>c)</b> Une paroi si mince refroidit vite et risque la trempe (fonte blanche ou truitée) : la résistance n'y a plus de sens, la pièce devient dure et fragile.</p>
+      <p><b>d)</b> 45 mm (30 à 60 mm) : R<sub>m</sub> ≥ 450 MPa, R<sub>p0,2</sub> ≥ 300 MPa, A ≥ 7 %. 100 mm (60 à 200 mm) : 420 MPa, 290 MPa, 5 %.</p>
+      <p><b>e)</b> GL : <span class="m">(250 − 170)/250 = 32 %</span> de perte. GS : <span class="m">(500 − 420)/500 = 16 %</span>. La GS est environ deux fois moins sensible à l'épaisseur.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 3 : le bon traitement <span class="lvtag">N1 et N2 · chapitre 3</span></h4>
+    <p class="q"><b>a)</b> Une GS brute de coulée est ferrito-perlitique. Quel traitement pour obtenir une EN-GJS-400-18 ? et une EN-GJS-700-2 ?</p>
+    <p class="q"><b>b)</b> Une bride mince est sortie truitée. Quel traitement la rend usinable ?</p>
+    <p class="q"><b>c)</b> Avec le modèle de la manipulation 3, calcule la fenêtre de traitement à 370 °C et à 400 °C. Conclus.</p>
+    <p class="q"><b>d)</b> Dans quelle plage de bain le modèle donne-t-il une EN-GJS-1200-3 ?</p>
+    <p class="q"><b>e)</b> Pourquoi faut-il usiner une pièce ADI le plus possible avant la trempe étagée ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> 400-18 : un recuit de ferritisation (maintien sous-critique vers 700 à 740 °C, ou austénitisation puis refroidissement très lent dans le domaine critique). 700-2 : une normalisation (austénitisation vers 900 °C, refroidissement à l'air) pour une perlite fine.</p>
+      <p><b>b)</b> Un recuit de graphitisation vers 900 à 950 °C, qui décompose la cémentite, suivi d'un refroidissement lent.</p>
+      <p><b>c)</b> 370 °C : <span class="m">t₁ = 30 min</span>, <span class="m">t₂ = 240·e⁰ = 240 min</span> : fenêtre de 30 min à 4 h. 400 °C : <span class="m">t₁ = 30·e<sup>−0,36</sup> ≈ 21 min</span>, <span class="m">t₂ = 240·e<sup>−0,75</sup> ≈ 113 min</span>. La fenêtre rétrécit quand le bain est chaud : la durée y demande plus de rigueur.</p>
+      <p><b>d)</b> R<sub>m</sub> ≥ 1 200 MPa et inférieure à 1 400 MPa (sinon c'est une 1400-1) : <span class="m">1 450 − 4·(T<sub>A</sub> − 250) ≥ 1 200</span> donne T<sub>A</sub> ≤ 312,5 °C, et R<sub>m</sub> &lt; 1 400 donne T<sub>A</sub> &gt; 262,5 °C : bain d'environ 265 à 310 °C.</p>
+      <p><b>e)</b> L'ausferrite est très résistante et son austénite durcit sous l'outil : l'usinage après traitement est lent et coûteux. On usine avant, en ne laissant qu'une finition.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 4 : cœur blanc, cœur noir <span class="lvtag">N2 · chapitre 4</span></h4>
+    <p>Modèle de la manipulation 4 : x<sub>f</sub> ≈ k·√t avec k ≈ 0,39 mm/√h à 1 000 °C ; graphitisation f = 1 − exp[−(t/τ)<sup>1,5</sup>] avec τ ≈ 15 h à 950 °C et ≈ 35 h à 900 °C.</p>
+    <p class="q"><b>a)</b> Après 80 h à 1 000 °C, une paroi de 6 mm est-elle décarburée à cœur ? et une paroi de 12 mm ?</p>
+    <p class="q"><b>b)</b> Combien de temps faut-il à 1 000 °C pour décarburer à cœur une paroi de 8 mm ?</p>
+    <p class="q"><b>c)</b> Quelle part de cémentite est graphitisée après 20 h à 950 °C ? Combien faut-il pour 99 % ?</p>
+    <p class="q"><b>d)</b> Même question à 900 °C après 50 h. Que conclure sur la température ?</p>
+    <p class="q"><b>e)</b> Laquelle de ces fontes choisirais-tu pour un petit raccord soudé sur un tube en acier ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">x<sub>f</sub> = 0,39 × √80 ≈ 3,5 mm</span> par face, soit 7 mm décarburés en tout : la paroi de 6 mm l'est à cœur ; celle de 12 mm garde un noyau d'environ 5 mm riche en carbone.</p>
+      <p><b>b)</b> Il faut <span class="m">x<sub>f</sub> = 4 mm</span> : <span class="m">t = (4/0,391)² ≈ 105 h</span>, plus de quatre jours.</p>
+      <p><b>c)</b> <span class="m">f = 1 − exp[−(20/15)<sup>1,5</sup>] = 1 − exp(−1,54) ≈ 0,79</span>. Pour 99 % : <span class="m">(t/τ)<sup>1,5</sup> = ln 100 ≈ 4,6</span>, soit <span class="m">t ≈ 2,77·τ ≈ 42 h</span>.</p>
+      <p><b>d)</b> <span class="m">f = 1 − exp[−(50/35)<sup>1,5</sup>] ≈ 0,82</span> : à 900 °C, même 50 h ne suffisent pas. La graphitisation est très sensible à la température.</p>
+      <p><b>e)</b> Une fonte malléable à cœur blanc mince, décarburée à cœur, comme l'EN-GJMW-360-12 : ferritique, ductile, la plus soudable des malléables.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 5 : contre l'usure <span class="lvtag">N1 et N2 · chapitre 5</span></h4>
+    <p>Duretés : perlite 300 HV, martensite 750 HV, M₃C 1 000 HV, M₇C₃ 1 500 HV ; quartz 1 100 HV, corindon 2 000 HV.</p>
+    <p class="q"><b>a)</b> Calcule le rapport r = H<sub>a</sub>/H<sub>phase</sub> du quartz sur chaque phase. Lesquelles sont fortement rayées ?</p>
+    <p class="q"><b>b)</b> Classe les fontes de la manipulation 5 dans le sable siliceux, puis contre le corindon. Explique le changement.</p>
+    <p class="q"><b>c)</b> Pourquoi une fonte au chrome est-elle plus tenace qu'une Ni-Hard à usure comparable ?</p>
+    <p class="q"><b>d)</b> Une pompe brasse une eau de mer chargée de sable fin peu abrasif. Quelle famille regarder en premier ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Perlite <span class="m">1 100/300 ≈ 3,7</span> ; martensite <span class="m">≈ 1,47</span> ; M₃C <span class="m">1,10</span> ; M₇C₃ <span class="m">≈ 0,73</span>. Perlite et martensite sont fortement rayées (r &gt; 1,25), la cémentite l'est en partie, le M₇C₃ résiste (r &lt; 0,83).</p>
+      <p><b>b)</b> Quartz : GL 100, blanche perlitique ≈ 45, Ni-Hard ≈ 21, fonte au chrome ≈ 11. Corindon : 100, ≈ 63, ≈ 36, ≈ 32. Le corindon raye même le M₇C₃ : l'avantage des carbures se réduit, il ne reste que celui d'une matrice plus dure.</p>
+      <p><b>c)</b> Ses carbures M₇C₃ forment des bâtonnets discontinus dans la matrice, alors que la cémentite des Ni-Hard forme un réseau continu où une fissure court d'un carbure à l'autre.</p>
+      <p><b>d)</b> La corrosion domine : une fonte austénitique au nickel (par exemple EN-GJSA-XNiCr20-2), qui résiste à l'eau de mer et tolère une abrasion modérée.</p>
+    </div></details>
+  </div>
+
+  <div class="exo">
+    <h4>Exercice 6 : choisir une nuance <span class="lvtag">N2 · chapitre 6</span></h4>
+    <p>Utilise la manipulation 6.</p>
+    <p class="q"><b>a)</b> Corps de vanne : R<sub>m</sub> ≥ 400 MPa et A ≥ 15 %. Quelles nuances conviennent ?</p>
+    <p class="q"><b>b)</b> Vilebrequin : R<sub>m</sub> ≥ 700 MPa et A ≥ 2 %. Combien de nuances, de quelles familles ?</p>
+    <p class="q"><b>c)</b> Couronne dentée : R<sub>m</sub> ≥ 1 000 MPa et A ≥ 5 %. Que reste-t-il ? Peut-on la réparer par soudage ?</p>
+    <p class="q"><b>d)</b> Raccord soudé sur un tube : R<sub>m</sub> ≥ 350 MPa, A ≥ 10 %, soudage requis. Quelles nuances sont soudables sans réserve ?</p>
+    <p class="q"><b>e)</b> Une vieille conduite en GL doit recevoir un piquage soudé. Que vérifies-tu d'abord ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> Trois nuances GS ferritiques : EN-GJS-400-18 (et ses variantes LT et RT), EN-GJS-400-15 et EN-GJS-450-18.</p>
+      <p><b>b)</b> Huit : EN-GJS-700-2, 800-2 et 900-2 ; les ADI 800-10, 900-8, 1050-6 et 1200-3 ; la malléable EN-GJMB-700-2. La GS perlitique est le choix courant.</p>
+      <p><b>c)</b> Seule l'EN-GJS-1050-6 (ADI). Pas de réparation par soudage : la soudure détruirait l'ausferrite.</p>
+      <p><b>d)</b> Sept GS ferritiques (350-22, 400-18, 400-15, 450-10, 450-18, 500-14, 600-10) et la malléable EN-GJMW-360-12 ; l'EN-GJMB-350-10 convient en propriétés mais sa soudabilité est délicate.</p>
+      <p><b>e)</b> La corrosion graphitique : gratter, sonder au marteau, mesurer l'épaisseur saine. On ne soude que sur du métal sain, après dégraissage.</p>
+    </div></details>
+  </div>
+
+  <div class="exo defi">
+    <h4>🏆 Défi : la couronne en ADI <span class="lvtag">N2 · chapitre 3, à rejouer dans la manipulation 3</span></h4>
+    <p>Une couronne dentée doit être en EN-GJS-1050-6. Le traiteur thermique te demande les réglages du bain.</p>
+    <p class="q"><b>a)</b> Avec le modèle, dans quelle plage de température de bain, par pas de 5 °C, obtiens-tu R<sub>m</sub> ≥ 1 050 MPa sans passer en nuance 1200-3 ?</p>
+    <p class="q"><b>b)</b> À 335 °C, quelle est la fenêtre de maintien ? Quelles propriétés à 2 h ?</p>
+    <p class="q"><b>c)</b> Le four n'est libre que 30 minutes. Que se passe-t-il ?</p>
+    <p class="q"><b>d)</b> Un oubli prolonge le maintien à 20 h. Que se passe-t-il ?</p>
+    <p class="q"><b>e)</b> La couronne arrive avec une dent ébréchée. Soudage de réparation ?</p>
+    <details><summary>Voir la correction</summary><div class="sol">
+      <p><b>a)</b> <span class="m">1 450 − 4·(T<sub>A</sub> − 250) ≥ 1 050</span> donne T<sub>A</sub> ≤ 350 °C, et <span class="m">&lt; 1 200 MPa</span> donne T<sub>A</sub> &gt; 312,5 °C : de <b>315 à 350 °C</b>. L'allongement y reste au-dessus de 6 %.</p>
+      <p><b>b)</b> <span class="m">t₁ = 30·e<sup>0,012×35</sup> ≈ 46 min</span>, <span class="m">t₂ = 240·e<sup>0,025×35</sup> ≈ 576 min ≈ 9,6 h</span>. À 2 h : R<sub>m</sub> ≈ 1 110 MPa, A ≈ 7,4 %, ≈ 336 HB : EN-GJS-1050-6.</p>
+      <p><b>c)</b> 30 min &lt; t₁ : la réaction I n'a transformé qu'environ la moitié de l'austénite (<span class="m">(30/46)<sup>1,5</sup> ≈ 0,53</span>) ; le reste devient martensite au refroidissement (≈ 46 %). Dureté ≈ 475 HB, allongement ≈ 2 % : la pièce n'atteint aucune nuance et risque de casser.</p>
+      <p><b>d)</b> 20 h &gt; t₂ : la réaction II précipite des carbures. L'allongement tombe à ≈ 5,7 % : la nuance 1050-6 n'est plus atteinte.</p>
+      <p><b>e)</b> Non : la soudure détruirait l'ausferrite et créerait martensite et carbures dans la zone affectée. On remplace la pièce, ou on la refait traiter entièrement si une réparation est malgré tout validée.</p>
+    </div></details>
+  </div>
+</div>
+</section>
+
+<section class="chap" id="quiz-s">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">?</div>
+    <div class="c-title"><h2>Quiz : 12 questions éclair</h2><p>Chaque réponse est expliquée, même quand tu as juste</p></div>
+    <div class="c-img"><span class="ico">🎯</span><span><small>Image à retenir</small>La cible : vise 10 sur 12 avant le cours 3</span></div>
+  </div>
+  <div id="quiz"></div>
+  <div class="score" id="qzScore" aria-live="polite">Score : 0 / 12</div>
+  <div class="btns"><button class="btn" id="qzReset" type="button">↺ Recommencer le quiz</button></div>
+</div>
+</section>
+
+<section class="chap" id="fiche">
+<div class="wrap wide">
+  <div class="cartouche">
+    <div class="c-num">★</div>
+    <div class="c-title"><h2>Fiche mémoire du cours 2</h2><p>Neuf cases, neuf images : à photographier, puis à redessiner de tête</p></div>
+    <div class="c-img"><span class="ico">🔐</span><span><small>Image à retenir</small>Percer un secret et en inventer un autre : la fonte malléable à cœur noir</span></div>
+  </div>
+  <div class="fiche">
+    <div><div class="ic">🪪</div><h4>La plaque</h4><div class="f">EN-GJ + L/S/V/M/N + R<sub>m</sub>-A</div><p>Graphite, structure, propriétés ou composition (X), exigences : W soudabilité, LT/RT résilience.</p></div>
+    <div><div class="ic">🔢</div><h4>Le numéro</h4><div class="f">EN-JS1025 = GJS-400-18-LT</div><p>1 traction, 2 dureté, 3 composition ; dernier chiffre : 0 rien, 4 RT, 5 LT.</p></div>
+    <div><div class="ic">🍰</div><h4>Le gâteau</h4><div class="f">GJL-250 : 250 → 170 MPa</div><p>De 8 à 50 mm de paroi ; la GS perd environ deux fois moins ; sous 5 mm, risque de trempe.</p></div>
+    <div><div class="ic">🔥</div><h4>Les recuits</h4><div class="f">500-600 · 700-740 · 900</div><p>Détensionnement, ferritisation, graphitisation ou normalisation : on change la matrice, pas le graphite.</p></div>
+    <div><div class="ic">🥚</div><h4>L'œuf mollet</h4><div class="f"><span class="sig">t₁</span> &lt; t &lt; <span class="sig">t₂</span></div><p>Ausferrite dans la fenêtre ; bain chaud : 800-10 ductile ; bain froid : 1400-1 dure. Ne se soude pas.</p></div>
+    <div><div class="ic">☯️</div><h4>Cœur blanc, cœur noir</h4><div class="f"><span class="eps">x<sub>f</sub></span> ≈ k·√t</div><p>Blanc : le carbone s'en va (parois minces, GJMW-360-12 soudable) ; noir : il reste en graphite de recuit.</p></div>
+    <div><div class="ic">🪨</div><h4>Le caillou</h4><div class="f"><span class="sig">r</span> = H<sub>a</sub>/H &lt; 0,83</div><p>Une phase à 0,8 fois la dureté de l'abrasif résiste ; M₇C₃ bat le quartz, pas le corindon.</p></div>
+    <div><div class="ic">🧪</div><h4>Le nickel</h4><div class="f">Ni 13 à 36 % : austénite</div><p>Austénitiques contre corrosion, chaleur, froid ; Ni-Hard (3,5 à 5 % Ni) contre l'usure.</p></div>
+    <div><div class="ic">👻</div><h4>Le fantôme</h4><div class="f">forme gardée, force perdue</div><p>Corrosion graphitique des GL ; on choisit d'abord la fonction, puis la nuance, puis on vérifie la soudabilité.</p></div>
+  </div>
+  <div class="fun"><span class="fun-h">🔐 Fun fact : percer un secret, et en inventer un autre</span>En 1722, à Paris, le savant René-Antoine Ferchault de Réaumur publie « L'art de convertir le fer forgé en acier, et l'art d'adoucir le fer fondu » : il y explique comment, par un long chauffage au four, rendre des pièces en fonte aussi travaillables que du fer forgé. Le procédé européen de fonte malléable, à cœur blanc, en descend. Un siècle plus tard, à Newark, aux États-Unis, l'inventeur Seth Boyden veut percer le secret de ce produit européen. Il s'y met en 1820, avec une idée venue de l'observation du fer resté collé aux parois de la forge de son grand-père. Il lui faut six ans : en 1826, il obtient sa première pièce de fonte malléable, et le Franklin Institute de Philadelphie le récompense en 1828 pour la première tentative, dans le pays, de recuire la fonte pour des usages courants. Son procédé n'est pas une copie : c'est la fonte malléable à cœur noir, dite américaine. Boyden, qui déposait rarement des brevets, préférait vendre son savoir-faire au contrat. Les deux recuits sont au <a href="#c4">chapitre 4</a>.</div>
+</div>
+</section>
+
+<section class="chap" id="gloss">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">A–Z</div>
+    <div class="c-title"><h2>Glossaire</h2><p>Les mots, symboles et sigles de ce cours</p></div>
+    <div class="c-img"><span class="ico">📖</span><span><small>Image à retenir</small>Le dictionnaire : un mot flou, un clic</span></div>
+  </div>
+  <dl class="gloss">
+    <dt>A, R<sub>m</sub>, R<sub>p0,2</sub></dt><dd>Allongement après rupture (%) ; résistance à la traction (MPa) ; limite d'élasticité conventionnelle à 0,2 % de déformation plastique (MPa).</dd>
+    <dt>Abrasion</dt><dd>Usure par des particules dures qui rayent ou arrachent la surface.</dd>
+    <dt>ADI, ausferrite</dt><dd>Fonte GS ausferritique (<i>austempered ductile iron</i>, EN 1564), obtenue par trempe étagée ; sa structure mêle ferrite aciculaire et austénite stabilisée par le carbone, sans carbures.</dd>
+    <dt>ASTM A48, A536</dt><dd>Normes américaines des fontes à graphite lamellaire et sphéroïdal ; leurs classes s'expriment en ksi (1 ksi ≈ 6,895 MPa).</dd>
+    <dt>Austénite γ, ferrite α, perlite, martensite</dt><dd>Phases et constituants de la matrice : solution solide cubique à faces centrées ; cubique centrée ; lamelles de ferrite et de cémentite ; structure de trempe dure.</dd>
+    <dt>Carbures M₃C, M₇C₃, MC</dt><dd>Cémentite (M = fer, éventuellement chrome) ; carbure de chrome des fontes au chrome ; carbures de vanadium, niobium ou titane. Leur dureté croît dans cet ordre.</dd>
+    <dt>Cœur blanc, cœur noir</dt><dd>Fontes malléables obtenues par recuit décarburant (EN-GJMW) ou par recuit de graphitisation en atmosphère neutre (EN-GJMB).</dd>
+    <dt>Corrosion graphitique</dt><dd>Dissolution sélective de la matrice d'une fonte grise, qui laisse un squelette de graphite et d'oxydes ayant la forme de la pièce.</dd>
+    <dt>Décarburation</dt><dd>Appauvrissement en carbone d'un métal chauffé dans une atmosphère oxydante.</dd>
+    <dt>Désignation numérique</dt><dd>Écriture courte d'une nuance normalisée : EN-J, lettre du graphite, quatre chiffres (EN-JL1040 = EN-GJL-250).</dd>
+    <dt>Détensionnement</dt><dd>Maintien vers 500 à 600 °C qui relâche les contraintes résiduelles sans changer la structure.</dd>
+    <dt>e, épaisseur relevante</dt><dd>Épaisseur de paroi qui fixe la vitesse de refroidissement d'une zone, et donc ses propriétés.</dd>
+    <dt>Échantillon S, U, C</dt><dd>Coulé à part ; attenant à la pièce ; prélevé dans la pièce.</dd>
+    <dt>EN 1560, EN 1561, EN 1562, EN 1563, EN 1564, EN 16079</dt><dd>Désignation des fontes ; fontes GL ; malléables ; GS ; ausferritiques ; GV.</dd>
+    <dt>EN 12513, EN 13835, EN 16124, EN 545</dt><dd>Fontes résistantes à l'abrasion ; austénitiques ; GS ferritiques faiblement alliées pour la tenue à chaud ; tuyaux en fonte ductile pour l'eau.</dd>
+    <dt>f, τ</dt><dd>Fraction de cémentite graphitisée au recuit à cœur noir ; constante de temps de cette graphitisation (h).</dd>
+    <dt>f<sub>c</sub></dt><dd>Fraction de carbures, part du volume occupée par les carbures.</dd>
+    <dt>GL, GV, GS, GJ</dt><dd>Fonte à graphite lamellaire, vermiculaire, sphéroïdal ; dans une désignation, G pièce moulée et J fonte.</dd>
+    <dt>Graphite de recuit</dt><dd>Amas de graphite formés à l'état solide par décomposition de la cémentite (forme IV de l'ISO 945-1).</dd>
+    <dt>H<sub>a</sub>, H<sub>phase</sub>, r</dt><dd>Dureté de l'abrasif ; dureté d'une phase ; rapport H<sub>a</sub>/H<sub>phase</sub> : la phase est fortement rayée au-dessus d'environ 1,25.</dd>
+    <dt>HB, HV, HRC</dt><dd>Duretés Brinell, Vickers, Rockwell C.</dd>
+    <dt>IIW, IWE</dt><dd><i>International Institute of Welding</i> ; <i>International Welding Engineer</i>, ingénieur international en soudage.</dd>
+    <dt>ISO/TR 15608, ISO 15614-3, ISO 1071</dt><dd>Groupes de matériaux pour le soudage (les fontes forment le groupe 7) ; qualification des modes opératoires de soudage des fontes ; produits d'apport pour le soudage des fontes.</dd>
+    <dt>k, x<sub>f</sub></dt><dd>Constante de décarburation du modèle (mm/√h) ; profondeur du front de décarburation depuis chaque face (mm).</dd>
+    <dt>KV, RT, LT</dt><dd>Énergie de rupture Charpy ; résilience garantie à température ambiante (<i>room temperature</i>) ; à basse température (<i>low temperature</i>).</dd>
+    <dt>Ni-Hard, Ni-Resist</dt><dd>Noms historiques des fontes blanches martensitiques au nickel-chrome et des fontes austénitiques au nickel.</dd>
+    <dt>Normalisation</dt><dd>Austénitisation puis refroidissement à l'air, qui donne une perlite fine.</dd>
+    <dt>Nuance</dt><dd>Variété normalisée d'un matériau, définie par ses exigences.</dd>
+    <dt>Recuit de ferritisation, de graphitisation</dt><dd>Recuit qui transforme la perlite en ferrite et graphite ; recuit qui décompose la cémentite en graphite.</dd>
+    <dt>Réactions I et II</dt><dd>Dans la trempe étagée : formation de ferrite aciculaire et d'austénite enrichie ; puis décomposition de cette austénite en ferrite et carbures, à éviter.</dd>
+    <dt>T<sub>A</sub>, t, t₁, t₂</dt><dd>Température du bain de trempe étagée ; durée du maintien ; fin de la réaction I ; début de la réaction II.</dd>
+    <dt>Trempe étagée</dt><dd>Trempe interrompue dans un bain chaud (sels fondus), suivie d'un maintien isotherme (<i>austempering</i>).</dd>
+    <dt>Trempe superficielle</dt><dd>Chauffage rapide de la surface (induction, chalumeau) puis trempe : peau martensitique sur cœur inchangé.</dd>
+    <dt>W, X (désignation)</dt><dd>Exigence supplémentaire de soudabilité pour assemblages ; fonte fortement alliée, désignée par sa composition.</dd>
+  </dl>
+</div>
+</section>
+
+<section class="chap" id="check">
+<div class="wrap">
+  <div class="cartouche">
+    <div class="c-num">✓</div>
+    <div class="c-title"><h2>Suis-je prêt pour la suite ?</h2><p>Dix points à cocher de tête</p></div>
+    <div class="c-img"><span class="ico">🧭</span><span><small>Image à retenir</small>La boussole : quand tout est coché, cap sur le cours 3</span></div>
+  </div>
+  <p>Coche seulement ce que tu sais faire <b>sans regarder</b>. Tes coches restent enregistrées dans ce navigateur.</p>
+  <div class="check" id="checklist">
+    <label><input type="checkbox" data-c="1"> <span>Je sais lire une désignation EN 1560 case par case et en écrire une d'après un cahier des charges.</span></label>
+    <label><input type="checkbox" data-c="2"> <span>Je sais décoder une désignation numérique et reconnaître les anciennes désignations courantes.</span></label>
+    <label><input type="checkbox" data-c="3"> <span>Je sais situer les nuances GL, GV et GS et leurs propriétés minimales.</span></label>
+    <label><input type="checkbox" data-c="4"> <span>Je sais expliquer et estimer l'effet de l'épaisseur sur la résistance d'une fonte.</span></label>
+    <label><input type="checkbox" data-c="5"> <span>Je sais choisir un traitement thermique d'après la matrice visée.</span></label>
+    <label><input type="checkbox" data-c="6"> <span>Je sais décrire la trempe étagée, la fenêtre de l'ausferrite et les nuances ADI.</span></label>
+    <label><input type="checkbox" data-c="7"> <span>Je sais expliquer les fontes malléables à cœur blanc et à cœur noir et leurs limites.</span></label>
+    <label><input type="checkbox" data-c="8"> <span>Je sais choisir une fonte contre l'abrasion d'après la dureté de l'abrasif.</span></label>
+    <label><input type="checkbox" data-c="9"> <span>Je sais citer les usages des fontes austénitiques, au silicium et SiMo.</span></label>
+    <label><input type="checkbox" data-c="10"> <span>Je sais reconnaître la corrosion graphitique et choisir une nuance en tenant compte de la soudabilité.</span></label>
+  </div>
+  <p class="status" id="checkMsg"></p>
+
+  <div class="meta">▶ <b>Prochain cours : souder une fonte, la métallurgie du joint.</b> Tu sais maintenant identifier une fonte et ce que sa nuance promet. Le cours 3 entre dans la soudure : quelles fontes se soudent, ce qui se passe dans la zone fondue, la zone partiellement fondue et la zone affectée, comment la dilution et le métal d'apport décident de tout, et comment choisir entre soudage à chaud et soudage à froid, préchauffage, refroidissement et traitements après soudage.</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+  <p>Cours 2 sur 4 de la série « Fontes et soudage des fontes » (sujet 2.17 du planning). Désignations selon l'EN 1560 ; nuances d'après les normes de produits EN 1561, EN 1562, EN 1563, EN 1564, EN 16079, EN 12513 et EN 13835 ; pour les notations et les conventions, l'enseignement de ta formation fait foi.</p>
+</div>
+</footer>
+
+
+
+<script>
+(function(){
+"use strict";
+const NS="http://www.w3.org/2000/svg";
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function el(tag,attrs,parent){
+  const e=document.createElementNS(NS,tag);
+  if(attrs){for(const k in attrs){const v=attrs[k];if(v===undefined||v===null)continue;
+    if(typeof v==="string"&&v.indexOf("var(")>=0&&k!=="style")e.style.setProperty(k,v);else e.setAttribute(k,v);}}
+  if(parent)parent.appendChild(e);
+  return e;
+}
+function tx(p,x,y,str,attrs){const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);t.textContent=str;return t;}
+function txs(p,x,y,parts,attrs){/* parts: [["σ",""],["max","sub"],[" = 3",""]] */
+  const t=el("text",Object.assign({x:x,y:y},attrs||{}),p);
+  parts.forEach(pt=>{const s=el("tspan",pt[1]==="sub"?{"font-size":"0.72em",dy:"3"}:(pt[2]?{dy:pt[2]}:{}),t);s.textContent=pt[0];
+    if(pt[1]==="sub"){const r=el("tspan",{dy:"-3"},t);r.textContent="\u200b";}});
+  return t;
+}
+function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild);}
+function fitText(t,x0,x1,gap){/* garde un texte SVG entre x0 et x1 : il passe de l'autre côté de son repère (écart gap), sinon il glisse */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const a=t.getAttribute("text-anchor")||"start",x=+t.getAttribute("x");
+  if(gap&&a!=="middle"&&(b.x<x0||b.x+b.width>x1)){t.setAttribute("text-anchor",a==="end"?"start":"end");t.setAttribute("x",a==="end"?x+2*gap:x-2*gap);b=t.getBBox();}
+  const nx=+t.getAttribute("x");
+  if(b.x+b.width>x1)t.setAttribute("x",nx-(b.x+b.width-x1));else if(b.x<x0)t.setAttribute("x",nx+(x0-b.x));
+  return t;}
+function arrow(p,x1,y1,x2,y2,color,w,h){
+  w=w||2.4;h=h||10;
+  const g=el("g",{class:"arr"},p);g.style.color=color||"var(--ink)";
+  const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy);
+  if(L<1)return g;
+  const ux=dx/L,uy=dy/L,hh=Math.min(h,L*0.6),bx=x2-ux*hh,by=y2-uy*hh,hw=hh*0.45+w*0.3;
+  el("line",{x1:x1,y1:y1,x2:bx,y2:by,"stroke-width":w,"stroke-linecap":"round"},g);
+  el("polygon",{points:x2+","+y2+" "+(bx-uy*hw)+","+(by+ux*hw)+" "+(bx+uy*hw)+","+(by-ux*hw)},g);
+  return g;
+}
+function darrow(p,x,y1,y2,color,w){/* double flèche verticale */
+  const g=el("g",{},p);const m=(y1+y2)/2;
+  if(Math.abs(y2-y1)<4){el("line",{x1:x-5,y1:y1,x2:x+5,y2:y1,stroke:color,"stroke-width":2},g);return g;}
+  arrow(g,x,m,x,y1,color,w||2,8);arrow(g,x,m,x,y2,color,w||2,8);return g;
+}
+function nf(v,d){
+  if(d===undefined)d=1;
+  if(Math.abs(v)<0.5*Math.pow(10,-d))v=0;
+  return v.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d}).replace("-","−").replace(/[\u202f\u2009]/g,"\u00a0");
+}
+const SUP={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sci(v,d){
+  if(v===0)return "0";
+  if(!isFinite(v))return "∞";
+  let e=Math.floor(Math.log10(Math.abs(v)));
+  let m=v/Math.pow(10,e);
+  const dd=d===undefined?1:d;
+  if(Math.abs(Number(m.toFixed(dd)))>=10){m/=10;e+=1;}
+  return nf(m,dd)+" × 10"+String(e).split("").map(c=>SUP[c]).join("");
+}
+function bigN(v){/* nombre de cycles lisible */
+  if(!isFinite(v))return "∞";
+  if(v===0)return "0";
+  if(v<10)return nf(v,v<1?2:0);
+  if(v<1e5)return nf(Math.round(v),0);
+  return sci(v,1);
+}
+function dur(s){
+  if(!isFinite(s))return "∞";
+  if(s<60)return nf(s,s<10?1:0)+" s";
+  if(s<3600)return nf(s/60,0)+" min";
+  if(s<86400)return nf(s/3600,1)+" h";
+  if(s<86400*365)return nf(s/86400,1)+" jours";
+  return nf(s/(86400*365),1)+" ans";
+}
+function svgW(svg){const r=svg.getBoundingClientRect();return Math.max(290,Math.round(r.width||(svg.parentNode&&svg.parentNode.clientWidth)||600));}
+function setVB(svg,W,H){svg.setAttribute("viewBox","0 0 "+W+" "+H);}
+const redraws=[];
+let rzT=null,lastWW=window.innerWidth;
+window.addEventListener("resize",()=>{if(window.innerWidth===lastWW)return;lastWW=window.innerWidth;clearTimeout(rzT);rzT=setTimeout(()=>redraws.forEach(f=>{try{f();}catch(e){console.error(e);}}),120);});
+
+function niceStep(range,n){const raw=range/(n||5),p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<1.5?1:m<3?2:m<7?5:10)*p;}
+function setOn(sel,btn){$$(sel+" .btn").forEach(b=>b.classList.toggle("on",b===btn));}
+function fmtmm(mm){return mm<0.1?nf(mm*1000,0)+" µm":mm<10?nf(mm,mm<1?2:1)+" mm":nf(mm,0)+" mm";}
+function axes(svg,x0,x1,y0,y1,xmin,xmax,ymin,ymax,xlab,ylab,xstep,ystep,xfmt,yfmt){
+  const X=v=>x0+(x1-x0)*(v-xmin)/(xmax-xmin),Y=v=>y1-(y1-y0)*(v-ymin)/(ymax-ymin);
+  for(let v=Math.ceil(ymin/ystep-1e-9)*ystep;v<=ymax+1e-9;v+=ystep){el("line",{x1:x0,y1:Y(v),x2:x1,y2:Y(v),class:"gridbg"},svg);tx(svg,x0-5,Y(v)+4,yfmt?yfmt(v):nf(v,ystep<1?1:0),{class:"lbl","text-anchor":"end"});}
+  for(let v=Math.ceil(xmin/xstep-1e-9)*xstep;v<=xmax+1e-9;v+=xstep){el("line",{x1:X(v),y1:y1,x2:X(v),y2:y1+4,class:"tick"},svg);tx(svg,X(v),y1+17,xfmt?xfmt(v):nf(v,xstep<1?1:0),{class:"lbl","text-anchor":"middle"});}
+  el("line",{x1:x0,y1:y1,x2:x1,y2:y1,class:"axis"},svg);el("line",{x1:x0,y1:y0-4,x2:x0,y2:y1,class:"axis"},svg);
+  tx(svg,x0+4,y0-10,ylab,{class:"lbl"});tx(svg,x1,y1+32,xlab,{class:"lbl","text-anchor":"end"});
+  return {X:X,Y:Y};
+}
+function animate(btn,label,dur,onStep,onEnd){
+  let raf=null,run=false;
+  function stop(){run=false;if(raf)cancelAnimationFrame(raf);raf=null;btn.textContent=label;}
+  function start(){if(run){stop();return;}if(RM){onStep(1);stop();if(onEnd)onEnd();return;}
+    run=true;btn.textContent="⏸ Pause";const t0=performance.now();
+    const step=now=>{const p=Math.min(1,(now-t0)/dur);onStep(p);if(p>=1){stop();if(onEnd)onEnd();return;}raf=requestAnimationFrame(step);};raf=requestAnimationFrame(step);}
+  btn.addEventListener("click",start);return {stop:stop,running:()=>run};
+}
+
+
+function sig2(v){/* arrondi à deux chiffres significatifs */
+  if(v<=0)return 0;const p=Math.pow(10,Math.floor(Math.log10(v))-1);return Math.round(v/p)*p;}
+function halo(t,svg){/* liseré de fond, puis passage au premier plan */
+  t.setAttribute("paint-order","stroke");t.style.setProperty("stroke","var(--card)");t.setAttribute("stroke-width","4");t.setAttribute("stroke-linejoin","round");if(svg)svg.appendChild(t);return t;}
+function plate(t,svg){/* fond plein derrière une étiquette */
+  let b;try{b=t.getBBox();}catch(e){return t;}if(!b.width)return t;
+  const r=el("rect",{x:b.x-3,y:b.y-1,width:b.width+6,height:b.height+2,fill:"var(--card)",opacity:.92,rx:2});svg.appendChild(r);svg.appendChild(t);return t;}
+function le(n,f){return /^[aeiouyhéèâî]/i.test(n)?"l'"+n:(f?"la ":"le ")+n;}
+function du(n,f){return /^[aeiouyhéèâî]/i.test(n)?"de l'"+n:(f?"de la ":"du ")+n;}
+function fmtG(v){return nf(v,v<0.1?3:2)+" N/m";}
+function fmtPa(p){return p<1000?nf(p,0)+" Pa":p<1e5?nf(p/1000,1)+" kPa":nf(p/1e5,2)+" bar";}
+function fmtLen(m){/* m en mètres */
+  const mm=m*1000;if(mm<1)return nf(mm*1000,0)+" µm";if(mm<10)return nf(mm,1)+" mm";if(mm<1000)return nf(mm,0)+" mm";return nf(m,1)+" m";}
+function fmtT(s){if(!isFinite(s))return "∞";if(s<0.01)return nf(s*1000,1)+" ms";if(s<1)return nf(s,3)+" s";if(s<60)return nf(s,s<10?1:0)+" s";return nf(s/60,s<600?1:0)+" min";}
+
+function spread(items,gap,ymin,ymax){/* écarte verticalement des étiquettes {y} triées */
+  items.sort((a,b)=>a.y-b.y);
+  for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;
+  if(items.length&&items[items.length-1].y>ymax){items[items.length-1].y=ymax;for(let i=items.length-2;i>=0;i--)if(items[i+1].y-items[i].y<gap)items[i].y=items[i+1].y-gap;}
+  if(items.length&&items[0].y<ymin){items[0].y=ymin;for(let i=1;i<items.length;i++)if(items[i].y-items[i-1].y<gap)items[i].y=items[i-1].y+gap;}
+  return items;}
+function declutter(ts,ymin,ymax){/* décale verticalement les textes qui se chevauchent */
+  const box=t=>{try{return t.getBBox();}catch(e){return null;}};
+  for(let i=1;i<ts.length;i++){const ti=ts[i];if(!ti)continue;
+    for(let pass=0;pass<6;pass++){const bi=box(ti);if(!bi)break;let moved=false;
+      for(let j=0;j<i;j++){const bj=ts[j]&&box(ts[j]);if(!bj)continue;
+        const ix=Math.min(bi.x+bi.width,bj.x+bj.width)-Math.max(bi.x,bj.x),iy=Math.min(bi.y+bi.height,bj.y+bj.height)-Math.max(bi.y,bj.y);
+        if(ix>1&&iy>1){let dy=(bi.y+bi.height/2>=bj.y+bj.height/2)?(bj.y+bj.height-bi.y+1):-(bi.y+bi.height-bj.y+1);
+          if(bi.y+dy<ymin||bi.y+bi.height+dy>ymax)dy=dy>0?-(bi.y+bi.height-bj.y+1):(bj.y+bj.height-bi.y+1);
+          ti.setAttribute("y",+ti.getAttribute("y")+dy);moved=true;break;}}
+      if(!moved)break;}}
+  return ts;}
+const SUPD={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function p10(e){return "10"+String(e).split("").map(c=>SUPD[c]||c).join("");}
+function fmtP(p){/* pression en Pa, lisible */
+  if(p>=1e5)return nf(p/1e5,1)+" bar";if(p>=1000)return nf(p/1000,p<1e4?1:0)+" kPa";if(p>=1)return nf(p,p<10?1:0)+" Pa";return sci(p,1)+" Pa";}
+
+
+
+function rng(seed){/* générateur pseudo-aléatoire reproductible */
+  let a=seed>>>0;return ()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
+
+
+
+/* =========================================================
+   Utilitaires communs du cours : unités, formats, dessins
+   ========================================================= */
+const nbsp=s=>s.replace(/(\d) (°C\/s|°C\/min|°C|kWh\/t|MPa|GPa|mm²|mm|µm|%|HB|HV|min|h|s)(?=[\s.,;:)<·/]|$)/g,"$1 $2");
+function fitSize(t,maxW,min){let b;try{b=t.getBBox();}catch(e){return t;}let fs=parseFloat(getComputedStyle(t).fontSize)||13;
+  while(b.width>maxW&&fs>(min||9)){fs-=0.5;t.style.fontSize=fs+"px";b=t.getBBox();}return t;}
+const pts=P=>P.map(p=>p[0].toFixed(2)+","+p[1].toFixed(2)).join(" ");
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function sstep(a,b,x){const u=clamp((x-a)/(b-a),0,1);return u*u*(3-2*u);}
+function fsz(t,px){t.style.fontSize=px+"px";return t;}
+function hatch(svg,id,color,gap,w){let d=svg.querySelector("defs");if(!d)d=el("defs",{},svg);
+  const p=el("pattern",{id:id,width:gap,height:gap,patternUnits:"userSpaceOnUse",patternTransform:"rotate(45)"},d);
+  el("line",{x1:0,y1:0,x2:0,y2:gap,stroke:color,"stroke-width":w||1.4},p);return "url(#"+id+")";}
+function fmtMin(m){return m<60?nf(m,m<10?1:0)+" min":m<600?nf(m/60,1)+" h":nf(m/60,0)+" h";}
+
+/* =========================================================
+   M1 : le décodeur de désignations
+   ========================================================= */
+(function(){
+  const svg=$("#m1svg");if(!svg)return;
+  const ss=$("#m1s"),ro=$("#m1r"),msg=$("#m1msg");
+  const K={id:"var(--ink)",st:"var(--gam)",pr:"var(--eps)",co:"var(--mat)",ex:"var(--weld)"};
+  const ID=[["EN-",1,"id","préfixe : désignation européenne (EN 1560)"],["GJ",2,"id","G : pièce moulée ; J : fonte"]];
+  const G={L:"graphite lamellaire",S:"graphite sphéroïdal",V:"graphite vermiculaire",M:"graphite de recuit : fonte malléable",N:"sans graphite : fonte blanche"};
+  const EX=[
+    {seg:[["L",3,"st",G.L],["-250",5,"pr","Rm ≥ 250 MPa (250 à 350 MPa sur éprouvette)"]],num:"EN-JL1040",nd:"J fonte · L lamellaire · 1 traction · 04 numéro · 0 sans exigence",nm:"EN 1561, fonte GL"},
+    {seg:[["L",3,"st",G.L],["-HB195",5,"pr","nuance définie par la dureté Brinell, repère 195"]],num:"",nm:"EN 1561, fonte GL par la dureté"},
+    {seg:[["S",3,"st",G.S],["-400-15",5,"pr","Rm ≥ 400 MPa ; A ≥ 15 %"]],num:"EN-JS1030",nd:"J fonte · S sphéroïdal · 1 traction · 03 numéro · 0 sans exigence",nm:"EN 1563, fonte GS ferritique"},
+    {seg:[["S",3,"st",G.S],["-400-18",5,"pr","Rm ≥ 400 MPa ; A ≥ 18 %"],["-LT",5,"pr","résilience garantie à basse température (−20 °C)"]],num:"EN-JS1025",nd:"J fonte · S sphéroïdal · 1 traction · 02 numéro · 5 résilience à basse température",nm:"EN 1563, fonte GS ferritique"},
+    {seg:[["S",3,"st",G.S],["-500-7",5,"pr","Rm ≥ 500 MPa ; A ≥ 7 %"],["U",5,"pr","mesuré sur un échantillon attenant à la pièce"]],num:"",nm:"EN 1563, fonte GS ferrito-perlitique"},
+    {seg:[["S",3,"st",G.S],["-500-14",5,"pr","Rm ≥ 500 MPa ; A ≥ 14 % : ferrite durcie par le silicium"]],num:"",nm:"EN 1563, fonte GS au silicium"},
+    {seg:[["V",3,"st",G.V],["-400",5,"pr","Rm ≥ 400 MPa"]],num:"",nm:"EN 16079, fonte GV"},
+    {seg:[["M",3,"st",G.M],["W",4,"st","cœur blanc (recuit décarburant)"],["-360-12",5,"pr","Rm ≥ 360 MPa ; A ≥ 12 %"]],num:"EN-JM1020",nd:"J fonte · M malléable · 1 traction · 02 numéro · 0 sans exigence",nm:"EN 1562, malléable à cœur blanc"},
+    {seg:[["M",3,"st",G.M],["B",4,"st","cœur noir (recuit de graphitisation)"],["-350-10",5,"pr","Rm ≥ 350 MPa ; A ≥ 10 %"]],num:"",nm:"EN 1562, malléable à cœur noir"},
+    {seg:[["S",3,"st",G.S],["-800-10",5,"pr","Rm ≥ 800 MPa ; A ≥ 10 % : nuance ausferritique (ADI)"]],num:"",nm:"EN 1564, fonte ADI"},
+    {seg:[["N",3,"st",G.N],["-HV600",5,"pr","nuance définie par la dureté Vickers, repère 600"]],num:"",nm:"EN 12513, fonte résistante à l'abrasion"},
+    {seg:[["S",3,"st",G.S],["A",4,"st","matrice austénitique"],["-X",5,"co","X : fonte fortement alliée, désignée par sa composition"],["NiCr",5,"co","éléments d'alliage : nickel, chrome"],["20-2",5,"co","teneurs : Ni ≈ 20 %, Cr ≈ 2 %"]],num:"",nm:"EN 13835, fonte austénitique"}];
+  const POS=["toutes les cases","1 préfixe","2 matériau","3 graphite","4 structure","5 propriétés ou composition","6 exigences supplémentaires"];
+  const EXPL={1:"La case 1, EN-, dit que la désignation suit la norme européenne EN 1560.",2:"La case 2, GJ, dit qu'il s'agit d'une pièce moulée (G) en fonte (J, de l'anglais iron).",3:"La case 3 donne la forme du graphite : L, S, V, M ou N.",4:"La case 4, facultative, précise la structure : A austénite, W cœur blanc, B cœur noir, F ferrite, P perlite…",5:"La case 5 donne les propriétés garanties (Rm-A, dureté, résilience, type d'échantillon) ou la composition des fontes fortement alliées (X).",6:"La case 6, facultative, ajoute des exigences : D brut de fonderie, H traité, W soudabilité, Z exigence de la commande."};
+  let k=0;
+  function draw(){
+    const W=svgW(svg),n=W<560,ex=EX[k],seg=ID.concat(ex.seg),sel=+ss.value;
+    const H=n?400:340;setVB(svg,W,H);clear(svg);
+    $("#m1so").textContent=sel===0?"toutes":"case "+sel;
+    tx(svg,8,16,"La désignation, case par case",{class:"ttl"});
+    /* cases */
+    let fs=n?24:30;const y0=54,bh=fs+18;
+    const mk=()=>{const g=el("g",{},svg),T=[];let x=0;
+      seg.forEach(s=>{const t=tx(g,0,y0+bh/2+fs*0.35,s[0],{"font-weight":"700"});t.style.fontSize=fs+"px";t.style.fontFamily="var(--font-head)";const w=t.getBBox().width+16;T.push({t:t,w:w,x:x});x+=w+4;});return {g:g,T:T,tot:x-4};};
+    let r=mk();while(r.tot>W-16&&fs>12){svg.removeChild(r.g);fs-=2;r=mk();}
+    const off=Math.max(8,(W-r.tot)/2);
+    r.T.forEach((o,i)=>{const s=seg[i],on=sel===0||sel===s[1],col=K[s[2]];
+      const bx=el("rect",{x:off+o.x,y:y0,width:o.w,height:bh,rx:5,fill:col,"fill-opacity":on?0.14:0.04,stroke:col,"stroke-width":on?2.4:1,opacity:on?1:.45},svg);
+      r.g.parentNode.insertBefore(bx,r.g);
+      o.t.setAttribute("x",off+o.x+o.w/2);o.t.setAttribute("text-anchor","middle");o.t.style.fill=col;o.t.setAttribute("opacity",on?1:.4);
+      const tn=fsz(tx(svg,off+o.x+o.w/2,y0-7,String(s[1]),{class:"lbl","text-anchor":"middle","font-weight":"700"}),11);tn.setAttribute("opacity",on?1:.4);});
+    /* liste des explications */
+    let y=y0+bh+30;const lh=n?21:22;
+    seg.forEach(s=>{const on=sel===0||sel===s[1],col=K[s[2]];
+      el("circle",{cx:14,cy:y-4,r:4.5,fill:col,opacity:on?1:.35},svg);
+      const t=tx(svg,26,y,s[0]+" (case "+s[1]+") : "+s[2+1],{class:"lbl"});t.style.fontSize="12.5px";t.style.fill=on?"var(--ink)":"var(--muted)";t.setAttribute("font-weight",on&&sel!==0?"700":"400");fitSize(t,W-34,8.5);
+      y+=lh;});
+    if(sel===4&&!seg.some(s=>s[1]===4)){const t=fsz(tx(svg,26,y,"case 4 absente : elle est facultative",{class:"lbl","font-style":"italic"}),12);fitSize(t,W-34,8.5);y+=lh;}
+    if(sel===6){const t=fsz(tx(svg,26,y,"case 6 absente ici : aucune exigence supplémentaire (D, H, W ou Z)",{class:"lbl","font-style":"italic"}),12);fitSize(t,W-34,8.5);y+=lh;}
+    /* désignation numérique */
+    const yn=Math.min(H-32,y+10);
+    const tnum=tx(svg,8,yn,ex.num?"Numérique : "+ex.num:"Numérique : non reprise ici",{class:"lbl","font-weight":"700"});tnum.style.fontSize="12.5px";fitSize(tnum,W-16,8);
+    if(ex.num){const tnd=tx(svg,8,yn+18,ex.nd,{class:"lbl"});tnd.style.fontSize="12px";fitSize(tnd,W-16,7.5);}
+    setVB(svg,W,Math.min(H,yn+(ex.num?32:16)));
+    const des="EN-GJ"+ex.seg.map(s=>s[0]).join("");
+    ro.innerHTML=nbsp("<span>désignation : <b>"+des+"</b></span><span>numérique : "+(ex.num||"—")+"</span><span>"+ex.nm+"</span>");
+    let m;
+    if(sel===0)m=des+" : "+ex.seg.map(s=>s[3]).join(" ; ")+".";
+    else{m=EXPL[sel];const here=seg.filter(s=>s[1]===sel);m+=here.length?" Ici : « "+here.map(s=>s[0]).join(" ")+" », "+here.map(s=>s[3]).join(" ; ")+".":" Cette case est absente de "+des+".";}
+    msg.innerHTML=nbsp(m);
+  }
+  let pos=0;
+  const A=animate($("#m1play"),"▶ Lire pas à pas",7000,p=>{const v=Math.min(6,1+Math.floor(p*6));if(p>=1){ss.value=0;}else ss.value=v;draw();},null);
+  $$("#m1e .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();k=+b.dataset.k;setOn("#m1e",b);draw();}));
+  ss.addEventListener("input",()=>{A.stop();draw();});
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M2 : l'épaisseur qui change tout
+   ========================================================= */
+(function(){
+  const svg=$("#m2svg");if(!svg)return;
+  const se=$("#m2e"),ro=$("#m2r"),msg=$("#m2msg");
+  const GL={"EN-GJL-200":[[2.5,5,230],[5,10,205],[10,20,180],[20,40,155],[40,80,130],[80,150,115]],"EN-GJL-250":[[5,10,250],[10,20,225],[20,40,195],[40,80,170],[80,150,155]]};
+  const GS={"EN-GJS-400-15":[[0,30,250,400,15],[30,60,250,390,14],[60,200,240,370,11]],"EN-GJS-500-7":[[0,30,320,500,7],[30,60,300,450,7],[60,200,290,420,5]],"EN-GJS-600-3":[[0,30,370,600,3],[30,60,360,600,2],[60,200,340,550,1]]};
+  const DASH=["","7 4","2 3"];
+  let fam="GL";
+  const find=(rows,e)=>rows.find(r=>e>r[0]&&e<=r[1]);
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?400:330;setVB(svg,W,H);clear(svg);
+    const e=Math.pow(10,+se.value);$("#m2eo").textContent=nf(e,e<10?1:0)+" mm";
+    tx(svg,8,15,fam==="GL"?"Résistance attendue dans la pièce (EN 1561)":"Minimums garantis selon l'épaisseur (EN 1563)",{class:"ttl"});
+    const x0=54,x1=W-(n?14:120),y0=44,y1=H-44,lx=v=>Math.log10(v);
+    const A=axes(svg,x0,x1,y0,y1,lx(2.5),lx(200),100,650,"épaisseur de paroi e (mm, échelle log)","Rm (MPa)",1,100,v=>"",v=>nf(v,0));
+    [2.5,5,10,20,40,80,150,200].forEach(v=>{el("line",{x1:A.X(lx(v)),y1:y1,x2:A.X(lx(v)),y2:y1+4,class:"tick"},svg);if(!(n&&v===150))fsz(tx(svg,A.X(lx(v)),y1+16,nf(v,v<10?1:0),{class:"lbl","text-anchor":"middle"}),11);});
+    const D=fam==="GL"?GL:GS,names=Object.keys(D),labs=[];
+    if(fam==="GL"){el("rect",{x:A.X(lx(2.5)),y:y0,width:A.X(lx(5))-A.X(lx(2.5)),height:y1-y0,fill:hatch(svg,"m2h","var(--tau)",6,1.2),opacity:.5},svg);
+      const tt=fsz(tx(svg,A.X(lx(3.5)),y0+14,"trempe ?",{class:"lbl","text-anchor":"middle",fill:"var(--tau)","font-weight":"700"}),11);halo(tt,svg);
+      el("line",{x1:A.X(lx(15)),y1:A.Y(250),x2:A.X(lx(15)),y2:A.Y(350),stroke:"var(--muted)","stroke-width":5,opacity:.35},svg);
+      const te=fsz(tx(svg,A.X(lx(15))+5,A.Y(355),"éprouvette Ø 30 mm",{class:"lbl"}),10.5);halo(te,svg);}
+    names.forEach((nm,i)=>{const rows=D[nm],P=[];rows.forEach(r=>{const v=fam==="GL"?r[2]:r[3];P.push([A.X(lx(Math.max(2.5,r[0]))),A.Y(v)],[A.X(lx(r[1])),A.Y(v)]);});
+      for(let j=0;j<P.length-1;j+=2){el("line",{x1:P[j][0],y1:P[j][1],x2:P[j+1][0],y2:P[j+1][1],stroke:"var(--eps)","stroke-width":2.6,"stroke-dasharray":DASH[i]},svg);
+        if(j+2<P.length)el("line",{x1:P[j+1][0],y1:P[j+1][1],x2:P[j+2][0],y2:P[j+2][1],stroke:"var(--eps)","stroke-width":1,"stroke-dasharray":"2 3",opacity:.6},svg);}
+      const last=P[P.length-1];
+      if(!n){const t=fsz(tx(svg,x1+6,last[1]+4,nm.replace("EN-",""),{class:"lbl",fill:"var(--eps)","font-weight":"700"}),11.5);labs.push(t);}});
+    if(labs.length)declutter(labs,y0,y1+8);
+    if(n){names.forEach((nm,i)=>{const yy=y0+4+i*14;el("line",{x1:x1-112,y1:yy-4,x2:x1-92,y2:yy-4,stroke:"var(--eps)","stroke-width":2.4,"stroke-dasharray":DASH[i]},svg);const t=fsz(tx(svg,x1-88,yy,nm.replace("EN-",""),{class:"lbl",fill:"var(--eps)","font-weight":"700"}),10.5);halo(t,svg);});}
+    /* curseur */
+    const xe=A.X(lx(e));el("line",{x1:xe,y1:y0,x2:xe,y2:y1,stroke:"var(--mat)","stroke-width":2,"stroke-dasharray":"5 3"},svg);
+    const vals=[];names.forEach(nm=>{const r=find(D[nm],e);if(r){const v=fam==="GL"?r[2]:r[3];el("circle",{cx:xe,cy:A.Y(v),r:5.5,fill:"var(--sig)"},svg);vals.push({nm:nm,r:r});}else vals.push({nm:nm,r:null});});
+    /* lectures */
+    let rd="<span>e = <b class='mat'>"+nf(e,e<10?1:0)+" mm</b></span>";
+    vals.forEach(o=>{rd+="<span>"+o.nm.replace("EN-GJL-","GL-").replace("EN-GJS-","")+" : "+(o.r?(fam==="GL"?"<b class='eps'>≈ "+o.r[2]+" MPa</b>":"<b class='eps'>"+o.r[3]+"</b>/"+o.r[2]+" MPa · "+o.r[4]+" %"):"—")+"</span>";});
+    ro.innerHTML=nbsp(rd);
+    let m;
+    if(fam==="GL"){
+      if(e<=5)m="Paroi très mince : l'EN 1561 ne donne de valeur que pour l'EN-GJL-200 ("+(vals[0].r?vals[0].r[2]:"—")+" MPa) ; le risque de trempe domine.";
+      else if(e>150)m="Au-delà de 150 mm, la norme ne donne plus de valeur attendue : il faut des essais sur la pièce.";
+      else m="À "+nf(e,0)+" mm, une EN-GJL-250 offre environ "+vals[1].r[2]+" MPa, une EN-GJL-200 environ "+vals[0].r[2]+" MPa. Plus la paroi est épaisse, plus la fonte refroidit lentement et plus elle est faible.";}
+    else{
+      if(e>200)m="Au-delà de 200 mm, l'EN 1563 ne fixe plus de minimum : accord entre fondeur et client.";
+      else m="Classe "+(e<=30?"jusqu'à 30 mm":e<=60?"30 à 60 mm":"60 à 200 mm")+" : EN-GJS-500-7 garantit "+vals[1].r[3]+" MPa et "+vals[1].r[4]+" % ; la GS perd peu avec l'épaisseur, l'allongement surtout baisse.";}
+    msg.innerHTML=nbsp(m);
+  }
+  const A=animate($("#m2play"),"▶ Parcourir les épaisseurs",7000,p=>{se.value=(0.4+1.9*p).toFixed(2);draw();},null);
+  $$("#m2f .btn").forEach(b=>b.addEventListener("click",()=>{fam=b.dataset.k;setOn("#m2f",b);draw();}));
+  se.addEventListener("input",()=>{A.stop();draw();});
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M3 : la fenêtre de l'ausferrite
+   ========================================================= */
+(function(){
+  const svg=$("#m3svg");if(!svg)return;
+  const sT=$("#m3T"),st=$("#m3t"),ro=$("#m3r"),msg=$("#m3msg");
+  const PR={800:[400,1.78],1050:[335,2.08],1400:[255,2.38],court:[370,1.0],long:[400,2.78]};
+  const t1=T=>30*Math.exp(0.012*(370-T)),t2=T=>240*Math.exp(0.025*(370-T));
+  const PTS=[[850,11],[1050,8.2],[1200,6.1],[1400,3.1],[1450,2.0]];
+  function Aof(R){if(R<=PTS[0][0])return PTS[0][1];for(let i=1;i<PTS.length;i++){if(R<=PTS[i][0]){const a=PTS[i-1],b=PTS[i];return a[1]+(b[1]-a[1])*(R-a[0])/(b[0]-a[0]);}}return Math.max(1.2,2-(R-1450)*0.01);}
+  const GR=[["800-10",800,10],["900-8",900,8],["1050-6",1050,6],["1200-3",1200,3],["1400-1",1400,1]];
+  function model(T,t){const Rm0=Math.min(1530,1450-4*(T-250)),A0=Aof(Rm0),T1=t1(T),T2=t2(T),X=Math.min(1,Math.pow(t/T1,1.5)),fM=1-X,fc=t>T2?clamp(Math.log10(t/T2),0,1):0;
+    const Rm=Rm0*(1+0.15*fM)*(1-0.1*fc),A=A0*X*X*(1-0.7*fc),HB=Rm/3.3+250*fM;let g=null;GR.forEach(q=>{if(Rm>=q[1]&&A>=q[2])g=q[0];});
+    return {T1:T1,T2:T2,X:X,fM:fM,fc:fc,Rm:Rm,A:A,HB:HB,g:g};}
+  const ND=(function(){const R=rng(1564),A=[];for(let i=0;i<16;i++)A.push([R(),R(),0.7+0.6*R()]);return A;})();
+  const NE=(function(){const R=rng(77),A=[];for(let i=0;i<220;i++)A.push([R(),R(),R()*Math.PI,R(),R()]);return A;})();
+  let prog=null;
+  function preset(){let k=null;for(const p in PR){if(+sT.value===PR[p][0]&&Math.abs(+st.value-PR[p][1])<0.001)k=p;}return k;}
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?540:330;setVB(svg,W,H);clear(svg);
+    const T=+sT.value,lt=prog===null?+st.value:3.2*prog,t=Math.pow(10,lt),m=model(T,t);
+    $("#m3To").textContent=nf(T,0)+" °C";$("#m3to").textContent=fmtMin(Math.pow(10,+st.value));
+    /* carte temps-température */
+    const x0=54,x1=n?W-60:Math.round(W*0.58)-46,y0=44,y1=n?270:H-44;
+    tx(svg,8,15,"Carte temps-température du bain",{class:"ttl"});
+    const A=axes(svg,x0,x1,y0,y1,0,3.2,230,400,"durée (min, échelle log)","TA (°C)",1,25,v=>"",v=>nf(v,0));
+    [1,10,100,1000].forEach(v=>{const xx=A.X(Math.log10(v));el("line",{x1:xx,y1:y1,x2:xx,y2:y1+4,class:"tick"},svg);fsz(tx(svg,xx,y1+16,nf(v,0),{class:"lbl","text-anchor":"middle"}),11);});
+    const Ts=[];for(let v=230;v<=400.01;v+=5)Ts.push(v);
+    const c1=Ts.map(v=>[A.X(Math.log10(t1(v))),A.Y(v)]),c2=Ts.map(v=>[A.X(Math.min(3.2,Math.log10(t2(v)))),A.Y(v)]);
+    el("polygon",{points:pts(c1.concat(c2.slice().reverse())),fill:"var(--gam)",opacity:.2},svg);
+    el("polygon",{points:pts([[A.X(0),A.Y(230)]].concat(c1,[[A.X(0),A.Y(400)]])),fill:"var(--tau)",opacity:.08},svg);
+    el("polyline",{points:pts(c1),fill:"none",stroke:"var(--gam)","stroke-width":2.2},svg);
+    el("polyline",{points:pts(c2),fill:"none",stroke:"var(--tau)","stroke-width":2.2,"stroke-dasharray":"6 4"},svg);
+    const L1=fsz(tx(svg,A.X(0.12),A.Y(262),"martensite",{class:"lbl",fill:"var(--tau)","font-weight":"700"}),11);halo(L1,svg);
+    const L2=fsz(tx(svg,A.X(1.95),A.Y(372),"ausferrite",{class:"lbl",fill:"var(--gam)","font-weight":"700"}),11.5);halo(L2,svg);
+    const L3=fsz(tx(svg,A.X(3.15),A.Y(392),"carbures",{class:"lbl","text-anchor":"end",fill:"var(--tau)","font-weight":"700"}),11);halo(L3,svg);
+    /* nuances visées par température */
+    [["1400-1",230,260],["1200-3",265,310],["1050-6",315,350],["900-8",355,385],["800-10",390,400]].forEach((g,i)=>{const yA=A.Y(g[2]),yB=A.Y(g[1]);
+      el("line",{x1:x1+6,y1:yA,x2:x1+6,y2:yB,stroke:"var(--eps)","stroke-width":4,opacity:i%2?0.55:0.9},svg);
+      const t=fsz(tx(svg,x1+12,(yA+yB)/2+4,g[0],{class:"lbl",fill:"var(--eps)","font-weight":"700"}),10.5);fitSize(t,W-x1-14,8);});
+    const px=A.X(lt),py=A.Y(T);el("circle",{cx:px,cy:py,r:6.5,fill:"var(--sig)"},svg);
+    /* micrographie schématique */
+    const cx0=n?W/2:Math.round(W*0.79),cy0=n?y1+150:H/2+8,R=n?Math.min(108,W/2-20):Math.min(118,(W*0.42)/2-12,(H-60)/2);
+    tx(svg,n?8:Math.round(W*0.6),n?y1+38:15,"Structure (schéma)",{class:"ttl"});
+    const cp=el("clipPath",{id:"m3c"},svg);el("circle",{cx:cx0,cy:cy0,r:R},cp);const g=el("g",{"clip-path":"url(#m3c)"},svg);
+    el("circle",{cx:cx0,cy:cy0,r:R,fill:"color-mix(in srgb,var(--gam) 10%,var(--card))"},g);
+    const fine=(T-230)/170,len=R*(0.08+0.14*fine),wid=0.9+1.8*fine,nN=Math.round(220*(1-0.55*fine)*m.X);
+    for(let i=0;i<nN;i++){const q=NE[i],x=cx0+(q[0]*2-1)*R,y=cy0+(q[1]*2-1)*R,a=q[2];
+      el("line",{x1:x-Math.cos(a)*len/2,y1:y-Math.sin(a)*len/2,x2:x+Math.cos(a)*len/2,y2:y+Math.sin(a)*len/2,stroke:"var(--gam)","stroke-width":wid,"stroke-linecap":"round"},g);
+      if(m.fc>0&&q[3]<m.fc)el("circle",{cx:x,cy:y,r:1.8,fill:"var(--tau)"},g);}
+    if(m.fM>0.02){const R2=rng(9);for(let i=0;i<Math.round(14*m.fM);i++){const x=cx0+(R2()*2-1)*R*0.85,y=cy0+(R2()*2-1)*R*0.85,s=R*0.16;
+      el("polygon",{points:pts([[x-s,y-s*0.4],[x+s*0.3,y-s],[x+s,y+s*0.2],[x-s*0.2,y+s]]),fill:"var(--tau)",opacity:.42},g);}}
+    ND.forEach(d=>el("circle",{cx:cx0+(d[0]*2-1)*R*0.8,cy:cy0+(d[1]*2-1)*R*0.8,r:R*0.07*d[2],fill:"var(--ink)"},g));
+    el("circle",{cx:cx0,cy:cy0,r:R,fill:"none",stroke:"var(--ink)","stroke-width":1.5},svg);
+    /* lectures */
+    ro.innerHTML=nbsp("<span>T<sub>A</sub> = <b class='sig'>"+nf(T,0)+" °C</b> · t = <b class='sig'>"+fmtMin(t)+"</b></span><span>fenêtre : "+fmtMin(m.T1)+" → "+fmtMin(m.T2)+"</span><span>R<sub>m</sub> ≈ <b class='eps'>"+nf(m.Rm,0)+" MPa</b></span><span>A ≈ <b class='eps'>"+nf(m.A,1)+" %</b></span><span>≈ "+nf(m.HB,0)+" HB</span><span>"+(m.fM>0.005?"martensite ≈ "+nf(m.fM*100,0)+" %":m.fc>0?"carbures : réaction II engagée":"ausferrite")+"</span><span>"+(m.g?"→ <b>EN-GJS-"+m.g+"</b>":"→ aucune nuance EN 1564")+"</span>");
+    let s;
+    if(m.fM>0.005)s="Trop court : la réaction I n'a transformé que "+nf(m.X*100,0)+" % de l'austénite ; le reste devient martensite au refroidissement. Dur ("+nf(m.HB,0)+" HB) et fragile (A ≈ "+nf(m.A,1)+" %).";
+    else if(m.fc>0)s="Trop long : au-delà de "+fmtMin(m.T2)+", l'austénite enrichie se décompose en ferrite et carbures. L'allongement tombe à ≈ "+nf(m.A,1)+" %.";
+    else s="Dans la fenêtre : ausferrite "+(T>=350?"grossière, riche en austénite, ductile":T>=290?"intermédiaire":"fine, résistante et dure")+". R<sub>m</sub> ≈ "+nf(m.Rm,0)+" MPa, A ≈ "+nf(m.A,1)+" %"+(m.g?" : EN-GJS-"+m.g+".":".");
+    if(prog===null&&m.T2-m.T1<120&&!m.fc&&!m.fM)s+=" La fenêtre est étroite à cette température : la durée doit être tenue.";
+    msg.innerHTML=nbsp(s);
+    const nm=preset();$$("#m3p .btn").forEach(b=>b.classList.toggle("on",b.dataset.k===nm));
+  }
+  const A=animate($("#m3play"),"▶ Maintenir dans le bain",7000,p=>{prog=p;draw();},()=>{prog=null;st.value=3.2;draw();});
+  $$("#m3p .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;const v=PR[b.dataset.k];sT.value=v[0];st.value=v[1];draw();}));
+  [sT,st].forEach(r=>r.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M4 : cœur blanc, cœur noir
+   ========================================================= */
+(function(){
+  const svg=$("#m4svg");if(!svg)return;
+  const sT=$("#m4T"),st=$("#m4t"),se=$("#m4e"),ro=$("#m4r"),msg=$("#m4msg");
+  const k=T=>0.391*Math.exp(-8900*(1/(T+273)-1/1273)),tau=T=>15*Math.exp(24055*(1/(T+273)-1/1223));
+  const TC=(function(){const R=rng(1562),A=[];for(let i=0;i<70;i++)A.push([R(),R(),R()]);return A;})();
+  let prog=null;
+  function blob(g,x,y,r,seed){const R=rng(seed),P=[];for(let i=0;i<9;i++){const a=i/9*Math.PI*2,rr=r*(0.6+0.55*R());P.push([x+rr*Math.cos(a),y+rr*Math.sin(a)]);}el("polygon",{points:pts(P),fill:"var(--ink)"},g);}
+  function draw(){
+    const W=svgW(svg),n=W<560,ph0=n?110:170,H=n?2*ph0+160:ph0+100;setVB(svg,W,H);clear(svg);
+    const T=+sT.value,t=prog===null?+st.value:120*prog,e=+se.value,xf=k(T)*Math.sqrt(t),ta=tau(T),f=t>0?1-Math.exp(-Math.pow(t/ta,1.5)):0;
+    $("#m4To").textContent=nf(T,0)+" °C";$("#m4to").textContent=nf(+st.value,0)+" h";$("#m4eo").textContent=nf(e,1)+" mm";
+    const pw=n?W-16:(W-40)/2,ph=ph0,sc=ph/30,hh=e*sc;
+    const panels=[{x:8,y:n?46:46,t:"Cœur blanc : décarburation"},{x:n?8:24+pw,y:n?46+ph+80:46,t:"Cœur noir : graphitisation"}];
+    panels.forEach((p,i)=>{
+      tx(svg,p.x,p.y-22,p.t,{class:"ttl"});
+      const top=p.y+(ph-hh)/2,cp=el("clipPath",{id:"m4c"+i},svg);el("rect",{x:p.x,y:top,width:pw,height:hh},cp);
+      const g=el("g",{"clip-path":"url(#m4c"+i+")"},svg);
+      if(i===0){
+        el("rect",{x:p.x,y:top,width:pw,height:hh,fill:hatch(svg,"m4p","var(--muted)",4,0.9),opacity:.6},g);
+        el("rect",{x:p.x,y:top,width:pw,height:hh,fill:"var(--tau)",opacity:t<1?.25:.0},g);
+        const d=Math.min(e/2,xf)*sc;
+        el("rect",{x:p.x,y:top,width:pw,height:d,fill:"color-mix(in srgb,var(--gam) 22%,var(--card))"},g);
+        el("rect",{x:p.x,y:top+hh-d,width:pw,height:d,fill:"color-mix(in srgb,var(--gam) 22%,var(--card))"},g);
+        if(2*xf<e){const core=hh-2*d;TC.forEach((q,j)=>{if(q[2]<Math.min(1,t/30)){const y=top+d+q[1]*core;if(core>4)blob(g,p.x+q[0]*pw,y,2.2,j);}});
+          el("line",{x1:p.x,y1:top+d,x2:p.x+pw,y2:top+d,stroke:"var(--gam)","stroke-width":1.6,"stroke-dasharray":"5 3"},g);
+          el("line",{x1:p.x,y1:top+hh-d,x2:p.x+pw,y2:top+hh-d,stroke:"var(--gam)","stroke-width":1.6,"stroke-dasharray":"5 3"},g);}
+        [[top+4,1],[top+hh-4,-1]].forEach(a=>{for(let j=0;j<5;j++){const xx=p.x+pw*(j+0.5)/5;arrow(svg,xx,a[0],xx,a[0]-a[1]*16,"var(--frc)",1.6,6);}});
+      }else{
+        el("rect",{x:p.x,y:top,width:pw,height:hh,fill:hatch(svg,"m4p2","var(--muted)",4,0.9),opacity:.45},g);
+        el("rect",{x:p.x,y:top,width:pw,height:hh,fill:"var(--tau)",opacity:.32*(1-f)},g);
+        const N=Math.round(70*f);TC.slice(0,N).forEach((q,j)=>blob(g,p.x+q[0]*pw,top+q[1]*hh,Math.max(1.8,Math.min(5,hh/9)),j+100));
+      }
+      el("rect",{x:p.x,y:top,width:pw,height:hh,fill:"none",stroke:"var(--ink)","stroke-width":1.5},svg);
+      darrow(svg,p.x+pw-10,top,top+hh,"var(--ink)",1.2);
+      const te=fsz(tx(svg,p.x+pw-16,top+hh/2+4,"e",{class:"lbl","font-weight":"700","text-anchor":"end"}),11.5);halo(te,svg);
+      const cap=i===0?(2*xf>=e?"décarburée à cœur : ferrite":"ferrite en peau ("+nf(Math.min(xf,e/2),1)+" mm/face), cœur riche en carbone"):(f>0.99?"cémentite entièrement graphitisée":"graphitisée à "+nf(f*100,0)+" % dans toute l'épaisseur");
+      const tc=fsz(tx(svg,p.x,top+hh+20,cap,{class:"lbl","font-weight":"700",fill:i===0?"var(--gam)":"var(--ink)"}),11.5);fitSize(tc,pw,8.5);});
+    /* lectures */
+    ro.innerHTML=nbsp("<span>T = <b class='sig'>"+nf(T,0)+" °C</b> · t = <b class='sig'>"+nf(t,0)+" h</b></span><span>front x<sub>f</sub> ≈ <b class='eps'>"+nf(xf,2)+" mm</b>/face (k ≈ "+nf(k(T),2)+")</span><span>"+(2*xf>=e?"paroi de "+nf(e,1)+" mm décarburée à cœur":"noyau non décarburé ≈ "+nf(e-2*xf,1)+" mm")+"</span><span>graphitisation ≈ <b class='eps'>"+nf(f*100,0)+" %</b> (τ ≈ "+nf(ta,1)+" h)</span><span>99 % en ≈ "+nf(2.77*ta,0)+" h</span>");
+    let s;
+    if(t<1)s="Avant recuit : fonte blanche, cémentite partout, dure et cassante.";
+    else{s=(2*xf>=e?"Cœur blanc : en "+nf(t,0)+" h, la paroi de "+nf(e,1)+" mm est décarburée à cœur, ferritique, ductile et soudable.":"Cœur blanc : le front n'a avancé que de "+nf(xf,1)+" mm par face ; il reste un cœur de "+nf(e-2*xf,1)+" mm riche en carbone.")+" ";
+      s+=f>0.99?"Cœur noir : toute la cémentite est devenue graphite de recuit, quelle que soit l'épaisseur.":"Cœur noir : "+nf(f*100,0)+" % de la cémentite graphitisée, uniformément dans l'épaisseur.";}
+    if(T<930&&t>0)s+=" À cette température, la graphitisation est lente.";
+    msg.innerHTML=nbsp(s);
+  }
+  const A=animate($("#m4play"),"▶ Recuire 120 heures",7000,p=>{prog=p;draw();},()=>{prog=null;st.value=120;draw();});
+  [sT,st,se].forEach(r=>r.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M5 : l'abrasif et la surface
+   ========================================================= */
+(function(){
+  const svg=$("#m5svg");if(!svg)return;
+  const sf=$("#m5f"),ro=$("#m5r"),msg=$("#m5msg");
+  const MAT={GL:{n:"fonte GL perlitique",Hm:300,Hc:0,f:0,K:1,mx:"perlite",cb:""},blanche:{n:"fonte blanche perlitique",Hm:350,Hc:1000,f:0.4,K:1,mx:"perlite",cb:"M₃C"},
+    nihard:{n:"Ni-Hard",Hm:750,Hc:1050,f:0.35,K:0.8,mx:"martensite",cb:"M₃C"},chrome:{n:"fonte au chrome",Hm:800,Hc:1500,f:0.3,K:0.8*1.4,mx:"martensite",cb:"M₇C₃"}};
+  const AB={calcaire:{n:"calcaire",H:200},quartz:{n:"sable siliceux",H:1100},corindon:{n:"corindon",H:2000}};
+  let mk="blanche",ak="quartz",prog=null;
+  const w=r=>0.03+0.97*sstep(0.83,1.25,r);
+  function model(){const M=MAT[mk],Ha=AB[ak].H,f=M.Hc?+sf.value:0,wm=w(Ha/M.Hm)*300/M.Hm,wc=M.Hc?w(Ha/M.Hc):0;
+    const W=(1-f)*wm*Math.exp(-3*f*(1-wc))+(M.Hc?f*wc*300/M.Hc:0),Kt=M.K*Math.pow(1-f,1.5);return {M:M,Ha:Ha,f:f,W:W,idx:100*W,Kt:Kt,rm:Ha/M.Hm,rc:M.Hc?Ha/M.Hc:0};}
+  const CB=(function(){const R=rng(12513),A=[];for(let i=0;i<120;i++)A.push([R(),R(),0.6+0.8*R(),R()*Math.PI]);return A;})();
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?430:360;setVB(svg,W,H);clear(svg);
+    const m=model();$("#m5fo").textContent=m.M.Hc?nf(m.f*100,0)+" %":"sans carbures";
+    /* échelle des duretés */
+    tx(svg,8,15,"Échelle des duretés (HV, logarithmique)",{class:"ttl"});
+    const x0=30,x1=W-20,yb=86,X=v=>x0+(x1-x0)*(Math.log10(v)-2)/(Math.log10(3000)-2);
+    el("line",{x1:x0,y1:yb,x2:x1,y2:yb,class:"axis"},svg);
+    [100,200,500,1000,2000,3000].forEach(v=>{el("line",{x1:X(v),y1:yb,x2:X(v),y2:yb+5,class:"tick"},svg);fsz(tx(svg,X(v),yb+18,nf(v,0),{class:"lbl","text-anchor":"middle"}),11);});
+    el("rect",{x:X(0.83*m.Ha>3000?3000:0.83*m.Ha),y:yb-12,width:Math.max(0,X(3000)-X(Math.min(3000,0.83*m.Ha))),height:12,fill:"var(--gam)",opacity:.15},svg);
+    const mks=[{v:m.M.Hm,t:m.M.mx,c:"var(--gam)"}];if(m.M.Hc)mks.push({v:m.M.Hc,t:m.M.cb,c:"var(--tau)"});mks.push({v:m.Ha,t:AB[ak].n,c:"var(--sig)"});
+    const tl=[];mks.forEach((q,i)=>{el("polygon",{points:pts([[X(q.v),yb-2],[X(q.v)-6,yb-12],[X(q.v)+6,yb-12]]),fill:q.c},svg);
+      const t=fsz(tx(svg,X(q.v),yb-16-(i===2?0:0),q.t+" "+nf(q.v,0),{class:"lbl","text-anchor":"middle",fill:q.c,"font-weight":"700"}),11);fitText(t,4,W-4);tl.push(t);});
+    declutter(tl,28,yb-14);
+    /* coupe de la surface */
+    const sy=n?218:196,sx0=12,sx1=W-12,depth=Math.min(84,4+m.idx*0.8),pp=prog===null?1:prog;
+    tx(svg,8,sy-58,"Coupe de la surface frottée",{class:"ttl"});
+    const cp=el("clipPath",{id:"m5c"},svg);el("rect",{x:sx0,y:sy,width:sx1-sx0,height:H-sy-12},cp);const g=el("g",{"clip-path":"url(#m5c)"},svg);
+    el("rect",{x:sx0,y:sy,width:sx1-sx0,height:H-sy-12,fill:"color-mix(in srgb,var(--gam) 10%,var(--card))"},g);
+    if(m.M.mx==="perlite")el("rect",{x:sx0,y:sy,width:sx1-sx0,height:H-sy-12,fill:hatch(svg,"m5h","var(--muted)",4,0.8),opacity:.45},g);
+    if(mk==="GL"){const R=rng(3);for(let i=0;i<34;i++){const x=sx0+R()*(sx1-sx0),y=sy+R()*(H-sy-12),a=R()*Math.PI,L=26;el("line",{x1:x-Math.cos(a)*L/2,y1:y-Math.sin(a)*L/2,x2:x+Math.cos(a)*L/2,y2:y+Math.sin(a)*L/2,stroke:"var(--ink)","stroke-width":1.6},g);}}
+    else{const N=Math.round(m.f*CB.length*1.1),rr=mk==="chrome"?[11,4]:[9,7];CB.slice(0,Math.min(CB.length,N)).forEach(q=>{const x=sx0+q[0]*(sx1-sx0),y=sy+q[1]*(H-sy-12);
+      el("ellipse",{cx:x,cy:y,rx:rr[0]*q[2],ry:rr[1]*q[2],transform:"rotate("+(q[3]*57.3).toFixed(0)+" "+x.toFixed(1)+" "+y.toFixed(1)+")",fill:"var(--tau)",opacity:.55},g);});}
+    /* sillon */
+    const xg=sx0+(sx1-sx0)*pp,P=[[sx0,sy-1]];for(let x=sx0;x<=xg;x+=4){const d=depth*Math.min(1,(x-sx0)/50)*(0.92+0.08*Math.sin(x*0.04));P.push([x,sy+d]);}P.push([xg,sy-1]);
+    el("polygon",{points:pts(P),fill:"var(--card)",stroke:"var(--ink)","stroke-width":1},svg);
+    el("line",{x1:sx0,y1:sy,x2:sx1,y2:sy,stroke:"var(--ink)","stroke-width":1.5},svg);
+    const ax=Math.min(sx1-14,Math.max(sx0+14,xg));el("polygon",{points:pts([[ax-12,sy-4],[ax-4,sy-20],[ax+10,sy-16],[ax+13,sy-3]]),fill:"var(--sig)"},svg);
+    arrow(svg,ax-40,sy-28,ax-10,sy-28,"var(--frc)",2,7);
+    const tw=fsz(tx(svg,sx1-4,sy+Math.min(depth,60)+16,"indice d'usure ≈ "+nf(m.idx,0),{class:"lbl","text-anchor":"end","font-weight":"700",fill:"var(--eps)"}),12);halo(tw,svg);
+    /* lectures */
+    ro.innerHTML=nbsp("<span>"+m.M.n+"</span><span>abrasif : "+AB[ak].n+" ("+nf(m.Ha,0)+" HV)</span><span>r matrice = "+nf(m.rm,2)+"</span><span>"+(m.M.Hc?"r carbures = "+nf(m.rc,2):"pas de carbures")+"</span><span>usure ≈ <b class='eps'>"+nf(m.idx,0)+"</b></span><span>ténacité relative ≈ <b class='eps'>"+nf(m.Kt,2)+"</b></span>");
+    let s;
+    if(m.rm<0.83&&(!m.M.Hc||m.rc<0.83))s="L'abrasif est plus tendre que toutes les phases : il glisse, l'usure est faible pour toutes les fontes. On choisit alors pour la ténacité.";
+    else if(m.M.Hc&&m.rc<0.83)s="Les carbures "+m.M.cb+" résistent à l'abrasif (r = "+nf(m.rc,2)+") : ils portent la charge et protègent la matrice. Usure ≈ "+nf(m.idx,0)+".";
+    else if(m.M.Hc)s="L'abrasif raye même les carbures "+m.M.cb+" (r = "+nf(m.rc,2)+") : il ne reste que l'avantage d'une matrice dure. Usure ≈ "+nf(m.idx,0)+".";
+    else s="Sans carbures, la matrice "+m.M.mx+" est rayée librement : usure ≈ "+nf(m.idx,0)+".";
+    if(m.M.Hc&&m.f>0.35)s+=" Beaucoup de carbures : la ténacité baisse.";
+    msg.innerHTML=nbsp(s);
+  }
+  const A=animate($("#m5play"),"▶ Frotter",4000,p=>{prog=p;draw();},()=>{prog=null;draw();});
+  $$("#m5m .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;mk=b.dataset.k;setOn("#m5m",b);if(MAT[mk].Hc)sf.value=MAT[mk].f;draw();}));
+  $$("#m5a .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;ak=b.dataset.k;setOn("#m5a",b);draw();}));
+  sf.addEventListener("input",()=>{A.stop();prog=null;draw();});
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   Figure : corrosion graphitique
+   ========================================================= */
+(function(){
+  const svg=$("#f6svg");if(!svg)return;
+  function draw(){const W=svgW(svg),n=W<560,cols=3,cw=(W-16)/cols,H=n?190:200;setVB(svg,W,H);clear(svg);
+    const T=[["Acier","s'amincit"],["Fonte GL","garde sa forme"],["Fonte GS","graphitise moins"]];
+    T.forEach((tt,i)=>{const x=8+i*cw+8,w=cw-16,y=34,h=H-80,R=rng(40+i);
+      tx(svg,x+w/2,22,tt[0],{class:"ttl","text-anchor":"middle"});
+      el("rect",{x:x,y:y,width:w,height:h,fill:"none",stroke:"var(--muted)","stroke-width":1.2,"stroke-dasharray":"4 3"},svg);
+      if(i===0){const lost=h*0.35;el("rect",{x:x,y:y+lost,width:w,height:h-lost,fill:"color-mix(in srgb,var(--gam) 14%,var(--card))",stroke:"var(--ink)","stroke-width":1.4},svg);
+        for(let j=0;j<10;j++)el("circle",{cx:x+R()*w,cy:y+lost-3-R()*10,r:2+R()*3,fill:"var(--frc)",opacity:.45},svg);}
+      else{const gd=i===1?h*0.45:h*0.18;el("rect",{x:x,y:y,width:w,height:h,fill:"color-mix(in srgb,var(--gam) 14%,var(--card))",stroke:"var(--ink)","stroke-width":1.4},svg);
+        if(i===1){el("rect",{x:x,y:y,width:w,height:gd,fill:"var(--muted)",opacity:.55},svg);for(let j=0;j<30;j++){const xx=x+R()*w,yy=y+R()*(h-4)+2,a=R()*Math.PI;flakeF(xx,yy,a,14);}}
+        else{for(let j=0;j<6;j++){const xx=x+(j+0.5)*w/6,d=gd*(0.6+0.8*R());el("path",{d:"M"+(xx-8)+","+y+" Q"+xx+","+(y+2*d)+" "+(xx+8)+","+y+"Z",fill:"var(--muted)",opacity:.55},svg);}
+          for(let j=0;j<16;j++)el("circle",{cx:x+R()*w,cy:y+4+R()*(h-8),r:2.6,fill:"var(--ink)"},svg);}}
+      const c=fsz(tx(svg,x+w/2,y+h+18,tt[1],{class:"lbl","text-anchor":"middle","font-weight":"700"}),11.5);fitSize(c,w,8.5);});
+    function flakeF(x,y,a,L){el("line",{x1:x-Math.cos(a)*L/2,y1:y-Math.sin(a)*L/2,x2:x+Math.cos(a)*L/2,y2:y+Math.sin(a)*L/2,stroke:"var(--ink)","stroke-width":1.3},svg);}
+    const tl=fsz(tx(svg,8,H-6,"surface exposée en haut · pointillé : forme initiale · gris : couche graphitisée",{class:"lbl"}),11);fitSize(tl,W-16,8);}
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   M6 : la carte des nuances
+   ========================================================= */
+(function(){
+  const svg=$("#m6svg");if(!svg)return;
+  const sr=$("#m6r"),sa=$("#m6a"),ro=$("#m6rd"),msg=$("#m6msg");
+  const G=[["GL","150",150,0,0.8],["GL","200",200,0,0.7],["GL","250",250,0,0.6],["GL","300",300,0,0.5],["GL","350",350,0,0.4],
+    ["GV","300",300,2],["GV","350",350,1.5],["GV","400",400,1],["GV","450",450,1],
+    ["GS","350-22",350,22],["GS","400-18",400,18],["GS","400-15",400,15],["GS","450-10",450,10],["GS","500-7",500,7],["GS","600-3",600,3],["GS","700-2",700,2],["GS","800-2",800,2],["GS","900-2",900,2],["GS","450-18",450,18],["GS","500-14",500,14],["GS","600-10",600,10],
+    ["ADI","800-10",800,10],["ADI","900-8",900,8],["ADI","1050-6",1050,6],["ADI","1200-3",1200,3],["ADI","1400-1",1400,1],
+    ["MW","350-4",350,4],["MW","360-12",360,12],["MW","400-5",400,5],["MW","450-7",450,7],["MW","550-4",550,4],
+    ["MB","300-6",300,6],["MB","350-10",350,10],["MB","450-6",450,6],["MB","500-5",500,5],["MB","550-4",550,4],["MB","600-3",600,3],["MB","650-2",650,2],["MB","700-2",700,2],["MB","800-1",800,1]];
+  const PFX={GL:"EN-GJL-",GV:"EN-GJV-",GS:"EN-GJS-",ADI:"EN-GJS-",MW:"EN-GJMW-",MB:"EN-GJMB-"};
+  const PRIO={GL:0,GS:1,MW:2,MB:3,GV:4,ADI:5};
+  const US={bati:[200,0,0,"Bâti : amortissement et prix désignent une GL."],vanne:[400,15,0,"Corps de vanne : une GS ferritique, ductile et étanche."],vilo:[700,2,0,"Vilebrequin : la GS perlitique est le choix courant."],couronne:[1000,5,0,"Couronne dentée : seule une ADI atteint ce niveau."],raccord:[350,10,1,"Raccord soudé : GS ferritique ou malléable à cœur blanc mince."]};
+  let wReq=0,prog=null;
+  const weld=g=>g[0]==="ADI"?0:(g[0]==="GS"&&g[3]>=10)||(g[0]==="MW"&&g[1]==="360-12")?2:1;
+  function shape(p,x,y,s,fam,fill,stroke,sw){
+    if(fam==="GS")return el("circle",{cx:x,cy:y,r:s,fill:fill,stroke:stroke,"stroke-width":sw},p);
+    if(fam==="GL")return el("rect",{x:x-s,y:y-s,width:2*s,height:2*s,fill:fill,stroke:stroke,"stroke-width":sw},p);
+    if(fam==="GV")return el("polygon",{points:pts([[x,y-s*1.2],[x+s*1.1,y+s*0.8],[x-s*1.1,y+s*0.8]]),fill:fill,stroke:stroke,"stroke-width":sw},p);
+    if(fam==="ADI")return el("polygon",{points:pts([[x,y-s*1.3],[x+s*1.1,y],[x,y+s*1.3],[x-s*1.1,y]]),fill:fill,stroke:stroke,"stroke-width":sw},p);
+    const g=el("g",{},p);const d=s*1.1;
+    if(fam==="MW"){el("line",{x1:x-d,y1:y,x2:x+d,y2:y,stroke:stroke,"stroke-width":sw+1.2},g);el("line",{x1:x,y1:y-d,x2:x,y2:y+d,stroke:stroke,"stroke-width":sw+1.2},g);}
+    else{el("line",{x1:x-d,y1:y-d,x2:x+d,y2:y+d,stroke:stroke,"stroke-width":sw+1.2},g);el("line",{x1:x-d,y1:y+d,x2:x+d,y2:y-d,stroke:stroke,"stroke-width":sw+1.2},g);}
+    return g;}
+  function preset(){let k=null;for(const u in US){const v=US[u];if(+sr.value===v[0]&&+sa.value===v[1]&&wReq===v[2])k=u;}return k;}
+  function draw(){
+    const W=svgW(svg),n=W<560,H=n?420:350;setVB(svg,W,H);clear(svg);
+    const R=prog===null?+sr.value:100+1300*prog,A=+sa.value;
+    $("#m6ro").textContent=nf(+sr.value,0)+" MPa";$("#m6ao").textContent=nf(A,1)+" %";
+    tx(svg,8,15,"Carte résistance-allongement des nuances normalisées",{class:"ttl"});
+    const x0=50,x1=W-14,y0=44,y1=H-(n?80:62),ly=v=>Math.log10(v);
+    const Ax=axes(svg,x0,x1,y0,y1,100,1500,ly(0.3),ly(30),"Rm minimale (MPa)","A minimal (%)",200,1,v=>nf(v,0),v=>"");
+    [0.3,1,3,10,30].forEach(v=>{el("line",{x1:x0,y1:Ax.Y(ly(v)),x2:x1,y2:Ax.Y(ly(v)),class:"gridbg"},svg);fsz(tx(svg,x0-5,Ax.Y(ly(v))+4,nf(v,v<1?1:0),{class:"lbl","text-anchor":"end"}),11);});
+    /* zone admissible */
+    const yA=Ax.Y(ly(Math.max(0.3,A)));el("rect",{x:Ax.X(R),y:y0,width:Math.max(0,x1-Ax.X(R)),height:Math.max(0,yA-y0),fill:"var(--mat)",opacity:.08},svg);
+    el("line",{x1:Ax.X(R),y1:y0,x2:Ax.X(R),y2:y1,stroke:"var(--mat)","stroke-width":1.8,"stroke-dasharray":"6 4"},svg);
+    if(A>0)el("line",{x1:x0,y1:yA,x2:x1,y2:yA,stroke:"var(--mat)","stroke-width":1.8,"stroke-dasharray":"6 4"},svg);
+    /* nuances */
+    const ok=[],del=[];
+    G.forEach(g=>{const Ag=g[3]>0?g[3]:g[4],x=Ax.X(g[2]),y=Ax.Y(ly(Ag)),sat=g[2]>=R&&g[3]>=A,wd=weld(g),pass=sat&&(!wReq||wd>=1);
+      if(pass){if(!wReq||wd===2)ok.push(g);else del.push(g);}
+      const fill=pass&&(!wReq||wd===2)?"var(--eps)":"var(--card)",stroke=pass?"var(--eps)":"var(--muted)";
+      const s=shape(svg,x,y,4.6,g[0],g[0]==="MW"||g[0]==="MB"?"none":fill,stroke,pass?1.8:1.1);if(!pass)s.setAttribute("opacity",.55);});
+    /* étiquettes de familles */
+    [["GL",250,0.33],["GV",330,1.9],["GS",620,4.4],["ADI",1150,8],["malléables",560,5.6]].forEach(l=>{if(n&&l[0]==="malléables")return;const t=fsz(tx(svg,Ax.X(l[1]),Ax.Y(ly(l[2])),l[0],{class:"lbl","font-weight":"700"}),11);halo(t,svg);});
+    /* légende des symboles */
+    const lg=[["GS","GS"],["GL","GL"],["GV","GV"],["ADI","ADI"],["MW","cœur blanc"],["MB","cœur noir"]];let lx=12,lyy=H-(n?26:12);
+    lg.forEach(q=>{const t=fsz(tx(svg,lx+13,lyy,q[1],{class:"lbl"}),10.5),w=t.getBBox().width;if(lx+13+w>W-6){lx=12;lyy+=16;t.setAttribute("x",lx+13);t.setAttribute("y",lyy);}shape(svg,lx+5,lyy-4,4,q[0],"none","var(--ink)",1.2);lx+=w+26;});
+    /* choix */
+    const cand=ok.slice().sort((a,b)=>PRIO[a[0]]-PRIO[b[0]]||a[2]-b[2]||a[3]-b[3]),best=cand[0];
+    const lst=cand.map(g=>PFX[g[0]].replace("EN-","")+g[1]);
+    ro.innerHTML=nbsp("<span>R<sub>m</sub> ≥ <b class='mat'>"+nf(R,0)+" MPa</b></span><span>A ≥ <b class='mat'>"+nf(A,1)+" %</b>"+(wReq?", soudable":"")+"</span><span>nuances : <b class='eps'>"+ok.length+"</b>"+(wReq?" soudables, "+del.length+" délicates":"")+"</span><span>"+(best?"piste : <b>"+PFX[best[0]]+best[1]+"</b>":"aucune nuance")+"</span>");
+    let s;
+    const u=preset();
+    if(!ok.length&&!del.length)s="Aucune nuance normalisée ne satisfait ces exigences : il faut les revoir, ou passer à un acier moulé.";
+    else{s=(u?US[u][3]+" ":"")+"Nuances qui conviennent"+(wReq?" et se soudent sans réserve":"")+" : "+(lst.length?lst.slice(0,8).join(", ")+(lst.length>8?"…":""):"aucune")+".";
+      if(wReq&&del.length)s+=" À soudabilité délicate : "+del.map(g=>PFX[g[0]].replace("EN-","")+g[1]).slice(0,5).join(", ")+".";
+      if(!wReq&&ok.some(g=>g[0]==="ADI"))s+=" Les ADI ne se soudent pas.";
+      if(A===0&&ok.some(g=>g[0]==="GL"))s+=" Les GL n'ont pas d'allongement garanti.";}
+    msg.innerHTML=nbsp(s);
+    $$("#m6u .btn").forEach(b=>b.classList.toggle("on",b.dataset.k===u));
+  }
+  const A=animate($("#m6play"),"▶ Durcir le cahier des charges",6000,p=>{prog=p;draw();},()=>{prog=null;draw();});
+  $$("#m6u .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;const v=US[b.dataset.k];sr.value=v[0];sa.value=v[1];wReq=v[2];setOn("#m6w",$$("#m6w .btn")[wReq]);draw();}));
+  $$("#m6w .btn").forEach(b=>b.addEventListener("click",()=>{A.stop();prog=null;wReq=+b.dataset.k;setOn("#m6w",b);draw();}));
+  [sr,sa].forEach(r=>r.addEventListener("input",()=>{A.stop();prog=null;draw();}));
+  redraws.push(draw);draw();
+})();
+
+/* =========================================================
+   Quiz, check-list, sommaire, thème
+   ========================================================= */
+(function(){
+  const box=$("#quiz");if(!box)return;
+  const Q=[
+    {q:"Dans EN-GJS-400-15, la lettre S désigne :",o:["l'acier (steel)","le graphite sphéroïdal","un échantillon coulé à part","le silicium"],c:1,e:"Case 3 : <b>S = graphite sphéroïdal</b> (L lamellaire, V vermiculaire, M malléable, N sans graphite)."},
+    {q:"Une EN-GJL-250 garantit sur éprouvette coulée à part une résistance :",o:["de 250 MPa exactement","comprise entre 250 et 350 MPa","d'au moins 250 MPa dans toute paroi de la pièce","de 250 HB"],c:1,e:"Pour les GL, l'EN 1561 encadre la valeur <b>entre n et n + 100 MPa</b> sur l'éprouvette de 30 mm ; dans une paroi épaisse, la pièce résiste moins."},
+    {q:"Le suffixe -LT dans EN-GJS-400-18-LT signifie :",o:["faible épaisseur","résilience garantie à basse température","nuance à faible teneur en carbone","nuance pour le soudage"],c:1,e:"<b>LT : low temperature</b>, résilience garantie à −20 °C pour cette nuance ; RT : à température ambiante. La soudabilité s'écrirait W en case 6."},
+    {q:"Dans EN-GJSA-XNiCr20-2, la lettre X indique :",o:["une nuance expérimentale","une fonte fortement alliée, désignée par sa composition","un traitement thermique","une fonte à graphite vermiculaire"],c:1,e:"<b>X : fortement alliée</b> ; suivent les éléments (Ni, Cr) et leurs teneurs (≈ 20 % et 2 %). Le A en case 4 annonce l'austénite."},
+    {q:"Une paroi de 50 mm en EN-GJL-250 offre une résistance attendue d'environ :",o:["350 MPa","250 MPa","170 MPa","100 MPa"],c:2,e:"Valeur indicative de l'EN 1561 pour 40 à 80 mm : <b>≈ 170 MPa</b>. La GL est très sensible à l'épaisseur."},
+    {q:"Une fonte ADI s'obtient par :",o:["une trempe à l'eau suivie d'un revenu","une trempe étagée dans un bain vers 230 à 400 °C","un recuit de ferritisation","un ajout de chrome"],c:1,e:"<b>Trempe étagée</b> (austempering) : austénitisation puis maintien dans un bain de sels vers 230 à 400 °C ; on obtient l'ausferrite."},
+    {q:"Si l'on prolonge trop le maintien dans le bain de trempe étagée :",o:["la martensite augmente","des carbures précipitent et la ductilité chute","la fonte redevient lamellaire","rien ne change"],c:1,e:"Au-delà de t₂, la <b>réaction II</b> décompose l'austénite enrichie en ferrite et carbures : l'allongement s'effondre. Trop court, c'est la martensite."},
+    {q:"La fonte malléable à cœur blanc est obtenue par :",o:["un recuit décarburant","un traitement au magnésium","un recuit de graphitisation en atmosphère neutre","une trempe étagée"],c:0,e:"<b>Recuit décarburant</b> : le carbone s'en va par la surface, d'où une limitation aux parois minces. Le cœur noir vient d'une graphitisation en atmosphère neutre."},
+    {q:"La plus soudable des fontes malléables est :",o:["EN-GJMB-800-1","EN-GJMW-360-12","EN-GJMB-450-6","EN-GJMW-550-4"],c:1,e:"<b>EN-GJMW-360-12</b> : à cœur blanc, décarburée presque à cœur dans les faibles épaisseurs, presque comme un acier doux."},
+    {q:"Contre un sable siliceux (quartz ≈ 1 100 HV), les carbures les plus efficaces sont :",o:["la cémentite M₃C","les carbures de chrome M₇C₃","la perlite","l'austénite"],c:1,e:"<b>M₇C₃</b> (≈ 1 200 à 1 800 HV) dépasse le quartz : r &lt; 0,83, il n'est presque pas rayé. La cémentite (≈ 1 000 HV) l'est en partie."},
+    {q:"Une fonte austénitique (Ni-Resist) contient de l'ordre de :",o:["0,5 % de nickel","3,5 à 5 % de nickel","13 à 36 % de nickel","50 % de chrome"],c:2,e:"<b>13 à 36 % de nickel</b> pour une matrice austénitique ; 3,5 à 5 % de nickel, c'est la Ni-Hard, fonte blanche martensitique."},
+    {q:"Une conduite en fonte GL atteinte de corrosion graphitique :",o:["perd visiblement de l'épaisseur","garde sa forme mais perd sa résistance","devient plus dure et plus résistante","se couvre de cristaux de graphite brillants"],c:1,e:"Le <b>tuyau fantôme</b> : le fer se dissout autour du graphite, le squelette garde la forme mais ne porte plus rien. On ne soude pas sur une couche graphitisée."}
+  ];
+  let score=0,done=0;const sc=$("#qzScore");
+  function upd(){let t="Score : "+score+" / "+Q.length;if(done===Q.length)t+=score>=10?"  ·  🎉 prêt pour le cours 3":score>=7?"  ·  relis les explications":"  ·  refais un tour des chapitres";sc.textContent=t;}
+  function render(){box.innerHTML="";score=0;done=0;
+    Q.forEach((it,n)=>{const d=document.createElement("div");d.className="qz";
+      d.innerHTML='<p class="qz-q"><b>'+(n+1)+".</b> "+it.q+'</p><div class="qz-o"></div><div class="qz-e" hidden></div>';
+      const o=d.querySelector(".qz-o"),ex=d.querySelector(".qz-e");let answered=false;
+      it.o.forEach((txt,i)=>{const b=document.createElement("button");b.type="button";b.className="qz-b";b.innerHTML=String.fromCharCode(65+i)+". "+txt;
+        b.addEventListener("click",()=>{if(answered)return;answered=true;done++;const ok=i===it.c;if(ok)score++;b.classList.add(ok?"ok":"ko");o.children[it.c].classList.add("ok");ex.hidden=false;ex.innerHTML=(ok?"✅ <b>Bien joué.</b> ":"❌ <b>Pas tout à fait.</b> ")+it.e;upd();});
+        o.appendChild(b);});
+      box.appendChild(d);});
+    upd();}
+  $("#qzReset").addEventListener("click",render);render();
+})();
+(function(){
+  const boxes=$$("#checklist input[type=checkbox]"),msg=$("#checkMsg"),KEY="fontes-cours2-check";
+  if(!boxes.length)return;
+  let saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||"[]")||[];}catch(e){saved=[];}
+  boxes.forEach(b=>{b.checked=saved.indexOf(b.dataset.c)>=0;});
+  function upd(){const on=boxes.filter(b=>b.checked).map(b=>b.dataset.c);try{localStorage.setItem(KEY,JSON.stringify(on));}catch(e){}
+    msg.innerHTML=on.length===boxes.length?"🎉 <b>Tout est coché : cap sur le cours 3, souder une fonte !</b>":on.length+" / "+boxes.length+" : reviens sur les points non cochés (les manipulations sont faites pour ça).";}
+  boxes.forEach(b=>b.addEventListener("change",upd));upd();
+})();
+
+
+(function(){
+  const links=$$(".toc a"),tin=$(".toc-in");
+  if(!links.length||!("IntersectionObserver" in window))return;
+  const map={};links.forEach(a=>{map[a.getAttribute("href").slice(1)]=a;});
+  const obs=new IntersectionObserver(ents=>{ents.forEach(en=>{if(!en.isIntersecting)return;const a=map[en.target.id];if(!a)return;
+    links.forEach(l=>l.classList.toggle("on",l===a));
+    if(tin){const tgt=a.offsetLeft-tin.clientWidth/2+a.offsetWidth/2;try{tin.scrollTo({left:tgt,behavior:RM?"auto":"smooth"});}catch(e){tin.scrollLeft=tgt;}}});},{rootMargin:"-45% 0px -50% 0px"});
+  Object.keys(map).forEach(id=>{const s=document.getElementById(id);if(s)obs.observe(s);});
+})();
+(function(){
+  const b=$("#themeBtn");if(!b)return;const KEY="fontes-theme",root=document.documentElement;
+  const lab={auto:"◐ Thème : automatique",light:"☀️ Thème : clair",dark:"🌙 Thème : sombre"};
+  let t="auto";try{t=localStorage.getItem(KEY)||"auto";}catch(e){}
+  function apply(){if(t==="auto")root.removeAttribute("data-theme");else root.setAttribute("data-theme",t);b.textContent=lab[t];}
+  b.addEventListener("click",()=>{t=t==="auto"?"light":t==="light"?"dark":"auto";try{localStorage.setItem(KEY,t);}catch(e){}apply();});
+  apply();
+})();
+})();
+</script>
+</body>
+</html>

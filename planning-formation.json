@@ -373,6 +373,15 @@
       "supports": [
         {
           "cours": "fontes-01"
+        },
+        {
+          "cours": "fontes-02"
+        },
+        {
+          "cours": "fontes-03"
+        },
+        {
+          "cours": "fontes-04"
         }
       ]
     },

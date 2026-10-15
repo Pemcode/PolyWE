@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "date_inventaire": "2026-10-13",
+  "date_inventaire": "2026-10-15",
   "description": "Catalogue éditorial du wiki de révision DU Ingénierie du soudage / IWE. Identifiants internes stables ; sections extraites automatiquement des HTML.",
   "cours": [
     {
@@ -1491,6 +1491,123 @@
       "fichiers_associes": [],
       "fichier": "Cours/Fontes/Fontes, cours 1 _ graphite ou cémentite, la métallurgie des fontes.html",
       "url": "Fontes/01-graphite-cementite-metallurgie.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "fontes-02",
+      "titre": "Fontes : la famille des fontes, nuances, désignations et traitements",
+      "matiere": "fontes",
+      "ordre": 2,
+      "repere": "Cours 02",
+      "prerequis_conseilles": [
+        "fontes-01",
+        "essais-01",
+        "essais-02",
+        "rupture-02"
+      ],
+      "mots_cles": [
+        "EN 1560",
+        "désignation",
+        "GL",
+        "GV",
+        "GS",
+        "ADI",
+        "ausferrite",
+        "fonte malléable",
+        "traitements thermiques",
+        "corrosion graphitique"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "quiz",
+        "fiche de révision"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Fontes/Fontes, cours 2 _ la famille des fontes, nuances, désignations et traitements.html",
+      "url": "Fontes/02-familles-nuances-designations-traitements.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "fontes-03",
+      "titre": "Fontes : souder une fonte, la métallurgie du joint",
+      "matiere": "fontes",
+      "ordre": 3,
+      "repere": "Cours 03",
+      "prerequis_conseilles": [
+        "fontes-01",
+        "fontes-02",
+        "electrode-enrobee-04",
+        "electrode-enrobee-05",
+        "met-03",
+        "essais-02"
+      ],
+      "mots_cles": [
+        "soudabilité",
+        "zone partiellement fondue",
+        "dilution",
+        "nickel",
+        "nickel-fer",
+        "régime chaud",
+        "soudage à froid",
+        "préchauffage",
+        "martelage",
+        "EN 1011-8"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "quiz",
+        "fiche de révision"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Fontes/Fontes, cours 3 _ souder une fonte, la métallurgie du joint.html",
+      "url": "Fontes/03-soudage-metallurgie-joint.html",
+      "statut": "disponible"
+    },
+    {
+      "id": "fontes-04",
+      "titre": "Fontes : souder une fonte, la pratique",
+      "matiere": "fontes",
+      "ordre": 4,
+      "repere": "Cours 04",
+      "prerequis_conseilles": [
+        "fontes-01",
+        "fontes-02",
+        "fontes-03",
+        "electrode-enrobee-01",
+        "electrode-enrobee-02",
+        "electrode-enrobee-03",
+        "electrode-enrobee-04",
+        "electrode-enrobee-05",
+        "brasage-01",
+        "brasage-03",
+        "brasage-04"
+      ],
+      "mots_cles": [
+        "chalumeau",
+        "ISO 1071",
+        "beurrage",
+        "soudobrasage",
+        "réparation",
+        "goujonnage",
+        "aluminothermie",
+        "qualification",
+        "aciers moulés",
+        "ISO 11970"
+      ],
+      "ressources": [
+        "cours",
+        "simulations",
+        "exercices corrigés",
+        "quiz",
+        "fiche de révision"
+      ],
+      "fichiers_associes": [],
+      "fichier": "Cours/Fontes/Fontes, cours 4 _ souder une fonte, la pratique.html",
+      "url": "Fontes/04-soudage-pratique.html",
       "statut": "disponible"
     }
   ],
