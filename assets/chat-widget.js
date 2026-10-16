@@ -38,6 +38,11 @@
   const HISTORY_EXCHANGES = 3;
   const SECTIONS_SENT = 3;
   const EXTRACT_CHARS = 1500;
+  const SYSTEM_CHARS = 8000; // consignes personnelles (S32)
+  const MAX_IMAGES = 4;
+  const IMAGE_SIDE = 1600, THUMB_SIDE = 160; // pixels du grand côté après réduction
+  const IMAGE_BYTES = 20e6;
+  const IMAGE_QUESTION = "Explique cette image.";
 
   // ——— PKCE ———
   function base64url(bytes) {
@@ -154,19 +159,28 @@
     return (start > 0 ? "…\n" : "") + lines.slice(start, end + 1).join("\n") + (end < lines.length - 1 ? "\n…" : "");
   }
 
-  // Le texte sélectionné passe en premier, puis les sections les plus pertinentes, sans doublon.
-  function buildExtracts({rows = [], question = "", selection = null, page = ""}) {
+  // Sections de la page courante, dans l’ordre du cours (celui de chat-extraits.json).
+  const courseRows = (rows, page) => page ? (rows || []).filter(row => pathOf(row.url) === page) : [];
+  const approxTokens = text => Math.round(String(text).length / 3.5); // ordre de grandeur pour un texte français
+
+  // Le texte sélectionné passe en premier ; avec `course`, tout le cours de la page suit, en entier.
+  // Viennent ensuite les sections les plus pertinentes des autres pages, sans doublon.
+  function buildExtracts({rows = [], question = "", selection = null, page = "", course = false}) {
     const extracts = [];
     const selected = selection && String(selection.text || "").trim();
     if (selected) {
       extracts.push({id: selection.id || "TEXTE-SELECTIONNE", titre: selection.titre ? `Texte sélectionné · ${selection.titre}` : "Texte sélectionné sur la page",
                      cours: selection.cours || "", url: selection.url || "", texte: clip(selected, EXTRACT_CHARS)});
     }
+    const own = course ? courseRows(rows, page) : [];
+    for (const row of own) extracts.push({id: row.id, titre: row.titre, cours: row.cours, url: row.url, texte: row.texte});
+    const skip = new Set(own.map(row => row.id));
+    const limit = extracts.length + SECTIONS_SENT;
     const wording = selected ? `${question}\n${selected}` : question;
     const queryTerms = terms(wording);
-    for (const {row} of rankSections(rows, wording, {page, limit: SECTIONS_SENT + 1})) {
-      if (extracts.length >= SECTIONS_SENT + (selected ? 1 : 0)) break;
-      if (extracts.some(item => item.id === row.id)) continue;
+    for (const {row} of rankSections(rows, wording, {page, limit: SECTIONS_SENT + 1 + skip.size})) {
+      if (extracts.length >= limit) break;
+      if (skip.has(row.id) || extracts.some(item => item.id === row.id)) continue;
       extracts.push({id: row.id, titre: row.titre, cours: row.cours, url: row.url, texte: bestPassage(row.texte, queryTerms)});
     }
     return extracts;
@@ -182,15 +196,19 @@
     return text;
   }
 
-  // Les extraits ne sont joints qu’à la dernière question : l’historique garde les questions et réponses seules.
-  function buildRequest({model, question, extracts = [], history = [], verify = false}) {
+  // Consignes du visiteur, gardées dans son navigateur : vides, elles laissent place à celles d’origine.
+  const systemPrompt = custom => (typeof custom === "string" ? custom.trim().slice(0, SYSTEM_CHARS).trim() : "") || SYSTEM_PROMPT;
+
+  // Les extraits et les images ne sont joints qu’à la dernière question : l’historique garde les questions et réponses seules.
+  function buildRequest({model, question, extracts = [], history = [], verify = false, system = "", images = []}) {
     const previous = history.filter(item => item && item.answer && !item.error).slice(-HISTORY_EXCHANGES);
+    const text = userMessage(question, extracts, verify);
     return {
       model,
       messages: [
-        {role: "system", content: SYSTEM_PROMPT},
+        {role: "system", content: systemPrompt(system)},
         ...previous.flatMap(item => [{role: "user", content: item.question}, {role: "assistant", content: item.answer}]),
-        {role: "user", content: userMessage(question, extracts, verify)},
+        {role: "user", content: images.length ? [{type: "text", text}, ...images.map(url => ({type: "image_url", image_url: {url}}))] : text},
       ],
       stream: true,
       max_tokens: MAX_TOKENS,
@@ -366,7 +384,10 @@
         id = usable.filter(model => candidate.match.test(model.id) || candidate.match.test(model.name || "")).map(model => model.id)
           .sort((a, b) => a.length - b.length || a.localeCompare(b))[0];
       }
-      if (id) models.push({label: candidate.label, id});
+      if (!id) continue;
+      // `images` : vrai ou faux d’après les modalités publiées, null si OpenRouter ne les précise pas.
+      const modes = usable.find(model => model.id === id).architecture?.input_modalities;
+      models.push({label: candidate.label, id, images: Array.isArray(modes) ? modes.includes("image") : null});
     }
     return models;
   }
@@ -382,8 +403,8 @@
   }
 
   const core = {ALLOWED_DOMAINS, MODEL_CANDIDATES, DEFAULT_MODEL, SYSTEM_PROMPT, createVerifier, codeChallenge, authorizeUrl, callbackUrl,
-    terms, rankSections, bestPassage, buildExtracts, buildRequest, citations, checkCitation, parseMarkdown, createStreamParser,
-    emptyAnswer, reduceChunk, errorFor, isOffCourse, pickModels, formatUsage};
+    terms, rankSections, bestPassage, courseRows, approxTokens, buildExtracts, systemPrompt, buildRequest, citations, checkCitation,
+    parseMarkdown, createStreamParser, emptyAnswer, reduceChunk, errorFor, isOffCourse, pickModels, formatUsage};
   if (typeof window === "undefined") {
     if (typeof module === "object" && module.exports) module.exports = core;
     return;
@@ -408,11 +429,17 @@
   let key = local.get("key");
   let model = local.get("model") || DEFAULT_MODEL;
   let models = null, modelsVerified = false, modelsPromise = null;
+  // Réglages propres à ce navigateur (S32) : jamais publiés, jamais partagés avec d’autres visiteurs.
+  let wholeCourse = local.get("course") === "1";
+  let customSystem = local.get("system") || "";
+  const isThumb = value => typeof value === "string" && value.startsWith("data:image/jpeg;base64,");
   let conversation = (readJSON(session, "conversation") || [])
     .filter(entry => entry && typeof entry.question === "string" && typeof entry.answer === "string" && !entry.pending)
-    .map(entry => ({...entry, sent: Array.isArray(entry.sent) ? entry.sent : [], sources: Array.isArray(entry.sources) ? entry.sources : []}));
-  let selection = null, captured = null, busy = false, controller = null;
-  let known = new Map();
+    .map(entry => ({...entry, sent: Array.isArray(entry.sent) ? entry.sent : [], sources: Array.isArray(entry.sources) ? entry.sources : [],
+                    thumbs: Array.isArray(entry.thumbs) ? entry.thumbs.filter(isThumb) : [], course: Number(entry.course) || 0}));
+  let selection = null, captured = null, busy = false, controller = null, editing = false;
+  let attachments = []; // images jointes à la prochaine question : {url, thumb}
+  let known = new Map(), pageRows = null;
   const views = new Map();
 
   function el(tag, props = {}, ...children) {
@@ -453,8 +480,9 @@
   const closeButton = el("button", {type: "button", className: "icon-button", "aria-label": "Fermer le chat", title: "Fermer (Échap)"}, icon("m6 6 12 12M18 6 6 18"));
   const select = el("select", {id: "pwc-model"});
   const newButton = el("button", {type: "button", className: "link-button"}, "Nouvelle conversation");
+  const promptButton = el("button", {type: "button", className: "link-button", "aria-expanded": "false", title: "Modifier les consignes de l’assistant, pour ce navigateur seulement"}, "Consignes");
   const logoutButton = el("button", {type: "button", className: "link-button"}, "Se déconnecter");
-  const bar = el("div", {className: "bar"}, el("label", {for: "pwc-model"}, "Modèle"), select, newButton, logoutButton);
+  const bar = el("div", {className: "bar"}, el("label", {for: "pwc-model"}, "Modèle"), select, newButton, promptButton, logoutButton);
   const log = el("div", {className: "log", role: "log", "aria-live": "polite", "aria-label": "Conversation", tabindex: "0"});
   const guide = new URL("assistant.html", siteRoot).href; // guide pas à pas (S26)
   const loginButton = el("button", {type: "button", className: "primary"}, "Se connecter avec OpenRouter");
@@ -468,15 +496,34 @@
   const chipText = el("q", {className: "chip-text"});
   const chipRemove = el("button", {type: "button", className: "icon-button small", "aria-label": "Retirer le texte sélectionné", title: "Retirer"}, icon("m6 6 12 12M18 6 6 18"));
   const chip = el("div", {className: "chip", hidden: true}, el("span", {className: "chip-label"}, "Texte sélectionné, envoyé en priorité :"), chipText, chipRemove);
-  const question = el("textarea", {id: "pwc-question", rows: "2", maxlength: "2000", placeholder: "Votre question sur le soudage ou les matériaux…"});
+  // Tout le cours en contexte : visible seulement sur une page dont les sections figurent dans les extraits.
+  const courseSwitch = el("input", {type: "checkbox", role: "switch"});
+  const courseSize = el("span", {className: "small", title: "Estimation : le cours entier part avec chaque question, ce qui en multiplie le coût."});
+  const context = el("div", {className: "context", hidden: true}, el("label", {className: "switch"}, courseSwitch, el("span", {}, "Tout le cours en contexte")), courseSize);
+  const tray = el("ul", {className: "tray", "aria-label": "Images jointes", hidden: true});
+  const trayNote = el("p", {className: "tray-note", hidden: true});
+  const fileInput = el("input", {type: "file", accept: "image/*", multiple: true, hidden: true, tabindex: "-1"});
+  const attachButton = el("button", {type: "button", className: "icon-button", "aria-label": "Joindre une image", title: "Joindre une image (ou collez une capture avec Ctrl+V)"},
+    icon("m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"));
+  const question = el("textarea", {id: "pwc-question", rows: "2", maxlength: "2000", placeholder: "Votre question sur le soudage ou les matériaux… (Ctrl+V colle une capture)"});
   const sendButton = el("button", {type: "submit", className: "primary"}, "Envoyer");
   const stopButton = el("button", {type: "button", className: "secondary", hidden: true}, "Arrêter");
-  const composer = el("form", {className: "composer"}, el("label", {for: "pwc-question", className: "sr"}, "Votre question"), question,
-    el("div", {className: "actions"}, el("span", {className: "small"}, "Entrée pour envoyer, Maj+Entrée pour aller à la ligne"), stopButton, sendButton));
+  const composer = el("form", {className: "composer"}, tray, trayNote, el("label", {for: "pwc-question", className: "sr"}, "Votre question"), question,
+    el("div", {className: "actions"}, attachButton, fileInput, el("span", {className: "small"}, "Entrée pour envoyer, Maj+Entrée pour aller à la ligne"), stopButton, sendButton));
+  // Consignes : le prompt système, modifiable pour ce navigateur seulement.
+  const promptBox = el("textarea", {id: "pwc-system", rows: "10", maxlength: String(SYSTEM_CHARS), spellcheck: "false"});
+  const promptReset = el("button", {type: "button", className: "secondary"}, "Rétablir les consignes d’origine");
+  const promptCancel = el("button", {type: "button", className: "link-button"}, "Annuler");
+  const editor = el("form", {className: "editor", hidden: true},
+    el("label", {for: "pwc-system", className: "editor-title"}, "Consignes de l’assistant"),
+    el("p", {className: "small"}, "Ces consignes (le « prompt système ») sont envoyées au modèle avant chaque question. Votre version reste dans ce navigateur : elle ne change rien pour les autres visiteurs ni sur vos autres appareils."),
+    promptBox,
+    el("div", {className: "editor-actions"}, promptCancel, promptReset, el("button", {type: "submit", className: "primary"}, "Enregistrer")));
+  const customTag = el("p", {className: "custom-tag", hidden: true}, "Consignes personnalisées");
   const panel = el("section", {id: "pwc-panel", className: "panel", role: "dialog", "aria-labelledby": "pwc-title", hidden: true},
-    el("header", {className: "head"}, el("div", {}, el("h2", {id: "pwc-title"}, "Assistant de révision"), el("p", {className: "sub"}, "IA · avec votre compte OpenRouter")), closeButton),
-    bar, log, login, status, chip, composer,
-    el("p", {className: "notice"}, "Vos questions, le texte sélectionné et des extraits des cours sont envoyés à OpenRouter et au fournisseur du modèle, et facturés sur votre compte OpenRouter. ",
+    el("header", {className: "head"}, el("div", {}, el("h2", {id: "pwc-title"}, "Assistant de révision"), el("p", {className: "sub"}, "IA · avec votre compte OpenRouter"), customTag), closeButton),
+    bar, log, editor, login, status, chip, context, composer,
+    el("p", {className: "notice"}, "Vos questions, les images jointes, le texte sélectionné et des extraits des cours (ou le cours entier) sont envoyés à OpenRouter et au fournisseur du modèle, et facturés sur votre compte OpenRouter. ",
       el("a", {href: guide}, "Guide de l’assistant")));
   shadow.append(styles, launcher, panel);
   document.body.append(host);
@@ -502,11 +549,12 @@
     launcher.setAttribute("aria-expanded", "true");
     place();
     render();
-    if (key) loadModels();
+    if (key) { loadModels(); loadRows().catch(() => {}); }
     log.scrollTop = log.scrollHeight;
     if (focus) (key ? question : loginButton).focus();
   }
   function close() {
+    editing = false;
     panel.hidden = true;
     launcher.hidden = false;
     launcher.setAttribute("aria-expanded", "false");
@@ -618,25 +666,27 @@
   function loadModels() {
     modelsPromise ||= (async () => {
       const cached = readJSON(local, "models");
-      let list = cached && Date.now() - cached.t < 864e5 && Array.isArray(cached.list) && cached.list.length ? cached.list : null;
+      // v: 2 — la liste mémorise aussi la lecture des images (S32) ; une liste plus ancienne est rechargée.
+      let list = cached && cached.v === 2 && Date.now() - cached.t < 864e5 && Array.isArray(cached.list) && cached.list.length ? cached.list : null;
       if (!list) {
         try {
           const response = await fetch(`${API}/models`);
           if (response.ok) list = pickModels(MODEL_CANDIDATES, (await response.json()).data);
-          if (list && list.length) local.set("models", JSON.stringify({t: Date.now(), list}));
+          if (list && list.length) local.set("models", JSON.stringify({v: 2, t: Date.now(), list}));
           else list = null;
         } catch { list = null; }
       }
       modelsVerified = Boolean(list);
-      models = list || MODEL_CANDIDATES.map(candidate => ({label: candidate.label, id: candidate.ids[0]}));
+      models = list || MODEL_CANDIDATES.map(candidate => ({label: candidate.label, id: candidate.ids[0], images: null}));
       if (!models.some(item => item.id === model)) model = models.some(item => item.id === DEFAULT_MODEL) ? DEFAULT_MODEL : models[0].id;
       select.replaceChildren(...models.map(item => el("option", {value: item.id}, item.label)));
       select.value = model;
       select.title = modelsVerified ? "" : "Liste non vérifiée : OpenRouter n’a pas pu être interrogé.";
+      renderTray();
     })();
     return modelsPromise;
   }
-  select.addEventListener("change", () => { model = select.value; local.set("model", model); });
+  select.addEventListener("change", () => { model = select.value; local.set("model", model); renderTray(); });
 
   // ——— Extraits des cours ———
   let rowsPromise = null;
@@ -645,6 +695,8 @@
     return response.json();
   }).then(rows => {
     known = new Map(rows.map(row => [row.id, row]));
+    pageRows = courseRows(rows, page);
+    renderContext();
     return rows;
   }).catch(error => { rowsPromise = null; throw error; });
   question.addEventListener("focus", () => { loadRows().catch(() => {}); }, {once: true});
@@ -704,11 +756,14 @@
         el("ul", {className: "sources"}, entry.sources.map(source => el("li", {}, external(source.url, source.title)))));
     }
     if (offCourse && !entry.pending && !entry.verify) {
-      box.append(el("button", {type: "button", className: "secondary verify", disabled: busy || null, onclick: () => ask(entry.question, {verify: true})}, "Vérifier sur le web"));
+      box.append(el("button", {type: "button", className: "secondary verify", disabled: busy || null, onclick: () => ask(entry.question, {verify: true, images: entry.images})}, "Vérifier sur le web"));
     }
     if (entry.sent.length) {
-      const count = entry.sent.length;
-      box.append(el("details", {className: "sent"}, el("summary", {}, count > 1 ? `${count} extraits des cours envoyés` : "1 extrait des cours envoyé"),
+      const count = entry.sent.length, rest = count - entry.course;
+      const plural = (n, word) => `${n} ${word}${n > 1 ? "s" : ""}`;
+      const summary = entry.course ? `Cours entier (${plural(entry.course, "section")})` + (rest ? ` et ${plural(rest, "extrait")} envoyés` : " envoyé")
+        : count > 1 ? `${count} extraits des cours envoyés` : "1 extrait des cours envoyé";
+      box.append(el("details", {className: "sent"}, el("summary", {}, summary),
         el("ul", {}, entry.sent.map(item => el("li", {}, item.url ? el("a", {href: new URL(item.url, siteRoot).href, "data-cite": item.id}, `[${item.id}]`) : `[${item.id}]`, " ", item.titre)))));
     }
     const usage = [entry.model, formatUsage(entry.usage)].filter(Boolean).join(" · ");
@@ -716,8 +771,10 @@
     return box;
   }
   function entryView(entry) {
+    // Les vignettes viennent du canvas du widget (data:image/jpeg) : jamais d’image fournie par le modèle.
+    const thumbs = entry.thumbs.length ? el("div", {className: "thumbs"}, entry.thumbs.map((src, index) => el("img", {src, alt: `Image jointe ${index + 1}`}))) : null;
     return el("article", {className: "exchange"},
-      el("div", {className: "question"}, entry.verify ? el("span", {className: "tag"}, "Vérification web") : null, el("p", {}, entry.question)),
+      el("div", {className: "question"}, entry.verify ? el("span", {className: "tag"}, "Vérification web") : null, thumbs, el("p", {}, entry.question)),
       answerView(entry));
   }
   function update(entry) {
@@ -730,22 +787,54 @@
 
   function render() {
     document.documentElement.dataset.polyweChat = key ? "connecte" : "deconnecte"; // lu par la page du guide
+    if (!key) editing = false;
     login.hidden = Boolean(key);
-    bar.hidden = composer.hidden = !key;
-    log.hidden = !key && !conversation.length; // après un 401, le message reste lisible au-dessus de la reconnexion
-    chip.hidden = !key || !selection;
+    bar.hidden = !key;
+    composer.hidden = !key || editing;
+    editor.hidden = !key || !editing;
+    log.hidden = editing || (!key && !conversation.length); // après un 401, le message reste lisible au-dessus de la reconnexion
+    chip.hidden = !key || !selection || editing;
     if (selection) chipText.textContent = clip(selection.text.replace(/\s+/g, " "), 160);
+    promptButton.setAttribute("aria-expanded", String(editing));
+    customTag.hidden = !customSystem;
     views.clear();
     const items = conversation.map(entry => { const view = entryView(entry); views.set(entry, view); return view; });
     log.replaceChildren(...(items.length ? items : [el("p", {className: "hint"}, "Posez une question sur un cours. Astuce : sélectionnez un passage avant d’ouvrir le chat pour l’envoyer en priorité.")]));
     log.setAttribute("aria-busy", String(busy));
     sendButton.disabled = busy;
     stopButton.hidden = !busy;
+    renderContext();
+    renderTray();
   }
-  const save = () => session.set("conversation", JSON.stringify(conversation.slice(-12)));
+  function renderContext() {
+    context.hidden = !key || editing || !pageRows || !pageRows.length;
+    courseSwitch.checked = wholeCourse;
+    if (!pageRows || !pageRows.length) return;
+    const tokens = approxTokens(pageRows.map(row => row.texte).join("\n"));
+    const step = tokens >= 1000 ? 1000 : 10;
+    courseSize.textContent = `≈ ${new Intl.NumberFormat("fr-FR").format(Math.max(step, Math.round(tokens / step) * step))} tokens par question`;
+  }
+  // Un modèle dont OpenRouter dit qu’il ne lit pas les images ne reçoit pas de capture.
+  function imageWarning() {
+    const chosen = attachments.length && models && models.find(item => item.id === model);
+    if (!chosen || chosen.images !== false) return "";
+    const able = models.filter(item => item.images).map(item => item.label);
+    return `${chosen.label} ne lit pas les images. ` + (able.length ? `Choisissez un modèle compatible : ${able.join(", ")}.` : "Choisissez un autre modèle ou retirez l’image.");
+  }
+  function renderTray() {
+    tray.hidden = !attachments.length;
+    tray.replaceChildren(...attachments.map((item, index) => el("li", {},
+      el("img", {src: item.thumb, alt: `Image jointe ${index + 1}`}),
+      el("button", {type: "button", className: "icon-button small", "aria-label": `Retirer l’image ${index + 1}`, title: "Retirer",
+        onclick: () => { attachments.splice(index, 1); renderTray(); question.focus(); }}, icon("m6 6 12 12M18 6 6 18")))));
+    trayNote.textContent = imageWarning();
+    trayNote.hidden = !trayNote.textContent;
+  }
+  // La conversation de l’onglet ne garde que les vignettes : les images complètes restent en mémoire.
+  const save = () => session.set("conversation", JSON.stringify(conversation.slice(-12).map(({images, ...entry}) => entry)));
 
   // ——— Question → réponse en streaming ———
-  async function ask(text, {verify = false} = {}) {
+  async function ask(text, {verify = false, images = []} = {}) {
     text = text.trim();
     if (!text || busy) return;
     if (!key) { render(); return; }
@@ -753,15 +842,20 @@
     status.textContent = "";
     await loadModels();
     const chosen = models.find(item => item.id === model) || {id: model, label: model};
-    const entry = {question: text, verify, answer: "", sent: [], sources: [], usage: null, finish: null, error: null, model: chosen.label, pending: true};
+    const entry = {question: text, verify, answer: "", sent: [], sources: [], usage: null, finish: null, error: null, model: chosen.label, pending: true,
+                   images, thumbs: images.map(image => image.thumb), course: 0};
     conversation.push(entry);
     render();
     log.scrollTop = log.scrollHeight;
     let rows = [];
     try { rows = await loadRows(); } catch { entry.note = "Extraits des cours indisponibles : cette réponse ne s’appuie pas sur le wiki."; }
-    const extracts = buildExtracts({rows, question: text, selection: resolveSelection(rows), page});
+    entry.course = wholeCourse ? courseRows(rows, page).length : 0;
+    // La question par défaut d’une image seule ne dit rien du sujet : elle ne sert pas à choisir des extraits.
+    const wording = images.length && text === IMAGE_QUESTION ? "" : text;
+    const extracts = buildExtracts({rows, question: wording, selection: resolveSelection(rows), page, course: entry.course > 0});
     entry.sent = extracts.map(({id, titre, cours, url}) => ({id, titre, cours, url}));
-    const body = buildRequest({model: chosen.id, question: text, extracts, history: conversation.slice(0, -1), verify});
+    const body = buildRequest({model: chosen.id, question: text, extracts, history: conversation.slice(0, -1), verify,
+                               system: customSystem, images: images.map(image => image.url)});
     let state = emptyAnswer(), frame = 0;
     const paint = () => { frame = 0; Object.assign(entry, {answer: state.text, sources: state.sources}); update(entry); };
     controller = new AbortController();
@@ -804,13 +898,123 @@
     if (!panel.hidden) (key ? question : loginButton).focus({preventScroll: true});
   }
 
-  composer.addEventListener("submit", event => {
+  composer.addEventListener("submit", async event => {
     event.preventDefault();
-    if (busy || !question.value.trim()) return;
-    const text = question.value;
+    if (busy || (!question.value.trim() && !attachments.length)) return;
+    if (attachments.length) {
+      await loadModels();
+      const warning = imageWarning();
+      if (warning) { status.textContent = warning; question.focus(); return; } // question et images restent en place
+    }
+    const text = question.value.trim() || IMAGE_QUESTION;
+    const images = attachments;
+    attachments = [];
     question.value = "";
-    ask(text);
+    ask(text, {images});
   });
+
+  // ——— Images jointes : collage, dépôt ou choix de fichier, réduites dans le navigateur ———
+  const imageFiles = data => {
+    if (!data) return [];
+    const files = data.files && data.files.length ? [...data.files] : [...(data.items || [])].filter(item => item.kind === "file").map(item => item.getAsFile());
+    return files.filter(file => file && /^image\//.test(file.type));
+  };
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const image = new Image();
+      image.onload = () => { URL.revokeObjectURL(url); resolve(image); };
+      image.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Image illisible")); };
+      image.src = url;
+    });
+  }
+  // JPEG sur fond blanc (une capture transparente reste lisible), grand côté limité à `side` pixels.
+  function encode(image, side, quality) {
+    const scale = Math.min(1, side / Math.max(image.naturalWidth, image.naturalHeight));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+    const context2d = canvas.getContext("2d");
+    context2d.fillStyle = "#fff";
+    context2d.fillRect(0, 0, canvas.width, canvas.height);
+    context2d.drawImage(image, 0, 0, canvas.width, canvas.height);
+    return canvas.toDataURL("image/jpeg", quality);
+  }
+  async function addImages(files) {
+    let refused = 0, full = false;
+    for (const file of files) {
+      if (attachments.length >= MAX_IMAGES) { full = true; break; }
+      try {
+        if (file.size > IMAGE_BYTES) throw new Error("Image trop lourde");
+        const image = await loadImage(file);
+        if (attachments.length >= MAX_IMAGES) { full = true; break; }
+        attachments.push({url: encode(image, IMAGE_SIDE, 0.88), thumb: encode(image, THUMB_SIDE, 0.7)});
+      } catch { refused++; }
+    }
+    status.textContent = full ? `${MAX_IMAGES} images au plus par question.`
+      : refused ? "Image non jointe : format illisible ou fichier de plus de 20 Mo." : "";
+    renderTray();
+  }
+  question.addEventListener("paste", event => {
+    const files = imageFiles(event.clipboardData);
+    if (!files.length) return;
+    if (!event.clipboardData.getData("text/plain")) event.preventDefault(); // un texte copié avec l’image se colle normalement
+    addImages(files);
+  });
+  composer.addEventListener("dragover", event => {
+    if (![...(event.dataTransfer?.types || [])].includes("Files")) return;
+    event.preventDefault();
+    composer.classList.add("drop");
+  });
+  composer.addEventListener("dragleave", event => { if (!composer.contains(event.relatedTarget)) composer.classList.remove("drop"); });
+  composer.addEventListener("drop", event => {
+    composer.classList.remove("drop");
+    const files = imageFiles(event.dataTransfer);
+    if (!files.length) return;
+    event.preventDefault();
+    addImages(files).then(() => question.focus());
+  });
+  attachButton.addEventListener("click", () => fileInput.click());
+  fileInput.addEventListener("change", () => {
+    const files = imageFiles({files: fileInput.files});
+    fileInput.value = "";
+    addImages(files).then(() => question.focus());
+  });
+
+  // ——— Tout le cours en contexte, consignes : réglages de ce navigateur ———
+  courseSwitch.addEventListener("change", () => {
+    wholeCourse = courseSwitch.checked;
+    if (wholeCourse) local.set("course", "1"); else local.remove("course");
+  });
+  function closeEditor(message = "") {
+    editing = false;
+    if (message) status.textContent = message;
+    render();
+    question.focus();
+  }
+  promptButton.addEventListener("click", () => {
+    if (editing) { closeEditor(); return; }
+    editing = true;
+    status.textContent = "";
+    promptBox.value = systemPrompt(customSystem);
+    render();
+    promptBox.focus();
+    promptBox.setSelectionRange(0, 0); // lecture depuis le début des consignes
+    promptBox.scrollTop = 0;
+  });
+  editor.addEventListener("submit", event => {
+    event.preventDefault();
+    const text = systemPrompt(promptBox.value);
+    customSystem = text === SYSTEM_PROMPT ? "" : text;
+    if (customSystem) local.set("system", customSystem); else local.remove("system");
+    closeEditor(customSystem ? "Vos consignes sont enregistrées dans ce navigateur." : "Consignes d’origine rétablies.");
+  });
+  promptReset.addEventListener("click", () => {
+    customSystem = "";
+    local.remove("system");
+    closeEditor("Consignes d’origine rétablies.");
+  });
+  promptCancel.addEventListener("click", () => closeEditor());
   question.addEventListener("keydown", event => {
     if (event.key === "Enter" && !event.shiftKey && !event.isComposing) { event.preventDefault(); composer.requestSubmit(); }
   });
@@ -828,6 +1032,7 @@
     if (!trigger) return;
     event.preventDefault();
     const text = trigger.getAttribute("data-chat-open");
+    editing = false; // l’éditeur de consignes laisse place au champ de question
     open();
     if (text && key) { question.value = text; question.focus(); }
   });

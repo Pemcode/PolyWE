@@ -490,3 +490,53 @@ En tant que visiteur, je peux saisir ma question directement après le retour Op
 Défaut découvert pendant S30 : le parcours existant de connexion échoue sur le focus, puis échoue de nouveau dans ses deux variantes lors de la relance ciblée. Le widget reste masqué jusqu’au chargement de son CSS ; un focus demandé avant cet événement est sans effet.
 
 Preuve TDD du 15 octobre 2026 : RED du test `test_login_focus_waits_for_the_widget_stylesheet` dans ses deux variantes, avec le CSS retenu jusqu’à la fin de l’échange de code. La trace des événements du parcours OAuth existant révèle également un focus perdu entre `DOMContentLoaded` et `load` lors du retour de navigation. GREEN après attente du style puis de la fin de chargement : les 24 parcours de l’assistant passent, ainsi que ses 12 tests Node, ses trois tests Python et le build. Les contrôles PKCE et les sources des cours restent inchangés.
+
+## S32 — Donner plus de contexte à l’assistant : cours entier, captures d’écran, consignes personnelles
+
+En tant qu’élève connecté à l’assistant, je peux lui confier tout le cours que je révise, lui montrer une capture d’écran et adapter ses consignes à ma façon de travailler, sans rien changer pour les autres visiteurs.
+
+- Sur une page de cours, un interrupteur « Tout le cours en contexte » ajoute à la question toutes les sections de la page, texte complet et dans l’ordre, en plus du texte sélectionné et des extraits pertinents des autres cours. Il affiche une estimation des tokens envoyés, est désactivé par défaut, reste mémorisé dans ce navigateur (`polywe_chat_course`) et n’apparaît pas sur les pages sans section (accueil, planning, guide, applications). Les sections du cours ainsi envoyées comptent comme citations vérifiées.
+- Une image collée dans le champ de question (Ctrl+V), déposée sur la zone de saisie ou choisie avec le bouton « Joindre une image » apparaît en vignette, retirable, puis part avec la question au format multimodal d’OpenRouter (`image_url`, JPEG réduit à 1 600 px au plus, quatre images au plus). Une image seule suffit pour envoyer. Si le modèle choisi ne lit pas les images, rien n’est envoyé et le message nomme les modèles compatibles. La conversation de l’onglet ne garde que de petites vignettes ; l’historique renvoyé au modèle reste du texte.
+- Un bouton « Consignes » ouvre l’éditeur du prompt système, prérempli avec les consignes en vigueur. Les consignes enregistrées sont gardées dans ce seul navigateur (`polywe_chat_system`) et remplacent le prompt système de ses requêtes ; « Rétablir les consignes d’origine » efface la clé. Un repère signale des consignes personnalisées. Un autre navigateur, ou un autre visiteur, garde le prompt d’origine.
+- Mentions du panneau et guide `assistant.html` à jour (ce qui est envoyé, ce qui est gardé), sans tarif inventé.
+- Tests RED puis GREEN : cœur sous Node (cours entier, consignes, message multimodal, modèles lisant les images), parcours Chromium à la racine et sous `/promo/` (interrupteur, collage d’image, consignes limitées à un contexte de navigateur) ; build valide, contrôle visuel du panneau.
+
+Preuve TDD du 15 octobre 2026 : RED exécuté avec `node --test tests/js/*.test.cjs` (4 échecs : `courseRows` et `systemPrompt` absents, message resté texte, aucun drapeau `images`) et `uv run --group browser pytest tests/browser/test_chat_widget.py -k "whole_course or pasted or custom_system"` (6 échecs : interrupteur, vignette et bouton « Consignes » absents). GREEN après implémentation : 16 tests Node et 30 parcours Chromium de l’assistant. Le second contexte de navigateur du parcours des consignes envoie bien le prompt d’origine pendant que le premier envoie le sien.
+
+Validation locale : 97 tests Python, 89 parcours Chromium du wiki, 16 tests Node de l’assistant, 25 tests Node et 34 parcours Chromium des applications ; catalogue et build valides (43 cours, 489 sections).
+
+QA du site construit sous `/PolyWE/`, OpenRouter simulé, sur le cours RDM 4 : 12 configurations (360, 390, 768, 1280, 1366 et 1440 px ; clair et sombre), avec l’interrupteur activé, deux captures collées, une réponse puis l’éditeur de consignes. Aucun débordement horizontal, panneau toujours dans l’écran, aucune erreur JavaScript, Échap ferme le panneau. À 1366 × 768, l’interrupteur, les vignettes, le champ et une réponse tiennent ensemble dans le panneau. L’interrupteur reste absent de l’accueil. Le cours entier de RDM 4 représente environ 8 000 tokens par question (environ 9 500 avec les autres extraits). Captures inspectées ; corrigés au passage : curseur de l’interrupteur peu visible en sombre, éditeur ouvert sur la fin des consignes.
+
+Seconde passe de QA, même jour : deux défauts trouvés et corrigés en RED puis GREEN, chacun dans ses deux variantes. Le premier : une image envoyée seule prend la question par défaut « Explique cette image. », dont le mot « image » attirait des sections sans rapport (« Image à retenir » des fiches) ; la question par défaut ne sert plus à choisir des extraits (assertion ajoutée au parcours du collage, avec une section leurre). Le second : une question d’exemple du guide, cliquée pendant l’édition des consignes, remplissait un champ masqué ; elle referme maintenant l’éditeur (`test_example_question_leaves_the_instructions_editor_for_the_question_box`). Quinze cas limites ont été contrôlés sur le site construit sous `/PolyWE/`, sans aucune erreur JavaScript :
+- non connecté ;
+- ancien cache des modèles rechargé ;
+- liste des modèles injoignable, l’image étant tout de même envoyée ;
+- cinq images, dont quatre gardées ;
+- fichier illisible ;
+- collage mixte texte et image ;
+- glisser-déposer ;
+- trombone ;
+- image seule ;
+- vérification web qui renvoie l’image ;
+- vignettes restaurées après rechargement ;
+- interrupteur au clavier sur téléphone ;
+- Échap ou déconnexion pendant l’édition ;
+- plus gros cours, Électrode enrobée 1 : 10 sections, environ 20 000 tokens annoncés.
+
+Fiabilité des parcours : le script externe de Cloudflare Web Analytics (S27) mettait plus de 4 s à charger depuis Chromium sur le poste local et faisait expirer `page.goto` dans tous les parcours, avec ou sans S32. Les navigateurs de test ne résolvent plus ce domaine (`OFFLINE_ANALYTICS`, règle `--host-resolver-rules` de Chromium définie dans `tests/browser/test_journeys.py`). Un premier blocage par `page.route` activait l’interception de toutes les requêtes et ralentissait assez `wiki.js` pour faire échouer `test_keyboard_selection_escape_and_full_search`, qui remplit la recherche juste après une navigation ; la règle DNS n’a pas cet effet. Le snippet reste vérifié dans les pages construites par les tests Python de S27.
+
+Validation finale : 97 tests Python, 91 parcours Chromium du wiki, 16 tests Node de l’assistant, 25 tests Node et 34 parcours Chromium des applications ; catalogue et build valides.
+
+Limites : l’envoi réel d’images, la lecture des images par chaque modèle et le coût du cours entier relèvent d’un test manuel avec un compte OpenRouter. Les modalités d’entrée viennent de `GET /models` ; si la liste n’a pas pu être vérifiée, l’image est envoyée et une éventuelle erreur d’OpenRouter s’affiche. L’estimation des tokens suppose environ 3,5 caractères par token et reste un ordre de grandeur. Les consignes personnalisées peuvent retirer les règles de citation ou de « Hors cours » : c’est le choix du visiteur, réversible par « Rétablir les consignes d’origine ».
+
+## S33 — Observer des photographies dans le cours de métallographie
+
+En tant qu’élève, je confronte les schémas à des observations réelles et j’agrandis leurs détails sans perdre ma place dans le cours.
+
+- Pilote limité à `essais-03`, autorisé par le propriétaire : quatre images documentées, réparties entre l’attaque, le microscope électronique et la lecture d’une soudure. Chaque image répond à un objectif d’observation et porte une légende, un texte alternatif, sa provenance et ses droits de réutilisation.
+- La comparaison de la fonte polie et attaquée précise qu’il s’agit de champs différents. Les échelles et inscriptions originales sont conservées ; aucune dimension ou condition d’observation manquante n’est inventée.
+- Les photographies sont embarquées dans le HTML : lecture et agrandissement fonctionnent hors ligne, sans hébergement tiers ni bibliothèque. La fenêtre d’agrandissement propose une vue d’ensemble et la taille réelle ; elle fonctionne au clavier, se ferme par Échap et rend le focus au bouton d’ouverture.
+- Ancres publiées, URL, clés de stockage, manipulations et quiz existants conservés. Images et légendes restent consultables sans JavaScript. Aucun autre cours enrichi dans ce pilote.
+- Contrôle du HTML autonome et du site construit : clair/sombre, téléphone, panneau ouvert/replié, paysage 1366 × 768 ; catalogue, tests utiles et build valides. Les consignes éditoriales encadrent les prochains ajouts et un registre documente les quatre images retenues.
+
+Validation RED/GREEN et contrôle visuel à consigner après exécution.

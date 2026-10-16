@@ -97,6 +97,64 @@ test("extraits : ni section creuse portée par le titre du cours, ni extrait pou
   assert.deepEqual(chat.terms("avant et après le soudage"), ["soud"]);
 });
 
+test("cours entier : toutes les sections de la page, complètes et dans l’ordre, puis des extraits d’autres pages (S32)", () => {
+  const filler = Array.from({length: 60}, (_, i) => `Phrase ${i} de remplissage sur la soudure.`).join("\n");
+  const page = "Thermique/introduction.html";
+  const rows = [
+    {...ROWS[0], texte: `Comprendre le préchauffage\n${filler}`},
+    {id: "TH-01-CALCUL", cours: "Préchauffage", matiere: "Thermique", mots_cles: ["ZAT"], titre: "Le t8/5 en pratique",
+     url: "Thermique/introduction.html#calcul", texte: "Le t8/5 en pratique\nLe temps de refroidissement entre 800 et 500 °C."},
+    ...ROWS.slice(1),
+    {id: "MET-03-C6", cours: "Martensite", matiere: "Métallurgie", mots_cles: [], titre: "Préchauffage et martensite",
+     url: "Metallurgie/03-martensite.html#c6", texte: "Préchauffage et martensite\nUn préchauffage limite la martensite de la ZAT."},
+  ];
+  assert.deepEqual(chat.courseRows(rows, page).map(row => row.id), ["TH-01-INTRO", "TH-01-CALCUL"]);
+  assert.deepEqual(chat.courseRows(rows, "index.html"), []);
+  const extracts = chat.buildExtracts({rows, question: "Pourquoi le préchauffage ?", page, course: true});
+  assert.deepEqual(extracts.map(item => item.id), ["TH-01-INTRO", "TH-01-CALCUL", "MET-03-C6"]);
+  assert.equal(extracts[0].texte, rows[0].texte, "texte complet, sans réduction au meilleur passage");
+  assert.ok(extracts[0].texte.length > 1500);
+  const selection = {id: "TH-01-CALCUL", titre: "Le t8/5 en pratique", cours: "Préchauffage", url: "Thermique/introduction.html#calcul",
+                     text: "Le temps de refroidissement"};
+  const selected = chat.buildExtracts({rows, question: "Détaille", page, course: true, selection});
+  assert.match(selected[0].titre, /Texte sélectionné/);
+  assert.deepEqual(selected.slice(1, 3).map(item => item.id), ["TH-01-INTRO", "TH-01-CALCUL"]);
+  const home = {rows, question: "Pourquoi le préchauffage ?", page: "index.html"};
+  assert.deepEqual(chat.buildExtracts({...home, course: true}), chat.buildExtracts(home), "sans section sur la page, rien ne change");
+  assert.equal(chat.approxTokens("x".repeat(3500)), 1000);
+});
+
+test("consignes : celles de ce navigateur remplacent le prompt système, sinon celles d’origine (S32)", () => {
+  for (const empty of [undefined, null, "", "  \n "]) assert.equal(chat.systemPrompt(empty), SYSTEM);
+  assert.equal(chat.systemPrompt("  Réponds en anglais.\n"), "Réponds en anglais.");
+  assert.equal(chat.systemPrompt("x".repeat(9000)).length, 8000);
+  const body = chat.buildRequest({model: "m", question: "Q", system: "Réponds en anglais."});
+  assert.deepEqual(body.messages[0], {role: "system", content: "Réponds en anglais."});
+  assert.deepEqual(chat.buildRequest({model: "m", question: "Q", system: " "}).messages[0], {role: "system", content: SYSTEM});
+});
+
+test("images : jointes à la dernière question au format multimodal, historique en texte seul (S32)", () => {
+  const image = "data:image/jpeg;base64,AAAA";
+  const history = [{question: "Q1", answer: "R1", thumbs: ["data:image/jpeg;base64,OLD"]}];
+  const body = chat.buildRequest({model: "m", question: "Que montre cette capture ?", history, images: [image]});
+  assert.deepEqual(body.messages.slice(1, 3), [{role: "user", content: "Q1"}, {role: "assistant", content: "R1"}]);
+  const [text, ...images] = body.messages.at(-1).content;
+  assert.equal(text.type, "text");
+  assert.match(text.text, /\n\nQUESTION\nQue montre cette capture \?$/);
+  assert.deepEqual(images, [{type: "image_url", image_url: {url: image}}]);
+  assert.equal(typeof chat.buildRequest({model: "m", question: "Q"}).messages.at(-1).content, "string", "sans image, le message reste du texte");
+});
+
+test("modèles : lecture des images d’après les modalités d’entrée publiées (S32)", () => {
+  const models = chat.pickModels(chat.MODEL_CANDIDATES, [
+    {id: "openai/gpt-6.1-sol", supported_parameters: ["tools"], architecture: {input_modalities: ["text", "image", "file"]}},
+    {id: "mistralai/mistral-large-4-0", supported_parameters: ["tools"], architecture: {input_modalities: ["text"]}},
+    {id: "deepseek/deepseek-v4-pro", supported_parameters: ["tools"]},
+  ]);
+  assert.deepEqual(models.map(model => [model.id, model.images]),
+    [["openai/gpt-6.1-sol", true], ["mistralai/mistral-large-4-0", false], ["deepseek/deepseek-v4-pro", null]]);
+});
+
 test("extraits : seul le meilleur passage d’une longue section est envoyé", () => {
   const filler = Array.from({length: 30}, (_, i) => `Paragraphe ${i} sur un tout autre sujet de dessin.`).join("\n");
   const text = `Titre\n${filler}\nLa règle du levier donne les fractions massiques des phases.\n${filler}`;

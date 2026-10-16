@@ -1,9 +1,11 @@
-"""Assistant de révision : connexion PKCE, réponse en streaming, citations, erreurs et mise en page (S25).
+"""Assistant de révision : connexion PKCE, réponse en streaming, citations, erreurs et mise en page (S25) ;
+cours entier, images jointes et consignes propres au navigateur (S32).
 
 OpenRouter est simulé : ces parcours ne demandent ni compte, ni réseau. Ils tournent à la racine et sous /promo/."""
 import base64
 import hashlib
 import json
+import re
 from urllib.parse import parse_qs, urlsplit
 
 import pytest
@@ -14,8 +16,10 @@ from test_journeys import site
 CORS = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Authorization, Content-Type",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS"}
 MODELS = {"data": [
-    {"id": "openai/gpt-6.1-sol", "name": "OpenAI: GPT-6.1 Sol", "supported_parameters": ["tools", "reasoning"]},
-    {"id": "mistralai/mistral-large-4-0", "name": "Mistral: Large 4", "supported_parameters": ["tools"]},
+    {"id": "openai/gpt-6.1-sol", "name": "OpenAI: GPT-6.1 Sol", "supported_parameters": ["tools", "reasoning"],
+     "architecture": {"input_modalities": ["text", "image"]}},
+    {"id": "mistralai/mistral-large-4-0", "name": "Mistral: Large 4", "supported_parameters": ["tools"],
+     "architecture": {"input_modalities": ["text"]}},
     {"id": "anthropic/claude-opus-5.5", "name": "Anthropic: Claude Opus 5.5", "supported_parameters": ["reasoning"]}]}
 DESKTOP = {"width": 1366, "height": 768}
 USAGE = {"prompt_tokens": 900, "completion_tokens": 80, "total_tokens": 980, "cost": 0.0031}
@@ -265,3 +269,144 @@ def test_panel_follows_the_system_theme_and_the_page_theme_choice(chat):
     box = panel(page).bounding_box()
     assert box["x"] + box["width"] <= DESKTOP["width"] - 8 and box["y"] >= 8
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+
+
+# ——— S32 : cours entier, captures d’écran, consignes propres au navigateur ———
+
+PASTE = """async () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 2400;
+    canvas.height = 1200;
+    const g = canvas.getContext('2d');
+    g.fillStyle = '#c0392b';
+    g.fillRect(0, 0, 2400, 1200);
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    const data = new DataTransfer();
+    data.items.add(new File([blob], 'capture.png', {type: 'image/png'}));
+    const box = document.getElementById('polywe-chat').shadowRoot.getElementById('pwc-question');
+    box.dispatchEvent(new ClipboardEvent('paste', {clipboardData: data, bubbles: true, cancelable: true}));
+}"""
+SIZE = "url => new Promise(resolve => { const image = new Image(); image.onload = () => resolve([image.naturalWidth, image.naturalHeight]); image.src = url; })"
+
+
+def answered(page, count=1):
+    expect(panel(page).get_by_role("log").get_by_text("Réponse.", exact=True)).to_have_count(count)
+
+
+def test_whole_course_switch_sends_every_section_of_the_page_and_is_remembered(connected):
+    page, base, api = connected
+    page.set_viewport_size(DESKTOP)
+    page.goto(base)
+    with page.expect_response("**/chat-extraits.json"):
+        open_chat(page)
+    page.wait_for_timeout(200)
+    expect(panel(page).get_by_role("switch", name="Tout le cours en contexte")).to_be_hidden()
+    page.goto(base + "Thermique/introduction.html")
+    open_chat(page)
+    switch = panel(page).get_by_role("switch", name="Tout le cours en contexte")
+    expect(switch).to_be_visible()
+    expect(switch).not_to_be_checked()
+    expect(panel(page).get_by_text("tokens par question", exact=False)).to_be_visible()
+    ask(page, "Pourquoi faut-il un préchauffage ?")
+    answered(page)
+    assert "[TH-01-CALCUL]" not in api.requests[0]["body"]["messages"][-1]["content"], "désactivé : seulement les extraits pertinents"
+    switch.check()
+    assert page.evaluate("localStorage.getItem('polywe_chat_course')") == "1"
+    ask(page, "Pourquoi faut-il un préchauffage ?")
+    answered(page, 2)
+    content = api.requests[1]["body"]["messages"][-1]["content"]
+    assert "[TH-01-INTRO] Préchauffage — Comprendre le préchauffage\nComprendre le préchauffage\nUne explication." in content, content
+    assert "[TH-01-CALCUL] Préchauffage — Le t8/5 en pratique\nLe t8/5 en pratique" in content, content
+    expect(panel(page).get_by_text("Cours entier (2 sections)", exact=False)).to_be_visible()
+    page.reload()
+    open_chat(page)
+    expect(panel(page).get_by_role("switch", name="Tout le cours en contexte")).to_be_checked()
+
+
+def test_pasted_screenshot_is_sent_as_an_image_and_never_stored_in_full(connected):
+    page, base, api = connected
+
+    def with_decoy(route):
+        # Le mot « image » de la question par défaut ne doit pas attirer une section sans rapport.
+        response = route.fetch()
+        decoy = {"id": "XX-01-C1", "cours": "Leurre", "matiere": "X", "mots_cles": [], "titre": "Image à retenir",
+                 "url": "X/01.html#c1", "texte": "Image à retenir\nUne image forte pour chaque chapitre."}
+        route.fulfill(response=response, json=response.json() + [decoy])
+
+    page.route("**/assets/chat-extraits.json", with_decoy)
+    page.set_viewport_size(DESKTOP)
+    page.goto(base + "Thermique/introduction.html")
+    open_chat(page)
+    expect(panel(page).get_by_label("Modèle")).to_have_value("openai/gpt-6.1-sol")
+    page.evaluate(PASTE)
+    expect(panel(page).get_by_role("img", name="Image jointe 1")).to_be_visible()
+    page.evaluate(PASTE)
+    remove = panel(page).get_by_role("button", name="Retirer l’image 2")
+    expect(remove).to_be_visible()
+    remove.click()
+    expect(remove).to_have_count(0)
+    page.get_by_label("Votre question").press("Enter")
+    answered(page)
+    text, image = api.requests[0]["body"]["messages"][-1]["content"]
+    assert text["type"] == "text" and text["text"].endswith("\n\nQUESTION\nExplique cette image."), text
+    assert text["text"].startswith("EXTRAITS\nAucun extrait des cours ne correspond"), text
+    url = image["image_url"]["url"]
+    assert image["type"] == "image_url" and url.startswith("data:image/jpeg;base64,")
+    assert page.evaluate(SIZE, url) == [1600, 800], "réduite à 1 600 px sur le grand côté"
+    expect(panel(page).get_by_role("button", name="Retirer l’image 1")).to_have_count(0)
+    expect(panel(page).get_by_role("log").get_by_role("img", name="Image jointe 1")).to_be_visible()
+    stored = page.evaluate("sessionStorage.getItem('polywe_chat_conversation')")
+    assert url not in stored and len(stored) < 20000, len(stored)
+    panel(page).get_by_label("Modèle").select_option("mistralai/mistral-large-4-0")
+    page.evaluate(PASTE)
+    ask(page, "Et celle-ci ?")
+    expect(panel(page).get_by_role("status")).to_contain_text("Mistral Large 4 ne lit pas les images")
+    expect(panel(page).get_by_role("status")).to_contain_text("GPT-6.1 Sol")
+    expect(page.get_by_label("Votre question")).to_have_value("Et celle-ci ?")
+    expect(panel(page).get_by_role("button", name="Retirer l’image 1")).to_be_visible()
+    assert len(api.requests) == 1, "rien n’est envoyé à un modèle qui ne lit pas les images"
+
+
+def test_custom_system_prompt_applies_only_in_this_browser(connected):
+    page, base, api = connected
+    custom = "Réponds toujours en anglais, en citant [ID]."
+    page.set_viewport_size(DESKTOP)
+    page.goto(base + "Thermique/introduction.html")
+    open_chat(page)
+    panel(page).get_by_role("button", name="Consignes", exact=True).click()
+    editor = panel(page).get_by_label("Consignes de l’assistant")
+    expect(editor).to_be_focused()
+    expect(editor).to_have_value(re.compile(r"^Tu es l'assistant de révision IWE de PolyWE"))
+    expect(panel(page).get_by_text("ne change rien pour les autres visiteurs", exact=False)).to_be_visible()
+    editor.fill(custom)
+    panel(page).get_by_role("button", name="Enregistrer", exact=True).click()
+    expect(editor).to_be_hidden()
+    expect(panel(page).get_by_text("Consignes personnalisées", exact=True)).to_be_visible()
+    ask(page, "Préchauffage ?")
+    answered(page)
+    assert api.requests[0]["body"]["messages"][0] == {"role": "system", "content": custom}
+    assert page.evaluate("localStorage.getItem('polywe_chat_system')") == custom
+
+    other = page.context.browser.new_context(viewport=DESKTOP)
+    visitor = other.new_page()
+    visitor.set_default_timeout(4000)
+    elsewhere = OpenRouter(visitor)
+    visitor.add_init_script("localStorage.setItem('polywe_chat_key', 'sk-or-v1-test')")
+    visitor.goto(base + "Thermique/introduction.html")
+    open_chat(visitor)
+    expect(panel(visitor).get_by_text("Consignes personnalisées", exact=True)).to_be_hidden()
+    ask(visitor, "Préchauffage ?")
+    answered(visitor)
+    assert elsewhere.requests[0]["body"]["messages"][0]["content"].startswith("Tu es l'assistant de révision IWE de PolyWE")
+    other.close()
+
+    page.reload()
+    open_chat(page)
+    panel(page).get_by_role("button", name="Consignes", exact=True).click()
+    expect(editor).to_have_value(custom)
+    panel(page).get_by_role("button", name="Rétablir les consignes d’origine").click()
+    expect(panel(page).get_by_text("Consignes personnalisées", exact=True)).to_be_hidden()
+    assert page.evaluate("localStorage.getItem('polywe_chat_system')") is None
+    ask(page, "Préchauffage ?")
+    answered(page, 2)
+    assert api.requests[-1]["body"]["messages"][0]["content"].startswith("Tu es l'assistant de révision IWE de PolyWE")

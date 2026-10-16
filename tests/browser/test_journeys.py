@@ -14,6 +14,11 @@ class QuietHandler(SimpleHTTPRequestHandler):
         pass
 
 
+# La mesure d’audience Cloudflare (S27) est un script externe : son domaine ne se résout pas dans les navigateurs de test.
+# Les parcours ne dépendent donc pas du réseau, sans interception qui ralentirait les autres requêtes.
+OFFLINE_ANALYTICS = ["--host-resolver-rules=MAP static.cloudflareinsights.com ~NOTFOUND"]
+
+
 @pytest.fixture(params=["", "promo"])
 def site(project, request):
     root, _ = project
@@ -25,7 +30,7 @@ def site(project, request):
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        browser = p.chromium.launch(args=OFFLINE_ANALYTICS)
         page = browser.new_page(viewport={"width": 390, "height": 844})
         page.set_default_timeout(4000)
         yield page, f"http://127.0.0.1:{server.server_port}/" + (request.param+"/" if request.param else "")

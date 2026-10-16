@@ -8,6 +8,7 @@ import pytest
 from playwright.sync_api import expect, sync_playwright
 
 from conftest import add_application, copy_real_project
+from test_journeys import OFFLINE_ANALYTICS
 from wiki.build import build
 
 PAINTED = """c => { const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;
@@ -33,7 +34,7 @@ def app_site(project, request):
     add_application(root, data)
     server, base = serve(build(root), root / "hosting", request.param)
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        browser = p.chromium.launch(args=OFFLINE_ANALYTICS)
         page = browser.new_page(viewport={"width": 390, "height": 844})
         page.set_default_timeout(4000)
         yield page, base
@@ -65,7 +66,7 @@ def test_real_game_is_playable_under_the_published_subpath(tmp_path):
     errors = []
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            browser = p.chromium.launch(args=OFFLINE_ANALYTICS)
             page = browser.new_page(viewport={"width": 390, "height": 844})
             page.on("pageerror", lambda error: errors.append(str(error)))
             page.goto(base + "matieres/rdm.html")

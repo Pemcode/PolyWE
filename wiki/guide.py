@@ -34,7 +34,7 @@ def render_guide():
 <li>Achetez un petit montant : 5 $ suffisent largement pour commencer. Le paiement se fait par carte bancaire ou en cryptomonnaie.</li>
 <li>Vérifiez le total avant de payer : OpenRouter ajoute des frais d’achat, affichés à ce moment-là.</li></ol>
 <p class="guide-check">Votre solde de crédits apparaît dans votre compte.</p>
-<p class="guide-tip"><strong>Ordre de grandeur :</strong> avec le modèle par défaut, une question coûte de l’ordre d’un à deux centimes ; davantage avec une recherche web ou un modèle haut de gamme. Quelques dollars permettent donc plusieurs centaines de questions. Le coût exact s’affiche sous chaque réponse.</p>
+<p class="guide-tip"><strong>Ordre de grandeur :</strong> avec le modèle par défaut, une question coûte de l’ordre d’un à deux centimes ; davantage avec une recherche web, le cours entier en contexte ou un modèle haut de gamme. Quelques dollars permettent donc plusieurs centaines de questions. Le coût exact s’affiche sous chaque réponse.</p>
 <p class="guide-warn">Laissez le rechargement automatique désactivé si vous voulez garder la maîtrise de vos dépenses.</p>"""),
         step(3, "Connecter le wiki à votre compte", """
 <p class="guide-why">La connexion crée pour le wiki une clé d’accès à votre compte, gardée uniquement dans ce navigateur. Vous n’avez aucun code à copier.</p>
@@ -55,7 +55,10 @@ def render_guide():
         step(5, "Poser votre première question", f"""
 <ol class="guide-do"><li>Ouvrez le chat. Le modèle GPT-6.1 Sol est choisi par défaut ; la liste ne propose que les modèles réellement disponibles chez OpenRouter.</li>
 <li>Écrivez votre question et validez avec Entrée (Maj+Entrée pour aller à la ligne).</li>
-<li>Pour parler d’un passage précis, sélectionnez-le dans le cours <em>avant</em> d’ouvrir le chat : il est envoyé en priorité.</li></ol>
+<li>Pour parler d’un passage précis, sélectionnez-le dans le cours <em>avant</em> d’ouvrir le chat : il est envoyé en priorité.</li>
+<li>Pour une question de synthèse, activez « Tout le cours en contexte » : chaque question emporte alors le cours entier de la page. Elle coûte nettement plus cher ; le chat affiche une estimation des tokens envoyés.</li>
+<li>Pour montrer une figure ou un exercice, collez une capture d’écran dans le champ (Ctrl+V) ou utilisez le trombone. Choisissez un modèle qui lit les images : le chat vous prévient sinon.</li>
+<li>Le bouton « Consignes » permet de réécrire les instructions données à l’assistant (longueur des réponses, ton, langue…). Votre version ne vaut que dans ce navigateur ; « Rétablir les consignes d’origine » revient au réglage du wiki.</li></ol>
 <p class="guide-label">Essayez une question : un clic la place dans le chat, rien n’est envoyé avant que vous validiez.</p>
 <ul class="guide-examples">{examples}</ul>
 <p class="guide-tip">L’assistant répond en 120 mots au plus, sauf pour un calcul. Il se souvient des trois derniers échanges : vous pouvez enchaîner avec « et pour un acier inoxydable ? ». « Nouvelle conversation » repart de zéro.</p>"""),
@@ -87,8 +90,8 @@ def render_guide():
 <nav class="guide-nav" aria-label="Étapes du guide"><ol>{nav}</ol></nav>
 <ol class="guide-steps">{"".join(steps)}</ol>
 <section class="guide-more" id="confidentialite"><h2>Ce qui est envoyé, ce qui est gardé</h2>
-<ul><li><strong>Envoyé à OpenRouter et au fournisseur du modèle :</strong> votre question, le texte sélectionné, jusqu’à trois extraits des cours et les trois derniers échanges.</li>
-<li><strong>Gardé dans ce navigateur :</strong> la clé jusqu’à la déconnexion, le modèle choisi, et la conversation le temps de l’onglet.</li>
+<ul><li><strong>Envoyé à OpenRouter et au fournisseur du modèle :</strong> les consignes de l’assistant, votre question et ses images jointes, le texte sélectionné, jusqu’à trois extraits des cours (et le cours entier si vous l’avez activé) et les trois derniers échanges.</li>
+<li><strong>Gardé dans ce navigateur :</strong> la clé jusqu’à la déconnexion, le modèle choisi, le réglage « Tout le cours en contexte », vos consignes personnalisées, et la conversation le temps de l’onglet (les images n’y restent qu’en vignettes).</li>
 <li><strong>Jamais envoyé au wiki :</strong> il n’a pas de serveur ; ni ses auteurs ni la promo ne voient vos questions.</li>
 <li>N’écrivez pas d’informations personnelles dans vos questions.</li></ul></section>
 <section class="guide-more" id="depannage"><h2>En cas de problème</h2><dl class="guide-legend">
@@ -97,5 +100,7 @@ def render_guide():
 <dt>« Trop de requêtes »</dt><dd>Patientez quelques secondes, puis reposez la question.</dd>
 <dt>« Connexion à OpenRouter impossible »</dt><dd>Vérifiez votre connexion internet ; certains réseaux d’établissement bloquent openrouter.ai.</dd>
 <dt>« Ce modèle n’est pas disponible »</dt><dd>Choisissez-en un autre dans la liste du chat.</dd>
+<dt>« … ne lit pas les images »</dt><dd>Choisissez l’un des modèles compatibles cités par le message, ou retirez l’image.</dd>
+<dt>Réponses inattendues</dt><dd>Si vous avez modifié les consignes, ouvrez « Consignes » et choisissez « Rétablir les consignes d’origine ».</dd>
 <dt>Retour sur le wiki sans être connecté</dt><dd>Terminez la connexion dans le même navigateur, en moins de quinze minutes, puis réessayez.</dd>
 <dt>Pas de bouton « Chat »</dt><dd>JavaScript est désactivé ou bloqué par une extension : autorisez-le pour ce site et rechargez la page.</dd></dl></section>"""
