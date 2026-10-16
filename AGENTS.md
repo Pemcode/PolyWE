@@ -62,7 +62,7 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
 
 - Chaque cours est une page HTML unique et autonome.
   - Le CSS est dans `<style>`, le JavaScript dans `<script>`, et les dessins sont en SVG générés par JavaScript.
-  - Pas d'images ni de bibliothèques externes. Seule exception : les polices Google Fonts, avec polices de secours.
+  - Pas de bibliothèques externes. Les photographies pédagogiques documentées sont autorisées selon la section ci-dessous et embarquées dans le HTML pour préserver son autonomie. Seules les polices Google Fonts peuvent être chargées en ligne, avec polices de secours.
   - La page doit fonctionner hors ligne.
 - Les cours sont longs et complets : environ 2 h 30 à 3 h de travail chacun, exercices compris.
 - Reprendre à l'identique la base CSS et les utilitaires JavaScript (quiz, check-list, sommaire, thème) du cours précédent de la série. Pour une nouvelle série, reprendre ceux de la série la plus récente. Seuls le contenu et les manipulations changent.
@@ -79,6 +79,16 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
   - aligner les notations et les conventions de signe sur ce document, sans le citer dans la page ;
   - présenter une notation différente rencontrée ailleurs comme une « autre notation courante » ;
   - consigner ses éventuelles erreurs ou ambiguïtés dans la fiche d'intégration, et donner dans le cours l'énoncé correct.
+
+### Photographies pédagogiques
+
+- Ajouter une photographie seulement si elle apprend à reconnaître, distinguer ou expliquer quelque chose : microstructure, macrographie, faciès de rupture, défaut, équipement ou geste utile. Les schémas et manipulations restent complémentaires. Deux à cinq figures par cours concerné constituent un repère, jamais un quota ; zéro est possible.
+- Placer chaque figure près de la notion, avec une légende qui guide le regard et, lorsque cela aide, une question d’observation avec repères masqués. Préférer une comparaison ciblée à une galerie. Une comparaison de champs différents le dit explicitement.
+- Retenir des observations réelles dont la provenance et les droits de réutilisation sont vérifiables (domaine public, licence ouverte adaptée ou autorisation explicite). Vérifier la licence de chaque fichier, y compris les éventuels crédits de tiers dans un article. Conserver auteur, titre, URL de provenance, licence et modifications ; crédit lisible et liens sous la figure, registre dans `docs/ILLUSTRATIONS.md`. La reproduction des polycopiés reste interdite.
+- Vérifier matériau, état, technique d’observation, préparation et échelle dans la source ; n’inventer aucune information manquante. Conserver les barres d’échelle et inscriptions. Un grossissement indiqué pour un tirage n’est pas celui de l’écran. Sans calibration suffisante, ne proposer aucune mesure quantitative sur l’image.
+- Ne pas utiliser d’image générée comme observation expérimentale. Ne pas retoucher, recolorer ni reconstruire un détail scientifique. Une réduction ou compression doit préserver les détails utiles et être indiquée ; tout recadrage doit être justifié et conserver l’échelle.
+- Embarquer les photographies optimisées dans le HTML (URL `data:image/...`) : pas de chargement depuis un site tiers. Préserver le rapport largeur/hauteur, renseigner dimensions et texte alternatif descriptif, prévoir un agrandissement accessible au clavier avec fermeture par Échap et retour du focus. Images et légendes restent lisibles sans JavaScript et hors ligne.
+- Contrôler au navigateur les images décodées, la lisibilité des détails et échelles, le poids du fichier, les thèmes clair/sombre, le téléphone et le site construit. Ne pas inverser les couleurs d’une photographie en mode sombre.
 
 ### Direction visuelle (identique pour toute une série)
 
@@ -134,7 +144,7 @@ Chaque tâche relève de l'une ou de l'autre. Sauf demande explicite du proprié
 ### Neutralité
 
 - Le site est public et les cours doivent pouvoir être partagés : aucune référence aux échanges de la conversation, à la situation personnelle de l'utilisateur, à ses délais ou à ses questions.
-- Aucune référence aux polycopiés ni aux supports de cours sources dans les pages publiées : texte, tableaux, quiz, glossaire, scripts et pied de page compris. Les normes, le référentiel de l'IIW et les ouvrages publiés peuvent être cités.
+- Aucune référence aux polycopiés ni aux supports de cours sources dans les pages publiées : texte, tableaux, quiz, glossaire, scripts et pied de page compris. Les normes, le référentiel de l'IIW et les ouvrages publiés peuvent être cités. Les crédits et liens de provenance des photographies autorisées doivent aussi figurer sous chaque image.
 
 ### Contrôle qualité d'un cours
 
